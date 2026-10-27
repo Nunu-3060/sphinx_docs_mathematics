@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 11 章 グラフの探索 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 12 章 最短経路問題" href="ch12_shortest_path.html" />
+    <link rel="prev" title="第 10 章 マッチング" href="ch10_matching.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 11 章 グラフの探索</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">幅優先探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">深さ優先探索</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2 つの探索の使い分け</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">トポロジカルソート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">強連結成分分解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 11 章 グラフの探索</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 11 章 グラフの探索<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>グラフのアルゴリズムの多くは、頂点を辺に沿って系統的にたどる<strong>探索</strong>を基礎にしている。迷路の解法、Web ページの巡回、ガベージコレクションによる不要なメモリの検出、ビルドの順序の決定などは、いずれもグラフの探索である。本章では、最も基本的な 2 つの探索方法である幅優先探索と深さ優先探索を学び、その応用としてトポロジカルソートと強連結成分分解を扱う。</p>
+<p>本章では、<a class="reference internal" href="#fig-ch11-graph"><span class="std std-numref">図 20</span></a> の無向グラフを例として使う。</p>
+<figure class="align-center" id="id8">
+<span id="fig-ch11-graph"></span><div class="graphviz"><object data="_images/graphviz-3fc74a0968787bb9f9f21950ce2fde2c6c55fa5b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    A [pos=&quot;1.2,2.4!&quot;]; B [pos=&quot;0.4,1.2!&quot;]; C [pos=&quot;2.0,1.2!&quot;]; D [pos=&quot;-0.4,0!&quot;]; E [pos=&quot;1.2,0!&quot;]; F [pos=&quot;2.8,0!&quot;];
+    A -- B; A -- C; B -- D; B -- E; C -- F; E -- F;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 20 </span><span class="caption-text">探索の例に用いる無向グラフ</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id2">
+<h2>幅優先探索<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><strong>幅優先探索</strong>（breadth-first search、BFS）は、始点から近い順に頂点を訪問する方法である。始点の隣接頂点をすべて訪問し、次にそれらの隣接頂点を訪問し、…… と、波紋が広がるように探索を進める。訪問待ちの頂点を<strong>キュー</strong>（先入れ先出しの待ち行列）で管理する。</p>
+<ol class="arabic simple">
+<li><p>始点を発見済みにしてキューに入れる。</p></li>
+<li><p>キューの先頭から頂点 <span class="math notranslate nohighlight">\(u\)</span> を取り出し、<span class="math notranslate nohighlight">\(u\)</span> に隣接する未発見の頂点をすべて発見済みにしてキューの末尾に入れる。</p></li>
+<li><p>キューが空になるまで 2 を繰り返す。</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">リスト 19 </span><span class="caption-text">幅優先探索</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">bfs_order</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;幅優先探索で頂点を訪問した順序を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">}</span>
+<span class="linenos"> 4</span>    <span class="n">order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 5</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">source</span><span class="p">])</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="n">order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">10</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">12</span>                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">order</span>
+</pre></div>
+</div>
+</div>
+<p>Python の <code class="docutils literal notranslate"><span class="pre">collections.deque</span></code> は両端の追加と削除が <span class="math notranslate nohighlight">\(O(1)\)</span> で行えるので、キューとして使う。リストの <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code> は <span class="math notranslate nohighlight">\(O(n)\)</span> 時間かかるので避ける。各頂点は高々 1 回キューに入り、各頂点の隣接リストは 1 回ずつ走査されるので、計算量は <span class="math notranslate nohighlight">\(O(n + m)\)</span> である。</p>
+<p><a class="reference internal" href="#fig-ch11-graph"><span class="std std-numref">図 20</span></a> のグラフで頂点 A から幅優先探索を行うと、訪問順は A, B, C, D, E, F となる。頂点 <span class="math notranslate nohighlight">\(v\)</span> を発見したときに通った辺 <span class="math notranslate nohighlight">\(uv\)</span> を集めると、始点を根とする全域木（連結でなければ到達できた部分の木）が得られる。これが第 6 章で述べた幅優先探索木である（<a class="reference internal" href="#fig-ch11-trees"><span class="std std-numref">図 21</span></a> 左）。</p>
+<p>幅優先探索の最も重要な性質は、始点からの距離の順に頂点を発見することである。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 11.1</p>
+<p>幅優先探索で、始点 <span class="math notranslate nohighlight">\(s\)</span> から頂点 <span class="math notranslate nohighlight">\(v\)</span> を発見したときの幅優先探索木における深さは、距離 <span class="math notranslate nohighlight">\(d(s, v)\)</span> に等しい。</p>
+</div>
+<p>このため、幅優先探索木の根から各頂点への道は最短経路になる。第 4 章で距離を計算した <code class="docutils literal notranslate"><span class="pre">bfs_distances</span></code> は、この性質を利用したものである。キューの中の頂点の距離は常に「<span class="math notranslate nohighlight">\(k\)</span> が並んだ後に <span class="math notranslate nohighlight">\(k + 1\)</span> が並ぶ」状態に保たれ、距離の小さい頂点から順に取り出されることが証明の要点である。</p>
+</section>
+<section id="id3">
+<h2>深さ優先探索<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p><strong>深さ優先探索</strong>（depth-first search、DFS）は、行けるところまで進み、行き止まりになったら引き返して別の道を試す方法である。迷路で「左手を壁につけて進む」方法に似ている。再帰呼び出しを使うと簡潔に書ける。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">リスト 20 </span><span class="caption-text">深さ優先探索（再帰版）</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">dfs_order</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;深さ優先探索（再帰）で頂点を訪問した順序（行きがけ順）を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">visited</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos"> 4</span>    <span class="n">order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="k">def</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos"> 8</span>        <span class="n">order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">10</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="n">visit</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="n">visit</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="n">order</span>
+</pre></div>
+</div>
+</div>
+<p>再帰の代わりにスタック（後入れ先出し）を使って書くこともできる。幅優先探索のキューをスタックに置き換えたものとほぼ同じ構造になる。計算量は幅優先探索と同じく <span class="math notranslate nohighlight">\(O(n + m)\)</span> である。</p>
+<p><a class="reference internal" href="#fig-ch11-graph"><span class="std std-numref">図 20</span></a> のグラフで頂点 A から深さ優先探索を行うと、訪問順は A, B, D, E, F, C となる。B から D に進んで行き止まりになり、B に戻って E へ進み、さらに F, C と進む。発見に使った辺を集めた木が深さ優先探索木である。</p>
+<figure class="align-center" id="id11">
+<span id="fig-ch11-trees"></span><div class="graphviz"><object data="_images/graphviz-a8e86b5467f7a78cbc2a1ab2831abbfba58eb81f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    subgraph cluster_bfs {
+        label=&quot;幅優先探索木&quot;; style=rounded; fontsize=12;
+        a1 [label=&quot;A&quot;]; b1 [label=&quot;B&quot;]; c1 [label=&quot;C&quot;]; d1 [label=&quot;D&quot;]; e1 [label=&quot;E&quot;]; f1 [label=&quot;F&quot;];
+        a1 -- b1; a1 -- c1; b1 -- d1; b1 -- e1; c1 -- f1;
+        e1 -- f1 [style=dashed, color=&quot;#999999&quot;, constraint=false];
+    }
+    subgraph cluster_dfs {
+        label=&quot;深さ優先探索木&quot;; style=rounded; fontsize=12;
+        a2 [label=&quot;A&quot;]; b2 [label=&quot;B&quot;]; c2 [label=&quot;C&quot;]; d2 [label=&quot;D&quot;]; e2 [label=&quot;E&quot;]; f2 [label=&quot;F&quot;];
+        a2 -- b2; b2 -- d2; b2 -- e2; e2 -- f2; f2 -- c2;
+        c2 -- a2 [style=dashed, color=&quot;#999999&quot;, constraint=false];
+    }
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 21 </span><span class="caption-text">頂点 A を始点とする幅優先探索木（左）と深さ優先探索木（右）。破線は木に含まれない辺である。</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>幅優先探索木は「浅く広い」木に、深さ優先探索木は「深く細い」木になる傾向がある。無向グラフの深さ優先探索では、木に含まれない辺は必ず先祖と子孫を結ぶ。このような辺を<strong>後退辺</strong>という。<a class="reference internal" href="#fig-ch11-trees"><span class="std std-numref">図 21</span></a> の右図では、辺 CA が後退辺である。後退辺があることと閉路があることは同値なので、深さ優先探索で閉路の有無を判定できる。第 4 章の切断点と橋の計算も、後退辺の性質を利用している。</p>
+<p>有向グラフで深さ優先探索を行う場合は、木に含まれない辺が後退辺（子孫から先祖へ）、前進辺（先祖から子孫へ）、横断辺（それ以外）の 3 種類に分かれる。有向グラフが有向閉路を持つことは、後退辺が存在することと同値である。</p>
+<p>再帰による実装は簡潔だが、第 4 章で述べたように、Python の再帰の深さの上限（既定では 1000 程度）に注意する。</p>
+<section id="id4">
+<h3>2 つの探索の使い分け<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-number">表 11 </span><span class="caption-text">幅優先探索と深さ優先探索の比較</span><a class="headerlink" href="#id12" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 38.0%" />
+<col style="width: 38.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>項目</p></th>
+<th class="head"><p>幅優先探索</p></th>
+<th class="head"><p>深さ優先探索</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>管理するデータ構造</p></td>
+<td><p>キュー</p></td>
+<td><p>スタック（または再帰）</p></td>
+</tr>
+<tr class="row-odd"><td><p>訪問順</p></td>
+<td><p>始点から近い順</p></td>
+<td><p>1 本の道を行けるところまで</p></td>
+</tr>
+<tr class="row-even"><td><p>計算量</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n + m)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n + m)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>主な用途</p></td>
+<td><p>重みのない最短経路、二部グラフの判定、近い順の探索</p></td>
+<td><p>閉路の検出、トポロジカルソート、強連結成分、切断点と橋</p></td>
+</tr>
+</tbody>
+</table>
+<p>単に到達可能な頂点を列挙するだけなら、どちらを使ってもよい。</p>
+</section>
+</section>
+<section id="id5">
+<h2>トポロジカルソート<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>第 5 章で述べたように、有向非巡回グラフ（DAG）の頂点は、すべての辺が前から後ろへ向かうように 1 列に並べられる。この並べ方を求めることを<strong>トポロジカルソート</strong>という。授業の履修順序、ビルドの順序、表計算ソフトの再計算の順序などを決めるのに使う。</p>
+<figure class="align-center" id="id13">
+<span id="fig-ch11-courses"></span><div class="graphviz"><object data="_images/graphviz-267f0a20c0a56b7b1994a279ec2532cbd14ca06f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph g {
+    rankdir=LR;
+    node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=&quot;#dbe8f5&quot;, fontsize=12];
+    &quot;プログラミング基礎&quot; -&gt; &quot;データ構造&quot;;
+    &quot;プログラミング基礎&quot; -&gt; &quot;離散数学&quot;;
+    &quot;離散数学&quot; -&gt; &quot;アルゴリズム&quot;;
+    &quot;離散数学&quot; -&gt; &quot;グラフ理論&quot;;
+    &quot;データ構造&quot; -&gt; &quot;アルゴリズム&quot;;
+    &quot;アルゴリズム&quot; -&gt; &quot;コンパイラ&quot;;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 22 </span><span class="caption-text">授業の先修関係を表す DAG</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 11.2</p>
+<p>有向グラフがトポロジカル順序を持つための必要十分条件は、有向閉路を持たないことである。</p>
+</div>
+<p><strong>証明</strong>：有向閉路 <span class="math notranslate nohighlight">\(v_1 \to v_2 \to \cdots \to v_k \to v_1\)</span> があれば、どの並べ方でも閉路上のどこかで後ろから前へ向かう辺ができるので、トポロジカル順序は存在しない。逆に、DAG には入次数 0 の頂点が必ず存在する（そうでなければ、辺を逆向きにたどり続けると有限個の頂点のどこかに戻り、有向閉路ができる）。入次数 0 の頂点を先頭に置いて取り除いても DAG のままなので、これを繰り返せばトポロジカル順序が得られる。□</p>
+<p>この証明をそのまま実装したものが<strong>カーンのアルゴリズム</strong>（Kahn's algorithm）である。各頂点の入次数を数え、入次数 0 の頂点をキューから取り出して出力し、その頂点から出る辺の終点の入次数を 1 ずつ減らす。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 21 </span><span class="caption-text">カーンのアルゴリズムによるトポロジカルソート</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">topological_sort</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;カーンのアルゴリズム: 入次数 0 の頂点を順に取り出す。閉路があれば None を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">indeg</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">}</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos"> 6</span>            <span class="n">indeg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 7</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span> <span class="k">if</span> <span class="n">indeg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 9</span>    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos">11</span>        <span class="n">order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">13</span>            <span class="n">indeg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">14</span>            <span class="k">if</span> <span class="n">indeg</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">15</span>                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="k">return</span> <span class="n">order</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<p>最後まで出力されない頂点が残った場合は、有向閉路があることを意味する。<a class="reference internal" href="#fig-ch11-courses"><span class="std std-numref">図 22</span></a> に適用すると、次の順序が得られる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>トポロジカル順序: [&#39;プログラミング基礎&#39;, &#39;データ構造&#39;, &#39;離散数学&#39;, &#39;アルゴリズム&#39;, &#39;グラフ理論&#39;, &#39;コンパイラ&#39;]
+</pre></div>
+</div>
+<p>トポロジカル順序は一般に一意ではない。たとえば「データ構造」と「離散数学」の順序は入れ替えてもよい。深さ優先探索を用いて、各頂点の探索を終えた順（帰りがけ順）を逆に並べる方法でも、トポロジカル順序が得られる。</p>
+</section>
+<section id="id6">
+<h2>強連結成分分解<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>有向グラフの強連結成分（第 4 章）は、互いに行き来できる頂点の極大な集まりである。<a class="reference internal" href="#fig-ch11-scc"><span class="std std-numref">図 23</span></a> の有向グラフは、{a, b, c}、{e, f, g}、{d}、{h} の 4 つの強連結成分に分かれる。</p>
+<figure class="align-center" id="id15">
+<span id="fig-ch11-scc"></span><div class="graphviz"><object data="_images/graphviz-d7551cdd7fc59e8739b944cfe27e8e168780701e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph g {
+    rankdir=LR;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    subgraph cluster_1 { label=&quot;&quot;; style=&quot;rounded,dashed&quot;; color=&quot;#e07b28&quot;; a; b; c; }
+    subgraph cluster_2 { label=&quot;&quot;; style=&quot;rounded,dashed&quot;; color=&quot;#e07b28&quot;; e; f; g; }
+    subgraph cluster_3 { label=&quot;&quot;; style=&quot;rounded,dashed&quot;; color=&quot;#e07b28&quot;; d; }
+    subgraph cluster_4 { label=&quot;&quot;; style=&quot;rounded,dashed&quot;; color=&quot;#e07b28&quot;; h; }
+    a -&gt; b; b -&gt; c; c -&gt; a; b -&gt; e; c -&gt; d; d -&gt; h;
+    e -&gt; f; f -&gt; g; g -&gt; e; g -&gt; h;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 23 </span><span class="caption-text">有向グラフとその強連結成分（枠で囲んだ部分）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>各強連結成分を 1 つの頂点にまとめると、DAG が得られる。もし有向閉路があれば、閉路上の成分同士が互いに行き来できることになり、強連結成分の極大性に反するからである。この DAG を<strong>縮約グラフ</strong>（または成分グラフ）という。強連結成分分解は、複雑な有向グラフを「成分の中」と「成分の間の DAG」に分けて理解するための基本的な道具である。たとえば、ソフトウェアのモジュール間の循環依存を検出したり、論理式の充足可能性問題の一種（2-SAT）を解いたりするのに使われる。</p>
+<p>強連結成分は、深さ優先探索を用いて <span class="math notranslate nohighlight">\(O(n + m)\)</span> 時間で求められる。代表的な方法が 2 つある。</p>
+<ul class="simple">
+<li><p><strong>コサラジュのアルゴリズム</strong>：深さ優先探索を 2 回行う。1 回目は元のグラフで行い、各頂点の探索を終えた順序を記録する。2 回目は辺の向きをすべて逆にしたグラフで、探索を終えた順序の遅い頂点から深さ優先探索を行う。2 回目の各探索で到達した頂点の集合が強連結成分になる。</p></li>
+<li><p><strong>タージャンのアルゴリズム</strong>：深さ優先探索を 1 回だけ行う。第 4 章の切断点の計算と同様に訪問順の番号（ここでは <code class="docutils literal notranslate"><span class="pre">index</span></code> と呼ぶ。第 4 章の <code class="docutils literal notranslate"><span class="pre">order</span></code> にあたる）と <code class="docutils literal notranslate"><span class="pre">low</span></code> を管理し、探索中の頂点をスタックに積んでおく。頂点 <span class="math notranslate nohighlight">\(u\)</span> の探索を終えたときに <code class="docutils literal notranslate"><span class="pre">low[u]</span> <span class="pre">==</span> <span class="pre">index[u]</span></code> なら、<span class="math notranslate nohighlight">\(u\)</span> は強連結成分の中で最初に訪問した頂点（根）であり、スタック上の <span class="math notranslate nohighlight">\(u\)</span> と、<span class="math notranslate nohighlight">\(u\)</span> より上に積まれた頂点が 1 つの強連結成分になる。</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-number">リスト 22 </span><span class="caption-text">タージャンのアルゴリズムによる強連結成分分解</span><a class="headerlink" href="#id16" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">strongly_connected_components</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;タージャンのアルゴリズムで強連結成分を求める。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">index</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 4</span>    <span class="n">low</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 5</span>    <span class="n">stack</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 6</span>    <span class="n">on_stack</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="n">components</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span><span class="w"> </span><span class="nf">visit</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="n">index</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">on_stack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">14</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+<span class="linenos">15</span>                <span class="n">visit</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">16</span>                <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="linenos">17</span>            <span class="k">elif</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">on_stack</span><span class="p">:</span>
+<span class="linenos">18</span>                <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">index</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="linenos">19</span>        <span class="k">if</span> <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="n">index</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>  <span class="c1"># u は強連結成分の根</span>
+<span class="linenos">20</span>            <span class="n">component</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos">21</span>            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">22</span>                <span class="n">w</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">23</span>                <span class="n">on_stack</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="linenos">24</span>                <span class="n">component</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="linenos">25</span>                <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="n">u</span><span class="p">:</span>
+<span class="linenos">26</span>                    <span class="k">break</span>
+<span class="linenos">27</span>            <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">:</span>
+<span class="linenos">30</span>        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+<span class="linenos">31</span>            <span class="n">visit</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="k">return</span> <span class="n">components</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-ch11-scc"><span class="std std-numref">図 23</span></a> のグラフに適用し、NetworkX の <code class="docutils literal notranslate"><span class="pre">nx.strongly_connected_components</span></code> と比較した結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>強連結成分: [[&#39;h&#39;], [&#39;d&#39;], [&#39;e&#39;, &#39;f&#39;, &#39;g&#39;], [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]
+<span class="linenos">2</span>NetworkX と一致: True
+</pre></div>
+</div>
+<p>タージャンのアルゴリズムは、縮約グラフのトポロジカル順序の逆順に成分を出力するという性質も持つ。実際、出力の順序 h, d, {e, f, g}, {a, b, c} を逆にすると、縮約グラフの辺の向きに沿った順序になっている。</p>
+</section>
+<section id="id7">
+<h2>まとめ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>幅優先探索はキューを使って始点から近い順に頂点を訪問し、重みのないグラフの最短経路を求められる。</p></li>
+<li><p>深さ優先探索はスタックまたは再帰を使って行けるところまで進む探索であり、後退辺の有無で閉路を検出できる。</p></li>
+<li><p>どちらの探索も計算量は <span class="math notranslate nohighlight">\(O(n + m)\)</span> である。</p></li>
+<li><p>有向グラフは有向閉路を持たないときに限りトポロジカル順序を持ち、カーンのアルゴリズムや深さ優先探索で求められる。</p></li>
+<li><p>強連結成分はタージャンのアルゴリズムやコサラジュのアルゴリズムで求められ、強連結成分を縮約したグラフは DAG になる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch10_matching.html" class="btn btn-neutral float-left" title="第 10 章 マッチング" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch12_shortest_path.html" class="btn btn-neutral float-right" title="第 12 章 最短経路問題" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

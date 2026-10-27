@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 5 章 グラフ理論入門 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 6 章 確率の基礎" href="ch06_probability.html" />
+    <link rel="prev" title="第 4 章 数え上げ" href="ch04_counting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 5 章 グラフ理論入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">グラフの定義</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">無向グラフ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">有向グラフと重み付きグラフ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">次数と握手補題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">道と連結性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">木</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">オイラー路</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">二部グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">グラフの表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">幅優先探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 5 章 グラフ理論入門</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 5 章 グラフ理論入門<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>鉄道の路線図、コンピュータネットワーク、SNS の友人関係、モジュールの依存関係などは、いずれも「もの」と「もの同士のつながり」で表せる。このような構造を抽象化したものが<a class="reference internal" href="glossary.html#term-8"><span class="xref std std-term">グラフ</span></a>である。グラフは第 11 章のマルコフ連鎖の状態遷移を表す道具にもなる。本章では、グラフの基本的な用語と性質、および最も基本的な探索アルゴリズムである幅優先探索を学ぶ。</p>
+<section id="id2">
+<h2>グラフの定義<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>無向グラフ<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p><strong>頂点</strong>の集合 <span class="math notranslate nohighlight">\(V\)</span> と、2 つの頂点を結ぶ<strong>辺</strong>の集合 <span class="math notranslate nohighlight">\(E\)</span> の組 <span class="math notranslate nohighlight">\(G = (V, E)\)</span> を<strong>グラフ</strong>という。辺に向きがないグラフを<strong>無向グラフ</strong>といい、頂点 <span class="math notranslate nohighlight">\(u, v\)</span> を結ぶ辺を <span class="math notranslate nohighlight">\(\{u, v\}\)</span> と書く。辺 <span class="math notranslate nohighlight">\(\{u, v\}\)</span> があるとき、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> は<strong>隣接</strong>しているという。</p>
+<p>同じ頂点の組を結ぶ辺が複数あるとき、それらを<strong>多重辺</strong>という。また、ある頂点からそれ自身に戻る辺を<strong>自己ループ</strong>という。多重辺も自己ループも持たないグラフを<strong>単純グラフ</strong>という。本書では、特に断らない限りグラフは有限（頂点も辺も有限個）とする。</p>
+</section>
+<section id="id4">
+<h3>有向グラフと重み付きグラフ<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>辺に向きがあるグラフを<strong>有向グラフ</strong>といい、<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への辺を <span class="math notranslate nohighlight">\((u, v)\)</span> と書く。一方通行の道路や、タスクの依存関係、Web ページのリンクなどは有向グラフで表される。また、各辺に数値（距離、コスト、確率など）を割り当てたグラフを<strong>重み付きグラフ</strong>という。第 11 章で扱うマルコフ連鎖の状態遷移図は、辺に遷移確率を割り当てた重み付き有向グラフである。</p>
+<figure class="align-center" id="id15">
+<span id="fig-ch05-example"></span><div class="graphviz"><object data="_images/graphviz-d198ccf7f41f84b12d9acdf4fb07111224b294ad.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph examples {
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=12];
+    subgraph cluster_u {
+        label=&quot;無向グラフ G&quot;; style=rounded; fontsize=11;
+        A -- B; A -- C; B -- C; B -- D; C -- E; D -- E; E -- F;
+    }
+    subgraph cluster_d {
+        label=&quot;有向グラフ&quot;; style=rounded; fontsize=11;
+        edge [dir=forward, arrowsize=0.7];
+        p [label=&quot;1&quot;]; q [label=&quot;2&quot;]; r [label=&quot;3&quot;]; s [label=&quot;4&quot;];
+        p -- q; q -- r; r -- p; r -- s;
+    }
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 5 </span><span class="caption-text">無向グラフ（左）と有向グラフ（右）の例</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id5">
+<h2>次数と握手補題<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>無向グラフで、頂点 <span class="math notranslate nohighlight">\(v\)</span> に接続する辺の本数を <span class="math notranslate nohighlight">\(v\)</span> の<strong>次数</strong>といい、<span class="math notranslate nohighlight">\(\deg(v)\)</span> と書く（自己ループは 2 本と数える）。<a class="reference internal" href="#fig-ch05-example"><span class="std std-numref">図 5</span></a> の無向グラフ <span class="math notranslate nohighlight">\(G\)</span> では、<span class="math notranslate nohighlight">\(\deg(A) = 2\)</span>、<span class="math notranslate nohighlight">\(\deg(B) = 3\)</span>、<span class="math notranslate nohighlight">\(\deg(F) = 1\)</span> である。</p>
+<p><strong>定理（握手補題）</strong>：任意の無向グラフ <span class="math notranslate nohighlight">\(G = (V, E)\)</span> について</p>
+<div class="math notranslate nohighlight">
+\[\sum_{v \in V} \deg(v) = 2 |E|\]</div>
+<p>が成り立つ。</p>
+<p><strong>証明</strong>：各辺 <span class="math notranslate nohighlight">\(\{u, v\}\)</span> は、<span class="math notranslate nohighlight">\(u\)</span> の次数と <span class="math notranslate nohighlight">\(v\)</span> の次数にそれぞれ 1 ずつ寄与する。したがって、次数の総和では各辺がちょうど 2 回数えられる。</p>
+<p>この結果から、次数が奇数の頂点の個数は必ず偶数であることが分かる（次数の総和が偶数なので）。この定理の名前は、パーティーで握手した回数を全員分足すと、握手の総数の 2 倍になることに由来する。これを<a class="reference internal" href="glossary.html#term-0"><span class="xref std std-term">握手補題</span></a>という。</p>
+</section>
+<section id="id6">
+<h2>道と連結性<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>頂点の列 <span class="math notranslate nohighlight">\(v_0, v_1, \ldots, v_k\)</span> で、隣り合う頂点がすべて辺で結ばれているものを、<span class="math notranslate nohighlight">\(v_0\)</span> から <span class="math notranslate nohighlight">\(v_k\)</span> への<strong>歩道</strong>といい、<span class="math notranslate nohighlight">\(k\)</span> をその<strong>長さ</strong>という。頂点に重複のない歩道を<strong>道</strong>、<span class="math notranslate nohighlight">\(v_0 = v_k\)</span> で、それ以外の頂点に重複のない長さ 3 以上の歩道を<strong>閉路</strong>という。</p>
+<p>任意の 2 頂点の間に道があるグラフを<strong>連結</strong>であるという。頂点 <span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への道のうち、長さが最小のものを<strong>最短路</strong>といい、その長さを <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> の<strong>距離</strong>という。</p>
+</section>
+<section id="id7">
+<h2>木<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>連結で閉路を持たない無向グラフを<a class="reference internal" href="glossary.html#term-4"><span class="xref std std-term">木</span></a>という。木は、ファイルシステムのディレクトリ構造、構文木、探索木など、情報科学のいたるところに現れる。頂点数 <span class="math notranslate nohighlight">\(n\)</span> の無向グラフについて、次の条件は互いに同値である。</p>
+<ul class="simple">
+<li><p>木である（連結で閉路を持たない）。</p></li>
+<li><p>連結で、辺の本数が <span class="math notranslate nohighlight">\(n - 1\)</span> である。</p></li>
+<li><p>閉路を持たず、辺の本数が <span class="math notranslate nohighlight">\(n - 1\)</span> である。</p></li>
+<li><p>任意の 2 頂点の間に道がただ 1 つ存在する。</p></li>
+</ul>
+<p>連結グラフ <span class="math notranslate nohighlight">\(G\)</span> のすべての頂点を含み、<span class="math notranslate nohighlight">\(G\)</span> の辺の一部からなる木を、<span class="math notranslate nohighlight">\(G\)</span> の<strong>全域木</strong>という。全域木は「すべての地点を最小限の配線でつなぐ」といった問題に現れる。</p>
+</section>
+<section id="id8">
+<h2>オイラー路<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>グラフのすべての辺をちょうど 1 回ずつ通る歩道を<a class="reference internal" href="glossary.html#term-1"><span class="xref std std-term">オイラー路</span></a>という。同じ頂点は何度通ってもよい。始点と終点が一致するオイラー路を<strong>オイラー閉路</strong>という。</p>
+<p>グラフ理論の起源とされるのが、18 世紀のケーニヒスベルク（現在のカリーニングラード）の橋の問題である。市内を流れる川に 7 本の橋が架かっており、「すべての橋をちょうど 1 回ずつ渡って散歩できるか」が問われた。オイラーは、陸地を頂点、橋を辺とする多重グラフ（<a class="reference internal" href="#fig-ch05-konigsberg"><span class="std std-numref">図 6</span></a>）を考え、これが不可能であることを示した。</p>
+<figure class="align-center" id="id16">
+<span id="fig-ch05-konigsberg"></span><div class="graphviz"><object data="_images/graphviz-d8faf7284b0455af68d186d9fcd3694c284ed47e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph konigsberg {
+    layout=neato;
+    node [shape=ellipse, fontsize=11];
+    N [label=&quot;北岸 (3)&quot;, pos=&quot;0,2!&quot;];
+    I [label=&quot;島 (5)&quot;, pos=&quot;0,0!&quot;];
+    S [label=&quot;南岸 (3)&quot;, pos=&quot;0,-2!&quot;];
+    E [label=&quot;東 (3)&quot;, pos=&quot;3,0!&quot;];
+    N -- I; N -- I; S -- I; S -- I; N -- E; S -- E; I -- E;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 6 </span><span class="caption-text">ケーニヒスベルクの橋を表す多重グラフ（括弧内は次数）</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>定理（オイラー）</strong>：辺を持つ連結な無向グラフについて、</p>
+<ul class="simple">
+<li><p>オイラー閉路が存在するための必要十分条件は、すべての頂点の次数が偶数であることである。</p></li>
+<li><p>オイラー路が存在するための必要十分条件は、次数が奇数の頂点が 0 個または 2 個であることである。</p></li>
+</ul>
+<p>必要性は次のように分かる。オイラー路の途中で頂点を通過するたびに、「入る辺」と「出る辺」を 1 本ずつ使う。したがって、始点と終点以外の頂点の次数は偶数でなければならない。ケーニヒスベルクのグラフでは 4 つの頂点すべての次数が奇数なので、オイラー路は存在しない。</p>
+</section>
+<section id="id9">
+<h2>二部グラフ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>頂点集合を 2 つの集合 <span class="math notranslate nohighlight">\(V_1, V_2\)</span> に分割し、すべての辺が <span class="math notranslate nohighlight">\(V_1\)</span> の頂点と <span class="math notranslate nohighlight">\(V_2\)</span> の頂点を結ぶようにできるグラフを<a class="reference internal" href="glossary.html#term-25"><span class="xref std std-term">二部グラフ</span></a>という。たとえば「応募者」と「求人」を頂点とし、応募可能な組を辺で結んだグラフは二部グラフである。</p>
+<p><strong>定理</strong>：グラフが二部グラフであるための必要十分条件は、長さが奇数の閉路を持たないことである。</p>
+<p>二部グラフであることは、隣接する頂点を異なる 2 色で塗り分けられることと同じである。長さ 3 の閉路（三角形）は 2 色で塗り分けられないので、二部グラフではない。</p>
+</section>
+<section id="id10">
+<h2>グラフの表現<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>グラフをプログラムで扱うには、主に次の 2 つの表現を使う。頂点を <span class="math notranslate nohighlight">\(1, \ldots, n\)</span> と番号付けたとする。</p>
+<ul class="simple">
+<li><p><strong>隣接行列</strong>：<span class="math notranslate nohighlight">\(n \times n\)</span> 行列 <span class="math notranslate nohighlight">\(A\)</span> で、頂点 <span class="math notranslate nohighlight">\(i\)</span> と <span class="math notranslate nohighlight">\(j\)</span> が隣接していれば <span class="math notranslate nohighlight">\(A_{ij} = 1\)</span>、そうでなければ <span class="math notranslate nohighlight">\(A_{ij} = 0\)</span> とする。無向グラフでは対称行列になる。2 頂点が隣接しているかを定数時間で判定できるが、<span class="math notranslate nohighlight">\(n^2\)</span> に比例するメモリを使う。</p></li>
+<li><p><strong>隣接リスト</strong>：各頂点について、隣接する頂点のリストを持つ。メモリは頂点数と辺の本数の和に比例し、辺の少ないグラフに向いている。</p></li>
+</ul>
+<p>隣接行列には、<span class="math notranslate nohighlight">\(A^k\)</span> の <span class="math notranslate nohighlight">\((i, j)\)</span> 成分が「頂点 <span class="math notranslate nohighlight">\(i\)</span> から <span class="math notranslate nohighlight">\(j\)</span> への長さ <span class="math notranslate nohighlight">\(k\)</span> の歩道の個数」に等しいという性質がある。この性質は、第 11 章で遷移行列のべき乗が「<span class="math notranslate nohighlight">\(n\)</span> ステップ後の遷移確率」を表すことと対応している。</p>
+</section>
+<section id="id11">
+<h2>幅優先探索<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>辺に重みがないグラフで、ある頂点 <span class="math notranslate nohighlight">\(s\)</span> から各頂点への最短路を求めるには<strong>幅優先探索</strong>（BFS：breadth-first search）を使う。幅優先探索では、<span class="math notranslate nohighlight">\(s\)</span> から距離 0 の頂点、距離 1 の頂点、距離 2 の頂点、……の順に、キュー（先入れ先出しの待ち行列）を使って頂点を訪問する。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(s\)</span> の距離を 0 とし、<span class="math notranslate nohighlight">\(s\)</span> をキューに入れる。</p></li>
+<li><p>キューが空でない間、次を繰り返す。</p>
+<ol class="arabic simple">
+<li><p>キューの先頭から頂点 <span class="math notranslate nohighlight">\(u\)</span> を取り出す。</p></li>
+<li><p><span class="math notranslate nohighlight">\(u\)</span> に隣接する頂点 <span class="math notranslate nohighlight">\(w\)</span> のうち、まだ距離が決まっていないものについて、距離を「<span class="math notranslate nohighlight">\(u\)</span> の距離 + 1」とし、<span class="math notranslate nohighlight">\(w\)</span> をキューに入れる。</p></li>
+</ol>
+</li>
+</ol>
+<p>各頂点と各辺を定数回ずつしか調べないので、計算量は頂点数と辺の本数の和に比例する。幅優先探索を少し変更すると、二部グラフの判定（隣接する頂点に交互に色を付けていき、矛盾が生じないかを調べる）や連結性の判定もできる。</p>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/b792617a88a26dc711e48d50828a8269/ch05_graphs.py"><code class="xref download docutils literal notranslate"><span class="pre">ch05_graphs.py</span></code></a></p>
+<p>サンプルコードでは、多重辺を許す無向グラフを <code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">list[str]]</span></code> の隣接リストで表す。辺 <span class="math notranslate nohighlight">\(\{u, v\}\)</span> を追加するたびに、<span class="math notranslate nohighlight">\(u\)</span> のリストに <span class="math notranslate nohighlight">\(v\)</span> を、<span class="math notranslate nohighlight">\(v\)</span> のリストに <span class="math notranslate nohighlight">\(u\)</span> を追加する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">Graph</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;無向グラフ（多重辺を許す）を隣接リストで表すクラス。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 6</span>        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos"> 7</span>            <span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos"> 8</span>            <span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">edge_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span><span class="w"> </span><span class="nf">vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="linenos">12</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;頂点の一覧を返す。&quot;&quot;&quot;</span>
+<span class="linenos">13</span>        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span><span class="w"> </span><span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;頂点 v の次数を返す。&quot;&quot;&quot;</span>
+<span class="linenos">17</span>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>幅優先探索は <code class="docutils literal notranslate"><span class="pre">collections.deque</span></code> をキューとして使って実装する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">bfs_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;幅優先探索で start から各頂点への最短距離（辺の本数）を求める。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="linenos"> 4</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+<span class="linenos"> 5</span>    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos"> 7</span>        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos"> 8</span>            <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">:</span>
+<span class="linenos"> 9</span>                <span class="n">distances</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">10</span>                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">distances</span>
+</pre></div>
+</div>
+<p>二部グラフの判定とオイラー路の存在判定は次のとおりである。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">is_bipartite</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;幅優先探索で隣接する頂点を異なる色に塗り分けられるかを調べる（連結グラフを仮定）。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 4</span>    <span class="n">color</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="linenos"> 5</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+<span class="linenos"> 6</span>    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacency</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos"> 9</span>            <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">color</span><span class="p">:</span>
+<span class="linenos">10</span>                <span class="n">color</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+<span class="linenos">11</span>                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="linenos">12</span>            <span class="k">elif</span> <span class="n">color</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">==</span> <span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">13</span>                <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="k">def</span><span class="w"> </span><span class="nf">has_euler_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">17</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;オイラー路が存在するか（連結かつ奇数次数の頂点が 0 個または 2 個か）を返す。&quot;&quot;&quot;</span>
+<span class="linenos">18</span>    <span class="n">odd</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">19</span>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_connected</span><span class="p">()</span> <span class="ow">and</span> <span class="n">odd</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-ch05-example"><span class="std std-numref">図 5</span></a> の無向グラフ <span class="math notranslate nohighlight">\(G\)</span> とケーニヒスベルクのグラフについて実行した結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- 握手補題 ---
+次数: {&#39;A&#39;: 2, &#39;B&#39;: 3, &#39;C&#39;: 3, &#39;D&#39;: 2, &#39;E&#39;: 3, &#39;F&#39;: 1}
+次数の総和=14, 辺の本数 x 2=14
+--- 幅優先探索 ---
+A からの距離: {&#39;A&#39;: 0, &#39;B&#39;: 1, &#39;C&#39;: 1, &#39;D&#39;: 2, &#39;E&#39;: 2, &#39;F&#39;: 3}
+A から F への最短路: [&#39;A&#39;, &#39;C&#39;, &#39;E&#39;, &#39;F&#39;]
+--- 二部グラフ判定 ---
+長さ 4 の閉路: True, 長さ 3 の閉路: False
+--- オイラー路 ---
+ケーニヒスベルク: 次数={&#39;北岸&#39;: 3, &#39;南岸&#39;: 3, &#39;島&#39;: 5, &#39;東&#39;: 3}
+オイラー路の存在: False
+グラフ g のオイラー路の存在: False
+</pre></div>
+</div>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> は次数が奇数の頂点が B、C、E、F の 4 個あるので、オイラー路を持たない。</p>
+</section>
+<section id="id12">
+<h2>まとめ<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>グラフは頂点と辺の組であり、無向グラフ・有向グラフ・重み付きグラフがある。</p></li>
+<li><p>握手補題により、次数の総和は辺の本数の 2 倍に等しい。</p></li>
+<li><p>木は連結で閉路を持たないグラフであり、頂点数 <span class="math notranslate nohighlight">\(n\)</span> の木の辺の本数は <span class="math notranslate nohighlight">\(n - 1\)</span> である。</p></li>
+<li><p>連結グラフがオイラー路を持つための必要十分条件は、次数が奇数の頂点が 0 個または 2 個であることである。</p></li>
+<li><p>二部グラフは、奇数長の閉路を持たないグラフであり、2 色で塗り分けられる。</p></li>
+<li><p>重みのないグラフの最短路は、幅優先探索で頂点数と辺の本数の和に比例する時間で求められる。</p></li>
+</ul>
+<p>グラフ理論をさらに学ぶには <a class="reference internal" href="references.html#rosen2019" id="id13"><span>[Rosen2019]</span></a> や <a class="reference internal" href="references.html#diestel2017" id="id14"><span>[Diestel2017]</span></a> を参照するとよい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch04_counting.html" class="btn btn-neutral float-left" title="第 4 章 数え上げ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch06_probability.html" class="btn btn-neutral float-right" title="第 6 章 確率の基礎" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

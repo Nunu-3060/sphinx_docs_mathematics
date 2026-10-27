@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 1 章 信号と数学的準備 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 2 章 フーリエ級数" href="ch02_fourier_series.html" />
+    <link rel="prev" title="はじめに" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 1 章 信号と数学的準備</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">信号とは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">正弦波</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">複素数とオイラーの公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">複素正弦波</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">内積と直交性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 1 章 信号と数学的準備</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 1 章 信号と数学的準備<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この章では、本書で扱う「信号」とは何かを説明し、フーリエ解析の主役である正弦波と、それを扱うための道具である複素数、オイラーの公式、内積と直交性を準備する。</p>
+<section id="id2">
+<h2>信号とは<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>時間とともに変化する量を、<a class="reference internal" href="appendix_a_glossary.html#term-25"><span class="xref std std-term">信号</span></a>という。マイクロフォンが出力する電圧、加速度センサーで測った振動、心電図、株価の推移などは、いずれも信号である。画像のように、位置によって変化する量も信号として扱える。</p>
+<p>信号は、時間の扱い方と値の扱い方によって、次のように分類できる（<a class="reference internal" href="#fig-ch01-signal-types"><span class="std std-numref">図 1</span></a>）。</p>
+<ul class="simple">
+<li><p>時間が連続な信号を<a class="reference internal" href="appendix_a_glossary.html#term-70"><span class="xref std std-term">連続時間信号</span></a>、とびとびの時刻だけで値をもつ信号を<a class="reference internal" href="appendix_a_glossary.html#term-66"><span class="xref std std-term">離散時間信号</span></a>という。</p></li>
+<li><p>値が連続的な信号に対して、値を有限個の段階に丸めることを<a class="reference internal" href="appendix_a_glossary.html#term-67"><span class="xref std std-term">量子化</span></a>という。</p></li>
+</ul>
+<p>時間も値も連続な信号をアナログ信号、時間が離散で値も量子化された信号を<a class="reference internal" href="appendix_a_glossary.html#term-44"><span class="xref std std-term">デジタル信号</span></a>という。計算機が直接扱えるのはデジタル信号だけである。</p>
+<figure class="align-default" id="id8">
+<span id="fig-ch01-signal-types"></span><img alt="連続時間・連続値、離散時間・連続値、連続時間・量子化された値、離散時間・量子化された値の 4 種類の信号の波形" src="_images/fig_ch01_signal_types.svg" />
+<figcaption>
+<p><span class="caption-number">図 1 </span><span class="caption-text">信号の 4 つの分類</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>現実の多くの信号はアナログ信号である。これを計算機で処理するには、一定の時間間隔で値を取り出し（<a class="reference internal" href="appendix_a_glossary.html#term-53"><span class="xref std std-term">標本化</span></a>）、値を量子化して、デジタル信号に変換する。この変換を A/D 変換（analog-to-digital conversion）といい、逆にデジタル信号からアナログ信号を作る変換を D/A 変換という。デジタル信号処理の典型的な流れは、<a class="reference internal" href="#fig-ch01-dsp-chain"><span class="std std-numref">図 2</span></a> のとおりである。標本化と量子化は第 4 章で詳しく説明する。</p>
+<figure class="align-default" id="id9">
+<span id="fig-ch01-dsp-chain"></span><div class="graphviz"><object data="_images/graphviz-4c934e69254b02002e5d4a216b1a677a709aa868.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">アナログ入力、アンチエイリアシングフィルタ、A/D 変換、デジタル信号処理、D/A 変換、再構成フィルタ、アナログ出力の順に並んだブロック図</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 2 </span><span class="caption-text">デジタル信号処理の典型的な流れ</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>信号をデジタルで処理する利点は、次のとおりである。</p>
+<ul class="simple">
+<li><p>同じ入力に対して、いつでも同じ結果が得られる（部品のばらつきや温度による変化がない）。</p></li>
+<li><p>処理の内容をプログラムの変更だけで切り替えられる。</p></li>
+<li><p>アナログ回路では実現が難しい処理（例えば、位相のずれがまったくないフィルタや、長い時間のデータを蓄えてから行う処理）ができる。</p></li>
+</ul>
+<p>一方で、標本化と量子化によって情報が失われる可能性がある。どのような条件なら失われないのかを明らかにすることも、本書の大きなテーマの 1 つである。</p>
+</section>
+<section id="id3">
+<h2>正弦波<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>フーリエ解析の主役は<a class="reference internal" href="appendix_a_glossary.html#term-32"><span class="xref std std-term">正弦波</span></a>である。本書では、<span class="math notranslate nohighlight">\(\sin\)</span> と <span class="math notranslate nohighlight">\(\cos\)</span> の波形をまとめて正弦波と呼び、次の形で表す。</p>
+<div class="math notranslate nohighlight">
+\[x(t) = A \cos(2\pi f t + \phi)\]</div>
+<p>各記号の意味は次のとおりである（<a class="reference internal" href="#fig-ch01-sinusoid"><span class="std std-numref">図 3</span></a>）。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 20.0%" />
+<col style="width: 55.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名前</p></th>
+<th class="head"><p>記号</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="appendix_a_glossary.html#term-26"><span class="xref std std-term">振幅</span></a></p></td>
+<td><p><span class="math notranslate nohighlight">\(A\)</span></p></td>
+<td><p>波の大きさ（<span class="math notranslate nohighlight">\(A \ge 0\)</span>）</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="appendix_a_glossary.html#term-21"><span class="xref std std-term">周波数</span></a></p></td>
+<td><p><span class="math notranslate nohighlight">\(f\)</span></p></td>
+<td><p>1 秒あたりの振動の回数。単位は Hz</p></td>
+</tr>
+<tr class="row-even"><td><p>周期</p></td>
+<td><p><span class="math notranslate nohighlight">\(T = 1/f\)</span></p></td>
+<td><p>1 回の振動にかかる時間。単位は s</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="appendix_a_glossary.html#term-12"><span class="xref std std-term">角周波数</span></a></p></td>
+<td><p><span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span></p></td>
+<td><p>1 秒あたりに進む角度。単位は rad/s</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="appendix_a_glossary.html#term-3"><span class="xref std std-term">位相</span></a></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>時刻 <span class="math notranslate nohighlight">\(t = 0\)</span> における角度。波形の時間方向のずれを表す</p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-default" id="id10">
+<span id="fig-ch01-sinusoid"></span><img alt="振幅、周波数、位相をそれぞれ変えた正弦波を、元の正弦波と重ねた 3 つのグラフ" src="_images/fig_ch01_sinusoid.svg" />
+<figcaption>
+<p><span class="caption-number">図 3 </span><span class="caption-text">正弦波の振幅、周波数、位相を変えた波形（青の実線が元の波形）</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="math notranslate nohighlight">\(\sin\)</span> は <span class="math notranslate nohighlight">\(\cos\)</span> の位相を <span class="math notranslate nohighlight">\(\pi/2\)</span> ずらしたもの（<span class="math notranslate nohighlight">\(\sin\theta = \cos(\theta - \pi/2)\)</span>）なので、上の形ですべての正弦波を表せる。また、加法定理を使うと</p>
+<div class="math notranslate nohighlight">
+\[A \cos(2\pi f t + \phi) = a \cos(2\pi f t) + b \sin(2\pi f t), \qquad a = A\cos\phi, \quad b = -A\sin\phi\]</div>
+<p>と書き直せる。つまり、同じ周波数の正弦波は、<span class="math notranslate nohighlight">\(\cos\)</span> と <span class="math notranslate nohighlight">\(\sin\)</span> の 2 つの成分の和で表せる。この事実は、第 2 章のフーリエ級数で使う。</p>
+<p>正弦波が特別に重要なのは、次の 2 つの理由による。</p>
+<ul class="simple">
+<li><p>ばねと質量の振動、LC 回路の電気振動、音叉の音など、自然界の多くの振動は正弦波になる。</p></li>
+<li><p>第 5 章で説明する線形時不変システム（フィルタ、回路、伝送路など）に正弦波を入力すると、出力は振幅と位相が変わるだけで、周波数が同じ正弦波になる。そのため、信号を正弦波に分解できれば、システムの出力は「各周波数の成分の振幅と位相がどう変わるか」だけで計算できる。</p></li>
+</ul>
+<p>後者がフーリエ解析を信号処理で使う最大の理由である。</p>
+</section>
+<section id="id4">
+<h2>複素数とオイラーの公式<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>正弦波の計算は、複素数を使うと見通しがよくなる。ここで、必要な範囲を復習する。</p>
+<p>複素数 <span class="math notranslate nohighlight">\(z\)</span> は、実数 <span class="math notranslate nohighlight">\(a, b\)</span> と虚数単位 <span class="math notranslate nohighlight">\(j\)</span>（<span class="math notranslate nohighlight">\(j^2 = -1\)</span>）を使って <span class="math notranslate nohighlight">\(z = a + jb\)</span> と表す。<span class="math notranslate nohighlight">\(a\)</span> を実部（<span class="math notranslate nohighlight">\(\mathrm{Re}\,z\)</span>）、<span class="math notranslate nohighlight">\(b\)</span> を虚部（<span class="math notranslate nohighlight">\(\mathrm{Im}\,z\)</span>）という。複素数は、横軸を実部、縦軸を虚部とする平面（複素平面）の上の点として表せる。原点からの距離 <span class="math notranslate nohighlight">\(|z| = \sqrt{a^2 + b^2}\)</span> を絶対値、実軸の正の向きからの角度 <span class="math notranslate nohighlight">\(\arg z\)</span> を偏角という。<span class="math notranslate nohighlight">\(z = a + jb\)</span> に対して <span class="math notranslate nohighlight">\(z^* = a - jb\)</span> を共役複素数という。<span class="math notranslate nohighlight">\(zz^* = |z|^2\)</span> が成り立つ。</p>
+<p>指数関数と三角関数を結び付けるのが、次の<a class="reference internal" href="appendix_a_glossary.html#term-9"><span class="xref std std-term">オイラーの公式</span></a>である。</p>
+<div class="math notranslate nohighlight" id="equation-eq-euler">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-euler" title="Link to this equation"></a></span>\[e^{j\theta} = \cos\theta + j\sin\theta\]</div>
+<p><span class="math notranslate nohighlight">\(e^{j\theta}\)</span> は、複素平面の単位円の上で、角度 <span class="math notranslate nohighlight">\(\theta\)</span> の位置にある点を表す（<a class="reference internal" href="#fig-ch01-euler"><span class="std std-numref">図 4</span></a>）。その実部が <span class="math notranslate nohighlight">\(\cos\theta\)</span>、虚部が <span class="math notranslate nohighlight">\(\sin\theta\)</span> である。</p>
+<figure class="align-default" id="id11">
+<span id="fig-ch01-euler"></span><img alt="複素平面の単位円の上の点 e の j シータ乗と、その実部のコサインと虚部のサインを示す図と、角度に対するコサインとサインのグラフ" src="_images/fig_ch01_euler.svg" />
+<figcaption>
+<p><span class="caption-number">図 4 </span><span class="caption-text">単位円の上の点 <span class="math notranslate nohighlight">\(e^{j\theta}\)</span>（左）と、その実部と虚部（右）</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>オイラーの公式を使うと、絶対値が <span class="math notranslate nohighlight">\(r\)</span>、偏角が <span class="math notranslate nohighlight">\(\theta\)</span> の複素数は <span class="math notranslate nohighlight">\(z = re^{j\theta}\)</span> と表せる。これを極形式という。極形式の積は</p>
+<div class="math notranslate nohighlight">
+\[r_1 e^{j\theta_1} \cdot r_2 e^{j\theta_2} = r_1 r_2 e^{j(\theta_1 + \theta_2)}\]</div>
+<p>となり、「絶対値は掛け算、偏角は足し算」になる。特に、<span class="math notranslate nohighlight">\(e^{j\theta}\)</span> を掛けることは、複素平面で角度 <span class="math notranslate nohighlight">\(\theta\)</span> だけ回転することを意味する。</p>
+<p>また、式 <a class="reference internal" href="#equation-eq-euler">(1)</a> と、<span class="math notranslate nohighlight">\(\theta\)</span> を <span class="math notranslate nohighlight">\(-\theta\)</span> に置き換えた式 <span class="math notranslate nohighlight">\(e^{-j\theta} = \cos\theta - j\sin\theta\)</span> を足したり引いたりすると、</p>
+<div class="math notranslate nohighlight" id="equation-eq-cos-sin">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-cos-sin" title="Link to this equation"></a></span>\[\cos\theta = \frac{e^{j\theta} + e^{-j\theta}}{2}, \qquad \sin\theta = \frac{e^{j\theta} - e^{-j\theta}}{2j}\]</div>
+<p>が得られる。三角関数を指数関数で表せるので、三角関数の積や微分・積分の計算が、指数法則だけで済むようになる。例えば、<span class="math notranslate nohighlight">\(\frac{d}{d\theta} e^{j\theta} = je^{j\theta}\)</span> であり、微分は「<span class="math notranslate nohighlight">\(j\)</span> を掛けること」、つまり <span class="math notranslate nohighlight">\(\pi/2\)</span> の回転になる。</p>
+<p>Python では、複素数を <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2j</span></code> のように書く。NumPy の関数は複素数の配列も扱える。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 1 </span><span class="caption-text">Python と NumPy での複素数の扱い</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="linenos">4</span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span>          <span class="c1"># e^{j theta}</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>                        <span class="c1"># (0.5000000000000001+0.8660254037844386j)</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>           <span class="c1"># 実部と虚部</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>   <span class="c1"># 絶対値 1.0 と偏角 1.047...（= pi/3）</span>
+<span class="linenos">8</span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>               <span class="c1"># 共役複素数</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>複素正弦波<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>オイラーの公式で <span class="math notranslate nohighlight">\(\theta = 2\pi f t\)</span> とした</p>
+<div class="math notranslate nohighlight">
+\[e^{j2\pi f t} = \cos(2\pi f t) + j\sin(2\pi f t)\]</div>
+<p>を<a class="reference internal" href="appendix_a_glossary.html#term-60"><span class="xref std std-term">複素正弦波</span></a>という。複素正弦波は、複素平面の単位円の上を、1 秒あたり <span class="math notranslate nohighlight">\(f\)</span> 回の速さで反時計回りに回る点を表す。<span class="math notranslate nohighlight">\(f\)</span> が負のときは時計回りに回る。</p>
+<p>式 <a class="reference internal" href="#equation-eq-cos-sin">(2)</a> を使うと、実数の正弦波は、反対向きに回る 2 つの複素正弦波の和で表せる。</p>
+<div class="math notranslate nohighlight" id="equation-eq-real-sinusoid">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-real-sinusoid" title="Link to this equation"></a></span>\[A\cos(2\pi f t + \phi) = \frac{A}{2} e^{j\phi} e^{j2\pi f t} + \frac{A}{2} e^{-j\phi} e^{-j2\pi f t}\]</div>
+<p>右辺の第 2 項は、周波数が <span class="math notranslate nohighlight">\(-f\)</span> の複素正弦波である。フーリエ解析では、このように実数の正弦波を「周波数 <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(-f\)</span> の成分の組」として扱う。負の周波数は、物理的な振動の速さが負という意味ではなく、回転の向きを表す数学的な表現である。実数の信号では、<span class="math notranslate nohighlight">\(f\)</span> の成分と <span class="math notranslate nohighlight">\(-f\)</span> の成分が互いに共役複素数（<span class="math notranslate nohighlight">\(\frac{A}{2}e^{j\phi}\)</span> と <span class="math notranslate nohighlight">\(\frac{A}{2}e^{-j\phi}\)</span>）になる。</p>
+<p>式 <a class="reference internal" href="#equation-eq-real-sinusoid">(3)</a> の係数 <span class="math notranslate nohighlight">\(\frac{A}{2}e^{j\phi}\)</span> は、1 つの複素数で振幅と位相の両方を表している。このように振幅と位相をまとめた複素数をフェーザ（phasor）といい、交流回路の計算でも使われる。</p>
+</section>
+<section id="id6">
+<h2>内積と直交性<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>フーリエ解析の考え方は、ベクトルの分解と同じ構造をもつ。この節では、その構造を説明する。</p>
+<p>2 次元の平面で、互いに直交する単位ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{e}_1, \boldsymbol{e}_2\)</span> を使うと、任意のベクトル <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> は</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{v} = c_1 \boldsymbol{e}_1 + c_2 \boldsymbol{e}_2, \qquad c_i = \langle \boldsymbol{v}, \boldsymbol{e}_i \rangle\]</div>
+<p>と分解できる。係数 <span class="math notranslate nohighlight">\(c_i\)</span> は、<span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> と <span class="math notranslate nohighlight">\(\boldsymbol{e}_i\)</span> の内積で求められる。両辺と <span class="math notranslate nohighlight">\(\boldsymbol{e}_1\)</span> の内積を取ると、<span class="math notranslate nohighlight">\(\langle \boldsymbol{e}_2, \boldsymbol{e}_1 \rangle = 0\)</span> なので <span class="math notranslate nohighlight">\(c_2\)</span> の項が消え、<span class="math notranslate nohighlight">\(c_1\)</span> だけが残るからである。<span class="math notranslate nohighlight">\(N\)</span> 次元でも同じで、互いに<a class="reference internal" href="appendix_a_glossary.html#term-42"><span class="xref std std-term">直交</span></a>する <span class="math notranslate nohighlight">\(N\)</span> 本のベクトルがあれば、任意のベクトルの成分は、内積を 1 回ずつ計算するだけで求められる。</p>
+<p>成分が複素数のベクトル <span class="math notranslate nohighlight">\(\boldsymbol{u} = (u_0, \ldots, u_{N-1})\)</span>、<span class="math notranslate nohighlight">\(\boldsymbol{v} = (v_0, \ldots, v_{N-1})\)</span> の内積は、次のように定義する。</p>
+<div class="math notranslate nohighlight">
+\[\langle \boldsymbol{u}, \boldsymbol{v} \rangle = \sum_{n=0}^{N-1} u_n v_n^*\]</div>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> の側の成分を共役複素数にするのは、<span class="math notranslate nohighlight">\(\langle \boldsymbol{v}, \boldsymbol{v} \rangle = \sum |v_n|^2\)</span> が実数になり、ベクトルの長さの 2 乗を表すようにするためである。</p>
+<p>この考え方は関数にも拡張できる。区間 <span class="math notranslate nohighlight">\([0, T]\)</span> で定義された 2 つの関数 <span class="math notranslate nohighlight">\(x(t), y(t)\)</span> の内積を</p>
+<div class="math notranslate nohighlight">
+\[\langle x, y \rangle = \int_0^T x(t)\, y^*(t)\, dt\]</div>
+<p>と定義する。ベクトルの成分の和 <span class="math notranslate nohighlight">\(\sum_n\)</span> が、積分 <span class="math notranslate nohighlight">\(\int dt\)</span> に置き換わっただけである。この内積が 0 のとき、2 つの関数は直交するという。</p>
+<p>第 2 章で示すように、周波数が基本周波数の整数倍の正弦波は互いに直交する。したがって、周期的な信号を正弦波の和に分解するときの各成分の大きさは、信号と各正弦波の内積で求められる。これがフーリエ級数の基本的な考え方である。フーリエ解析とは、「正弦波という直交する基底で信号を表し直すこと」だといえる。</p>
+</section>
+<section id="id7">
+<h2>まとめ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>信号は、時間が連続か離散か、値が連続か量子化されているかで分類できる。計算機が扱うのはデジタル信号である。</p></li>
+<li><p>正弦波 <span class="math notranslate nohighlight">\(A\cos(2\pi f t + \phi)\)</span> は、振幅、周波数、位相の 3 つで決まる。</p></li>
+<li><p>オイラーの公式 <span class="math notranslate nohighlight">\(e^{j\theta} = \cos\theta + j\sin\theta\)</span> により、正弦波を複素指数関数で表せる。実数の正弦波は、周波数 <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(-f\)</span> の複素正弦波の和である。</p></li>
+<li><p>直交する基底を使うと、各成分の大きさは内積で求められる。フーリエ解析は、信号を正弦波という直交基底で表し直すことである。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-left" title="はじめに" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch02_fourier_series.html" class="btn btn-neutral float-right" title="第 2 章 フーリエ級数" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. はじめに &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="2. 数値シミュレーションの基礎" href="numerical_basics.html" />
+    <link rel="prev" title="Python による流体・粒子シミュレーション入門" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. はじめに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 本書のねらい</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 対象読者</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.3. 本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">1.4. 動作環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">1.5. サンプルコード</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">1.6. 本書の表記</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>はじめに</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>はじめに<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2><span class="section-number">1.1. </span>本書のねらい<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>水の流れ、煙の広がり、砂粒の積み重なりなど、身の回りの「流れ」や「粒の集まり」の振る舞いは、コンピューターで再現できる。こうした数値シミュレーションは、工学の設計計算から映画やゲームの映像表現まで、幅広い分野で使われている。</p>
+<p>一方で、数値シミュレーションの入門は敷居が高いと感じられやすい。教科書の多くは偏微分方程式の理論から始まり、実際に動くコードにたどり着くまでが長い。逆に、ネット上の短いコードを動かしてみても、なぜそれで流れが再現できるのか、結果をどこまで信用してよいのかが分からないまま終わりがちである。</p>
+<p>本書は、その中間を目指す。手法を実装する各章では、次の 4 つの手順を踏む。</p>
+<ol class="arabic simple">
+<li><p><strong>モデル化</strong>: 現象を方程式で表す。理論は実装に必要な最小限にとどめ、式の各項が何を表しているかを直感的に説明する。</p></li>
+<li><p><strong>離散化</strong>: 連続的な方程式を、コンピューターで計算できる有限個の数の更新式に置き換える。</p></li>
+<li><p><strong>実装</strong>: 更新式を Python と NumPy のコードにする。サンプルコードは単体で実行でき、数秒から数分で結果が出る規模にする。</p></li>
+<li><p><strong>検証</strong>: 厳密解、保存則、既知の実験値やベンチマーク値と比べて、結果が正しいかを確かめる。</p></li>
+</ol>
+<p>特に 4 番目の検証を重視する。数値シミュレーションは、間違っていても「それらしい」結果を出してしまうことが多い。結果を疑い、確かめる習慣は、手法そのものと同じくらい重要である。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.2. </span>対象読者<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>本書は、次の知識を持つエンジニアを対象とする。</p>
+<ul class="simple">
+<li><p>Python の基本的な文法(関数、クラス、型ヒント)を理解している。</p></li>
+<li><p>NumPy の配列演算(スライス、ブロードキャスト)と matplotlib のグラフ描画を使ったことがある。</p></li>
+<li><p>微分・積分とベクトルの基礎(高校から大学初年程度)を知っている。</p></li>
+</ul>
+<p>流体力学や数値解析の予備知識は仮定しない。偏微分やベクトル解析の記号は、使うところで説明する。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.3. </span>本書の構成<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>本書は、粒子の運動の基礎から始め、格子を使う流体の計算法を経て、粒子を使って流体を計算する手法へと進む。<a class="reference internal" href="#fig-chapter-map"><span class="std std-numref">図 1.1</span></a> に章の関係を示す。</p>
+<figure class="align-center" id="id8">
+<span id="fig-chapter-map"></span><div class="graphviz"><object data="_images/graphviz-09ae87b6fa01bfcc8d9f43e16712e2bcf5cb7d06.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph chapters {
+    graph [rankdir=TB, fontname=&quot;Meiryo&quot;, nodesep=0.3, ranksep=0.35];
+    node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=&quot;#eef3fa&quot;, fontname=&quot;Meiryo&quot;, fontsize=11];
+    edge [color=&quot;#555555&quot;];
+    c2 [label=&quot;第 2 章\n数値シミュレーションの基礎&quot;];
+    c3 [label=&quot;第 3 章\n粒子シミュレーション&quot;];
+    c4 [label=&quot;第 4 章\n粒子間の相互作用&quot;];
+    c5 [label=&quot;第 5 章\n流体力学の基礎&quot;];
+    c6 [label=&quot;第 6 章\n移流と拡散&quot;];
+    c7 [label=&quot;第 7 章\nStable Fluids&quot;];
+    c8 [label=&quot;第 8 章\nキャビティ流れ&quot;];
+    c9 [label=&quot;第 9 章\nSPH&quot;, fillcolor=&quot;#fbeedd&quot;];
+    c10 [label=&quot;第 10 章\n格子ボルツマン法&quot;];
+    c11 [label=&quot;第 11 章\n手法の比較と実践上の注意&quot;];
+    c2 -&gt; c3 -&gt; c4;
+    c2 -&gt; c5 -&gt; c6 -&gt; c7 -&gt; c8;
+    c4 -&gt; c9;
+    c5 -&gt; c9;
+    c5 -&gt; c10;
+    c8 -&gt; c11;
+    c9 -&gt; c11;
+    c10 -&gt; c11;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 1.1 </span><span class="caption-text">各章の関係</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 1.1 </span><span class="caption-text">各章の内容</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 8.0%" />
+<col style="width: 30.0%" />
+<col style="width: 62.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>章</p></th>
+<th class="head"><p>タイトル</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>数値シミュレーションの基礎</p></td>
+<td><p>微分方程式の離散化、時間積分法、誤差と安定性</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>粒子シミュレーション</p></td>
+<td><p>質点の運動、空気抵抗、床での反発、パーティクルシステム、NumPy によるベクトル化</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>粒子間の相互作用</p></td>
+<td><p>ばね-質点系、粒子どうしの衝突、近傍探索</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>流体力学の基礎</p></td>
+<td><p>オイラー的視点とラグランジュ的視点、連続の式、ナビエ-ストークス方程式、レイノルズ数</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>格子法の第一歩: 移流と拡散</p></td>
+<td><p>1 次元の移流方程式と拡散方程式の差分法、CFL 条件</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>格子法による 2 次元流体: Stable Fluids</p></td>
+<td><p>セミラグランジュ法、圧力投影、煙のシミュレーション</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>格子法の検証: キャビティ流れ</p></td>
+<td><p>射影法による定常流れの計算と、ベンチマーク値との比較</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>粒子法による流体: SPH</p></td>
+<td><p>カーネル関数、密度と圧力の計算、ダムブレイク</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>格子ボルツマン法</p></td>
+<td><p>D2Q9 モデル、BGK 衝突則、カルマン渦列</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>手法の比較と実践上の注意</p></td>
+<td><p>各手法の比較、パラメーターの選び方、計算が発散したときの調べ方、次のステップ</p></td>
+</tr>
+</tbody>
+</table>
+<p>第 2〜4 章は粒子(質点)の運動を扱う。第 5 章で流体力学の基礎を学んだ後、第 6〜8 章では空間を格子に区切って流体を計算する方法を扱う。第 9 章では両者が合流し、粒子を使って流体を計算する。第 10 章では、さらに別の考え方による手法を紹介する。</p>
+<p>第 2 章と第 5 章は以降の章の土台となる。それ以外の章は、矢印の順序を守れば興味のある章から読んでもよい。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">1.4. </span>動作環境<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>本書のサンプルコードは、次の環境で動作を確認した。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 1.2 </span><span class="caption-text">動作確認に使った環境</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ソフトウェア</p></th>
+<th class="head"><p>バージョン</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.14</p></td>
+</tr>
+<tr class="row-odd"><td><p>NumPy</p></td>
+<td><p>2.5</p></td>
+</tr>
+<tr class="row-even"><td><p>matplotlib</p></td>
+<td><p>3.11</p></td>
+</tr>
+</tbody>
+</table>
+<p>使うライブラリは NumPy と matplotlib だけである。次のコマンドでインストールできる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python -m pip install numpy matplotlib</span>
+</pre></div>
+</div>
+<p>グラフの日本語表示には Windows に標準で入っているメイリオ(Meiryo)フォントを指定している。他の OS で日本語が表示されない場合は、各サンプルコードの <code class="docutils literal notranslate"><span class="pre">plt.rcParams[&quot;font.family&quot;]</span></code> を、使っている環境にある日本語フォントに変更する。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">1.5. </span>サンプルコード<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>本書のサンプルコードは、次の zip ファイルにまとめてある。</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/b65c1036c13a343a56ae6f0b7a03daa5/examples.zip"><code class="xref download docutils literal notranslate"><span class="pre">examples.zip</span></code></a></p></li>
+</ul>
+<p>各章で使うサンプルコードは、その章の本文からも個別にダウンロードできる。各ファイルは単体で実行できる(第 9 章の <code class="docutils literal notranslate"><span class="pre">sph_dam_break.py</span></code> だけは、第 4 章の <code class="docutils literal notranslate"><span class="pre">neighbor_search.py</span></code> を同じフォルダに置く必要がある)。</p>
+<table class="docutils align-default" id="id11">
+<caption><span class="caption-number">表 1.3 </span><span class="caption-text">サンプルコードの一覧</span><a class="headerlink" href="#id11" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 10.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ファイル</p></th>
+<th class="head"><p>章</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/720f3f599789afd1e0d871384556b15c/integrators.py"><code class="xref download docutils literal notranslate"><span class="pre">integrators.py</span></code></a></p></td>
+<td><p>2</p></td>
+<td><p>時間積分法の比較(ばね振動子)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/8a9c8724a25ad6b80801e59f00d3074b/projectile.py"><code class="xref download docutils literal notranslate"><span class="pre">projectile.py</span></code></a></p></td>
+<td><p>3</p></td>
+<td><p>空気抵抗を受けるボールと、床で跳ね返るボール</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/5c491b00327a0bd04428b94cb465a6fe/particle_system.py"><code class="xref download docutils literal notranslate"><span class="pre">particle_system.py</span></code></a></p></td>
+<td><p>3</p></td>
+<td><p>パーティクルシステムによる噴水</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/fba6c04b49dfdae7570e419de3be976f/spring_mass.py"><code class="xref download docutils literal notranslate"><span class="pre">spring_mass.py</span></code></a></p></td>
+<td><p>4</p></td>
+<td><p>ばね-質点系によるロープ</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/1eac510e7f64e1ddaface18a49f0f714/collision.py"><code class="xref download docutils literal notranslate"><span class="pre">collision.py</span></code></a></p></td>
+<td><p>4</p></td>
+<td><p>ばね-ダッシュポットモデルによる粒子の衝突</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/443d063685f3bbe520edd2075ee1d651/neighbor_search.py"><code class="xref download docutils literal notranslate"><span class="pre">neighbor_search.py</span></code></a></p></td>
+<td><p>4</p></td>
+<td><p>近傍探索(総当たり法とセル分割法)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/c93ed70a7b612e03be69302147febc08/advection_1d.py"><code class="xref download docutils literal notranslate"><span class="pre">advection_1d.py</span></code></a></p></td>
+<td><p>6</p></td>
+<td><p>1 次元移流方程式</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/7f436273829df6ce356cd659d1f6120e/diffusion_1d.py"><code class="xref download docutils literal notranslate"><span class="pre">diffusion_1d.py</span></code></a></p></td>
+<td><p>6</p></td>
+<td><p>1 次元拡散方程式</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/0e648fa66a21420927c9fb6d05c8da17/stable_fluids.py"><code class="xref download docutils literal notranslate"><span class="pre">stable_fluids.py</span></code></a></p></td>
+<td><p>7</p></td>
+<td><p>Stable Fluids による煙</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/d78d941910c35c497d85f81f28b87772/cavity_flow.py"><code class="xref download docutils literal notranslate"><span class="pre">cavity_flow.py</span></code></a></p></td>
+<td><p>8</p></td>
+<td><p>正方キャビティ流れ</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/0fe97598012628e6783de1d20a9d5956/sph_dam_break.py"><code class="xref download docutils literal notranslate"><span class="pre">sph_dam_break.py</span></code></a></p></td>
+<td><p>9</p></td>
+<td><p>SPH によるダムブレイク</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/985dd5cb0d726539715b0b503359fa1c/lbm_karman.py"><code class="xref download docutils literal notranslate"><span class="pre">lbm_karman.py</span></code></a></p></td>
+<td><p>10</p></td>
+<td><p>格子ボルツマン法によるカルマン渦列</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/9a7d4e6baa469aeaeb4d02338f479f5a/setup.cfg"><code class="xref download docutils literal notranslate"><span class="pre">setup.cfg</span></code></a></p></td>
+<td><p>―</p></td>
+<td><p>flake8 と mypy の設定ファイル</p></td>
+</tr>
+</tbody>
+</table>
+<p>サンプルコードは、次のコマンドのようにファイル名を指定して実行する。多くのサンプルは、計算結果をグラフやアニメーションのウィンドウに表示する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python integrators.py</span>
+</pre></div>
+</div>
+<p>すべてのサンプルコードには型ヒントを付けており、同梱の <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> の設定で flake8(1 行 120 文字まで許容)と mypy(<code class="docutils literal notranslate"><span class="pre">strict</span> <span class="pre">=</span> <span class="pre">True</span></code>)の検査に通ることを確認している。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">1.6. </span>本書の表記<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>本文中に掲載するコードには行番号を付ける。サンプルコードから抜粋したものは、ファイル中の行番号をそのまま示す。</p></li>
+<li><p>ベクトルは太字で <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> のように書く。時刻 <span class="math notranslate nohighlight">\(t\)</span> における量を、時刻の番号 <span class="math notranslate nohighlight">\(n\)</span> を使って <span class="math notranslate nohighlight">\(x^n\)</span> のように上付きの添字で表すことがある。これはべき乗ではない。</p></li>
+<li><p>格子点の番号は下付きの添字で <span class="math notranslate nohighlight">\(u_i\)</span> や <span class="math notranslate nohighlight">\(u_{i,j}\)</span> のように書く。</p></li>
+<li><p>使える文字の数には限りがあるため、同じ記号を章によって別の意味で使うことがある(例: <span class="math notranslate nohighlight">\(h\)</span> は第 7・8 章では格子間隔、第 9 章ではカーネル関数の大きさを表す)。記号の意味は各章で定義する。</p></li>
+<li><p>本書で使う主な用語は<a class="reference internal" href="glossary.html"><span class="doc">用語集</span></a>にまとめた。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Python による流体・粒子シミュレーション入門" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="numerical_basics.html" class="btn btn-neutral float-right" title="2. 数値シミュレーションの基礎" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

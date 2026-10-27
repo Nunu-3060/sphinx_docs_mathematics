@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. 関係 &mdash; 論理・集合入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=27372ee5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="8. 写像" href="mapping.html" />
+    <link rel="prev" title="6. 集合の基礎" href="set.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            論理・集合入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proposition.html">2. 命題と論理演算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equivalence.html">3. 論理式の同値変形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">4. 推論と証明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate.html">5. 述語と量化子</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">6. 集合の基礎</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. 関係</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">7.1. 二項関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">7.2. 関係の性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">7.3. 同値関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">7.4. 順序関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">7.5. ハッセ図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">7.6. 関係の合成と推移閉包</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">7.7. サンプルコード</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">8. 写像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality.html">9. 集合の大きさ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paradox.html">10. 素朴集合論の限界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">付録 C 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">論理・集合入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>関係</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">7. </span>関係<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>「<span class="math notranslate nohighlight">\(x\)</span> は <span class="math notranslate nohighlight">\(y\)</span> 以下である」「<span class="math notranslate nohighlight">\(x\)</span> と <span class="math notranslate nohighlight">\(y\)</span> は同じ部署に所属する」のように、2 つのものの間に成り立つかどうかが定まる性質を関係という。本章では、関係を集合として定義し、同値関係と順序関係という 2 つの重要な種類を学ぶ。</p>
+<section id="id2">
+<h2><span class="section-number">7.1. </span>二項関係<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（二項関係）</p>
+<p>直積 <span class="math notranslate nohighlight">\(A \times B\)</span> の部分集合 <span class="math notranslate nohighlight">\(R\)</span> を、<span class="math notranslate nohighlight">\(A\)</span> から <span class="math notranslate nohighlight">\(B\)</span> への二項関係という。<span class="math notranslate nohighlight">\((a, b) \in R\)</span> であることを <span class="math notranslate nohighlight">\(a \, R \, b\)</span> とも書く。<span class="math notranslate nohighlight">\(A \times A\)</span> の部分集合を <span class="math notranslate nohighlight">\(A\)</span> 上の二項関係という。</p>
+</div>
+<p>関係を「成り立つ組の集合」として定義するのがこの定義の要点である。たとえば <span class="math notranslate nohighlight">\(A = \{1, 2, 3\}\)</span> 上の関係 <span class="math notranslate nohighlight">\(\leq\)</span> は、次の順序対の集合として表される。</p>
+<div class="math notranslate nohighlight">
+\[\{(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)\}\]</div>
+<p>以下、単に関係といえば二項関係を指す。関係の例を挙げる。</p>
+<ul class="simple">
+<li><p>自然数全体 <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> 上の <span class="math notranslate nohighlight">\(\leq\)</span> と <span class="math notranslate nohighlight">\(&lt;\)</span></p></li>
+<li><p>任意の集合上の等号 <span class="math notranslate nohighlight">\(=\)</span></p></li>
+<li><p>正の整数全体上の整除関係 <span class="math notranslate nohighlight">\(\mid\)</span>。<span class="math notranslate nohighlight">\(a \mid b\)</span> は「<span class="math notranslate nohighlight">\(a\)</span> は <span class="math notranslate nohighlight">\(b\)</span> を割り切る」、すなわち <span class="math notranslate nohighlight">\(b\)</span> が <span class="math notranslate nohighlight">\(a\)</span> の倍数であることを表す。</p></li>
+<li><p>整数全体 <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> 上の合同関係。<span class="math notranslate nohighlight">\(a \equiv b \pmod{3}\)</span> は、<span class="math notranslate nohighlight">\(a - b\)</span> が 3 で割り切れることを表す。</p></li>
+</ul>
+<p>Python では、有限集合上の関係を <code class="docutils literal notranslate"><span class="pre">tuple</span></code> 型の値の集合として表せる。リレーショナルデータベースのテーブルや、SNS のフォロー関係（<span class="math notranslate nohighlight">\(a\)</span> が <span class="math notranslate nohighlight">\(b\)</span> をフォローしている）も、組の集合として表される関係の例である。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">7.2. </span>関係の性質<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>集合 <span class="math notranslate nohighlight">\(A\)</span> 上の関係 <span class="math notranslate nohighlight">\(R\)</span> について、次の性質を考える。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>定義</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>反射律</p></td>
+<td><p><span class="math notranslate nohighlight">\(\forall a \, (a \, R \, a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>対称律</p></td>
+<td><p><span class="math notranslate nohighlight">\(\forall a \, \forall b \, (a \, R \, b \to b \, R \, a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>推移律</p></td>
+<td><p><span class="math notranslate nohighlight">\(\forall a \, \forall b \, \forall c \, ((a \, R \, b \land b \, R \, c) \to a \, R \, c)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>反対称律</p></td>
+<td><p><span class="math notranslate nohighlight">\(\forall a \, \forall b \, ((a \, R \, b \land b \, R \, a) \to a = b)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>前節の例がそれぞれの性質を満たすかどうかは次のとおりである（○は満たす、×は満たさない）。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>関係</p></th>
+<th class="head"><p>反射律</p></th>
+<th class="head"><p>対称律</p></th>
+<th class="head"><p>推移律</p></th>
+<th class="head"><p>反対称律</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathbb{N}\)</span> 上の <span class="math notranslate nohighlight">\(\leq\)</span></p></td>
+<td><p>○</p></td>
+<td><p>×</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbb{N}\)</span> 上の <span class="math notranslate nohighlight">\(&lt;\)</span></p></td>
+<td><p>×</p></td>
+<td><p>×</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+</tr>
+<tr class="row-even"><td><p>等号 <span class="math notranslate nohighlight">\(=\)</span></p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+</tr>
+<tr class="row-odd"><td><p>整除関係 <span class="math notranslate nohighlight">\(\mid\)</span></p></td>
+<td><p>○</p></td>
+<td><p>×</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\equiv \pmod{3}\)</span></p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+<td><p>×</p></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math notranslate nohighlight">\(&lt;\)</span> が反対称律を満たすのは、<span class="math notranslate nohighlight">\(a &lt; b\)</span> かつ <span class="math notranslate nohighlight">\(b &lt; a\)</span> となる <span class="math notranslate nohighlight">\(a\)</span>、<span class="math notranslate nohighlight">\(b\)</span> が存在せず、含意の前件が常に偽になるためである。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">7.3. </span>同値関係<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（同値関係）</p>
+<p>反射律・対称律・推移律を満たす関係を同値関係という。</p>
+</div>
+<p>同値関係は「ある観点で同じとみなせる」という関係を抽象化したものである。等号 <span class="math notranslate nohighlight">\(=\)</span> や合同関係 <span class="math notranslate nohighlight">\(\equiv \pmod{3}\)</span>、「同じ部署に所属する」は同値関係である。</p>
+<p>プログラミングでよく現れる同値関係として、ある関数 <code class="docutils literal notranslate"><span class="pre">key</span></code> を使って「<code class="docutils literal notranslate"><span class="pre">key(x)</span> <span class="pre">==</span> <span class="pre">key(y)</span></code> のとき <span class="math notranslate nohighlight">\(x\)</span> と <span class="math notranslate nohighlight">\(y\)</span> を関係付ける」と定めた関係がある。これは等号の性質から必ず同値関係になる。たとえば、文字列を <code class="docutils literal notranslate"><span class="pre">str.lower</span></code> の結果で比べれば、大文字と小文字を区別しない比較という同値関係が得られる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（同値類・商集合）</p>
+<p><span class="math notranslate nohighlight">\(R\)</span> を集合 <span class="math notranslate nohighlight">\(A\)</span> 上の同値関係とする。<span class="math notranslate nohighlight">\(a \in A\)</span> に対し、<span class="math notranslate nohighlight">\(a\)</span> と関係する要素全体の集合</p>
+<div class="math notranslate nohighlight">
+\[[a] = \{x \in A \mid x \, R \, a\}\]</div>
+<p>を <span class="math notranslate nohighlight">\(a\)</span> の同値類という。同値類全体の集合 <span class="math notranslate nohighlight">\(\{[a] \mid a \in A\}\)</span> を <span class="math notranslate nohighlight">\(A\)</span> の <span class="math notranslate nohighlight">\(R\)</span> による商集合といい、<span class="math notranslate nohighlight">\(A / R\)</span> と書く。</p>
+</div>
+<p>たとえば <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> 上の <span class="math notranslate nohighlight">\(\equiv \pmod{3}\)</span> の同値類は、3 で割った余りが 0、1、2 の整数全体の 3 つである。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}[0] &amp;= \{\ldots, -3, 0, 3, 6, \ldots\} \\
+[1] &amp;= \{\ldots, -2, 1, 4, 7, \ldots\} \\
+[2] &amp;= \{\ldots, -1, 2, 5, 8, \ldots\}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\([0] = [3] = [6]\)</span> のように、同じ同値類を異なる要素で表せることに注意する。同値類から選んだ要素を代表元という。</p>
+<p>同値類には次の重要な性質がある。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p><span class="math notranslate nohighlight">\(R\)</span> を集合 <span class="math notranslate nohighlight">\(A\)</span> 上の同値関係とする。任意の <span class="math notranslate nohighlight">\(a, b \in A\)</span> について、<span class="math notranslate nohighlight">\([a] = [b]\)</span> と <span class="math notranslate nohighlight">\([a] \cap [b] = \emptyset\)</span> のどちらか一方が成り立つ。</p>
+</div>
+<p><strong>証明</strong> <span class="math notranslate nohighlight">\([a] \cap [b] \neq \emptyset\)</span> と仮定して <span class="math notranslate nohighlight">\([a] = [b]\)</span> を示す。<span class="math notranslate nohighlight">\(c \in [a] \cap [b]\)</span> とすると <span class="math notranslate nohighlight">\(c \, R \, a\)</span> かつ <span class="math notranslate nohighlight">\(c \, R \, b\)</span> である。対称律より <span class="math notranslate nohighlight">\(a \, R \, c\)</span> なので、推移律より <span class="math notranslate nohighlight">\(a \, R \, b\)</span> である。対称律よりさらに <span class="math notranslate nohighlight">\(b \, R \, a\)</span> も成り立つ。ここで <span class="math notranslate nohighlight">\(x \in [a]\)</span> とすると <span class="math notranslate nohighlight">\(x \, R \, a\)</span> と <span class="math notranslate nohighlight">\(a \, R \, b\)</span> から推移律により <span class="math notranslate nohighlight">\(x \, R \, b\)</span>、すなわち <span class="math notranslate nohighlight">\(x \in [b]\)</span> である。よって <span class="math notranslate nohighlight">\([a] \subseteq [b]\)</span> である。<span class="math notranslate nohighlight">\(a\)</span> と <span class="math notranslate nohighlight">\(b\)</span> の役割を入れ替えれば <span class="math notranslate nohighlight">\([b] \subseteq [a]\)</span> も同様に示せるので、<span class="math notranslate nohighlight">\([a] = [b]\)</span> である。□</p>
+<p>また、反射律より <span class="math notranslate nohighlight">\(a \in [a]\)</span> なので、どの要素もいずれかの同値類に属し、同値類は空でない。つまり、同値類は集合 <span class="math notranslate nohighlight">\(A\)</span> を、互いに重ならない空でない部分集合に切り分ける。このような切り分けを <span class="math notranslate nohighlight">\(A\)</span> の分割という。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（分割）</p>
+<p>集合 <span class="math notranslate nohighlight">\(A\)</span> の空でない部分集合からなる集合族 <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> が次の 2 つを満たすとき、<span class="math notranslate nohighlight">\(\mathcal{F}\)</span> を <span class="math notranslate nohighlight">\(A\)</span> の分割という。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{F}\)</span> の要素の和集合が <span class="math notranslate nohighlight">\(A\)</span> に等しい。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{F}\)</span> の異なる 2 つの要素は互いに素である。</p></li>
+</ol>
+</div>
+<p>逆に、集合 <span class="math notranslate nohighlight">\(A\)</span> の分割が与えられたとき、「同じ部分集合に属する」という関係は同値関係になる。したがって、集合上の同値関係と分割は一対一に対応する。次の図は、集合 <span class="math notranslate nohighlight">\(\{0, 1, \ldots, 8\}\)</span> を <span class="math notranslate nohighlight">\(\equiv \pmod{3}\)</span> で分割した様子を示している。</p>
+<figure class="align-default" id="id9">
+<div class="graphviz"><object data="_images/graphviz-3cedef99f0d5e116538f44d18cf201045f7e9ec9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">0 から 8 までの整数を 3 で割った余りで 3 つの同値類に分けた図</p></object></div>
+<figcaption>
+<p><span class="caption-text"><span class="math notranslate nohighlight">\(\{0, 1, \ldots, 8\}\)</span> の <span class="math notranslate nohighlight">\(\equiv \pmod{3}\)</span> による分割</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>同値類による分割は、データを <code class="docutils literal notranslate"><span class="pre">key</span></code> 関数の値ごとにグループ化する処理（<code class="docutils literal notranslate"><span class="pre">itertools.groupby</span></code> や SQL の <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code>）と同じ構造をしている。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">7.4. </span>順序関係<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（半順序・全順序）</p>
+<p>反射律・反対称律・推移律を満たす関係を半順序という。半順序 <span class="math notranslate nohighlight">\(\preceq\)</span> が定められた集合を半順序集合という。半順序 <span class="math notranslate nohighlight">\(\preceq\)</span> がさらに</p>
+<div class="math notranslate nohighlight">
+\[\forall a \, \forall b \, (a \preceq b \lor b \preceq a)\]</div>
+<p>を満たすとき、<span class="math notranslate nohighlight">\(\preceq\)</span> を全順序という。</p>
+</div>
+<p>全順序では任意の 2 つの要素が比較できるが、半順序では比較できない要素の組があってもよい。</p>
+<ul class="simple">
+<li><p>実数全体 <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> 上の <span class="math notranslate nohighlight">\(\leq\)</span> は全順序である。</p></li>
+<li><p>正の整数全体上の整除関係 <span class="math notranslate nohighlight">\(\mid\)</span> は半順序だが全順序ではない。<span class="math notranslate nohighlight">\(2 \mid 3\)</span> も <span class="math notranslate nohighlight">\(3 \mid 2\)</span> も成り立たない。</p></li>
+<li><p>集合 <span class="math notranslate nohighlight">\(A\)</span> のべき集合 <span class="math notranslate nohighlight">\(\mathcal{P}(A)\)</span> 上の包含関係 <span class="math notranslate nohighlight">\(\subseteq\)</span> は半順序である。<span class="math notranslate nohighlight">\(A\)</span> が 2 個以上の要素を持てば全順序ではない。たとえば <span class="math notranslate nohighlight">\(\{a\}\)</span> と <span class="math notranslate nohighlight">\(\{b\}\)</span> は比較できない。</p></li>
+</ul>
+<p>ソフトウェアのモジュール間の依存関係や、タスクの前後関係も半順序で表されることが多い。有限の半順序集合の要素は、半順序と矛盾しないように一列に並べられる。この並べ方を求めることをトポロジカルソートといい、ビルドツールやパッケージ管理ツールで使われている。Python では標準ライブラリの <code class="docutils literal notranslate"><span class="pre">graphlib.TopologicalSorter</span></code> で計算できる。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">7.5. </span>ハッセ図<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>有限の半順序集合は、ハッセ図で図示できる。ハッセ図では、要素を点で表し、<span class="math notranslate nohighlight">\(a \preceq b\)</span> かつ <span class="math notranslate nohighlight">\(a \neq b\)</span> で、その間に別の要素が入らないとき、<span class="math notranslate nohighlight">\(a\)</span> を下、<span class="math notranslate nohighlight">\(b\)</span> を上に置いて線で結ぶ。反射律と推移律から分かる線は省略する。</p>
+<p>次の図は、12 の正の約数全体 <span class="math notranslate nohighlight">\(\{1, 2, 3, 4, 6, 12\}\)</span> の整除関係と、<span class="math notranslate nohighlight">\(\mathcal{P}(\{a, b, c\})\)</span> の包含関係のハッセ図である。</p>
+<figure class="align-default" id="id10">
+<div class="graphviz"><object data="_images/graphviz-ec04c014abd89d9578445d3ffe8f315005f2c603.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">12 の約数の整除関係のハッセ図</p></object></div>
+<figcaption>
+<p><span class="caption-text">12 の約数の整除関係</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id11">
+<div class="graphviz"><object data="_images/graphviz-2db7539d5238af41071ab54dd85916e174ccd034.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">3 要素の集合のべき集合の包含関係のハッセ図</p></object></div>
+<figcaption>
+<p><span class="caption-text"><span class="math notranslate nohighlight">\(\mathcal{P}(\{a, b, c\})\)</span> の包含関係</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>たとえば 1 つ目の図で <span class="math notranslate nohighlight">\(1 \mid 4\)</span> は線で直接結ばれていないが、<span class="math notranslate nohighlight">\(1 \mid 2\)</span> と <span class="math notranslate nohighlight">\(2 \mid 4\)</span> から推移律で分かる。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">7.6. </span>関係の合成と推移閉包<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（関係の合成）</p>
+<p><span class="math notranslate nohighlight">\(R\)</span> を <span class="math notranslate nohighlight">\(A\)</span> から <span class="math notranslate nohighlight">\(B\)</span> への関係、<span class="math notranslate nohighlight">\(S\)</span> を <span class="math notranslate nohighlight">\(B\)</span> から <span class="math notranslate nohighlight">\(C\)</span> への関係とする。<span class="math notranslate nohighlight">\(A\)</span> から <span class="math notranslate nohighlight">\(C\)</span> への関係</p>
+<div class="math notranslate nohighlight">
+\[S \circ R = \{(a, c) \in A \times C \mid \exists b \in B \, (a \, R \, b \land b \, S \, c)\}\]</div>
+<p>を <span class="math notranslate nohighlight">\(R\)</span> と <span class="math notranslate nohighlight">\(S\)</span> の合成という。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(S \circ R\)</span> は「<span class="math notranslate nohighlight">\(R\)</span> をたどってから <span class="math notranslate nohighlight">\(S\)</span> をたどる」関係である。<span class="math notranslate nohighlight">\(R\)</span> を先に書かないのは、第 8 章で扱う合成写像の記法に合わせるためである。</p>
+<p>「直接依存している」という関係 <span class="math notranslate nohighlight">\(R\)</span> があるとき、「直接または間接に依存している」という関係は、<span class="math notranslate nohighlight">\(R\)</span>、<span class="math notranslate nohighlight">\(R \circ R\)</span>、<span class="math notranslate nohighlight">\(R \circ R \circ R\)</span>、… の和集合になる。これは <span class="math notranslate nohighlight">\(R\)</span> を含む推移的な関係のうち最小のものであり、<span class="math notranslate nohighlight">\(R\)</span> の推移閉包という。推移閉包は、ネットワークの到達可能性や、パッケージの間接的な依存関係を求める際に現れる。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">7.7. </span>サンプルコード<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>有限集合上の関係の性質を判定し、同値類と推移閉包を求めるサンプルコードを示す。推移閉包は、合成によって新しい組が増えなくなるまで組を追加して求めている。</p>
+<p><a class="reference download internal" download="" href="_downloads/f352a12bd6c4abbc228480b65127eff9/relation.py"><code class="xref download docutils literal notranslate"><span class="pre">relation.py</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;有限集合上の二項関係の性質を判定し、同値類と推移閉包を求めるサンプル。</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="sd">集合 A 上の二項関係 R は、A × A の部分集合（順序対の集合）として表す。</span>
+<span class="linenos"> 4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">Relation</span> <span class="o">=</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">]]</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">def</span><span class="w"> </span><span class="nf">relation_from</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<span class="linenos">14</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;集合 a 上で predicate(x, y) が真になる順序対 (x, y) の集合を返す。&quot;&quot;&quot;</span>
+<span class="linenos">15</span>    <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="k">return</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">elements</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">elements</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)}</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">def</span><span class="w"> </span><span class="nf">is_reflexive</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;反射律: すべての x について x R x。&quot;&quot;&quot;</span>
+<span class="linenos">21</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="k">def</span><span class="w"> </span><span class="nf">is_symmetric</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">25</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;対称律: x R y ならば y R x。&quot;&quot;&quot;</span>
+<span class="linenos">26</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">r</span><span class="p">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="k">def</span><span class="w"> </span><span class="nf">is_antisymmetric</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;反対称律: x R y かつ y R x ならば x = y。&quot;&quot;&quot;</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">if</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">r</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="k">def</span><span class="w"> </span><span class="nf">is_transitive</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">35</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;推移律: x R y かつ y R z ならば x R z。&quot;&quot;&quot;</span>
+<span class="linenos">36</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y2</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="k">def</span><span class="w"> </span><span class="nf">is_equivalence</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">40</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;同値関係（反射律・対称律・推移律）であるかを判定する。&quot;&quot;&quot;</span>
+<span class="linenos">41</span>    <span class="k">return</span> <span class="n">is_reflexive</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_symmetric</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_transitive</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="k">def</span><span class="w"> </span><span class="nf">is_partial_order</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">45</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;半順序（反射律・反対称律・推移律）であるかを判定する。&quot;&quot;&quot;</span>
+<span class="linenos">46</span>    <span class="k">return</span> <span class="n">is_reflexive</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_antisymmetric</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_transitive</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="k">def</span><span class="w"> </span><span class="nf">equivalence_classes</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">[</span><span class="n">T</span><span class="p">]]:</span>
+<span class="linenos">50</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;同値関係 r による a の同値類全体（商集合）を返す。&quot;&quot;&quot;</span>
+<span class="linenos">51</span>    <span class="k">return</span> <span class="p">{</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">a</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">}</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="k">def</span><span class="w"> </span><span class="nf">compose</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<span class="linenos">55</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;合成 S ∘ R = {(x, z) | ある y について x R y かつ y S z} を返す。&quot;&quot;&quot;</span>
+<span class="linenos">56</span>    <span class="k">return</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="n">y2</span><span class="p">}</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="k">def</span><span class="w"> </span><span class="nf">transitive_closure</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Relation</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<span class="linenos">60</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;推移閉包（r を含む最小の推移的な関係）を返す。</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span><span class="sd">    合成で得られる順序対を、新しい順序対が増えなくなるまで追加する。</span>
+<span class="linenos">63</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">64</span>    <span class="n">closure</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="linenos">65</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="n">extended</span> <span class="o">=</span> <span class="n">closure</span> <span class="o">|</span> <span class="n">compose</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">closure</span><span class="p">)</span>
+<span class="linenos">67</span>        <span class="k">if</span> <span class="n">extended</span> <span class="o">==</span> <span class="n">closure</span><span class="p">:</span>
+<span class="linenos">68</span>            <span class="k">return</span> <span class="n">closure</span>
+<span class="linenos">69</span>        <span class="n">closure</span> <span class="o">=</span> <span class="n">extended</span>
+<span class="linenos">70</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">73</span>    <span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<span class="linenos">74</span>    <span class="n">mod3</span> <span class="o">=</span> <span class="n">relation_from</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">75</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x ≡ y (mod 3) は同値関係か:&quot;</span><span class="p">,</span> <span class="n">is_equivalence</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mod3</span><span class="p">))</span>
+<span class="linenos">76</span>    <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">equivalence_classes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mod3</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="nb">min</span><span class="p">):</span>
+<span class="linenos">77</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  同値類:&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">cls</span><span class="p">))</span>
+<span class="linenos">78</span>
+<span class="linenos">79</span>    <span class="n">divisors</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
+<span class="linenos">80</span>    <span class="n">divides</span> <span class="o">=</span> <span class="n">relation_from</span><span class="p">(</span><span class="n">divisors</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">%</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">81</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;整除関係は半順序か:&quot;</span><span class="p">,</span> <span class="n">is_partial_order</span><span class="p">(</span><span class="n">divisors</span><span class="p">,</span> <span class="n">divides</span><span class="p">))</span>
+<span class="linenos">82</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;整除関係は同値関係か:&quot;</span><span class="p">,</span> <span class="n">is_equivalence</span><span class="p">(</span><span class="n">divisors</span><span class="p">,</span> <span class="n">divides</span><span class="p">))</span>
+<span class="linenos">83</span>
+<span class="linenos">84</span>    <span class="c1"># 直接の依存関係から、間接的なものを含む依存関係を求める。</span>
+<span class="linenos">85</span>    <span class="n">depends</span> <span class="o">=</span> <span class="p">{(</span><span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="s2">&quot;web&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;web&quot;</span><span class="p">,</span> <span class="s2">&quot;http&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="s2">&quot;socket&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">)}</span>
+<span class="linenos">86</span>    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">transitive_closure</span><span class="p">(</span><span class="n">depends</span><span class="p">)):</span>
+<span class="linenos">87</span>        <span class="n">mark</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">depends</span> <span class="k">else</span> <span class="s2">&quot;（間接）&quot;</span>
+<span class="linenos">88</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> は </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> に依存する</span><span class="si">{</span><span class="n">mark</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">89</span>
+<span class="linenos">90</span>
+<span class="linenos">91</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">92</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>x ≡ y (mod 3) は同値関係か: True
+  同値類: [0, 3, 6]
+  同値類: [1, 4, 7]
+  同値類: [2, 5, 8]
+整除関係は半順序か: True
+整除関係は同値関係か: False
+  app は db に依存する
+  app は http に依存する（間接）
+  app は socket に依存する（間接）
+  app は web に依存する
+  http は socket に依存する
+  web は http に依存する
+  web は socket に依存する（間接）
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="set.html" class="btn btn-neutral float-left" title="6. 集合の基礎" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mapping.html" class="btn btn-neutral float-right" title="8. 写像" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

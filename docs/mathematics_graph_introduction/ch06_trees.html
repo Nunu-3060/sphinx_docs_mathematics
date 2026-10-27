@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 6 章 木と全域木 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 7 章 オイラー路とハミルトン路" href="ch07_euler_hamilton.html" />
+    <link rel="prev" title="第 5 章 さまざまなグラフ" href="ch05_graph_classes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 6 章 木と全域木</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">木の定義と性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">根付き木</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">全域木</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">ケイリーの公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">最小全域木</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">カット性質</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">クラスカル法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#union-find">Union-Find</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">プリム法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 6 章 木と全域木</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 6 章 木と全域木<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>閉路を持たない連結グラフを木という。木は最も単純な連結グラフであり、ファイルシステムのディレクトリ構造、プログラムの構文木、探索アルゴリズムの探索木、組織図など、情報科学や工学のいたるところに現れる。本章では木の基本的な性質を学んだ後、グラフの全頂点をつなぐ木である全域木と、重みの合計が最小の全域木を求めるアルゴリズムを扱う。</p>
+<section id="id2">
+<h2>木の定義と性質<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 6.1（木・森）</p>
+<p>閉路を持たない連結グラフを<strong>木</strong>という。閉路を持たないグラフ（連結とは限らない）を<strong>森</strong>という。</p>
+</div>
+<p>森の各連結成分は木である。木の次数 1 の頂点を<strong>葉</strong>という。</p>
+<figure class="align-center" id="id11">
+<span id="fig-ch06-trees"></span><div class="graphviz"><object data="_images/graphviz-a75cc63d5ebc6e5d010a52de6dc108d2144cef9f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    node [shape=circle, width=0.3, fixedsize=true, label=&quot;&quot;, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    a1 -- a2; a2 -- a3; a3 -- a4;
+    b1 -- b2; b1 -- b3; b1 -- b4; b1 -- b5;
+    c1 -- c2; c1 -- c3; c2 -- c4; c2 -- c5; c3 -- c6;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 12 </span><span class="caption-text">3 つの木からなる森</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 6.1</p>
+<p>頂点数が 2 以上の木は、少なくとも 2 つの葉を持つ。</p>
+</div>
+<p><strong>証明</strong>：木の中で最も長い道 <span class="math notranslate nohighlight">\(P = (v_0, \ldots, v_k)\)</span> を 1 つ選ぶ。頂点数が 2 以上の連結グラフには辺があるので <span class="math notranslate nohighlight">\(k \ge 1\)</span> である。端点 <span class="math notranslate nohighlight">\(v_0\)</span> が <span class="math notranslate nohighlight">\(v_1\)</span> 以外の頂点 <span class="math notranslate nohighlight">\(w\)</span> と隣接しているとする。<span class="math notranslate nohighlight">\(w\)</span> が <span class="math notranslate nohighlight">\(P\)</span> 上にあれば閉路ができ、<span class="math notranslate nohighlight">\(P\)</span> 上になければ <span class="math notranslate nohighlight">\(P\)</span> の前に <span class="math notranslate nohighlight">\(w\)</span> をつなげてより長い道ができる。いずれも矛盾なので、<span class="math notranslate nohighlight">\(\deg(v_0) = 1\)</span> である。<span class="math notranslate nohighlight">\(v_k\)</span> についても同様である。□</p>
+<p>葉を 1 つ取り除いても、残りは連結で閉路を持たないので、やはり木である。この「葉を取り除いて小さな木に帰着させる」方法は、木に関する性質を数学的帰納法で示すときの基本的な手段である。たとえば次の定理の (3) は、葉を 1 つずつ取り除くと頂点と辺が 1 つずつ減り、最後に頂点 1 個、辺 0 本の木になることから分かる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 6.2（木の特徴付け）</p>
+<p>頂点数 <span class="math notranslate nohighlight">\(n\)</span> のグラフ <span class="math notranslate nohighlight">\(G\)</span> について、次の条件はすべて同値である。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(G\)</span> は木である（連結で閉路を持たない）。</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span> の任意の 2 頂点の間に、道がちょうど 1 つ存在する。</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span> は連結で、辺数が <span class="math notranslate nohighlight">\(n - 1\)</span> である。</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span> は閉路を持たず、辺数が <span class="math notranslate nohighlight">\(n - 1\)</span> である。</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span> は連結で、どの辺を取り除いても連結でなくなる（すべての辺が橋である）。</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span> は閉路を持たず、隣接していない 2 頂点を結ぶ辺を 1 本加えると閉路がちょうど 1 つできる。</p></li>
+</ol>
+</div>
+<p>証明の要点だけを述べる。(1) と (2) の同値性は、2 頂点を結ぶ道が 2 つあれば閉路ができ、逆に閉路があればその上の 2 頂点を結ぶ道が 2 つあることから分かる。(1) と (5) の同値性は、定理 4.3（橋はどの閉路にも含まれない辺）から直ちに従う。辺数に関する (3) と (4) は、次のように示せる。木の辺数が <span class="math notranslate nohighlight">\(n - 1\)</span> であることは前述のとおりである。閉路を持たないグラフの各連結成分は木なので、連結成分が <span class="math notranslate nohighlight">\(c\)</span> 個なら辺数は <span class="math notranslate nohighlight">\(n - c\)</span> になる。よって閉路を持たず辺数が <span class="math notranslate nohighlight">\(n - 1\)</span> なら <span class="math notranslate nohighlight">\(c = 1\)</span>、つまり連結である。逆に連結で辺数が <span class="math notranslate nohighlight">\(n - 1\)</span> のグラフに閉路があれば、閉路上の辺を除いても連結性は保たれるので、辺数 <span class="math notranslate nohighlight">\(n - 2\)</span> 以下の連結グラフが得られ、定理 4.2 に反する。</p>
+<p>この定理は、木が「連結であるための最小限の辺を持つグラフ」であり、同時に「閉路を作らずに持てる最大限の辺を持つグラフ」であることを示している。</p>
+</section>
+<section id="id3">
+<h2>根付き木<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>木の頂点を 1 つ選んで特別扱いしたものを<strong>根付き木</strong>といい、選んだ頂点を<strong>根</strong>という。根付き木では、根から各頂点への道が一意に定まるので、次の用語が定義できる。</p>
+<ul class="simple">
+<li><p>頂点 <span class="math notranslate nohighlight">\(v\)</span> の<strong>深さ</strong>：根から <span class="math notranslate nohighlight">\(v\)</span> への道の長さ。</p></li>
+<li><p>根から <span class="math notranslate nohighlight">\(v\)</span> への道で <span class="math notranslate nohighlight">\(v\)</span> の直前にある頂点を <span class="math notranslate nohighlight">\(v\)</span> の<strong>親</strong>、<span class="math notranslate nohighlight">\(v\)</span> を親とする頂点を <span class="math notranslate nohighlight">\(v\)</span> の<strong>子</strong>という。</p></li>
+<li><p>根から <span class="math notranslate nohighlight">\(v\)</span> への道の上にある頂点を <span class="math notranslate nohighlight">\(v\)</span> の<strong>祖先</strong>、<span class="math notranslate nohighlight">\(v\)</span> を祖先とする頂点を <span class="math notranslate nohighlight">\(v\)</span> の<strong>子孫</strong>という。</p></li>
+<li><p>木の<strong>高さ</strong>：深さの最大値。</p></li>
+</ul>
+<p>各頂点の子が高々 2 個の根付き木を<strong>二分木</strong>という。二分探索木やヒープ、ハフマン符号の符号木など、多くのデータ構造が根付き木を基礎にしている。根付き木では親を記録しておけば根への道をたどれるので、配列 <code class="docutils literal notranslate"><span class="pre">parent[v]</span></code> だけで木全体を表せる。この表現は、本章の Union-Find や、第 11 章の探索木、第 12 章の最短経路木でも使う。</p>
+</section>
+<section id="id4">
+<h2>全域木<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 6.2（全域木）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> の全域部分グラフで木であるものを、<span class="math notranslate nohighlight">\(G\)</span> の<strong>全域木</strong>という。</p>
+</div>
+<p>全域木は、すべての頂点を最小限の辺でつなぐ「骨組み」である。連結グラフは必ず全域木を持つ。実際、連結グラフに閉路があれば、その閉路上の辺を 1 本取り除いても連結性は保たれる（定理 4.3）。閉路がなくなるまでこれを繰り返せば全域木が得られる。連結でないグラフは全域木を持たないが、各連結成分の全域木を合わせた<strong>全域森</strong>を持つ。</p>
+<p>実際に全域木を求めるには、幅優先探索や深さ優先探索で、新しい頂点を初めて発見したときに通った辺を集めればよい。こうして得られる全域木を、それぞれ<strong>幅優先探索木</strong>、<strong>深さ優先探索木</strong>という（第 11 章）。</p>
+</section>
+<section id="id5">
+<h2>ケイリーの公式<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>頂点に 1 から <span class="math notranslate nohighlight">\(n\)</span> の番号を付けた（ラベル付きの）全域木は、完全グラフ <span class="math notranslate nohighlight">\(K_n\)</span> にいくつあるだろうか。<span class="math notranslate nohighlight">\(n = 3\)</span> なら 3 個、<span class="math notranslate nohighlight">\(n = 4\)</span> なら 16 個である。一般には次の美しい公式が成り立つ。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 6.3（ケイリーの公式）</p>
+<p>頂点集合 <span class="math notranslate nohighlight">\(\{1, 2, \ldots, n\}\)</span> 上の木の個数は <span class="math notranslate nohighlight">\(n^{n-2}\)</span> である。</p>
+</div>
+<p>この公式は、木と「長さ <span class="math notranslate nohighlight">\(n - 2\)</span>、各要素が 1 から <span class="math notranslate nohighlight">\(n\)</span> の数列」の間に 1 対 1 の対応を作ることで証明できる。その対応が<strong>プリューファー符号</strong>である。以下ではプログラムに合わせて頂点を 0 から <span class="math notranslate nohighlight">\(n - 1\)</span> で表す。</p>
+<p>木からプリューファー符号を作る手順は次のとおりである。</p>
+<ol class="arabic simple">
+<li><p>番号が最小の葉を選び、それに隣接する頂点の番号を符号の末尾に書く。</p></li>
+<li><p>その葉を木から取り除く。</p></li>
+<li><p>頂点が 2 個になるまで 1, 2 を繰り返す。</p></li>
+</ol>
+<p><a class="reference internal" href="#fig-ch06-prufer"><span class="std std-numref">図 13</span></a> の木では、葉 0, 1, 2, 5 のうち最小の 0 を取り除いて 3 を書き、続いて葉 1、葉 2 を取り除いて 3 を 2 回書く。すると頂点 3 が葉になるので、最小の葉 3 を取り除いて 4 を書く。残りは頂点 4, 5 の 2 個なので終了し、符号 <span class="math notranslate nohighlight">\((3, 3, 3, 4)\)</span> が得られる。</p>
+<figure class="align-center" id="id12">
+<span id="fig-ch06-prufer"></span><div class="graphviz"><object data="_images/graphviz-83489440ac534d6e82e5cc3feac99749141fbc8f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.35, fixedsize=true, fontsize=12, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    0 [pos=&quot;0,1!&quot;]; 1 [pos=&quot;0,0!&quot;]; 2 [pos=&quot;0,-1!&quot;]; 3 [pos=&quot;1.2,0!&quot;]; 4 [pos=&quot;2.4,0!&quot;]; 5 [pos=&quot;3.6,0!&quot;];
+    0 -- 3; 1 -- 3; 2 -- 3; 3 -- 4; 4 -- 5;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 13 </span><span class="caption-text">プリューファー符号 (3, 3, 3, 4) に対応する木</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>各頂点が符号に現れる回数は「その頂点の次数 - 1」に等しい。葉は一度も現れない。このことを使うと、符号から木を復元できる。符号を先頭から読みながら、「まだ使っていない頂点のうち、残りの符号に現れない最小の頂点」を葉として、読んだ頂点と結べばよい。最後に残った 2 頂点を結ぶと木が完成する。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 6 </span><span class="caption-text">木からプリューファー符号への変換</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">prufer_encode</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tree_edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;頂点 0..n-1 の木をプリューファー符号（長さ n-2 の数列）に変換する。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">adj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="nb">set</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)}</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tree_edges</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos"> 6</span>        <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="n">code</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 8</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span>
+<span class="linenos"> 9</span>        <span class="n">leaf</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 番号最小の葉</span>
+<span class="linenos">10</span>        <span class="n">neighbor</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span><span class="n">leaf</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">11</span>        <span class="n">code</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="n">adj</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="k">del</span> <span class="n">adj</span><span class="p">[</span><span class="n">leaf</span><span class="p">]</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="n">code</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 7 </span><span class="caption-text">プリューファー符号から木への復元</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">prufer_decode</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;プリューファー符号から木の辺リストを復元する。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="linenos"> 4</span>    <span class="n">remaining</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>  <span class="c1"># 残りの符号に各頂点が何回現れるか</span>
+<span class="linenos"> 5</span>    <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 6</span>    <span class="n">used</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos"> 7</span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="n">leaf</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span> <span class="ow">and</span> <span class="n">remaining</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos"> 9</span>        <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">leaf</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="linenos">10</span>        <span class="n">used</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">leaf</span><span class="p">)</span>
+<span class="linenos">11</span>        <span class="n">remaining</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">12</span>    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="n">edges</span>
+</pre></div>
+</div>
+</div>
+<p>符号化と復元は互いに逆の操作であり、任意の数列が何らかの木に対応する。長さ <span class="math notranslate nohighlight">\(n - 2\)</span> で各要素が <span class="math notranslate nohighlight">\(n\)</span> 通りの数列は <span class="math notranslate nohighlight">\(n^{n-2}\)</span> 個あるので、ケイリーの公式が得られる。サンプルコード <code class="docutils literal notranslate"><span class="pre">spanning_tree.py</span></code> では、すべての数列を復元して異なる木の個数を数え、公式と一致することを確かめている。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>プリューファー符号: [3, 3, 3, 4]
+<span class="linenos">2</span>復元した木: [(0, 3), (1, 3), (2, 3), (3, 4), (4, 5)]
+<span class="linenos">3</span>n = 2: 木の個数 = 1, n^(n-2) = 1
+<span class="linenos">4</span>n = 3: 木の個数 = 3, n^(n-2) = 3
+<span class="linenos">5</span>n = 4: 木の個数 = 16, n^(n-2) = 16
+<span class="linenos">6</span>n = 5: 木の個数 = 125, n^(n-2) = 125
+<span class="linenos">7</span>n = 6: 木の個数 = 1296, n^(n-2) = 1296
+</pre></div>
+</div>
+<p>完全グラフに限らず、一般のグラフの全域木の個数は、第 14 章の行列木定理によって行列式として計算できる。</p>
+</section>
+<section id="id6">
+<h2>最小全域木<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>重み付き連結グラフの全域木のうち、辺の重みの合計が最小のものを<strong>最小全域木</strong>という。いくつかの拠点を通信回線や送電線で結ぶとき、各区間の敷設費用を重みとすれば、全拠点をつなぐ最も安い配線は最小全域木になる。ほかにも、データのクラスタリング（単連結法）や、巡回セールスマン問題の近似アルゴリズム（第 7 章）などに使われる。</p>
+<p>本節では <a class="reference internal" href="#fig-ch06-mst"><span class="std std-numref">図 14</span></a> の重み付きグラフを例とする。太線が最小全域木であり、重みの合計は 30 である。</p>
+<figure class="align-center" id="id15">
+<span id="fig-ch06-mst"></span><div class="graphviz"><object data="_images/graphviz-c1d33e41a5e2ed13a1a5c91a6bb6628559c84949.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    edge [fontsize=12, color=&quot;#999999&quot;];
+    0 [pos=&quot;0,1.5!&quot;]; 1 [pos=&quot;2,1.5!&quot;]; 2 [pos=&quot;4,1.5!&quot;];
+    3 [pos=&quot;0.6,0!&quot;]; 4 [pos=&quot;2.6,0!&quot;]; 5 [pos=&quot;3.6,-1.3!&quot;];
+    0 -- 1 [label=&quot;7&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    0 -- 3 [label=&quot;5&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    1 -- 2 [label=&quot;8&quot;];
+    1 -- 3 [label=&quot;9&quot;];
+    1 -- 4 [label=&quot;7&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    2 -- 4 [label=&quot;5&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    3 -- 4 [label=&quot;15&quot;];
+    3 -- 5 [label=&quot;6&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    4 -- 5 [label=&quot;8&quot;];
+    2 -- 5 [label=&quot;11&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 14 </span><span class="caption-text">重み付きグラフとその最小全域木（太線）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id7">
+<h3>カット性質<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>最小全域木のアルゴリズムの正しさは、次のカット性質に基づく。頂点集合を 2 つに分けたとき、両側にまたがる辺の集合を<strong>カット</strong>という。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 6.4（カット性質）</p>
+<p>重み付き連結グラフの頂点集合を空でない 2 つの集合 <span class="math notranslate nohighlight">\(S\)</span> と <span class="math notranslate nohighlight">\(V \setminus S\)</span> に分ける。<span class="math notranslate nohighlight">\(S\)</span> と <span class="math notranslate nohighlight">\(V \setminus S\)</span> を結ぶ辺のうち重みが最小のものを <span class="math notranslate nohighlight">\(e\)</span> とすると、<span class="math notranslate nohighlight">\(e\)</span> を含む最小全域木が存在する。</p>
+</div>
+<p><strong>証明</strong>：最小全域木 <span class="math notranslate nohighlight">\(T\)</span> を 1 つとり、<span class="math notranslate nohighlight">\(e = uv\)</span> が <span class="math notranslate nohighlight">\(T\)</span> に含まれないとする（含まれていれば示すことはない）。<span class="math notranslate nohighlight">\(T\)</span> に <span class="math notranslate nohighlight">\(e\)</span> を加えると閉路が 1 つできる（定理 6.2 の 6）。この閉路は <span class="math notranslate nohighlight">\(u \in S\)</span> から <span class="math notranslate nohighlight">\(v \in V \setminus S\)</span> へ渡り、また <span class="math notranslate nohighlight">\(S\)</span> に戻ってくるので、<span class="math notranslate nohighlight">\(e\)</span> 以外にも <span class="math notranslate nohighlight">\(S\)</span> と <span class="math notranslate nohighlight">\(V \setminus S\)</span> を結ぶ辺 <span class="math notranslate nohighlight">\(f\)</span> を含む。<span class="math notranslate nohighlight">\(T\)</span> から <span class="math notranslate nohighlight">\(f\)</span> を除いて <span class="math notranslate nohighlight">\(e\)</span> を加えた <span class="math notranslate nohighlight">\(T' = T - f + e\)</span> は、閉路が切れるので全域木である。<span class="math notranslate nohighlight">\(e\)</span> の重みは最小なので <span class="math notranslate nohighlight">\(w(e) \le w(f)\)</span> であり、<span class="math notranslate nohighlight">\(T'\)</span> の重みの合計は <span class="math notranslate nohighlight">\(T\)</span> 以下である。<span class="math notranslate nohighlight">\(T\)</span> が最小なので <span class="math notranslate nohighlight">\(T'\)</span> も最小全域木であり、<span class="math notranslate nohighlight">\(e\)</span> を含む。□</p>
+<p>このように、木の辺を 1 本入れ替えて別の木を作る操作を<strong>辺の交換</strong>という。辺の交換は、木に関する最適性の証明でよく使う論法である。</p>
+</section>
+<section id="id8">
+<h3>クラスカル法<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><strong>クラスカル法</strong>（Kruskal's algorithm）は、辺を重みの小さい順に調べ、すでに選んだ辺と閉路を作らないものだけを採用する方法である。</p>
+<ol class="arabic simple">
+<li><p>辺を重みの小さい順に並べる。</p></li>
+<li><p>順に辺 <span class="math notranslate nohighlight">\(uv\)</span> を調べ、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> がまだ選んだ辺で結ばれていなければ採用する。</p></li>
+<li><p><span class="math notranslate nohighlight">\(n - 1\)</span> 本採用したら終了する。</p></li>
+</ol>
+<p>辺 <span class="math notranslate nohighlight">\(uv\)</span> を採用するとき、<span class="math notranslate nohighlight">\(u\)</span> を含む成分を <span class="math notranslate nohighlight">\(S\)</span> とすれば、<span class="math notranslate nohighlight">\(uv\)</span> は <span class="math notranslate nohighlight">\(S\)</span> から出る辺のうち重みが最小である（より軽い辺はすでに調べ終わっており、採用されたか、閉路を作るとして捨てられている）。よってカット性質により、採用した辺は最小全域木の一部になる。</p>
+<p><a class="reference internal" href="#fig-ch06-mst"><span class="std std-numref">図 14</span></a> の例では、重み 5 の辺 03 と 24、重み 6 の辺 35、重み 7 の辺 01 と 14 を順に採用する。この時点で 5 本（<span class="math notranslate nohighlight">\(n - 1\)</span> 本）採用したので終了する。</p>
+<p>「<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> がすでに結ばれているか」の判定には、次に述べる Union-Find を使う。辺の整列に <span class="math notranslate nohighlight">\(O(m \log m)\)</span> 時間かかり、これが全体の計算量になる。</p>
+</section>
+<section id="union-find">
+<h3>Union-Find<a class="headerlink" href="#union-find" title="Link to this heading"></a></h3>
+<p><strong>Union-Find</strong>（素集合データ構造）は、互いに素な集合の族を管理し、次の 2 つの操作を高速に行うデータ構造である。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">find(x)</span></code>：<span class="math notranslate nohighlight">\(x\)</span> が属する集合の代表元を返す。2 要素の <code class="docutils literal notranslate"><span class="pre">find</span></code> の結果が等しければ同じ集合に属する。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">union(x,</span> <span class="pre">y)</span></code>：<span class="math notranslate nohighlight">\(x\)</span> の集合と <span class="math notranslate nohighlight">\(y\)</span> の集合を併合する。</p></li>
+</ul>
+<p>各集合を根付き木で表し、根を代表元とする。<code class="docutils literal notranslate"><span class="pre">find</span></code> は親をたどって根を求め、<code class="docutils literal notranslate"><span class="pre">union</span></code> は一方の根をもう一方の根の子にする。木が高くなりすぎないよう、次の 2 つの工夫をする。</p>
+<ul class="simple">
+<li><p><strong>ランクによる併合</strong>：木の高さの目安（ランク）が小さい方の根を、大きい方の根の子にする。</p></li>
+<li><p><strong>経路圧縮</strong>：<code class="docutils literal notranslate"><span class="pre">find</span></code> でたどった頂点を、根の近くに付け替える。</p></li>
+</ul>
+<p>この 2 つを併用すると、操作 1 回あたりの償却計算量は <span class="math notranslate nohighlight">\(O(\alpha(n))\)</span> になる。<span class="math notranslate nohighlight">\(\alpha\)</span> はアッカーマン関数の逆関数で、現実的なすべての <span class="math notranslate nohighlight">\(n\)</span> に対して 5 以下であり、実質的には定数とみなせる。</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-number">リスト 8 </span><span class="caption-text">Union-Find</span><a class="headerlink" href="#id16" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">UnionFind</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;互いに素な集合を管理するデータ構造（経路圧縮とランクによる併合付き）。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;x が属する集合の代表元を返す。&quot;&quot;&quot;</span>
+<span class="linenos">10</span>        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span>  <span class="c1"># 経路圧縮（経路半分化）</span>
+<span class="linenos">12</span>            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="linenos">13</span>        <span class="k">return</span> <span class="n">x</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span><span class="w"> </span><span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;x と y の集合を併合する。既に同じ集合なら False を返す。&quot;&quot;&quot;</span>
+<span class="linenos">17</span>        <span class="n">rx</span><span class="p">,</span> <span class="n">ry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos">18</span>        <span class="k">if</span> <span class="n">rx</span> <span class="o">==</span> <span class="n">ry</span><span class="p">:</span>
+<span class="linenos">19</span>            <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">20</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">rx</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">ry</span><span class="p">]:</span>
+<span class="linenos">21</span>            <span class="n">rx</span><span class="p">,</span> <span class="n">ry</span> <span class="o">=</span> <span class="n">ry</span><span class="p">,</span> <span class="n">rx</span>
+<span class="linenos">22</span>        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">ry</span><span class="p">]</span> <span class="o">=</span> <span class="n">rx</span>
+<span class="linenos">23</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">rx</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">ry</span><span class="p">]:</span>
+<span class="linenos">24</span>            <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">[</span><span class="n">rx</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">25</span>        <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-number">リスト 9 </span><span class="caption-text">クラスカル法</span><a class="headerlink" href="#id17" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">kruskal</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">WeightedEdge</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">WeightedEdge</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;クラスカル法: 重みの小さい辺から順に、閉路を作らないものを採用する。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">uf</span> <span class="o">=</span> <span class="n">UnionFind</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="n">tree</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">WeightedEdge</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="k">if</span> <span class="n">uf</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="linenos"> 7</span>            <span class="n">tree</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<span class="linenos"> 8</span>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 9</span>                <span class="k">break</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">tree</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>プリム法<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p><strong>プリム法</strong>（Prim's algorithm）は、1 つの頂点から始めて木を少しずつ成長させる方法である。</p>
+<ol class="arabic simple">
+<li><p>任意の頂点を 1 つ選び、それだけからなる木を作る。</p></li>
+<li><p>木に含まれる頂点と含まれない頂点を結ぶ辺のうち、重みが最小のものを木に加える。</p></li>
+<li><p>すべての頂点が木に含まれるまで 2 を繰り返す。</p></li>
+</ol>
+<p>手順 2 で加える辺は、木の頂点集合を <span class="math notranslate nohighlight">\(S\)</span> とするカットの最小の辺なので、カット性質により正しさが保証される。最小の辺を効率よく選ぶには、優先度付きキュー（Python の <code class="docutils literal notranslate"><span class="pre">heapq</span></code>）を使う。計算量は <span class="math notranslate nohighlight">\(O(m \log n)\)</span> である。</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-number">リスト 10 </span><span class="caption-text">プリム法</span><a class="headerlink" href="#id18" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">prim</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">WeightedEdge</span><span class="p">],</span> <span class="n">root</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">WeightedEdge</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;プリム法: 木に含まれる頂点集合から外へ出る最小の辺を繰り返し採用する。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">adj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)}</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<span class="linenos"> 6</span>        <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">))</span>
+<span class="linenos"> 7</span>    <span class="n">in_tree</span> <span class="o">=</span> <span class="p">{</span><span class="n">root</span><span class="p">}</span>
+<span class="linenos"> 8</span>    <span class="n">heap</span> <span class="o">=</span> <span class="p">[(</span><span class="n">w</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">root</span><span class="p">]]</span>
+<span class="linenos"> 9</span>    <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="n">tree</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">WeightedEdge</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">11</span>    <span class="k">while</span> <span class="n">heap</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">in_tree</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos">12</span>        <span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">in_tree</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="k">continue</span>
+<span class="linenos">15</span>        <span class="n">in_tree</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="n">tree</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<span class="linenos">17</span>        <span class="k">for</span> <span class="n">w2</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+<span class="linenos">18</span>            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">in_tree</span><span class="p">:</span>
+<span class="linenos">19</span>                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="linenos">20</span>    <span class="k">return</span> <span class="n">tree</span>
+</pre></div>
+</div>
+</div>
+<p>このコードでは、木に入った頂点から出る辺をすべてヒープに入れ、取り出したときに相手の頂点がすでに木に含まれていれば読み飛ばしている。<a class="reference internal" href="#fig-ch06-mst"><span class="std std-numref">図 14</span></a> の例に両方の方法を適用し、NetworkX の <code class="docutils literal notranslate"><span class="pre">nx.minimum_spanning_tree</span></code> と比較した結果は次のとおりである。辺は（重み, 端点, 端点）の組で表している。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>クラスカル法: [(5, 0, 3), (5, 2, 4), (6, 3, 5), (7, 0, 1), (7, 1, 4)] 重み合計 = 30
+<span class="linenos">2</span>プリム法    : [(5, 0, 3), (6, 3, 5), (7, 0, 1), (7, 1, 4), (5, 4, 2)] 重み合計 = 30
+<span class="linenos">3</span>NetworkX    : 重み合計 = 30.0
+</pre></div>
+</div>
+<p>2 つの方法は辺を選ぶ順序が異なるが、同じ最小全域木が得られている。重みがすべて異なるグラフでは最小全域木は一意に定まる。重みが等しい辺がある場合は、最小全域木が複数存在することがあるが、重みの合計はどれも等しい。</p>
+<p>クラスカル法とプリム法の使い分けの目安は、疎グラフでは辺リストから直接処理できるクラスカル法、密グラフでは隣接行列を使った <span class="math notranslate nohighlight">\(O(n^2)\)</span> 版のプリム法である。</p>
+</section>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>木は閉路を持たない連結グラフであり、<span class="math notranslate nohighlight">\(n\)</span> 頂点の木はちょうど <span class="math notranslate nohighlight">\(n - 1\)</span> 本の辺を持つ。木の特徴付けには多くの同値な言い換えがある。</p></li>
+<li><p>根付き木は親子関係を持ち、多くのデータ構造の基礎になる。</p></li>
+<li><p>連結グラフは必ず全域木を持つ。ラベル付きの <span class="math notranslate nohighlight">\(n\)</span> 頂点の木は <span class="math notranslate nohighlight">\(n^{n-2}\)</span> 個あり（ケイリーの公式）、プリューファー符号によって数列と 1 対 1 に対応する。</p></li>
+<li><p>最小全域木はカット性質に基づくクラスカル法やプリム法で求められる。クラスカル法では Union-Find を使って閉路の判定を行う。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch05_graph_classes.html" class="btn btn-neutral float-left" title="第 5 章 さまざまなグラフ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch07_euler_hamilton.html" class="btn btn-neutral float-right" title="第 7 章 オイラー路とハミルトン路" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

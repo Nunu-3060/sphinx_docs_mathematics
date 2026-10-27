@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. 粒子法による流体: SPH &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="10. 格子ボルツマン法" href="lbm.html" />
+    <link rel="prev" title="8. 格子法の検証: キャビティ流れ" href="cavity_flow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. 粒子法による流体: SPH</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">9.1. SPH の考え方</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.1.1. カーネル関数による補間</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.1.2. 3 次スプラインカーネル</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">9.2. 密度と圧力</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">9.2.1. 密度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">9.2.2. 弱圧縮性 SPH と状態方程式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">9.3. 運動方程式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">9.3.1. 人工粘性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">9.3.2. 実装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">9.4. 壁の表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">9.5. 粒子の質量の決め方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">9.6. 時間刻み幅と近傍リスト</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">9.6.1. 時間刻み幅</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">9.6.2. 近傍リストの再利用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">9.7. 結果</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">9.7.1. 先端の位置の比較</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">9.8. SPH の注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">9.9. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>粒子法による流体: SPH</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sph">
+<h1><span class="section-number">9. </span>粒子法による流体: SPH<a class="headerlink" href="#sph" title="Link to this heading"></a></h1>
+<p>この章では、流体を多数の粒子で表して計算する <strong>SPH</strong>(Smoothed Particle Hydrodynamics、平滑化粒子流体力学)を実装する。第 3・4 章で学んだ粒子の時間積分と近傍探索に、第 5 章の流体の方程式を組み合わせる。題材は、水槽の端に置いた水柱が崩れて流れ出す<strong>ダムブレイク</strong>である。水面が激しく変形し、しぶきが飛ぶような流れは、格子法では扱いが難しく、粒子法が得意とする問題である。</p>
+<figure class="align-center" id="id19">
+<a class="reference internal image-reference" href="_images/sph_dam_break.gif"><img alt="_images/sph_dam_break.gif" src="_images/sph_dam_break.gif" style="width: 480px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 9.1 </span><span class="caption-text">SPH によるダムブレイクのアニメーション</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id1">
+<h2><span class="section-number">9.1. </span>SPH の考え方<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>SPH は、1977 年に Lucy、Gingold と Monaghan によって天体物理学の計算のために考案され、その後、水などの流れの計算に広く使われるようになった。</p>
+<p>SPH では、流体を有限個の粒子に分割する。各粒子は質量 <span class="math notranslate nohighlight">\(m_j\)</span>、位置 <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span>、速度 <span class="math notranslate nohighlight">\(\mathbf{v}_j\)</span>、密度 <span class="math notranslate nohighlight">\(\rho_j\)</span>、圧力 <span class="math notranslate nohighlight">\(p_j\)</span> を持ち、流れに乗って移動する(ラグランジュ的視点)。粒子は流体の小さな塊を代表しており、粒子のない場所の物理量は、周りの粒子の値を重み付きで平均して求める。</p>
+<section id="id2">
+<h3><span class="section-number">9.1.1. </span>カーネル関数による補間<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>位置 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> での物理量 <span class="math notranslate nohighlight">\(A\)</span> は、次の式で近似する。</p>
+<div class="math notranslate nohighlight">
+\[A(\mathbf{x}) \approx \sum_j \frac{m_j}{\rho_j} A_j\, W(|\mathbf{x} - \mathbf{x}_j|, h)\]</div>
+<p><span class="math notranslate nohighlight">\(m_j / \rho_j\)</span> は粒子 <span class="math notranslate nohighlight">\(j\)</span> が代表する体積、<span class="math notranslate nohighlight">\(W\)</span> は<strong>カーネル関数</strong>と呼ばれる重み関数である。カーネル関数は、距離 0 で最大となり、距離が大きくなるにつれて滑らかに小さくなる釣り鐘型の関数で、全空間で積分すると 1 になる。<span class="math notranslate nohighlight">\(h\)</span> はカーネル関数の広がりを決める長さで、<strong>影響半径</strong>と呼ばれる距離(本書のカーネル関数では <span class="math notranslate nohighlight">\(2h\)</span>)より遠い粒子の重みは 0 になる。</p>
+<p>この式を微分すると、物理量の勾配も、カーネル関数の勾配を使って粒子の値から計算できる。</p>
+<div class="math notranslate nohighlight">
+\[\nabla A(\mathbf{x}) \approx \sum_j \frac{m_j}{\rho_j} A_j\, \nabla W(|\mathbf{x} - \mathbf{x}_j|, h)\]</div>
+<p>微分を格子の差分で近似する代わりに、カーネル関数の微分(解析的に計算できる)を使う点が SPH の特徴である。粒子がどのように並んでいても計算できるので、格子が不要になる。</p>
+</section>
+<section id="id3">
+<h3><span class="section-number">9.1.2. </span>3 次スプラインカーネル<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>本書では、広く使われている <strong>3 次スプラインカーネル</strong>を使う。<span class="math notranslate nohighlight">\(q = r / h\)</span> とすると、2 次元では</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}W(r, h) = \frac{10}{7\pi h^2}
+\begin{cases}
+1 - \dfrac{3}{2} q^2 + \dfrac{3}{4} q^3 &amp; (0 \le q &lt; 1) \\[2mm]
+\dfrac{1}{4} (2 - q)^3 &amp; (1 \le q &lt; 2) \\[2mm]
+0 &amp; (q \ge 2)
+\end{cases}\end{split}\]</div>
+<p>である。係数 <span class="math notranslate nohighlight">\(10/(7\pi h^2)\)</span> は、積分が 1 になるようにするための値である。関数の形を<a class="reference internal" href="#fig-sph-kernel"><span class="std std-numref">図 9.2</span></a> に示す。</p>
+<figure class="align-center" id="id20">
+<span id="fig-sph-kernel"></span><img alt="_images/sph_kernel.png" src="_images/sph_kernel.png" />
+<figcaption>
+<p><span class="caption-number">図 9.2 </span><span class="caption-text">3 次スプラインカーネルとその微分</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">77</span><span class="k">def</span><span class="w"> </span><span class="nf">kernel</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">78</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;2 次元の 3 次スプラインカーネル W(r, h)。r &lt; 2h の範囲で使う。&quot;&quot;&quot;</span>
+<span class="linenos">79</span>    <span class="n">q</span> <span class="o">=</span> <span class="n">r</span> <span class="o">/</span> <span class="n">h</span>
+<span class="linenos">80</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">7.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">81</span>    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">q</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">0.75</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">q</span><span class="p">,</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos">82</span>    <span class="k">return</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">w</span>
+<span class="linenos">83</span>
+<span class="linenos">84</span>
+<span class="linenos">85</span><span class="k">def</span><span class="w"> </span><span class="nf">kernel_derivative</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">86</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;カーネル関数の r による微分 dW/dr。r &lt; 2h の範囲で使う。&quot;&quot;&quot;</span>
+<span class="linenos">87</span>    <span class="n">q</span> <span class="o">=</span> <span class="n">r</span> <span class="o">/</span> <span class="n">h</span>
+<span class="linenos">88</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">7.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">89</span>    <span class="n">dw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">q</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">2.25</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">q</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.75</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">90</span>    <span class="k">return</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">dw</span> <span class="o">/</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>これらの関数は、影響半径 <span class="math notranslate nohighlight">\(2h\)</span> 以内の粒子の組についてだけ呼び出す前提で書いている。</p>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">9.2. </span>密度と圧力<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3><span class="section-number">9.2.1. </span>密度<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>補間の式で <span class="math notranslate nohighlight">\(A = \rho\)</span> とおくと、<span class="math notranslate nohighlight">\(m_j/\rho_j \cdot \rho_j = m_j\)</span> なので、密度は質量とカーネル関数だけで計算できる。</p>
+<div class="math notranslate nohighlight">
+\[\rho_i = \sum_j m_j W(|\mathbf{x}_i - \mathbf{x}_j|, h)\]</div>
+<p>和には粒子 <span class="math notranslate nohighlight">\(i\)</span> 自身(<span class="math notranslate nohighlight">\(j = i\)</span>、距離 0)も含める。粒子が密に集まった所では密度が高く、まばらな所では低くなる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">124</span><span class="k">def</span><span class="w"> </span><span class="nf">compute_density</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">125</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;密度 ρ_i = Σ_j m W(r_ij, h) を求める(自分自身の寄与も含める)。&quot;&quot;&quot;</span>
+<span class="linenos">126</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="linenos">127</span>    <span class="n">w</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="linenos">128</span>    <span class="n">self_term</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="n">kernel</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">h</span><span class="p">)</span>
+<span class="linenos">129</span>    <span class="k">return</span> <span class="n">self_term</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>近傍の組 <span class="math notranslate nohighlight">\((i, j)\)</span>(<span class="math notranslate nohighlight">\(i &lt; j\)</span>)の一覧から、各粒子に重みを足し込むには <code class="docutils literal notranslate"><span class="pre">np.bincount</span></code> を使う。<code class="docutils literal notranslate"><span class="pre">np.bincount(i,</span> <span class="pre">w)</span></code> は、<code class="docutils literal notranslate"><span class="pre">i</span></code> の値ごとに <code class="docutils literal notranslate"><span class="pre">w</span></code> を合計した配列を返す。1 つの組は粒子 <span class="math notranslate nohighlight">\(i\)</span> と <span class="math notranslate nohighlight">\(j\)</span> の両方に寄与するので、<code class="docutils literal notranslate"><span class="pre">i</span></code> と <code class="docutils literal notranslate"><span class="pre">j</span></code> のそれぞれについて足し込む。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">9.2.2. </span>弱圧縮性 SPH と状態方程式<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>第 5 章で述べたように、非圧縮性流体の圧力は非圧縮条件から決まる。これを厳密に扱うには、第 7・8 章と同様にポアソン方程式を解く必要がある。ここでは、流体をごくわずかに圧縮できるものとみなし、密度から圧力を直接計算する<strong>弱圧縮性 SPH</strong>(WCSPH)を使う。圧力は、水の計算でよく使われるテイトの状態方程式で求める。</p>
+<div class="math notranslate nohighlight">
+\[p = B\left[\left(\frac{\rho}{\rho_0}\right)^{\gamma} - 1\right], \qquad B = \frac{\rho_0 c_0^2}{\gamma}, \quad \gamma = 7\]</div>
+<p><span class="math notranslate nohighlight">\(\rho_0\)</span> は基準密度(水なら 1000 kg/m³)、<span class="math notranslate nohighlight">\(c_0\)</span> は音速である。密度が <span class="math notranslate nohighlight">\(\rho_0\)</span> よりわずかでも大きくなると、7 乗の効果で圧力が急激に高くなり、粒子を押し広げる。</p>
+<p>本物の水の音速(約 1500 m/s)を使うと、後で述べる時間刻み幅の条件が厳しくなりすぎる。そこで、流れの最大速度 <span class="math notranslate nohighlight">\(v_{\max}\)</span> の 10 倍程度の人工的な音速を使うのが普通である。音速が流れの速さの 10 倍なら、密度の変化はおよそ <span class="math notranslate nohighlight">\((v_{\max}/c_0)^2 = 1\ \%\)</span> 程度に収まり、ほぼ非圧縮とみなせる。この例では水柱の高さ <span class="math notranslate nohighlight">\(H = 0.8\ \mathrm{m}\)</span> から <span class="math notranslate nohighlight">\(v_{\max} \approx \sqrt{2gH}\)</span> と見積もり、<span class="math notranslate nohighlight">\(c_0 = 10\sqrt{2gH} \approx 39.6\ \mathrm{m/s}\)</span> とした。ただし、後で見るように、しぶきなどの局所的な流れの速さはこの見積もり(約 4 m/s)を超えて 6.6 m/s 程度に達する。そのような場所では音速との比が 6 程度になり、密度の変化は数 % に達しうる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">132</span><span class="k">def</span><span class="w"> </span><span class="nf">compute_pressure</span><span class="p">(</span><span class="n">rho</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">133</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;状態方程式(テイトの式)で密度から圧力を求める。負の圧力は 0 にする。&quot;&quot;&quot;</span>
+<span class="linenos">134</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">prm</span><span class="o">.</span><span class="n">rho0</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">sound_speed</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">7.0</span>
+<span class="linenos">135</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="p">((</span><span class="n">rho</span> <span class="o">/</span> <span class="n">prm</span><span class="o">.</span><span class="n">rho0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">7</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>負の圧力を 0 で打ち切っているのには理由がある。水面の近くの粒子は、外側(空気側)に相手の粒子がいないため、密度が実際より低く計算される。そのまま負の圧力を使うと、水面の粒子どうしが引き合って塊になる不自然な振る舞いが起こりやすい。打ち切りは単純な対策だが、表面張力のように流体が引き合う効果は表現できなくなる。</p>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">9.3. </span>運動方程式<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>圧力勾配の項 <span class="math notranslate nohighlight">\(-\nabla p / \rho\)</span> を SPH で近似する方法はいくつかあるが、よく使われるのは次の形である。</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\mathbf{v}_i}{dt} = -\sum_j m_j \left( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} + \Pi_{ij} \right) \nabla_i W_{ij} + \mathbf{g}\]</div>
+<p><span class="math notranslate nohighlight">\(\nabla_i W_{ij}\)</span> は、カーネル関数 <span class="math notranslate nohighlight">\(W(|\mathbf{x}_i - \mathbf{x}_j|, h)\)</span> を <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> で微分したもので、<span class="math notranslate nohighlight">\(\mathbf{r}_{ij} = \mathbf{x}_i - \mathbf{x}_j\)</span>、<span class="math notranslate nohighlight">\(r = |\mathbf{r}_{ij}|\)</span> とすると <span class="math notranslate nohighlight">\(\nabla_i W_{ij} = (dW/dr)\,\mathbf{r}_{ij}/r\)</span> である。</p>
+<p>この形では、粒子 <span class="math notranslate nohighlight">\(i\)</span> が <span class="math notranslate nohighlight">\(j\)</span> から受ける力と、<span class="math notranslate nohighlight">\(j\)</span> が <span class="math notranslate nohighlight">\(i\)</span> から受ける力が、大きさが等しく向きが逆になる(<span class="math notranslate nohighlight">\(\nabla_j W_{ij} = -\nabla_i W_{ij}\)</span> のため)。作用・反作用の法則が成り立つので、全体の運動量が保存される。第 4 章の接触力と同様に、組ごとに 1 回だけ計算して両方の粒子に足し込めばよい。</p>
+<section id="id8">
+<h3><span class="section-number">9.3.1. </span>人工粘性<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(\Pi_{ij}\)</span> は、Monaghan による<strong>人工粘性</strong>の項である。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Pi_{ij} =
+\begin{cases}
+-\dfrac{\alpha\, c_0\, \mu_{ij}}{\bar\rho_{ij}} &amp; (\mathbf{v}_{ij} \cdot \mathbf{r}_{ij} &lt; 0) \\[2mm]
+0 &amp; (\text{それ以外})
+\end{cases}
+, \qquad
+\mu_{ij} = \frac{h\, \mathbf{v}_{ij} \cdot \mathbf{r}_{ij}}{r^2 + 0.01 h^2}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{v}_{ij} = \mathbf{v}_i - \mathbf{v}_j\)</span>、<span class="math notranslate nohighlight">\(\bar\rho_{ij}\)</span> は 2 粒子の密度の平均である。<span class="math notranslate nohighlight">\(\mathbf{v}_{ij} \cdot \mathbf{r}_{ij} &lt; 0\)</span> は 2 粒子が近づき合っていることを表し、そのときだけ互いの接近を妨げる力が働く。分母の <span class="math notranslate nohighlight">\(0.01 h^2\)</span> は、距離が 0 に近いときに値が発散しないようにするための項である。人工粘性は、粒子の運動の乱れ(数値的な振動)を抑えて計算を安定にする役割を持ち、<span class="math notranslate nohighlight">\(\alpha\)</span> は 0.01〜0.1 程度の値を使うことが多い。本書では <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> とした。</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">9.3.2. </span>実装<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>以上をまとめると、加速度の計算は次のようになる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">138</span><span class="k">def</span><span class="w"> </span><span class="nf">compute_acceleration</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">139</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;各粒子の加速度(圧力勾配 + 人工粘性 + 重力)を求める。&quot;&quot;&quot;</span>
+<span class="linenos">140</span>    <span class="n">h</span> <span class="o">=</span> <span class="n">prm</span><span class="o">.</span><span class="n">h</span>
+<span class="linenos">141</span>    <span class="c1"># 近傍リストから、現在の距離が影響半径 2h 未満の組だけを取り出す</span>
+<span class="linenos">142</span>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pairs</span>
+<span class="linenos">143</span>    <span class="n">d</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>  <span class="c1"># r_ij = x_i - x_j</span>
+<span class="linenos">144</span>    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">145</span>    <span class="n">near</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">h</span>
+<span class="linenos">146</span>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">near</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="n">near</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">near</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="n">near</span><span class="p">]</span>
+<span class="linenos">147</span>    <span class="n">rho</span> <span class="o">=</span> <span class="n">compute_density</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="linenos">148</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">compute_pressure</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>    <span class="c1"># ∇_i W_ij = (dW/dr) r_ij / |r_ij|</span>
+<span class="linenos">151</span>    <span class="n">grad_w</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_derivative</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">))[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span>
+<span class="linenos">152</span>
+<span class="linenos">153</span>    <span class="c1"># 人工粘性: 近づき合う粒子の組にだけ働く</span>
+<span class="linenos">154</span>    <span class="n">dv</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">vel</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="n">vel</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<span class="linenos">155</span>    <span class="n">vd</span> <span class="o">=</span> <span class="n">dv</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">dv</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># v_ij · r_ij</span>
+<span class="linenos">156</span>    <span class="n">mu</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">vd</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">157</span>    <span class="n">rho_mean</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">rho</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="linenos">158</span>    <span class="n">visc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vd</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="n">prm</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">sound_speed</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">/</span> <span class="n">rho_mean</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">159</span>
+<span class="linenos">160</span>    <span class="c1"># 粒子 i が受ける加速度。粒子 j は同じ大きさで逆向きの加速度を受ける</span>
+<span class="linenos">161</span>    <span class="n">coeff</span> <span class="o">=</span> <span class="o">-</span><span class="n">s</span><span class="o">.</span><span class="n">mass</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">rho</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">rho</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">visc</span><span class="p">)</span>
+<span class="linenos">162</span>    <span class="n">a_ij</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">grad_w</span>
+<span class="linenos">163</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="linenos">164</span>    <span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="linenos">165</span>    <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+<span class="linenos">166</span>        <span class="n">acc</span><span class="p">[:,</span> <span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a_ij</span><span class="p">[:,</span> <span class="n">axis</span><span class="p">],</span> <span class="n">minlength</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">a_ij</span><span class="p">[:,</span> <span class="n">axis</span><span class="p">],</span> <span class="n">minlength</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">167</span>    <span class="n">acc</span> <span class="o">+=</span> <span class="n">GRAVITY</span>
+<span class="linenos">168</span>    <span class="n">acc</span><span class="p">[</span><span class="o">~</span><span class="n">s</span><span class="o">.</span><span class="n">is_fluid</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># 壁粒子は動かさない</span>
+<span class="linenos">169</span>    <span class="k">return</span> <span class="n">acc</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">9.4. </span>壁の表現<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>以下では、流体を表す計算上の粒子を<strong>流体粒子</strong>と呼び、壁を表す粒子と区別する(第 5 章の、流体の小さな塊という意味の流体粒子に対応する)。壁は、動かない粒子(<strong>壁粒子</strong>)を 3 層並べて表現する。壁粒子も流体粒子と同じように密度と圧力を計算し、流体粒子に圧力による力を及ぼす。流体粒子が壁に近づくと、壁粒子の密度と圧力が上がって流体粒子を押し返す。ただし、壁粒子自身は動かさない(加速度を 0 にする)。この方法は、壁の形状を粒子の配置だけで表せるので扱いやすい。</p>
+<p>壁粒子を 3 層にしているのは、壁の近くの流体粒子の影響半径 <span class="math notranslate nohighlight">\(2h\)</span> の中を、壁粒子で埋めるためである。壁粒子が足りないと、壁際の流体粒子の密度が低く計算され、壁に引き寄せられたり、壁を通り抜けたりする原因になる。</p>
+</section>
+<section id="id11">
+<h2><span class="section-number">9.5. </span>粒子の質量の決め方<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>粒子は、初期状態では間隔 <span class="math notranslate nohighlight">\(\Delta x = 0.02\ \mathrm{m}\)</span> の格子状に並べる。素朴には、粒子 1 個の質量を <span class="math notranslate nohighlight">\(m = \rho_0 \Delta x^2\)</span> とすればよいように思える。しかし、密度は有限個の粒子についてのカーネル関数の和で計算するので、格子状に並んだ粒子の密度は、ちょうど <span class="math notranslate nohighlight">\(\rho_0\)</span> にはならない。わずかでも密度がずれると、状態方程式によって大きな圧力が生じ、静止しているはずの水が動き出してしまう。</p>
+<p>そこで、格子状に並んだ粒子の密度がちょうど <span class="math notranslate nohighlight">\(\rho_0\)</span> になるように、質量を</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{\rho_0}{\sum_j W(|\mathbf{x}_i - \mathbf{x}_j|, h)}\]</div>
+<p>と決める。ここで分母の和は、格子上の 1 点 <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> から見た周囲の格子点 <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span>(<span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> 自身を含む)についてとる。サンプルコードの <code class="docutils literal notranslate"><span class="pre">create_state</span></code> 関数の後半で、この計算を行っている。</p>
+</section>
+<section id="id12">
+<h2><span class="section-number">9.6. </span>時間刻み幅と近傍リスト<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<section id="id13">
+<h3><span class="section-number">9.6.1. </span>時間刻み幅<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p>弱圧縮性 SPH では、圧力の変化が音速で伝わる。1 ステップの間に圧力の情報(音波)がカーネル関数の大きさ <span class="math notranslate nohighlight">\(h\)</span> 程度より遠くまで伝わってはならないという CFL 条件から、時間刻み幅はおよそ</p>
+<div class="math notranslate nohighlight">
+\[\Delta t \le 0.25\, \frac{h}{c_0}\]</div>
+<p>に制限される。係数 0.25 は、経験的に選ばれた安全係数である。この例では <span class="math notranslate nohighlight">\(h = 1.3 \Delta x = 0.026\ \mathrm{m}\)</span>(影響半径 <span class="math notranslate nohighlight">\(2h\)</span> の円の中に 20 個程度の粒子が入るように選んだ値)なので、上限は約 <span class="math notranslate nohighlight">\(1.6 \times 10^{-4}\ \mathrm{s}\)</span> であり、余裕を持たせて <span class="math notranslate nohighlight">\(\Delta t = 1.0 \times 10^{-4}\ \mathrm{s}\)</span> とした。時間積分には半陰的オイラー法を使う。人工的な音速を本物の水の音速より小さくするのは、この条件を緩めるためである。</p>
+</section>
+<section id="id14">
+<h3><span class="section-number">9.6.2. </span>近傍リストの再利用<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p>近傍探索には第 4 章のセル分割法の関数 <code class="docutils literal notranslate"><span class="pre">cell_list_pairs</span></code> を使う。ただし、時間刻み幅が小さいので、1 ステップの間に粒子はわずかしか動かない。毎ステップ近傍探索をするのは無駄が多い。</p>
+<p>そこで、影響半径 <span class="math notranslate nohighlight">\(2h\)</span> より少し大きな探索半径 <span class="math notranslate nohighlight">\(2.5h\)</span> で近傍の組の一覧(<strong>近傍リスト</strong>)を作り、それを 8 ステップの間使い回す。この方法は<strong>ベルレリスト</strong>と呼ばれる。8 ステップの間に 2 粒子が近づく距離が、余裕の <span class="math notranslate nohighlight">\(0.5h = 13\ \mathrm{mm}\)</span> より小さければ、影響半径内の組を見落とすことはない。流れの速さは最大で 6.6 m/s 程度なので、2 粒子が正面から近づいても、8 ステップで近づく距離は約 11 mm にとどまる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">172</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">173</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;半陰的オイラー法で 1 ステップ進める。&quot;&quot;&quot;</span>
+<span class="linenos">174</span>    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">steps</span> <span class="o">%</span> <span class="n">prm</span><span class="o">.</span><span class="n">rebuild_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">175</span>        <span class="n">s</span><span class="o">.</span><span class="n">pairs</span> <span class="o">=</span> <span class="n">cell_list_pairs</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">search_radius</span><span class="p">)</span>
+<span class="linenos">176</span>    <span class="n">acc</span> <span class="o">=</span> <span class="n">compute_acceleration</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+<span class="linenos">177</span>    <span class="n">s</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="n">acc</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">178</span>    <span class="n">s</span><span class="o">.</span><span class="n">pos</span> <span class="o">+=</span> <span class="n">s</span><span class="o">.</span><span class="n">vel</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">179</span>    <span class="n">s</span><span class="o">.</span><span class="n">time</span> <span class="o">+=</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">180</span>    <span class="n">s</span><span class="o">.</span><span class="n">steps</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>近傍リストに含まれる組のうち、実際に影響半径の内側にある組だけを、<code class="docutils literal notranslate"><span class="pre">compute_acceleration</span></code> の最初で取り出して使っている。近傍リストの再利用とこの工夫により、1 ステップの計算時間は筆者の環境で約 11 ms から平均約 5.5 ms に短縮された(流れが崩れて近傍の組が増えるにつれて、1 ステップの時間は長くなる)。</p>
+</section>
+</section>
+<section id="id15">
+<h2><span class="section-number">9.7. </span>結果<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p>幅 1.6 m、高さ 1.0 m の水槽の左端に、幅 0.4 m、高さ 0.8 m の水柱を置いて計算した。流体粒子は 800 個、壁粒子は 558 個である。結果を<a class="reference internal" href="#fig-sph-dam-break"><span class="std std-numref">図 9.3</span></a> に示す。</p>
+<figure class="align-center" id="id21">
+<span id="fig-sph-dam-break"></span><img alt="_images/sph_dam_break.png" src="_images/sph_dam_break.png" />
+<figcaption>
+<p><span class="caption-number">図 9.3 </span><span class="caption-text">SPH によるダムブレイク(青: 流体粒子、灰: 壁粒子)</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>水柱は自身の重さで崩れ、底に沿って右へ流れ出す。約 0.46 秒で流れの先端が右の壁に達し、水は壁を駆け上がって、一部はしぶきとなって壁より高く飛ぶ。その後、駆け上がった水が崩れ落ちて左向きの波となり、水槽の中を戻っていく。水面が大きく変形し、ちぎれて飛ぶような流れを、特別な処理なしに計算できるのが粒子法の強みである。</p>
+<p>1.6 秒分の計算(16,000 ステップ)には、筆者の環境で約 90 秒かかった。サンプルコード <a class="reference download internal" download="" href="_downloads/0fe97598012628e6783de1d20a9d5956/sph_dam_break.py"><code class="xref download docutils literal notranslate"><span class="pre">sph_dam_break.py</span></code></a> を実行すると、計算しながらアニメーションを表示する(第 4 章の <a class="reference download internal" download="" href="_downloads/443d063685f3bbe520edd2075ee1d651/neighbor_search.py"><code class="xref download docutils literal notranslate"><span class="pre">neighbor_search.py</span></code></a> を同じフォルダに置くこと)。</p>
+<section id="id16">
+<h3><span class="section-number">9.7.1. </span>先端の位置の比較<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<p>流れの先端(流体粒子の <span class="math notranslate nohighlight">\(x\)</span> 座標の最大値)の位置の時間変化を<a class="reference internal" href="#fig-sph-front"><span class="std std-numref">図 9.4</span></a> に示す。</p>
+<figure class="align-center" id="id22">
+<span id="fig-sph-front"></span><img alt="_images/sph_front.png" src="_images/sph_front.png" />
+<figcaption>
+<p><span class="caption-number">図 9.4 </span><span class="caption-text">流れの先端の位置の時間変化</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>破線は、無限に長い水深 <span class="math notranslate nohighlight">\(H\)</span> の水が瞬間的に解放され、底との摩擦がない場合の浅水波理論による解(リッターの解、1892 年)で、先端は一定の速さ <span class="math notranslate nohighlight">\(2\sqrt{gH} \approx 5.6\ \mathrm{m/s}\)</span> で進む。SPH の結果では、先端は静止状態から加速し、<span class="math notranslate nohighlight">\(t = 0.2\)</span> 〜 0.4 s の間の平均の速さは約 3.3 m/s だった。</p>
+<p>リッターの解は、底との摩擦や、水柱が有限の大きさであること、流れ始めの加速を無視した理想化された解であり、実際の流れの先端はこれより遅い。したがって、この比較から言えるのは、SPH の結果が理想化した上限の速さを超えておらず、桁は妥当である、ということにとどまる。定量的な妥当性確認(第 8 章)を行うには、Martin と Moyce の実験(1952 年)など、同じ条件の実験データと比較する必要がある。また、人工粘性の係数 <span class="math notranslate nohighlight">\(\alpha\)</span> や粒子間隔を変えると結果がどう変わるかを調べ、結果がパラメーターにどの程度依存するかを把握しておくことも重要である。</p>
+</section>
+</section>
+<section id="id17">
+<h2><span class="section-number">9.8. </span>SPH の注意点<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<p>ここで実装したのは、最も基本的な形の弱圧縮性 SPH である。実用的な計算では、次のような問題が知られており、さまざまな改良手法が提案されている。</p>
+<ul class="simple">
+<li><p><strong>圧力の振動</strong>: 密度から直接圧力を計算するため、圧力の分布に粒子規模の細かい振動が現れやすい。密度の計算法の改良(δ-SPH など)で抑えられる。</p></li>
+<li><p><strong>水面の扱い</strong>: 水面近くでは近傍の粒子が足りず、密度や圧力の計算精度が落ちる。</p></li>
+<li><p><strong>壁の扱い</strong>: 壁粒子の方法は簡単だが、壁際の流れの精度は高くない。</p></li>
+<li><p><strong>非圧縮性</strong>: 人工的な音速を使うため、密度は完全には一定にならない。圧力のポアソン方程式を解く非圧縮性 SPH(ISPH)や、同様の考え方の MPS 法などもある。</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2><span class="section-number">9.9. </span>まとめ<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>SPH は、流体を粒子で表し、カーネル関数による重み付き平均で物理量とその勾配を計算する粒子法である。</p></li>
+<li><p>密度は周囲の粒子の質量とカーネル関数の和で求め、弱圧縮性 SPH では状態方程式で密度から圧力を計算する。</p></li>
+<li><p>圧力勾配の項を対称な形で書くと、作用・反作用の法則が成り立ち、運動量が保存される。</p></li>
+<li><p>人工的な音速は流れの速さの 10 倍程度とし、時間刻み幅は <span class="math notranslate nohighlight">\(0.25\,h/c_0\)</span> 以下にする。</p></li>
+<li><p>粒子法は、水面が大きく変形する流れを自然に扱える。一方で、結果の定量的な信頼性を確かめるには、実験データとの比較やパラメーターの影響の調査が欠かせない。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cavity_flow.html" class="btn btn-neutral float-left" title="8. 格子法の検証: キャビティ流れ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lbm.html" class="btn btn-neutral float-right" title="10. 格子ボルツマン法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 流体力学の基礎 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="6. 格子法の第一歩: 移流と拡散" href="advection_diffusion.html" />
+    <link rel="prev" title="4. 粒子間の相互作用" href="interactions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 流体力学の基礎</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">5.1. 流体と場</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">5.2. オイラー的視点とラグランジュ的視点</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5.2.1. 物質微分</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">5.3. ベクトル解析の記号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">5.4. 連続の式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">5.5. ナビエ-ストークス方程式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5.5.1. 非圧縮性流体における圧力の役割</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">5.6. レイノルズ数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">5.7. 境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">5.8. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>流体力学の基礎</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">5. </span>流体力学の基礎<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この章では、流体のシミュレーションに必要な流体力学の基礎を説明する。流れをどの視点から記述するかという考え方から始め、流体の運動を支配する連続の式とナビエ-ストークス方程式の各項の意味、流れの性質を決めるレイノルズ数を順に学ぶ。数式の厳密な導出は省き、実装の際に必要となる意味の理解を優先する。</p>
+<section id="id2">
+<h2><span class="section-number">5.1. </span>流体と場<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>水や空気のように、力を加えると形を変え続ける物質を<strong>流体</strong>と呼ぶ。流体は膨大な数の分子からなるが、私たちが扱う大きさ(ミリメートルからメートル程度)では、分子 1 個 1 個を区別せず、物質が空間を連続的に満たしているとみなせる。これを<strong>連続体近似</strong>と呼ぶ。</p>
+<p>連続体近似のもとでは、流体の状態は空間の各点 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> と時刻 <span class="math notranslate nohighlight">\(t\)</span> の関数として表される。</p>
+<ul class="simple">
+<li><p>速度 <span class="math notranslate nohighlight">\(\mathbf{u}(\mathbf{x}, t) = (u, v)\)</span>(2 次元の場合)</p></li>
+<li><p>圧力 <span class="math notranslate nohighlight">\(p(\mathbf{x}, t)\)</span></p></li>
+<li><p>密度 <span class="math notranslate nohighlight">\(\rho(\mathbf{x}, t)\)</span></p></li>
+</ul>
+<p>このように、空間の各点に値が割り当てられたものを<strong>場</strong>と呼ぶ。速度は向きを持つのでベクトル場、圧力や密度はスカラー場である。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.2. </span>オイラー的視点とラグランジュ的視点<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>流れを記述する視点には 2 種類ある(<a class="reference internal" href="#fig-viewpoints"><span class="std std-numref">図 5.1</span></a>)。</p>
+<figure class="align-center" id="id12">
+<span id="fig-viewpoints"></span><img alt="_images/viewpoints.png" src="_images/viewpoints.png" />
+<figcaption>
+<p><span class="caption-number">図 5.1 </span><span class="caption-text">オイラー的視点(左)とラグランジュ的視点(右)</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>オイラー的視点</strong>では、空間に固定した観測点で、そこを通り過ぎる流体の速度や圧力を観測する。川岸に立って、目の前を流れる水の速さを測るイメージである。</p>
+<p><strong>ラグランジュ的視点</strong>では、流体の小さな塊(流体粒子)を一つ一つ追いかけ、その位置と速度の変化を記述する。川に浮かべたボートに乗って、流されながら周りを観測するイメージである。</p>
+<p>数値計算の手法も、この 2 つの視点に対応して大きく 2 つに分かれる。</p>
+<ul class="simple">
+<li><p><strong>格子法</strong>(オイラー的): 空間を固定した格子に区切り、格子点やセルでの物理量の時間変化を計算する。第 6〜8 章で扱う。第 10 章の格子ボルツマン法も、格子を使う方法である。</p></li>
+<li><p><strong>粒子法</strong>(ラグランジュ的): 流体を多数の粒子で表し、粒子を流れとともに動かす。第 9 章の SPH がこれにあたる。</p></li>
+</ul>
+<section id="id4">
+<h3><span class="section-number">5.2.1. </span>物質微分<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>2 つの視点の関係を表すのが<strong>物質微分</strong>である。ある流体粒子の温度 <span class="math notranslate nohighlight">\(T\)</span> が時間とともにどう変わるかを考える。粒子は流れに乗って移動するので、粒子の温度の変化には、その場所の温度そのものの時間変化 <span class="math notranslate nohighlight">\(\partial T / \partial t\)</span> に加えて、温度の異なる場所へ運ばれることによる変化が加わる。</p>
+<div class="math notranslate nohighlight">
+\[\frac{DT}{Dt} = \frac{\partial T}{\partial t} + \mathbf{u} \cdot \nabla T\]</div>
+<p>左辺の <span class="math notranslate nohighlight">\(D/Dt\)</span> が物質微分(流体粒子に乗って見た時間変化)、右辺第 1 項が固定点での時間変化(オイラー的視点での時間変化)である。右辺第 2 項は、流れによって物理量が運ばれる効果を表し、<strong>移流項</strong>と呼ばれる。</p>
+<p>ラグランジュ的視点の計算では、粒子そのものが移動するので移流項を計算する必要がない。一方、格子法では移流項を差分で近似する必要があり、これが格子法の難しさの一つになる(第 6 章)。</p>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">5.3. </span>ベクトル解析の記号<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>流体の方程式では、偏微分をまとめて書くための記号 <span class="math notranslate nohighlight">\(\nabla\)</span>(ナブラ)を使う。2 次元では <span class="math notranslate nohighlight">\(\nabla = (\partial/\partial x, \partial/\partial y)\)</span> である。本書で使う演算を<a class="reference internal" href="#table-nabla"><span class="std std-numref">表 5.1</span></a> にまとめる。</p>
+<span id="table-nabla"></span><table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 5.1 </span><span class="caption-text">ナブラを使った演算</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 40.0%" />
+<col style="width: 42.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名前</p></th>
+<th class="head"><p>定義(2 次元)</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>勾配</p></td>
+<td><p><span class="math notranslate nohighlight">\(\nabla p = \left(\dfrac{\partial p}{\partial x}, \dfrac{\partial p}{\partial y}\right)\)</span></p></td>
+<td><p>スカラー場が最も急に増える向きと、その増え方を表すベクトル</p></td>
+</tr>
+<tr class="row-odd"><td><p>発散</p></td>
+<td><p><span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{u} = \dfrac{\partial u}{\partial x} + \dfrac{\partial v}{\partial y}\)</span></p></td>
+<td><p>その点から流体が湧き出す量(正なら湧き出し、負なら吸い込み)</p></td>
+</tr>
+<tr class="row-even"><td><p>ラプラシアン</p></td>
+<td><p><span class="math notranslate nohighlight">\(\nabla^2 p = \dfrac{\partial^2 p}{\partial x^2} + \dfrac{\partial^2 p}{\partial y^2}\)</span></p></td>
+<td><p>周囲の平均と比べた、その点の値のへこみ具合</p></td>
+</tr>
+</tbody>
+</table>
+<p>ラプラシアンは、格子で近似すると「上下左右 4 点の平均とその点の値の差」に比例する量になる。値が周囲の平均より小さい点では正になり、拡散の効果によって周囲の平均に近づこうとする。この性質は第 6 章の拡散方程式で使う。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">5.4. </span>連続の式<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>流体の質量は、勝手に生まれたり消えたりしない。この<strong>質量保存則</strong>を場の言葉で書いたものが<strong>連続の式</strong>である。</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \mathbf{u}) = 0\]</div>
+<p>ある点の周りの小さな領域を考えると、領域から流れ出す質量(第 2 項)の分だけ、領域内の密度が減る(第 1 項)ことを表している。</p>
+<p>水のような液体は、普通の条件ではほとんど圧縮されない。密度が一定(<span class="math notranslate nohighlight">\(\rho\)</span> = 一定)とみなせる流体を<strong>非圧縮性流体</strong>と呼ぶ。このとき連続の式は次のように簡単になる。</p>
+<div class="math notranslate nohighlight">
+\[\nabla \cdot \mathbf{u} = 0\]</div>
+<p>これを<strong>非圧縮条件</strong>と呼ぶ。速度場の発散が至るところで 0、つまりどの点でも流体の湧き出しも吸い込みもないことを意味する。空気も、流れの速さが音速より十分小さい(目安として音速の 3 割程度以下)場合は非圧縮性流体とみなせる。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">5.5. </span>ナビエ-ストークス方程式<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>流体の運動を支配するのは、流体粒子に対するニュートンの運動方程式である。粘性(流体の「ねばり」)の性質が最も単純な流体(速度の差に比例した粘性の力が働く流体で、ニュートン流体と呼ぶ。水や空気が代表例である)で、非圧縮の場合、運動方程式は次のようになる。</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \mathbf{u}}{\partial t}
+= -(\mathbf{u} \cdot \nabla)\mathbf{u}
+  - \frac{1}{\rho}\nabla p
+  + \nu \nabla^2 \mathbf{u}
+  + \mathbf{f}\]</div>
+<p>これを<strong>ナビエ-ストークス方程式</strong>と呼ぶ。<span class="math notranslate nohighlight">\(\nu\)</span> は<strong>動粘性係数</strong>、<span class="math notranslate nohighlight">\(\mathbf{f}\)</span> は重力などの単位質量あたりの外力である。動粘性係数は、粘性の強さを表す粘性係数 <span class="math notranslate nohighlight">\(\mu\)</span> を密度で割った量 <span class="math notranslate nohighlight">\(\nu = \mu/\rho\)</span> で、単位は <span class="math notranslate nohighlight">\(\mathrm{m^2/s}\)</span> である。非圧縮性流体の運動は、この方程式と非圧縮条件 <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{u} = 0\)</span> の組で決まる。</p>
+<p>右辺の各項の意味を<a class="reference internal" href="#table-ns-terms"><span class="std std-numref">表 5.2</span></a> にまとめる。</p>
+<span id="table-ns-terms"></span><table class="docutils align-default" id="id14">
+<caption><span class="caption-number">表 5.2 </span><span class="caption-text">ナビエ-ストークス方程式の各項</span><a class="headerlink" href="#id14" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>項</p></th>
+<th class="head"><p>名前</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(-(\mathbf{u} \cdot \nabla)\mathbf{u}\)</span></p></td>
+<td><p>移流項</p></td>
+<td><p>流れが速度そのものを運ぶ効果。物質微分の移流項を速度自身に当てはめたもの</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(-\dfrac{1}{\rho}\nabla p\)</span></p></td>
+<td><p>圧力項</p></td>
+<td><p>圧力の高い所から低い所へ押される力</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\nu \nabla^2 \mathbf{u}\)</span></p></td>
+<td><p>粘性項</p></td>
+<td><p>粘性によって速度の差がならされる効果(速度の拡散)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbf{f}\)</span></p></td>
+<td><p>外力項</p></td>
+<td><p>重力、浮力などの外から加わる力</p></td>
+</tr>
+</tbody>
+</table>
+<p>左辺と移流項をまとめると <span class="math notranslate nohighlight">\(D\mathbf{u}/Dt\)</span>(流体粒子の加速度)になるので、ナビエ-ストークス方程式は「流体粒子の加速度 = 圧力による力 + 粘性による力 + 外力」という、単位質量あたりの運動方程式そのものである。</p>
+<section id="id8">
+<h3><span class="section-number">5.5.1. </span>非圧縮性流体における圧力の役割<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>非圧縮性流体の方程式には、圧力を直接決める式(圧力の時間変化を表す式)がない。圧力は、<strong>速度場が非圧縮条件を満たすように</strong>決まる量である。流体がある場所に集まろうとすると、そこの圧力が上がって流体を押し返し、湧き出しも吸い込みもない状態が保たれる。</p>
+<p>この性質のために、非圧縮性流体の計算では、各ステップで「非圧縮条件を満たすような圧力」を求める必要がある。これは第 7 章と第 8 章で扱う<strong>圧力投影</strong>の考え方につながる。一方、第 9 章の SPH では、流体をわずかに圧縮できるものとして扱い、密度の変化から圧力を計算する。手法によって圧力の扱い方が大きく異なることは、流体の計算法を理解するうえで重要な点である。</p>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">5.6. </span>レイノルズ数<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>流れの代表的な速さを <span class="math notranslate nohighlight">\(U\)</span>、代表的な長さ(物体の大きさなど)を <span class="math notranslate nohighlight">\(L\)</span> とするとき、</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Re} = \frac{U L}{\nu}\]</div>
+<p>を<strong>レイノルズ数</strong>と呼ぶ。レイノルズ数は、移流項(慣性の効果)と粘性項(粘性の効果)の大きさの比を表す無次元数である。</p>
+<ul class="simple">
+<li><p>レイノルズ数が小さい流れでは粘性が支配的で、流れは滑らかで規則的になる(<strong>層流</strong>)。</p></li>
+<li><p>レイノルズ数が大きい流れでは慣性が支配的で、流れは不規則に乱れやすくなる(<strong>乱流</strong>)。</p></li>
+</ul>
+<p>身近な流れのレイノルズ数の例を<a class="reference internal" href="#table-reynolds"><span class="std std-numref">表 5.3</span></a> に示す。水の動粘性係数を <span class="math notranslate nohighlight">\(1.0 \times 10^{-6}\ \mathrm{m^2/s}\)</span>、空気の動粘性係数を <span class="math notranslate nohighlight">\(1.5 \times 10^{-5}\ \mathrm{m^2/s}\)</span> とした。</p>
+<span id="table-reynolds"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 5.3 </span><span class="caption-text">レイノルズ数の例</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 34.0%" />
+<col style="width: 22.0%" />
+<col style="width: 22.0%" />
+<col style="width: 22.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>流れ</p></th>
+<th class="head"><p>速さ <span class="math notranslate nohighlight">\(U\)</span></p></th>
+<th class="head"><p>長さ <span class="math notranslate nohighlight">\(L\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\mathrm{Re}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>水中を泳ぐ細菌</p></td>
+<td><p>30 µm/s</p></td>
+<td><p>2 µm</p></td>
+<td><p><span class="math notranslate nohighlight">\(6 \times 10^{-5}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>コップの水をかき混ぜる</p></td>
+<td><p>0.1 m/s</p></td>
+<td><p>5 cm</p></td>
+<td><p><span class="math notranslate nohighlight">\(5 \times 10^{3}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>走行中の自動車のまわりの空気</p></td>
+<td><p>30 m/s</p></td>
+<td><p>4 m</p></td>
+<td><p><span class="math notranslate nohighlight">\(8 \times 10^{6}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>レイノルズ数には、もう一つ重要な意味がある。形が相似な 2 つの流れは、レイノルズ数が等しければ同じ流れのパターンになる(<strong>相似則</strong>)。模型を使った風洞実験が実物の予測に使えるのはこのためである。数値計算でも、速さや長さを 1 などの扱いやすい値にそろえ(無次元化し)、動粘性係数を <span class="math notranslate nohighlight">\(\nu = UL/\mathrm{Re}\)</span> から決めることが多い。第 8 章と第 10 章では、この方法でレイノルズ数を指定する。</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">5.7. </span>境界条件<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>流体の方程式を解くには、領域の境界で流体がどう振る舞うかを指定する<strong>境界条件</strong>が必要である。本書で使う主な境界条件を<a class="reference internal" href="#table-boundary"><span class="std std-numref">表 5.4</span></a> にまとめる。</p>
+<span id="table-boundary"></span><table class="docutils align-default" id="id16">
+<caption><span class="caption-number">表 5.4 </span><span class="caption-text">主な境界条件</span><a class="headerlink" href="#id16" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 50.0%" />
+<col style="width: 28.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名前</p></th>
+<th class="head"><p>内容</p></th>
+<th class="head"><p>使う章</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>滑りなし条件</p></td>
+<td><p>壁の上で、流体の速度が壁の速度に等しい(静止した壁なら速度 0)</p></td>
+<td><p>第 8 章、第 10 章</p></td>
+</tr>
+<tr class="row-odd"><td><p>滑り条件</p></td>
+<td><p>壁に垂直な速度成分だけが 0 で、壁に沿った流れは妨げない</p></td>
+<td><p>第 7 章</p></td>
+</tr>
+<tr class="row-even"><td><p>流入・流出条件</p></td>
+<td><p>領域の端から流体が入る、または出ていく</p></td>
+<td><p>第 10 章</p></td>
+</tr>
+<tr class="row-odd"><td><p>周期境界条件</p></td>
+<td><p>領域の一方の端から出た流体が、反対側の端から入ってくる</p></td>
+<td><p>第 6 章、第 10 章</p></td>
+</tr>
+</tbody>
+</table>
+<p>実在の流体と壁の間では、滑りなし条件が成り立つ。滑り条件は、壁の近くの薄い層(境界層)を細かく解像する代わりに用いる近似である。</p>
+<p>また、水面のように、液体と気体の境界が自由に動く場合の境界を<strong>自由表面</strong>と呼ぶ。格子法で自由表面を扱うには工夫が必要だが、粒子法では粒子のない場所が自然に気体の領域になるので、比較的簡単に扱える。第 9 章のダムブレイクはその例である。</p>
+</section>
+<section id="id11">
+<h2><span class="section-number">5.8. </span>まとめ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>流体は、速度・圧力・密度の場として記述する。</p></li>
+<li><p>固定点で観測するオイラー的視点は格子法に、流体粒子を追跡するラグランジュ的視点は粒子法に対応する。</p></li>
+<li><p>非圧縮性流体の運動は、非圧縮条件 <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{u} = 0\)</span> とナビエ-ストークス方程式で決まる。ナビエ-ストークス方程式は、移流項・圧力項・粘性項・外力項からなる。</p></li>
+<li><p>非圧縮性流体の圧力は、非圧縮条件を満たすように決まる。</p></li>
+<li><p>レイノルズ数は慣性と粘性の比を表し、流れの性質を決める。数値計算では、レイノルズ数から動粘性係数を決めることが多い。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interactions.html" class="btn btn-neutral float-left" title="4. 粒子間の相互作用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="advection_diffusion.html" class="btn btn-neutral float-right" title="6. 格子法の第一歩: 移流と拡散" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>セル・オートマトンの理論と歴史 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="1. はじめに" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">セル・オートマトンの理論と歴史</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>セル・オートマトンの理論と歴史<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書は、セル・オートマトン（Cellular Automaton、CA）の基本的な考え方、その誕生から現在までの歴史、および計算能力・可逆性などの理論的な性質を解説する。対象読者は、Python などのプログラミングの知識を持つエンジニアと工学系の大学生である。数学的な定義は正確に示すが、定理の証明は考え方の紹介にとどめ、図と Python のサンプルコードで具体的に確かめられるようにした。</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id2">1.1. セル・オートマトンとは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id3">1.2. 本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id4">1.3. 前提知識</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id5">1.4. サンプルコードについて</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id6">1.5. 表記について</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id2">2.1. 構成要素</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id3">2.2. 配置と大域写像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id4">2.3. 近傍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id5">2.4. 静止状態と有限配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id6">2.5. 境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id7">2.6. 更新の方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#id8">2.7. 計算例と時空図</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id2">3.1. 誕生：自己増殖する機械（1940〜1950 年代）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id4">3.2. 数学的な基礎（1960 年代）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id9">3.3. ライフゲームの登場（1970 年代）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id14">3.4. 体系的な研究と物理への応用（1980 年代）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id27">3.5. 応用の広がりと計算万能性（1990〜2000 年代）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id33">3.6. 新しい展開（2010 年代以降）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id36">3.7. 年表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#id37">3.8. 研究の系譜</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="one_dimensional.html#id2">4.1. 基本セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="one_dimensional.html#id3">4.2. ルール番号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="one_dimensional.html#id5">4.3. 規則の対称性と同値類</a></li>
+<li class="toctree-l2"><a class="reference internal" href="one_dimensional.html#id6">4.4. ウルフラムの 4 クラス分類</a></li>
+<li class="toctree-l2"><a class="reference internal" href="one_dimensional.html#id9">4.5. 代表的な規則</a></li>
+<li class="toctree-l2"><a class="reference internal" href="one_dimensional.html#ca">4.6. 1 次元 CA の拡張</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="two_dimensional.html#id2">5.1. ライフゲーム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_dimensional.html#id4">5.2. パターンの分類</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_dimensional.html#b-s-life-like-ca">5.3. B/S 表記と Life-like CA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_dimensional.html#ca">5.4. その他の 2 次元 CA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_dimensional.html#id6">5.5. ラングトンのアリ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="two_dimensional.html#id9">5.6. 正方格子以外の格子</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#id2">6.1. 計算万能性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#id11">6.2. 自己増殖</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#id18">6.3. 大域写像の性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#ca">6.4. 力学系としての CA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id2">7.1. 流体シミュレーション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id6">7.2. 交通流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id8">7.3. 森林火災と感染症</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id10">7.4. 結晶の成長</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id12">7.5. 乱数生成と暗号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id15">7.6. 画像処理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id16">7.7. 量子ドット・セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#id18">7.8. 生物の模様</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#id2">8.1. 確率的セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#id4">8.2. 非同期セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#id6">8.3. 連続値・連続空間のセル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#id9">8.4. ニューラル・セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#id11">8.5. 量子セル・オートマトン</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#id1">9.1. 基本方針</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#ca">9.2. 1 次元 CA の実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#id2">9.3. 2 次元 CA の実装：近傍の数え方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#id5">9.4. 境界条件の実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#id6">9.5. 可視化とアニメーション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.html#id7">9.6. 実装上の注意</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="1. はじめに" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

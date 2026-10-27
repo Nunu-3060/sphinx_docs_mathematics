@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python による流体・粒子シミュレーション入門 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="1. はじめに" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python による流体・粒子シミュレーション入門</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python">
+<h1>Python による流体・粒子シミュレーション入門<a class="headerlink" href="#python" title="Link to this heading"></a></h1>
+<p>本書は、Python と NumPy を使って粒子と流体の数値シミュレーションを一から実装しながら、その基礎を学ぶための入門書である。方程式を離散化し、コードにして動かし、結果が正しいかを確かめる、という一連の流れを、小さな動くサンプルコードで体験することを目的とする。</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/stable_fluids.gif"><img alt="_images/stable_fluids.gif" src="_images/stable_fluids.gif" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 1 </span><span class="caption-text">第 7 章で実装する Stable Fluids 法による煙のシミュレーション</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id2">1.1. 本書のねらい</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id3">1.2. 対象読者</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id4">1.3. 本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id5">1.4. 動作環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id6">1.5. サンプルコード</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#id7">1.6. 本書の表記</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id2">2.1. 運動方程式を数値的に解く</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id3">2.2. 陽的オイラー法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id4">2.3. 半陰的オイラー法と速度ベルレ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id5">2.4. 例題: ばね振動子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id6">2.5. 結果: エネルギーが増え続ける陽的オイラー法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id7">2.6. 誤差と精度の次数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id8">2.7. 安定性と時間刻み幅</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_basics.html#id9">2.8. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="particles.html#id2">3.1. 空気抵抗を受けるボール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="particles.html#id3">3.2. 床での跳ね返り</a></li>
+<li class="toctree-l2"><a class="reference internal" href="particles.html#id4">3.3. パーティクルシステム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="particles.html#id7">3.4. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interactions.html#id2">4.1. ばね-質点系</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactions.html#id6">4.2. 粒子どうしの衝突</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactions.html#id12">4.3. 近傍探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interactions.html#id17">4.4. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id2">5.1. 流体と場</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id3">5.2. オイラー的視点とラグランジュ的視点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id5">5.3. ベクトル解析の記号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id6">5.4. 連続の式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id7">5.5. ナビエ-ストークス方程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id9">5.6. レイノルズ数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id10">5.7. 境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fluid_basics.html#id11">5.8. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advection_diffusion.html#id2">6.1. 差分法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advection_diffusion.html#id3">6.2. 1 次元移流方程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advection_diffusion.html#cfl">6.3. 安定性の解析と CFL 条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advection_diffusion.html#id6">6.4. 数値拡散と数値分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advection_diffusion.html#id7">6.5. 1 次元拡散方程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advection_diffusion.html#id8">6.6. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id1">7.1. Stable Fluids の考え方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id2">7.2. 格子と境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id3">7.3. 外力</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id4">7.4. 移流: セミラグランジュ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id5">7.5. 拡散: 陰解法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id6">7.6. 圧力投影</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id7">7.7. 1 ステップの計算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id8">7.8. 結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id9">7.9. 検証: 発散は本当に消えたか</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stable_fluids.html#id10">7.10. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id2">8.1. ベンチマーク問題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id3">8.2. 射影法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id4">8.3. 格子と境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id5">8.4. 実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id6">8.5. 結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id7">8.6. 検証と妥当性確認</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cavity_flow.html#id8">8.7. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id1">9.1. SPH の考え方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id4">9.2. 密度と圧力</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id7">9.3. 運動方程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id10">9.4. 壁の表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id11">9.5. 粒子の質量の決め方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id12">9.6. 時間刻み幅と近傍リスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id15">9.7. 結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id17">9.8. SPH の注意点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sph.html#id18">9.9. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id2">10.1. 考え方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#d2q9">10.2. D2Q9 モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id3">10.3. 平衡分布関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id4">10.4. 衝突と移動</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id6">10.5. 境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id7">10.6. ナビエ-ストークス方程式との関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id8">10.7. 計算の設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id9">10.8. 結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id11">10.9. 格子ボルツマン法の特徴</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lbm.html#id12">10.10. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id2">11.1. 手法の比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id3">11.2. パラメーターの選び方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id4">11.3. 計算が発散したときの調べ方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id5">11.4. 結果を検証する手順</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id6">11.5. 計算を速くする</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id7">11.6. さらに学ぶために</a></li>
+<li class="toctree-l2"><a class="reference internal" href="practice.html#id8">11.7. おわりに</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-right" title="1. はじめに" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

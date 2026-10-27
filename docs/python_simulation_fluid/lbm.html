@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. 格子ボルツマン法 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="11. 手法の比較と実践上の注意" href="practice.html" />
+    <link rel="prev" title="9. 粒子法による流体: SPH" href="sph.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. 格子ボルツマン法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">10.1. 考え方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d2q9">10.2. D2Q9 モデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">10.3. 平衡分布関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">10.4. 衝突と移動</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bgk">10.4.1. 衝突: BGK 衝突則</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">10.4.2. 移動</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">10.5. 境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">10.6. ナビエ-ストークス方程式との関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">10.7. 計算の設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">10.8. 結果</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">10.8.1. 検証: ストローハル数</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">10.9. 格子ボルツマン法の特徴</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">10.10. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10. </span>格子ボルツマン法</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">10. </span>格子ボルツマン法<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この章では、これまでとは異なる考え方で流体を計算する<strong>格子ボルツマン法</strong>(LBM、Lattice Boltzmann Method)を紹介する。ナビエ-ストークス方程式を直接離散化するのではなく、格子の上を飛び移りながら衝突する仮想的な粒子の集団を考え、その平均的な振る舞いとして流体の運動を再現する。題材は、一様な流れの中に置いた円柱の後ろに渦が交互に放出される<strong>カルマン渦列</strong>である。</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="_images/lbm_karman.gif"><img alt="_images/lbm_karman.gif" src="_images/lbm_karman.gif" style="width: 560px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 10.1 </span><span class="caption-text">格子ボルツマン法によるカルマン渦列(色は渦度)</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id2">
+<h2><span class="section-number">10.1. </span>考え方<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>気体は膨大な数の分子からなり、分子は飛び回りながら互いに衝突している。個々の分子の運動は複雑でも、多数の分子の平均をとると、流体としての滑らかな運動(速度場や圧力場)が現れる。分子の速度の分布を表す関数(<strong>分布関数</strong>)の時間変化を記述するのがボルツマン方程式であり、その平均的な振る舞いからナビエ-ストークス方程式が導かれることが知られている。</p>
+<p>格子ボルツマン法は、この考え方を思い切って単純化したものである。</p>
+<ul class="simple">
+<li><p>空間を正方格子に区切り、仮想的な粒子は格子点の上にだけ存在する。</p></li>
+<li><p>粒子の速度は、隣の格子点へちょうど 1 ステップで移る、ごく少数の速度だけに限る。</p></li>
+<li><p>各格子点では、速度ごとの粒子の量(分布関数)だけを扱い、個々の粒子は追跡しない。</p></li>
+</ul>
+<p>物理量はすべて<strong>格子単位</strong>(格子間隔 1、時間刻み幅 1)で表す。</p>
+</section>
+<section id="d2q9">
+<h2><span class="section-number">10.2. </span>D2Q9 モデル<a class="headerlink" href="#d2q9" title="Link to this heading"></a></h2>
+<p>2 次元で最もよく使われるのは、9 個の速度を持つ <strong>D2Q9 モデル</strong>である(2 次元 = D2、9 速度 = Q9)。速度は、静止(0 番)、上下左右の 4 方向(1〜4 番)、斜めの 4 方向(5〜8 番)からなる(<a class="reference internal" href="#fig-d2q9"><span class="std std-numref">図 10.2</span></a>)。</p>
+<figure class="align-center" id="id14">
+<span id="fig-d2q9"></span><a class="reference internal image-reference" href="_images/d2q9.png"><img alt="_images/d2q9.png" src="_images/d2q9.png" style="width: 320px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 10.2 </span><span class="caption-text">D2Q9 モデルの 9 個の離散速度と番号</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>各格子点は、9 個の速度に対応する分布関数 <span class="math notranslate nohighlight">\(f_k\)</span>(<span class="math notranslate nohighlight">\(k = 0, \ldots, 8\)</span>)を持つ。<span class="math notranslate nohighlight">\(f_k\)</span> は、その格子点にいて速度 <span class="math notranslate nohighlight">\(\mathbf{c}_k\)</span> で動く粒子の量と考えればよい。密度と速度は、分布関数の和として求まる。</p>
+<div class="math notranslate nohighlight">
+\[\rho = \sum_{k=0}^{8} f_k, \qquad \rho\,\mathbf{u} = \sum_{k=0}^{8} f_k\, \mathbf{c}_k\]</div>
+<p>各速度には、次の節の平衡分布関数で使う重み <span class="math notranslate nohighlight">\(w_k\)</span> が決められている(<a class="reference internal" href="#table-d2q9"><span class="std std-numref">表 10.1</span></a>)。</p>
+<span id="table-d2q9"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 10.1 </span><span class="caption-text">D2Q9 モデルの離散速度と重み</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 45.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>番号 <span class="math notranslate nohighlight">\(k\)</span></p></th>
+<th class="head"><p>速度 <span class="math notranslate nohighlight">\(\mathbf{c}_k\)</span></p></th>
+<th class="head"><p>重み <span class="math notranslate nohighlight">\(w_k\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\((0, 0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(4/9\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>1〜4</p></td>
+<td><p><span class="math notranslate nohighlight">\((1, 0), (0, 1), (-1, 0), (0, -1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1/9\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5〜8</p></td>
+<td><p><span class="math notranslate nohighlight">\((1, 1), (-1, 1), (-1, -1), (1, -1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1/36\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">22</span><span class="c1"># D2Q9 モデルの 9 個の離散速度 (cx, cy) と重み</span>
+<span class="linenos">23</span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="linenos">24</span><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">36</span><span class="p">])</span>
+<span class="linenos">25</span><span class="c1"># 各離散速度と逆向きの離散速度の番号(跳ね返り境界で使う)</span>
+<span class="linenos">26</span><span class="n">OPPOSITE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">10.3. </span>平衡分布関数<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>衝突を十分繰り返して落ち着いた状態の分布関数を<strong>平衡分布関数</strong>と呼ぶ。密度 <span class="math notranslate nohighlight">\(\rho\)</span> と速度 <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> が与えられたとき、D2Q9 モデルの平衡分布関数は次の式で表される。</p>
+<div class="math notranslate nohighlight">
+\[f_k^{\mathrm{eq}} = w_k\, \rho \left[ 1 + 3 (\mathbf{c}_k \cdot \mathbf{u}) + \frac{9}{2} (\mathbf{c}_k \cdot \mathbf{u})^2 - \frac{3}{2} |\mathbf{u}|^2 \right]\]</div>
+<p>この式は、気体分子の速度分布(マクスウェル分布)を流速が小さいとして展開したものに相当する。平衡分布関数から求めた密度と速度は、元の <span class="math notranslate nohighlight">\(\rho\)</span> と <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> に一致するように作られている。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">59</span><span class="k">def</span><span class="w"> </span><span class="nf">equilibrium</span><span class="p">(</span><span class="n">rho</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">ux</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">uy</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">60</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;密度 rho と速度 (ux, uy)(いずれも 2 次元配列)に対応する平衡分布関数を返す。&quot;&quot;&quot;</span>
+<span class="linenos">61</span>    <span class="n">usq</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">ux</span> <span class="o">*</span> <span class="n">ux</span> <span class="o">+</span> <span class="n">uy</span> <span class="o">*</span> <span class="n">uy</span><span class="p">)</span>
+<span class="linenos">62</span>    <span class="n">feq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="o">*</span><span class="n">ux</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="linenos">63</span>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+<span class="linenos">64</span>        <span class="n">cu</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">ux</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">uy</span><span class="p">)</span>  <span class="c1"># 3 (c_k · u)</span>
+<span class="linenos">65</span>        <span class="n">feq</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">cu</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">-</span> <span class="n">usq</span><span class="p">)</span>
+<span class="linenos">66</span>    <span class="k">return</span> <span class="n">feq</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">10.4. </span>衝突と移動<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>格子ボルツマン法の 1 ステップは、<strong>衝突</strong>と<strong>移動</strong>(ストリーミング)の 2 つの操作からなる。</p>
+<section id="bgk">
+<h3><span class="section-number">10.4.1. </span>衝突: BGK 衝突則<a class="headerlink" href="#bgk" title="Link to this heading"></a></h3>
+<p>各格子点で、分布関数を平衡分布関数に向けて少しだけ近づける。</p>
+<div class="math notranslate nohighlight">
+\[f_k^{*} = f_k - \frac{1}{\tau}\left( f_k - f_k^{\mathrm{eq}} \right)\]</div>
+<p>これを <strong>BGK 衝突則</strong>と呼ぶ。<span class="math notranslate nohighlight">\(\tau\)</span> は<strong>緩和時間</strong>と呼ばれる定数で、平衡に近づく遅さを表す。衝突の前後で密度と運動量(<span class="math notranslate nohighlight">\(\rho\)</span> と <span class="math notranslate nohighlight">\(\rho\mathbf{u}\)</span>)は変わらない。</p>
+<p>緩和時間は、流体の動粘性係数と次の関係にある。</p>
+<div class="math notranslate nohighlight">
+\[\nu = \frac{1}{3}\left( \tau - \frac{1}{2} \right)\]</div>
+<p><span class="math notranslate nohighlight">\(\tau\)</span> が <span class="math notranslate nohighlight">\(1/2\)</span> に近いほど粘性が小さく、レイノルズ数の高い流れになる。ただし、<span class="math notranslate nohighlight">\(\tau\)</span> が <span class="math notranslate nohighlight">\(1/2\)</span> に近づくほど計算は不安定になりやすく、<span class="math notranslate nohighlight">\(\tau \le 1/2\)</span> では計算できない。</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">10.4.2. </span>移動<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>衝突後の分布関数 <span class="math notranslate nohighlight">\(f_k^{*}\)</span> を、それぞれの速度 <span class="math notranslate nohighlight">\(\mathbf{c}_k\)</span> の向きに隣の格子点へ移す。</p>
+<div class="math notranslate nohighlight">
+\[f_k(\mathbf{x} + \mathbf{c}_k, t + 1) = f_k^{*}(\mathbf{x}, t)\]</div>
+<p>配列全体を速度の向きにずらす操作なので、<code class="docutils literal notranslate"><span class="pre">np.roll</span></code> で実装できる。<code class="docutils literal notranslate"><span class="pre">np.roll</span></code> は端からはみ出した値を反対側の端に戻すので、上下の端は自動的に周期境界条件になる。</p>
+<p>衝突は各格子点の中だけで、移動は隣の格子点との間だけで完結する。この<strong>局所性</strong>が格子ボルツマン法の大きな特徴で、計算が単純であり、GPU などで並列に計算しやすい。</p>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">10.5. </span>境界条件<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><strong>円柱の表面(滑りなし条件)</strong>: 円柱の内部の格子点に入ってきた粒子を、来た向きにそのまま跳ね返す。これを<strong>跳ね返り境界</strong>(bounce-back)と呼ぶ。粒子が来た道を戻ることで、壁の近くの流体の平均の速度が 0 になり、滑りなし条件が実現される。円柱の内部かどうかを表す真偽値の配列さえあれば、どんな形の物体でも同じ方法で扱える。</p>
+<p><strong>流入境界(左端)</strong>: 一様な速度 <span class="math notranslate nohighlight">\(U\)</span> の流れが入ってくるように、左端の分布関数を、密度 1、速度 <span class="math notranslate nohighlight">\((U, 0)\)</span> の平衡分布関数で置き換える。</p>
+<p><strong>流出境界(右端)</strong>: 右端の分布関数を、1 つ内側の格子点の値で置き換える(勾配 0 の条件)。</p>
+<p><strong>上下の端</strong>: 周期境界条件とする。</p>
+<p>以上の操作をまとめた 1 ステップの計算は次のとおりである。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 89</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 90</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;1 ステップ進める: 衝突 → 跳ね返り → 移動(ストリーミング)→ 流入・流出境界。&quot;&quot;&quot;</span>
+<span class="linenos"> 91</span>    <span class="n">f</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">f</span>
+<span class="linenos"> 92</span>    <span class="n">rho</span><span class="p">,</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span> <span class="o">=</span> <span class="n">macroscopic</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="linenos"> 93</span>    <span class="n">feq</span> <span class="o">=</span> <span class="n">equilibrium</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">)</span>
+<span class="linenos"> 94</span>    <span class="n">f_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="linenos"> 95</span>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+<span class="linenos"> 96</span>        <span class="c1"># 1. 衝突: 分布関数を平衡分布関数に近づける(BGK 衝突則)</span>
+<span class="linenos"> 97</span>        <span class="n">post</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">feq</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">/</span> <span class="n">prm</span><span class="o">.</span><span class="n">tau</span>
+<span class="linenos"> 98</span>        <span class="c1"># 2. 円柱の内部では、粒子を来た向きへ跳ね返す(滑りなし条件)</span>
+<span class="linenos"> 99</span>        <span class="n">post</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">obstacle</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">OPPOSITE</span><span class="p">[</span><span class="n">k</span><span class="p">]][</span><span class="n">s</span><span class="o">.</span><span class="n">obstacle</span><span class="p">]</span>
+<span class="linenos">100</span>        <span class="c1"># 3. 移動: 離散速度 c_k の向きに隣の格子点へずらす(上下の端は周期境界になる)</span>
+<span class="linenos">101</span>        <span class="n">f_new</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">C</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">102</span>    <span class="c1"># 4. 流入境界(左端)は平衡分布関数で置き換え、流出境界(右端)は 1 つ内側の値を写す</span>
+<span class="linenos">103</span>    <span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">prm</span><span class="o">.</span><span class="n">ny</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">104</span>    <span class="n">f_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">equilibrium</span><span class="p">(</span><span class="n">ones</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">u_in</span> <span class="o">*</span> <span class="n">ones</span><span class="p">,</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">ones</span><span class="p">)</span>
+<span class="linenos">105</span>    <span class="n">f_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_new</span><span class="p">[:,</span> <span class="p">:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">106</span>    <span class="n">s</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f_new</span>
+<span class="linenos">107</span>    <span class="n">s</span><span class="o">.</span><span class="n">steps</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>9 個の速度ごとに for 文で処理しているのは、<span class="math notranslate nohighlight">\((9, n_y, n_x)\)</span> の大きな配列の一時的なコピーを何度も作らないようにするためである。配列全体を一度に計算するより、この方が筆者の環境では 2 倍以上速かった。NumPy の配列演算でも、メモリーの使い方によって速度が大きく変わることがある。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">10.6. </span>ナビエ-ストークス方程式との関係<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>格子ボルツマン法がなぜ流体の運動を再現できるのかは、チャップマン-エンスコッグ展開と呼ばれる手法で示される。その結果、流速が<strong>格子の音速</strong> <span class="math notranslate nohighlight">\(c_s = 1/\sqrt{3} \approx 0.577\)</span> より十分小さければ、格子ボルツマン法の平均的な振る舞いは、前に示した関係で緩和時間から決まる動粘性係数を持つナビエ-ストークス方程式に従うことが分かっている。</p>
+<p>逆に言えば、流速を大きくしすぎると、圧縮性の効果による誤差が大きくなる。この誤差はマッハ数 <span class="math notranslate nohighlight">\(\mathrm{Ma} = U / c_s\)</span> の 2 乗に比例するので、流速は格子単位で 0.1 程度以下にするのが普通である。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">10.7. </span>計算の設定<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>計算の設定を<a class="reference internal" href="#table-lbm-params"><span class="std std-numref">表 10.2</span></a> に示す。</p>
+<span id="table-lbm-params"></span><table class="docutils align-default" id="id16">
+<caption><span class="caption-number">表 10.2 </span><span class="caption-text">円柱まわりの流れの計算の設定(格子単位)</span><a class="headerlink" href="#id16" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 45.0%" />
+<col style="width: 55.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>項目</p></th>
+<th class="head"><p>値</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>格子点数</p></td>
+<td><p><span class="math notranslate nohighlight">\(400 \times 100\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>円柱の半径(直径 <span class="math notranslate nohighlight">\(D\)</span>)</p></td>
+<td><p>8(16)</p></td>
+</tr>
+<tr class="row-even"><td><p>円柱の中心</p></td>
+<td><p><span class="math notranslate nohighlight">\((80, 50)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>流入速度 <span class="math notranslate nohighlight">\(U\)</span></p></td>
+<td><p>0.08(マッハ数は約 0.14)</p></td>
+</tr>
+<tr class="row-even"><td><p>レイノルズ数 <span class="math notranslate nohighlight">\(UD/\nu\)</span></p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p>動粘性係数 <span class="math notranslate nohighlight">\(\nu\)</span></p></td>
+<td><p>0.0128</p></td>
+</tr>
+<tr class="row-even"><td><p>緩和時間 <span class="math notranslate nohighlight">\(\tau\)</span></p></td>
+<td><p>0.5384</p></td>
+</tr>
+</tbody>
+</table>
+<p>円柱の後ろの流れは、レイノルズ数がおよそ 47 を超えると上下対称な状態が不安定になり、渦が交互に放出され始める。ただし、計算の初期状態が完全に上下対称だと、対称性を崩すきっかけが丸め誤差しかないため、渦の放出が始まるまでに長い時間がかかる。そこで、初期の流速にわずかな上下非対称の乱れ(相対的に 0.1 %)を加えている。</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">10.8. </span>結果<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>24,000 ステップ計算した後の渦度の分布を<a class="reference internal" href="#fig-lbm-vorticity"><span class="std std-numref">図 10.3</span></a> に示す。渦度は流体の局所的な回転の強さで、2 次元では <span class="math notranslate nohighlight">\(\omega_z = \partial v / \partial x - \partial u / \partial y\)</span> である。赤は反時計回り、青は時計回りの回転を表す。</p>
+<figure class="align-center" id="id17">
+<span id="fig-lbm-vorticity"></span><img alt="_images/lbm_vorticity.png" src="_images/lbm_vorticity.png" />
+<figcaption>
+<p><span class="caption-number">図 10.3 </span><span class="caption-text">円柱まわりの流れの渦度の分布(Re = 100)</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>円柱の上側からは時計回りの渦が、下側からは反時計回りの渦が交互に放出され、2 列に並んで下流へ流れていく。これがカルマン渦列である。</p>
+<p>円柱の後方(円柱の中心から直径の 3 倍下流、<a class="reference internal" href="#fig-lbm-vorticity"><span class="std std-numref">図 10.3</span></a> の × 印)で記録した <span class="math notranslate nohighlight">\(y\)</span> 方向の速度を<a class="reference internal" href="#fig-lbm-probe"><span class="std std-numref">図 10.4</span></a> に示す。</p>
+<figure class="align-center" id="id18">
+<span id="fig-lbm-probe"></span><img alt="_images/lbm_probe.png" src="_images/lbm_probe.png" />
+<figcaption>
+<p><span class="caption-number">図 10.4 </span><span class="caption-text">円柱の後流で記録した <span class="math notranslate nohighlight">\(y\)</span> 方向の速度の時間変化</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>最初の数千ステップは上下対称に近い流れが続くが、小さな振動が次第に成長し、約 10,000 ステップで一定の振幅の周期的な振動に落ち着く。これが渦の放出に対応する。</p>
+<section id="id10">
+<h3><span class="section-number">10.8.1. </span>検証: ストローハル数<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>渦の放出の周波数 <span class="math notranslate nohighlight">\(f\)</span> は、<strong>ストローハル数</strong> <span class="math notranslate nohighlight">\(\mathrm{St} = fD/U\)</span> という無次元数で表される。後半の 12,000 ステップの振動から周期を求めると、ストローハル数は約 0.189 だった。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">116</span><span class="k">def</span><span class="w"> </span><span class="nf">strouhal_number</span><span class="p">(</span><span class="n">signal</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">117</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;円柱の後流で 1 ステップごとに記録した速度の時系列から、ストローハル数 St = f D / U を求める。</span>
+<span class="linenos">118</span>
+<span class="linenos">119</span><span class="sd">    信号が負から正に変わる時刻(上向きのゼロ交差)を線形補間で求め、</span>
+<span class="linenos">120</span><span class="sd">    その間隔の平均を渦放出の周期とする。</span>
+<span class="linenos">121</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">122</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">signal</span> <span class="o">-</span> <span class="n">signal</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="linenos">123</span>    <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">((</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="linenos">124</span>    <span class="n">crossings</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># ゼロ交差の時刻(線形補間)</span>
+<span class="linenos">125</span>    <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">crossings</span><span class="p">)))</span>
+<span class="linenos">126</span>    <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">radius</span> <span class="o">/</span> <span class="p">(</span><span class="n">period</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">u_in</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>一方、周りに壁のない空間に置いた円柱では、Re = 100 のストローハル数は約 0.164 であることが実験から知られている(Williamson、1996 年)。計算結果は約 15 % 大きい。主な原因として、次の 2 つが考えられる。</p>
+<ul class="simple">
+<li><p><strong>流路の幅が狭い</strong>: 円柱の直径は流路の幅の 16 % あり、さらに上下が周期境界なので、実際には円柱が上下に一定間隔で並んだ列の流れを計算している。周りの円柱や壁による閉じ込めの効果で、流れは円柱の脇で速くなり、渦の放出の周波数は高くなる。</p></li>
+<li><p><strong>解像度が低い</strong>: 円柱の直径が 16 格子しかなく、表面も格子に沿った階段状になっている。</p></li>
+</ul>
+<p>流路の幅を広げ、円柱の直径をより多くの格子で表すと、計算結果は実験値に近づいていくはずである。ここでは計算時間を優先したが、このように「どの程度ずれていて、その原因は何か」を把握したうえで結果を使うことが大切である。</p>
+<p>筆者の環境では、1 ステップの計算に約 9.5 ms、24,000 ステップで約 4 分かかった。サンプルコード <a class="reference download internal" download="" href="_downloads/985dd5cb0d726539715b0b503359fa1c/lbm_karman.py"><code class="xref download docutils literal notranslate"><span class="pre">lbm_karman.py</span></code></a> を実行すると、渦度の分布がアニメーションで表示される。</p>
+</section>
+</section>
+<section id="id11">
+<h2><span class="section-number">10.9. </span>格子ボルツマン法の特徴<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>格子ボルツマン法の主な特徴を<a class="reference internal" href="#table-lbm-features"><span class="std std-numref">表 10.3</span></a> にまとめる。</p>
+<span id="table-lbm-features"></span><table class="docutils align-default" id="id19">
+<caption><span class="caption-number">表 10.3 </span><span class="caption-text">格子ボルツマン法の長所と短所</span><a class="headerlink" href="#id19" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>長所</p></th>
+<th class="head"><p>短所</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>各操作が局所的で、実装が単純であり、並列計算に向く</p></td>
+<td><p>流速を音速より十分小さくする必要がある</p></td>
+</tr>
+<tr class="row-odd"><td><p>圧力のポアソン方程式を解く必要がない</p></td>
+<td><p>1 つの格子点あたり 9 個の値を持つので、メモリーを多く使う</p></td>
+</tr>
+<tr class="row-even"><td><p>跳ね返り境界で、複雑な形の物体を簡単に扱える</p></td>
+<td><p>粘性が小さい(<span class="math notranslate nohighlight">\(\tau\)</span> が 1/2 に近い)と不安定になりやすい</p></td>
+</tr>
+</tbody>
+</table>
+<p>粘性の小さい流れを安定に計算するため、BGK 衝突則を改良した MRT(多緩和時間)モデルなどが使われている。</p>
+</section>
+<section id="id12">
+<h2><span class="section-number">10.10. </span>まとめ<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>格子ボルツマン法は、格子上を飛び移りながら衝突する仮想的な粒子の分布関数を計算し、その平均として流体の運動を再現する。</p></li>
+<li><p>1 ステップは、平衡分布関数に近づける衝突と、隣の格子点への移動からなる。緩和時間 <span class="math notranslate nohighlight">\(\tau\)</span> は動粘性係数と <span class="math notranslate nohighlight">\(\nu = (\tau - 1/2)/3\)</span> の関係にある。</p></li>
+<li><p>滑りなし条件は、粒子を来た向きに跳ね返すだけで実現でき、複雑な形の物体も扱いやすい。</p></li>
+<li><p>流速は格子単位で 0.1 程度以下にする。</p></li>
+<li><p>計算したストローハル数は実験値より約 15 % 大きかった。流路の幅や解像度の影響を理解したうえで結果を評価する必要がある。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sph.html" class="btn btn-neutral float-left" title="9. 粒子法による流体: SPH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="practice.html" class="btn btn-neutral float-right" title="11. 手法の比較と実践上の注意" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

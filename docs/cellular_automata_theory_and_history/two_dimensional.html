@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 2 次元セル・オートマトン &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="6. 理論" href="theory.html" />
+    <link rel="prev" title="4. 1 次元セル・オートマトン" href="one_dimensional.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 2 次元セル・オートマトン</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">5.1. ライフゲーム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">5.2. パターンの分類</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#b-s-life-like-ca">5.3. B/S 表記と Life-like CA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ca">5.4. その他の 2 次元 CA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">5.5. ラングトンのアリ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">5.6. 正方格子以外の格子</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>2 次元セル・オートマトン</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">5. </span>2 次元セル・オートマトン<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本章では、2 次元 CA の代表であるライフゲームと、その仲間の規則を扱う。2 次元 CA は 1 次元 CA よりも規則の種類がはるかに多く、移動する構造や自己組織化する模様など、より多彩な振る舞いを示す。</p>
+<section id="id2">
+<h2><span class="section-number">5.1. </span>ライフゲーム<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="glossary.html#term-39"><span class="xref std std-term">ライフゲーム</span></a>は、コンウェイが 1970 年に考案した 2 次元 CA である <a class="reference internal" href="references.html#gardner1970" id="id3"><span>[Gardner1970]</span></a>。各セルは「生」（1）か「死」（0）の 2 状態をとり、周囲 8 セル（ムーア近傍から中心を除いたもの）のうち生きているセルの数 <span class="math notranslate nohighlight">\(n\)</span> によって、次の世代の状態が決まる。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 5.1 </span><span class="caption-text">ライフゲームの規則</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>現在の状態</p></th>
+<th class="head"><p>条件</p></th>
+<th class="head"><p>次の世代の状態</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>死</p></td>
+<td><p><span class="math notranslate nohighlight">\(n = 3\)</span></p></td>
+<td><p>生（誕生）</p></td>
+</tr>
+<tr class="row-odd"><td><p>死</p></td>
+<td><p><span class="math notranslate nohighlight">\(n \ne 3\)</span></p></td>
+<td><p>死のまま</p></td>
+</tr>
+<tr class="row-even"><td><p>生</p></td>
+<td><p><span class="math notranslate nohighlight">\(n = 2\)</span> または <span class="math notranslate nohighlight">\(n = 3\)</span></p></td>
+<td><p>生のまま（生存）</p></td>
+</tr>
+<tr class="row-odd"><td><p>生</p></td>
+<td><p><span class="math notranslate nohighlight">\(n \le 1\)</span></p></td>
+<td><p>死（過疎）</p></td>
+</tr>
+<tr class="row-even"><td><p>生</p></td>
+<td><p><span class="math notranslate nohighlight">\(n \ge 4\)</span></p></td>
+<td><p>死（過密）</p></td>
+</tr>
+</tbody>
+</table>
+<p>生物の個体群になぞらえて、「周りに仲間がちょうど 3 個体いれば新たに生まれ、2〜3 個体なら生き続け、少なすぎても多すぎても死ぬ」と覚えるとよい。コンウェイは、パターンが単純に消滅したり無限に増殖したりせず、予測しにくい振る舞いを示すように、多くの候補の中からこの規則を選んだ。</p>
+<p>次の世代の状態は、中心のセルの状態と周囲 8 セルの状態の和だけで決まるので、ライフゲームは外部総和型 CA である（第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」を参照）。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">5.2. </span>パターンの分類<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>ライフゲームの研究では、特徴的な振る舞いをするパターンに名前を付けて分類してきた。主な分類を次に示す。</p>
+<table class="docutils align-default" id="id11">
+<caption><span class="caption-number">表 5.2 </span><span class="caption-text">ライフゲームのパターンの分類</span><a class="headerlink" href="#id11" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 50.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>分類</p></th>
+<th class="head"><p>性質</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>静物（still life）</p></td>
+<td><p>世代が進んでも変化しない</p></td>
+<td><p>ブロック、ビーハイブ</p></td>
+</tr>
+<tr class="row-odd"><td><p>振動子（oscillator）</p></td>
+<td><p>一定の周期で元の形に戻る</p></td>
+<td><p>ブリンカー、ヒキガエル</p></td>
+</tr>
+<tr class="row-even"><td><p>宇宙船（spaceship）</p></td>
+<td><p>一定の周期で、位置をずらしながら元の形に戻る</p></td>
+<td><p>グライダー、軽量級宇宙船</p></td>
+</tr>
+<tr class="row-odd"><td><p>銃（gun）</p></td>
+<td><p>形を保ちながら、宇宙船を周期的に放出し続ける</p></td>
+<td><p>ゴスパーのグライダー銃</p></td>
+</tr>
+<tr class="row-even"><td><p>メトセラ（methuselah）</p></td>
+<td><p>小さなパターンから始まり、安定するまでに長い世代を要する</p></td>
+<td><p>R ペントミノ</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#fig-life-patterns"><span class="std std-numref">図 5.1</span></a> に代表的な静物・振動子・宇宙船を示す。</p>
+<figure class="align-center" id="id12">
+<span id="fig-life-patterns"></span><a class="reference internal image-reference" href="_images/life_patterns.png"><img alt="_images/life_patterns.png" src="_images/life_patterns.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 5.1 </span><span class="caption-text">ライフゲームの代表的なパターン</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>宇宙船の代表が<a class="reference internal" href="glossary.html#term-12"><span class="xref std std-term">グライダー</span></a>である。<a class="reference internal" href="#fig-glider"><span class="std std-numref">図 5.2</span></a> に示すように、グライダーは 4 世代で元の形に戻り、そのとき斜め方向に 1 セルずつずれている。1 世代に 1 セルという速さは、情報がライフゲームの中を伝わる最大の速さであり、「光速」と呼ばれて <span class="math notranslate nohighlight">\(c\)</span> で表される。これを使うと、グライダーの速さは <span class="math notranslate nohighlight">\(c/4\)</span>、軽量級宇宙船（4 世代で 2 セル進む）の速さは <span class="math notranslate nohighlight">\(c/2\)</span> と表される。</p>
+<figure class="align-center" id="id13">
+<span id="fig-glider"></span><a class="reference internal image-reference" href="_images/glider_evolution.png"><img alt="_images/glider_evolution.png" src="_images/glider_evolution.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 5.2 </span><span class="caption-text">グライダーの時間発展（4 世代で右下に 1 セル移動する）</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>ゴスパーらが 1970 年に発見したグライダー銃は、30 世代ごとにグライダーを 1 つ放出する（<a class="reference internal" href="#fig-gosper-gun"><span class="std std-numref">図 5.3</span></a>）。グライダー銃の発見により、有限のパターンが無限に大きくなりうること（生きたセルの数が上限なく増えること）が示された。グライダーを信号とみなし、グライダー同士の衝突で信号を消したり反射させたりすることで論理回路を組めるため、グライダー銃はライフゲームの計算万能性を示すうえでも重要な部品となる（第 6 章「<a class="reference internal" href="theory.html"><span class="doc">理論</span></a>」を参照）。</p>
+<figure class="align-center" id="id14">
+<span id="fig-gosper-gun"></span><a class="reference internal image-reference" href="_images/gosper_gun.png"><img alt="_images/gosper_gun.png" src="_images/gosper_gun.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 5.3 </span><span class="caption-text">ゴスパーのグライダー銃（上部の銃本体から右下へグライダーが放出される）</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>グライダー銃が動く様子のアニメーションも用意した（<a class="reference download internal" download="" href="_downloads/a94ea0c06c9dbc45ea359ec528ae38da/gosper_gun.gif"><code class="xref download docutils literal notranslate"><span class="pre">gosper_gun.gif</span></code></a>）。なお、このアニメーションは周期境界条件で計算しているが、放出されたグライダーが盤面を一周して銃に衝突しないように、右端と下端に達したグライダーを消している。</p>
+<p>メトセラの代表例である R ペントミノは、わずか 5 セルのパターンだが、安定するまでに 1103 世代を要し、その間にいくつものグライダーを放出する。このように、小さな初期パターンの行く末をあらかじめ予測することは難しく、実際に計算してみるしかないことが多い。これは、第 6 章「<a class="reference internal" href="theory.html"><span class="doc">理論</span></a>」で述べる計算万能性と深く関係している。</p>
+</section>
+<section id="b-s-life-like-ca">
+<h2><span class="section-number">5.3. </span>B/S 表記と Life-like CA<a class="headerlink" href="#b-s-life-like-ca" title="Link to this heading"></a></h2>
+<p>ライフゲームと同じく、2 状態・ムーア近傍の外部総和型 CA で、「周囲の生きたセルの数が何個のときに誕生するか」と「何個のときに生存するか」で規則が決まるものを Life-like CA と呼ぶ。Life-like CA の規則は、誕生（Birth）の条件と生存（Survival）の条件を並べた <a class="reference internal" href="glossary.html#term-B-S"><span class="xref std std-term">B/S 表記</span></a>で表す。ライフゲームは B3/S23 と書ける。誕生と生存の条件はそれぞれ 0〜8 の 9 個の数の部分集合なので、Life-like CA は <span class="math notranslate nohighlight">\(2^9 \times 2^9 = 262144\)</span> 通りある。</p>
+<table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 5.3 </span><span class="caption-text">主な Life-like CA</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 20.0%" />
+<col style="width: 55.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>規則</p></th>
+<th class="head"><p>特徴</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ライフゲーム</p></td>
+<td><p>B3/S23</p></td>
+<td><p>本章で説明した規則</p></td>
+</tr>
+<tr class="row-odd"><td><p>HighLife</p></td>
+<td><p>B36/S23</p></td>
+<td><p>ライフゲームとよく似た振る舞いをするが、自分自身の複製を作り続けるパターン（レプリケーター）が存在する</p></td>
+</tr>
+<tr class="row-even"><td><p>Seeds</p></td>
+<td><p>B2/S</p></td>
+<td><p>生きたセルは必ず 1 世代で死ぬ。多くの初期配置が爆発的に広がる</p></td>
+</tr>
+<tr class="row-odd"><td><p>Day &amp; Night</p></td>
+<td><p>B3678/S34678</p></td>
+<td><p>生と死を入れ替えても同じ規則になる。生きたセルの領域と死んだセルの領域が対等に振る舞う</p></td>
+</tr>
+<tr class="row-even"><td><p>Life without Death</p></td>
+<td><p>B3/S012345678</p></td>
+<td><p>生きたセルは死なないので、生きたセルの領域は単調に広がる。はしご状の構造が伸びていくなどの特徴的な成長を示す</p></td>
+</tr>
+</tbody>
+</table>
+<p>B/S 表記の規則による時間発展は、次のように実装できる（サンプルコード <code class="docutils literal notranslate"><span class="pre">game_of_life.py</span></code> から抜粋）。<code class="docutils literal notranslate"><span class="pre">count_neighbors</span></code> は、盤面を 8 方向に 1 セルずつずらした配列を足し合わせることで、各セルの周囲 8 セルにある生きたセルの数を一度に求める。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">count_neighbors</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">Grid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;各セルの周囲 8 セル (ムーア近傍から中心を除いたもの) にある生きたセルの数を数える.&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="k">for</span> <span class="n">dy</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">5</span>        <span class="k">for</span> <span class="n">dx</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">6</span>            <span class="k">if</span> <span class="n">dy</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">7</span>                <span class="k">continue</span>
+<span class="linenos">8</span>            <span class="n">total</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">Grid</span><span class="p">,</span>
+<span class="linenos">2</span>         <span class="n">birth</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">3</span><span class="p">}),</span>
+<span class="linenos">3</span>         <span class="n">survive</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}))</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="linenos">4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;1 世代だけ時間発展させる.&quot;&quot;&quot;</span>
+<span class="linenos">5</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">count_neighbors</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="n">born</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">birth</span><span class="p">))</span>
+<span class="linenos">7</span>    <span class="n">stays</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">survive</span><span class="p">))</span>
+<span class="linenos">8</span>    <span class="n">result</span><span class="p">:</span> <span class="n">Grid</span> <span class="o">=</span> <span class="p">(</span><span class="n">born</span> <span class="o">|</span> <span class="n">stays</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</section>
+<section id="ca">
+<h2><span class="section-number">5.4. </span>その他の 2 次元 CA<a class="headerlink" href="#ca" title="Link to this heading"></a></h2>
+<p>ライフゲーム以外にも、目的に応じてさまざまな 2 次元 CA が考案されている。</p>
+<table class="docutils align-default" id="id16">
+<caption><span class="caption-number">表 5.4 </span><span class="caption-text">その他の 2 次元 CA</span><a class="headerlink" href="#id16" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 12.0%" />
+<col style="width: 64.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>状態数</p></th>
+<th class="head"><p>規則と特徴</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ワイヤーワールド（WireWorld）</p></td>
+<td><p>4</p></td>
+<td><p>状態は「空」「電子の頭」「電子の尾」「導線」。電子の頭は次に電子の尾に、電子の尾は次に導線になる。導線は、周囲 8 セルのうち電子の頭がちょうど 1 個または 2 個あれば電子の頭になる。導線の形を工夫することで、ダイオードや論理ゲートを作ることができ、電子回路のシミュレーションに使われる。</p></td>
+</tr>
+<tr class="row-odd"><td><p>Brian's Brain</p></td>
+<td><p>3</p></td>
+<td><p>状態は「発火」「不応」「休止」。休止中のセルは、周囲 8 セルのうち発火中のセルがちょうど 2 個あれば発火する。発火したセルは次に不応状態に、不応状態のセルは次に休止状態になる。神経細胞の発火と不応期になぞらえた規則で、多数の宇宙船が飛び交う模様が現れる。</p></td>
+</tr>
+<tr class="row-even"><td><p>グリーンバーグ・ハスティングス・モデル</p></td>
+<td><p>3 以上</p></td>
+<td><p>興奮・不応・静止の状態を持ち、興奮が隣へ伝わる。化学反応や心筋のような興奮性媒質で見られる、らせん状の波を再現する <a class="reference internal" href="references.html#greenberg1978" id="id5"><span>[Greenberg1978]</span></a>。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h2><span class="section-number">5.5. </span>ラングトンのアリ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="glossary.html#term-41"><span class="xref std std-term">ラングトンのアリ</span></a>は、ラングトンが 1986 年に発表した研究に含まれるモデルである <a class="reference internal" href="references.html#langton1986" id="id7"><span>[Langton1986]</span></a>。白か黒に塗られた正方格子の上を 1 匹の「アリ」が動き回り、次の規則に従う。</p>
+<ol class="arabic simple">
+<li><p>アリが白いセルにいれば右に 90 度、黒いセルにいれば左に 90 度向きを変える。</p></li>
+<li><p>アリがいるセルの色を反転する。</p></li>
+<li><p>アリが向いている方向へ 1 セル進む。</p></li>
+</ol>
+<p>厳密には、このモデルはアリという特別な要素を含むので、第 2 章で定義した CA の形にはそのまま当てはまらない。しかし、各セルの状態を「色」と「アリがいるかどうか、いるならどちらを向いているか」の組（<span class="math notranslate nohighlight">\(2 \times 5 = 10\)</span> 状態）とすれば、フォン・ノイマン近傍の CA として表すことができる。このように、格子上を動き回る主体を持つモデルはターマイト（turmite）とも呼ばれる。</p>
+<p>すべて白の盤面から始めると、アリは最初の数百ステップの間は対称性の高い単純な模様を作るが、やがて不規則な動きになる。そして約 1 万ステップ後、突然 104 ステップを周期とする規則的な動きに移り、斜め方向にまっすぐな帯（ハイウェイ）を作りながら無限に進み続ける（<a class="reference internal" href="#fig-langtons-ant"><span class="std std-numref">図 5.4</span></a>）。</p>
+<figure class="align-center" id="id17">
+<span id="fig-langtons-ant"></span><a class="reference internal image-reference" href="_images/langtons_ant.png"><img alt="_images/langtons_ant.png" src="_images/langtons_ant.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 5.4 </span><span class="caption-text">ラングトンのアリ（赤い点がアリの位置。右図では左下へ延びるハイウェイが見える）</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>アリの軌跡が有界にとどまらない（どんな有限の初期配置から始めても、アリはいくらでも遠くまで移動する）ことは証明されている <a class="reference internal" href="references.html#bunimovich1992" id="id8"><span>[Bunimovich1992]</span></a>。しかし、どんな有限の初期配置から始めても最終的にハイウェイが現れるかどうかは、未解決の問題である。規則は 3 行で書けるほど単純なのに、その長期的な振る舞いを証明することは非常に難しい。これも CA に共通する特徴である。</p>
+<p>アリの 1 ステップは次のように実装できる（サンプルコード <code class="docutils literal notranslate"><span class="pre">langtons_ant.py</span></code> から抜粋）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">ant</span><span class="p">:</span> <span class="n">Ant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;アリを 1 ステップ動かす. grid と ant をその場で書き換える.&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">ant</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">ant</span><span class="o">.</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>   <span class="c1"># 白いセル: 右に曲がる</span>
+<span class="linenos"> 4</span>        <span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+<span class="linenos"> 5</span>    <span class="k">else</span><span class="p">:</span>                             <span class="c1"># 黒いセル: 左に曲がる</span>
+<span class="linenos"> 6</span>        <span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+<span class="linenos"> 7</span>    <span class="n">grid</span><span class="p">[</span><span class="n">ant</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">ant</span><span class="o">.</span><span class="n">col</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>       <span class="c1"># セルの色を反転する</span>
+<span class="linenos"> 8</span>    <span class="n">d_row</span><span class="p">,</span> <span class="n">d_col</span> <span class="o">=</span> <span class="n">DIRECTIONS</span><span class="p">[</span><span class="n">ant</span><span class="o">.</span><span class="n">direction</span><span class="p">]</span>
+<span class="linenos"> 9</span>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos">10</span>    <span class="n">ant</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">row</span> <span class="o">+</span> <span class="n">d_row</span><span class="p">)</span> <span class="o">%</span> <span class="n">rows</span>  <span class="c1"># 周期境界条件</span>
+<span class="linenos">11</span>    <span class="n">ant</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">col</span> <span class="o">+</span> <span class="n">d_col</span><span class="p">)</span> <span class="o">%</span> <span class="n">cols</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2><span class="section-number">5.6. </span>正方格子以外の格子<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>本章では正方格子だけを扱ったが、2 次元 CA は六角格子や三角格子の上でも定義できる。六角格子では各セルが 6 個の隣のセルと辺を共有し、正方格子のフォン・ノイマン近傍とムーア近傍のような「辺で接する隣」と「角で接する隣」の区別がない。そのため、正方格子よりも等方的な（方向によって性質が変わりにくい）モデルを作りやすい。この性質は、第 7 章「<a class="reference internal" href="applications.html"><span class="doc">応用</span></a>」で扱う FHP モデルや雪の結晶の成長モデルで重要になる。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="one_dimensional.html" class="btn btn-neutral float-left" title="4. 1 次元セル・オートマトン" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="theory.html" class="btn btn-neutral float-right" title="6. 理論" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

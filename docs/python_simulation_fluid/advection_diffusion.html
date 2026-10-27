@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. 格子法の第一歩: 移流と拡散 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="7. 格子法による 2 次元流体: Stable Fluids" href="stable_fluids.html" />
+    <link rel="prev" title="5. 流体力学の基礎" href="fluid_basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. 格子法の第一歩: 移流と拡散</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">6.1. 差分法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">6.2. 1 次元移流方程式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">6.2.1. 3 つの差分法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">6.2.2. 結果</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cfl">6.3. 安定性の解析と CFL 条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">6.4. 数値拡散と数値分散</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">6.5. 1 次元拡散方程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">6.6. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>格子法の第一歩: 移流と拡散</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">6. </span>格子法の第一歩: 移流と拡散<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>第 5 章で見たように、ナビエ-ストークス方程式は移流項・圧力項・粘性項(拡散)・外力項からなる。この章では、そのうちの移流と拡散だけを取り出した 1 次元の方程式を、格子を使う方法(差分法)で解く。単純な方程式だからこそ厳密解と比べやすく、格子法に共通する安定性の条件や数値誤差の性質がはっきりと見える。</p>
+<section id="id2">
+<h2><span class="section-number">6.1. </span>差分法<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>区間を間隔 <span class="math notranslate nohighlight">\(\Delta x\)</span> の格子点 <span class="math notranslate nohighlight">\(x_i = i\,\Delta x\)</span> に区切り、各格子点での値 <span class="math notranslate nohighlight">\(u_i\)</span> だけを扱う。微分は、隣り合う格子点の値の差で近似する。これを<strong>差分法</strong>と呼ぶ。</p>
+<p>テイラー展開 <span class="math notranslate nohighlight">\(u(x \pm \Delta x) = u \pm u' \Delta x + \frac{1}{2} u'' \Delta x^2 \pm \frac{1}{6} u''' \Delta x^3 + \cdots\)</span> から、1 階微分には次の近似が得られる。</p>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 6.1 </span><span class="caption-text">1 階微分の差分近似</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 45.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名前</p></th>
+<th class="head"><p>近似式</p></th>
+<th class="head"><p>誤差</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>前進差分</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{u_{i+1} - u_i}{\Delta x}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta x\)</span> に比例(1 次精度)</p></td>
+</tr>
+<tr class="row-odd"><td><p>後退差分</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{u_i - u_{i-1}}{\Delta x}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta x\)</span> に比例(1 次精度)</p></td>
+</tr>
+<tr class="row-even"><td><p>中心差分</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{u_{i+1} - u_{i-1}}{2\Delta x}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta x^2\)</span> に比例(2 次精度)</p></td>
+</tr>
+</tbody>
+</table>
+<p>2 階微分は、2 つのテイラー展開を足し合わせて次のように近似できる(2 次精度)。</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^2 u}{\partial x^2} \approx \frac{u_{i+1} - 2u_i + u_{i-1}}{\Delta x^2}\]</div>
+<p>時間方向は、第 2 章と同様に時間刻み幅 <span class="math notranslate nohighlight">\(\Delta t\)</span> で区切り、時刻 <span class="math notranslate nohighlight">\(t^n\)</span> での値を <span class="math notranslate nohighlight">\(u_i^n\)</span> と書く。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">6.2. </span>1 次元移流方程式<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>一定の速さ <span class="math notranslate nohighlight">\(c\)</span> の流れが量 <span class="math notranslate nohighlight">\(u\)</span> を運ぶ様子は、<strong>移流方程式</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0\]</div>
+<p>で表される。厳密解は <span class="math notranslate nohighlight">\(u(x, t) = u_0(x - ct)\)</span> で、初期の波形 <span class="math notranslate nohighlight">\(u_0\)</span> が形を変えずに速さ <span class="math notranslate nohighlight">\(c\)</span> で移動する。ここでは区間 <span class="math notranslate nohighlight">\([0, 1)\)</span> で周期境界条件(右端から出た波が左端から入る)を使い、<span class="math notranslate nohighlight">\(c = 1\)</span> とする。<span class="math notranslate nohighlight">\(t = 1\)</span> で波形はちょうど 1 周して元の位置に戻るので、初期波形と比べれば誤差がすぐに分かる。初期波形には、滑らかなガウス関数と、不連続な矩形波を並べたものを使う。</p>
+<section id="id4">
+<h3><span class="section-number">6.2.1. </span>3 つの差分法<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>時間に前進差分を使い、空間微分の近似を変えた 3 つの方法を比べる。式中の <span class="math notranslate nohighlight">\(C = c\,\Delta t / \Delta x\)</span> は<strong>クーラン数</strong>と呼ばれ、1 ステップの間に波が何格子分進むかを表す。</p>
+<p><strong>FTCS 法</strong>(Forward Time, Centered Space)は、空間に中心差分を使う。</p>
+<div class="math notranslate nohighlight">
+\[u_i^{n+1} = u_i^n - \frac{C}{2}\left(u_{i+1}^n - u_{i-1}^n\right)\]</div>
+<p><strong>風上差分</strong>は、流れの上流側(<span class="math notranslate nohighlight">\(c &gt; 0\)</span> なら左側)の点との差を使う。</p>
+<div class="math notranslate nohighlight">
+\[u_i^{n+1} = u_i^n - C\left(u_i^n - u_{i-1}^n\right)\]</div>
+<p><strong>ラックス-ヴェンドロフ法</strong>は、テイラー展開を時間の 2 次まで考慮し、時間・空間とも 2 次精度にした方法である。</p>
+<div class="math notranslate nohighlight">
+\[u_i^{n+1} = u_i^n - \frac{C}{2}\left(u_{i+1}^n - u_{i-1}^n\right) + \frac{C^2}{2}\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right)\]</div>
+<p>周期境界条件のもとでは、<code class="docutils literal notranslate"><span class="pre">np.roll</span></code> で配列を 1 つずらすと隣の格子点の値の配列が得られる。<code class="docutils literal notranslate"><span class="pre">np.roll(u,</span> <span class="pre">1)</span></code> の <span class="math notranslate nohighlight">\(i\)</span> 番目の要素は <code class="docutils literal notranslate"><span class="pre">u[i</span> <span class="pre">-</span> <span class="pre">1]</span></code> になり、0 番目の要素には末尾の値が入る。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">21</span><span class="k">def</span><span class="w"> </span><span class="nf">upwind</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">cfl</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">22</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;1 次精度風上差分(c &gt; 0 なので、上流側 = 左隣との差を使う)。&quot;&quot;&quot;</span>
+<span class="linenos">23</span>    <span class="k">return</span> <span class="n">u</span> <span class="o">-</span> <span class="n">cfl</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">def</span><span class="w"> </span><span class="nf">ftcs</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">cfl</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">27</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;時間に前進差分、空間に中心差分を使う方法。無条件に不安定である。&quot;&quot;&quot;</span>
+<span class="linenos">28</span>    <span class="k">return</span> <span class="n">u</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cfl</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="k">def</span><span class="w"> </span><span class="nf">lax_wendroff</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">cfl</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">32</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ラックス-ヴェンドロフ法(時間・空間とも 2 次精度)。&quot;&quot;&quot;</span>
+<span class="linenos">33</span>    <span class="n">up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 右隣 u[i + 1]</span>
+<span class="linenos">34</span>    <span class="n">um</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 左隣 u[i - 1]</span>
+<span class="linenos">35</span>    <span class="k">return</span> <span class="n">u</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cfl</span> <span class="o">*</span> <span class="p">(</span><span class="n">up</span> <span class="o">-</span> <span class="n">um</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">cfl</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">up</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">u</span> <span class="o">+</span> <span class="n">um</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">6.2.2. </span>結果<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>格子点数 200 で計算した結果を<a class="reference internal" href="#fig-advection"><span class="std std-numref">図 6.1</span></a> に示す。</p>
+<figure class="align-center" id="id10">
+<span id="fig-advection"></span><img alt="_images/advection.png" src="_images/advection.png" />
+<figcaption>
+<p><span class="caption-number">図 6.1 </span><span class="caption-text">移流方程式の計算結果。左: 安定な 2 つの方法で 1 周させた結果。右: 不安定になる例</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>左の図は、クーラン数 0.5 で 1 周させた結果である。</p>
+<ul class="simple">
+<li><p><strong>風上差分</strong>の結果は安定だが、波形がなまっている。ガウス関数の山の高さは 1 から約 0.65 に下がり、矩形波の角は丸くなっている。</p></li>
+<li><p><strong>ラックス-ヴェンドロフ法</strong>は、滑らかなガウス関数をほぼ正確に運んでいる。しかし矩形波の不連続な部分の前後には、元の波形にない振動(最大 1.23、最小 -0.23)が現れている。</p></li>
+</ul>
+<p>右の図は、<span class="math notranslate nohighlight">\(t = 0.05\)</span> という短い時間の結果である。</p>
+<ul class="simple">
+<li><p><strong>FTCS 法</strong>は、クーラン数 0.5 でも振動が急速に成長している。この方法は、クーラン数をどれだけ小さくしても不安定である。</p></li>
+<li><p><strong>風上差分</strong>でも、クーラン数を 1.2 にすると、矩形波の不連続な部分から振動が爆発的に成長する。</p></li>
+</ul>
+<p>最も素直な中心差分(FTCS 法)が使えないこと、安定な方法でも波形がなまるか振動するかのどちらかになることは、移流を計算するうえで避けて通れない問題である。以下では、これらの性質を順に説明する。</p>
+</section>
+</section>
+<section id="cfl">
+<h2><span class="section-number">6.3. </span>安定性の解析と CFL 条件<a class="headerlink" href="#cfl" title="Link to this heading"></a></h2>
+<p>差分法が安定かどうかは、<strong>フォン・ノイマンの安定性解析</strong>で調べられる。解を波 <span class="math notranslate nohighlight">\(u_m^n = G^n e^{\mathrm{i} m \theta}\)</span>(<span class="math notranslate nohighlight">\(m\)</span> は格子点の番号、<span class="math notranslate nohighlight">\(\mathrm{i}\)</span> は虚数単位、<span class="math notranslate nohighlight">\(\theta\)</span> は 1 格子あたりの位相の変化。ここでの <span class="math notranslate nohighlight">\(G^n\)</span> は時刻の添字ではなく <span class="math notranslate nohighlight">\(G\)</span> の <span class="math notranslate nohighlight">\(n\)</span> 乗)の重ね合わせとして考え、更新式に代入して 1 ステップあたりの増幅率 <span class="math notranslate nohighlight">\(G\)</span> を求める。すべての <span class="math notranslate nohighlight">\(\theta\)</span> で <span class="math notranslate nohighlight">\(|G| \le 1\)</span> なら安定である。</p>
+<p>FTCS 法では <span class="math notranslate nohighlight">\(G = 1 - \mathrm{i}\,C \sin\theta\)</span> となり、</p>
+<div class="math notranslate nohighlight">
+\[|G|^2 = 1 + C^2 \sin^2\theta &gt; 1\]</div>
+<p>なので、どの波も少しずつ増幅され、やがて発散する。</p>
+<p>風上差分では <span class="math notranslate nohighlight">\(G = 1 - C + C e^{-\mathrm{i}\theta}\)</span> となり、</p>
+<div class="math notranslate nohighlight">
+\[|G|^2 = 1 - 2C(1 - C)(1 - \cos\theta)\]</div>
+<p>である。<span class="math notranslate nohighlight">\(0 \le C \le 1\)</span> のとき <span class="math notranslate nohighlight">\(|G| \le 1\)</span> となって安定、<span class="math notranslate nohighlight">\(C &gt; 1\)</span> では不安定になる。</p>
+<p>この条件 <span class="math notranslate nohighlight">\(C = c\,\Delta t / \Delta x \le 1\)</span> は、<strong>CFL 条件</strong>(クーラン-フリードリッヒス-レヴィ条件)と呼ばれる条件の代表例である。意味は直感的に理解できる。風上差分では、格子点の新しい値を、自分と 1 つ上流の格子点の値だけから計算する。1 ステップの間に波が 1 格子より長い距離を進むと、本来影響を受けるはずの情報が計算に含まれなくなってしまう。<strong>1 ステップで情報が格子を飛び越えてはならない</strong>というのが CFL 条件の本質であり、陽解法の格子法では一般に時間刻み幅の上限を与える。</p>
+<p>なお、クーラン数がちょうど 1 のとき、風上差分の更新式は <span class="math notranslate nohighlight">\(u_i^{n+1} = u_{i-1}^n\)</span> となり、波形を 1 格子ずつ正確にずらす操作になる。実際に計算すると、1 周後の誤差は丸め誤差の程度(<span class="math notranslate nohighlight">\(10^{-18}\)</span>)にとどまる。ただし、これは速さが一定の 1 次元の問題に限った特別な場合である。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">6.4. </span>数値拡散と数値分散<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>風上差分の波形がなまる理由は、更新式をテイラー展開して、差分法が実際にはどのような微分方程式を解いているかを調べると分かる。風上差分は、近似的に</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = \frac{c\,\Delta x}{2}(1 - C)\frac{\partial^2 u}{\partial x^2}\]</div>
+<p>という方程式を解いている。右辺は、元の方程式にはない拡散項であり、波形をなまらせる。これを<strong>数値拡散</strong>と呼ぶ。格子間隔 <span class="math notranslate nohighlight">\(\Delta x\)</span> を小さくすれば数値拡散は小さくなるが、0 にはならない。</p>
+<p>ラックス-ヴェンドロフ法では、この拡散項が打ち消されている代わりに、波長によって波の進む速さがずれる誤差が残る。不連続な波形は多くの波長の波の重ね合わせなので、それぞれの波がずれて進むことで振動が生じる。これを<strong>数値分散</strong>と呼ぶ。</p>
+<p>一般に、1 次精度の安定な方法は数値拡散でなまり、2 次精度以上の方法は不連続の近くで振動する。実用的な格子法では、滑らかな所では高精度に、不連続の近くでは数値拡散を加えて振動を抑えるように、場所に応じて方法を切り替える工夫(TVD 法など)が使われる。第 7 章のセミラグランジュ法も、風上差分と同様に数値拡散を持つ。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">6.5. </span>1 次元拡散方程式<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>次に、熱の伝わり方や、粘性による速度のならされ方を表す<strong>拡散方程式</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} = \nu \frac{\partial^2 u}{\partial x^2}\]</div>
+<p>を解く。<span class="math notranslate nohighlight">\(\nu\)</span> は拡散係数である。区間 <span class="math notranslate nohighlight">\([0, 1]\)</span> の両端で <span class="math notranslate nohighlight">\(u = 0\)</span> とし、初期条件を 2 つの正弦波の和 <span class="math notranslate nohighlight">\(u_0 = \sin \pi x + 0.3 \sin 6\pi x\)</span> とする。正弦波 <span class="math notranslate nohighlight">\(\sin k\pi x\)</span> は形を保ったまま <span class="math notranslate nohighlight">\(e^{-\nu (k\pi)^2 t}\)</span> の割合で減衰するので、厳密解は</p>
+<div class="math notranslate nohighlight">
+\[u(x, t) = e^{-\nu \pi^2 t} \sin \pi x + 0.3\,e^{-36 \nu \pi^2 t} \sin 6\pi x\]</div>
+<p>となる。波数が大きい(細かい)波ほど速く減衰することが分かる。</p>
+<p>時間に前進差分、空間に 2 階微分の中心差分を使うと、更新式は</p>
+<div class="math notranslate nohighlight">
+\[u_i^{n+1} = u_i^n + r\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right), \qquad r = \frac{\nu \Delta t}{\Delta x^2}\]</div>
+<p>となる。<span class="math notranslate nohighlight">\(r\)</span> を<strong>拡散数</strong>と呼ぶ。実装では、両端を除く内部の格子点だけを配列のスライスでまとめて更新する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">29</span><span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="n">nx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t_end</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">FloatArray</span><span class="p">]:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;格子点数 nx、拡散数 r で t_end まで計算し、(x, u) を返す。&quot;&quot;&quot;</span>
+<span class="linenos">31</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">33</span>    <span class="n">dt</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">nu</span>
+<span class="linenos">34</span>    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_end</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">u</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<span class="linenos">37</span>        <span class="c1"># 内部の点だけを更新する(両端 u[0] と u[-1] は 0 のまま)</span>
+<span class="linenos">38</span>        <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos">39</span>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span>
+</pre></div>
+</div>
+<p>この方法の増幅率は <span class="math notranslate nohighlight">\(G = 1 - 4r\sin^2(\theta/2)\)</span> で、<span class="math notranslate nohighlight">\(|G| \le 1\)</span> となる条件は</p>
+<div class="math notranslate nohighlight">
+\[r = \frac{\nu \Delta t}{\Delta x^2} \le \frac{1}{2}\]</div>
+<p>である。結果を<a class="reference internal" href="#fig-diffusion"><span class="std std-numref">図 6.2</span></a> に示す(格子点数 51、<span class="math notranslate nohighlight">\(\nu = 1\)</span>)。</p>
+<figure class="align-center" id="id11">
+<span id="fig-diffusion"></span><img alt="_images/diffusion.png" src="_images/diffusion.png" />
+<figcaption>
+<p><span class="caption-number">図 6.2 </span><span class="caption-text">拡散方程式の計算結果。左: 拡散数 0.4 の結果と厳密解。右: 拡散数 0.5 と 0.55 の比較</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>拡散数 0.4 では、細かい波が先に消え、全体がなだらかに減衰していく様子が厳密解とよく一致している(<span class="math notranslate nohighlight">\(t = 0.05\)</span> での誤差の最大値は約 <span class="math notranslate nohighlight">\(3 \times 10^{-4}\)</span>)。拡散数を 0.55 にすると、隣り合う格子点で値が交互に上下するジグザグの振動が現れる。これは <span class="math notranslate nohighlight">\(\theta = \pi\)</span>(波長が格子間隔の 2 倍の最も細かい波)の増幅率が <span class="math notranslate nohighlight">\(G = 1 - 4r = -1.2\)</span> となり、1 ステップごとに符号を変えながら 1.2 倍に成長するためである。初期条件にはこの波は含まれていないが、計算の丸め誤差として生まれたごく小さな成分が成長して目に見える大きさになる。</p>
+<p>拡散の安定条件 <span class="math notranslate nohighlight">\(\Delta t \le \Delta x^2 / (2\nu)\)</span> は、格子間隔の <strong>2 乗</strong>に比例する。格子を 2 倍細かくすると、時間刻み幅を 4 分の 1 にしなければならず、計算量は 8 倍(1 次元の場合)になる。このため、拡散の計算には、安定条件のない<strong>陰解法</strong>がよく使われる。陰解法では、未知の <span class="math notranslate nohighlight">\(u^{n+1}\)</span> を含む連立 1 次方程式を解く必要があるが、時間刻み幅を自由に選べる。第 7 章では、拡散を陰解法で計算する。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">6.6. </span>まとめ<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>差分法では、微分を隣り合う格子点の値の差で近似する。中心差分は 2 次精度、前進差分と後退差分は 1 次精度である。</p></li>
+<li><p>移流方程式に FTCS 法を使うと、時間刻み幅によらず不安定になる。風上差分は、CFL 条件 <span class="math notranslate nohighlight">\(c\,\Delta t / \Delta x \le 1\)</span> を満たせば安定である。</p></li>
+<li><p>1 次精度の方法は数値拡散によって波形をなまらせ、2 次精度の方法は不連続の近くで数値分散による振動を生じる。</p></li>
+<li><p>拡散方程式の陽解法は、拡散数 <span class="math notranslate nohighlight">\(\nu \Delta t / \Delta x^2 \le 1/2\)</span> のときに安定である。格子を細かくすると時間刻み幅が急激に小さくなるので、陰解法がよく使われる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fluid_basics.html" class="btn btn-neutral float-left" title="5. 流体力学の基礎" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stable_fluids.html" class="btn btn-neutral float-right" title="7. 格子法による 2 次元流体: Stable Fluids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

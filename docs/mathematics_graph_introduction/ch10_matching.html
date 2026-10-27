@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 10 章 マッチング &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 11 章 グラフの探索" href="ch11_search.html" />
+    <link rel="prev" title="第 9 章 グラフ彩色" href="ch09_coloring.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 10 章 マッチング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">マッチングの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">増加路とベルジュの定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">二部グラフのマッチング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">ホールの結婚定理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">ケーニッヒの定理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">増加路アルゴリズム</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">一般のグラフと重み付きのマッチング</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">安定マッチング</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">ゲール・シャプレー法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 10 章 マッチング</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 10 章 マッチング<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>作業者に仕事を割り当てる、学生を研究室に配属する、臓器提供者と患者を組み合わせる。このように 2 つのものを組にする問題は、グラフの辺を選ぶ問題として定式化できる。選んだ辺が端点を共有しないという条件の下で、なるべく多くの組を作るのがマッチングの問題である。本章では、マッチングの基本的な定理とアルゴリズム、さらに好みを考慮した安定マッチングを学ぶ。</p>
+<section id="id2">
+<h2>マッチングの定義<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 10.1（マッチング）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> の辺集合 <span class="math notranslate nohighlight">\(M\)</span> で、どの 2 辺も端点を共有しないものを<strong>マッチング</strong>という。<span class="math notranslate nohighlight">\(M\)</span> の辺の端点になっている頂点を、<span class="math notranslate nohighlight">\(M\)</span> で<strong>マッチされている</strong>という。</p>
+</div>
+<ul class="simple">
+<li><p>辺数が最大のマッチングを<strong>最大マッチング</strong>という。</p></li>
+<li><p>それ以上辺を加えられないマッチングを<strong>極大マッチング</strong>という。</p></li>
+<li><p>すべての頂点がマッチされているマッチングを<strong>完全マッチング</strong>という。完全マッチングは頂点数が偶数のときにしか存在しない。</p></li>
+</ul>
+<p>最大マッチングは極大マッチングであるが、逆は成り立たない。たとえば道グラフ <span class="math notranslate nohighlight">\(P_4\)</span>（頂点 1-2-3-4）では、中央の辺 23 だけからなるマッチングは極大であるが、辺 12 と 34 からなるマッチングの方が大きい。辺を貪欲に選ぶだけでは最大マッチングは得られない。</p>
+<p>本章では、<a class="reference internal" href="#fig-ch10-bipartite"><span class="std std-numref">図 19</span></a> の二部グラフを例として使う。左側は 5 人の作業者、右側は 5 つのタスクであり、辺は作業者がそのタスクを担当できることを表す。太線は最大マッチングの一例である。</p>
+<figure class="align-center" id="id12">
+<span id="fig-ch10-bipartite"></span><div class="graphviz"><object data="_images/graphviz-bdb292d20ae2bec8a971e70e8d1e99c00e111bfc.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=&quot;#dbe8f5&quot;, fontsize=12, width=0.8, height=0.35, fixedsize=true];
+    edge [color=&quot;#999999&quot;];
+    Aoki [pos=&quot;0,4!&quot;]; Baba [pos=&quot;0,3!&quot;]; Chiba [pos=&quot;0,2!&quot;, fillcolor=&quot;#fde5cf&quot;]; Doi [pos=&quot;0,1!&quot;]; Endo [pos=&quot;0,0!&quot;, fillcolor=&quot;#fde5cf&quot;];
+    t1 [pos=&quot;3,4!&quot;, fillcolor=&quot;#fde5cf&quot;]; t2 [pos=&quot;3,3!&quot;, fillcolor=&quot;#fde5cf&quot;]; t3 [pos=&quot;3,2!&quot;]; t4 [pos=&quot;3,1!&quot;]; t5 [pos=&quot;3,0!&quot;];
+    Aoki -- t1; Aoki -- t2 [penwidth=3, color=&quot;#e07b28&quot;];
+    Baba -- t1 [penwidth=3, color=&quot;#e07b28&quot;];
+    Chiba -- t2; Chiba -- t3 [penwidth=3, color=&quot;#e07b28&quot;]; Chiba -- t4;
+    Doi -- t2;
+    Endo -- t4 [penwidth=3, color=&quot;#e07b28&quot;]; Endo -- t5;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 19 </span><span class="caption-text">作業者とタスクの二部グラフ。太線は最大マッチング（大きさ 4）、橙色の頂点は最小頂点被覆を表す。</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id3">
+<h2>増加路とベルジュの定理<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>マッチングを大きくする鍵は、増加路という概念である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 10.2（交互路・増加路）</p>
+<p>マッチング <span class="math notranslate nohighlight">\(M\)</span> について、<span class="math notranslate nohighlight">\(M\)</span> に含まれない辺と <span class="math notranslate nohighlight">\(M\)</span> に含まれる辺を交互に通る道を <span class="math notranslate nohighlight">\(M\)</span> の<strong>交互路</strong>という。両端がともにマッチされていない頂点である交互路を <span class="math notranslate nohighlight">\(M\)</span> の<strong>増加路</strong>という。</p>
+</div>
+<p>増加路は両端が「<span class="math notranslate nohighlight">\(M\)</span> に含まれない辺」なので、<span class="math notranslate nohighlight">\(M\)</span> に含まれない辺の本数が、<span class="math notranslate nohighlight">\(M\)</span> に含まれる辺の本数より 1 本多い。増加路上の辺について、<span class="math notranslate nohighlight">\(M\)</span> に含まれるかどうかを反転させると、新しいマッチングが得られ、辺数が 1 増える。たとえば <a class="reference internal" href="#fig-ch10-bipartite"><span class="std std-numref">図 19</span></a> で、仮に Aoki-t1 だけをマッチングとして選んでいたとすると、Baba → t1 → Aoki → t2 は増加路である。反転すると Baba-t1 と Aoki-t2 の 2 辺のマッチングになる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 10.1（ベルジュの定理）</p>
+<p>マッチング <span class="math notranslate nohighlight">\(M\)</span> が最大マッチングであるための必要十分条件は、<span class="math notranslate nohighlight">\(M\)</span> の増加路が存在しないことである。</p>
+</div>
+<p><strong>証明</strong>：増加路があれば反転してより大きいマッチングが作れるので、必要性は明らかである。十分性を示すため、<span class="math notranslate nohighlight">\(M\)</span> が最大でないとし、より大きいマッチング <span class="math notranslate nohighlight">\(M'\)</span> をとる。<span class="math notranslate nohighlight">\(M\)</span> と <span class="math notranslate nohighlight">\(M'\)</span> の一方だけに含まれる辺の集合（対称差）を考えると、各頂点に接続する辺は <span class="math notranslate nohighlight">\(M\)</span> から高々 1 本、<span class="math notranslate nohighlight">\(M'\)</span> から高々 1 本なので、対称差の各連結成分は <span class="math notranslate nohighlight">\(M\)</span> と <span class="math notranslate nohighlight">\(M'\)</span> の辺が交互に並ぶ道か偶数長の閉路である。閉路では両者の辺数が等しい。<span class="math notranslate nohighlight">\(|M'| &gt; |M|\)</span> なので、<span class="math notranslate nohighlight">\(M'\)</span> の辺の方が多い道が少なくとも 1 つあり、それは <span class="math notranslate nohighlight">\(M\)</span> の増加路である。□</p>
+<p>この定理から、「増加路を探して反転する」ことを増加路がなくなるまで繰り返せば、最大マッチングが得られる。この考え方は、第 13 章のネットワークフローにもそのまま現れる。</p>
+</section>
+<section id="id4">
+<h2>二部グラフのマッチング<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>ホールの結婚定理<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>二部グラフ <span class="math notranslate nohighlight">\(G\)</span> の頂点集合を <span class="math notranslate nohighlight">\(X, Y\)</span> に分ける。<span class="math notranslate nohighlight">\(X\)</span> のすべての頂点をマッチするマッチングが存在するための条件は、次のホールの定理で与えられる。頂点集合 <span class="math notranslate nohighlight">\(S\)</span> に隣接する頂点全体の集合を <span class="math notranslate nohighlight">\(N(S)\)</span> と書く。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 10.2（ホールの結婚定理）</p>
+<p>二部グラフ <span class="math notranslate nohighlight">\(G = (X \cup Y, E)\)</span> に <span class="math notranslate nohighlight">\(X\)</span> のすべての頂点をマッチするマッチングが存在するための必要十分条件は、<span class="math notranslate nohighlight">\(X\)</span> の任意の部分集合 <span class="math notranslate nohighlight">\(S\)</span> について <span class="math notranslate nohighlight">\(|N(S)| \ge |S|\)</span> が成り立つことである。</p>
+</div>
+<p>必要性は明らかである。<span class="math notranslate nohighlight">\(S\)</span> の各頂点を異なる相手とマッチするには、<span class="math notranslate nohighlight">\(S\)</span> の隣接頂点が <span class="math notranslate nohighlight">\(|S|\)</span> 個以上必要だからである。十分性の証明は、次に述べるケーニッヒの定理から導ける。</p>
+<p><a class="reference internal" href="#fig-ch10-bipartite"><span class="std std-numref">図 19</span></a> では、<span class="math notranslate nohighlight">\(S = \{\text{Aoki}, \text{Baba}, \text{Doi}\}\)</span> について <span class="math notranslate nohighlight">\(N(S) = \{t1, t2\}\)</span> であり、<span class="math notranslate nohighlight">\(|N(S)| = 2 &lt; 3 = |S|\)</span> となる。この 3 人は 2 つのタスクを取り合うので、少なくとも 1 人は担当なしになる。したがって 5 人全員にタスクを割り当てることはできない。</p>
+<p>ホールの定理の系として、<span class="math notranslate nohighlight">\(k\)</span>-正則な二部グラフ（<span class="math notranslate nohighlight">\(k \ge 1\)</span>）は完全マッチングを持つ。<span class="math notranslate nohighlight">\(S\)</span> から出る <span class="math notranslate nohighlight">\(k|S|\)</span> 本の辺はすべて <span class="math notranslate nohighlight">\(N(S)\)</span> に入り、<span class="math notranslate nohighlight">\(N(S)\)</span> に入る辺は全部で <span class="math notranslate nohighlight">\(k|N(S)|\)</span> 本なので、<span class="math notranslate nohighlight">\(k|S| \le k|N(S)|\)</span> が成り立つからである。</p>
+</section>
+<section id="id6">
+<h3>ケーニッヒの定理<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>頂点集合 <span class="math notranslate nohighlight">\(C\)</span> で、すべての辺の少なくとも一方の端点が <span class="math notranslate nohighlight">\(C\)</span> に含まれるものを<strong>頂点被覆</strong>という。マッチングの各辺は異なる頂点で覆う必要があるので、任意のマッチング <span class="math notranslate nohighlight">\(M\)</span> と任意の頂点被覆 <span class="math notranslate nohighlight">\(C\)</span> について <span class="math notranslate nohighlight">\(|M| \le |C|\)</span> である。二部グラフでは、この不等式の最大値と最小値が一致する。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 10.3（ケーニッヒの定理）</p>
+<p>二部グラフでは、最大マッチングの大きさと最小頂点被覆の大きさは等しい。</p>
+</div>
+<p>証明は構成的である。最大マッチング <span class="math notranslate nohighlight">\(M\)</span> をとり、<span class="math notranslate nohighlight">\(X\)</span> 側のマッチされていない頂点から交互路でたどり着ける頂点の集合を <span class="math notranslate nohighlight">\(Z\)</span> とする。このとき <span class="math notranslate nohighlight">\(C = (X \setminus Z) \cup (Y \cap Z)\)</span> は頂点被覆であり、<span class="math notranslate nohighlight">\(M\)</span> の各辺のちょうど一方の端点を含み、それ以外の頂点を含まない。よって <span class="math notranslate nohighlight">\(|C| = |M|\)</span> である。<span class="math notranslate nohighlight">\(Y \cap Z\)</span> の頂点がマッチされていなければ増加路ができてしまうことが、この議論の要点である。</p>
+<p><a class="reference internal" href="#fig-ch10-bipartite"><span class="std std-numref">図 19</span></a> では、最大マッチングの大きさ 4 と、最小頂点被覆 {Chiba, Endo, t1, t2} の大きさ 4 が一致している。最小頂点被覆は、マッチングがこれ以上大きくならないことの「証明書」になっている。</p>
+</section>
+<section id="id7">
+<h3>増加路アルゴリズム<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>二部グラフの最大マッチングは、<span class="math notranslate nohighlight">\(X\)</span> の各頂点から深さ優先探索で増加路を探し、見つかれば反転する方法で求められる（サンプルコード <code class="docutils literal notranslate"><span class="pre">matching.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 17 </span><span class="caption-text">増加路による二部グラフの最大マッチング</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">max_bipartite_matching</span><span class="p">(</span><span class="n">left</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">adj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;増加路法で二部グラフの最大マッチングを求める。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    adj[u] は左側の頂点 u に隣接する右側の頂点のリスト。</span>
+<span class="linenos"> 5</span><span class="sd">    戻り値は右側の頂点 -&gt; 左側の頂点 の対応。</span>
+<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 7</span>    <span class="n">match_of</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span><span class="w"> </span><span class="nf">try_augment</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">visited</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">10</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;u から始まる増加路を深さ優先探索で探し、見つかればマッチングを更新する。&quot;&quot;&quot;</span>
+<span class="linenos">11</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">12</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos">13</span>                <span class="k">continue</span>
+<span class="linenos">14</span>            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">15</span>            <span class="c1"># v が未マッチ、または v の相手が別の右側頂点に付け替えられるなら増加路がある</span>
+<span class="linenos">16</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">match_of</span> <span class="ow">or</span> <span class="n">try_augment</span><span class="p">(</span><span class="n">match_of</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">visited</span><span class="p">):</span>
+<span class="linenos">17</span>                <span class="n">match_of</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="linenos">18</span>                <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">19</span>        <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">left</span><span class="p">:</span>
+<span class="linenos">22</span>        <span class="n">try_augment</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span>
+<span class="linenos">23</span>    <span class="k">return</span> <span class="n">match_of</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">try_augment(u,</span> <span class="pre">visited)</span></code> は、左側の頂点 <span class="math notranslate nohighlight">\(u\)</span> から始まる増加路を探す。<span class="math notranslate nohighlight">\(u\)</span> に隣接する右側の頂点 <span class="math notranslate nohighlight">\(v\)</span> が未マッチなら、そこで増加路が完成する。<span class="math notranslate nohighlight">\(v\)</span> がすでに左側の頂点 <span class="math notranslate nohighlight">\(w\)</span> とマッチしていれば、<span class="math notranslate nohighlight">\(w\)</span> を別の右側頂点に付け替えられるかを再帰的に調べる。付け替えられれば <span class="math notranslate nohighlight">\(v\)</span> を <span class="math notranslate nohighlight">\(u\)</span> に譲る。この処理が、増加路の反転にあたる。</p>
+<p>増加路を 1 本探すのに <span class="math notranslate nohighlight">\(O(m)\)</span> 時間かかり、それを <span class="math notranslate nohighlight">\(X\)</span> の各頂点について行うので、計算量は <span class="math notranslate nohighlight">\(O(nm)\)</span> である。複数の最短の増加路を同時に処理するホップクロフト・カープ法を使うと <span class="math notranslate nohighlight">\(O(m \sqrt{n})\)</span> に改善できる。ケーニッヒの定理の構成に従った最小頂点被覆の計算も含めて、実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>最大マッチング: [(&#39;Aoki&#39;, &#39;t2&#39;), (&#39;Baba&#39;, &#39;t1&#39;), (&#39;Chiba&#39;, &#39;t3&#39;), (&#39;Endo&#39;, &#39;t4&#39;)]
+<span class="linenos">2</span>最小頂点被覆: [&#39;Chiba&#39;, &#39;Endo&#39;, &#39;t1&#39;, &#39;t2&#39;] 大きさ = 4
+<span class="linenos">3</span>NetworkX の最大マッチングの大きさ: 4
+</pre></div>
+</div>
+<p>二部グラフの最大マッチングは、第 13 章で扱う最大フロー問題に帰着して解くこともできる。</p>
+</section>
+<section id="id8">
+<h3>一般のグラフと重み付きのマッチング<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>二部グラフでないグラフでも、ベルジュの定理は成り立つ。ただし、奇数長の閉路があると増加路の探索が複雑になる。エドモンズは、奇数長の閉路（<strong>花</strong>と呼ばれる）を 1 つの頂点に縮約して探索を続ける<strong>花アルゴリズム</strong>によって、一般のグラフの最大マッチングを多項式時間で求められることを示した。一般のグラフが完全マッチングを持つための必要十分条件は、タットの定理として知られている。</p>
+<p>辺に重みがある場合に、重みの合計が最大（または最小）のマッチングを求める問題もある。二部グラフで完全マッチングのコストを最小化する問題は<strong>割り当て問題</strong>と呼ばれ、ハンガリー法により <span class="math notranslate nohighlight">\(O(n^3)\)</span> 時間で解ける。一般のグラフでも、重みの合計が最大（または最小）のマッチングは、エドモンズの花アルゴリズムを拡張して多項式時間で求められる。</p>
+</section>
+</section>
+<section id="id9">
+<h2>安定マッチング<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>これまでは「なるべく多くの組を作る」ことを考えた。現実の割り当てでは、各人が相手に対する好みの順位を持っていることが多い。たとえば研修医と病院の配属では、研修医は希望する病院の順位を、病院は採用したい研修医の順位を持つ。このような状況で望ましい組み合わせを考えるのが、安定マッチングの問題である。</p>
+<p>同数の 2 つのグループ（ここでは提案する側 <span class="math notranslate nohighlight">\(m_1, \ldots, m_n\)</span> と受け入れる側 <span class="math notranslate nohighlight">\(w_1, \ldots, w_n\)</span>）があり、各人が相手側の全員に順位を付けているとする。完全マッチングで、次の条件を満たす組 <span class="math notranslate nohighlight">\((m, w)\)</span> を<strong>ブロッキングペア</strong>という。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> と <span class="math notranslate nohighlight">\(w\)</span> は組になっていない。</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> は現在の相手より <span class="math notranslate nohighlight">\(w\)</span> を好み、<span class="math notranslate nohighlight">\(w\)</span> も現在の相手より <span class="math notranslate nohighlight">\(m\)</span> を好む。</p></li>
+</ul>
+<p>ブロッキングペアがあると、その 2 人は現在の相手を捨てて組み直す動機を持つ。ブロッキングペアのない完全マッチングを<strong>安定マッチング</strong>という。</p>
+<section id="id10">
+<h3>ゲール・シャプレー法<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>安定マッチングは常に存在し、次の<strong>ゲール・シャプレー法</strong>（受け入れ保留方式）で求められる。</p>
+<ol class="arabic simple">
+<li><p>相手の決まっていない提案側の人は、まだ断られていない相手のうち最も好む人に提案する。</p></li>
+<li><p>提案を受けた人は、現在保留している相手と新たな提案者のうち好む方を保留し、もう一方を断る。</p></li>
+<li><p>提案側の全員の相手が決まるまで繰り返す。</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 18 </span><span class="caption-text">ゲール・シャプレー法</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">gale_shapley</span><span class="p">(</span><span class="n">proposer_pref</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">acceptor_pref</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ゲール・シャプレー法（受け入れ保留方式）で安定マッチングを求める。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    戻り値は 受け入れ側 -&gt; 提案側 の対応。</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="n">rank</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prefs</span><span class="p">)}</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">prefs</span> <span class="ow">in</span> <span class="n">acceptor_pref</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="linenos"> 7</span>    <span class="n">next_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">proposer_pref</span><span class="p">}</span>  <span class="c1"># 次に提案する相手の順位</span>
+<span class="linenos"> 8</span>    <span class="n">engaged</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 9</span>    <span class="n">free</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">proposer_pref</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="k">while</span> <span class="n">free</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">p</span> <span class="o">=</span> <span class="n">free</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">12</span>        <span class="n">a</span> <span class="o">=</span> <span class="n">proposer_pref</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">next_index</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span>
+<span class="linenos">13</span>        <span class="n">next_index</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">14</span>        <span class="n">current</span> <span class="o">=</span> <span class="n">engaged</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">16</span>            <span class="n">engaged</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+<span class="linenos">17</span>        <span class="k">elif</span> <span class="n">rank</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">current</span><span class="p">]:</span>
+<span class="linenos">18</span>            <span class="n">engaged</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+<span class="linenos">19</span>            <span class="n">free</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>  <span class="c1"># 振られた側は再び提案する</span>
+<span class="linenos">20</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">21</span>            <span class="n">free</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="k">return</span> <span class="n">engaged</span>
+</pre></div>
+</div>
+</div>
+<p>各提案者は同じ相手に 2 度提案しないので、提案の回数は高々 <span class="math notranslate nohighlight">\(n^2\)</span> であり、アルゴリズムは必ず終了する。受け入れ側は一度提案を受けると誰かを保留し続け、保留する相手は良くなる一方なので、最後には全員の相手が決まる。結果が安定であることは次のように分かる。<span class="math notranslate nohighlight">\(m\)</span> が最終的な相手より <span class="math notranslate nohighlight">\(w\)</span> を好むなら、<span class="math notranslate nohighlight">\(m\)</span> はそれ以前に <span class="math notranslate nohighlight">\(w\)</span> に提案して断られている。<span class="math notranslate nohighlight">\(w\)</span> が断ったのはより好む相手を保留したからであり、<span class="math notranslate nohighlight">\(w\)</span> の保留相手は良くなる一方なので、<span class="math notranslate nohighlight">\(w\)</span> は最終的な相手を <span class="math notranslate nohighlight">\(m\)</span> より好む。よって <span class="math notranslate nohighlight">\((m, w)\)</span> はブロッキングペアにならない。</p>
+<p>例として、次の好みの順位を考える。</p>
+<table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 10 </span><span class="caption-text">安定マッチングの例（左ほど好む）</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>提案側</p></th>
+<th class="head"><p>順位</p></th>
+<th class="head"><p>受け入れ側</p></th>
+<th class="head"><p>順位</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>m1</p></td>
+<td><p>w1, w2, w3</p></td>
+<td><p>w1</p></td>
+<td><p>m3, m2, m1</p></td>
+</tr>
+<tr class="row-odd"><td><p>m2</p></td>
+<td><p>w1, w3, w2</p></td>
+<td><p>w2</p></td>
+<td><p>m1, m3, m2</p></td>
+</tr>
+<tr class="row-even"><td><p>m3</p></td>
+<td><p>w2, w1, w3</p></td>
+<td><p>w3</p></td>
+<td><p>m1, m2, m3</p></td>
+</tr>
+</tbody>
+</table>
+<p>最初に m1 と m2 が w1 に、m3 が w2 に提案する。w1 は m2 を保留して m1 を断る。次に m1 が w2 に提案し、w2 は m3 より m1 を好むので m1 に乗り換え、m3 を断る。m3 は w1 に提案し、w1 は m2 より m3 を好むので乗り換え、m2 を断る。最後に m2 が w3 に提案して終了する。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>安定マッチング: [(&#39;m1&#39;, &#39;w2&#39;), (&#39;m2&#39;, &#39;w3&#39;), (&#39;m3&#39;, &#39;w1&#39;)]
+</pre></div>
+</div>
+<p>ゲール・シャプレー法で得られる安定マッチングは、提案の順序によらず一意に定まる。しかも、提案側の各人にとって、あらゆる安定マッチングの中で最も好ましい相手と組になる（提案側最適）。逆に、受け入れ側にとっては最も不利な安定マッチングになる。どちらの側が提案するかによって結果が変わることは、制度設計で重要な意味を持つ。ゲール・シャプレー法は、米国の研修医の配属制度や、各国の学校選択制度などで実際に使われている。シャプレーとロスは、この分野の業績により 2012 年にノーベル経済学賞を受賞した。</p>
+</section>
+</section>
+<section id="id11">
+<h2>まとめ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>マッチングは端点を共有しない辺の集合である。極大マッチングは最大マッチングとは限らない。</p></li>
+<li><p>マッチングが最大であることは、増加路が存在しないことと同値である（ベルジュの定理）。</p></li>
+<li><p>二部グラフでは、ホールの定理が完全な割り当ての存在条件を与え、ケーニッヒの定理により最大マッチングの大きさと最小頂点被覆の大きさが一致する。</p></li>
+<li><p>二部グラフの最大マッチングは増加路アルゴリズムで <span class="math notranslate nohighlight">\(O(nm)\)</span> 時間で求められる。</p></li>
+<li><p>好みの順位がある場合は、ゲール・シャプレー法で安定マッチングが求められる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch09_coloring.html" class="btn btn-neutral float-left" title="第 9 章 グラフ彩色" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch11_search.html" class="btn btn-neutral float-right" title="第 11 章 グラフの探索" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

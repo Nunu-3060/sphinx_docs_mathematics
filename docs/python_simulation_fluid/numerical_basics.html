@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 数値シミュレーションの基礎 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="3. 粒子シミュレーション" href="particles.html" />
+    <link rel="prev" title="1. はじめに" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 数値シミュレーションの基礎</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.1. 運動方程式を数値的に解く</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.2. 陽的オイラー法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.3. 半陰的オイラー法と速度ベルレ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.4. 例題: ばね振動子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.5. 結果: エネルギーが増え続ける陽的オイラー法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.6. 誤差と精度の次数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.7. 安定性と時間刻み幅</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">2.8. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>数値シミュレーションの基礎</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">2. </span>数値シミュレーションの基礎<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この章では、すべてのシミュレーションの土台となる「時間を細かく区切って少しずつ進める」という考え方を学ぶ。題材として、厳密解が分かっているばね振動子を使い、3 種類の時間積分法を比較する。同じ方程式を解いているのに、方法によって結果が大きく異なることを確かめる。</p>
+<section id="id2">
+<h2><span class="section-number">2.1. </span>運動方程式を数値的に解く<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>質量 <span class="math notranslate nohighlight">\(m\)</span> の物体に力 <span class="math notranslate nohighlight">\(F\)</span> が働くとき、位置 <span class="math notranslate nohighlight">\(x\)</span> はニュートンの運動方程式に従う。</p>
+<div class="math notranslate nohighlight">
+\[m \frac{d^2 x}{dt^2} = F\]</div>
+<p>2 階の微分方程式のままでは扱いにくいので、速度 <span class="math notranslate nohighlight">\(v = dx/dt\)</span> を導入し、1 階の微分方程式の組に書き直す。加速度を <span class="math notranslate nohighlight">\(a = F/m\)</span> とすると、次のようになる。</p>
+<div class="math notranslate nohighlight">
+\[\frac{dx}{dt} = v, \qquad \frac{dv}{dt} = a(x, v, t)\]</div>
+<p>力が単純な場合を除き、この方程式を手計算で解く(解を式で表す)ことはできない。そこで、時間を幅 <span class="math notranslate nohighlight">\(\Delta t\)</span> の小さな区間に区切り、時刻 <span class="math notranslate nohighlight">\(t^n = n \Delta t\)</span> における位置 <span class="math notranslate nohighlight">\(x^n\)</span> と速度 <span class="math notranslate nohighlight">\(v^n\)</span> から、次の時刻の <span class="math notranslate nohighlight">\(x^{n+1}\)</span> と <span class="math notranslate nohighlight">\(v^{n+1}\)</span> を近似的に求める操作を繰り返す。この操作を<strong>時間積分</strong>と呼び、<span class="math notranslate nohighlight">\(\Delta t\)</span> を<strong>時間刻み幅</strong>と呼ぶ。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.2. </span>陽的オイラー法<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>最も素朴な方法は、区間の始まりの速度と加速度が区間の間ずっと一定だとみなす方法である。</p>
+<div class="math notranslate nohighlight">
+\[x^{n+1} = x^n + v^n \Delta t, \qquad v^{n+1} = v^n + a^n \Delta t\]</div>
+<p>これを<strong>陽的オイラー法</strong>と呼ぶ。「陽的」とは、右辺が既知の量(時刻 <span class="math notranslate nohighlight">\(t^n\)</span> の量)だけで書けていて、そのまま計算できるという意味である。</p>
+<p>この式は、テイラー展開</p>
+<div class="math notranslate nohighlight">
+\[x(t + \Delta t) = x(t) + \frac{dx}{dt}\Delta t + \frac{1}{2}\frac{d^2 x}{dt^2}\Delta t^2 + \cdots\]</div>
+<p>の 1 次の項までを残したものになっている。切り捨てた 2 次以降の項が、1 ステップごとに入り込む誤差である。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.3. </span>半陰的オイラー法と速度ベルレ法<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>陽的オイラー法の順序を少しだけ変え、先に速度を更新し、その<strong>新しい速度</strong>で位置を更新する方法を<strong>半陰的オイラー法</strong>(シンプレクティック・オイラー法)と呼ぶ。</p>
+<div class="math notranslate nohighlight">
+\[v^{n+1} = v^n + a^n \Delta t, \qquad x^{n+1} = x^n + v^{n+1} \Delta t\]</div>
+<p>違いはわずかだが、後で見るように結果は大きく変わる。</p>
+<p><strong>速度ベルレ法</strong>は、位置をテイラー展開の 2 次の項まで使って進め、速度は更新前後の加速度の平均で進める方法である。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x^{n+1} &amp;= x^n + v^n \Delta t + \frac{1}{2} a^n \Delta t^2 \\
+v^{n+1} &amp;= v^n + \frac{1}{2}\left(a^n + a^{n+1}\right) \Delta t\end{split}\]</div>
+<p>ここで <span class="math notranslate nohighlight">\(a^{n+1}\)</span> は、新しい位置 <span class="math notranslate nohighlight">\(x^{n+1}\)</span> で計算した加速度である。加速度の計算は 1 ステップあたり 1 回で済む(<span class="math notranslate nohighlight">\(a^{n+1}\)</span> は次のステップの <span class="math notranslate nohighlight">\(a^n\)</span> として再利用できる)ので、計算量はオイラー法とほとんど変わらない(本書のサンプルコードは、分かりやすさを優先して 1 ステップに 2 回計算している)。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.4. </span>例題: ばね振動子<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>質量 <span class="math notranslate nohighlight">\(m\)</span>、ばね定数 <span class="math notranslate nohighlight">\(k\)</span> のばねにつながれた物体の運動方程式は <span class="math notranslate nohighlight">\(m\,d^2x/dt^2 = -kx\)</span> である。<span class="math notranslate nohighlight">\(m = k = 1\)</span> とし、初期条件を <span class="math notranslate nohighlight">\(x = 1\)</span>、<span class="math notranslate nohighlight">\(v = 0\)</span> とすると、厳密解は <span class="math notranslate nohighlight">\(x(t) = \cos t\)</span> となる。また、力学的エネルギー</p>
+<div class="math notranslate nohighlight">
+\[E = \frac{1}{2} v^2 + \frac{1}{2} x^2\]</div>
+<p>は時間がたっても一定(<span class="math notranslate nohighlight">\(E = 0.5\)</span>)に保たれる。この 2 つの性質を、数値計算の結果が満たすかどうかを調べる。</p>
+<p>3 つの時間積分法は、次のように実装できる。いずれも、位置 <code class="docutils literal notranslate"><span class="pre">x</span></code>、速度 <code class="docutils literal notranslate"><span class="pre">v</span></code>、時間刻み幅 <code class="docutils literal notranslate"><span class="pre">dt</span></code> と加速度を計算する関数 <code class="docutils literal notranslate"><span class="pre">accel</span></code> を受け取り、1 ステップ後の位置と速度を返す。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">24</span><span class="k">def</span><span class="w"> </span><span class="nf">spring_acceleration</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">25</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ばね振動子の加速度 a = -(k / m) x を返す(k = m = 1)。&quot;&quot;&quot;</span>
+<span class="linenos">26</span>    <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="k">def</span><span class="w"> </span><span class="nf">explicit_euler</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">accel</span><span class="p">:</span> <span class="n">Acceleration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;陽的オイラー法: 現在の速度と加速度だけを使って更新する。&quot;&quot;&quot;</span>
+<span class="linenos">31</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">accel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">v</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="k">def</span><span class="w"> </span><span class="nf">semi_implicit_euler</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">accel</span><span class="p">:</span> <span class="n">Acceleration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">36</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;半陰的オイラー法: 先に速度を更新し、新しい速度で位置を更新する。&quot;&quot;&quot;</span>
+<span class="linenos">37</span>    <span class="n">v_new</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="n">accel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">38</span>    <span class="n">x_new</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">v_new</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">39</span>    <span class="k">return</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">v_new</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="k">def</span><span class="w"> </span><span class="nf">velocity_verlet</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">accel</span><span class="p">:</span> <span class="n">Acceleration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">43</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;速度ベルレ法: 更新前後の 2 つの加速度の平均で速度を更新する。&quot;&quot;&quot;</span>
+<span class="linenos">44</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">accel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">45</span>    <span class="n">x_new</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">dt</span><span class="o">**</span><span class="mi">2</span>
+<span class="linenos">46</span>    <span class="n">v_new</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">accel</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">47</span>    <span class="k">return</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">v_new</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">simulate</span></code> 関数は、選んだ積分法で指定したステップ数だけ計算を進め、位置と速度の履歴を配列で返す。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">50</span><span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">stepper</span><span class="p">:</span> <span class="n">Stepper</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">FloatArray</span><span class="p">]:</span>
+<span class="linenos">51</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;指定した積分法で n_steps ステップ進め、位置と速度の履歴を返す。&quot;&quot;&quot;</span>
+<span class="linenos">52</span>    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">53</span>    <span class="n">vs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">54</span>    <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span> <span class="n">v0</span>
+<span class="linenos">55</span>    <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span> <span class="n">v0</span>
+<span class="linenos">56</span>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<span class="linenos">57</span>        <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">stepper</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">spring_acceleration</span><span class="p">)</span>
+<span class="linenos">58</span>        <span class="n">xs</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">v</span>
+<span class="linenos">59</span>    <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">vs</span>
+</pre></div>
+</div>
+<p>サンプルコード全体は <a class="reference download internal" download="" href="_downloads/720f3f599789afd1e0d871384556b15c/integrators.py"><code class="xref download docutils literal notranslate"><span class="pre">integrators.py</span></code></a> からダウンロードできる。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.5. </span>結果: エネルギーが増え続ける陽的オイラー法<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>時間刻み幅 <span class="math notranslate nohighlight">\(\Delta t = 0.1\)</span> で <span class="math notranslate nohighlight">\(t = 30\)</span> まで(300 ステップ)計算した結果を<a class="reference internal" href="#fig-integrators"><span class="std std-numref">図 2.1</span></a> に示す。</p>
+<figure class="align-center" id="id10">
+<span id="fig-integrators"></span><img alt="_images/integrators.png" src="_images/integrators.png" />
+<figcaption>
+<p><span class="caption-number">図 2.1 </span><span class="caption-text">3 つの時間積分法による位置(上)と力学的エネルギー(下)の時間変化</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>陽的オイラー法では、振動の振幅がどんどん大きくなり、エネルギーは <span class="math notranslate nohighlight">\(t = 30\)</span> で初期値の約 20 倍(<span class="math notranslate nohighlight">\(E \approx 9.89\)</span>)に達する。摩擦のないばね振動子のエネルギーが増えることは物理的にあり得ないので、これは計算方法が作り出した誤りである。</p>
+<p>この増え方は式で確かめられる。陽的オイラー法の更新式を <span class="math notranslate nohighlight">\(E^{n+1}\)</span> に代入すると、</p>
+<div class="math notranslate nohighlight">
+\[E^{n+1} = \frac{1}{2}\left(v^n - x^n \Delta t\right)^2 + \frac{1}{2}\left(x^n + v^n \Delta t\right)^2 = \left(1 + \Delta t^2\right) E^n\]</div>
+<p>となり、エネルギーは 1 ステップごとに <span class="math notranslate nohighlight">\(1 + \Delta t^2\)</span> 倍になる。300 ステップでは <span class="math notranslate nohighlight">\(1.01^{300} \approx 19.8\)</span> 倍で、図の結果と一致する。<span class="math notranslate nohighlight">\(\Delta t\)</span> を小さくすれば増え方は緩やかになるが、増え続けることに変わりはない。</p>
+<p>一方、半陰的オイラー法のエネルギーは、正しい値 0.5 のまわりで小さく振動するだけで、長時間たっても増えも減りもしない。速度ベルレ法のエネルギーはさらに正確で、図ではほとんど 0.5 の線と重なっている。</p>
+<p>半陰的オイラー法と速度ベルレ法は<strong>シンプレクティック積分法</strong>と呼ばれる種類の方法である。これらの方法は、エネルギーそのものではないが、エネルギーにごく近い量を正確に保存する性質を持つ。そのため、長時間計算してもエネルギーが一方的にずれていかない。粒子や天体の運動のように長時間の計算を行う場面では、この性質が重要になる。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">2.6. </span>誤差と精度の次数<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>次に、時間刻み幅 <span class="math notranslate nohighlight">\(\Delta t\)</span> を変えたときに、<span class="math notranslate nohighlight">\(t = 10\)</span> における位置の誤差 <span class="math notranslate nohighlight">\(|x - \cos 10|\)</span> がどう変わるかを調べる(<a class="reference internal" href="#fig-integrators-order"><span class="std std-numref">図 2.2</span></a>)。</p>
+<figure class="align-center" id="id11">
+<span id="fig-integrators-order"></span><img alt="_images/integrators_order.png" src="_images/integrators_order.png" />
+<figcaption>
+<p><span class="caption-number">図 2.2 </span><span class="caption-text">時間刻み幅と誤差の関係(両対数グラフ)</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-number">表 2.1 </span><span class="caption-text"><span class="math notranslate nohighlight">\(t = 10\)</span> における位置の誤差</span><a class="headerlink" href="#id12" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>時間刻み幅</p></th>
+<th class="head"><p>陽的オイラー法</p></th>
+<th class="head"><p>半陰的オイラー法</p></th>
+<th class="head"><p>速度ベルレ法</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.1</p></td>
+<td><p><span class="math notranslate nohighlight">\(5.70 \times 10^{-1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2.97 \times 10^{-2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2.28 \times 10^{-3}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>0.05</p></td>
+<td><p><span class="math notranslate nohighlight">\(2.44 \times 10^{-1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.42 \times 10^{-2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(5.67 \times 10^{-4}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>0.025</p></td>
+<td><p><span class="math notranslate nohighlight">\(1.13 \times 10^{-1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(6.95 \times 10^{-3}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.42 \times 10^{-4}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>2 つのオイラー法では、<span class="math notranslate nohighlight">\(\Delta t\)</span> を半分にすると誤差もほぼ半分になる。つまり誤差は <span class="math notranslate nohighlight">\(\Delta t\)</span> に比例する。一方、速度ベルレ法では、<span class="math notranslate nohighlight">\(\Delta t\)</span> を半分にすると誤差は約 4 分の 1 になり、誤差は <span class="math notranslate nohighlight">\(\Delta t^2\)</span> に比例する。</p>
+<p>一定の時刻まで計算したときの誤差が <span class="math notranslate nohighlight">\(\Delta t^p\)</span> に比例するとき、その方法を <strong>p 次精度</strong>と呼ぶ。オイラー法は 1 次精度、速度ベルレ法は 2 次精度である。両対数グラフでは、誤差の線の傾きが次数 <span class="math notranslate nohighlight">\(p\)</span> に等しくなる。</p>
+<p>次数は、時間刻み幅を細かくしたときの効き目を表す。1 次精度の方法で誤差を 100 分の 1 にするにはステップ数を 100 倍にする必要があるが、2 次精度の方法なら 10 倍で済む。新しく実装した方法の次数を、このように <span class="math notranslate nohighlight">\(\Delta t\)</span> を変えながら確かめることは、実装の誤りを見つける有効な手段でもある。期待した傾きが出なければ、どこかに誤りがある可能性が高い。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">2.7. </span>安定性と時間刻み幅<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>誤差が小さいかどうかとは別に、計算が<strong>安定</strong>かどうかという問題がある。安定でない計算では、小さな誤差がステップごとに増幅され、やがて値が発散する。</p>
+<p>角振動数 <span class="math notranslate nohighlight">\(\omega = \sqrt{k/m}\)</span> のばね振動子を半陰的オイラー法で解く場合、1 ステップの更新は、<span class="math notranslate nohighlight">\((x^n, v^n)\)</span> に次の行列を掛ける操作として書ける。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix} x^{n+1} \\ v^{n+1} \end{pmatrix}
+=
+\begin{pmatrix} 1 - \omega^2 \Delta t^2 &amp; \Delta t \\ -\omega^2 \Delta t &amp; 1 \end{pmatrix}
+\begin{pmatrix} x^n \\ v^n \end{pmatrix}\end{split}\]</div>
+<p>この行列の行列式は 1 であり、2 つの固有値の積は 1 になる。固有値が絶対値 1 の複素数の組になるのは、行列のトレース <span class="math notranslate nohighlight">\(2 - \omega^2 \Delta t^2\)</span> の絶対値が 2 未満のとき、つまり</p>
+<div class="math notranslate nohighlight">
+\[\omega \Delta t &lt; 2\]</div>
+<p>のときである。<span class="math notranslate nohighlight">\(\omega \Delta t\)</span> が 2 を超えると、片方の固有値の絶対値が 1 より大きくなり、計算は指数関数的に発散する。</p>
+<p>この結果は、陽解法の時間積分法に共通する重要な教訓を含んでいる。<strong>時間刻み幅は、系の中で最も速い変化の時間スケールより十分小さくなければならない</strong>。ばねが硬い(<span class="math notranslate nohighlight">\(k\)</span> が大きい)ほど、あるいは質量が小さいほど <span class="math notranslate nohighlight">\(\omega\)</span> は大きくなり、使える <span class="math notranslate nohighlight">\(\Delta t\)</span> は小さくなる。この制約は、第 4 章のばね-質点系や粒子の衝突、第 6 章以降の流体の計算でも形を変えて繰り返し現れる。</p>
+<p>なお、陽的オイラー法でばね振動子を解くと、1 ステップあたりの増幅率は <span class="math notranslate nohighlight">\(\sqrt{1 + \omega^2 \Delta t^2}\)</span> で常に 1 より大きい。前の節で見たエネルギーの増加は、この不安定性の表れである。どれほど <span class="math notranslate nohighlight">\(\Delta t\)</span> を小さくしても安定にならないため、陽的オイラー法は振動する系には向かない。</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">2.8. </span>まとめ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>運動方程式は、時間を時間刻み幅 <span class="math notranslate nohighlight">\(\Delta t\)</span> で区切り、位置と速度を少しずつ更新して解く。</p></li>
+<li><p>陽的オイラー法は単純だが、振動する系ではエネルギーが増え続け、発散する。</p></li>
+<li><p>更新の順序を変えただけの半陰的オイラー法や速度ベルレ法は、エネルギーを長時間にわたってよく保つ。本書では以降、主に半陰的オイラー法を使う。</p></li>
+<li><p>誤差が <span class="math notranslate nohighlight">\(\Delta t^p\)</span> に比例するとき、その方法を p 次精度と呼ぶ。<span class="math notranslate nohighlight">\(\Delta t\)</span> を変えて誤差の変化を調べることは、実装を検証する有効な手段である。</p></li>
+<li><p>陽解法では、時間刻み幅を系の最も速い変化より十分小さくしなければ、計算が発散する。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="1. はじめに" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="particles.html" class="btn btn-neutral float-right" title="3. 粒子シミュレーション" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

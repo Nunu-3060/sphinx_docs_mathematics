@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>付録 A 用語集 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="付録 B 記号一覧" href="appendix_b_symbols.html" />
+    <link rel="prev" title="第 11 章 さらに学ぶために" href="ch11_further_study.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">付録 A 用語集</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">英字</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">ア行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">カ行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">サ行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">タ行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">ナ行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">ハ行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">マ行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">ラ行</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">付録 A 用語集</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a">
+<h1>付録 A 用語集<a class="headerlink" href="#a" title="Link to this heading"></a></h1>
+<p>本書で使う主な用語を、英字、五十音の順に並べる。括弧内は、詳しく説明している章である。</p>
+<section id="id1">
+<h2>英字<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-DFT">DFT<a class="headerlink" href="#term-DFT" title="Link to this term"></a></dt><dd><p>離散フーリエ変換（discrete Fourier transform）。長さ <span class="math notranslate nohighlight">\(N\)</span> の離散時間信号を、<span class="math notranslate nohighlight">\(N\)</span> 個の周波数成分 <span class="math notranslate nohighlight">\(X[k] = \sum_{n=0}^{N-1} x[n] e^{-j2\pi kn/N}\)</span> に変換する。DTFT を等間隔に <span class="math notranslate nohighlight">\(N\)</span> 点で標本化したものに等しい（第 6 章）。</p>
+</dd>
+<dt id="term-DTFT">DTFT<a class="headerlink" href="#term-DTFT" title="Link to this term"></a></dt><dd><p>離散時間フーリエ変換（discrete-time Fourier transform）。離散時間信号のスペクトル <span class="math notranslate nohighlight">\(X(e^{j\hat{\omega}}) = \sum_n x[n] e^{-j\hat{\omega} n}\)</span> であり、正規化角周波数について周期 <span class="math notranslate nohighlight">\(2\pi\)</span> の連続な関数になる（第 6 章）。</p>
+</dd>
+<dt id="term-DTMF">DTMF<a class="headerlink" href="#term-DTMF" title="Link to this term"></a></dt><dd><p>電話のプッシュボタンの信号方式（dual-tone multi-frequency）。各キーを、低群と高群の周波数の 2 つの正弦波の和で表す（第 10 章）。</p>
+</dd>
+<dt id="term-FFT">FFT<a class="headerlink" href="#term-FFT" title="Link to this term"></a></dt><dd><p>高速フーリエ変換（fast Fourier transform）。DFT を <span class="math notranslate nohighlight">\(N\log_2 N\)</span> に比例する計算量で求めるアルゴリズムの総称（第 7 章）。</p>
+</dd>
+<dt id="term-FIR">FIR フィルタ<a class="headerlink" href="#term-FIR" title="Link to this term"></a></dt><dd><p>インパルス応答の長さが有限のデジタルフィルタ（finite impulse response filter）。常に安定で、係数を対称にすると線形位相になる（第 9 章）。</p>
+</dd>
+<dt id="term-IIR">IIR フィルタ<a class="headerlink" href="#term-IIR" title="Link to this term"></a></dt><dd><p>過去の出力も使って計算し、インパルス応答が無限に続くデジタルフィルタ（infinite impulse response filter）。少ない次数で急峻な特性が得られる（第 9 章）。</p>
+</dd>
+<dt id="term-LTI">LTI システム<a class="headerlink" href="#term-LTI" title="Link to this term"></a></dt><dd><p>線形性と時不変性をもつシステム（linear time-invariant system、線形時不変システム）。インパルス応答で完全に特徴付けられ、出力は入力とインパルス応答の畳み込みで求められる（第 5 章）。</p>
+</dd>
+<dt id="term-sinc">sinc 関数<a class="headerlink" href="#term-sinc" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(\mathrm{sinc}(x) = \sin(\pi x)/(\pi x)\)</span>（<span class="math notranslate nohighlight">\(\mathrm{sinc}(0) = 1\)</span>）で定義される関数。矩形パルスのフーリエ変換であり、理想的なローパスフィルタのインパルス応答である（第 3 章、第 4 章）。</p>
+</dd>
+<dt id="term-SNR">SNR<a class="headerlink" href="#term-SNR" title="Link to this term"></a></dt><dd><p>信号対雑音比（signal-to-noise ratio）。信号の電力と雑音の電力の比で、ふつうはデシベルで表す（第 4 章）。</p>
+</dd>
+<dt id="term-STFT">STFT<a class="headerlink" href="#term-STFT" title="Link to this term"></a></dt><dd><p>短時間フーリエ変換（short-time Fourier transform）。信号を短い区間に分け、区間ごとに窓関数を掛けて DFT を計算する（第 8 章）。</p>
+</dd>
+<dt id="term-z">z 変換<a class="headerlink" href="#term-z" title="Link to this term"></a></dt><dd><p>離散時間信号 <span class="math notranslate nohighlight">\(x[n]\)</span> を、複素数 <span class="math notranslate nohighlight">\(z\)</span> の関数 <span class="math notranslate nohighlight">\(X(z) = \sum_n x[n] z^{-n}\)</span> に変換する。<span class="math notranslate nohighlight">\(z = e^{j\hat{\omega}}\)</span> とすると DTFT に一致する（第 5 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h2>ア行<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-0">アップサンプリング<a class="headerlink" href="#term-0" title="Link to this term"></a></dt><dd><p>標本の間に 0 を挿入し、LPF で補間して、標本化周波数を整数倍に上げる処理（第 10 章）。</p>
+</dd>
+<dt id="term-1">アンチエイリアシングフィルタ<a class="headerlink" href="#term-1" title="Link to this term"></a></dt><dd><p>標本化の前に、ナイキスト周波数より高い周波数の成分を取り除くためのローパスフィルタ（第 4 章）。</p>
+</dd>
+<dt id="term-2">安定性<a class="headerlink" href="#term-2" title="Link to this term"></a></dt><dd><p>有界な入力に対して出力も有界になる性質（BIBO 安定）。LTI システムでは、インパルス応答の絶対値の総和が有限であることと同じである（第 5 章）。</p>
+</dd>
+<dt id="term-3">位相<a class="headerlink" href="#term-3" title="Link to this term"></a></dt><dd><p>正弦波 <span class="math notranslate nohighlight">\(A\cos(2\pi ft + \phi)\)</span> の <span class="math notranslate nohighlight">\(\phi\)</span>。時刻 0 における角度で、波形の時間方向のずれを表す（第 1 章）。</p>
+</dd>
+<dt id="term-4">位相特性<a class="headerlink" href="#term-4" title="Link to this term"></a></dt><dd><p>周波数応答の偏角 <span class="math notranslate nohighlight">\(\arg H(e^{j\hat{\omega}})\)</span>。各周波数の成分の位相がどれだけずれるかを表す（第 5 章）。</p>
+</dd>
+<dt id="term-5">因果性<a class="headerlink" href="#term-5" title="Link to this term"></a></dt><dd><p>出力が現在と過去の入力だけで決まる性質。LTI システムでは、<span class="math notranslate nohighlight">\(n &lt; 0\)</span> でインパルス応答が 0 であることと同じである（第 5 章）。</p>
+</dd>
+<dt id="term-6">インパルス応答<a class="headerlink" href="#term-6" title="Link to this term"></a></dt><dd><p>システムに単位インパルスを入力したときの出力。LTI システムの性質をすべて表す（第 5 章）。</p>
+</dd>
+<dt id="term-7">ウェルチ法<a class="headerlink" href="#term-7" title="Link to this term"></a></dt><dd><p>信号を一部が重なる区間に分け、各区間のピリオドグラムを平均して、パワースペクトル密度の推定値の揺らぎを減らす方法（第 8 章）。</p>
+</dd>
+<dt id="term-8">エイリアシング<a class="headerlink" href="#term-8" title="Link to this term"></a></dt><dd><p>標本化によって、ナイキスト周波数を超える周波数の成分が、低い周波数の成分として現れる現象。折り返しともいう（第 4 章）。</p>
+</dd>
+<dt id="term-9">オイラーの公式<a class="headerlink" href="#term-9" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(e^{j\theta} = \cos\theta + j\sin\theta\)</span>。指数関数と三角関数を結び付ける（第 1 章）。</p>
+</dd>
+<dt id="term-10">オーバーラップ加算法<a class="headerlink" href="#term-10" title="Link to this term"></a></dt><dd><p>長い入力をブロックに分け、ブロックごとに FFT で畳み込んで、結果の重なる部分を足し合わせる方法（第 10 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h2>カ行<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-11">回転因子<a class="headerlink" href="#term-11" title="Link to this term"></a></dt><dd><p>FFT のバタフライ演算で掛ける複素数 <span class="math notranslate nohighlight">\(W_N^k = e^{-j2\pi k/N}\)</span> （第 7 章）。</p>
+</dd>
+<dt id="term-12">角周波数<a class="headerlink" href="#term-12" title="Link to this term"></a></dt><dd><p>1 秒あたりに進む角度 <span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span>。単位は rad/s（第 1 章）。</p>
+</dd>
+<dt id="term-13">ギブス現象<a class="headerlink" href="#term-13" title="Link to this term"></a></dt><dd><p>不連続点をもつ信号のフーリエ級数の部分和が、不連続点の付近で跳びの約 9 % だけ行き過ぎる現象。項を増やしても行き過ぎの高さは小さくならない（第 2 章）。</p>
+</dd>
+<dt id="term-14">基本周波数<a class="headerlink" href="#term-14" title="Link to this term"></a></dt><dd><p>周期信号の基本周期 <span class="math notranslate nohighlight">\(T\)</span> の逆数 <span class="math notranslate nohighlight">\(f_0 = 1/T\)</span> （第 2 章）。</p>
+</dd>
+<dt id="term-15">逆フーリエ変換<a class="headerlink" href="#term-15" title="Link to this term"></a></dt><dd><p>スペクトル <span class="math notranslate nohighlight">\(X(f)\)</span> から信号 <span class="math notranslate nohighlight">\(x(t) = \int X(f) e^{j2\pi ft} df\)</span> を求める変換（第 3 章）。</p>
+</dd>
+<dt id="term-16">極<a class="headerlink" href="#term-16" title="Link to this term"></a></dt><dd><p>伝達関数の分母を 0 にする <span class="math notranslate nohighlight">\(z\)</span> の値。因果的なシステムは、すべての極が単位円の内側にあるとき安定である（第 5 章）。</p>
+</dd>
+<dt id="term-17">群遅延<a class="headerlink" href="#term-17" title="Link to this term"></a></dt><dd><p>位相特性を角周波数で微分して符号を反転したもの。各周波数の成分の遅れを表す。線形位相のフィルタでは一定である（第 9 章）。</p>
+</dd>
+<dt id="term-18">ゲルツェル法<a class="headerlink" href="#term-18" title="Link to this term"></a></dt><dd><p>特定の周波数の DFT の値を、2 次の IIR フィルタで効率よく求める方法（第 10 章）。</p>
+</dd>
+<dt id="term-19">高調波<a class="headerlink" href="#term-19" title="Link to this term"></a></dt><dd><p>基本周波数の整数倍の周波数をもつ成分。周波数 <span class="math notranslate nohighlight">\(kf_0\)</span> の成分を第 <span class="math notranslate nohighlight">\(k\)</span> 高調波という（第 2 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h2>サ行<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-20">差分方程式<a class="headerlink" href="#term-20" title="Link to this term"></a></dt><dd><p>入力と出力の現在と過去の値の関係を表す式。離散時間の LTI システムの多くは差分方程式で記述できる（第 5 章）。</p>
+</dd>
+<dt id="term-21">周波数<a class="headerlink" href="#term-21" title="Link to this term"></a></dt><dd><p>1 秒あたりの振動の回数。単位は Hz（第 1 章）。</p>
+</dd>
+<dt id="term-22">周波数応答<a class="headerlink" href="#term-22" title="Link to this term"></a></dt><dd><p>LTI システムに複素正弦波を入力したときに掛かる複素数 <span class="math notranslate nohighlight">\(H(e^{j\hat{\omega}})\)</span>。インパルス応答の DTFT に等しい（第 5 章）。</p>
+</dd>
+<dt id="term-23">周波数分解能<a class="headerlink" href="#term-23" title="Link to this term"></a></dt><dd><p>DFT のビンの間隔 <span class="math notranslate nohighlight">\(f_s/N\)</span>。近い 2 つの周波数を分離する能力は、おおよそ観測時間の逆数で決まる（第 6 章）。</p>
+</dd>
+<dt id="term-24">循環畳み込み<a class="headerlink" href="#term-24" title="Link to this term"></a></dt><dd><p>長さ <span class="math notranslate nohighlight">\(N\)</span> の信号をずらすとき、はみ出した部分が反対側から戻ってくるとして計算する畳み込み。DFT の積の逆 DFT に等しい（第 6 章）。</p>
+</dd>
+<dt id="term-25">信号<a class="headerlink" href="#term-25" title="Link to this term"></a></dt><dd><p>時間（または位置）とともに変化する量（第 1 章）。</p>
+</dd>
+<dt id="term-26">振幅<a class="headerlink" href="#term-26" title="Link to this term"></a></dt><dd><p>正弦波の大きさ（第 1 章）。</p>
+</dd>
+<dt id="term-27">振幅特性<a class="headerlink" href="#term-27" title="Link to this term"></a></dt><dd><p>周波数応答の大きさ <span class="math notranslate nohighlight">\(|H(e^{j\hat{\omega}})|\)</span>。利得ともいう（第 5 章）。</p>
+</dd>
+<dt id="term-28">スペクトル<a class="headerlink" href="#term-28" title="Link to this term"></a></dt><dd><p>信号に含まれる各周波数の成分の大きさと位相を、周波数の関数として表したもの（第 2 章）。</p>
+</dd>
+<dt id="term-29">スペクトル漏れ<a class="headerlink" href="#term-29" title="Link to this term"></a></dt><dd><p>周波数が DFT のビンに一致しない成分が、周囲のビンに漏れ出す現象。有限の長さの観測が原因である（第 8 章）。</p>
+</dd>
+<dt id="term-30">スペクトログラム<a class="headerlink" href="#term-30" title="Link to this term"></a></dt><dd><p>STFT の大きさの 2 乗を、時間と周波数の 2 次元の図に描いたもの（第 8 章）。</p>
+</dd>
+<dt id="term-31">正規化角周波数<a class="headerlink" href="#term-31" title="Link to this term"></a></dt><dd><p>1 標本あたりに進む角度 <span class="math notranslate nohighlight">\(\hat{\omega} = 2\pi f/f_s\)</span>。単位は rad/標本。ナイキスト周波数は <span class="math notranslate nohighlight">\(\pi\)</span> に対応する（第 5 章）。</p>
+</dd>
+<dt id="term-32">正弦波<a class="headerlink" href="#term-32" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(A\cos(2\pi ft + \phi)\)</span> の形の波形。本書では <span class="math notranslate nohighlight">\(\sin\)</span> と <span class="math notranslate nohighlight">\(\cos\)</span> の両方の形をまとめてこう呼ぶ（第 1 章）。</p>
+</dd>
+<dt id="term-33">ゼロ位相フィルタリング<a class="headerlink" href="#term-33" title="Link to this term"></a></dt><dd><p>フィルタを順方向と逆方向に 1 回ずつ掛けて、位相のずれをなくす処理。記録済みのデータにだけ使える（第 9 章）。</p>
+</dd>
+<dt id="term-34">ゼロ詰め<a class="headerlink" href="#term-34" title="Link to this term"></a></dt><dd><p>信号の末尾に 0 を足して長くしてから DFT を計算すること。DTFT を細かく標本化する効果があるが、周波数分解能は上がらない（第 6 章）。</p>
+</dd>
+<dt id="term-35">線形位相<a class="headerlink" href="#term-35" title="Link to this term"></a></dt><dd><p>位相特性が周波数に比例すること。すべての周波数の成分が同じだけ遅れるので、波形の形が崩れない（第 9 章）。</p>
+</dd>
+<dt id="term-36">線スペクトル<a class="headerlink" href="#term-36" title="Link to this term"></a></dt><dd><p>周期信号のスペクトルのように、とびとびの周波数にだけ値をもつスペクトル（第 2 章）。</p>
+</dd>
+<dt id="term-37">双一次変換<a class="headerlink" href="#term-37" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(s = 2f_s(1 - z^{-1})/(1 + z^{-1})\)</span> によって、アナログフィルタの伝達関数をデジタルフィルタの伝達関数に変換する方法（第 9 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h2>タ行<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-38">帯域幅<a class="headerlink" href="#term-38" title="Link to this term"></a></dt><dd><p>信号のスペクトルが広がっている周波数の範囲の幅（第 3 章）。</p>
+</dd>
+<dt id="term-39">ダウンサンプリング<a class="headerlink" href="#term-39" title="Link to this term"></a></dt><dd><p>標本を間引いて、標本化周波数を整数分の 1 に下げる処理。前もって LPF でエイリアシングを防ぐ必要がある（第 10 章）。</p>
+</dd>
+<dt id="term-40">畳み込み<a class="headerlink" href="#term-40" title="Link to this term"></a></dt><dd><p>2 つの信号の一方を時間反転してずらしながら、他方と掛けて積分（または総和）する演算。LTI システムの出力は、入力とインパルス応答の畳み込みである（第 3 章、第 5 章）。</p>
+</dd>
+<dt id="term-41">畳み込み定理<a class="headerlink" href="#term-41" title="Link to this term"></a></dt><dd><p>時間領域の畳み込みが、周波数領域の積になるという定理（第 3 章）。</p>
+</dd>
+<dt id="term-42">直交<a class="headerlink" href="#term-42" title="Link to this term"></a></dt><dd><p>2 つのベクトル（または関数）の内積が 0 であること（第 1 章）。</p>
+</dd>
+<dt id="term-43">デシベル<a class="headerlink" href="#term-43" title="Link to this term"></a></dt><dd><p>比を対数で表す単位（dB）。電力の比 <span class="math notranslate nohighlight">\(P_1/P_2\)</span> は <span class="math notranslate nohighlight">\(10\log_{10}(P_1/P_2)\)</span>、振幅の比 <span class="math notranslate nohighlight">\(A_1/A_2\)</span> は <span class="math notranslate nohighlight">\(20\log_{10}(A_1/A_2)\)</span> で表す（第 4 章）。</p>
+</dd>
+<dt id="term-44">デジタル信号<a class="headerlink" href="#term-44" title="Link to this term"></a></dt><dd><p>時間が離散で、値も量子化された信号（第 1 章）。</p>
+</dd>
+<dt id="term-45">デジタルフィルタ<a class="headerlink" href="#term-45" title="Link to this term"></a></dt><dd><p>デジタル信号の特定の周波数の成分を通し、ほかの成分を弱める処理（第 9 章）。</p>
+</dd>
+<dt id="term-46">デルタ関数<a class="headerlink" href="#term-46" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(t = 0\)</span> の一点に集中した面積 1 のパルスを表す超関数 <span class="math notranslate nohighlight">\(\delta(t)\)</span>。任意の関数と掛けて積分すると、その点の値を取り出す（第 3 章）。</p>
+</dd>
+<dt id="term-47">伝達関数<a class="headerlink" href="#term-47" title="Link to this term"></a></dt><dd><p>LTI システムのインパルス応答の z 変換 <span class="math notranslate nohighlight">\(H(z)\)</span>。出力の z 変換と入力の z 変換の比に等しい（第 5 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h2>ナ行<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-48">ナイキスト周波数<a class="headerlink" href="#term-48" title="Link to this term"></a></dt><dd><p>標本化周波数の半分 <span class="math notranslate nohighlight">\(f_s/2\)</span>。これを超える周波数の成分は、標本化すると折り返す（第 4 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h2>ハ行<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-49">パーセバルの等式<a class="headerlink" href="#term-49" title="Link to this term"></a></dt><dd><p>信号の電力（またはエネルギー）が、各周波数の成分の電力（エネルギー）の和に等しいという関係。フーリエ変換や DFT では、パーセバルの定理と呼ぶことが多い（第 2 章、第 3 章、第 6 章）。</p>
+</dd>
+<dt id="term-50">バタフライ演算<a class="headerlink" href="#term-50" title="Link to this term"></a></dt><dd><p>FFT の基本となる計算 <span class="math notranslate nohighlight">\(X[k] = E[k] + W_N^k O[k]\)</span>、<span class="math notranslate nohighlight">\(X[k + N/2] = E[k] - W_N^k O[k]\)</span> （第 7 章）。</p>
+</dd>
+<dt id="term-51">バタワースフィルタ<a class="headerlink" href="#term-51" title="Link to this term"></a></dt><dd><p>通過域の振幅特性が最も平坦になるように設計したフィルタ（第 9 章）。</p>
+</dd>
+<dt id="term-52">パワースペクトル密度<a class="headerlink" href="#term-52" title="Link to this term"></a></dt><dd><p>周波数あたりの電力を表すスペクトル。雑音のように周波数が連続的に広がった信号の解析に使う（第 8 章）。</p>
+</dd>
+<dt id="term-53">標本化<a class="headerlink" href="#term-53" title="Link to this term"></a></dt><dd><p>連続時間信号から、一定の時間間隔で値を取り出すこと。サンプリングともいう（第 4 章）。</p>
+</dd>
+<dt id="term-54">標本化周波数<a class="headerlink" href="#term-54" title="Link to this term"></a></dt><dd><p>1 秒あたりに取り出す標本の数 <span class="math notranslate nohighlight">\(f_s\)</span>。標本化周期 <span class="math notranslate nohighlight">\(T_s\)</span> の逆数である（第 4 章）。</p>
+</dd>
+<dt id="term-55">標本化定理<a class="headerlink" href="#term-55" title="Link to this term"></a></dt><dd><p>帯域幅 <span class="math notranslate nohighlight">\(B\)</span> の信号は、<span class="math notranslate nohighlight">\(f_s &gt; 2B\)</span> で標本化すれば、標本値から完全に復元できるという定理（第 4 章）。</p>
+</dd>
+<dt id="term-56">ピリオドグラム<a class="headerlink" href="#term-56" title="Link to this term"></a></dt><dd><p>DFT の大きさの 2 乗から求めた、パワースペクトル密度の推定値（第 8 章）。</p>
+</dd>
+<dt id="term-57">フーリエ級数<a class="headerlink" href="#term-57" title="Link to this term"></a></dt><dd><p>周期信号を、基本周波数の整数倍の周波数をもつ正弦波の和で表したもの（第 2 章）。</p>
+</dd>
+<dt id="term-58">フーリエ係数<a class="headerlink" href="#term-58" title="Link to this term"></a></dt><dd><p>フーリエ級数の各項の係数。信号と各正弦波の内積で求められる（第 2 章）。</p>
+</dd>
+<dt id="term-59">フーリエ変換<a class="headerlink" href="#term-59" title="Link to this term"></a></dt><dd><p>信号 <span class="math notranslate nohighlight">\(x(t)\)</span> のスペクトル <span class="math notranslate nohighlight">\(X(f) = \int x(t) e^{-j2\pi ft} dt\)</span> を求める変換（第 3 章）。</p>
+</dd>
+<dt id="term-60">複素正弦波<a class="headerlink" href="#term-60" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(e^{j2\pi ft}\)</span> の形の信号。複素平面の単位円の上を回転する点を表す（第 1 章）。</p>
+</dd>
+<dt id="term-61">複素フーリエ級数<a class="headerlink" href="#term-61" title="Link to this term"></a></dt><dd><p>周期信号を複素正弦波の和 <span class="math notranslate nohighlight">\(\sum c_k e^{j2\pi kf_0t}\)</span> で表したもの（第 2 章）。</p>
+</dd>
+<dt id="term-62">プリワーピング<a class="headerlink" href="#term-62" title="Link to this term"></a></dt><dd><p>双一次変換による周波数のゆがみを補正するため、アナログフィルタの周波数をあらかじめずらしておくこと（第 9 章）。</p>
+</dd>
+<dt id="term-63">変調<a class="headerlink" href="#term-63" title="Link to this term"></a></dt><dd><p>信号に正弦波を掛けて、スペクトルを高い周波数に移動させること（第 3 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h2>マ行<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-64">窓関数<a class="headerlink" href="#term-64" title="Link to this term"></a></dt><dd><p>スペクトル漏れを減らすために、信号の両端を滑らかに 0 に近づける重み。ハン窓、ハミング窓、ブラックマン窓などがある（第 8 章）。</p>
+</dd>
+<dt id="term-65">窓関数法<a class="headerlink" href="#term-65" title="Link to this term"></a></dt><dd><p>理想的なフィルタのインパルス応答を、窓関数を掛けて有限の長さで打ち切る FIR フィルタの設計方法（第 9 章）。</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h2>ラ行<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<dl class="simple glossary">
+<dt id="term-66">離散時間信号<a class="headerlink" href="#term-66" title="Link to this term"></a></dt><dd><p>とびとびの時刻だけで値をもつ信号 <span class="math notranslate nohighlight">\(x[n]\)</span> （第 1 章）。</p>
+</dd>
+<dt id="term-67">量子化<a class="headerlink" href="#term-67" title="Link to this term"></a></dt><dd><p>信号の値を、有限個の段階に丸めること（第 1 章、第 4 章）。</p>
+</dd>
+<dt id="term-68">量子化雑音<a class="headerlink" href="#term-68" title="Link to this term"></a></dt><dd><p>量子化による誤差を雑音とみなしたもの。刻みを <span class="math notranslate nohighlight">\(\Delta\)</span> とすると、電力は約 <span class="math notranslate nohighlight">\(\Delta^2/12\)</span> である（第 4 章）。</p>
+</dd>
+<dt id="term-69">零点<a class="headerlink" href="#term-69" title="Link to this term"></a></dt><dd><p>伝達関数の分子を 0 にする <span class="math notranslate nohighlight">\(z\)</span> の値。単位円の上にあると、その周波数の利得は 0 になる（第 5 章）。</p>
+</dd>
+<dt id="term-70">連続時間信号<a class="headerlink" href="#term-70" title="Link to this term"></a></dt><dd><p>時間が連続な信号 <span class="math notranslate nohighlight">\(x(t)\)</span> （第 1 章）。</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch11_further_study.html" class="btn btn-neutral float-left" title="第 11 章 さらに学ぶために" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix_b_symbols.html" class="btn btn-neutral float-right" title="付録 B 記号一覧" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

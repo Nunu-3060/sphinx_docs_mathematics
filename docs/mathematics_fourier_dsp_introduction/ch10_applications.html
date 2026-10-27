@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 10 章 応用 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 11 章 さらに学ぶために" href="ch11_further_study.html" />
+    <link rel="prev" title="第 9 章 デジタルフィルタ" href="ch09_digital_filters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 10 章 応用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">雑音の除去</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fft">FFT による高速な畳み込み</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">リサンプリング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dft">画像の 2 次元 DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dtmf">DTMF 信号の検出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 10 章 応用</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 10 章 応用<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この章では、これまでに学んだスペクトル解析とフィルタの知識を組み合わせて、いくつかの典型的な問題を解く。雑音の除去、FFT による高速な畳み込み、標本化周波数の変換、画像の 2 次元 DFT、電話のプッシュ音（DTMF 信号）の検出を取り上げる。</p>
+<section id="id2">
+<h2>雑音の除去<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>最もよく使われる信号処理の 1 つが、雑音の除去である。サンプルの <code class="docutils literal notranslate"><span class="pre">noise_reduction.py</span></code> では、10 Hz と 25 Hz の正弦波の和（標本化周波数 1000 Hz、長さ 1 s）に、標準偏差 0.5 の白色雑音を加え、次の 3 つの方法で雑音を減らす。</p>
+<ol class="arabic simple">
+<li><p><strong>FFT による除去</strong>：信号全体を FFT し、40 Hz を超える周波数の成分を 0 にしてから逆 FFT する。</p></li>
+<li><p><strong>バタワース LPF</strong>：カットオフ周波数 40 Hz の 4 次のバタワース LPF を、<code class="docutils literal notranslate"><span class="pre">sosfiltfilt()</span></code> でゼロ位相で掛ける。</p></li>
+<li><p><strong>移動平均</strong>：21 点の移動平均を掛ける。</p></li>
+</ol>
+<div class="literal-block-wrapper docutils container" id="list-ch10-fft-mask">
+<div class="code-block-caption"><span class="caption-number">リスト 26 </span><span class="caption-text">noise_reduction.py の fft_mask()</span><a class="headerlink" href="#list-ch10-fft-mask" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">36</span><span class="k">def</span><span class="w"> </span><span class="nf">fft_mask</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">37</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;FFT で CUTOFF を超える周波数の成分を 0 にして、逆変換する.&quot;&quot;&quot;</span>
+<span class="linenos">38</span>    <span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">39</span>    <span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">FS</span><span class="p">)</span>
+<span class="linenos">40</span>    <span class="n">spectrum</span><span class="p">[</span><span class="n">freqs</span> <span class="o">&gt;</span> <span class="n">CUTOFF</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">41</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">spectrum</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>除去の効果は、元の信号（雑音を加える前の信号）との差を雑音とみなした SNR で評価する。信号の両端は、フィルタの過渡応答の影響を受けるので、評価から除いている。</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">リスト 27 </span><span class="caption-text">noise_reduction.py の実行結果</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SNR =   3.9 dB  雑音を加えた信号
+SNR =  14.6 dB  FFT による除去
+SNR =  15.0 dB  バタワース LPF
+SNR =  12.5 dB  移動平均
+</pre></div>
+</div>
+</div>
+<figure class="align-default" id="id6">
+<span id="fig-ch10-noise-reduction"></span><img alt="雑音を加えた信号と、3 つの方法で雑音を除去した結果の波形、およびそれぞれの振幅スペクトル" src="_images/noise_reduction.svg" />
+<figcaption>
+<p><span class="caption-number">図 38 </span><span class="caption-text">雑音の除去の結果：波形の一部（上）と振幅スペクトル（下）</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>FFT による除去とバタワース LPF は、SNR を約 11 dB 改善している。この値は、次のように理論的に見積もれる。白色雑音の電力は 0 から 500 Hz（ナイキスト周波数）まで一様に分布しているので、0 から 40 Hz の範囲だけを残すと、雑音の電力は <span class="math notranslate nohighlight">\(40/500\)</span> になる。これは <span class="math notranslate nohighlight">\(10\log_{10}(500/40) \approx 11\)</span> dB の改善に相当する。通過域（0 から 40 Hz）に入っている雑音は、信号と区別できないので、周波数で選び分ける方法では取り除けない。</p>
+<p>移動平均の改善量は約 9 dB で、ほかの 2 つより小さい。<a class="reference internal" href="#fig-ch10-noise-reduction"><span class="std std-numref">図 38</span></a> の上の図を見ると、移動平均の出力（緑）は、元の信号より振幅が小さくなっている。21 点の移動平均の利得は、10 Hz で約 0.93、25 Hz で約 0.61 であり、信号の成分まで弱めてしまうからである（第 9 章の <a class="reference internal" href="ch09_digital_filters.html#fig-ch09-moving-average"><span class="std std-numref">図 34</span></a>）。下の図のように、阻止域の減衰も小さい。</p>
+<p>FFT による除去は、手軽で、この例ではよく機能している。しかし、次の点に注意が必要である。</p>
+<ul class="simple">
+<li><p>信号全体を一度に FFT するので、すべてのデータがそろってからでないと処理できない。リアルタイムの処理には向かない。</p></li>
+<li><p>周波数領域で急に 0 にすることは、理想的なフィルタ（sinc 関数のインパルス応答）を循環畳み込みで掛けることに相当する。信号の両端の不連続や、急な変化の付近に、ギブス現象による波打ちが生じることがある。</p></li>
+<li><p>DFT のビンに一致しない成分は複数のビンに漏れるので、0 にする範囲の境目の付近の成分は正しく処理されない。</p></li>
+</ul>
+<p>一般的には、目的に合わせて設計したフィルタを使うほうが、結果を予測しやすく安全である。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/90c69a9e52a68c461c6630a7af240593/noise_reduction.py"><code class="xref download docutils literal notranslate"><span class="pre">noise_reduction.py</span></code></a></p>
+</section>
+<section id="fft">
+<h2>FFT による高速な畳み込み<a class="headerlink" href="#fft" title="Link to this heading"></a></h2>
+<p>長さ <span class="math notranslate nohighlight">\(N\)</span> の信号と、長さ <span class="math notranslate nohighlight">\(M\)</span> のインパルス応答の畳み込みを定義どおりに計算すると、約 <span class="math notranslate nohighlight">\(NM\)</span> 回の掛け算が必要である。<span class="math notranslate nohighlight">\(M\)</span> が大きい場合（例えば、部屋の残響のインパルス応答は数万点にもなる）、計算量は膨大になる。</p>
+<p>第 6 章で述べたように、ゼロ詰めして DFT の積を計算すれば、線形畳み込みが求められる。FFT を使えば、この計算量は <span class="math notranslate nohighlight">\((N + M)\log(N + M)\)</span> に比例する程度に減る。ただし、信号が非常に長い場合や、リアルタイムで次々に入力が来る場合は、信号全体を一度に FFT するのは現実的でない。</p>
+<p>そこで、入力を長さ <span class="math notranslate nohighlight">\(L\)</span> のブロックに分けて、ブロックごとに FFT で畳み込み、結果をつなぎ合わせる。各ブロックとインパルス応答の畳み込みは長さ <span class="math notranslate nohighlight">\(L + M - 1\)</span> になり、後ろの <span class="math notranslate nohighlight">\(M - 1\)</span> 点が次のブロックの結果と重なる。畳み込みは線形なので、重なる部分を足し合わせれば、全体の畳み込みと一致する（<a class="reference internal" href="#fig-ch10-overlap-add"><span class="std std-numref">図 39</span></a>）。この方法を<a class="reference internal" href="appendix_a_glossary.html#term-10"><span class="xref std std-term">オーバーラップ加算法</span></a>（overlap-add 法）という。</p>
+<figure class="align-default" id="id7">
+<span id="fig-ch10-overlap-add"></span><img alt="入力を 3 つのブロックに分け、それぞれをインパルス応答と畳み込んだ結果を重ねて足し合わせると、全体の畳み込みと一致する様子" src="_images/fig_ch10_overlap_add.svg" />
+<figcaption>
+<p><span class="caption-number">図 39 </span><span class="caption-text">オーバーラップ加算法の考え方</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">fast_convolution.py</span></code> は、オーバーラップ加算法を実装し、<code class="docutils literal notranslate"><span class="pre">np.convolve()</span></code>（定義どおりの計算）と SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.signal.oaconvolve()</span></code> と比べる。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch10-overlap-add">
+<div class="code-block-caption"><span class="caption-number">リスト 28 </span><span class="caption-text">fast_convolution.py の overlap_add()</span><a class="headerlink" href="#list-ch10-overlap-add" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">23</span><span class="k">def</span><span class="w"> </span><span class="nf">overlap_add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">h</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">block</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">24</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;オーバーラップ加算法で x と h の畳み込み（長さ len(x) + len(h) - 1）を求める.&quot;&quot;&quot;</span>
+<span class="linenos">25</span>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="linenos">26</span>    <span class="n">n_fft</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">block</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span>  <span class="c1"># block + m - 1 以上の 2 のべき乗</span>
+<span class="linenos">27</span>    <span class="n">h_spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
+<span class="linenos">28</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">29</span>    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">block</span><span class="p">):</span>
+<span class="linenos">30</span>        <span class="n">segment</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">start</span> <span class="o">+</span> <span class="n">block</span><span class="p">]</span>
+<span class="linenos">31</span>        <span class="n">piece</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span> <span class="o">*</span> <span class="n">h_spectrum</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
+<span class="linenos">32</span>        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">33</span>        <span class="n">y</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">]</span> <span class="o">+=</span> <span class="n">piece</span><span class="p">[:</span><span class="n">length</span><span class="p">]</span>
+<span class="linenos">34</span>    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<p>FFT の長さ <code class="docutils literal notranslate"><span class="pre">n_fft</span></code> は、<span class="math notranslate nohighlight">\(L + M - 1\)</span> 以上の 2 のべき乗に選んでいる。インパルス応答の FFT（<code class="docutils literal notranslate"><span class="pre">h_spectrum</span></code>）は、最初に 1 回だけ計算して使い回す。</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">リスト 29 </span><span class="caption-text">fast_convolution.py の実行結果（計算時間は計算機によって変わる）</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>np.convolve と一致する: True
+scipy.signal.oaconvolve と一致する: True
+
+入力の長さ 200,000、インパルス応答の長さ 1,000 のときの計算時間
+  np.convolve（直接計算）          36.3 ms
+  overlap_add（自作）              14.9 ms
+  scipy.signal.oaconvolve           9.4 ms
+</pre></div>
+</div>
+</div>
+<p>自作の関数の結果は、<code class="docutils literal notranslate"><span class="pre">np.convolve()</span></code> と一致している。計算時間は、実行する計算機によって変わるが、インパルス応答が 1000 点程度の長さになると、FFT を使う方法が定義どおりの計算より速くなることが多い。インパルス応答が短い（数十点以下の）場合は、定義どおりの計算のほうが速い。SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.signal.convolve()</span></code> は、<code class="docutils literal notranslate"><span class="pre">method=&quot;auto&quot;</span></code> を指定すると（既定）、データの長さから速いほうの方法を自動的に選ぶ。</p>
+<p>ブロックを重ねて入力し、結果の正しい部分だけを取り出すオーバーラップ保存法（overlap-save 法）もある。どちらも、音響機器の残響の付加やイコライザなど、長いフィルタをリアルタイムで掛ける処理に使われている。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/e66ddfb29fda47c4a17b70123f3bc995/fast_convolution.py"><code class="xref download docutils literal notranslate"><span class="pre">fast_convolution.py</span></code></a></p>
+</section>
+<section id="id3">
+<h2>リサンプリング<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>標本化周波数を変換することを、リサンプリングという。例えば、48 kHz の音声を 16 kHz の音声認識の入力に変換したり、44.1 kHz と 48 kHz の機器の間でデータをやり取りしたりするときに必要になる。</p>
+<p><strong>ダウンサンプリング</strong>：標本化周波数を <span class="math notranslate nohighlight">\(1/D\)</span> にするには、<span class="math notranslate nohighlight">\(D\)</span> 個に 1 個の標本を残せばよい。これを<a class="reference internal" href="appendix_a_glossary.html#term-39"><span class="xref std std-term">ダウンサンプリング</span></a>（間引き）という。ただし、新しいナイキスト周波数 <span class="math notranslate nohighlight">\(f_s/(2D)\)</span> を超える成分があると、エイリアシングが起こる。<a class="reference internal" href="#fig-ch10-resampling"><span class="std std-numref">図 40</span></a> は、標本化周波数 200 Hz の信号（5 Hz と 30 Hz の正弦波の和）を 1/4 に間引いて 50 Hz にした例である。新しいナイキスト周波数は 25 Hz なので、間引くだけでは 30 Hz の成分が 20 Hz に折り返す（中央）。間引く前に、ナイキスト周波数より低いカットオフ周波数の LPF を掛けておけば、30 Hz の成分は取り除かれ、エイリアシングは起こらない（右）。第 4 章のアンチエイリアシングフィルタと同じ考え方を、デジタルで行うのである。</p>
+<figure class="align-default" id="id9">
+<span id="fig-ch10-resampling"></span><img alt="5 Hz と 30 Hz を含む信号のスペクトルと、間引くだけの場合に 30 Hz が 20 Hz に折り返す様子、LPF の後に間引くと 30 Hz が除かれる様子" src="_images/fig_ch10_resampling.svg" />
+<figcaption>
+<p><span class="caption-number">図 40 </span><span class="caption-text">ダウンサンプリング：元の信号（左）、間引くだけ（中）、LPF の後に間引く（右）</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>アップサンプリング</strong>：標本化周波数を <span class="math notranslate nohighlight">\(U\)</span> 倍にするには、各標本の間に <span class="math notranslate nohighlight">\(U - 1\)</span> 個の 0 を挿入し、その後に LPF を掛ける。0 を挿入しただけの信号のスペクトルには、元のスペクトルの複製（イメージ）が現れるので、LPF でそれを取り除き、標本の間を補間する。この処理を<a class="reference internal" href="appendix_a_glossary.html#term-0"><span class="xref std std-term">アップサンプリング</span></a>（補間）という。理想的な LPF を使えば、第 4 章の sinc 補間と同じ結果になる。</p>
+<p>標本化周波数を <span class="math notranslate nohighlight">\(U/D\)</span> 倍にするには、<span class="math notranslate nohighlight">\(U\)</span> 倍のアップサンプリングと <span class="math notranslate nohighlight">\(1/D\)</span> のダウンサンプリングを組み合わせる。2 つの LPF は 1 つにまとめられる。SciPy では、次の関数が使える。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">リスト 30 </span><span class="caption-text">SciPy によるリサンプリング</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos">2</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">fs</span> <span class="o">=</span> <span class="mi">48000</span>
+<span class="linenos">5</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>   <span class="c1"># 1 秒分の信号</span>
+<span class="linenos">6</span><span class="n">y</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">resample_poly</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">down</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>           <span class="c1"># 48 kHz -&gt; 16 kHz</span>
+<span class="linenos">7</span><span class="n">z</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">resample_poly</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">up</span><span class="o">=</span><span class="mi">147</span><span class="p">,</span> <span class="n">down</span><span class="o">=</span><span class="mi">160</span><span class="p">)</span>       <span class="c1"># 48 kHz -&gt; 44.1 kHz</span>
+<span class="linenos">8</span><span class="n">w</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">decimate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>                           <span class="c1"># 48 kHz -&gt; 16 kHz（IIR の LPF を使う）</span>
+<span class="linenos">9</span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>                       <span class="c1"># 16000 44100 16000</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">resample_poly()</span></code> は、アップサンプリング、FIR の LPF、ダウンサンプリングを、無駄な計算（挿入した 0 との掛け算や、捨てる標本の計算）を省いて効率よく行う。<span class="math notranslate nohighlight">\(48000 \times 147/160 = 44100\)</span> である。</p>
+</section>
+<section id="dft">
+<h2>画像の 2 次元 DFT<a class="headerlink" href="#dft" title="Link to this heading"></a></h2>
+<p>フーリエ解析は、時間の信号だけでなく、画像のような 2 次元の信号にも使える。<span class="math notranslate nohighlight">\(M \times N\)</span> 画素の画像 <span class="math notranslate nohighlight">\(x[m, n]\)</span> の 2 次元 DFT は、次の式で定義される。</p>
+<div class="math notranslate nohighlight">
+\[X[k, l] = \sum_{m=0}^{M-1}\sum_{n=0}^{N-1} x[m, n]\, e^{-j2\pi (km/M + ln/N)}\]</div>
+<p>指数関数を <span class="math notranslate nohighlight">\(e^{-j2\pi km/M} e^{-j2\pi ln/N}\)</span> に分けられるので、2 次元 DFT は、各行を 1 次元 DFT した後、各列を 1 次元 DFT すれば計算できる。NumPy では <code class="docutils literal notranslate"><span class="pre">np.fft.fft2()</span></code> で計算する。</p>
+<p><span class="math notranslate nohighlight">\(X[k, l]\)</span> は、縦方向に <span class="math notranslate nohighlight">\(k\)</span>、横方向に <span class="math notranslate nohighlight">\(l\)</span> 回振動する縞模様の成分を表す。画像における「周波数」は、明るさが空間的に変化する細かさ（空間周波数）である。</p>
+<p><a class="reference internal" href="#fig-ch10-image-dft"><span class="std std-numref">図 41</span></a> は、Pillow で描いた長方形と円に、斜めの縞模様を加えたテスト画像の 2 次元 DFT の例である。振幅スペクトルは、<code class="docutils literal notranslate"><span class="pre">np.fft.fftshift()</span></code> で周波数 0 が中央に来るように並べ替え、対数で表示している。</p>
+<figure class="align-default" id="id11">
+<span id="fig-ch10-image-dft"></span><img alt="長方形、円、斜めの縞模様を含むテスト画像と、その振幅スペクトル、低い周波数だけを残した画像、高い周波数だけを残した画像" src="_images/fig_ch10_image_dft.svg" />
+<figcaption>
+<p><span class="caption-number">図 41 </span><span class="caption-text">画像の 2 次元 DFT：元の画像、振幅スペクトル、低域だけ、高域だけ（左から）</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>振幅スペクトルは中央（低い空間周波数）が最も明るい。多くの画像のエネルギーは、ゆっくりした明るさの変化に集中している。</p></li>
+<li><p>長方形の縦と横の縁は、横軸と縦軸の上の明るい線になる。縁と直交する方向に、急な変化（高い周波数の成分）があるからである。</p></li>
+<li><p>斜めの縞模様は、中央から斜め方向に離れた位置の 1 組の明るい点として現れる。周期的な模様は、線スペクトルになる。</p></li>
+<li><p>低い周波数だけを残すと、画像はぼやける。縁の付近には、ギブス現象による波打ちが見える。</p></li>
+<li><p>高い周波数だけを残すと、縁と縞模様だけが残る。</p></li>
+</ul>
+<p>JPEG などの画像圧縮では、2 次元 DFT の仲間である離散コサイン変換（DCT）で画像を周波数成分に分け、人の目で気付きにくい高い周波数の成分を粗く量子化して、データ量を減らしている。</p>
+</section>
+<section id="dtmf">
+<h2>DTMF 信号の検出<a class="headerlink" href="#dtmf" title="Link to this heading"></a></h2>
+<p>電話のプッシュボタンを押したときに鳴る音は、 <a class="reference internal" href="appendix_a_glossary.html#term-DTMF"><span class="xref std std-term">DTMF</span></a>（dual-tone multi-frequency）信号と呼ばれる。各ボタンは、低群の 4 つの周波数から 1 つ、高群の 4 つの周波数から 1 つを選んだ、2 つの正弦波の和で表される（<a class="reference internal" href="#table-ch10-dtmf"><span class="std std-numref">表 11</span></a>）。</p>
+<span id="table-ch10-dtmf"></span><table class="docutils align-default" id="id12">
+<caption><span class="caption-number">表 11 </span><span class="caption-text">DTMF の周波数の割り当て</span><a class="headerlink" href="#id12" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head stub"><p>低群 / 高群</p></th>
+<th class="head"><p>1209 Hz</p></th>
+<th class="head"><p>1336 Hz</p></th>
+<th class="head"><p>1477 Hz</p></th>
+<th class="head"><p>1633 Hz</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>697 Hz</p></th>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>770 Hz</p></th>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>B</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>852 Hz</p></th>
+<td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>941 Hz</p></th>
+<td><p>*</p></td>
+<td><p>0</p></td>
+<td><p>#</p></td>
+<td><p>D</p></td>
+</tr>
+</tbody>
+</table>
+<p>受信側では、8 つの周波数のうちどれが含まれているかを調べればよい。FFT ですべての周波数を計算することもできるが、必要なのは 8 つの周波数の値だけである。特定の周波数の DFT の値だけを効率よく求める方法に、<a class="reference internal" href="appendix_a_glossary.html#term-18"><span class="xref std std-term">ゲルツェル法</span></a>がある。</p>
+<p>ゲルツェル法は、長さ <span class="math notranslate nohighlight">\(N\)</span> のブロックについて、正規化角周波数 <span class="math notranslate nohighlight">\(\hat{\omega}_0\)</span> の成分を、次の 2 次の IIR フィルタで計算する。</p>
+<div class="math notranslate nohighlight">
+\[s[n] = x[n] + 2\cos\hat{\omega}_0 \cdot s[n-1] - s[n-2] \qquad (n = 0, 1, \ldots, N - 1)\]</div>
+<p>最後の 2 つの値 <span class="math notranslate nohighlight">\(s_1 = s[N-1]\)</span>、<span class="math notranslate nohighlight">\(s_2 = s[N-2]\)</span> から、その周波数の DTFT の大きさの 2 乗が</p>
+<div class="math notranslate nohighlight">
+\[|X(e^{j\hat{\omega}_0})|^2 = s_1^2 + s_2^2 - 2\cos\hat{\omega}_0 \cdot s_1 s_2\]</div>
+<p>で求められる。1 つの周波数あたり、1 標本につき実数の掛け算 1 回で済むので、調べる周波数が少ないときは FFT より効率がよい。また、<span class="math notranslate nohighlight">\(\hat{\omega}_0\)</span> は DFT のビンに一致していなくてもよい。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch10-goertzel">
+<div class="code-block-caption"><span class="caption-number">リスト 31 </span><span class="caption-text">dtmf_detection.py の goertzel_power()</span><a class="headerlink" href="#list-ch10-goertzel" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">54</span><span class="k">def</span><span class="w"> </span><span class="nf">goertzel_power</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">55</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ゲルツェル法で、周波数 freq [Hz] における |X|^2 を求める.</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span><span class="sd">    2 次の IIR フィルタ s[n] = x[n] + 2 cos(w) s[n-1] - s[n-2] を通し、</span>
+<span class="linenos">58</span><span class="sd">    最後の 2 つの値から |X|^2 = s1^2 + s2^2 - 2 cos(w) s1 s2 を計算する。</span>
+<span class="linenos">59</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">60</span>    <span class="n">coeff</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">/</span> <span class="n">FS</span><span class="p">))</span>
+<span class="linenos">61</span>    <span class="n">s1</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">62</span>    <span class="n">s2</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">63</span>    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+<span class="linenos">64</span>        <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="o">+</span> <span class="n">coeff</span> <span class="o">*</span> <span class="n">s1</span> <span class="o">-</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s1</span>
+<span class="linenos">65</span>    <span class="k">return</span> <span class="n">s1</span> <span class="o">*</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span> <span class="o">*</span> <span class="n">s2</span> <span class="o">-</span> <span class="n">coeff</span> <span class="o">*</span> <span class="n">s1</span> <span class="o">*</span> <span class="n">s2</span>
+</pre></div>
+</div>
+</div>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">dtmf_detection.py</span></code> は、12 個のキーの DTMF 信号（1 つのキーあたり 80 ms、間に 40 ms の無音）を作って白色雑音を加え、ゲルツェル法で検出する。各ブロックで、低群と高群のそれぞれで値が最大の周波数を選び、キーを判定している。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 32 </span><span class="caption-text">dtmf_detection.py の実行結果</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>送ったキー: 0123456789*#
+検出したキー: 0123456789*#
+937.5 Hz の |X|^2: ゲルツェル法 = 19026.5、FFT = 19026.5
+</pre></div>
+</div>
+</div>
+<p>雑音があっても、すべてのキーを正しく検出できている。実行結果の最後の行は、ゲルツェル法の値が、同じ周波数の FFT の値 <span class="math notranslate nohighlight">\(|X[k]|^2\)</span> と一致することを確かめたものである。<a class="reference internal" href="#fig-ch10-dtmf"><span class="std std-numref">図 42</span></a> は、キー「5」（770 Hz と 1336 Hz）の信号のスペクトルと、ゲルツェル法で求めた 8 つの周波数の値である。</p>
+<figure class="align-default" id="id14">
+<span id="fig-ch10-dtmf"></span><img alt="キー 5 の DTMF 信号のスペクトルで 770 Hz と 1336 Hz にピークがある様子と、ゲルツェル法で求めた 8 つの周波数の値の棒グラフ" src="_images/dtmf_detection.svg" />
+<figcaption>
+<p><span class="caption-number">図 42 </span><span class="caption-text">キー「5」の DTMF 信号のスペクトル（左）とゲルツェル法の値（右）</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>この例では、キーの音と無音の長さが分かっているものとして信号を区切った。実際の受信機では、信号の強さや、低群と高群の強さの比などから、音の始まりと終わりを判定する必要がある。DTMF の規格（ITU-T Q.23 など）では、周波数の許容誤差や、音の最短の長さが定められている。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/e354374a306c6ef1e245684c6edfd0ac/dtmf_detection.py"><code class="xref download docutils literal notranslate"><span class="pre">dtmf_detection.py</span></code></a></p>
+</section>
+<section id="id4">
+<h2>まとめ<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>周波数で雑音を除去できるのは、信号と雑音の周波数の範囲が異なる場合だけである。通過域に入った雑音は取り除けない。</p></li>
+<li><p>FFT による除去は手軽だが、リアルタイムの処理には向かず、波打ちが生じることがある。目的に合わせて設計したフィルタのほうが安全である。</p></li>
+<li><p>長いインパルス応答との畳み込みは、オーバーラップ加算法などで FFT を使うと高速に計算できる。</p></li>
+<li><p>ダウンサンプリングの前には LPF でエイリアシングを防ぎ、アップサンプリングの後には LPF でイメージを取り除く。</p></li>
+<li><p>2 次元 DFT で画像の空間周波数を解析できる。</p></li>
+<li><p>少数の周波数だけを調べるには、ゲルツェル法が効率的である。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch09_digital_filters.html" class="btn btn-neutral float-left" title="第 9 章 デジタルフィルタ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch11_further_study.html" class="btn btn-neutral float-right" title="第 11 章 さらに学ぶために" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

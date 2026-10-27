@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. 発展的な話題 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="9. Python による実装" href="implementation.html" />
+    <link rel="prev" title="7. 応用" href="applications.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. 発展的な話題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">8.1. 確率的セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">8.2. 非同期セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">8.3. 連続値・連続空間のセル・オートマトン</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#smoothlife">8.3.1. SmoothLife</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lenia">8.3.2. Lenia</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">8.4. ニューラル・セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">8.5. 量子セル・オートマトン</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8. </span>発展的な話題</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">8. </span>発展的な話題<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>第 2 章「<a class="reference internal" href="basics.html"><span class="doc">基本概念と定義</span></a>」で定義した CA は、決定的な規則・同期更新・有限個の状態・離散的な空間という 4 つの性質を持っていた。本章では、これらの性質の一部を緩めた CA の拡張を紹介する。</p>
+<section id="id2">
+<h2><span class="section-number">8.1. </span>確率的セル・オートマトン<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>局所規則が次の状態を 1 つに決めるのではなく、近傍の状態に応じて各状態になる確率を与える CA を<a class="reference internal" href="glossary.html#term-5"><span class="xref std std-term">確率的 CA</span></a> と呼ぶ。第 7 章「<a class="reference internal" href="applications.html"><span class="doc">応用</span></a>」で扱ったナーゲル・シュレッケンベルク・モデルや森林火災のモデルは、確率的 CA の例である。</p>
+<p>確率的 CA は、統計物理学の模型と深い関係がある。たとえば、ドマニー（E. Domany）とキンツェル（W. Kinzel）が導入した 1 次元の確率的 CA（ドマニー・キンツェル・モデル）では、各セルが近傍の状態に応じた確率で 1 になる <a class="reference internal" href="references.html#domany1984" id="id3"><span>[Domany1984]</span></a>。この確率を変えていくと、1 のセルが最終的に消滅する相と、生き残り続ける相との間で相転移が起こる。この相転移は、多孔質の物質に液体が一方向に染み込むかどうかを表す「有向パーコレーション」と同じ普遍性クラスに属する（相転移点付近の振る舞いを特徴付ける臨界指数が共通であるという意味である）。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">8.2. </span>非同期セル・オートマトン<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>標準的な CA は全セルを同時に更新するが、自然界の現象では、すべての要素が共通の時計に従って一斉に変化するとは限らない。そこで、毎ステップ、ランダムに選んだセルを 1 つずつ更新する、各セルを確率 <span class="math notranslate nohighlight">\(\alpha\)</span> で更新する、といった<a class="reference internal" href="glossary.html#term-32"><span class="xref std std-term">非同期更新</span></a>の CA が研究されている。</p>
+<p>非同期更新にすると、同期更新の CA の振る舞いは大きく変わりうる。たとえばライフゲームを非同期に更新すると、グライダーのような精密な構造は保たれず、パターンの性質が変わる。シェーンフィッシュ（B. Schönfisch）とド・ルース（A. de Roos）は、さまざまな非同期更新の方式を比較し、同期更新で得られた結果の中には更新方式に強く依存するものがあることを示した <a class="reference internal" href="references.html#schonfisch1999" id="id5"><span>[Schonfisch1999]</span></a>。CA を現実の現象のモデルとして使う場合は、結果が更新方式に依存しないかを確かめることが重要である。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">8.3. </span>連続値・連続空間のセル・オートマトン<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>セルの状態を有限集合ではなく実数とし、さらに近傍を広くとって空間を実質的に連続とみなす拡張も研究されている。</p>
+<section id="smoothlife">
+<h3><span class="section-number">8.3.1. </span>SmoothLife<a class="headerlink" href="#smoothlife" title="Link to this heading"></a></h3>
+<p>ラフラー（S. Rafler）が 2011 年に発表した SmoothLife は、ライフゲームを連続空間に拡張したモデルである <a class="reference internal" href="references.html#rafler2011" id="id7"><span>[Rafler2011]</span></a>。各点の状態を 0〜1 の実数とし、ライフゲームの「中心のセル」と「周囲 8 セル」を、それぞれ「小さな円板内の平均」と「その外側の円環内の平均」で置き換える。誕生と生存の条件も、整数の個数の代わりに円環内の平均値の区間で与える。SmoothLife では、グライダーに相当する滑らかな形の移動パターンが、さまざまな方向に動くことが観察されている。</p>
+</section>
+<section id="lenia">
+<h3><span class="section-number">8.3.2. </span>Lenia<a class="headerlink" href="#lenia" title="Link to this heading"></a></h3>
+<p>チャンが 2019 年に発表した Lenia は、SmoothLife の考え方をさらに一般化したモデルである <a class="reference internal" href="references.html#chan2019" id="id8"><span>[Chan2019]</span></a>。各セルの状態 <span class="math notranslate nohighlight">\(A(x) \in [0, 1]\)</span> は次の規則で更新される。</p>
+<div class="math notranslate nohighlight">
+\[A^{t + \Delta t}(x) = \mathrm{clip}\Bigl( A^t(x) + \Delta t \cdot G\bigl( (K * A^t)(x) \bigr),\ 0,\ 1 \Bigr)\]</div>
+<p>ここで <span class="math notranslate nohighlight">\(K * A\)</span> は、円環状の重み関数（カーネル）<span class="math notranslate nohighlight">\(K\)</span> と状態 <span class="math notranslate nohighlight">\(A\)</span> の畳み込みであり、周囲のセルの状態の重み付き平均を表す。<span class="math notranslate nohighlight">\(G\)</span> は「成長関数」と呼ばれ、周囲の平均がある値の付近にあれば正（成長）、そこから離れると負（減衰）の値をとる釣鐘型の関数である。<span class="math notranslate nohighlight">\(\mathrm{clip}\)</span> は値を 0〜1 の範囲に収める関数である。</p>
+<p>ライフゲームは、<span class="math notranslate nohighlight">\(K\)</span> を周囲 8 セルを数える関数、<span class="math notranslate nohighlight">\(G\)</span> を誕生・生存の条件を表す階段関数、<span class="math notranslate nohighlight">\(\Delta t = 1\)</span> としたときの Lenia の特別な場合とみなせる。<span class="math notranslate nohighlight">\(\Delta t\)</span> を小さくし、カーネルを滑らかにすると、時間・空間・状態のすべてが連続に近づく。Lenia では、原生生物のように見える数百種類の「生物」が見つかっており、それらを生物学のように分類・命名する試みも行われている。</p>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">8.4. </span>ニューラル・セル・オートマトン<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>これまで扱った CA では、人間が局所規則を設計し、その結果として現れる振る舞いを調べてきた。逆に、望ましい振る舞いを先に決め、それを実現する局所規則を機械学習で求めるのが<a class="reference internal" href="glossary.html#term-30"><span class="xref std std-term">ニューラル・セル・オートマトン</span></a>である。</p>
+<p>モルドヴィンツェフらのモデル <a class="reference internal" href="references.html#mordvintsev2020" id="id10"><span>[Mordvintsev2020]</span></a> では、各セルの状態は 16 個の実数からなるベクトルであり、そのうち 4 個が画素の色と不透明度（RGBA）を、残りが外から見えない内部状態を表す。各ステップの更新は次のように行う。</p>
+<ol class="arabic simple">
+<li><p><strong>知覚</strong>：各セルは、自分の状態と、周囲 3 × 3 のセルの状態に縦・横方向の微分フィルター（ソーベル・フィルター）をかけた値を観測する。</p></li>
+<li><p><strong>更新量の計算</strong>：観測した値を小さなニューラルネットワークに入力し、状態の更新量を出力する。このネットワークはすべてのセルで共通であり、これが局所規則に相当する。</p></li>
+<li><p><strong>確率的な更新</strong>：各セルは確率 1/2 で更新量を自分の状態に加える。これにより、全セルが同期して動くことを前提としない、頑健な規則が学習される。</p></li>
+</ol>
+<p>1 個のセルから始めて一定ステップ後に目標の画像（たとえばトカゲの絵文字）が得られるように、ネットワークの重みを誤差逆伝播法で学習する。学習した CA は、目標の形に「成長」するだけでなく、途中で一部を削られても元の形を「再生」できる。この性質から、ニューラル・セル・オートマトンは生物の発生や再生の仕組みを考えるモデルとしても注目されている。ニューラル・セル・オートマトンは CA と深層学習を結び付けた例であり、画像のテクスチャ生成などにも応用されている。</p>
+</section>
+<section id="id11">
+<h2><span class="section-number">8.5. </span>量子セル・オートマトン<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>量子力学の法則に従う CA も研究されている。各セルが量子系であり、全体の時間発展が、局所的な相互作用だけからなるユニタリ変換（量子力学的に可逆な変換）で表されるものを量子セル・オートマトンと呼ぶ <a class="reference internal" href="references.html#arrighi2019" id="id12"><span>[Arrighi2019]</span></a> <a class="reference internal" href="references.html#farrelly2020" id="id13"><span>[Farrelly2020]</span></a>。量子セル・オートマトンは、量子計算のモデルとして計算万能なものが存在するほか、空間を離散化した場の量子論のモデルとしても研究されている。</p>
+<p>なお、第 7 章「<a class="reference internal" href="applications.html"><span class="doc">応用</span></a>」で扱った量子ドット・セル・オートマトンは、量子効果を使った素子で古典的な CA を実現する技術であり、ここで述べた量子セル・オートマトンとは別のものである。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="applications.html" class="btn btn-neutral float-left" title="7. 応用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="implementation.html" class="btn btn-neutral float-right" title="9. Python による実装" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

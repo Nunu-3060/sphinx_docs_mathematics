@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. 格子法による 2 次元流体: Stable Fluids &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="8. 格子法の検証: キャビティ流れ" href="cavity_flow.html" />
+    <link rel="prev" title="6. 格子法の第一歩: 移流と拡散" href="advection_diffusion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. 格子法による 2 次元流体: Stable Fluids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">7.1. Stable Fluids の考え方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">7.2. 格子と境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">7.3. 外力</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">7.4. 移流: セミラグランジュ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">7.5. 拡散: 陰解法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">7.6. 圧力投影</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">7.7. 1 ステップの計算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">7.8. 結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">7.9. 検証: 発散は本当に消えたか</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">7.10. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>格子法による 2 次元流体: Stable Fluids</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stable-fluids">
+<h1><span class="section-number">7. </span>格子法による 2 次元流体: Stable Fluids<a class="headerlink" href="#stable-fluids" title="Link to this heading"></a></h1>
+<p>この章では、2 次元の非圧縮性流体を格子法で計算し、煙が立ち上る様子を再現する。手法には、Stam が 1999 年に発表した <strong>Stable Fluids</strong> 法を使う。その名のとおり、時間刻み幅を大きくしても計算が発散しない(安定な)方法であり、ゲームや映像制作で流体を実時間で計算する手法の基礎になっている。</p>
+<section id="id1">
+<h2><span class="section-number">7.1. </span>Stable Fluids の考え方<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>第 5 章のナビエ-ストークス方程式</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \mathbf{u}}{\partial t}
+= -(\mathbf{u} \cdot \nabla)\mathbf{u}
+  - \frac{1}{\rho}\nabla p
+  + \nu \nabla^2 \mathbf{u}
+  + \mathbf{f},
+\qquad \nabla \cdot \mathbf{u} = 0\]</div>
+<p>を、すべての項を同時に扱うのではなく、項ごとに分けて順番に計算する。このような方法を<strong>分離解法</strong>と呼ぶ。1 ステップの計算は<a class="reference internal" href="#fig-stable-fluids-flow"><span class="std std-numref">図 7.1</span></a> の 4 段階からなる。</p>
+<figure class="align-center" id="id11">
+<span id="fig-stable-fluids-flow"></span><div class="graphviz"><object data="_images/graphviz-34133cf40ff194f44933635c9c12e00581cf0190.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph stable_fluids {
+    graph [rankdir=LR, fontname=&quot;Meiryo&quot;, nodesep=0.3];
+    node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=&quot;#eef3fa&quot;, fontname=&quot;Meiryo&quot;, fontsize=11];
+    edge [color=&quot;#555555&quot;];
+    u0 [label=&quot;速度場\nu(t)&quot;, shape=ellipse, fillcolor=&quot;#ffffff&quot;];
+    f [label=&quot;1. 外力\n浮力などを加える&quot;];
+    a [label=&quot;2. 移流\nセミラグランジュ法&quot;];
+    d [label=&quot;3. 拡散\n陰解法&quot;];
+    p [label=&quot;4. 圧力投影\n発散を取り除く&quot;];
+    u1 [label=&quot;速度場\nu(t + Δt)&quot;, shape=ellipse, fillcolor=&quot;#ffffff&quot;];
+    u0 -&gt; f -&gt; a -&gt; d -&gt; p -&gt; u1;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 7.1 </span><span class="caption-text">Stable Fluids 法の 1 ステップ</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>各段階は、それぞれ無条件に安定な方法で計算する。そのため、全体としても時間刻み幅の制限(CFL 条件など)を受けない。圧力の項は、第 5 章で説明したように「非圧縮条件を満たすように速度場を修正する」という第 4 段階の操作に置き換えられる。</p>
+<p>煙は、この速度場に乗って運ばれる濃度の場(スカラー場)として表す。煙の濃度も、速度場と同じ方法で移流・拡散させる。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">7.2. </span>格子と境界条件<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>一辺の長さ 1 の正方形の領域を <span class="math notranslate nohighlight">\(N \times N\)</span> 個の正方形のセルに分割し(本章では <span class="math notranslate nohighlight">\(N = 128\)</span>)、各セルの中心に速度 <span class="math notranslate nohighlight">\((u, v)\)</span> と煙の濃度を置く。セルの幅は <span class="math notranslate nohighlight">\(h = 1/N\)</span> である。</p>
+<p>境界条件を扱いやすくするため、領域の外周に 1 層の<strong>ゴーストセル</strong>を加えた <span class="math notranslate nohighlight">\((N+2) \times (N+2)\)</span> の配列を使う。ゴーストセルは計算領域の外にある仮想的なセルで、壁の内側の値から境界条件に合うように値を決める。配列の添字は <code class="docutils literal notranslate"><span class="pre">[y</span> <span class="pre">方向,</span> <span class="pre">x</span> <span class="pre">方向]</span></code> の順とし、<code class="docutils literal notranslate"><span class="pre">imshow</span></code> でそのまま表示できるようにしている。</p>
+<p>領域の四方は壁とし、壁に垂直な速度成分が壁の上で 0 になるように、ゴーストセルには内側の値の符号を反転させた値を入れる。壁に平行な速度成分と煙の濃度は、内側の値をそのまま写す(壁に沿った流れは妨げない滑り条件)。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">58</span><span class="k">def</span><span class="w"> </span><span class="nf">set_boundary</span><span class="p">(</span><span class="n">kind</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">59</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ゴーストセルに境界条件を設定する。</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span><span class="sd">    領域の四方は壁とし、壁に垂直な速度成分は壁の上で 0 になるように符号を</span>
+<span class="linenos">62</span><span class="sd">    反転させ、それ以外の量は壁の内側の値をそのまま写す(勾配 0)。</span>
+<span class="linenos">63</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">64</span>    <span class="n">sign_x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="n">X_VELOCITY</span> <span class="k">else</span> <span class="mf">1.0</span>
+<span class="linenos">65</span>    <span class="n">sign_y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="n">Y_VELOCITY</span> <span class="k">else</span> <span class="mf">1.0</span>
+<span class="linenos">66</span>    <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign_x</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># 左の壁</span>
+<span class="linenos">67</span>    <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign_x</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># 右の壁</span>
+<span class="linenos">68</span>    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign_y</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 下の壁</span>
+<span class="linenos">69</span>    <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign_y</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># 上の壁</span>
+<span class="linenos">70</span>    <span class="c1"># 四隅は隣接する 2 つのゴーストセルの平均とする</span>
+<span class="linenos">71</span>    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">72</span>    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos">73</span>    <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">74</span>    <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">7.3. </span>外力<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>外力の段階では、速度に <span class="math notranslate nohighlight">\(\mathbf{f}\,\Delta t\)</span> を加えるだけである。この例では、領域の下端中央を煙の発生源とし、煙の濃度と上向きの速度を加える。さらに、流れが単調にならないよう、発生源の横向きの速度をゆっくり揺らしている。</p>
+<p>煙は周囲の空気より温かく軽いので、煙の濃い所ほど上向きの力(浮力)を受けるものとする。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">148</span><span class="k">def</span><span class="w"> </span><span class="nf">add_forces_and_sources</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">149</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;煙の発生源から煙を出し、浮力と吹き出しの速度を与える。&quot;&quot;&quot;</span>
+<span class="linenos">150</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">prm</span><span class="o">.</span><span class="n">n</span>
+<span class="linenos">151</span>    <span class="c1"># 発生源: 下端中央の小さな領域。左右にゆっくり揺らして流れを乱す</span>
+<span class="linenos">152</span>    <span class="n">cx</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos">153</span>    <span class="n">w</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">154</span>    <span class="n">src</span> <span class="o">=</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="n">cx</span> <span class="o">-</span> <span class="n">w</span><span class="p">,</span> <span class="n">cx</span> <span class="o">+</span> <span class="n">w</span><span class="p">))</span>
+<span class="linenos">155</span>    <span class="n">s</span><span class="o">.</span><span class="n">density</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">+=</span> <span class="n">prm</span><span class="o">.</span><span class="n">source_rate</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">156</span>    <span class="n">s</span><span class="o">.</span><span class="n">v</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">157</span>    <span class="n">s</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">time</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+<span class="linenos">158</span>    <span class="c1"># 浮力: 煙の濃い所ほど上向きの加速度を受ける</span>
+<span class="linenos">159</span>    <span class="n">s</span><span class="o">.</span><span class="n">v</span> <span class="o">+=</span> <span class="n">prm</span><span class="o">.</span><span class="n">buoyancy</span> <span class="o">*</span> <span class="n">s</span><span class="o">.</span><span class="n">density</span> <span class="o">*</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">7.4. </span>移流: セミラグランジュ法<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>第 6 章で見たように、移流を陽解法の差分法で計算すると、CFL 条件のために時間刻み幅が制限される。Stable Fluids では、移流を<strong>セミラグランジュ法</strong>で計算する。</p>
+<p>物理量 <span class="math notranslate nohighlight">\(q\)</span> が流れに乗って運ばれるだけなら、時刻 <span class="math notranslate nohighlight">\(t + \Delta t\)</span> に位置 <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> にある流体は、時刻 <span class="math notranslate nohighlight">\(t\)</span> には位置 <span class="math notranslate nohighlight">\(\mathbf{x} - \mathbf{u}\,\Delta t\)</span> にあったはずである。したがって</p>
+<div class="math notranslate nohighlight">
+\[q^{n+1}(\mathbf{x}) = q^n(\mathbf{x} - \mathbf{u}\,\Delta t)\]</div>
+<p>とすればよい。各セルの中心から流れを逆向きにたどった<strong>出発点</strong>の値を、前の時刻の場から読み取るのである(<a class="reference internal" href="#fig-semi-lagrangian"><span class="std std-numref">図 7.2</span></a>)。出発点は一般にセルの中心からずれるので、周囲 4 つのセルの値から<strong>双線形補間</strong>で値を求める。双線形補間は、まず <span class="math notranslate nohighlight">\(x\)</span> 方向に 2 回線形補間し、その 2 つの結果を <span class="math notranslate nohighlight">\(y\)</span> 方向に線形補間する方法である。</p>
+<figure class="align-center" id="id12">
+<span id="fig-semi-lagrangian"></span><a class="reference internal image-reference" href="_images/semi_lagrangian.png"><img alt="_images/semi_lagrangian.png" src="_images/semi_lagrangian.png" style="width: 360px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7.2 </span><span class="caption-text">セミラグランジュ法。値を求めたいセル中心(赤)から流れを逆にたどった出発点(青)の値を、周囲 4 点(橙)から補間する</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>補間した値は、必ず周囲 4 点の値の最大値と最小値の間に収まる。そのため、時間刻み幅をどれだけ大きくしても値が増幅されることはなく、計算は無条件に安定である。名前に「ラグランジュ」とあるのは、流体粒子を追跡するラグランジュ的視点の考え方を、固定した格子の上で 1 ステップ分だけ使っているからである。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">77</span><span class="k">def</span><span class="w"> </span><span class="nf">advect</span><span class="p">(</span><span class="n">kind</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f0</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">78</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;セミラグランジュ法で物理量 f0 を速度場 (u, v) に沿って運ぶ。</span>
+<span class="linenos">79</span>
+<span class="linenos">80</span><span class="sd">    各セルの中心から流れを dt だけ逆にたどった位置(出発点)の値を、</span>
+<span class="linenos">81</span><span class="sd">    周囲 4 セルの値から双線形補間で求めて新しい値とする。</span>
+<span class="linenos">82</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">83</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="linenos">84</span>    <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># 内部セルの添字 (y, x)</span>
+<span class="linenos">85</span>    <span class="c1"># 出発点の位置(セル単位)。速度 1 は 1 単位時間に領域の一辺(n セル)進む速さ</span>
+<span class="linenos">86</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="linenos">87</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="linenos">88</span>    <span class="n">i0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos">89</span>    <span class="n">j0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos">90</span>    <span class="n">sx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">i0</span>  <span class="c1"># x 方向の補間の重み</span>
+<span class="linenos">91</span>    <span class="n">sy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">j0</span>  <span class="c1"># y 方向の補間の重み</span>
+<span class="linenos">92</span>    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">f0</span><span class="p">)</span>
+<span class="linenos">93</span>    <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">94</span>        <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">sy</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">sx</span><span class="p">)</span> <span class="o">*</span> <span class="n">f0</span><span class="p">[</span><span class="n">j0</span><span class="p">,</span> <span class="n">i0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sx</span> <span class="o">*</span> <span class="n">f0</span><span class="p">[</span><span class="n">j0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">95</span>        <span class="o">+</span> <span class="n">sy</span> <span class="o">*</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">sx</span><span class="p">)</span> <span class="o">*</span> <span class="n">f0</span><span class="p">[</span><span class="n">j0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sx</span> <span class="o">*</span> <span class="n">f0</span><span class="p">[</span><span class="n">j0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">96</span>    <span class="p">)</span>
+<span class="linenos">97</span>    <span class="n">set_boundary</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="linenos">98</span>    <span class="k">return</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">np.mgrid</span></code> で全セルの添字を作り、出発点の座標と補間の重みを配列としてまとめて計算している。出発点が領域の外に出た場合は、<code class="docutils literal notranslate"><span class="pre">np.clip</span></code> で境界のセルの範囲に収める。</p>
+<p>一方で、補間は値を平均化する操作なので、第 6 章の風上差分と同様に<strong>数値拡散</strong>を生じる。ステップを重ねるたびに細かい渦や煙の輪郭がなまっていくのが、セミラグランジュ法の弱点である。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">7.5. </span>拡散: 陰解法<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>粘性による拡散 <span class="math notranslate nohighlight">\(\partial \mathbf{u} / \partial t = \nu \nabla^2 \mathbf{u}\)</span> を、第 6 章の陽解法で計算すると、拡散数の条件 <span class="math notranslate nohighlight">\(\nu \Delta t / h^2 \le 1/4\)</span>(2 次元の場合)を満たす必要がある。そこで、右辺の <span class="math notranslate nohighlight">\(\nabla^2 \mathbf{u}\)</span> を新しい時刻の値で評価する<strong>陰解法</strong>を使う。</p>
+<div class="math notranslate nohighlight">
+\[\frac{q^{n+1} - q^n}{\Delta t} = \nu \nabla^2 q^{n+1}\]</div>
+<p>ラプラシアンを差分で近似し、<span class="math notranslate nohighlight">\(a = \nu \Delta t / h^2\)</span>(第 6 章の拡散数と同じ量)とおいて整理すると、各セルについて</p>
+<div class="math notranslate nohighlight">
+\[(1 + 4a)\, q^{n+1}_{i,j} - a\left(q^{n+1}_{i+1,j} + q^{n+1}_{i-1,j} + q^{n+1}_{i,j+1} + q^{n+1}_{i,j-1}\right) = q^n_{i,j}\]</div>
+<p>という連立 1 次方程式が得られる。未知数はセルの数(約 16,000 個)だけあるが、各式に含まれる未知数は 5 個だけなので、反復法で効率よく解ける。ここでは最も単純な<strong>ヤコビ法</strong>を使う。ヤコビ法は、上の式を <span class="math notranslate nohighlight">\(q^{n+1}_{i,j}\)</span> について解いた形</p>
+<div class="math notranslate nohighlight">
+\[q^{(k+1)}_{i,j} = \frac{q^n_{i,j} + a\left(q^{(k)}_{i+1,j} + q^{(k)}_{i-1,j} + q^{(k)}_{i,j+1} + q^{(k)}_{i,j-1}\right)}{1 + 4a}\]</div>
+<p>を、前回の反復の値 <span class="math notranslate nohighlight">\(q^{(k)}\)</span> を使って全セル同時に繰り返し計算する方法である。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">101</span><span class="k">def</span><span class="w"> </span><span class="nf">diffuse</span><span class="p">(</span><span class="n">kind</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f0</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">coeff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">102</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;拡散を陰解法で計算する。</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span><span class="sd">    (1 + 4a) f[j, i] - a (周囲 4 セルの f の和) = f0[j, i] (a = coeff dt n^2)</span>
+<span class="linenos">105</span><span class="sd">    という連立 1 次方程式をヤコビ法で解く。</span>
+<span class="linenos">106</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">107</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="linenos">108</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">coeff</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
+<span class="linenos">109</span>    <span class="n">f</span> <span class="o">=</span> <span class="n">f0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">110</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+<span class="linenos">111</span>        <span class="n">neighbors</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">112</span>        <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">f0</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span> <span class="o">*</span> <span class="n">neighbors</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+<span class="linenos">113</span>        <span class="n">set_boundary</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="linenos">114</span>    <span class="k">return</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p>Stam によるゲーム向けの解説(2003 年)では、更新した値をすぐに次のセルの計算に使う<strong>ガウス-ザイデル法</strong>を使っている。ガウス-ザイデル法はヤコビ法より速く収束するが、素直な形ではセルを順番に 1 つずつ更新するため、NumPy の配列演算では書きにくい(セルを市松模様の 2 組に分けて交互に更新する red-black 順序にすれば、配列演算でも書ける)。本書では、配列演算で書けることを優先してヤコビ法を使う。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">7.6. </span>圧力投影<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>移流と拡散を終えた速度場 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> は、一般に非圧縮条件 <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{w} = 0\)</span> を満たしていない。最後の段階で、この速度場から発散を取り除く。</p>
+<p>ベクトル解析の定理(ヘルムホルツ-ホッジ分解)によれば、任意の速度場 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> は、発散が 0 の速度場 <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> と、あるスカラー場 <span class="math notranslate nohighlight">\(q\)</span> の勾配の和に分解できる。</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} = \mathbf{u} + \nabla q, \qquad \nabla \cdot \mathbf{u} = 0\]</div>
+<p>両辺の発散をとると、<span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{u} = 0\)</span> なので</p>
+<div class="math notranslate nohighlight">
+\[\nabla^2 q = \nabla \cdot \mathbf{w}\]</div>
+<p>という<strong>ポアソン方程式</strong>が得られる。これを解いて <span class="math notranslate nohighlight">\(q\)</span> を求め、<span class="math notranslate nohighlight">\(\mathbf{u} = \mathbf{w} - \nabla q\)</span> とすれば、発散が 0 の速度場が得られる。この操作を<strong>圧力投影</strong>と呼ぶ。<span class="math notranslate nohighlight">\(q\)</span> は、圧力 <span class="math notranslate nohighlight">\(p\)</span> に <span class="math notranslate nohighlight">\(\Delta t / \rho\)</span> を掛けたものに相当し、ナビエ-ストークス方程式の圧力項の効果をまとめて計算したことになる。</p>
+<p>ポアソン方程式も、拡散と同様にヤコビ法で解く。発散と勾配は中心差分で計算する。<span class="math notranslate nohighlight">\(q\)</span> の境界条件は、ゴーストセルに内側の値を写す(壁に垂直な方向の勾配を 0 にする)ものとする。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">125</span><span class="k">def</span><span class="w"> </span><span class="nf">project</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">FloatArray</span><span class="p">]:</span>
+<span class="linenos">126</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;圧力投影: 速度場から発散を取り除き、非圧縮の条件を満たす速度場を返す。</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span><span class="sd">    ポアソン方程式 ∇²p = ∇·u をヤコビ法で解き、u から ∇p を引く。</span>
+<span class="linenos">129</span><span class="sd">    ここでの p は、圧力に dt / ρ を掛けた量に相当する。</span>
+<span class="linenos">130</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">131</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="linenos">132</span>    <span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">n</span>
+<span class="linenos">133</span>    <span class="n">div</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">134</span>    <span class="n">div</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">divergence</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="linenos">135</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">136</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+<span class="linenos">137</span>        <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="n">div</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">4.0</span>
+<span class="linenos">138</span>        <span class="n">set_boundary</span><span class="p">(</span><span class="n">SCALAR</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="linenos">139</span>    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">140</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">141</span>    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+<span class="linenos">142</span>    <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+<span class="linenos">143</span>    <span class="n">set_boundary</span><span class="p">(</span><span class="n">X_VELOCITY</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="linenos">144</span>    <span class="n">set_boundary</span><span class="p">(</span><span class="n">Y_VELOCITY</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="linenos">145</span>    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2><span class="section-number">7.7. </span>1 ステップの計算<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>以上の 4 段階を順に呼び出すと、1 ステップの計算になる。速度場を更新した後、新しい速度場で煙の濃度を移流・拡散させる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">162</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">prm</span><span class="p">:</span> <span class="n">Params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">163</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;1 ステップ進める。&quot;&quot;&quot;</span>
+<span class="linenos">164</span>    <span class="c1"># 速度場の更新: 外力 → 移流 → 拡散 → 圧力投影</span>
+<span class="linenos">165</span>    <span class="n">add_forces_and_sources</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+<span class="linenos">166</span>    <span class="n">u</span> <span class="o">=</span> <span class="n">advect</span><span class="p">(</span><span class="n">X_VELOCITY</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
+<span class="linenos">167</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">advect</span><span class="p">(</span><span class="n">Y_VELOCITY</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
+<span class="linenos">168</span>    <span class="n">u</span> <span class="o">=</span> <span class="n">diffuse</span><span class="p">(</span><span class="n">X_VELOCITY</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">viscosity</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">jacobi_iterations</span><span class="p">)</span>
+<span class="linenos">169</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">diffuse</span><span class="p">(</span><span class="n">Y_VELOCITY</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">viscosity</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">jacobi_iterations</span><span class="p">)</span>
+<span class="linenos">170</span>    <span class="n">s</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">jacobi_iterations</span><span class="p">)</span>
+<span class="linenos">171</span>    <span class="c1"># 煙の濃度の更新: 新しい速度場で運び、拡散させる</span>
+<span class="linenos">172</span>    <span class="n">d</span> <span class="o">=</span> <span class="n">advect</span><span class="p">(</span><span class="n">SCALAR</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">density</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
+<span class="linenos">173</span>    <span class="n">s</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="n">diffuse</span><span class="p">(</span><span class="n">SCALAR</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">diffusivity</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">prm</span><span class="o">.</span><span class="n">jacobi_iterations</span><span class="p">)</span>
+<span class="linenos">174</span>    <span class="n">s</span><span class="o">.</span><span class="n">time</span> <span class="o">+=</span> <span class="n">prm</span><span class="o">.</span><span class="n">dt</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">7.8. </span>結果<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>時間刻み幅 <span class="math notranslate nohighlight">\(\Delta t = 0.05\)</span> で計算した煙の濃度を<a class="reference internal" href="#fig-stable-fluids"><span class="std std-numref">図 7.3</span></a> に示す。流れの速さは最大で 0.8 程度なので、1 ステップの間に流れは最大で約 5 セル分進む。第 6 章の陽解法なら CFL 条件を満たさない時間刻み幅だが、計算は安定に進む。</p>
+<figure class="align-center" id="id13">
+<span id="fig-stable-fluids"></span><img alt="_images/stable_fluids.png" src="_images/stable_fluids.png" />
+<figcaption>
+<p><span class="caption-number">図 7.3 </span><span class="caption-text">Stable Fluids による煙のシミュレーション(<span class="math notranslate nohighlight">\(128 \times 128\)</span>、色は煙の濃度)</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="_images/stable_fluids.gif"><img alt="_images/stable_fluids.gif" src="_images/stable_fluids.gif" style="width: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7.4 </span><span class="caption-text">煙のシミュレーションのアニメーション</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>煙は浮力で立ち上り、先端が丸く巻き込みながら上昇する。上の壁にぶつかると左右に広がり、発生源の揺れによって煙の柱は蛇行する。サンプルコード <a class="reference download internal" download="" href="_downloads/0e648fa66a21420927c9fb6d05c8da17/stable_fluids.py"><code class="xref download docutils literal notranslate"><span class="pre">stable_fluids.py</span></code></a> を実行すると、この様子がアニメーションで表示される。筆者の環境では 1 ステップの計算に約 35 ms かかった。</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">7.9. </span>検証: 発散は本当に消えたか<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>見た目はもっともらしいが、圧力投影は本当に非圧縮条件を満たす速度場を作れているだろうか。100 ステップ計算した後の速度場について、圧力投影の前後で発散(中心差分で計算したもの)の二乗平均平方根を比べた結果を<a class="reference internal" href="#table-divergence"><span class="std std-numref">表 7.1</span></a> に示す。</p>
+<span id="table-divergence"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 7.1 </span><span class="caption-text">ヤコビ法の反復回数と、圧力投影後に残る発散</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ヤコビ法の反復回数</p></th>
+<th class="head"><p>発散の二乗平均平方根</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>(投影前)</p></td>
+<td><p>1.229</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>0.963</p></td>
+</tr>
+<tr class="row-even"><td><p>50(サンプルコードの設定)</p></td>
+<td><p>0.763</p></td>
+</tr>
+<tr class="row-odd"><td><p>200</p></td>
+<td><p>0.544</p></td>
+</tr>
+<tr class="row-even"><td><p>1000</p></td>
+<td><p>0.351</p></td>
+</tr>
+<tr class="row-odd"><td><p>5000</p></td>
+<td><p>0.255</p></td>
+</tr>
+</tbody>
+</table>
+<p>サンプルコードの設定(50 回)では、発散は投影前の 6 割程度にしか減っていない。5000 回反復しても 2 割ほど残る。原因は 2 つある。</p>
+<p><strong>ヤコビ法の収束が遅い。</strong>ヤコビ法は、1 回の反復で情報を隣のセルにしか伝えられない。領域全体にわたる大きな波長の誤差を消すには、格子の一辺のセル数の 2 乗程度の反復が必要になる。<span class="math notranslate nohighlight">\(128 \times 128\)</span> の格子では数万回にあたり、50 回ではとても足りない。</p>
+<p><strong>離散化の不整合がある。</strong>中心差分の勾配と中心差分の発散を組み合わせると、セル <span class="math notranslate nohighlight">\(i\)</span> と 2 つ隣のセル <span class="math notranslate nohighlight">\(i \pm 2\)</span> を使う(1 つおきのセルを使う)ラプラシアンになる。一方、ポアソン方程式を解くときには、セル <span class="math notranslate nohighlight">\(i\)</span> と隣のセル <span class="math notranslate nohighlight">\(i \pm 1\)</span> を使う通常のラプラシアンを使っている。この 2 つの演算は一致しないため、ポアソン方程式を完全に解いても、中心差分で計算した発散は 0 にならない。特に、セルごとに値が交互に変わる市松模様の成分は、中心差分の発散や勾配からは見えないため、取り除くことができない。</p>
+<p>映像表現が目的なら、この程度の発散が残っても見た目に大きな問題はなく、むしろ計算の速さが優先されることが多い。しかし、定量的な予測を目的とするなら、次のような改善が必要である。</p>
+<ul class="simple">
+<li><p>反復法を、共役勾配法やマルチグリッド法など、より速く収束する方法に替える。</p></li>
+<li><p>速度をセルの中心ではなく、セルの面の中央に置く<strong>スタガード格子</strong>(MAC 格子)を使う。速度の <span class="math notranslate nohighlight">\(x\)</span> 成分をセルの左右の面に、<span class="math notranslate nohighlight">\(y\)</span> 成分を上下の面に置くと、発散・勾配・ラプラシアンが互いに整合し、ポアソン方程式を解けば発散を(反復の誤差を除いて)厳密に 0 にできる。</p></li>
+<li><p>数値拡散で失われる細かい渦を補うため、渦度閉じ込め(vorticity confinement)などの手法を加える。</p></li>
+</ul>
+<p>次の第 8 章では、ベンチマーク問題を使って、格子法の結果を定量的に検証する。</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">7.10. </span>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Stable Fluids 法は、ナビエ-ストークス方程式を外力・移流・拡散・圧力投影の 4 段階に分けて計算する。各段階が無条件に安定なので、大きな時間刻み幅を使える。</p></li>
+<li><p>セミラグランジュ法は、流れを逆にたどった出発点の値を補間して移流を計算する。安定だが、数値拡散が大きい。</p></li>
+<li><p>拡散と圧力投影では、各式が 5 個の未知数だけを含む連立 1 次方程式を反復法で解く。本書では配列演算で書けるヤコビ法を使った。</p></li>
+<li><p>圧力投影は、ポアソン方程式を解いて速度場から発散を取り除く操作である。</p></li>
+<li><p>反復回数の不足と、中心差分による離散化の不整合のため、投影後の速度場には発散が残る。結果が見た目にもっともらしくても、数値で確かめることが重要である。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="advection_diffusion.html" class="btn btn-neutral float-left" title="6. 格子法の第一歩: 移流と拡散" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cavity_flow.html" class="btn btn-neutral float-right" title="8. 格子法の検証: キャビティ流れ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

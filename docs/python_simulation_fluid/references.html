@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>参考文献 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="prev" title="用語集" href="glossary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">参考文献</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">書籍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">論文</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">時間積分法と差分法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">粒子の衝突</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">格子法による流体の計算</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sph">SPH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">ダムブレイクの理論解</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">円柱まわりの流れ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#web">ソフトウェアと Web サイト</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">参考文献</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>参考文献<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書の内容に関連する主な文献と情報源を挙げる。</p>
+<section id="id2">
+<h2>書籍<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul>
+<li><ol class="upperalpha simple" start="18">
+<li><p>Bridson, <em>Fluid Simulation for Computer Graphics</em>, 2nd ed., CRC Press, 2015.</p></li>
+</ol>
+<p>コンピューターグラフィックスのための流体シミュレーションの定番の教科書。スタガード格子(MAC 格子)、圧力投影、FLIP 法などを詳しく扱う(第 7 章、第 11 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="20">
+<li><p>Krüger, H. Kusumaatmaja, A. Kuzmin, O. Shardt, G. Silva, E. M. Viggen, <em>The Lattice Boltzmann Method: Principles and Practice</em>, Springer, 2017.</p></li>
+</ol>
+<p>格子ボルツマン法の理論と実装を網羅した教科書(第 10 章)。</p>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>論文<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>時間積分法と差分法<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul>
+<li><ol class="upperalpha simple" start="5">
+<li><p>Hairer, C. Lubich, G. Wanner, &quot;Geometric numerical integration illustrated by the Störmer–Verlet method,&quot; <em>Acta Numerica</em>, vol. 12, pp. 399–450, 2003.</p></li>
+</ol>
+<p>ベルレ法とシンプレクティック積分法の性質の解説(第 2 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="18">
+<li><p>Courant, K. Friedrichs, H. Lewy, &quot;Über die partiellen Differenzengleichungen der mathematischen Physik,&quot; <em>Mathematische Annalen</em>, vol. 100, pp. 32–74, 1928.</p></li>
+</ol>
+<p>CFL 条件の由来となった論文(第 6 章)。</p>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h3>粒子の衝突<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul>
+<li><ol class="upperalpha simple" start="16">
+<li><ol class="upperalpha simple">
+<li><p>Cundall, O. D. L. Strack, &quot;A discrete numerical model for granular assemblies,&quot; <em>Géotechnique</em>, vol. 29, no. 1, pp. 47–65, 1979.</p></li>
+</ol>
+</li>
+</ol>
+<p>個別要素法(DEM)の原論文(第 4 章)。</p>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h3>格子法による流体の計算<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul>
+<li><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="10">
+<li><p>Chorin, &quot;Numerical solution of the Navier-Stokes equations,&quot; <em>Mathematics of Computation</em>, vol. 22, no. 104, pp. 745–762, 1968.</p></li>
+</ol>
+</li>
+</ol>
+<p>射影法の原論文(第 8 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="6">
+<li><ol class="upperalpha simple" start="8">
+<li><p>Harlow, J. E. Welch, &quot;Numerical calculation of time-dependent viscous incompressible flow of fluid with free surface,&quot; <em>Physics of Fluids</em>, vol. 8, no. 12, pp. 2182–2189, 1965.</p></li>
+</ol>
+</li>
+</ol>
+<p>スタガード格子(MAC 法)の原論文(第 7 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="10">
+<li><p>Stam, &quot;Stable Fluids,&quot; <em>Proceedings of SIGGRAPH 99</em>, pp. 121–128, 1999.</p></li>
+</ol>
+<p>Stable Fluids 法の原論文(第 7 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="10">
+<li><p>Stam, &quot;Real-Time Fluid Dynamics for Games,&quot; <em>Proceedings of the Game Developer Conference</em>, 2003.</p></li>
+</ol>
+<p>Stable Fluids 法の実装を短いコードで解説した文献(第 7 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="18">
+<li><p>Fedkiw, J. Stam, H. W. Jensen, &quot;Visual simulation of smoke,&quot; <em>Proceedings of SIGGRAPH 2001</em>, pp. 15–22, 2001.</p></li>
+</ol>
+<p>煙の表現と渦度閉じ込め(vorticity confinement)の論文(第 7 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="21">
+<li><p>Ghia, K. N. Ghia, C. T. Shin, &quot;High-Re solutions for incompressible flow using the Navier-Stokes equations and a multigrid method,&quot; <em>Journal of Computational Physics</em>, vol. 48, no. 3, pp. 387–411, 1982.</p></li>
+</ol>
+<p>正方キャビティ流れの参照解として広く使われる論文(第 8 章)。</p>
+</li>
+</ul>
+</section>
+<section id="sph">
+<h3>SPH<a class="headerlink" href="#sph" title="Link to this heading"></a></h3>
+<ul>
+<li><ol class="upperalpha simple" start="12">
+<li><ol class="upperalpha simple" start="2">
+<li><p>Lucy, &quot;A numerical approach to the testing of the fission hypothesis,&quot; <em>The Astronomical Journal</em>, vol. 82, pp. 1013–1024, 1977.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><ol class="upperalpha simple" start="18">
+<li><ol class="upperalpha simple">
+<li><p>Gingold, J. J. Monaghan, &quot;Smoothed particle hydrodynamics: theory and application to non-spherical stars,&quot; <em>Monthly Notices of the Royal Astronomical Society</em>, vol. 181, pp. 375–389, 1977.</p></li>
+</ol>
+</li>
+</ol>
+<p>SPH の原論文(第 9 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="10">
+<li><p>Monaghan, &quot;Smoothed particle hydrodynamics,&quot; <em>Annual Review of Astronomy and Astrophysics</em>, vol. 30, pp. 543–574, 1992.</p></li>
+</ol>
+</li>
+</ol>
+<p>SPH の解説。人工粘性やカーネル関数を扱う(第 9 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="10">
+<li><p>Monaghan, &quot;Simulating free surface flows with SPH,&quot; <em>Journal of Computational Physics</em>, vol. 110, no. 2, pp. 399–406, 1994.</p></li>
+</ol>
+</li>
+</ol>
+<p>弱圧縮性 SPH による自由表面流れの計算(第 9 章)。</p>
+</li>
+<li><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="3">
+<li><p>Martin, W. J. Moyce, &quot;An experimental study of the collapse of liquid columns on a rigid horizontal plane,&quot; <em>Philosophical Transactions of the Royal Society of London. Series A</em>, vol. 244, no. 882, pp. 312–324, 1952.</p></li>
+</ol>
+</li>
+</ol>
+<p>ダムブレイクの実験。SPH の検証によく使われる(第 9 章)。</p>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h3>ダムブレイクの理論解<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul>
+<li><ol class="upperalpha simple">
+<li><p>Ritter, &quot;Die Fortpflanzung der Wasserwellen,&quot; <em>Zeitschrift des Vereines Deutscher Ingenieure</em>, vol. 36, no. 33, pp. 947–954, 1892.</p></li>
+</ol>
+<p>水の流出(ダムブレイク)を浅水波理論で解いたリッターの解の原論文(第 9 章)。</p>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h3>円柱まわりの流れ<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul>
+<li><ol class="upperalpha simple" start="3">
+<li><ol class="upperalpha simple" start="8">
+<li><ol class="upperalpha simple" start="11">
+<li><p>Williamson, &quot;Vortex dynamics in the cylinder wake,&quot; <em>Annual Review of Fluid Mechanics</em>, vol. 28, pp. 477–539, 1996.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>円柱の後流とカルマン渦列についての総説。ストローハル数とレイノルズ数の関係を扱う(第 10 章)。</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="web">
+<h2>ソフトウェアと Web サイト<a class="headerlink" href="#web" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名前</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://numpy.org/">NumPy</a></p></td>
+<td><p>本書のサンプルコードで使った数値計算ライブラリ</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></td>
+<td><p>本書のサンプルコードで使ったグラフ描画ライブラリ</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/barbagroup/CFDPython">CFD Python</a></p></td>
+<td><ol class="upperalpha simple" start="12">
+<li><ol class="upperalpha simple">
+<li><p>Barba らによる、Python で流体の差分法を 12 のステップで学ぶ教材</p></li>
+</ol>
+</li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://numba.pydata.org/">Numba</a></p></td>
+<td><p>Python の関数を機械語にコンパイルして高速化するライブラリ</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.taichi-lang.org/">Taichi</a></p></td>
+<td><p>Python から GPU などで並列計算を行うための言語</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.openfoam.com/">OpenFOAM</a></p></td>
+<td><p>オープンソースの格子法による流体解析ソフトウェア</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DualSPHysics/DualSPHysics">DualSPHysics</a></p></td>
+<td><p>オープンソースの SPH による流体解析ソフトウェア</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/pypr/pysph">PySPH</a></p></td>
+<td><p>Python による SPH のフレームワーク</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://palabos.unige.ch/">Palabos</a></p></td>
+<td><p>オープンソースの格子ボルツマン法のライブラリ</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="glossary.html" class="btn btn-neutral float-left" title="用語集" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

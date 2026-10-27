@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 3 章 グラフの表現 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 4 章 道と連結性" href="ch04_connectivity.html" />
+    <link rel="prev" title="第 2 章 グラフの定義と基本用語" href="ch02_basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 3 章 グラフの表現</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">隣接行列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">接続行列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">隣接リスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">辺リスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">表現の比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python による実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 3 章 グラフの表現</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 3 章 グラフの表現<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>グラフをプログラムで扱うには、頂点と辺の情報をデータ構造として表す必要がある。代表的な表現方法には、隣接行列、接続行列、隣接リスト、辺リストの 4 つがある。どの表現を選ぶかによって、メモリ使用量や各操作の速さが大きく変わる。本章では、それぞれの表現と使い分けを学ぶ。</p>
+<p>本章では、<a class="reference internal" href="#fig-ch03-graph"><span class="std std-numref">図 7</span></a> のグラフを例として使う。頂点を 0 から 4 の整数で表し、辺には <span class="math notranslate nohighlight">\(e_0\)</span> から <span class="math notranslate nohighlight">\(e_5\)</span> の番号を付けておく。</p>
+<figure class="align-center" id="id8">
+<span id="fig-ch03-graph"></span><div class="graphviz"><object data="_images/graphviz-ded5e2cdd8378d31a483dd3b837b14690254510b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    edge [fontsize=11, fontcolor=&quot;#555555&quot;];
+    0 [pos=&quot;0,0.6!&quot;]; 1 [pos=&quot;1.4,1.3!&quot;]; 2 [pos=&quot;1.4,-0.1!&quot;]; 3 [pos=&quot;2.8,1.3!&quot;]; 4 [pos=&quot;2.8,-0.1!&quot;];
+    0 -- 1 [label=&quot;e0&quot;]; 0 -- 2 [label=&quot;e1&quot;]; 1 -- 2 [label=&quot;e2&quot;];
+    1 -- 3 [label=&quot;e3&quot;]; 2 -- 4 [label=&quot;e4&quot;]; 3 -- 4 [label=&quot;e5&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 7 </span><span class="caption-text">本章で例として用いるグラフ</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id2">
+<h2>隣接行列<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 3.1（隣接行列）</p>
+<p>頂点集合が <span class="math notranslate nohighlight">\(V = \{v_1, \ldots, v_n\}\)</span> のグラフ <span class="math notranslate nohighlight">\(G\)</span> について、<span class="math notranslate nohighlight">\(n \times n\)</span> 行列 <span class="math notranslate nohighlight">\(A = (a_{ij})\)</span> を次のように定める。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}a_{ij} = \begin{cases} 1 &amp; (v_i v_j \in E) \\ 0 &amp; (\text{それ以外}) \end{cases}\end{split}\]</div>
+<p>この <span class="math notranslate nohighlight">\(A\)</span> を <span class="math notranslate nohighlight">\(G\)</span> の<strong>隣接行列</strong>という。</p>
+</div>
+<p><a class="reference internal" href="#fig-ch03-graph"><span class="std std-numref">図 7</span></a> のグラフの隣接行列は次のとおりである（行と列は頂点 0 から 4 の順）。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = \begin{pmatrix}
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0
+\end{pmatrix}\end{split}\]</div>
+<p>隣接行列には次の性質がある。</p>
+<ul class="simple">
+<li><p>無向グラフの隣接行列は対称行列である（<span class="math notranslate nohighlight">\(a_{ij} = a_{ji}\)</span>）。</p></li>
+<li><p>単純グラフでは自己ループがないので、対角成分はすべて 0 である。</p></li>
+<li><p>第 <span class="math notranslate nohighlight">\(i\)</span> 行の和は頂点 <span class="math notranslate nohighlight">\(v_i\)</span> の次数に等しい。</p></li>
+</ul>
+<p>有向グラフでは、<span class="math notranslate nohighlight">\(v_i\)</span> から <span class="math notranslate nohighlight">\(v_j\)</span> への辺があるとき <span class="math notranslate nohighlight">\(a_{ij} = 1\)</span> とする。この場合は一般に対称行列にならず、第 <span class="math notranslate nohighlight">\(i\)</span> 行の和は出次数、第 <span class="math notranslate nohighlight">\(j\)</span> 列の和は入次数になる。重み付きグラフでは、1 の代わりに辺の重みを入れた<strong>重み行列</strong>を使うことが多い。多重グラフでは、<span class="math notranslate nohighlight">\(a_{ij}\)</span> を <span class="math notranslate nohighlight">\(v_i\)</span> と <span class="math notranslate nohighlight">\(v_j\)</span> を結ぶ辺の本数とする。</p>
+<p>隣接行列の利点は、2 頂点が隣接しているかどうかを <span class="math notranslate nohighlight">\(O(1)\)</span> 時間で調べられることと、線形代数の道具がそのまま使えることである。第 14 章で見るように、行列のべき乗や固有値はグラフの重要な性質を表す。欠点は、辺の本数にかかわらず <span class="math notranslate nohighlight">\(n^2\)</span> 個の成分を記憶する必要があることと、ある頂点の隣接頂点を列挙するのに <span class="math notranslate nohighlight">\(O(n)\)</span> 時間かかることである。</p>
+</section>
+<section id="id3">
+<h2>接続行列<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 3.2（接続行列）</p>
+<p>頂点集合が <span class="math notranslate nohighlight">\(\{v_1, \ldots, v_n\}\)</span>、辺集合が <span class="math notranslate nohighlight">\(\{e_1, \ldots, e_m\}\)</span> のグラフについて、<span class="math notranslate nohighlight">\(n \times m\)</span> 行列 <span class="math notranslate nohighlight">\(B = (b_{ij})\)</span> を、頂点 <span class="math notranslate nohighlight">\(v_i\)</span> が辺 <span class="math notranslate nohighlight">\(e_j\)</span> の端点なら <span class="math notranslate nohighlight">\(b_{ij} = 1\)</span>、そうでなければ <span class="math notranslate nohighlight">\(b_{ij} = 0\)</span> と定める。この <span class="math notranslate nohighlight">\(B\)</span> を<strong>接続行列</strong>という。</p>
+</div>
+<p>接続行列の各列にはちょうど 2 つの 1 があり、第 <span class="math notranslate nohighlight">\(i\)</span> 行の和は <span class="math notranslate nohighlight">\(v_i\)</span> の次数に等しい。<a class="reference internal" href="#fig-ch03-graph"><span class="std std-numref">図 7</span></a> のグラフでは次のようになる（列は <span class="math notranslate nohighlight">\(e_0\)</span> から <span class="math notranslate nohighlight">\(e_5\)</span> の順）。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}B = \begin{pmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1
+\end{pmatrix}\end{split}\]</div>
+<p>接続行列と隣接行列の間には、次の関係がある。</p>
+<div class="math notranslate nohighlight">
+\[B B^{\mathsf{T}} = D + A\]</div>
+<p>ここで <span class="math notranslate nohighlight">\(D\)</span> は、対角成分に各頂点の次数を並べた対角行列（<strong>次数行列</strong>）である。<span class="math notranslate nohighlight">\(B B^{\mathsf{T}}\)</span> の <span class="math notranslate nohighlight">\((i, j)\)</span> 成分は <span class="math notranslate nohighlight">\(\sum_k b_{ik} b_{jk}\)</span> であり、<span class="math notranslate nohighlight">\(i \ne j\)</span> のときは <span class="math notranslate nohighlight">\(v_i\)</span> と <span class="math notranslate nohighlight">\(v_j\)</span> の両方を端点に持つ辺の本数、<span class="math notranslate nohighlight">\(i = j\)</span> のときは <span class="math notranslate nohighlight">\(v_i\)</span> に接続する辺の本数を数えていることから分かる。</p>
+<p>有向グラフでは、辺 <span class="math notranslate nohighlight">\(e_j\)</span> の始点に対応する成分を <span class="math notranslate nohighlight">\(-1\)</span>、終点に対応する成分を <span class="math notranslate nohighlight">\(+1\)</span> とする向き付きの接続行列を使う。無向グラフの各辺に任意の向きを付けてこの行列を作ると、<span class="math notranslate nohighlight">\(B B^{\mathsf{T}} = D - A\)</span> となる。<span class="math notranslate nohighlight">\(D - A\)</span> は第 14 章で扱うラプラシアン行列である。</p>
+<p>接続行列は <span class="math notranslate nohighlight">\(n \times m\)</span> の大きさを持ち、ほとんどの成分が 0 なので、アルゴリズムのためのデータ構造として使うことは少ない。主に、電気回路のキルヒホッフの法則のような理論的な定式化に使われる。</p>
+</section>
+<section id="id4">
+<h2>隣接リスト<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>各頂点について、隣接する頂点の一覧を持つ表現を<strong>隣接リスト</strong>という。<a class="reference internal" href="#fig-ch03-graph"><span class="std std-numref">図 7</span></a> のグラフの隣接リストは次のとおりである。</p>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 4 </span><span class="caption-text">隣接リストの例</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>頂点</p></th>
+<th class="head"><p>隣接する頂点</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1, 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0, 2, 3</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0, 1, 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1, 4</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>2, 3</p></td>
+</tr>
+</tbody>
+</table>
+<p>無向グラフでは各辺が 2 つの頂点のリストに 1 回ずつ現れるので、リストの長さの合計は <span class="math notranslate nohighlight">\(2m\)</span> である。したがって必要なメモリは <span class="math notranslate nohighlight">\(O(n + m)\)</span> で済む。頂点 <span class="math notranslate nohighlight">\(v\)</span> の隣接頂点の列挙は <span class="math notranslate nohighlight">\(O(\deg(v))\)</span> 時間でできるので、第 11 章の探索アルゴリズムのように「隣接頂点を順にたどる」処理に向いている。一方、2 頂点が隣接しているかを調べるには、リストを走査する <span class="math notranslate nohighlight">\(O(\deg(v))\)</span> 時間が必要になる。</p>
+<p>Python では、頂点をキー、隣接頂点のリストを値とする辞書 <code class="docutils literal notranslate"><span class="pre">dict[int,</span> <span class="pre">list[int]]</span></code> で表すのが簡単である。値をリストの代わりに集合 <code class="docutils literal notranslate"><span class="pre">set</span></code> にすれば、隣接判定も平均 <span class="math notranslate nohighlight">\(O(1)\)</span> 時間でできる。重み付きグラフでは、値を「隣接頂点と重みの組」のリストや、隣接頂点をキーとして重みを値とする辞書にする。NetworkX の <code class="docutils literal notranslate"><span class="pre">Graph</span></code> クラスも、内部では辞書の辞書として隣接リストを保持している。</p>
+</section>
+<section id="id5">
+<h2>辺リスト<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>辺を端点の組として並べただけの表現を<strong>辺リスト</strong>という。<a class="reference internal" href="#fig-ch03-graph"><span class="std std-numref">図 7</span></a> のグラフでは <code class="docutils literal notranslate"><span class="pre">[(0,</span> <span class="pre">1),</span> <span class="pre">(0,</span> <span class="pre">2),</span> <span class="pre">(1,</span> <span class="pre">2),</span> <span class="pre">(1,</span> <span class="pre">3),</span> <span class="pre">(2,</span> <span class="pre">4),</span> <span class="pre">(3,</span> <span class="pre">4)]</span></code> となる。メモリは <span class="math notranslate nohighlight">\(O(m)\)</span> で最も少ないが、ある頂点の隣接頂点を調べるには全体を走査する必要がある。</p>
+<p>辺リストは、ファイルにグラフを保存する形式や、辺を重みの順に処理するアルゴリズム（第 6 章のクラスカル法など）の入力として使われる。</p>
+</section>
+<section id="id6">
+<h2>表現の比較<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>各表現の特徴を <a class="reference internal" href="#table-ch03-compare"><span class="std std-numref">表 5</span></a> にまとめる。</p>
+<span id="table-ch03-compare"></span><table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 5 </span><span class="caption-text">グラフの表現の比較</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 18.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 17.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>操作</p></th>
+<th class="head"><p>隣接行列</p></th>
+<th class="head"><p>隣接リスト</p></th>
+<th class="head"><p>辺リスト</p></th>
+<th class="head"><p>接続行列</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>メモリ</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n + m)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(m)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(nm)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>隣接判定</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\deg(v))\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(m)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(m)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>隣接頂点の列挙</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\deg(v))\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(m)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(m)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>辺の追加</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p>行列の拡張が必要</p></td>
+</tr>
+</tbody>
+</table>
+<p>辺数 <span class="math notranslate nohighlight">\(m\)</span> が <span class="math notranslate nohighlight">\(n^2\)</span> に近いグラフを<strong>密グラフ</strong>、<span class="math notranslate nohighlight">\(n\)</span> に比例する程度のグラフを<strong>疎グラフ</strong>という。単純グラフでは <span class="math notranslate nohighlight">\(m \le n(n - 1)/2\)</span> なので、隣接行列のメモリは密グラフなら無駄が少ない。しかし、道路網や SNS のような現実の大規模ネットワークのほとんどは疎グラフである。たとえば頂点数 100 万、平均次数 10 のグラフでは、隣接行列は <span class="math notranslate nohighlight">\(10^{12}\)</span> 個の成分を必要とするのに対し、隣接リストは約 <span class="math notranslate nohighlight">\(10^7\)</span> 個の要素で済む。そのため、アルゴリズムの実装では隣接リストを使うのが基本である。行列の計算が必要な場合は、0 でない成分だけを記憶する<strong>疎行列</strong>（SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> など）を使う。</p>
+</section>
+<section id="python">
+<h2>Python による実装<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>辺リストから、隣接行列、接続行列、隣接リストを作る関数を示す（サンプルコード <code class="docutils literal notranslate"><span class="pre">graph_repr.py</span></code>）。隣接行列と接続行列には NumPy の配列を使う。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 1 </span><span class="caption-text">辺リストから各表現への変換（graph_repr.py より抜粋）</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">to_adjacency_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Edge</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">IntMatrix</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;辺リストから隣接行列を作る。A[u, v] は u と v を結ぶ辺の本数。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 6</span>        <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 7</span>    <span class="k">return</span> <span class="n">a</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">def</span><span class="w"> </span><span class="nf">to_incidence_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Edge</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">IntMatrix</span><span class="p">:</span>
+<span class="linenos">11</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;辺リストから接続行列を作る。B[v, j] は頂点 v が辺 j の端点なら 1。&quot;&quot;&quot;</span>
+<span class="linenos">12</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="n">b</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">15</span>        <span class="n">b</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">16</span>    <span class="k">return</span> <span class="n">b</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">def</span><span class="w"> </span><span class="nf">to_adjacency_list</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Edge</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AdjList</span><span class="p">:</span>
+<span class="linenos">20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;辺リストから隣接リストを作る。&quot;&quot;&quot;</span>
+<span class="linenos">21</span>    <span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)}</span>
+<span class="linenos">22</span>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos">23</span>        <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">24</span>        <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">25</span>    <span class="k">return</span> <span class="n">adj</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="k">def</span><span class="w"> </span><span class="nf">degrees</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="linenos">29</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;隣接リストから各頂点の次数を求める。&quot;&quot;&quot;</span>
+<span class="linenos">30</span>    <span class="k">return</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="n">adj</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">main</span></code> 関数では、<a class="reference internal" href="#fig-ch03-graph"><span class="std std-numref">図 7</span></a> のグラフについて各表現を作り、次数と握手補題、<span class="math notranslate nohighlight">\(B B^{\mathsf{T}} = D + A\)</span> の関係を確かめ、NetworkX で作った隣接行列と照合する。実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>隣接行列 A:
+<span class="linenos"> 2</span>[[0 1 1 0 0]
+<span class="linenos"> 3</span> [1 0 1 1 0]
+<span class="linenos"> 4</span> [1 1 0 0 1]
+<span class="linenos"> 5</span> [0 1 0 0 1]
+<span class="linenos"> 6</span> [0 0 1 1 0]]
+<span class="linenos"> 7</span>接続行列 B:
+<span class="linenos"> 8</span>[[1 1 0 0 0 0]
+<span class="linenos"> 9</span> [1 0 1 1 0 0]
+<span class="linenos">10</span> [0 1 1 0 1 0]
+<span class="linenos">11</span> [0 0 0 1 0 1]
+<span class="linenos">12</span> [0 0 0 0 1 1]]
+<span class="linenos">13</span>隣接リスト: {0: [1, 2], 1: [0, 2, 3], 2: [0, 1, 4], 3: [1, 4], 4: [2, 3]}
+<span class="linenos">14</span>次数: {0: 2, 1: 3, 2: 3, 3: 2, 4: 2}
+<span class="linenos">15</span>次数の総和 = 12  2|E| = 12
+<span class="linenos">16</span>A の行和: [2, 3, 3, 2, 2]
+<span class="linenos">17</span>B B^T == D + A: True
+<span class="linenos">18</span>NetworkX の隣接行列と一致: True
+<span class="linenos">19</span>NetworkX の次数と一致: True
+</pre></div>
+</div>
+<p>NetworkX では、<code class="docutils literal notranslate"><span class="pre">nx.to_numpy_array</span></code> で隣接行列を、<code class="docutils literal notranslate"><span class="pre">nx.incidence_matrix</span></code> で接続行列を、<code class="docutils literal notranslate"><span class="pre">nx.to_dict_of_lists</span></code> で隣接リストを得られる。逆に、<code class="docutils literal notranslate"><span class="pre">nx.from_numpy_array</span></code> や <code class="docutils literal notranslate"><span class="pre">nx.from_edgelist</span></code> で各表現からグラフを作ることもできる。</p>
+</section>
+<section id="id7">
+<h2>まとめ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>隣接行列は隣接判定が <span class="math notranslate nohighlight">\(O(1)\)</span> で線形代数と相性がよいが、メモリが <span class="math notranslate nohighlight">\(O(n^2)\)</span> 必要である。</p></li>
+<li><p>接続行列は頂点と辺の接続関係を表し、<span class="math notranslate nohighlight">\(B B^{\mathsf{T}} = D + A\)</span> の関係がある。主に理論的な定式化に使う。</p></li>
+<li><p>隣接リストはメモリが <span class="math notranslate nohighlight">\(O(n + m)\)</span> で、隣接頂点を順にたどる処理に向く。疎グラフのアルゴリズムでは隣接リストが基本である。</p></li>
+<li><p>辺リストは辺を一括して処理するアルゴリズムやファイル形式に使う。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch02_basics.html" class="btn btn-neutral float-left" title="第 2 章 グラフの定義と基本用語" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch04_connectivity.html" class="btn btn-neutral float-right" title="第 4 章 道と連結性" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

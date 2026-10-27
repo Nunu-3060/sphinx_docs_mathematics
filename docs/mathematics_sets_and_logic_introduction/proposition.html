@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 命題と論理演算 &mdash; 論理・集合入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=27372ee5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="3. 論理式の同値変形" href="equivalence.html" />
+    <link rel="prev" title="1. はじめに" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            論理・集合入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 命題と論理演算</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.1. 命題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.2. 論理演算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.3. 真理値表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.4. 含意の真理値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.5. 論理式と結合の強さ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">2.6. Python の論理演算子との対応</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.7. サンプルコード</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="equivalence.html">3. 論理式の同値変形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">4. 推論と証明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate.html">5. 述語と量化子</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">6. 集合の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relation.html">7. 関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">8. 写像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality.html">9. 集合の大きさ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paradox.html">10. 素朴集合論の限界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">付録 C 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">論理・集合入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>命題と論理演算</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">2. </span>命題と論理演算<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本章では、論理の最小単位である命題と、命題どうしを組み合わせる論理演算を導入する。</p>
+<section id="id2">
+<h2><span class="section-number">2.1. </span>命題<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（命題）</p>
+<p>真であるか偽であるかが定まる主張を命題という。命題が真であるか偽であるかを、その命題の真理値という。</p>
+</div>
+<p>本書では、真理値の真を T、偽を F で表す。次の例を見てみよう。</p>
+<ul class="simple">
+<li><p>「2 は素数である」は真の命題である。</p></li>
+<li><p>「10 は 3 で割り切れる」は偽の命題である。</p></li>
+<li><p>「このプログラムは速い」は、何をもって速いとするかが決まっていないため命題ではない。</p></li>
+<li><p>「<span class="math notranslate nohighlight">\(x &gt; 3\)</span>」は、<span class="math notranslate nohighlight">\(x\)</span> の値が決まるまで真偽が定まらないため、このままでは命題ではない。このように変数を含む主張は、第 5 章で述語として扱う。</p></li>
+</ul>
+<p>個々の命題の中身に立ち入らず、命題を記号 <span class="math notranslate nohighlight">\(P\)</span>、<span class="math notranslate nohighlight">\(Q\)</span>、<span class="math notranslate nohighlight">\(R\)</span> などで表して議論することが多い。このような記号を命題変数という。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.2. </span>論理演算<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>既存の命題から新しい命題を作る操作を論理演算といい、論理演算を表す記号を論理記号という。基本的な論理演算は次の 5 つである。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 20.0%" />
+<col style="width: 25.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>記号</p></th>
+<th class="head"><p>読み方</p></th>
+<th class="head"><p>真になる条件</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>否定</p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg P\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> でない</p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> が偽のとき</p></td>
+</tr>
+<tr class="row-odd"><td><p>論理積</p></td>
+<td><p><span class="math notranslate nohighlight">\(P \land Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> かつ <span class="math notranslate nohighlight">\(Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> と <span class="math notranslate nohighlight">\(Q\)</span> がともに真のとき</p></td>
+</tr>
+<tr class="row-even"><td><p>論理和</p></td>
+<td><p><span class="math notranslate nohighlight">\(P \lor Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> または <span class="math notranslate nohighlight">\(Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> と <span class="math notranslate nohighlight">\(Q\)</span> の少なくとも一方が真のとき</p></td>
+</tr>
+<tr class="row-odd"><td><p>含意</p></td>
+<td><p><span class="math notranslate nohighlight">\(P \to Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> ならば <span class="math notranslate nohighlight">\(Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> が偽であるか、<span class="math notranslate nohighlight">\(Q\)</span> が真であるとき</p></td>
+</tr>
+<tr class="row-even"><td><p>同値</p></td>
+<td><p><span class="math notranslate nohighlight">\(P \leftrightarrow Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> と <span class="math notranslate nohighlight">\(Q\)</span> は同値</p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> と <span class="math notranslate nohighlight">\(Q\)</span> の真理値が一致するとき</p></td>
+</tr>
+</tbody>
+</table>
+<p>論理和は、両方が真の場合も真になる。日常語の「または」は「どちらか一方だけ」の意味で使われることもあるが、論理和はそうではない。一方だけが真のときに真になる演算は排他的論理和と呼ばれ、<span class="math notranslate nohighlight">\(P \oplus Q\)</span> と書く。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.3. </span>真理値表<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>命題変数の真理値のすべての組み合わせについて、論理式の真理値を並べた表を真理値表という。基本的な論理演算の真理値表は次のとおりである。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(P\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(Q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\neg P\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P \land Q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P \lor Q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P \to Q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P \leftrightarrow Q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+</tr>
+<tr class="row-odd"><td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-even"><td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-odd"><td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+</tr>
+</tbody>
+</table>
+<p>命題変数が <span class="math notranslate nohighlight">\(n\)</span> 個あれば、真理値の組み合わせは <span class="math notranslate nohighlight">\(2^n\)</span> 通りあるので、真理値表は <span class="math notranslate nohighlight">\(2^n\)</span> 行になる。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.4. </span>含意の真理値<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>含意 <span class="math notranslate nohighlight">\(P \to Q\)</span> において、<span class="math notranslate nohighlight">\(P\)</span> を前件、<span class="math notranslate nohighlight">\(Q\)</span> を後件という。含意の真理値表で戸惑いやすいのは、前件 <span class="math notranslate nohighlight">\(P\)</span> が偽のとき、後件 <span class="math notranslate nohighlight">\(Q\)</span> の真偽にかかわらず <span class="math notranslate nohighlight">\(P \to Q\)</span> が真になる点である。</p>
+<p>これは「約束が破られたかどうか」と考えると納得しやすい。「雨が降ったら試合を中止する」という約束が破られるのは、雨が降ったのに試合を中止しなかった場合だけである。雨が降らなかった場合は、試合を中止しても中止しなくても、約束を破ったことにはならない。含意 <span class="math notranslate nohighlight">\(P \to Q\)</span> が偽になるのも、<span class="math notranslate nohighlight">\(P\)</span> が真で <span class="math notranslate nohighlight">\(Q\)</span> が偽の場合だけである。</p>
+<p>また、含意は因果関係を表すものではない。「1 + 1 = 2 ならば、東京は日本の首都である」は、前件と後件に何の関係もないが、どちらも真なので含意としては真である。含意はあくまで真理値だけで決まる演算である。</p>
+<p>なお、真理値表から分かるとおり、<span class="math notranslate nohighlight">\(P \to Q\)</span> は <span class="math notranslate nohighlight">\(\neg P \lor Q\)</span> と同じ真理値をとる。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.5. </span>論理式と結合の強さ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>命題変数と論理記号を組み合わせて作った式を論理式という。たとえば <span class="math notranslate nohighlight">\((P \to Q) \land (Q \to P)\)</span> は論理式である。</p>
+<p>括弧を減らすため、論理記号の結合の強さを <span class="math notranslate nohighlight">\(\neg\)</span>、<span class="math notranslate nohighlight">\(\land\)</span>、<span class="math notranslate nohighlight">\(\lor\)</span>、<span class="math notranslate nohighlight">\(\to\)</span>、<span class="math notranslate nohighlight">\(\leftrightarrow\)</span> の順に強いものとする。たとえば <span class="math notranslate nohighlight">\(\neg P \lor Q \land R\)</span> は <span class="math notranslate nohighlight">\((\neg P) \lor (Q \land R)\)</span> を表す。<span class="math notranslate nohighlight">\(\to\)</span> を続けて書く場合など、紛らわしいときは括弧を省略しない。</p>
+<p>複雑な論理式の真理値表は、部分式ごとに列を設けて順に計算する。次の表は、<span class="math notranslate nohighlight">\((P \to Q) \land (Q \to P)\)</span> の真理値が <span class="math notranslate nohighlight">\(P \leftrightarrow Q\)</span> と一致することを示している。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(P\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(Q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P \to Q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(Q \to P\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\((P \to Q) \land (Q \to P)\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(P \leftrightarrow Q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+</tr>
+<tr class="row-odd"><td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-even"><td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-odd"><td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+<td><p>T</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="python">
+<h2><span class="section-number">2.6. </span>Python の論理演算子との対応<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>Python の <code class="docutils literal notranslate"><span class="pre">bool</span></code> 型の値 <code class="docutils literal notranslate"><span class="pre">True</span></code> と <code class="docutils literal notranslate"><span class="pre">False</span></code> を真理値とみなすと、論理演算は次のように書ける。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>論理演算</p></th>
+<th class="head"><p>Python の式</p></th>
+<th class="head"><p>備考</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\neg P\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">p</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(P \land Q\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">and</span> <span class="pre">q</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(P \lor Q\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">or</span> <span class="pre">q</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(P \to Q\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">p</span> <span class="pre">or</span> <span class="pre">q</span></code></p></td>
+<td><p>含意を表す演算子は無い。<code class="docutils literal notranslate"><span class="pre">bool</span></code> 型どうしなら <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;=</span> <span class="pre">q</span></code> でもよい。</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(P \leftrightarrow Q\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">==</span> <span class="pre">q</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(P \oplus Q\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">!=</span> <span class="pre">q</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code> 型どうしなら <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">^</span> <span class="pre">q</span></code> でもよい。</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;=</span> <span class="pre">q</span></code> で含意を表せるのは、Python では <code class="docutils literal notranslate"><span class="pre">False</span> <span class="pre">&lt;</span> <span class="pre">True</span></code> であり、<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&lt;=</span> <span class="pre">q</span></code> が偽になるのは <code class="docutils literal notranslate"><span class="pre">p</span></code> が <code class="docutils literal notranslate"><span class="pre">True</span></code> で <code class="docutils literal notranslate"><span class="pre">q</span></code> が <code class="docutils literal notranslate"><span class="pre">False</span></code> の場合だけだからである。ただし、意図が読み取りにくいので、実際のコードでは <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">p</span> <span class="pre">or</span> <span class="pre">q</span></code> と書くほうがよい。</p>
+<p>Python の論理演算子は、数学の論理演算と次の点で異なる。</p>
+<p><strong>短絡評価</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">and</span></code> と <code class="docutils literal notranslate"><span class="pre">or</span></code> は左の被演算子から評価し、結果が確定した時点で右の被演算子を評価しない。これを短絡評価という。真理値の計算結果は数学の論理演算と同じだが、右の被演算子に副作用がある場合や、評価すると例外が発生する場合に違いが現れる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;を評価した&quot;</span><span class="p">)</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="n">value</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="n">result</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;左&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;右&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos">7</span><span class="c1"># 「左 を評価した」だけが表示される。左が偽なので、右は評価されない。</span>
+</pre></div>
+</div>
+<p>この性質は、<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span> <span class="pre">and</span> <span class="pre">x.value</span> <span class="pre">&gt;</span> <span class="pre">0:</span></code> のように、前の条件が成り立つときだけ後の条件を評価したい場合に利用される。数学の <span class="math notranslate nohighlight">\(P \land Q\)</span> には評価の順序という概念が無く、<span class="math notranslate nohighlight">\(P \land Q\)</span> と <span class="math notranslate nohighlight">\(Q \land P\)</span> は常に同じ真理値をとる。</p>
+<p><strong>被演算子をそのまま返す</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">and</span></code> と <code class="docutils literal notranslate"><span class="pre">or</span></code> の結果は <code class="docutils literal notranslate"><span class="pre">bool</span></code> 型とは限らず、どちらかの被演算子がそのまま返る。たとえば <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">or</span> <span class="pre">&quot;abc&quot;</span></code> の値は <code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span></code> であり、<code class="docutils literal notranslate"><span class="pre">[]</span> <span class="pre">and</span> <span class="pre">1</span></code> の値は <code class="docutils literal notranslate"><span class="pre">[]</span></code> である。Python では <code class="docutils literal notranslate"><span class="pre">0</span></code>、空文字列、空のリストなどが偽として扱われる（このような値を falsy という）ためである。論理演算として扱う場合は、被演算子を <code class="docutils literal notranslate"><span class="pre">bool</span></code> 型にそろえておくとよい。</p>
+<p><strong>ビット演算子との混同</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code>、<code class="docutils literal notranslate"><span class="pre">|</span></code>、<code class="docutils literal notranslate"><span class="pre">~</span></code> はビット演算子であり、論理演算子ではない。<code class="docutils literal notranslate"><span class="pre">bool</span></code> 型どうしの <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> と <code class="docutils literal notranslate"><span class="pre">|</span></code> は論理積・論理和と同じ結果になるが、<code class="docutils literal notranslate"><span class="pre">~True</span></code> の値は <code class="docutils literal notranslate"><span class="pre">False</span></code> ではなく <code class="docutils literal notranslate"><span class="pre">-2</span></code> になる。<code class="docutils literal notranslate"><span class="pre">bool</span></code> 型が整数型 <code class="docutils literal notranslate"><span class="pre">int</span></code> の派生型であり、<code class="docutils literal notranslate"><span class="pre">~</span></code> は整数のビット反転として計算されるためである。否定には必ず <code class="docutils literal notranslate"><span class="pre">not</span></code> を使う。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">2.7. </span>サンプルコード<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>論理式を「真理値を受け取って <code class="docutils literal notranslate"><span class="pre">bool</span></code> 型の値を返す関数」として表し、真理値表を表示するサンプルコードを示す。第 3 章と第 4 章で扱う恒真式・論理的同値・推論の妥当性の判定もこのファイルに含めた。</p>
+<p><a class="reference download internal" download="" href="_downloads/7b6fd518b17e7fee3f3a14d1be65560d/truth_table.py"><code class="xref download docutils literal notranslate"><span class="pre">truth_table.py</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;命題論理の真理値表を作り、恒真式・論理的同値を判定するサンプル。</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="sd">論理式は「命題変数の真理値（bool）を受け取って bool を返す関数」として表す。</span>
+<span class="linenos"> 4</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># 命題変数の個数は論理式ごとに異なるため、引数の個数は固定しない。</span>
+<span class="linenos">10</span><span class="n">Formula</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">def</span><span class="w"> </span><span class="nf">implies</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">14</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;含意 p → q の真理値を返す。&quot;&quot;&quot;</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="p">)</span> <span class="ow">or</span> <span class="n">q</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">def</span><span class="w"> </span><span class="nf">iff</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">19</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;同値 p ↔ q の真理値を返す。&quot;&quot;&quot;</span>
+<span class="linenos">20</span>    <span class="k">return</span> <span class="n">p</span> <span class="o">==</span> <span class="n">q</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="k">def</span><span class="w"> </span><span class="nf">assignments</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+<span class="linenos">24</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;n 個の命題変数への真理値の割り当てを、すべて真の行から順に列挙する。&quot;&quot;&quot;</span>
+<span class="linenos">25</span>    <span class="k">return</span> <span class="n">product</span><span class="p">((</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="k">def</span><span class="w"> </span><span class="nf">to_symbol</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="linenos">29</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;真理値を T または F で表す。&quot;&quot;&quot;</span>
+<span class="linenos">30</span>    <span class="k">return</span> <span class="s2">&quot;T&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;F&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="k">def</span><span class="w"> </span><span class="nf">print_truth_table</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="n">Formula</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">34</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;論理式 formula の真理値表を表示する。&quot;&quot;&quot;</span>
+<span class="linenos">35</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">assignments</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)):</span>
+<span class="linenos">37</span>        <span class="n">cells</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to_symbol</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">)</span>
+<span class="linenos">38</span>        <span class="nb">print</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">to_symbol</span><span class="p">(</span><span class="n">formula</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)))</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="k">def</span><span class="w"> </span><span class="nf">is_tautology</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="n">Formula</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">42</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;n 変数の論理式 formula が恒真式であるかを判定する。&quot;&quot;&quot;</span>
+<span class="linenos">43</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">formula</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">assignments</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="k">def</span><span class="w"> </span><span class="nf">is_satisfiable</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="n">Formula</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">47</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;n 変数の論理式 formula が充足可能であるかを判定する。&quot;&quot;&quot;</span>
+<span class="linenos">48</span>    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">formula</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">assignments</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="k">def</span><span class="w"> </span><span class="nf">are_equivalent</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Formula</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">Formula</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">52</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;n 変数の論理式 f と g が論理的に同値であるかを判定する。&quot;&quot;&quot;</span>
+<span class="linenos">53</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">assignments</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">57</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;真理値表: P → Q&quot;</span><span class="p">)</span>
+<span class="linenos">58</span>    <span class="n">print_truth_table</span><span class="p">(</span><span class="n">implies</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">],</span> <span class="s2">&quot;P → Q&quot;</span><span class="p">)</span>
+<span class="linenos">59</span>    <span class="nb">print</span><span class="p">()</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;排中律 P ∨ ¬P は恒真式か:&quot;</span><span class="p">,</span> <span class="n">is_tautology</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">62</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P ∧ ¬P は充足可能か:&quot;</span><span class="p">,</span> <span class="n">is_satisfiable</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span>    <span class="c1"># ド・モルガンの法則: ¬(P ∧ Q) ≡ ¬P ∨ ¬Q</span>
+<span class="linenos">65</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ド・モルガンの法則は成り立つか:&quot;</span><span class="p">,</span>
+<span class="linenos">66</span>          <span class="n">are_equivalent</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="ow">not</span> <span class="p">(</span><span class="n">p</span> <span class="ow">and</span> <span class="n">q</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">q</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span>    <span class="c1"># 対偶: P → Q ≡ ¬Q → ¬P、逆: P → Q と Q → P は同値でない</span>
+<span class="linenos">69</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P → Q と対偶 ¬Q → ¬P は同値か:&quot;</span><span class="p">,</span>
+<span class="linenos">70</span>          <span class="n">are_equivalent</span><span class="p">(</span><span class="n">implies</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">implies</span><span class="p">(</span><span class="ow">not</span> <span class="n">q</span><span class="p">,</span> <span class="ow">not</span> <span class="n">p</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="linenos">71</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P → Q と逆 Q → P は同値か:&quot;</span><span class="p">,</span>
+<span class="linenos">72</span>          <span class="n">are_equivalent</span><span class="p">(</span><span class="n">implies</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">implies</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span>    <span class="c1"># 推論の妥当性: (P ∧ (P → Q)) → Q が恒真式ならモーダスポネンスは妥当</span>
+<span class="linenos">75</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;モーダスポネンスは妥当か:&quot;</span><span class="p">,</span>
+<span class="linenos">76</span>          <span class="n">is_tautology</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">implies</span><span class="p">(</span><span class="n">p</span> <span class="ow">and</span> <span class="n">implies</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">),</span> <span class="n">q</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="linenos">77</span>    <span class="c1"># 後件肯定: (Q ∧ (P → Q)) → P は恒真式でない</span>
+<span class="linenos">78</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;後件肯定は妥当か:&quot;</span><span class="p">,</span>
+<span class="linenos">79</span>          <span class="n">is_tautology</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">implies</span><span class="p">(</span><span class="n">q</span> <span class="ow">and</span> <span class="n">implies</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">),</span> <span class="n">p</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="linenos">80</span>
+<span class="linenos">81</span>
+<span class="linenos">82</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">83</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>真理値表: P → Q
+P Q | P → Q
+T T | T
+T F | F
+F T | T
+F F | T
+
+排中律 P ∨ ¬P は恒真式か: True
+P ∧ ¬P は充足可能か: False
+ド・モルガンの法則は成り立つか: True
+P → Q と対偶 ¬Q → ¬P は同値か: True
+P → Q と逆 Q → P は同値か: False
+モーダスポネンスは妥当か: True
+後件肯定は妥当か: False
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="1. はじめに" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="equivalence.html" class="btn btn-neutral float-right" title="3. 論理式の同値変形" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

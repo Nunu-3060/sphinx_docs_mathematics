@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 14 章 代数的グラフ理論 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 15 章 ネットワーク科学への入口" href="ch15_network_science.html" />
+    <link rel="prev" title="第 13 章 ネットワークフロー" href="ch13_flow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 14 章 代数的グラフ理論</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">隣接行列のべき乗と歩道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">隣接行列の固有値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">ラプラシアン行列</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">代数的連結度</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">行列木定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">スペクトルによるグラフ分割</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pagerank">PageRank</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">ランダムサーファーモデル</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">べき乗法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 14 章 代数的グラフ理論</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 14 章 代数的グラフ理論<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>第 3 章で、グラフは隣接行列で表せることを学んだ。グラフを行列として見ると、行列のべき乗や固有値といった線形代数の道具を使ってグラフの性質を調べられる。このアプローチを<strong>代数的グラフ理論</strong>（特に固有値を扱う部分を<strong>スペクトルグラフ理論</strong>）という。本章では、隣接行列とラプラシアン行列の基本的な性質と、全域木の数え上げ、グラフの分割、Web ページの重要度の評価への応用を学ぶ。本章は、行列の積、行列式、固有値と固有ベクトルの基礎知識を前提とする。</p>
+<p>本章では、<span class="math notranslate nohighlight">\(n\)</span> 頂点のグラフの頂点を <span class="math notranslate nohighlight">\(1, \ldots, n\)</span> で表し、隣接行列を <span class="math notranslate nohighlight">\(A\)</span>、次数を対角に並べた次数行列を <span class="math notranslate nohighlight">\(D\)</span> とする。</p>
+<section id="id2">
+<h2>隣接行列のべき乗と歩道<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 14.1</p>
+<p>隣接行列 <span class="math notranslate nohighlight">\(A\)</span> の <span class="math notranslate nohighlight">\(k\)</span> 乗の <span class="math notranslate nohighlight">\((i, j)\)</span> 成分 <span class="math notranslate nohighlight">\((A^k)_{ij}\)</span> は、頂点 <span class="math notranslate nohighlight">\(i\)</span> から頂点 <span class="math notranslate nohighlight">\(j\)</span> への長さ <span class="math notranslate nohighlight">\(k\)</span> の歩道の個数に等しい。</p>
+</div>
+<p><strong>証明</strong>：<span class="math notranslate nohighlight">\(k\)</span> に関する帰納法で示す。<span class="math notranslate nohighlight">\(k = 1\)</span> のときは隣接行列の定義そのものである。<span class="math notranslate nohighlight">\(k - 1\)</span> で成り立つとすると、</p>
+<div class="math notranslate nohighlight">
+\[(A^k)_{ij} = \sum_{l=1}^{n} (A^{k-1})_{il} \, a_{lj}\]</div>
+<p>である。右辺の各項は「<span class="math notranslate nohighlight">\(i\)</span> から <span class="math notranslate nohighlight">\(l\)</span> への長さ <span class="math notranslate nohighlight">\(k - 1\)</span> の歩道の個数」に、<span class="math notranslate nohighlight">\(l\)</span> と <span class="math notranslate nohighlight">\(j\)</span> が隣接していれば 1、そうでなければ 0 を掛けたものである。長さ <span class="math notranslate nohighlight">\(k\)</span> の歩道は最後から 2 番目の頂点 <span class="math notranslate nohighlight">\(l\)</span> で分類できるので、その和は <span class="math notranslate nohighlight">\(i\)</span> から <span class="math notranslate nohighlight">\(j\)</span> への長さ <span class="math notranslate nohighlight">\(k\)</span> の歩道の個数に等しい。□</p>
+<p>対角成分 <span class="math notranslate nohighlight">\((A^k)_{ii}\)</span> は、頂点 <span class="math notranslate nohighlight">\(i\)</span> から出て <span class="math notranslate nohighlight">\(i\)</span> に戻る長さ <span class="math notranslate nohighlight">\(k\)</span> の閉歩道の個数である。三角形は、3 つの頂点のそれぞれを始点として 2 つの向きにたどれるので、長さ 3 の閉歩道として 6 回数えられる。したがって、グラフに含まれる三角形の個数は <span class="math notranslate nohighlight">\(\operatorname{tr}(A^3) / 6\)</span> である。また、<span class="math notranslate nohighlight">\((A^2)_{ii} = \deg(i)\)</span> であり、<span class="math notranslate nohighlight">\(\operatorname{tr}(A^2) = 2m\)</span> となる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>K4 の A^3:
+<span class="linenos">2</span>[[6 7 7 7]
+<span class="linenos">3</span> [7 6 7 7]
+<span class="linenos">4</span> [7 7 6 7]
+<span class="linenos">5</span> [7 7 7 6]]
+<span class="linenos">6</span>三角形の個数 = trace(A^3) / 6 = 4
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(K_4\)</span> には 4 個の三角形があり、各頂点を通る三角形は 3 個なので、各頂点から戻る長さ 3 の閉歩道は <span class="math notranslate nohighlight">\(3 \times 2 = 6\)</span> 個である。</p>
+</section>
+<section id="id3">
+<h2>隣接行列の固有値<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>無向グラフの隣接行列は実対称行列なので、固有値はすべて実数であり、互いに直交する固有ベクトルからなる基底を持つ。隣接行列の固有値を、重複を含めてグラフの<strong>スペクトル</strong>という。頂点の番号の付け方を変えても、隣接行列は置換行列 <span class="math notranslate nohighlight">\(P\)</span> を使って <span class="math notranslate nohighlight">\(P^{\mathsf{T}} A P\)</span> に変わるだけなので、スペクトルはグラフ不変量である。</p>
+<p>隣接行列の固有値について、次の性質が知られている。最大固有値を <span class="math notranslate nohighlight">\(\lambda_1\)</span> とする。</p>
+<ul class="simple">
+<li><p>平均次数を <span class="math notranslate nohighlight">\(\bar{d}\)</span> とすると、<span class="math notranslate nohighlight">\(\bar{d} \le \lambda_1 \le \Delta(G)\)</span> が成り立つ。<span class="math notranslate nohighlight">\(k\)</span>-正則グラフでは <span class="math notranslate nohighlight">\(\lambda_1 = k\)</span> であり、固有ベクトルはすべての成分が 1 のベクトル <span class="math notranslate nohighlight">\(\mathbf{1}\)</span> である。</p></li>
+<li><p>連結グラフでは、<span class="math notranslate nohighlight">\(\lambda_1\)</span> に対応する固有ベクトルとして、すべての成分が正のものがとれる（ペロン・フロベニウスの定理）。この固有ベクトルの成分は、頂点の重要度の指標（<strong>固有ベクトル中心性</strong>、第 15 章）として使われる。</p></li>
+<li><p>グラフが二部グラフであることと、スペクトルが原点に関して対称（<span class="math notranslate nohighlight">\(\lambda\)</span> が固有値なら <span class="math notranslate nohighlight">\(-\lambda\)</span> も同じ重複度の固有値）であることは同値である。</p></li>
+</ul>
+<p>ただし、スペクトルが一致しても同型とは限らない。スペクトルが等しく同型でないグラフの組（<strong>共スペクトル</strong>なグラフ）が存在する。</p>
+</section>
+<section id="id4">
+<h2>ラプラシアン行列<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 14.1（ラプラシアン行列）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> に対し、<span class="math notranslate nohighlight">\(L = D - A\)</span> を <span class="math notranslate nohighlight">\(G\)</span> の<strong>ラプラシアン行列</strong>という。</p>
+</div>
+<p>ラプラシアン行列の対角成分は各頂点の次数、非対角成分は隣接していれば <span class="math notranslate nohighlight">\(-1\)</span>、そうでなければ 0 である。各行の和は 0 になる。名前は、関数の 2 階微分にあたる微分作用素ラプラシアンの離散版であることに由来する。第 3 章で述べたように、向き付きの接続行列 <span class="math notranslate nohighlight">\(B\)</span> を使うと <span class="math notranslate nohighlight">\(L = B B^{\mathsf{T}}\)</span> と書ける。</p>
+<p>ラプラシアン行列の最も重要な性質は、次の二次形式の表示である。ベクトル <span class="math notranslate nohighlight">\(x = (x_1, \ldots, x_n)^{\mathsf{T}}\)</span> を、各頂点に実数を割り当てたものとみなす。</p>
+<div class="math notranslate nohighlight">
+\[x^{\mathsf{T}} L x = \sum_{ij \in E} (x_i - x_j)^2\]</div>
+<p>右辺は辺ごとの両端の値の差の 2 乗和であり、隣接する頂点の値がどれだけ「ばらついているか」を表す。この式から、ラプラシアン行列の固有値について次のことが分かる。</p>
+<ul class="simple">
+<li><p>右辺は常に 0 以上なので、<span class="math notranslate nohighlight">\(L\)</span> は半正定値であり、固有値はすべて 0 以上である。固有値を <span class="math notranslate nohighlight">\(0 = \mu_1 \le \mu_2 \le \cdots \le \mu_n\)</span> と書く。</p></li>
+<li><p><span class="math notranslate nohighlight">\(L \mathbf{1} = \mathbf{0}\)</span>（各行の和が 0）なので、最小固有値は <span class="math notranslate nohighlight">\(\mu_1 = 0\)</span> である。</p></li>
+</ul>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 14.2</p>
+<p>ラプラシアン行列の固有値 0 の重複度は、グラフの連結成分の個数に等しい。</p>
+</div>
+<p><strong>証明</strong>：<span class="math notranslate nohighlight">\(Lx = 0\)</span> なら <span class="math notranslate nohighlight">\(x^{\mathsf{T}} L x = 0\)</span> であり、二次形式の表示から、すべての辺 <span class="math notranslate nohighlight">\(ij\)</span> について <span class="math notranslate nohighlight">\(x_i = x_j\)</span> となる。したがって <span class="math notranslate nohighlight">\(x\)</span> は各連結成分の上で定数である。逆に、各連結成分の上で定数のベクトルは <span class="math notranslate nohighlight">\(Lx = 0\)</span> を満たす。連結成分が <span class="math notranslate nohighlight">\(c\)</span> 個なら、このようなベクトル全体は <span class="math notranslate nohighlight">\(c\)</span> 次元の空間をなすので、固有値 0 の重複度は <span class="math notranslate nohighlight">\(c\)</span> である。□</p>
+<p>3 頂点の道グラフ <span class="math notranslate nohighlight">\(P_3\)</span> と閉路グラフ <span class="math notranslate nohighlight">\(C_4\)</span> を並べたグラフ（連結成分 2 個）では、固有値 0 がちょうど 2 個現れる（サンプルコード <code class="docutils literal notranslate"><span class="pre">spectral.py</span></code>）。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>P3 と C4 の非交和のラプラシアン固有値: [0. 0. 1. 2. 2. 3. 4.]
+</pre></div>
+</div>
+<section id="id5">
+<h3>代数的連結度<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>定理 14.2 より、グラフが連結であることと <span class="math notranslate nohighlight">\(\mu_2 &gt; 0\)</span> であることは同値である。フィードラーは <span class="math notranslate nohighlight">\(\mu_2\)</span> を<strong>代数的連結度</strong>と名付けた。<span class="math notranslate nohighlight">\(\mu_2\)</span> はグラフが連結であるかどうかだけでなく、「どれだけ切り離しにくいか」を連続的な量として表す。たとえば、完全グラフでないグラフでは <span class="math notranslate nohighlight">\(\mu_2 \le \kappa(G)\)</span>（点連結度）が成り立ち、細い部分でつながったグラフでは <span class="math notranslate nohighlight">\(\mu_2\)</span> が小さくなる。一方、完全グラフ <span class="math notranslate nohighlight">\(K_n\)</span> では <span class="math notranslate nohighlight">\(\mu_2 = n\)</span> であり、これは <span class="math notranslate nohighlight">\(n\)</span> 頂点の単純グラフで最大の値である。</p>
+</section>
+</section>
+<section id="id6">
+<h2>行列木定理<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>第 6 章で、<span class="math notranslate nohighlight">\(K_n\)</span> の全域木の個数が <span class="math notranslate nohighlight">\(n^{n-2}\)</span> であることを見た。一般のグラフの全域木の個数は、ラプラシアン行列から計算できる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 14.3（行列木定理）</p>
+<p>連結グラフ <span class="math notranslate nohighlight">\(G\)</span> の全域木の個数は、ラプラシアン行列 <span class="math notranslate nohighlight">\(L\)</span> から任意の第 <span class="math notranslate nohighlight">\(i\)</span> 行と第 <span class="math notranslate nohighlight">\(i\)</span> 列を取り除いた <span class="math notranslate nohighlight">\((n-1) \times (n-1)\)</span> 行列の行列式に等しい。また、これは <span class="math notranslate nohighlight">\(\frac{1}{n} \mu_2 \mu_3 \cdots \mu_n\)</span> にも等しい。</p>
+</div>
+<p>この定理はキルヒホッフが電気回路の研究の中で発見したもので、キルヒホッフの定理とも呼ばれる。証明は <span class="math notranslate nohighlight">\(L = B B^{\mathsf{T}}\)</span> とコーシー・ビネの公式（行列の積の小行列式の展開）を使うもので、ここでは省略する。</p>
+<p><span class="math notranslate nohighlight">\(K_n\)</span> に適用してみる。<span class="math notranslate nohighlight">\(K_n\)</span> のラプラシアン行列は <span class="math notranslate nohighlight">\(L = nI - J\)</span>（<span class="math notranslate nohighlight">\(J\)</span> は全成分が 1 の行列）であり、固有値は 0 が 1 個と <span class="math notranslate nohighlight">\(n\)</span> が <span class="math notranslate nohighlight">\(n - 1\)</span> 個である。よって全域木の個数は <span class="math notranslate nohighlight">\(\frac{1}{n} n^{n-1} = n^{n-2}\)</span> となり、ケイリーの公式が再び得られる。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 29 </span><span class="caption-text">行列木定理による全域木の数え上げ</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">count_spanning_trees</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">FloatMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;行列木定理: ラプラシアン行列から 1 行 1 列を除いた行列式が全域木の個数に等しい。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">reduced</span> <span class="o">=</span> <span class="n">laplacian</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span>
+<span class="linenos">4</span>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">reduced</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>K2 の全域木の個数: 1 (n^(n-2) = 1)
+<span class="linenos">2</span>K3 の全域木の個数: 3 (n^(n-2) = 3)
+<span class="linenos">3</span>K4 の全域木の個数: 16 (n^(n-2) = 16)
+<span class="linenos">4</span>K5 の全域木の個数: 125 (n^(n-2) = 125)
+<span class="linenos">5</span>K6 の全域木の個数: 1296 (n^(n-2) = 1296)
+<span class="linenos">6</span>ピーターセングラフの全域木の個数: 2000 NetworkX: 2000
+</pre></div>
+</div>
+<p>浮動小数点で行列式を計算するため、結果を <code class="docutils literal notranslate"><span class="pre">round</span></code> で整数に丸めている。大きなグラフでは丸め誤差に注意が必要である。</p>
+</section>
+<section id="id7">
+<h2>スペクトルによるグラフ分割<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>グラフの頂点を、間の辺がなるべく少なくなるように 2 つのグループに分ける問題を考える。コミュニティの検出、並列計算での仕事の分配、回路の分割などに現れる問題である。</p>
+<p>各頂点に <span class="math notranslate nohighlight">\(+1\)</span> または <span class="math notranslate nohighlight">\(-1\)</span> を割り当てて 2 つのグループを表すと、<span class="math notranslate nohighlight">\(x^{\mathsf{T}} L x = \sum_{ij \in E} (x_i - x_j)^2\)</span> は、グループをまたぐ辺 1 本につき 4 になり、それ以外の辺では 0 になる。つまり <span class="math notranslate nohighlight">\(x^{\mathsf{T}} L x / 4\)</span> はグループ間の辺の本数である。この値を最小化したいが、すべての頂点を同じグループにする自明な解を避けるため、グループの大きさをそろえる条件 <span class="math notranslate nohighlight">\(\sum_i x_i = 0\)</span> を課す。</p>
+<p><span class="math notranslate nohighlight">\(x_i \in \{+1, -1\}\)</span> という条件のままでは組合せ最適化問題であり、効率よく解くのは難しい。そこで、<span class="math notranslate nohighlight">\(x_i\)</span> を任意の実数に緩め、<span class="math notranslate nohighlight">\(\|x\|^2 = n\)</span> と <span class="math notranslate nohighlight">\(x \perp \mathbf{1}\)</span> の条件の下で <span class="math notranslate nohighlight">\(x^{\mathsf{T}} L x\)</span> を最小化する。線形代数の結果（レイリー商の性質）から、この最小値は <span class="math notranslate nohighlight">\(n \mu_2\)</span> であり、最小値を与える <span class="math notranslate nohighlight">\(x\)</span> は <span class="math notranslate nohighlight">\(\mu_2\)</span> の固有ベクトルである。この固有ベクトルを<strong>フィードラーベクトル</strong>という。フィードラーベクトルの成分の符号で頂点を 2 つに分けるのが、<strong>スペクトル分割</strong>である。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 30 </span><span class="caption-text">フィードラーベクトルによる 2 分割</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">fiedler_partition</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">FloatMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;2 番目に小さい固有値（代数的連結度）と、フィードラーベクトルの符号による 2 分割を返す。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">laplacian</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>  <span class="c1"># 固有値は昇順に並ぶ</span>
+<span class="linenos">4</span>    <span class="n">fiedler</span> <span class="o">=</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="linenos">5</span>    <span class="n">plus</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fiedler</span><span class="p">))</span> <span class="k">if</span> <span class="n">fiedler</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="linenos">6</span>    <span class="n">minus</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fiedler</span><span class="p">))</span> <span class="k">if</span> <span class="n">fiedler</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="linenos">7</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">plus</span><span class="p">,</span> <span class="n">minus</span>
+</pre></div>
+</div>
+</div>
+<p>2 つの <span class="math notranslate nohighlight">\(K_5\)</span> を 1 本の辺でつないだバーベルグラフに適用すると、2 つの <span class="math notranslate nohighlight">\(K_5\)</span> にきれいに分かれる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>代数的連結度 = 0.2984, 分割: [0, 1, 2, 3, 4] / [5, 6, 7, 8, 9]
+</pre></div>
+</div>
+<p>より現実的な例として、ザッカリーの空手クラブのネットワークを考える。これは 1970 年代に米国の大学の空手クラブ 34 人の交友関係を調べたもので、調査中に指導者（頂点 0）と管理者（頂点 33）の対立からクラブが 2 つに分裂した。<a class="reference internal" href="#fig-ch14-fiedler"><span class="std std-numref">図 28</span></a> は、フィードラーベクトルの符号による分割と実際の分裂を比較したものである。34 人中、頂点 2 と 8 を除く 32 人について、スペクトル分割は実際の分裂と一致している。</p>
+<figure class="align-center" id="id13">
+<span id="fig-ch14-fiedler"></span><img alt="空手クラブのネットワークのスペクトル分割" src="_images/ch14_fiedler.png" />
+<figcaption>
+<p><span class="caption-number">図 28 </span><span class="caption-text">空手クラブのネットワークのスペクトル分割。左図の色はフィードラーベクトルの符号、形は実際の分裂後の所属を表す。右図はフィードラーベクトルの各成分である。</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>このように、固有ベクトルを使ってデータをグループに分ける手法を一般に<strong>スペクトルクラスタリング</strong>という。データ点を頂点とし、点同士の類似度を辺の重みとするグラフを作れば、グラフ以外のデータにも適用できる。3 つ以上のグループに分けるには、小さい方から複数の固有ベクトルを使う。</p>
+</section>
+<section id="pagerank">
+<h2>PageRank<a class="headerlink" href="#pagerank" title="Link to this heading"></a></h2>
+<p>Web ページの重要度を、リンク構造だけから評価する方法を考える。Google の創業者らが考案した <strong>PageRank</strong> は、「重要なページからリンクされているページは重要である」という再帰的な考え方に基づく。</p>
+<section id="id8">
+<h3>ランダムサーファーモデル<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>次のように Web を移動する仮想的な閲覧者（ランダムサーファー）を考える。</p>
+<ul class="simple">
+<li><p>確率 <span class="math notranslate nohighlight">\(\alpha\)</span> で、現在のページのリンクから 1 つを等確率で選んで移動する。リンクを持たないページでは、全ページから等確率で選んで移動する。</p></li>
+<li><p>確率 <span class="math notranslate nohighlight">\(1 - \alpha\)</span> で、リンクとは無関係に、全ページから等確率で選んだページへ移動する。</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> を<strong>減衰率</strong>といい、0.85 がよく使われる。この移動を長く続けたとき、各ページに滞在している確率がそのページの PageRank である。</p>
+<p>ページ <span class="math notranslate nohighlight">\(i\)</span> からページ <span class="math notranslate nohighlight">\(j\)</span> へリンクをたどって移る確率を <span class="math notranslate nohighlight">\(P_{ji}\)</span> とする行列 <span class="math notranslate nohighlight">\(P\)</span> を作る（<span class="math notranslate nohighlight">\(i\)</span> が <span class="math notranslate nohighlight">\(k\)</span> 個のリンクを持てば、リンク先 <span class="math notranslate nohighlight">\(j\)</span> について <span class="math notranslate nohighlight">\(P_{ji} = 1/k\)</span>）。各ページの滞在確率を並べたベクトルを <span class="math notranslate nohighlight">\(x\)</span> とすると、1 ステップ後の確率は次の式で表される。</p>
+<div class="math notranslate nohighlight">
+\[x' = \alpha P x + \frac{1 - \alpha}{n} \mathbf{1}\]</div>
+<p>PageRank はこの式で変わらないベクトル、すなわち <span class="math notranslate nohighlight">\(x = \alpha P x + \frac{1 - \alpha}{n} \mathbf{1}\)</span> を満たす確率ベクトルである。<span class="math notranslate nohighlight">\(\sum_i x_i = 1\)</span> を使って書き直すと、<span class="math notranslate nohighlight">\(x\)</span> は行列 <span class="math notranslate nohighlight">\(\alpha P + \frac{1 - \alpha}{n} J\)</span> の固有値 1 に対応する固有ベクトルであることが分かる。この行列はすべての成分が正なので、ペロン・フロベニウスの定理により、そのような確率ベクトルは一意に存在する。</p>
+</section>
+<section id="id9">
+<h3>べき乗法<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>PageRank は、適当な初期値から上の式を繰り返し適用する<strong>べき乗法</strong>で求められる。<span class="math notranslate nohighlight">\(1 - \alpha\)</span> の項のおかげで、繰り返しは速く収束する（誤差は 1 回ごとに <span class="math notranslate nohighlight">\(\alpha\)</span> 倍以下に縮む）。Web 全体のような巨大な行列でも、行列とベクトルの積を繰り返すだけで計算できる点が重要である。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 31 </span><span class="caption-text">べき乗法による PageRank の計算</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">pagerank</span><span class="p">(</span><span class="n">links</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatVector</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;べき乗法で PageRank を求める。リンクを持たないページからは全ページへ均等に移るものとする。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>  <span class="c1"># p[j, i] は i から j へ移る確率</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">outs</span> <span class="ow">in</span> <span class="n">links</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos"> 6</span>        <span class="k">if</span> <span class="n">outs</span><span class="p">:</span>
+<span class="linenos"> 7</span>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">outs</span><span class="p">:</span>
+<span class="linenos"> 8</span>                <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">outs</span><span class="p">)</span>
+<span class="linenos"> 9</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">n</span>
+<span class="linenos">11</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">13</span>        <span class="n">x_new</span><span class="p">:</span> <span class="n">FloatVector</span> <span class="o">=</span> <span class="n">damping</span> <span class="o">*</span> <span class="n">p</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">damping</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+<span class="linenos">14</span>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+<span class="linenos">15</span>            <span class="k">return</span> <span class="n">x_new</span>
+<span class="linenos">16</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
+</pre></div>
+</div>
+</div>
+<figure class="align-center" id="id15">
+<span id="fig-ch14-pagerank"></span><div class="graphviz"><object data="_images/graphviz-87e8a01e0f666ceda5b1bdf3232d3e8666779cd9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph g {
+    layout=neato;
+    node [shape=box, style=&quot;rounded,filled&quot;, fillcolor=&quot;#dbe8f5&quot;, fontsize=11, width=0.9, height=0.55, fixedsize=true];
+    0 [label=&quot;0\n0.3725&quot;, pos=&quot;0,1.4!&quot;]; 1 [label=&quot;1\n0.1958&quot;, pos=&quot;2.2,1.4!&quot;];
+    2 [label=&quot;2\n0.3941&quot;, pos=&quot;1.1,0!&quot;]; 3 [label=&quot;3\n0.0375&quot;, pos=&quot;3.3,0!&quot;];
+    0 -&gt; 1; 0 -&gt; 2; 1 -&gt; 2; 2 -&gt; 0; 3 -&gt; 2;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 29 </span><span class="caption-text">PageRank の例に用いるリンク構造（数値は PageRank）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>PageRank: [0.3725 0.1958 0.3941 0.0375]
+<span class="linenos">2</span>NetworkX: [0.3725, 0.1958, 0.3941, 0.0375]
+</pre></div>
+</div>
+<p>ページ 2 は 3 つのページからリンクされているので最も高い。ページ 0 はリンク元が 2 だけだが、重要なページ 2 の唯一のリンク先なので 2 番目に高い。ページ 3 はどこからもリンクされていないので、ランダムな移動で訪れる確率 <span class="math notranslate nohighlight">\((1 - \alpha)/n = 0.0375\)</span> だけになる。PageRank は、単にリンクの数を数えるのではなく、リンク元の重要度を加味している点に特徴がある。</p>
+</section>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>隣接行列の <span class="math notranslate nohighlight">\(k\)</span> 乗の成分は長さ <span class="math notranslate nohighlight">\(k\)</span> の歩道の個数を表し、<span class="math notranslate nohighlight">\(\operatorname{tr}(A^3) / 6\)</span> は三角形の個数である。</p></li>
+<li><p>ラプラシアン行列 <span class="math notranslate nohighlight">\(L = D - A\)</span> は半正定値であり、固有値 0 の重複度は連結成分の個数に等しい。2 番目に小さい固有値（代数的連結度）はグラフの切り離しにくさを表す。</p></li>
+<li><p>行列木定理により、全域木の個数はラプラシアン行列の小行列式として計算できる。</p></li>
+<li><p>フィードラーベクトルの符号によってグラフを 2 つに分割できる（スペクトル分割）。</p></li>
+<li><p>PageRank はランダムサーファーの滞在確率であり、べき乗法で計算できる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch13_flow.html" class="btn btn-neutral float-left" title="第 13 章 ネットワークフロー" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch15_network_science.html" class="btn btn-neutral float-right" title="第 15 章 ネットワーク科学への入口" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

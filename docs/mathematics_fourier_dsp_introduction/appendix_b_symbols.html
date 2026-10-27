@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>付録 B 記号一覧 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="付録 C サンプルコード一覧" href="appendix_c_samples.html" />
+    <link rel="prev" title="付録 A 用語集" href="appendix_a_glossary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">付録 B 記号一覧</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="b">
+<h1>付録 B 記号一覧<a class="headerlink" href="#b" title="Link to this heading"></a></h1>
+<p>本書で使う主な記号を示す。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 55.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>記号</p></th>
+<th class="head"><p>意味</p></th>
+<th class="head"><p>初出</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(j\)</span></p></td>
+<td><p>虚数単位（<span class="math notranslate nohighlight">\(j^2 = -1\)</span>）</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(z^*\)</span></p></td>
+<td><p>複素数 <span class="math notranslate nohighlight">\(z\)</span> の共役複素数</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathrm{Re}\,z\)</span>、<span class="math notranslate nohighlight">\(\mathrm{Im}\,z\)</span></p></td>
+<td><p>複素数 <span class="math notranslate nohighlight">\(z\)</span> の実部、虚部</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(|z|\)</span>、<span class="math notranslate nohighlight">\(\arg z\)</span></p></td>
+<td><p>複素数 <span class="math notranslate nohighlight">\(z\)</span> の絶対値、偏角</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(t\)</span></p></td>
+<td><p>連続な時間 [s]</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f\)</span></p></td>
+<td><p>周波数 [Hz]</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\omega\)</span></p></td>
+<td><p>角周波数 <span class="math notranslate nohighlight">\(2\pi f\)</span> [rad/s]</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(A\)</span>、<span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>正弦波の振幅、位相</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\langle \boldsymbol{u}, \boldsymbol{v} \rangle\)</span></p></td>
+<td><p>内積</p></td>
+<td><p>第 1 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(T\)</span>、<span class="math notranslate nohighlight">\(f_0\)</span></p></td>
+<td><p>周期信号の基本周期と基本周波数（<span class="math notranslate nohighlight">\(f_0 = 1/T\)</span>）</p></td>
+<td><p>第 2 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(a_k\)</span>、<span class="math notranslate nohighlight">\(b_k\)</span></p></td>
+<td><p>実数形式のフーリエ係数</p></td>
+<td><p>第 2 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(c_k\)</span></p></td>
+<td><p>複素フーリエ係数</p></td>
+<td><p>第 2 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x(t)\)</span>、<span class="math notranslate nohighlight">\(X(f)\)</span></p></td>
+<td><p>連続時間信号と、そのフーリエ変換</p></td>
+<td><p>第 3 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x(t) \leftrightarrow X(f)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(x(t)\)</span> と <span class="math notranslate nohighlight">\(X(f)\)</span> がフーリエ変換の対であること</p></td>
+<td><p>第 3 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathrm{sinc}(x)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sin(\pi x)/(\pi x)\)</span></p></td>
+<td><p>第 3 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathrm{rect}(t)\)</span></p></td>
+<td><p>幅 1 の矩形パルス</p></td>
+<td><p>第 3 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(u(t)\)</span>、<span class="math notranslate nohighlight">\(u[n]\)</span></p></td>
+<td><p>単位ステップ関数</p></td>
+<td><p>第 3 章、第 5 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\delta(t)\)</span></p></td>
+<td><p>デルタ関数</p></td>
+<td><p>第 3 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x * h\)</span></p></td>
+<td><p>畳み込み</p></td>
+<td><p>第 3 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(T_s\)</span>、<span class="math notranslate nohighlight">\(f_s\)</span></p></td>
+<td><p>標本化周期 [s] と標本化周波数 [Hz]（<span class="math notranslate nohighlight">\(f_s = 1/T_s\)</span>）</p></td>
+<td><p>第 4 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(B\)</span></p></td>
+<td><p>信号の帯域幅 [Hz]</p></td>
+<td><p>第 4 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Delta\)</span></p></td>
+<td><p>量子化の刻み</p></td>
+<td><p>第 4 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p>離散時間の時刻（標本の番号）</p></td>
+<td><p>第 4 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(x[n]\)</span></p></td>
+<td><p>離散時間信号</p></td>
+<td><p>第 4 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\omega}\)</span></p></td>
+<td><p>正規化角周波数 <span class="math notranslate nohighlight">\(2\pi f/f_s\)</span> [rad/標本]</p></td>
+<td><p>第 5 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\delta[n]\)</span></p></td>
+<td><p>単位インパルス</p></td>
+<td><p>第 5 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(h[n]\)</span></p></td>
+<td><p>インパルス応答</p></td>
+<td><p>第 5 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(H(e^{j\hat{\omega}})\)</span></p></td>
+<td><p>周波数応答</p></td>
+<td><p>第 5 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(H(z)\)</span></p></td>
+<td><p>伝達関数</p></td>
+<td><p>第 5 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(b_k\)</span>、<span class="math notranslate nohighlight">\(a_k\)</span></p></td>
+<td><p>差分方程式と伝達関数の分子と分母の係数</p></td>
+<td><p>第 5 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(X(e^{j\hat{\omega}})\)</span></p></td>
+<td><p>離散時間フーリエ変換（DTFT）</p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(N\)</span></p></td>
+<td><p>DFT の長さ（点の数）</p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(k\)</span></p></td>
+<td><p>DFT のビンの番号（周波数 <span class="math notranslate nohighlight">\(kf_s/N\)</span> に対応）</p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(X[k]\)</span></p></td>
+<td><p>離散フーリエ変換（DFT）</p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(W_N\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{-j2\pi/N}\)</span></p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((\cdot)_N\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(N\)</span> で割った余り</p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x \circledast y\)</span></p></td>
+<td><p>循環畳み込み</p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(w[n]\)</span></p></td>
+<td><p>窓関数</p></td>
+<td><p>第 8 章</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(X[m, k]\)</span></p></td>
+<td><p>STFT（<span class="math notranslate nohighlight">\(m\)</span> は区間の番号）</p></td>
+<td><p>第 8 章</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\Omega\)</span></p></td>
+<td><p>アナログフィルタの角周波数 [rad/s]</p></td>
+<td><p>第 9 章</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="appendix_a_glossary.html" class="btn btn-neutral float-left" title="付録 A 用語集" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix_c_samples.html" class="btn btn-neutral float-right" title="付録 C サンプルコード一覧" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

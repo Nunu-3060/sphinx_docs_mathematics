@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 16 章 おわりに &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="付録 A 記号一覧" href="appendix_a_symbols.html" />
+    <link rel="prev" title="第 15 章 ネットワーク科学への入口" href="ch15_network_science.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 16 章 おわりに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">本書の振り返り</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">さらに学ぶために</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">グラフ理論をさらに深く</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">アルゴリズムと計算量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">機械学習との接点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">ツール</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">おわりに</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 16 章 おわりに</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 16 章 おわりに<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書では、グラフの基本的な概念から始めて、構造の理論、アルゴリズム、行列による解析、ネットワーク科学までを駆け足で見てきた。本章では全体を振り返り、さらに学ぶための道しるべを示す。</p>
+<section id="id2">
+<h2>本書の振り返り<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 15 </span><span class="caption-text">本書で扱った主な内容</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 78.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>部</p></th>
+<th class="head"><p>主な内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>第 I 部 基礎</p></td>
+<td><p>グラフの定義と用語、握手補題、グラフの表現（隣接行列・隣接リストなど）、道と連結性、切断点と橋、連結度、二部グラフ、DAG</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 II 部 構造</p></td>
+<td><p>木と全域木、ケイリーの公式、最小全域木、オイラー路とハミルトン路、平面グラフとオイラーの公式、グラフ彩色、マッチングと安定マッチング</p></td>
+</tr>
+<tr class="row-even"><td><p>第 III 部 アルゴリズム</p></td>
+<td><p>幅優先探索と深さ優先探索、トポロジカルソート、強連結成分分解、最短経路、ネットワークフロー</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 IV 部 発展</p></td>
+<td><p>隣接行列とラプラシアン行列の固有値、行列木定理、スペクトル分割、PageRank、ネットワークの指標とモデル</p></td>
+</tr>
+</tbody>
+</table>
+<p>本書を通じて、いくつかの考え方が繰り返し現れた。</p>
+<ul class="simple">
+<li><p><strong>抽象化</strong>：問題の本質を「頂点」と「辺」だけで捉えることで、交通・通信・スケジューリング・割り当てといった異なる問題を同じ理論で扱える。ケーニヒスベルクの橋の問題を解いたオイラーの着眼点そのものである。</p></li>
+<li><p><strong>双対性</strong>：最大マッチングと最小頂点被覆（ケーニッヒの定理）、最大フローと最小カット、連結度と独立な道の数（メンガーの定理）のように、「最大化の問題」と「最小化の問題」の最適値が一致する関係がたびたび現れた。一方の解は、他方の解が最適であることの証明書になる。</p></li>
+<li><p><strong>増加路と交換</strong>：マッチングやフローでは増加路による改善を、最小全域木では辺の交換を使って、解の最適性を示した。局所的な改善ができないことが全体の最適性を意味する、という構造である。</p></li>
+<li><p><strong>易しい問題と難しい問題</strong>：オイラー路と最短経路は効率よく解けるが、ハミルトン閉路・彩色数・巡回セールスマン問題は NP 困難である。見た目の似た問題でも、計算の難しさは大きく異なる。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>さらに学ぶために<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>本書で触れられなかった話題や、より深く学ぶための方向をいくつか挙げる。参考文献は付録 C にまとめた。</p>
+<section id="id4">
+<h3>グラフ理論をさらに深く<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>ラムゼー理論</strong>：「十分大きなグラフには、必ず大きなクリークか大きな独立集合が含まれる」という、秩序の不可避性を扱う理論である。</p></li>
+<li><p><strong>極値グラフ理論</strong>：特定の部分グラフ（たとえば三角形）を含まないグラフの辺数の最大値を問う分野である。三角形を含まない <span class="math notranslate nohighlight">\(n\)</span> 頂点のグラフの辺数は高々 <span class="math notranslate nohighlight">\(n^2/4\)</span> であるというマンテルの定理がその出発点である。</p></li>
+<li><p><strong>グラフマイナー理論</strong>：クラトフスキーの定理やワグナーの定理を大きく一般化した、ロバートソンとシーモアによる理論である。</p></li>
+<li><p><strong>ランダムグラフ理論</strong>：第 15 章で触れた ER モデルの相転移などを、確率論を用いて厳密に扱う。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>アルゴリズムと計算量<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>NP 完全性の理論</strong>：ハミルトン閉路や彩色がなぜ難しいのかを理解するには、計算量理論を学ぶとよい。</p></li>
+<li><p><strong>近似アルゴリズムとパラメータ化計算量</strong>：NP 困難な問題に対して、解の質を保証した近似解を求める方法や、特定のパラメータが小さい場合に効率よく解く方法がある。</p></li>
+<li><p><strong>大規模グラフ処理</strong>：数十億の辺を持つグラフを扱うには、分散処理（Pregel 型の計算モデル）やグラフデータベースなどの技術が必要になる。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>機械学習との接点<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>グラフニューラルネットワーク</strong>（GNN）：頂点が隣接頂点の情報を集めて自身の特徴量を更新する処理を繰り返すニューラルネットワークであり、分子の性質予測、推薦システム、交通量予測などに使われている。その数学的な背景には、第 14 章のラプラシアン行列やスペクトルの理論がある。</p></li>
+<li><p><strong>知識グラフ</strong>：実世界の事物とその関係を有向グラフとして表したものであり、検索エンジンや質問応答システムに使われている。</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>ツール<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>本書では NetworkX を使ったが、用途に応じて次のツールも使われる。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 16 </span><span class="caption-text">グラフを扱う主なツール</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ツール</p></th>
+<th class="head"><p>特徴</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NetworkX</p></td>
+<td><p>Python で書かれた汎用ライブラリ。機能が豊富で学習や試作に向くが、大規模なグラフでは遅い。</p></td>
+</tr>
+<tr class="row-odd"><td><p>igraph</p></td>
+<td><p>C で実装された高速なライブラリ。Python や R から使える。</p></td>
+</tr>
+<tr class="row-even"><td><p>graph-tool</p></td>
+<td><p>C++ で実装された高速なライブラリ。Python から使える。</p></td>
+</tr>
+<tr class="row-odd"><td><p>Graphviz</p></td>
+<td><p>グラフの描画ツール。本書の図の多くも Graphviz で描いている。</p></td>
+</tr>
+<tr class="row-even"><td><p>Neo4j</p></td>
+<td><p>グラフデータベース。頂点と辺に属性を持たせて保存し、問い合わせ言語で検索できる。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id8">
+<h2>おわりに<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>グラフ理論は、18 世紀の小さなパズルから始まり、今日ではインターネット、物流、ソフトウェア、生命科学、機械学習を支える基盤になっている。新しい問題に出会ったとき、「これは何を頂点とし、何を辺とするグラフの問題だろうか」と考えてみてほしい。それが、本書で学んだ理論とアルゴリズムを活かす第一歩になるはずである。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch15_network_science.html" class="btn btn-neutral float-left" title="第 15 章 ネットワーク科学への入口" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix_a_symbols.html" class="btn btn-neutral float-right" title="付録 A 記号一覧" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

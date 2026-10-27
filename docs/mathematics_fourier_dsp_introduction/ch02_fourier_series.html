@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 2 章 フーリエ級数 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 3 章 フーリエ変換" href="ch03_fourier_transform.html" />
+    <link rel="prev" title="第 1 章 信号と数学的準備" href="ch01_signals.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 2 章 フーリエ級数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">周期信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">三角関数の直交性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">フーリエ係数の求め方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">例：矩形波</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">ギブス現象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">複素フーリエ級数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">スペクトル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">パーセバルの等式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 2 章 フーリエ級数</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 2 章 フーリエ級数<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>一定の時間ごとに同じ波形を繰り返す信号は、周波数が整数倍の関係にある正弦波の和で表せる。これを<a class="reference internal" href="appendix_a_glossary.html#term-57"><span class="xref std std-term">フーリエ級数</span></a>という。この章では、フーリエ級数の係数の求め方と、そこから得られる「スペクトル」という見方を説明する。</p>
+<section id="id2">
+<h2>周期信号<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>ある正の数 <span class="math notranslate nohighlight">\(T\)</span> について、すべての <span class="math notranslate nohighlight">\(t\)</span> で</p>
+<div class="math notranslate nohighlight">
+\[x(t + T) = x(t)\]</div>
+<p>が成り立つ信号を、周期 <span class="math notranslate nohighlight">\(T\)</span> の周期信号という。このような <span class="math notranslate nohighlight">\(T\)</span> のうち最小のものを基本周期、その逆数 <span class="math notranslate nohighlight">\(f_0 = 1/T\)</span> を<a class="reference internal" href="appendix_a_glossary.html#term-14"><span class="xref std std-term">基本周波数</span></a>という。</p>
+<p>周期 <span class="math notranslate nohighlight">\(T\)</span> の信号を作る最も簡単な材料は、周期 <span class="math notranslate nohighlight">\(T\)</span> の正弦波である。さらに、周波数が <span class="math notranslate nohighlight">\(f_0\)</span> の整数倍 <span class="math notranslate nohighlight">\(k f_0\)</span>（<span class="math notranslate nohighlight">\(k = 1, 2, 3, \ldots\)</span>）の正弦波も、<span class="math notranslate nohighlight">\(T\)</span> の間にちょうど <span class="math notranslate nohighlight">\(k\)</span> 回振動するので、周期 <span class="math notranslate nohighlight">\(T\)</span> をもつ。周波数 <span class="math notranslate nohighlight">\(k f_0\)</span> の成分を第 <span class="math notranslate nohighlight">\(k\)</span> <a class="reference internal" href="appendix_a_glossary.html#term-19"><span class="xref std std-term">高調波</span></a>という（<span class="math notranslate nohighlight">\(k = 1\)</span> は基本波と呼ぶ）。楽器の音色の違いは、主に高調波の含まれ方の違いである。</p>
+<p>フーリエ級数は、周期 <span class="math notranslate nohighlight">\(T\)</span> の信号を、基本波と高調波と定数（直流成分）の和で表すものである。</p>
+<div class="math notranslate nohighlight" id="equation-eq-fourier-series-real">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-fourier-series-real" title="Link to this equation"></a></span>\[x(t) = \frac{a_0}{2} + \sum_{k=1}^{\infty} \bigl( a_k \cos(2\pi k f_0 t) + b_k \sin(2\pi k f_0 t) \bigr)\]</div>
+<p><span class="math notranslate nohighlight">\(a_k, b_k\)</span> を<a class="reference internal" href="appendix_a_glossary.html#term-58"><span class="xref std std-term">フーリエ係数</span></a>という。<span class="math notranslate nohighlight">\(a_0\)</span> を 2 で割っておく理由は、次の節で係数の式を見ると分かる。</p>
+</section>
+<section id="id3">
+<h2>三角関数の直交性<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>フーリエ係数を求める鍵は、第 1 章で述べた直交性である。<span class="math notranslate nohighlight">\(k, m\)</span> を 0 以上の整数とすると、1 周期にわたる積分について次の関係が成り立つ。</p>
+<div class="math notranslate nohighlight" id="equation-eq-orthogonality">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-orthogonality" title="Link to this equation"></a></span>\[\begin{split}\int_0^T \cos(2\pi k f_0 t) \cos(2\pi m f_0 t)\, dt &amp;= \begin{cases} T &amp; (k = m = 0) \\ T/2 &amp; (k = m \ne 0) \\ 0 &amp; (k \ne m) \end{cases} \\
+\int_0^T \sin(2\pi k f_0 t) \sin(2\pi m f_0 t)\, dt &amp;= \begin{cases} T/2 &amp; (k = m \ne 0) \\ 0 &amp; (\text{それ以外}) \end{cases} \\
+\int_0^T \cos(2\pi k f_0 t) \sin(2\pi m f_0 t)\, dt &amp;= 0\end{split}\]</div>
+<p>これらは、積を和に直す公式（例えば <span class="math notranslate nohighlight">\(\cos\alpha\cos\beta = \frac{1}{2}\{\cos(\alpha - \beta) + \cos(\alpha + \beta)\}\)</span>）を使うと確かめられる。周波数が 0 でない正弦波を 1 周期（またはその整数倍）にわたって積分すると 0 になるので、積分が 0 でなくなるのは <span class="math notranslate nohighlight">\(\alpha - \beta = 0\)</span>、つまり <span class="math notranslate nohighlight">\(k = m\)</span> のときだけである。</p>
+<p><a class="reference internal" href="#fig-ch02-orthogonality"><span class="std std-numref">図 5</span></a> は、この関係を図で示したものである。周波数の異なる正弦波の積は、正の部分と負の部分の面積が打ち消し合い、積分が 0 になる。同じ周波数の正弦波の積（2 乗）は、常に 0 以上なので、積分は正の値になる。</p>
+<figure class="align-default" id="id11">
+<span id="fig-ch02-orthogonality"></span><img alt="周波数の異なる正弦波の積は正と負の面積が打ち消し合い、同じ周波数の正弦波の積は正の面積だけをもつことを示す 2 つのグラフ" src="_images/fig_ch02_orthogonality.svg" />
+<figcaption>
+<p><span class="caption-number">図 5 </span><span class="caption-text">正弦波の積の積分（青は正の面積、赤は負の面積）</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h2>フーリエ係数の求め方<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>式 <a class="reference internal" href="#equation-eq-fourier-series-real">(4)</a> の両辺に <span class="math notranslate nohighlight">\(\cos(2\pi m f_0 t)\)</span>（<span class="math notranslate nohighlight">\(m \ge 1\)</span>）を掛けて 1 周期で積分する。右辺の各項のうち、直交性 <a class="reference internal" href="#equation-eq-orthogonality">(5)</a> によって 0 にならないのは <span class="math notranslate nohighlight">\(a_m\)</span> の項だけであり、その積分は <span class="math notranslate nohighlight">\(a_m T/2\)</span> になる。したがって <span class="math notranslate nohighlight">\(a_m = \frac{2}{T}\int_0^T x(t)\cos(2\pi m f_0 t)\, dt\)</span> である。<span class="math notranslate nohighlight">\(\sin\)</span> を掛けた場合も同様である。まとめると、フーリエ係数は次の式で求められる。</p>
+<div class="math notranslate nohighlight" id="equation-eq-fourier-coefficients">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-fourier-coefficients" title="Link to this equation"></a></span>\[a_k = \frac{2}{T} \int_0^T x(t) \cos(2\pi k f_0 t)\, dt \quad (k \ge 0), \qquad
+b_k = \frac{2}{T} \int_0^T x(t) \sin(2\pi k f_0 t)\, dt \quad (k \ge 1)\]</div>
+<p><span class="math notranslate nohighlight">\(k = 0\)</span> のとき <span class="math notranslate nohighlight">\(a_0 = \frac{2}{T}\int_0^T x(t)\,dt\)</span> なので、<span class="math notranslate nohighlight">\(a_0/2\)</span> は信号の 1 周期の平均値（直流成分）になる。式 <a class="reference internal" href="#equation-eq-fourier-series-real">(4)</a> で <span class="math notranslate nohighlight">\(a_0\)</span> を 2 で割っておいたのは、<span class="math notranslate nohighlight">\(a_0\)</span> も <span class="math notranslate nohighlight">\(a_k\)</span> と同じ式で求められるようにするためである。</p>
+<p>積分の区間は、長さが 1 周期であればどこでもよい。<span class="math notranslate nohighlight">\(-T/2\)</span> から <span class="math notranslate nohighlight">\(T/2\)</span> までとすることも多い。</p>
+</section>
+<section id="id5">
+<h2>例：矩形波<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>振幅 1、周期 <span class="math notranslate nohighlight">\(T\)</span> の矩形波</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x(t) = \begin{cases} 1 &amp; (0 &lt; t &lt; T/2) \\ -1 &amp; (T/2 &lt; t &lt; T) \end{cases}\end{split}\]</div>
+<p>のフーリエ係数を求める。この波形は、<span class="math notranslate nohighlight">\(t = 0\)</span> を中心に考えると奇関数（<span class="math notranslate nohighlight">\(x(-t) = -x(t)\)</span>）である。奇関数と偶関数 <span class="math notranslate nohighlight">\(\cos\)</span> の積は奇関数で、その 1 周期の積分は 0 になるので、<span class="math notranslate nohighlight">\(a_k = 0\)</span> である。<span class="math notranslate nohighlight">\(b_k\)</span> は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}b_k = \frac{2}{T}\left( \int_0^{T/2} \sin(2\pi k f_0 t)\, dt - \int_{T/2}^{T} \sin(2\pi k f_0 t)\, dt \right)
+= \frac{2}{\pi k}\bigl(1 - \cos(\pi k)\bigr)
+= \begin{cases} \dfrac{4}{\pi k} &amp; (k \text{ が奇数}) \\ 0 &amp; (k \text{ が偶数}) \end{cases}\end{split}\]</div>
+<p>となる。したがって、矩形波は奇数次の高調波だけを含み、</p>
+<div class="math notranslate nohighlight" id="equation-eq-square-wave">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-square-wave" title="Link to this equation"></a></span>\[x(t) = \frac{4}{\pi} \left( \sin(2\pi f_0 t) + \frac{1}{3}\sin(2\pi \cdot 3 f_0 t) + \frac{1}{5}\sin(2\pi \cdot 5 f_0 t) + \cdots \right)\]</div>
+<p>と表せる。</p>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">fourier_series.py</span></code> は、フーリエ係数を数値積分で求めて理論値と比べ、さらに部分和（有限個の項までの和）を計算する。<a class="reference internal" href="#list-ch02-fourier-series"><span class="std std-numref">リスト 2</span></a> の <code class="docutils literal notranslate"><span class="pre">sine_coefficients()</span></code> は、1 周期を細かく分けた長方形の面積の和で、式 <a class="reference internal" href="#equation-eq-fourier-coefficients">(6)</a> の積分を近似している。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch02-fourier-series">
+<div class="code-block-caption"><span class="caption-number">リスト 2 </span><span class="caption-text">fourier_series.py の sine_coefficients()</span><a class="headerlink" href="#list-ch02-fourier-series" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">40</span><span class="k">def</span><span class="w"> </span><span class="nf">sine_coefficients</span><span class="p">(</span><span class="n">max_order</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">num_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">41</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;正弦の係数 b_k = (2 / T) * integral of x(t) sin(k w0 t) dt を数値積分で求める.</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="sd">    1 周期を num_points 個の点に分け、長方形の面積の和で積分を近似する。</span>
+<span class="linenos">44</span><span class="sd">    戻り値の k 番目の要素が b_k である（b_0 は使わないので 0 とする）。</span>
+<span class="linenos">45</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">46</span>    <span class="n">dt</span> <span class="o">=</span> <span class="n">PERIOD</span> <span class="o">/</span> <span class="n">num_points</span>
+<span class="linenos">47</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dt</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">PERIOD</span> <span class="o">-</span> <span class="n">dt</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>  <span class="c1"># 各区間の中点</span>
+<span class="linenos">48</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">square_wave</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">49</span>    <span class="n">w0</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">PERIOD</span>
+<span class="linenos">50</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">max_order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">51</span>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">52</span>        <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">PERIOD</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">w0</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">53</span>    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 3 </span><span class="caption-text">fourier_series.py の実行結果</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>k   数値積分の b_k   理論値 4/(pi k)（k が奇数のとき）
+1     1.273240         1.273240
+2     0.000000         0.000000
+3     0.424413         0.424413
+4    -0.000000         0.000000
+5     0.254648         0.254648
+6    -0.000000         0.000000
+7     0.181892         0.181891
+
+最高次数   部分和の最大値
+       5   1.1884
+      21   1.1797
+     101   1.1790
+    1001   1.1790
+</pre></div>
+</div>
+</div>
+<p>数値積分の結果は、理論値 <span class="math notranslate nohighlight">\(4/(\pi k)\)</span> と小数第 5 位まで一致している。実行結果の後半は部分和の最大値であり、次の節で説明する。<a class="reference internal" href="#fig-ch02-fourier-series"><span class="std std-numref">図 6</span></a> は、部分和に含める項を増やしていくと、矩形波に近づいていく様子を示している。</p>
+<figure class="align-default" id="id13">
+<span id="fig-ch02-fourier-series"></span><img alt="矩形波のフーリエ級数の部分和が、項を増やすにつれて矩形波に近づく様子と、不連続点の付近で行き過ぎが残る様子を示す図" src="_images/fourier_series.svg" />
+<figcaption>
+<p><span class="caption-number">図 6 </span><span class="caption-text">矩形波のフーリエ級数の部分和（左）と、<span class="math notranslate nohighlight">\(t = 0\)</span> の付近の拡大（右）</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/f919a5d3b9f16246fa6c4c47cd220015/fourier_series.py"><code class="xref download docutils literal notranslate"><span class="pre">fourier_series.py</span></code></a></p>
+</section>
+<section id="id6">
+<h2>ギブス現象<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#fig-ch02-fourier-series"><span class="std std-numref">図 6</span></a> の右の図を見ると、項を増やすと部分和は不連続点（<span class="math notranslate nohighlight">\(t = 0\)</span>）の両側で急に立ち上がるようになるが、立ち上がった直後に 1 を超える「行き過ぎ」がある。実行結果に示したとおり、最高次数を 5、21、101、1001 と増やしても、部分和の最大値は約 1.179 からほとんど小さくならない。行き過ぎの幅は狭くなるが、高さは変わらない。</p>
+<p>この現象を<a class="reference internal" href="appendix_a_glossary.html#term-13"><span class="xref std std-term">ギブス現象</span></a>という。不連続点では、部分和は不連続な跳びの大きさ（この例では 2）の約 9 % だけ行き過ぎる（<span class="math notranslate nohighlight">\(1 + 2 \times 0.0895 \approx 1.179\)</span>）。項の数を無限にすれば、不連続点以外の各点で部分和は <span class="math notranslate nohighlight">\(x(t)\)</span> に収束するが、行き過ぎの山は不連続点に近づきながら残り続ける。</p>
+<p>ギブス現象は、理論上の話にとどまらない。信号の高い周波数の成分を急峻に切り捨てると、波形の急な変化の付近に波打ち（リンギング）が現れる。第 9 章のフィルタ設計で、この問題に再び出会う。</p>
+</section>
+<section id="id7">
+<h2>複素フーリエ級数<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>式 <a class="reference internal" href="#equation-eq-fourier-series-real">(4)</a> の <span class="math notranslate nohighlight">\(\cos\)</span> と <span class="math notranslate nohighlight">\(\sin\)</span> を、第 1 章の式 <a class="reference internal" href="ch01_signals.html#equation-eq-cos-sin">(2)</a> で複素指数関数に書き換えると、フーリエ級数はより簡潔な形になる。</p>
+<div class="math notranslate nohighlight" id="equation-eq-fourier-series-complex">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-fourier-series-complex" title="Link to this equation"></a></span>\[x(t) = \sum_{k=-\infty}^{\infty} c_k e^{j2\pi k f_0 t}, \qquad
+c_k = \frac{1}{T} \int_0^T x(t) e^{-j2\pi k f_0 t}\, dt\]</div>
+<p>これを<a class="reference internal" href="appendix_a_glossary.html#term-61"><span class="xref std std-term">複素フーリエ級数</span></a>という。<span class="math notranslate nohighlight">\(k\)</span> は負の整数も含む。<span class="math notranslate nohighlight">\(c_k\)</span> を求める式は、信号 <span class="math notranslate nohighlight">\(x(t)\)</span> と複素正弦波 <span class="math notranslate nohighlight">\(e^{j2\pi k f_0 t}\)</span> の内積（を <span class="math notranslate nohighlight">\(T\)</span> で割ったもの）であり、第 1 章で述べた直交基底による分解そのものである。実際、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{1}{T}\int_0^T e^{j2\pi k f_0 t} \left(e^{j2\pi m f_0 t}\right)^* dt = \frac{1}{T}\int_0^T e^{j2\pi (k - m) f_0 t}\, dt = \begin{cases} 1 &amp; (k = m) \\ 0 &amp; (k \ne m) \end{cases}\end{split}\]</div>
+<p>であり、複素正弦波は互いに直交する。三角関数の 3 種類の直交関係 <a class="reference internal" href="#equation-eq-orthogonality">(5)</a> が、この 1 つの式にまとまっている。</p>
+<p>実数形式の係数との関係は、<span class="math notranslate nohighlight">\(k \ge 1\)</span> について次のとおりである。</p>
+<div class="math notranslate nohighlight">
+\[c_0 = \frac{a_0}{2}, \qquad c_k = \frac{a_k - j b_k}{2}, \qquad c_{-k} = \frac{a_k + j b_k}{2} = c_k^*\]</div>
+<p><span class="math notranslate nohighlight">\(x(t)\)</span> が実数の信号であれば <span class="math notranslate nohighlight">\(c_{-k} = c_k^*\)</span> が成り立つ。これは第 1 章の式 <a class="reference internal" href="ch01_signals.html#equation-eq-real-sinusoid">(3)</a> で見た「実数の正弦波は、互いに共役な係数をもつ <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(-f\)</span> の成分の組である」という事実の一般化である。第 <span class="math notranslate nohighlight">\(k\)</span> 高調波の振幅は <span class="math notranslate nohighlight">\(2|c_k| = \sqrt{a_k^2 + b_k^2}\)</span>、位相は <span class="math notranslate nohighlight">\(\arg c_k\)</span> で表される。</p>
+<p>本書では、以降、主に複素形式を使う。複素形式は式が短く、フーリエ変換や DFT にそのまま拡張できるからである。</p>
+</section>
+<section id="id8">
+<h2>スペクトル<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>フーリエ係数 <span class="math notranslate nohighlight">\(c_k\)</span> を周波数 <span class="math notranslate nohighlight">\(k f_0\)</span> の関数として並べたものを、信号の<a class="reference internal" href="appendix_a_glossary.html#term-28"><span class="xref std std-term">スペクトル</span></a>という。周期信号のスペクトルは、とびとびの周波数にだけ値をもつので、<a class="reference internal" href="appendix_a_glossary.html#term-36"><span class="xref std std-term">線スペクトル</span></a>と呼ばれる。<span class="math notranslate nohighlight">\(|c_k|\)</span> を振幅スペクトル、<span class="math notranslate nohighlight">\(\arg c_k\)</span> を位相スペクトルという。</p>
+<p><a class="reference internal" href="#fig-ch02-line-spectrum"><span class="std std-numref">図 7</span></a> は、矩形波と、のこぎり波（<span class="math notranslate nohighlight">\(0 \le t &lt; T\)</span> で <span class="math notranslate nohighlight">\(x(t) = 2t/T - 1\)</span> を繰り返す波形）の振幅スペクトルである。矩形波では <span class="math notranslate nohighlight">\(|c_k| = 2/(\pi |k|)\)</span>（<span class="math notranslate nohighlight">\(k\)</span> が奇数）、のこぎり波では <span class="math notranslate nohighlight">\(|c_k| = 1/(\pi |k|)\)</span>（<span class="math notranslate nohighlight">\(k \ne 0\)</span>）となる。</p>
+<figure class="align-default" id="id14">
+<span id="fig-ch02-line-spectrum"></span><img alt="矩形波とのこぎり波の波形と、それぞれの複素フーリエ係数の大きさを棒グラフで示した線スペクトル" src="_images/fig_ch02_line_spectrum.svg" />
+<figcaption>
+<p><span class="caption-number">図 7 </span><span class="caption-text">矩形波とのこぎり波の波形（上）と振幅スペクトル（下）</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>時間の関数として波形を見ることを<strong>時間領域</strong>で見る、スペクトルを見ることを<strong>周波数領域</strong>で見るという。2 つの見方は同じ信号を別の角度から表したもので、どちらも信号の情報をすべて含んでいる（<span class="math notranslate nohighlight">\(c_k\)</span> がすべて分かれば、式 <a class="reference internal" href="#equation-eq-fourier-series-complex">(8)</a> で波形に戻せる）。</p>
+<p>スペクトルの減衰の速さは、波形の滑らかさと関係している。</p>
+<ul class="simple">
+<li><p>矩形波やのこぎり波のように、波形に不連続な跳びがあると、<span class="math notranslate nohighlight">\(|c_k|\)</span> は <span class="math notranslate nohighlight">\(1/|k|\)</span> に比例して減衰する。</p></li>
+<li><p>三角波のように、波形は連続だが傾きが不連続な点（角）があると、<span class="math notranslate nohighlight">\(|c_k|\)</span> は <span class="math notranslate nohighlight">\(1/k^2\)</span> に比例して減衰する。</p></li>
+<li><p>波形が滑らかであるほど、<span class="math notranslate nohighlight">\(|c_k|\)</span> は速く減衰する。</p></li>
+</ul>
+<p>急な変化を表すには、高い周波数の成分が多く必要になるということである。これは、デジタル信号処理で必要な帯域幅を見積もるときの基本的な考え方になる。</p>
+</section>
+<section id="id9">
+<h2>パーセバルの等式<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>信号の 1 周期あたりの平均電力（2 乗の平均）は、フーリエ係数の 2 乗の和に等しい。</p>
+<div class="math notranslate nohighlight" id="equation-eq-parseval-series">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-parseval-series" title="Link to this equation"></a></span>\[\frac{1}{T}\int_0^T |x(t)|^2\, dt = \sum_{k=-\infty}^{\infty} |c_k|^2\]</div>
+<p>これを<a class="reference internal" href="appendix_a_glossary.html#term-49"><span class="xref std std-term">パーセバルの等式</span></a>という。電力が、各周波数の成分の電力の和に分けられることを意味する。式 <a class="reference internal" href="#equation-eq-fourier-series-complex">(8)</a> を <span class="math notranslate nohighlight">\(|x(t)|^2 = x(t)x^*(t)\)</span> に代入すると、直交性によって異なる <span class="math notranslate nohighlight">\(k\)</span> の項の積が消えることから導ける。</p>
+<p>矩形波で確かめてみる。左辺は <span class="math notranslate nohighlight">\(|x(t)|^2 = 1\)</span> なので 1 である。右辺は、<span class="math notranslate nohighlight">\(k\)</span> が正と負の奇数について <span class="math notranslate nohighlight">\(|c_k|^2 = 4/(\pi^2 k^2)\)</span> を足して</p>
+<div class="math notranslate nohighlight">
+\[2 \sum_{k = 1, 3, 5, \ldots} \frac{4}{\pi^2 k^2} = \frac{8}{\pi^2}\left(1 + \frac{1}{9} + \frac{1}{25} + \cdots\right) = \frac{8}{\pi^2} \cdot \frac{\pi^2}{8} = 1\]</div>
+<p>となり、一致する。</p>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>周期 <span class="math notranslate nohighlight">\(T\)</span> の信号は、基本周波数 <span class="math notranslate nohighlight">\(f_0 = 1/T\)</span> の整数倍の周波数をもつ正弦波の和（フーリエ級数）で表せる。</p></li>
+<li><p>フーリエ係数は、三角関数（複素正弦波）の直交性を使い、信号と各正弦波の内積で求められる。</p></li>
+<li><p>複素フーリエ級数 <span class="math notranslate nohighlight">\(x(t) = \sum c_k e^{j2\pi k f_0 t}\)</span> では、実数の信号に対して <span class="math notranslate nohighlight">\(c_{-k} = c_k^*\)</span> が成り立つ。</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_k\)</span> を周波数の関数として見たものがスペクトルである。急な変化を含む信号ほど、高い周波数の成分を多く含む。</p></li>
+<li><p>不連続点の付近では、部分和に約 9 % の行き過ぎ（ギブス現象）が残る。</p></li>
+<li><p>平均電力は、各周波数の成分の電力の和に等しい（パーセバルの等式）。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch01_signals.html" class="btn btn-neutral float-left" title="第 1 章 信号と数学的準備" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch03_fourier_transform.html" class="btn btn-neutral float-right" title="第 3 章 フーリエ変換" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

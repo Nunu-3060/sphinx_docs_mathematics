@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 9 章 同時分布と確率変数の和 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 10 章 確率の不等式と極限定理" href="ch10_limit_theorems.html" />
+    <link rel="prev" title="第 8 章 代表的な離散分布" href="ch08_distributions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 9 章 同時分布と確率変数の和</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">同時分布と周辺分布</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">同時分布</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">周辺分布と条件付き分布</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">確率変数の独立</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">共分散と相関係数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">共分散</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">和の分散</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">相関係数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">無相関と独立</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">独立な確率変数の和の分布</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">畳み込み</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">再生性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 9 章 同時分布と確率変数の和</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 9 章 同時分布と確率変数の和<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>第 7 章では 1 つの確率変数を扱った。しかし実際には、身長と体重、サーバーの負荷と応答時間のように、複数の確率変数の関係が問題になることが多い。本章では、複数の確率変数をまとめて扱う同時分布と、確率変数の間の関係の強さを表す共分散・相関係数を学ぶ。また、独立な確率変数の和の分布を求める方法として畳み込みを扱う。</p>
+<section id="id2">
+<h2>同時分布と周辺分布<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>同時分布<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>同じ確率空間上の 2 つの離散確率変数 <span class="math notranslate nohighlight">\(X, Y\)</span> について、値の組 <span class="math notranslate nohighlight">\((x, y)\)</span> に確率</p>
+<div class="math notranslate nohighlight">
+\[p_{X,Y}(x, y) = P(X = x, Y = y)\]</div>
+<p>を対応させる関数を <span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> の<strong>同時確率質量関数</strong>といい、これによって定まる分布を<strong>同時分布</strong>という。ここで <span class="math notranslate nohighlight">\(P(X = x, Y = y)\)</span> は事象 <span class="math notranslate nohighlight">\(\{X = x\} \cap \{Y = y\}\)</span> の確率を表す。</p>
+<p><strong>例</strong>：2 個のサイコロを投げ、<span class="math notranslate nohighlight">\(X\)</span> を 1 個目の目、<span class="math notranslate nohighlight">\(S\)</span> を 2 個の目の和とする。<span class="math notranslate nohighlight">\(P(X = 3, S = 8) = P(\text{1 個目が 3、2 個目が 5}) = 1/36\)</span> であり、<span class="math notranslate nohighlight">\(P(X = 1, S = 8) = 0\)</span> （1 個目が 1 なら和は 7 以下）である。</p>
+</section>
+<section id="id4">
+<h3>周辺分布と条件付き分布<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>同時分布から、一方の確率変数だけの分布を求められる。<span class="math notranslate nohighlight">\(\{X = x\}\)</span> は、<span class="math notranslate nohighlight">\(Y\)</span> のとる値で互いに排反な事象 <span class="math notranslate nohighlight">\(\{X = x, Y = y\}\)</span> に分割されるので</p>
+<div class="math notranslate nohighlight">
+\[P(X = x) = \sum_{y} P(X = x, Y = y)\]</div>
+<p>である。このようにして得られる <span class="math notranslate nohighlight">\(X\)</span> の分布を<strong>周辺分布</strong>という。同時分布を表にまとめたとき、行または列ごとの和を表の周辺（端）に書くことに由来する名前である。</p>
+<p>また、<span class="math notranslate nohighlight">\(P(Y = y) &gt; 0\)</span> のとき、<span class="math notranslate nohighlight">\(Y = y\)</span> という条件のもとでの <span class="math notranslate nohighlight">\(X\)</span> の分布</p>
+<div class="math notranslate nohighlight">
+\[P(X = x \mid Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)}\]</div>
+<p>を<strong>条件付き分布</strong>という。</p>
+</section>
+<section id="id5">
+<h3>確率変数の独立<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>すべての <span class="math notranslate nohighlight">\(x, y\)</span> について</p>
+<div class="math notranslate nohighlight">
+\[P(X = x, Y = y) = P(X = x) \, P(Y = y)\]</div>
+<p>が成り立つとき、確率変数 <span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> は<a class="reference internal" href="glossary.html#term-23"><span class="xref std std-term">独立</span></a>であるという。すなわち、<span class="math notranslate nohighlight">\(X\)</span> に関する事象と <span class="math notranslate nohighlight">\(Y\)</span> に関する事象が常に独立であることをいう。独立なとき、同時分布は周辺分布の積で決まる。3 個以上の確率変数の独立性も、同時確率質量関数が周辺確率質量関数の積に分解できることとして同様に定める。</p>
+<p>2 個のサイコロの目 <span class="math notranslate nohighlight">\(X_1, X_2\)</span> は独立であるが、1 個目の目 <span class="math notranslate nohighlight">\(X\)</span> と目の和 <span class="math notranslate nohighlight">\(S\)</span> は独立でない（<span class="math notranslate nohighlight">\(P(X = 1, S = 8) = 0 \ne P(X = 1) P(S = 8)\)</span>）。</p>
+<p><span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> が独立ならば、関数 <span class="math notranslate nohighlight">\(f, g\)</span> について <span class="math notranslate nohighlight">\(f(X)\)</span> と <span class="math notranslate nohighlight">\(g(Y)\)</span> も独立であり、次の重要な性質が成り立つ。</p>
+<div class="math notranslate nohighlight">
+\[E[XY] = E[X] \, E[Y]\]</div>
+<p>これは、<span class="math notranslate nohighlight">\(E[XY] = \sum_{x, y} xy \, P(X = x) P(Y = y) = \left(\sum_x x P(X = x)\right) \left(\sum_y y P(Y = y)\right)\)</span> から分かる。期待値の線形性と異なり、積の期待値が期待値の積になるのは、一般には独立な場合に限られる。</p>
+</section>
+</section>
+<section id="id6">
+<h2>共分散と相関係数<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3>共分散<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(\mu_X = E[X]\)</span>、<span class="math notranslate nohighlight">\(\mu_Y = E[Y]\)</span> とするとき、</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Cov}[X, Y] = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X] \, E[Y]\]</div>
+<p>を <span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> の<a class="reference internal" href="glossary.html#term-6"><span class="xref std std-term">共分散</span></a>という。<span class="math notranslate nohighlight">\(X\)</span> が平均より大きいときに <span class="math notranslate nohighlight">\(Y\)</span> も平均より大きくなる傾向があれば共分散は正に、逆の傾向があれば負になる。定義から <span class="math notranslate nohighlight">\(\mathrm{Cov}[X, X] = V[X]\)</span> である。</p>
+<p>前節の性質から、<span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> が独立ならば <span class="math notranslate nohighlight">\(\mathrm{Cov}[X, Y] = 0\)</span> である。</p>
+</section>
+<section id="id8">
+<h3>和の分散<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>共分散を使うと、和の分散は次のように表せる。</p>
+<div class="math notranslate nohighlight">
+\[V[X + Y] = E[((X - \mu_X) + (Y - \mu_Y))^2] = V[X] + V[Y] + 2 \, \mathrm{Cov}[X, Y]\]</div>
+<p>一般に、<span class="math notranslate nohighlight">\(n\)</span> 個の確率変数について</p>
+<div class="math notranslate nohighlight">
+\[V\left[\sum_{i=1}^{n} X_i\right] = \sum_{i=1}^{n} V[X_i] + 2 \sum_{i &lt; j} \mathrm{Cov}[X_i, X_j]\]</div>
+<p>が成り立つ。特に、<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> が独立（どの 2 つも共分散が 0 であれば十分）ならば</p>
+<div class="math notranslate nohighlight">
+\[V[X_1 + \cdots + X_n] = V[X_1] + \cdots + V[X_n]\]</div>
+<p>である。これにより、第 8 章の二項分布の分散 <span class="math notranslate nohighlight">\(V[X] = npq\)</span> が得られる（<span class="math notranslate nohighlight">\(n\)</span> 個の独立な <span class="math notranslate nohighlight">\(\mathrm{Ber}(p)\)</span> の和で、それぞれの分散は <span class="math notranslate nohighlight">\(pq\)</span>）。2 個のサイコロの目の和の分散が <span class="math notranslate nohighlight">\(2 \times 35/12 = 35/6\)</span> になるのも同じ理由である。</p>
+<p><strong>例（順列の不動点の分散）</strong>：第 7 章で扱った順列の不動点の個数 <span class="math notranslate nohighlight">\(X = \sum_{i} I_{A_i}\)</span> の分散を求める。<span class="math notranslate nohighlight">\(V[I_{A_i}] = \frac{1}{n}\left(1 - \frac{1}{n}\right)\)</span> である。<span class="math notranslate nohighlight">\(i \ne j\)</span> のとき、<span class="math notranslate nohighlight">\(P(A_i \cap A_j) = (n - 2)!/n! = \frac{1}{n(n - 1)}\)</span> なので</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Cov}[I_{A_i}, I_{A_j}] = \frac{1}{n(n - 1)} - \frac{1}{n^2} = \frac{1}{n^2 (n - 1)}\]</div>
+<p>である。<span class="math notranslate nohighlight">\(n \ge 2\)</span> のとき、<span class="math notranslate nohighlight">\(i &lt; j\)</span> の組は <span class="math notranslate nohighlight">\(n(n - 1)/2\)</span> 個あるので</p>
+<div class="math notranslate nohighlight">
+\[V[X] = n \cdot \frac{1}{n}\left(1 - \frac{1}{n}\right) + 2 \cdot \frac{n(n - 1)}{2} \cdot \frac{1}{n^2 (n - 1)} = 1 - \frac{1}{n} + \frac{1}{n} = 1\]</div>
+<p>となり、第 7 章のサンプルコードの結果と一致する。指示確率変数が独立でなくても、共分散を計算すれば分散を求められる。</p>
+</section>
+<section id="id9">
+<h3>相関係数<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>共分散は確率変数の単位に依存する（たとえば長さの単位を m から cm に変えると 100 倍になる）。単位によらない関係の強さの指標として、<span class="math notranslate nohighlight">\(V[X] &gt; 0\)</span>、<span class="math notranslate nohighlight">\(V[Y] &gt; 0\)</span> のとき</p>
+<div class="math notranslate nohighlight">
+\[\rho[X, Y] = \frac{\mathrm{Cov}[X, Y]}{\sqrt{V[X] \, V[Y]}}\]</div>
+<p>を<strong>相関係数</strong>という。相関係数は常に <span class="math notranslate nohighlight">\(-1 \le \rho \le 1\)</span> を満たし、<span class="math notranslate nohighlight">\(|\rho| = 1\)</span> となるのは <span class="math notranslate nohighlight">\(Y = aX + b\)</span> （<span class="math notranslate nohighlight">\(a \ne 0\)</span>）と表せる場合に限られる。相関係数は「直線的な関係」の強さを表す指標である。</p>
+<p><strong>例</strong>：1 個目の目 <span class="math notranslate nohighlight">\(X\)</span> と目の和 <span class="math notranslate nohighlight">\(S = X + X_2\)</span> について、<span class="math notranslate nohighlight">\(\mathrm{Cov}[X, S] = \mathrm{Cov}[X, X] + \mathrm{Cov}[X, X_2] = V[X] = 35/12\)</span> である。<span class="math notranslate nohighlight">\(V[S] = 35/6\)</span> なので</p>
+<div class="math notranslate nohighlight">
+\[\rho[X, S] = \frac{35/12}{\sqrt{(35/12)(35/6)}} = \frac{1}{\sqrt{2}} \approx 0.707\]</div>
+<p>である。</p>
+</section>
+<section id="id10">
+<h3>無相関と独立<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(\mathrm{Cov}[X, Y] = 0\)</span> のとき、<span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> は<strong>無相関</strong>であるという。独立ならば無相関であるが、逆は成り立たない。</p>
+<p><strong>例</strong>：<span class="math notranslate nohighlight">\(X\)</span> が <span class="math notranslate nohighlight">\(-1, 0, 1\)</span> を等確率でとり、<span class="math notranslate nohighlight">\(Y = X^2\)</span> とする。<span class="math notranslate nohighlight">\(E[X] = 0\)</span>、<span class="math notranslate nohighlight">\(E[XY] = E[X^3] = 0\)</span> より <span class="math notranslate nohighlight">\(\mathrm{Cov}[X, Y] = 0\)</span> で無相関であるが、<span class="math notranslate nohighlight">\(Y\)</span> は <span class="math notranslate nohighlight">\(X\)</span> で完全に決まるので独立ではない（<span class="math notranslate nohighlight">\(P(X = 0, Y = 1) = 0 \ne P(X = 0) P(Y = 1) = 2/9\)</span>）。相関係数は直線的な関係しか捉えないので、相関係数が 0 であっても関係がないとは限らない。</p>
+</section>
+</section>
+<section id="id11">
+<h2>独立な確率変数の和の分布<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<h3>畳み込み<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> が独立で、ともに整数値をとるとき、和 <span class="math notranslate nohighlight">\(X + Y\)</span> の分布は次で求められる。</p>
+<div class="math notranslate nohighlight">
+\[P(X + Y = s) = \sum_{k} P(X = k, Y = s - k) = \sum_{k} P(X = k) \, P(Y = s - k)\]</div>
+<p>この演算を、<span class="math notranslate nohighlight">\(X\)</span> の分布と <span class="math notranslate nohighlight">\(Y\)</span> の分布の<strong>畳み込み</strong>という。これは第 4 章で見た「母関数の積の係数」と同じ計算である。</p>
+<p>サイコロ <span class="math notranslate nohighlight">\(n\)</span> 個の目の和の分布は、サイコロ 1 個の分布を <span class="math notranslate nohighlight">\(n\)</span> 回畳み込んで求められる（<a class="reference internal" href="#fig-ch09-dice"><span class="std std-numref">図 13</span></a>）。<span class="math notranslate nohighlight">\(n\)</span> が増えるにつれて分布は山型になり、なめらかな釣鐘型に近づいていく。この現象は第 10 章の中心極限定理で説明される。</p>
+<figure class="align-center" id="id16">
+<span id="fig-ch09-dice"></span><a class="reference internal image-reference" href="_images/ch09_dice_sum.png"><img alt="_images/ch09_dice_sum.png" src="_images/ch09_dice_sum.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 13 </span><span class="caption-text">サイコロ <span class="math notranslate nohighlight">\(n\)</span> 個の目の和の分布（<span class="math notranslate nohighlight">\(n = 1, 2, 3, 4\)</span>）</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id13">
+<h3>再生性<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p>独立な確率変数の和が同じ種類の分布に従う性質を<strong>再生性</strong>という。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X \sim \mathrm{Bin}(m, p)\)</span> と <span class="math notranslate nohighlight">\(Y \sim \mathrm{Bin}(n, p)\)</span> が独立ならば、<span class="math notranslate nohighlight">\(X + Y \sim \mathrm{Bin}(m + n, p)\)</span> である。成功確率が同じベルヌーイ試行を <span class="math notranslate nohighlight">\(m\)</span> 回、<span class="math notranslate nohighlight">\(n\)</span> 回行うことは、合わせて <span class="math notranslate nohighlight">\(m + n\)</span> 回行うことと同じだからである。</p></li>
+<li><p><span class="math notranslate nohighlight">\(X \sim \mathrm{Po}(\lambda)\)</span> と <span class="math notranslate nohighlight">\(Y \sim \mathrm{Po}(\mu)\)</span> が独立ならば、<span class="math notranslate nohighlight">\(X + Y \sim \mathrm{Po}(\lambda + \mu)\)</span> である。</p></li>
+</ul>
+<p>ポアソン分布の再生性は、畳み込みと二項定理で次のように示せる。</p>
+<div class="math notranslate nohighlight">
+\[P(X + Y = s) = \sum_{k=0}^{s} e^{-\lambda} \frac{\lambda^k}{k!} \, e^{-\mu} \frac{\mu^{s-k}}{(s - k)!} = \frac{e^{-(\lambda + \mu)}}{s!} \sum_{k=0}^{s} \binom{s}{k} \lambda^k \mu^{s-k} = e^{-(\lambda + \mu)} \frac{(\lambda + \mu)^s}{s!}\]</div>
+<p>たとえば、2 台のサーバーに届くリクエストの数がそれぞれ独立に <span class="math notranslate nohighlight">\(\mathrm{Po}(3)\)</span> と <span class="math notranslate nohighlight">\(\mathrm{Po}(5)\)</span> に従うなら、合計は <span class="math notranslate nohighlight">\(\mathrm{Po}(8)\)</span> に従う。</p>
+</section>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/4093ceda3a99765b2ef58518c6a6a690/ch09_joint_distributions.py"><code class="xref download docutils literal notranslate"><span class="pre">ch09_joint_distributions.py</span></code></a></p>
+<p>サンプルコードでは、同時分布を「<span class="math notranslate nohighlight">\((x, y)\)</span> → 確率」の辞書で表す。周辺分布は一方の値ごとに確率を足し合わせて求め、独立性はすべての <span class="math notranslate nohighlight">\((x, y)\)</span> について同時確率と周辺確率の積を比較して判定する。共分散は <span class="math notranslate nohighlight">\(E[XY] - E[X] E[Y]\)</span> で計算する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">marginal</span><span class="p">(</span><span class="n">joint</span><span class="p">:</span> <span class="n">JointDistribution</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;周辺分布を返す。axis=0 なら X の分布、axis=1 なら Y の分布。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">joint</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos"> 5</span>        <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="n">axis</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="n">axis</span><span class="p">],</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">+</span> <span class="n">p</span>
+<span class="linenos"> 6</span>    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span><span class="w"> </span><span class="nf">is_independent</span><span class="p">(</span><span class="n">joint</span><span class="p">:</span> <span class="n">JointDistribution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">10</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;すべての (x, y) で P(X=x, Y=y) = P(X=x) P(Y=y) が成り立つかを返す。&quot;&quot;&quot;</span>
+<span class="linenos">11</span>    <span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="o">=</span> <span class="n">marginal</span><span class="p">(</span><span class="n">joint</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">marginal</span><span class="p">(</span><span class="n">joint</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">joint</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">==</span> <span class="n">px</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">*</span> <span class="n">py</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">px</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">py</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">def</span><span class="w"> </span><span class="nf">covariance</span><span class="p">(</span><span class="n">joint</span><span class="p">:</span> <span class="n">JointDistribution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Fraction</span><span class="p">:</span>
+<span class="linenos">16</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;共分散 Cov[X, Y] = E[XY] - E[X]E[Y] を返す。&quot;&quot;&quot;</span>
+<span class="linenos">17</span>    <span class="n">ex</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">joint</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos">18</span>    <span class="n">ey</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">joint</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos">19</span>    <span class="n">exy</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">joint</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos">20</span>    <span class="k">return</span> <span class="n">exy</span> <span class="o">-</span> <span class="n">ex</span> <span class="o">*</span> <span class="n">ey</span>
+</pre></div>
+</div>
+<p>独立な確率変数の和の分布は、<code class="docutils literal notranslate"><span class="pre">numpy.convolve</span></code> で畳み込みを計算して求める。<code class="docutils literal notranslate"><span class="pre">numpy.convolve(a,</span> <span class="pre">b)</span></code> は、配列 <code class="docutils literal notranslate"><span class="pre">a</span></code>、<code class="docutils literal notranslate"><span class="pre">b</span></code> に対して <code class="docutils literal notranslate"><span class="pre">c[s]</span> <span class="pre">=</span> <span class="pre">sum(a[k]</span> <span class="pre">*</span> <span class="pre">b[s</span> <span class="pre">-</span> <span class="pre">k])</span></code> となる配列 <code class="docutils literal notranslate"><span class="pre">c</span></code> を返す。配列の添字 <span class="math notranslate nohighlight">\(k\)</span> を値 <span class="math notranslate nohighlight">\(k\)</span> の確率に対応させれば、これはまさに畳み込みの式である。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">sum_distribution</span><span class="p">(</span><span class="n">pmf</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;値 0, 1, 2, ... をとる確率変数 n 個の独立和の分布を畳み込みで求める。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
+<span class="linenos">4</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">5</span>        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">pmf</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- X = 1 個目の目, S = 2 個の和 ---
+Cov[X, S] = 35/12, ρ = 0.7071, 1/√2 = 0.7071
+独立か: False
+--- X = 1 個目の目, Y = 2 個目の目 ---
+Cov[X, Y] = 0, 独立か: True
+--- 無相関だが独立でない例 ---
+Cov[X, Y] = 0, 独立か: False
+--- サイコロ n 個の和の分布（畳み込み） ---
+n=1: 値の範囲 1..6, 最頻値 1, 期待値 3.5000, 総和 1.0000
+n=2: 値の範囲 2..12, 最頻値 7, 期待値 7.0000, 総和 1.0000
+n=3: 値の範囲 3..18, 最頻値 10, 期待値 10.5000, 総和 1.0000
+2 個の和の確率 x 36: [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(n = 1\)</span> の最頻値が 1 と表示されているのは、6 つの値の確率がすべて等しく、<code class="docutils literal notranslate"><span class="pre">numpy.argmax</span></code> が最大値をとる最初の添字を返すためである。<span class="math notranslate nohighlight">\(n = 3\)</span> では 10 と 11 の確率がともに <span class="math notranslate nohighlight">\(27/216\)</span> で等しく、最頻値として小さい方の 10 が表示されている。2 個の和の確率は第 4 章の母関数 <span class="math notranslate nohighlight">\(D(x)^2\)</span> の係数と一致する。</p>
+</section>
+<section id="id14">
+<h2>まとめ<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>複数の確率変数の分布は同時分布で表され、周辺分布は同時分布を一方の変数について足し合わせて得られる。</p></li>
+<li><p>確率変数が独立であるとは、同時分布が周辺分布の積に分解できることであり、このとき <span class="math notranslate nohighlight">\(E[XY] = E[X] E[Y]\)</span> が成り立つ。</p></li>
+<li><p>共分散 <span class="math notranslate nohighlight">\(\mathrm{Cov}[X, Y] = E[XY] - E[X] E[Y]\)</span> を使うと、和の分散は <span class="math notranslate nohighlight">\(V[X + Y] = V[X] + V[Y] + 2 \mathrm{Cov}[X, Y]\)</span> と表せる。独立ならば分散は加法的である。</p></li>
+<li><p>相関係数は直線的な関係の強さを表す。独立ならば無相関であるが、逆は成り立たない。</p></li>
+<li><p>独立な整数値確率変数の和の分布は畳み込みで求められる。二項分布とポアソン分布は再生性を持つ。</p></li>
+</ul>
+<p>同時分布と共分散については <a class="reference internal" href="references.html#ross2019" id="id15"><span>[Ross2019]</span></a> に詳しい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch08_distributions.html" class="btn btn-neutral float-left" title="第 8 章 代表的な離散分布" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch10_limit_theorems.html" class="btn btn-neutral float-right" title="第 10 章 確率の不等式と極限定理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

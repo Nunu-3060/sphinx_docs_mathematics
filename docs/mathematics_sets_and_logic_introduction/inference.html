@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. 推論と証明 &mdash; 論理・集合入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=27372ee5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="5. 述語と量化子" href="predicate.html" />
+    <link rel="prev" title="3. 論理式の同値変形" href="equivalence.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            論理・集合入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proposition.html">2. 命題と論理演算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equivalence.html">3. 論理式の同値変形</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 推論と証明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.1. 推論の妥当性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.2. 推論規則</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4.3. 妥当でない推論の例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4.4. 証明の方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.4.1. 直接証明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.4.2. 対偶による証明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.4.3. 背理法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.4.4. 場合分けによる証明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.4.5. 反例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">4.5. 数学的帰納法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="predicate.html">5. 述語と量化子</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">6. 集合の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relation.html">7. 関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">8. 写像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality.html">9. 集合の大きさ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paradox.html">10. 素朴集合論の限界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">付録 C 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">論理・集合入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>推論と証明</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">4. </span>推論と証明<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>数学の議論は、正しいと認めた前提から、正しい推論を積み重ねて結論を導く形で進む。本章では、推論が正しいとはどういうことかを論理式で定め、代表的な証明の方法を紹介する。</p>
+<section id="id2">
+<h2><span class="section-number">4.1. </span>推論の妥当性<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>いくつかの命題（前提）から別の命題（結論）を導くことを推論という。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（妥当な推論）</p>
+<p>前提 <span class="math notranslate nohighlight">\(A_1, A_2, \ldots, A_n\)</span> から結論 <span class="math notranslate nohighlight">\(B\)</span> を導く推論が妥当であるとは、論理式 <span class="math notranslate nohighlight">\((A_1 \land A_2 \land \cdots \land A_n) \to B\)</span> が恒真式であることをいう。</p>
+</div>
+<p>言い換えると、前提がすべて真になるどのような場合にも、結論が真になる推論が妥当な推論である。妥当性は推論の形式だけで決まり、前提が実際に真であるかどうかとは関係しない。前提が偽であれば、妥当な推論から偽の結論が導かれることもある。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">4.2. </span>推論規則<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>妥当な推論のうち、基本的でよく使われるものを推論規則という。代表的な推論規則を次の表に示す。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 24.0%" />
+<col style="width: 12.0%" />
+<col style="width: 46.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>前提</p></th>
+<th class="head"><p>結論</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>モーダスポネンス</p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span>、<span class="math notranslate nohighlight">\(P \to Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Q\)</span></p></td>
+<td><p>雨が降った。雨が降ったら道がぬれる。よって道がぬれる。</p></td>
+</tr>
+<tr class="row-odd"><td><p>モーダストレンス</p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg Q\)</span>、<span class="math notranslate nohighlight">\(P \to Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg P\)</span></p></td>
+<td><p>道はぬれていない。雨が降ったら道がぬれる。よって雨は降っていない。</p></td>
+</tr>
+<tr class="row-even"><td><p>仮言三段論法</p></td>
+<td><p><span class="math notranslate nohighlight">\(P \to Q\)</span>、<span class="math notranslate nohighlight">\(Q \to R\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P \to R\)</span></p></td>
+<td><p>雨が降ったら道がぬれる。道がぬれたら滑りやすい。よって雨が降ったら滑りやすい。</p></td>
+</tr>
+<tr class="row-odd"><td><p>選言三段論法</p></td>
+<td><p><span class="math notranslate nohighlight">\(P \lor Q\)</span>、<span class="math notranslate nohighlight">\(\neg P\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(Q\)</span></p></td>
+<td><p>バグの原因は設定かコードにある。設定ではない。よってコードにある。</p></td>
+</tr>
+</tbody>
+</table>
+<p>いずれも、前提の論理積から結論への含意が恒真式であることを真理値表で確かめられる。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">4.3. </span>妥当でない推論の例<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>次の 2 つは妥当に見えて妥当でない推論であり、誤りとしてよく現れる。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+<col style="width: 15.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>前提</p></th>
+<th class="head"><p>結論</p></th>
+<th class="head"><p>反例となる真理値</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>後件肯定</p></td>
+<td><p><span class="math notranslate nohighlight">\(Q\)</span>、<span class="math notranslate nohighlight">\(P \to Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> が F、<span class="math notranslate nohighlight">\(Q\)</span> が T</p></td>
+</tr>
+<tr class="row-odd"><td><p>前件否定</p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg P\)</span>、<span class="math notranslate nohighlight">\(P \to Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg Q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(P\)</span> が F、<span class="math notranslate nohighlight">\(Q\)</span> が T</p></td>
+</tr>
+</tbody>
+</table>
+<p>「雨が降ったら道がぬれる。道がぬれている。よって雨が降った」は後件肯定である。道は散水でもぬれるので、結論は導けない。後件肯定は、第 3 章で述べた「逆も真」と考える誤りと同じ構造をしている。</p>
+<p>推論の妥当性を確かめるサンプルコードは、第 2 章の <a class="reference download internal" download="" href="_downloads/7b6fd518b17e7fee3f3a14d1be65560d/truth_table.py"><code class="xref download docutils literal notranslate"><span class="pre">truth_table.py</span></code></a> に含めてある。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">4.4. </span>証明の方法<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>数学における証明とは、前提や既に正しいと分かっている命題から、妥当な推論を重ねて主張を導くことである。以下、整数に関する例を通して代表的な証明の方法を紹介する。整数 <span class="math notranslate nohighlight">\(n\)</span> が偶数であるとは、ある整数 <span class="math notranslate nohighlight">\(k\)</span> を用いて <span class="math notranslate nohighlight">\(n = 2k\)</span> と書けることをいい、奇数であるとは <span class="math notranslate nohighlight">\(n = 2k + 1\)</span> と書けることをいう。どの整数も偶数か奇数のどちらか一方である。</p>
+<section id="id6">
+<h3><span class="section-number">4.4.1. </span>直接証明<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(P \to Q\)</span> を示すために、<span class="math notranslate nohighlight">\(P\)</span> を仮定して <span class="math notranslate nohighlight">\(Q\)</span> を導く方法である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p>整数 <span class="math notranslate nohighlight">\(n\)</span> が奇数ならば、<span class="math notranslate nohighlight">\(n^2\)</span> は奇数である。</p>
+</div>
+<p><strong>証明</strong> <span class="math notranslate nohighlight">\(n\)</span> が奇数なので、ある整数 <span class="math notranslate nohighlight">\(k\)</span> を用いて <span class="math notranslate nohighlight">\(n = 2k + 1\)</span> と書ける。このとき <span class="math notranslate nohighlight">\(n^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1\)</span> であり、<span class="math notranslate nohighlight">\(2k^2 + 2k\)</span> は整数なので <span class="math notranslate nohighlight">\(n^2\)</span> は奇数である。□</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">4.4.2. </span>対偶による証明<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(P \to Q\)</span> は対偶 <span class="math notranslate nohighlight">\(\neg Q \to \neg P\)</span> と論理的に同値である。そこで、<span class="math notranslate nohighlight">\(P \to Q\)</span> の代わりに対偶を示してもよい。直接示すのが難しいときに有効である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p>整数 <span class="math notranslate nohighlight">\(n\)</span> について、<span class="math notranslate nohighlight">\(n^2\)</span> が偶数ならば、<span class="math notranslate nohighlight">\(n\)</span> は偶数である。</p>
+</div>
+<p><strong>証明</strong> 対偶「<span class="math notranslate nohighlight">\(n\)</span> が奇数ならば、<span class="math notranslate nohighlight">\(n^2\)</span> は奇数である」を示せばよい。これは直接証明の項で示した定理そのものである。□</p>
+</section>
+<section id="id8">
+<h3><span class="section-number">4.4.3. </span>背理法<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(P\)</span> を示すために、<span class="math notranslate nohighlight">\(\neg P\)</span> を仮定して矛盾を導く方法である。<span class="math notranslate nohighlight">\(\neg P \to \bot\)</span> は <span class="math notranslate nohighlight">\(P\)</span> と論理的に同値なので、この方法で <span class="math notranslate nohighlight">\(P\)</span> が示される。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p><span class="math notranslate nohighlight">\(\sqrt{2}\)</span> は無理数である。</p>
+</div>
+<p><strong>証明</strong> <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> が有理数であると仮定する。すると、1 以外に共通の約数を持たない正の整数 <span class="math notranslate nohighlight">\(a\)</span>、<span class="math notranslate nohighlight">\(b\)</span> を用いて <span class="math notranslate nohighlight">\(\sqrt{2} = a / b\)</span> と書ける。両辺を 2 乗して整理すると <span class="math notranslate nohighlight">\(a^2 = 2b^2\)</span> となるので、<span class="math notranslate nohighlight">\(a^2\)</span> は偶数である。対偶による証明の項の定理より <span class="math notranslate nohighlight">\(a\)</span> は偶数なので、整数 <span class="math notranslate nohighlight">\(c\)</span> を用いて <span class="math notranslate nohighlight">\(a = 2c\)</span> と書ける。これを代入すると <span class="math notranslate nohighlight">\(4c^2 = 2b^2\)</span>、すなわち <span class="math notranslate nohighlight">\(b^2 = 2c^2\)</span> となり、同様に <span class="math notranslate nohighlight">\(b\)</span> も偶数である。<span class="math notranslate nohighlight">\(a\)</span> と <span class="math notranslate nohighlight">\(b\)</span> がともに偶数であることは、<span class="math notranslate nohighlight">\(a\)</span> と <span class="math notranslate nohighlight">\(b\)</span> が 1 以外に共通の約数を持たないことに矛盾する。したがって <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> は無理数である。□</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">4.4.4. </span>場合分けによる証明<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(P \lor Q\)</span>、<span class="math notranslate nohighlight">\(P \to R\)</span>、<span class="math notranslate nohighlight">\(Q \to R\)</span> がすべて真ならば <span class="math notranslate nohighlight">\(R\)</span> は真である。そこで、起こりうる場合を漏れなく挙げ、それぞれの場合に主張を示す方法がある。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p>任意の整数 <span class="math notranslate nohighlight">\(n\)</span> について、<span class="math notranslate nohighlight">\(n(n + 1)\)</span> は偶数である。</p>
+</div>
+<p><strong>証明</strong> <span class="math notranslate nohighlight">\(n\)</span> が偶数の場合、<span class="math notranslate nohighlight">\(n = 2k\)</span> と書けるので <span class="math notranslate nohighlight">\(n(n + 1) = 2k(2k + 1)\)</span> は偶数である。<span class="math notranslate nohighlight">\(n\)</span> が奇数の場合、<span class="math notranslate nohighlight">\(n = 2k + 1\)</span> と書けるので <span class="math notranslate nohighlight">\(n(n + 1) = (2k + 1)(2k + 2) = 2(2k + 1)(k + 1)\)</span> は偶数である。いずれの場合も <span class="math notranslate nohighlight">\(n(n + 1)\)</span> は偶数である。□</p>
+<p>場合分けでは、挙げた場合が起こりうるすべての場合を尽くしていることを必ず確認する。</p>
+</section>
+<section id="id10">
+<h3><span class="section-number">4.4.5. </span>反例<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>「すべての <span class="math notranslate nohighlight">\(x\)</span> について〇〇である」という形の主張が偽であることを示すには、〇〇でない <span class="math notranslate nohighlight">\(x\)</span> を 1 つ挙げれば十分である。このような <span class="math notranslate nohighlight">\(x\)</span> を反例という。たとえば「すべての素数は奇数である」は、反例 2 があるので偽である。この形の主張の扱いは第 5 章で詳しく述べる。</p>
+</section>
+</section>
+<section id="id11">
+<h2><span class="section-number">4.5. </span>数学的帰納法<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>自然数 <span class="math notranslate nohighlight">\(n\)</span> に関する主張 <span class="math notranslate nohighlight">\(P(n)\)</span> が、すべての自然数 <span class="math notranslate nohighlight">\(n\)</span> について成り立つことを示したいとする。<span class="math notranslate nohighlight">\(P(n)\)</span> は <span class="math notranslate nohighlight">\(n\)</span> の値ごとに真偽が定まる主張であり、第 5 章で述語として扱う。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">数学的帰納法</p>
+<p>次の 2 つが示されれば、すべての自然数 <span class="math notranslate nohighlight">\(n\)</span> について <span class="math notranslate nohighlight">\(P(n)\)</span> が成り立つ。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(P(0)\)</span> が成り立つ（基底段階）。</p></li>
+<li><p>任意の自然数 <span class="math notranslate nohighlight">\(n\)</span> について、<span class="math notranslate nohighlight">\(P(n)\)</span> が成り立つならば <span class="math notranslate nohighlight">\(P(n + 1)\)</span> が成り立つ（帰納段階）。</p></li>
+</ol>
+</div>
+<p>基底段階から <span class="math notranslate nohighlight">\(P(0)\)</span> が、帰納段階を繰り返し適用して <span class="math notranslate nohighlight">\(P(1)\)</span>、<span class="math notranslate nohighlight">\(P(2)\)</span>、… が順に得られる、というのがこの方法の考え方である。帰納段階で仮定する <span class="math notranslate nohighlight">\(P(n)\)</span> を帰納法の仮定という。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p>任意の自然数 <span class="math notranslate nohighlight">\(n\)</span> について、<span class="math notranslate nohighlight">\(0 + 1 + 2 + \cdots + n = \dfrac{n(n + 1)}{2}\)</span> が成り立つ。</p>
+</div>
+<p><strong>証明</strong> この等式を <span class="math notranslate nohighlight">\(P(n)\)</span> とする。</p>
+<ul>
+<li><p>基底段階：左辺は 0、右辺は <span class="math notranslate nohighlight">\(0 \cdot 1 / 2 = 0\)</span> なので <span class="math notranslate nohighlight">\(P(0)\)</span> は成り立つ。</p></li>
+<li><p>帰納段階：<span class="math notranslate nohighlight">\(P(n)\)</span> が成り立つと仮定する。このとき</p>
+<div class="math notranslate nohighlight">
+\[0 + 1 + \cdots + n + (n + 1) = \frac{n(n + 1)}{2} + (n + 1) = \frac{(n + 1)(n + 2)}{2}\]</div>
+<p>となるので <span class="math notranslate nohighlight">\(P(n + 1)\)</span> も成り立つ。</p>
+</li>
+</ul>
+<p>以上より、すべての自然数 <span class="math notranslate nohighlight">\(n\)</span> について <span class="math notranslate nohighlight">\(P(n)\)</span> が成り立つ。□</p>
+<p>数学的帰納法は、プログラムのループが正しいことを確かめる考え方と対応している。次の関数を考える。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">triangular</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">3</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">4</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="linenos">5</span>        <span class="c1"># ここで total == i * (i + 1) // 2 が成り立つ</span>
+<span class="linenos">6</span>    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+<p>コメントの条件のように、ループの各回の終わりで常に成り立つ条件をループ不変条件という。<span class="math notranslate nohighlight">\(i = 0\)</span> の回で成り立つこと（基底段階）と、ある回で成り立てば次の回でも成り立つこと（帰納段階）を示せば、数学的帰納法によりすべての回で成り立つことが分かる。最後の回（<span class="math notranslate nohighlight">\(i = n\)</span>）の終わりで不変条件が成り立つことから、関数の戻り値が <span class="math notranslate nohighlight">\(n(n + 1) / 2\)</span> であることが分かる。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="equivalence.html" class="btn btn-neutral float-left" title="3. 論理式の同値変形" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="predicate.html" class="btn btn-neutral float-right" title="5. 述語と量化子" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

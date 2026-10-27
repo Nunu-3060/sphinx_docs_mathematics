@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>はじめに &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 1 章 信号と数学的準備" href="ch01_signals.html" />
+    <link rel="prev" title="フーリエ解析・デジタル信号処理入門" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">はじめに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">本書の目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">対象読者と前提知識</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">実行環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">表記の約束</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">はじめに</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>はじめに<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2>本書の目的<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>スマートフォンで音楽を聴く、通話の雑音を消す、機械の振動から故障の兆候を見つける、画像を圧縮する。これらの処理の土台には、信号を「どの周波数の成分がどれだけ含まれているか」という見方で捉えるフーリエ解析がある。</p>
+<p>本書の目標は、次の 2 つである。</p>
+<ul class="simple">
+<li><p>フーリエ級数、フーリエ変換、離散フーリエ変換（DFT）の数式の意味を理解し、それらの関係を説明できるようになる。</p></li>
+<li><p>NumPy と SciPy を使って、自分で用意した信号のスペクトルを正しく求め、目的に合ったデジタルフィルタを設計して適用できるようになる。</p></li>
+</ul>
+<p>FFT（高速フーリエ変換）の関数は、1 行で呼び出せる。しかし、窓関数を掛けないとなぜスペクトルが広がるのか、ゼロ詰めで周波数分解能は上がるのか、標本化周波数をいくつにすればよいのか、といった疑問に答えるには、背後にある理論の理解が欠かせない。本書は、理論と実装の両方を往復しながら、これらの疑問に答えられる力を身に付けることを目指す。</p>
+</section>
+<section id="id3">
+<h2>対象読者と前提知識<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>本書は、Python などのプログラミングの経験があるエンジニアと、工学系の大学生を対象とする。前提とする知識は次のとおりである。</p>
+<ul class="simple">
+<li><p>微分と積分の基本（三角関数と指数関数の微分・積分、定積分の意味）</p></li>
+<li><p>ベクトルと行列の基本（内積、行列とベクトルの積）</p></li>
+<li><p>Python の基本的な文法と、NumPy の配列の基本的な操作</p></li>
+</ul>
+<p>複素数は第 1 章で必要な範囲を復習するので、詳しく知らなくてもよい。</p>
+</section>
+<section id="id4">
+<h2>本書の構成<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>本書は、次の 3 部と付録で構成している。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>章</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>第 1 章 信号と数学的準備</p></td>
+<td><p>信号の分類、正弦波、複素数とオイラーの公式、内積と直交性</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 2 章 フーリエ級数</p></td>
+<td><p>周期信号を正弦波の和で表す方法、スペクトルの考え方、ギブス現象</p></td>
+</tr>
+<tr class="row-even"><td><p>第 3 章 フーリエ変換</p></td>
+<td><p>周期をもたない信号への拡張、代表的な変換対と性質、畳み込み定理</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 4 章 標本化と量子化</p></td>
+<td><p>標本化定理、エイリアシング、信号の再構成、量子化雑音</p></td>
+</tr>
+<tr class="row-even"><td><p>第 5 章 離散時間信号と LTI システム</p></td>
+<td><p>インパルス応答と畳み込み和、差分方程式、周波数応答、z 変換</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 6 章 離散時間フーリエ変換と離散フーリエ変換</p></td>
+<td><p>DTFT と DFT の定義と関係、周波数分解能、ゼロ詰め</p></td>
+</tr>
+<tr class="row-even"><td><p>第 7 章 高速フーリエ変換</p></td>
+<td><p>FFT の原理と実装、NumPy の FFT 関数の使い方</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 8 章 スペクトル解析</p></td>
+<td><p>スペクトル漏れと窓関数、パワースペクトル密度、スペクトログラム</p></td>
+</tr>
+<tr class="row-even"><td><p>第 9 章 デジタルフィルタ</p></td>
+<td><p>FIR フィルタと IIR フィルタの設計と適用</p></td>
+</tr>
+<tr class="row-odd"><td><p>第 10 章 応用</p></td>
+<td><p>雑音の除去、高速な畳み込み、リサンプリング、画像の 2 次元 DFT、DTMF 信号の検出</p></td>
+</tr>
+<tr class="row-even"><td><p>第 11 章 さらに学ぶために</p></td>
+<td><p>本書の先にある話題の案内</p></td>
+</tr>
+<tr class="row-odd"><td><p>付録</p></td>
+<td><p>用語集、記号一覧、サンプルコード一覧、参考文献</p></td>
+</tr>
+</tbody>
+</table>
+<p>第 I 部（第 1 章から第 3 章）では、連続時間の信号を対象に、フーリエ解析の考え方を説明する。第 II 部（第 4 章から第 7 章）では、信号を標本化して計算機で扱う方法と、そのための離散的なフーリエ変換を説明する。第 III 部（第 8 章から第 11 章）では、スペクトル解析とフィルタ設計という 2 つの代表的な処理を実践し、応用例を紹介する。</p>
+<p>第 I 部の内容は、第 II 部以降の理解の土台になる。急いで実践に進みたい場合でも、第 1 章から第 3 章の要点（各章の「まとめ」）には目を通しておくことを勧める。</p>
+</section>
+<section id="id5">
+<h2>実行環境<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>本書のサンプルコードは、次の環境で動作を確認している。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ソフトウェア</p></th>
+<th class="head"><p>バージョン</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.14</p></td>
+</tr>
+<tr class="row-odd"><td><p>NumPy</p></td>
+<td><p>2.5</p></td>
+</tr>
+<tr class="row-even"><td><p>SciPy</p></td>
+<td><p>1.18</p></td>
+</tr>
+<tr class="row-odd"><td><p>matplotlib</p></td>
+<td><p>3.11</p></td>
+</tr>
+<tr class="row-even"><td><p>Pillow</p></td>
+<td><p>本文の図の作成だけに使う</p></td>
+</tr>
+</tbody>
+</table>
+<p>必要なパッケージは、次のコマンドでインストールできる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>matplotlib
+</pre></div>
+</div>
+<p>サンプルコードの一覧と、実行方法、型ヒントとコーディング規約の検査方法は、<a class="reference internal" href="appendix_c_samples.html"><span class="doc">付録 C サンプルコード一覧</span></a>にまとめた。</p>
+</section>
+<section id="id6">
+<h2>表記の約束<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>本書では、次の表記を使う。記号の一覧は<a class="reference internal" href="appendix_b_symbols.html"><span class="doc">付録 B 記号一覧</span></a>にある。</p>
+<ul class="simple">
+<li><p>虚数単位は <span class="math notranslate nohighlight">\(j\)</span> で表す（<span class="math notranslate nohighlight">\(j^2 = -1\)</span>）。数学では <span class="math notranslate nohighlight">\(i\)</span> を使うことが多いが、電気・電子工学では電流の記号 <span class="math notranslate nohighlight">\(i\)</span> と区別するために <span class="math notranslate nohighlight">\(j\)</span> を使う。Python の複素数リテラル <code class="docutils literal notranslate"><span class="pre">1j</span></code> とも対応する。</p></li>
+<li><p>連続時間の信号は <span class="math notranslate nohighlight">\(x(t)\)</span> のように丸括弧で、離散時間の信号は <span class="math notranslate nohighlight">\(x[n]\)</span> のように角括弧で表す。</p></li>
+<li><p>周波数 <span class="math notranslate nohighlight">\(f\)</span> の単位は Hz（ヘルツ）、角周波数 <span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span> の単位は rad/s とする。</p></li>
+<li><p>sinc 関数は、NumPy の <code class="docutils literal notranslate"><span class="pre">np.sinc()</span></code> と同じく <span class="math notranslate nohighlight">\(\mathrm{sinc}(x) = \sin(\pi x)/(\pi x)\)</span> と定義する（<span class="math notranslate nohighlight">\(\mathrm{sinc}(0) = 1\)</span>）。</p></li>
+<li><p>本文中の用語のうち、用語集に載せたものは、初出の箇所から用語集へのリンクを張っている。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="フーリエ解析・デジタル信号処理入門" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch01_signals.html" class="btn btn-neutral float-right" title="第 1 章 信号と数学的準備" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

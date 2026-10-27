@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11. 手法の比較と実践上の注意 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="用語集" href="glossary.html" />
+    <link rel="prev" title="10. 格子ボルツマン法" href="lbm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. 手法の比較と実践上の注意</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">11.1. 手法の比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">11.2. パラメーターの選び方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">11.3. 計算が発散したときの調べ方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">11.4. 結果を検証する手順</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">11.5. 計算を速くする</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">11.6. さらに学ぶために</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">11.7. おわりに</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">11. </span>手法の比較と実践上の注意</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">11. </span>手法の比較と実践上の注意<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>最後の章では、これまでに実装した手法を比較し、自分でシミュレーションを作るときに役立つ実践的な注意点をまとめる。パラメーターの選び方、計算が発散したときの調べ方、結果を検証する手順、計算を速くする方法を順に説明し、さらに学ぶための道筋を示す。</p>
+<section id="id2">
+<h2><span class="section-number">11.1. </span>手法の比較<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>本書で扱った流体の計算法を<a class="reference internal" href="#table-methods"><span class="std std-numref">表 11.1</span></a> に比較する。</p>
+<span id="table-methods"></span><table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 11.1 </span><span class="caption-text">本書で扱った流体の計算法の比較</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 16.0%" />
+<col style="width: 21.0%" />
+<col style="width: 21.0%" />
+<col style="width: 21.0%" />
+<col style="width: 21.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>項目</p></th>
+<th class="head"><p>射影法(第 8 章)</p></th>
+<th class="head"><p>Stable Fluids(第 7 章)</p></th>
+<th class="head"><p>SPH(第 9 章)</p></th>
+<th class="head"><p>格子ボルツマン法(第 10 章)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>視点</p></td>
+<td><p>オイラー的(格子)</p></td>
+<td><p>オイラー的(格子)</p></td>
+<td><p>ラグランジュ的(粒子)</p></td>
+<td><p>オイラー的(格子)</p></td>
+</tr>
+<tr class="row-odd"><td><p>非圧縮性の扱い</p></td>
+<td><p>圧力のポアソン方程式</p></td>
+<td><p>圧力のポアソン方程式</p></td>
+<td><p>わずかな圧縮を許し、状態方程式で圧力を計算</p></td>
+<td><p>わずかな圧縮を許す(流速を小さく保つ)</p></td>
+</tr>
+<tr class="row-even"><td><p>時間刻み幅の主な制約</p></td>
+<td><p>CFL 条件、拡散数</p></td>
+<td><p>なし(無条件に安定)</p></td>
+<td><p>人工的な音速による CFL 条件</p></td>
+<td><p>1 ステップ = 1 格子(流速を小さく保つ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>得意なこと</p></td>
+<td><p>精度の検証された定常・非定常の流れ</p></td>
+<td><p>大きな時間刻み幅による高速な計算、映像表現</p></td>
+<td><p>自由表面、激しい変形、しぶき</p></td>
+<td><p>複雑な形の物体、並列計算</p></td>
+</tr>
+<tr class="row-even"><td><p>苦手なこと</p></td>
+<td><p>自由表面、複雑な形状</p></td>
+<td><p>定量的な精度(数値拡散)</p></td>
+<td><p>圧力の精度、壁際の精度</p></td>
+<td><p>高い流速、メモリー使用量</p></td>
+</tr>
+</tbody>
+</table>
+<p>どの手法にも得意・不得意があり、すべての問題に最適な手法はない。目的(見た目か定量的な予測か)、流れの性質(自由表面の有無、レイノルズ数)、境界の形状、許される計算時間を考えて手法を選ぶ。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">11.2. </span>パラメーターの選び方<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>シミュレーションのパラメーターは、次の順に決めるとよい。</p>
+<ol class="arabic simple">
+<li><p><strong>無次元数を決める</strong>: レイノルズ数など、再現したい流れの性質を決める無次元数を先に決める。速さや長さを 1 にそろえ、動粘性係数を無次元数から求めると扱いやすい(第 5 章)。</p></li>
+<li><p><strong>解像度を決める</strong>: 再現したい最も小さな構造(物体の直径、渦の大きさ、水の層の厚さ)が、何個の格子や粒子で表されるかを考える。目安として 10〜20 個以上は必要である。第 10 章では円柱の直径を 16 格子で表したが、流路の幅の影響もあり、ストローハル数は実験値より約 15 % 大きかった。</p></li>
+<li><p><strong>時間刻み幅を決める</strong>: 次の表の条件をすべて満たすように決める。</p></li>
+</ol>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 11.2 </span><span class="caption-text">時間刻み幅の主な制約</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 40.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>制約</p></th>
+<th class="head"><p>条件の目安</p></th>
+<th class="head"><p>本書で扱った章</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>振動(ばね、接触)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta t &lt; 2/\omega_{\max}\)</span>、接触時間の数十分の 1</p></td>
+<td><p>第 2 章、第 4 章</p></td>
+</tr>
+<tr class="row-odd"><td><p>移流の CFL 条件</p></td>
+<td><p><span class="math notranslate nohighlight">\(U \Delta t / \Delta x \le 1\)</span></p></td>
+<td><p>第 6 章</p></td>
+</tr>
+<tr class="row-even"><td><p>移流と粘性(中心差分)</p></td>
+<td><p><span class="math notranslate nohighlight">\(U^2 \Delta t / \nu \le 2\)</span> 程度</p></td>
+<td><p>第 8 章</p></td>
+</tr>
+<tr class="row-odd"><td><p>拡散(陽解法)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\nu \Delta t / \Delta x^2 \le 1/2\)</span>(2 次元では 1/4)</p></td>
+<td><p>第 6 章、第 8 章</p></td>
+</tr>
+<tr class="row-even"><td><p>音速による CFL 条件</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta t \le 0.25\,h/c_0\)</span></p></td>
+<td><p>第 9 章</p></td>
+</tr>
+</tbody>
+</table>
+<p>条件の目安はいずれも安定性の限界なので、実際にはさらに余裕を持たせる。また、安定であることと正確であることは別である。安定な時間刻み幅の中でも、時間刻み幅を半分にして結果が変わらないことを確かめるとよい。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">11.3. </span>計算が発散したときの調べ方<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>数値シミュレーションを作ると、値が急に大きくなって <code class="docutils literal notranslate"><span class="pre">NaN</span></code>(非数)や <code class="docutils literal notranslate"><span class="pre">inf</span></code>(無限大)になることがよくある。次の順に調べると原因を見つけやすい。</p>
+<ol class="arabic simple">
+<li><p><strong>時間刻み幅を確かめる</strong>: 前の節の条件を満たしているかを確かめる。時間刻み幅を半分にして発散しなくなるなら、安定性の条件を満たしていなかった可能性が高い。</p></li>
+<li><p><strong>最初に発散したステップを見つける</strong>: 毎ステップ値が有限かどうかを調べ、最初に異常が起きたステップと場所を特定する。発散が始まった場所(壁際、特定の粒子、領域の端など)は、原因の大きな手がかりになる。</p></li>
+<li><p><strong>保存量を監視する</strong>: 全エネルギー、全質量、全運動量など、本来保存されるはずの量を毎ステップ記録する。発散する前から少しずつずれ始めていることが多い。</p></li>
+<li><p><strong>問題を小さくする</strong>: 粒子 2 個、格子を 1 次元にするなど、手計算や厳密解で確かめられる大きさまで問題を小さくして、同じ現象が起きるかを調べる。第 4 章の 2 粒子の衝突はその例である。</p></li>
+<li><p><strong>境界条件と単位を確かめる</strong>: 境界の処理の符号の誤り、配列の添字の向き(<code class="docutils literal notranslate"><span class="pre">[y,</span> <span class="pre">x]</span></code> か <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y]</span></code> か)の取り違え、単位の不一致は、よくある誤りである。</p></li>
+</ol>
+<p>2 番目の手順は、次のようなコードで簡単に実現できる(<code class="docutils literal notranslate"><span class="pre">advance</span></code> と <code class="docutils literal notranslate"><span class="pre">state</span></code> は、それぞれ 1 ステップ進める関数と状態を表す仮の名前である)。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">advance</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">u</span><span class="p">)):</span>
+<span class="linenos">4</span>        <span class="n">bad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">u</span><span class="p">))</span>
+<span class="linenos">5</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ステップ </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2"> で発散した。最初の異常な位置: </span><span class="si">{</span><span class="n">bad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">11.4. </span>結果を検証する手順<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>本書では、各章で結果を検証してきた。その方法を<a class="reference internal" href="#table-verification"><span class="std std-numref">表 11.3</span></a> にまとめる。新しいシミュレーションを作るときは、できるだけ多くの方法で結果を確かめるとよい。</p>
+<span id="table-verification"></span><table class="docutils align-default" id="id11">
+<caption><span class="caption-number">表 11.3 </span><span class="caption-text">本書で使った検証の方法</span><a class="headerlink" href="#id11" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>方法</p></th>
+<th class="head"><p>内容</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>厳密解との比較</p></td>
+<td><p>解の分かっている問題で誤差を測る</p></td>
+<td><p>ばね振動子(第 2 章)、空気抵抗(第 3 章)、移流と拡散(第 6 章)</p></td>
+</tr>
+<tr class="row-odd"><td><p>精度の次数の確認</p></td>
+<td><p>時間刻み幅や格子間隔を変えて、誤差の減り方を調べる</p></td>
+<td><p>時間積分法(第 2 章)</p></td>
+</tr>
+<tr class="row-even"><td><p>保存量の確認</p></td>
+<td><p>エネルギーなど保存されるはずの量が保たれるかを調べる</p></td>
+<td><p>時間積分法(第 2 章)</p></td>
+</tr>
+<tr class="row-odd"><td><p>単純な方法との比較</p></td>
+<td><p>高速化したアルゴリズムの結果を、単純な方法と比べる</p></td>
+<td><p>近傍探索(第 4 章)</p></td>
+</tr>
+<tr class="row-even"><td><p>設定値の再現</p></td>
+<td><p>入力したパラメーターが結果に正しく現れるかを調べる</p></td>
+<td><p>反発係数(第 4 章)</p></td>
+</tr>
+<tr class="row-odd"><td><p>拘束条件の確認</p></td>
+<td><p>満たすべき条件(非圧縮条件など)が満たされているかを数値で調べる</p></td>
+<td><p>発散(第 7 章)</p></td>
+</tr>
+<tr class="row-even"><td><p>ベンチマーク問題</p></td>
+<td><p>信頼できる参照解と比べる。格子収束も確かめる</p></td>
+<td><p>キャビティ流れ(第 8 章)</p></td>
+</tr>
+<tr class="row-odd"><td><p>実験値との比較</p></td>
+<td><p>実験で知られている値と比べる(妥当性確認)</p></td>
+<td><p>ストローハル数(第 10 章)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h2><span class="section-number">11.5. </span>計算を速くする<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>シミュレーションの計算時間を短くする方法は、効果の大きい順におおむね次のようになる。</p>
+<ol class="arabic simple">
+<li><p><strong>アルゴリズムを改善する</strong>: 近傍探索を総当たり法からセル分割法に変えると、計算量そのものが <span class="math notranslate nohighlight">\(N^2\)</span> に比例する状態から、ほぼ <span class="math notranslate nohighlight">\(N\)</span> に比例する状態に下がった(第 4 章)。近傍リストの再利用(第 9 章)や、より速く収束する反復法(第 7 章)もこれにあたる。</p></li>
+<li><p><strong>ベクトル化する</strong>: Python の for 文を NumPy の配列演算に置き換える(第 3 章)。</p></li>
+<li><p><strong>メモリーの使い方を見直す</strong>: 大きな一時配列を何度も作らないようにする(第 10 章)。</p></li>
+<li><p><strong>コンパイルする</strong>: Numba などで Python の関数を機械語にコンパイルすると、NumPy で書きにくい逐次的な処理(ガウス-ザイデル法など)も高速に実行できる。</p></li>
+<li><p><strong>並列化・GPU を使う</strong>: CuPy、JAX、Taichi などを使うと、GPU で計算できる。格子ボルツマン法のように局所的な計算は、特に GPU に向いている。</p></li>
+</ol>
+<p>どこに時間がかかっているかは、推測せずに測定して確かめる。Python 標準の <code class="docutils literal notranslate"><span class="pre">cProfile</span></code> を使うと、関数ごとの計算時間を調べられる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python -m cProfile -s tottime sph_dam_break.py</span>
+</pre></div>
+</div>
+<p>本書の SPH(第 9 章)では、このように調べた結果、最初の実装では計算時間の 6 割近くを近傍探索が占めていることが分かり、近傍リストの再利用などによって 1 ステップの計算時間を半分程度にできた。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">11.6. </span>さらに学ぶために<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>本書で扱ったのは、2 次元の基本的な手法だけである。さらに学ぶための方向をいくつか挙げる。</p>
+<ul class="simple">
+<li><p><strong>3 次元への拡張</strong>: 本書の手法は、いずれも原理的にはそのまま 3 次元に拡張できる。ただし計算量が大きく増えるので、前の節の高速化が重要になる。</p></li>
+<li><p><strong>乱流</strong>: レイノルズ数が高い流れでは、格子で解像できない小さな渦の効果をモデルで表す乱流モデル(LES など)が必要になる。</p></li>
+<li><p><strong>自由表面の格子法</strong>: 格子法で水面を扱うには、VOF 法やレベルセット法などで水面の位置を追跡する。</p></li>
+<li><p><strong>格子と粒子の組み合わせ</strong>: 粒子で物理量を運び、格子で圧力を計算する FLIP 法や APIC 法は、映像制作の液体の表現で広く使われている。</p></li>
+<li><p><strong>既存のソフトウェア</strong>: 実務では、OpenFOAM(格子法)、DualSPHysics や PySPH(SPH)、Palabos(格子ボルツマン法)などのソフトウェアがよく使われる。本書で手法の中身を理解しておくと、これらのソフトウェアのパラメーターの意味や結果の限界を判断しやすくなる。</p></li>
+</ul>
+<p>各ソフトウェアや参考書の情報は<a class="reference internal" href="references.html"><span class="doc">参考文献</span></a>にまとめた。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">11.7. </span>おわりに<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>本書では、粒子の運動から始めて、格子法、粒子法、格子ボルツマン法による流体のシミュレーションを、小さな動くコードで実装してきた。どの章でも、結果がもっともらしく見えることと、結果が正しいことは別であり、数値で確かめる必要があることを繰り返し示した。</p>
+<p>数値シミュレーションは、正しく使えば現象を深く理解するための強力な道具になる。本書のサンプルコードのパラメーターを変えたり、新しい力や境界を加えたりしながら、自分の手で確かめる経験を積んでほしい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lbm.html" class="btn btn-neutral float-left" title="10. 格子ボルツマン法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="glossary.html" class="btn btn-neutral float-right" title="用語集" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

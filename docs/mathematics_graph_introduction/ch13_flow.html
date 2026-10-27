@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 13 章 ネットワークフロー &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 14 章 代数的グラフ理論" href="ch14_algebraic.html" />
+    <link rel="prev" title="第 12 章 最短経路問題" href="ch12_shortest_path.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 13 章 ネットワークフロー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">フローネットワーク</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">カット</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">最大フロー最小カット定理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">残余グラフと増加路</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">フォード・ファルカーソン法とエドモンズ・カープ法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">整数性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">最大フローの応用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">二部グラフの最大マッチング</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">辺素な道とメンガーの定理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">その他の応用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 13 章 ネットワークフロー</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 13 章 ネットワークフロー<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>水道管で浄水場から町へ水を送る、通信網で拠点間にデータを流す、物流網で工場から倉庫へ荷物を運ぶ。各区間に流せる量の上限（容量）があるとき、全体として最大でどれだけ流せるだろうか。この問いを扱うのがネットワークフローの理論である。本章では最大フロー問題と、その双対にあたる最小カット問題を学び、両者の値が一致するという最大フロー最小カット定理を中心に、アルゴリズムと応用を扱う。</p>
+<section id="id2">
+<h2>フローネットワーク<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 13.1（フローネットワーク・フロー）</p>
+<p>有向グラフ <span class="math notranslate nohighlight">\(G = (V, E)\)</span> の各辺 <span class="math notranslate nohighlight">\((u, v)\)</span> に非負の<strong>容量</strong> <span class="math notranslate nohighlight">\(c(u, v)\)</span> が定められ、2 つの特別な頂点<strong>ソース</strong>（始点）<span class="math notranslate nohighlight">\(s\)</span> と<strong>シンク</strong>（終点）<span class="math notranslate nohighlight">\(t\)</span> が指定されたものを<strong>フローネットワーク</strong>という。各辺に流量 <span class="math notranslate nohighlight">\(f(u, v)\)</span> を割り当てたもので、次の 2 条件を満たすものを<strong>フロー</strong>という。</p>
+<ul class="simple">
+<li><p><strong>容量制約</strong>：すべての辺について <span class="math notranslate nohighlight">\(0 \le f(u, v) \le c(u, v)\)</span>。</p></li>
+<li><p><strong>流量保存則</strong>：<span class="math notranslate nohighlight">\(s, t\)</span> 以外のすべての頂点 <span class="math notranslate nohighlight">\(v\)</span> について、<span class="math notranslate nohighlight">\(v\)</span> に入る流量の和と <span class="math notranslate nohighlight">\(v\)</span> から出る流量の和が等しい。</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(s\)</span> から出る流量の和から <span class="math notranslate nohighlight">\(s\)</span> に入る流量の和を引いた値を、フローの<strong>値</strong>（流量）という。</p>
+</div>
+<p>流量保存則は、途中の頂点で水が湧き出したり消えたりしないことを表す。電気回路のキルヒホッフの電流則と同じ形である。値が最大のフローを求める問題を<strong>最大フロー問題</strong>という。</p>
+<p>本章では <a class="reference internal" href="#fig-ch13-network"><span class="std std-numref">図 26</span></a> のフローネットワークを例とする。辺のラベル「<span class="math notranslate nohighlight">\(f\)</span> / <span class="math notranslate nohighlight">\(c\)</span>」は、最大フローにおける流量 <span class="math notranslate nohighlight">\(f\)</span> と容量 <span class="math notranslate nohighlight">\(c\)</span> を表す。最大フローの値は 19 である。</p>
+<figure class="align-center" id="id13">
+<span id="fig-ch13-network"></span><div class="graphviz"><object data="_images/graphviz-493e97cffa233852ac3f76110a91eedcf59c4d6a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    edge [fontsize=11];
+    s [pos=&quot;0,1!&quot;, fillcolor=&quot;#fde5cf&quot;]; a [pos=&quot;2,2!&quot;]; b [pos=&quot;2,0!&quot;, fillcolor=&quot;#fde5cf&quot;];
+    c [pos=&quot;4.2,2!&quot;]; d [pos=&quot;4.2,0!&quot;]; t [pos=&quot;6.2,1!&quot;];
+    s -&gt; a [label=&quot;10/10&quot;, color=&quot;#c0392b&quot;, penwidth=2];
+    s -&gt; b [label=&quot;9/10&quot;];
+    a -&gt; b [label=&quot;0/2&quot;];
+    a -&gt; c [label=&quot;4/4&quot;];
+    a -&gt; d [label=&quot;6/8&quot;];
+    b -&gt; d [label=&quot;9/9&quot;, color=&quot;#c0392b&quot;, penwidth=2];
+    c -&gt; t [label=&quot;9/10&quot;];
+    d -&gt; c [label=&quot;5/6&quot;];
+    d -&gt; t [label=&quot;10/10&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 26 </span><span class="caption-text">フローネットワークと最大フロー（ラベルは 流量 / 容量）。橙色の頂点集合 {s, b} が最小カットの s 側、赤い辺がカットの辺である。</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id3">
+<h2>カット<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>ソースからシンクへの流れを妨げる「切れ目」を表すのがカットである。</p>
+<div class="admonition-s-t admonition">
+<p class="admonition-title">定義 13.2（s-t カット）</p>
+<p>頂点集合を <span class="math notranslate nohighlight">\(s \in S\)</span>、<span class="math notranslate nohighlight">\(t \in T\)</span> となる 2 つの集合 <span class="math notranslate nohighlight">\(S, T = V \setminus S\)</span> に分けたものを <strong>s-t カット</strong>という。第 6 章では頂点集合の分割の両側にまたがる辺の集合をカットと呼んだが、本章では頂点集合の分割そのものをカットと呼ぶ。<span class="math notranslate nohighlight">\(S\)</span> から <span class="math notranslate nohighlight">\(T\)</span> へ向かう辺の容量の和をカットの<strong>容量</strong>という。</p>
+</div>
+<p>カットの容量には、<span class="math notranslate nohighlight">\(T\)</span> から <span class="math notranslate nohighlight">\(S\)</span> へ向かう辺は含めないことに注意する。<a class="reference internal" href="#fig-ch13-network"><span class="std std-numref">図 26</span></a> で <span class="math notranslate nohighlight">\(S = \{s, b\}\)</span> とすると、<span class="math notranslate nohighlight">\(S\)</span> から <span class="math notranslate nohighlight">\(T\)</span> へ向かう辺は s → a（容量 10）と b → d（容量 9）であり、カットの容量は 19 である。辺 a → b は <span class="math notranslate nohighlight">\(T\)</span> から <span class="math notranslate nohighlight">\(S\)</span> へ向かうので数えない。</p>
+<p>任意のフロー <span class="math notranslate nohighlight">\(f\)</span> と任意の s-t カット <span class="math notranslate nohighlight">\((S, T)\)</span> について、流量保存則から次の関係が導ける。</p>
+<div class="math notranslate nohighlight">
+\[(f \text{ の値}) = \sum_{u \in S,\, v \in T} f(u, v) - \sum_{u \in T,\, v \in S} f(u, v) \le \sum_{u \in S,\, v \in T} c(u, v)\]</div>
+<p>つまり、フローの値は「<span class="math notranslate nohighlight">\(S\)</span> から <span class="math notranslate nohighlight">\(T\)</span> へ出ていく流量から、<span class="math notranslate nohighlight">\(T\)</span> から <span class="math notranslate nohighlight">\(S\)</span> へ戻ってくる流量を引いたもの」に等しく、これはカットの容量を超えない。したがって、フローの値の最大値は、カットの容量の最小値以下である。<a class="reference internal" href="#fig-ch13-network"><span class="std std-numref">図 26</span></a> では、値 19 のフローと容量 19 のカットが見つかっているので、どちらも最適であることが分かる。</p>
+</section>
+<section id="id4">
+<h2>最大フロー最小カット定理<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>実は、最大フローの値と最小カットの容量は常に一致する。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 13.1（最大フロー最小カット定理）</p>
+<p>任意のフローネットワークにおいて、フローの値の最大値は、s-t カットの容量の最小値に等しい。</p>
+</div>
+<p>この定理の証明には、次に述べる残余グラフを使う。</p>
+<section id="id5">
+<h3>残余グラフと増加路<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>フロー <span class="math notranslate nohighlight">\(f\)</span> に対して、「あとどれだけ流量を変えられるか」を表すグラフを<strong>残余グラフ</strong>という。元のグラフの各辺 <span class="math notranslate nohighlight">\((u, v)\)</span> について、残余グラフには次の辺を置く。</p>
+<ul class="simple">
+<li><p>順方向の辺 <span class="math notranslate nohighlight">\((u, v)\)</span>：残余容量 <span class="math notranslate nohighlight">\(c(u, v) - f(u, v)\)</span>（まだ流せる量）。</p></li>
+<li><p>逆方向の辺 <span class="math notranslate nohighlight">\((v, u)\)</span>：残余容量 <span class="math notranslate nohighlight">\(f(u, v)\)</span>（流している量を押し戻せる量）。</p></li>
+</ul>
+<p>残余容量が 0 の辺は除く。残余グラフで <span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(t\)</span> への道を<strong>増加路</strong>という。増加路上の残余容量の最小値 <span class="math notranslate nohighlight">\(\delta\)</span> だけ、順方向の辺では流量を増やし、逆方向の辺では元の辺の流量を減らすと、フローの値が <span class="math notranslate nohighlight">\(\delta\)</span> 増える。逆方向の辺は「以前の流し方を取り消して別の経路に付け替える」ことを表しており、これがあるおかげで、一度決めた流し方に縛られずに最適解にたどり着ける。第 10 章のマッチングの増加路と同じ考え方である。</p>
+<p><strong>定理 13.1 の証明</strong>：フロー <span class="math notranslate nohighlight">\(f\)</span> の残余グラフに増加路がないとする。残余グラフで <span class="math notranslate nohighlight">\(s\)</span> から到達できる頂点の集合を <span class="math notranslate nohighlight">\(S\)</span>、それ以外を <span class="math notranslate nohighlight">\(T\)</span> とすると、<span class="math notranslate nohighlight">\(t \in T\)</span> なので <span class="math notranslate nohighlight">\((S, T)\)</span> は s-t カットである。<span class="math notranslate nohighlight">\(S\)</span> から <span class="math notranslate nohighlight">\(T\)</span> へ向かう元の辺 <span class="math notranslate nohighlight">\((u, v)\)</span> は、残余容量が 0 なので <span class="math notranslate nohighlight">\(f(u, v) = c(u, v)\)</span> である（そうでなければ <span class="math notranslate nohighlight">\(v\)</span> に到達できる）。<span class="math notranslate nohighlight">\(T\)</span> から <span class="math notranslate nohighlight">\(S\)</span> へ向かう元の辺 <span class="math notranslate nohighlight">\((u, v)\)</span> は、逆方向の残余容量が 0 なので <span class="math notranslate nohighlight">\(f(u, v) = 0\)</span> である。よって前節の式で等号が成り立ち、フローの値はカットの容量に等しい。フローの値はどのカットの容量も超えないので、このフローは最大で、このカットは最小である。増加路がある限りフローの値を増やせることと合わせると、最大フローでは増加路がなく、上の議論から最大フローの値は最小カットの容量に一致する。□</p>
+<p>この証明は、最大フローが求まれば最小カットも同時に求まることを示している。残余グラフで <span class="math notranslate nohighlight">\(s\)</span> から到達できる頂点を集めればよい。</p>
+</section>
+</section>
+<section id="id6">
+<h2>フォード・ファルカーソン法とエドモンズ・カープ法<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>増加路がなくなるまで増加路に沿って流量を増やす方法を<strong>フォード・ファルカーソン法</strong>（Ford–Fulkerson method）という。</p>
+<ol class="arabic simple">
+<li><p>すべての辺の流量を 0 とする。</p></li>
+<li><p>残余グラフで増加路を 1 本探す。なければ終了する。</p></li>
+<li><p>増加路上の残余容量の最小値だけ流量を増やし、2 に戻る。</p></li>
+</ol>
+<p>容量が整数なら、1 回の増加で値が 1 以上増えるので、最大フローの値を <span class="math notranslate nohighlight">\(F\)</span> とすると高々 <span class="math notranslate nohighlight">\(F\)</span> 回の反復で終了する。しかし <span class="math notranslate nohighlight">\(F\)</span> が大きいと反復回数が多くなりうる。また、容量が無理数の場合は、増加路の選び方によっては終了しないことが知られている。</p>
+<p>増加路として、幅優先探索で見つかる辺数最小の道を選ぶものを<strong>エドモンズ・カープ法</strong>（Edmonds–Karp algorithm）という。この選び方では、反復回数が容量によらず <span class="math notranslate nohighlight">\(O(nm)\)</span> 回で抑えられ、全体の計算量は <span class="math notranslate nohighlight">\(O(nm^2)\)</span> となる（サンプルコード <code class="docutils literal notranslate"><span class="pre">max_flow.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 27 </span><span class="caption-text">エドモンズ・カープ法</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">edmonds_karp</span><span class="p">(</span><span class="n">capacity</span><span class="p">:</span> <span class="n">Capacity</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Capacity</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;最大フローの値と、各辺の流量を返す。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    簡単のため、u -&gt; v と v -&gt; u の両方の辺を持つ頂点の組は無いものとする。</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="c1"># 残余容量: 順方向は容量、逆方向は 0 から始める</span>
+<span class="linenos"> 7</span>    <span class="n">residual</span><span class="p">:</span> <span class="n">Capacity</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">capacity</span><span class="p">}</span>
+<span class="linenos"> 8</span>    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">capacity</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">capacity</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">10</span>            <span class="n">residual</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">{})</span>
+<span class="linenos">11</span>            <span class="n">residual</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">residual</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span>
+<span class="linenos">12</span>            <span class="n">residual</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">15</span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">16</span>        <span class="c1"># 幅優先探索で、残余容量が正の辺だけを通る s-t 路を探す</span>
+<span class="linenos">17</span>        <span class="n">parent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">}</span>
+<span class="linenos">18</span>        <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">s</span><span class="p">])</span>
+<span class="linenos">19</span>        <span class="k">while</span> <span class="n">queue</span> <span class="ow">and</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos">21</span>            <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">residual</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">22</span>                <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
+<span class="linenos">23</span>                    <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="linenos">24</span>                    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">25</span>        <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parent</span><span class="p">:</span>
+<span class="linenos">26</span>            <span class="k">break</span>
+<span class="linenos">27</span>        <span class="c1"># 増加路上の残余容量の最小値だけ流す</span>
+<span class="linenos">28</span>        <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
+<span class="linenos">29</span>        <span class="k">while</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">:</span>
+<span class="linenos">30</span>            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="linenos">31</span>        <span class="n">path</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="linenos">32</span>        <span class="n">delta</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">residual</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+<span class="linenos">33</span>        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+<span class="linenos">34</span>            <span class="n">residual</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">-=</span> <span class="n">delta</span>
+<span class="linenos">35</span>            <span class="n">residual</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">u</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span>
+<span class="linenos">36</span>        <span class="n">total</span> <span class="o">+=</span> <span class="n">delta</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>    <span class="n">flow</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">c</span> <span class="o">-</span> <span class="n">residual</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">capacity</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">capacity</span><span class="p">}</span>
+<span class="linenos">39</span>    <span class="k">return</span> <span class="n">total</span><span class="p">,</span> <span class="n">flow</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">residual</span></code> が残余グラフであり、順方向の辺は容量で、逆方向の辺は 0 で初期化する。増加路に沿って <code class="docutils literal notranslate"><span class="pre">delta</span></code> だけ流すとき、順方向の残余容量を減らし、逆方向の残余容量を増やしている。最小カットは、終了後の残余グラフで <span class="math notranslate nohighlight">\(s\)</span> から到達できる頂点を集めて求める。</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-number">リスト 28 </span><span class="caption-text">最大フローからの最小カットの取り出し</span><a class="headerlink" href="#id15" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">min_cut</span><span class="p">(</span><span class="n">capacity</span><span class="p">:</span> <span class="n">Capacity</span><span class="p">,</span> <span class="n">flow</span><span class="p">:</span> <span class="n">Capacity</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;最大フローの残余グラフで s から到達できる頂点集合 S と、S から出る辺（カット）を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">reach</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">}</span>
+<span class="linenos"> 4</span>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+<span class="linenos"> 5</span>    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos"> 7</span>        <span class="n">candidates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">capacity</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">-</span> <span class="n">flow</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">capacity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">{})]</span>
+<span class="linenos"> 8</span>        <span class="n">candidates</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">w</span><span class="p">,</span> <span class="n">flow</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="n">u</span><span class="p">])</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">capacity</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">capacity</span><span class="p">[</span><span class="n">w</span><span class="p">]]</span>  <span class="c1"># 逆向きに戻せる流量</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reach</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="n">reach</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">12</span>                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="n">cut</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">reach</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">capacity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="p">{})</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reach</span><span class="p">]</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="n">reach</span><span class="p">,</span> <span class="n">cut</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-ch13-network"><span class="std std-numref">図 26</span></a> のネットワークに適用した結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>最大フローの値: 19
+<span class="linenos"> 2</span>  s -&gt; a: 10 / 10
+<span class="linenos"> 3</span>  s -&gt; b: 9 / 10
+<span class="linenos"> 4</span>  a -&gt; b: 0 / 2
+<span class="linenos"> 5</span>  a -&gt; c: 4 / 4
+<span class="linenos"> 6</span>  a -&gt; d: 6 / 8
+<span class="linenos"> 7</span>  b -&gt; d: 9 / 9
+<span class="linenos"> 8</span>  c -&gt; t: 9 / 10
+<span class="linenos"> 9</span>  d -&gt; c: 5 / 6
+<span class="linenos">10</span>  d -&gt; t: 10 / 10
+<span class="linenos">11</span>S = [&#39;b&#39;, &#39;s&#39;]  カット: [(&#39;b&#39;, &#39;d&#39;), (&#39;s&#39;, &#39;a&#39;)]  容量 = 19
+<span class="linenos">12</span>NetworkX の最大フローの値: 19
+</pre></div>
+</div>
+<p>最小カット <span class="math notranslate nohighlight">\(S = \{s, b\}\)</span> を見ると、このネットワークのボトルネックは辺 s → a と辺 b → d であることが分かる。全体の流量を増やすには、これらの辺の容量を増やす必要がある。一方、たとえば辺 c → t の容量を増やしても最大フローは変わらない。</p>
+<p>実用的には、プッシュ・再ラベル法やディニッツ法など、より高速なアルゴリズムが使われる。NetworkX の <code class="docutils literal notranslate"><span class="pre">nx.maximum_flow</span></code> では、<code class="docutils literal notranslate"><span class="pre">flow_func</span></code> 引数でアルゴリズムを選べる。</p>
+<section id="id7">
+<h3>整数性<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>フォード・ファルカーソン法では、容量がすべて整数なら、増加量 <span class="math notranslate nohighlight">\(\delta\)</span> も常に整数になる。したがって次の性質が成り立つ。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 13.2（整数性定理）</p>
+<p>容量がすべて整数のフローネットワークには、各辺の流量がすべて整数である最大フローが存在する。</p>
+</div>
+<p>この性質は、次節の応用で「流す・流さない」の 0/1 の選択を表すのに欠かせない。</p>
+</section>
+</section>
+<section id="id8">
+<h2>最大フローの応用<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>最大フローの価値は、一見フローとは関係のない多くの問題をフローに帰着して解けることにある。</p>
+<section id="id9">
+<h3>二部グラフの最大マッチング<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>二部グラフ <span class="math notranslate nohighlight">\((X \cup Y, E)\)</span> の最大マッチングは、次のフローネットワークの最大フローとして求められる（<a class="reference internal" href="#fig-ch13-matching"><span class="std std-numref">図 27</span></a>）。</p>
+<ul class="simple">
+<li><p>ソース <span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(X\)</span> の各頂点へ容量 1 の辺を張る。</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> から <span class="math notranslate nohighlight">\(Y\)</span> への各辺の向きを <span class="math notranslate nohighlight">\(X \to Y\)</span> とし、容量を 1 とする。</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> の各頂点からシンク <span class="math notranslate nohighlight">\(t\)</span> へ容量 1 の辺を張る。</p></li>
+</ul>
+<figure class="align-center" id="id16">
+<span id="fig-ch13-matching"></span><div class="graphviz"><object data="_images/graphviz-879c6cb161c0a4942b8b37ccdc24de83030cd9e2.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph g {
+    rankdir=LR;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=12, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    s [fillcolor=&quot;#fde5cf&quot;]; t [fillcolor=&quot;#fde5cf&quot;];
+    s -&gt; x1; s -&gt; x2; s -&gt; x3;
+    x1 -&gt; y1; x1 -&gt; y2; x2 -&gt; y1; x3 -&gt; y2; x3 -&gt; y3;
+    y1 -&gt; t; y2 -&gt; t; y3 -&gt; t;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 27 </span><span class="caption-text">二部グラフの最大マッチングを最大フローに帰着するネットワーク（容量はすべて 1）</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>整数性定理により、各辺の流量が 0 か 1 の最大フローが存在する。流量 1 の <span class="math notranslate nohighlight">\(X \to Y\)</span> の辺を集めると、<span class="math notranslate nohighlight">\(X\)</span> の各頂点から出る流量は高々 1、<span class="math notranslate nohighlight">\(Y\)</span> の各頂点に入る流量も高々 1 なので、マッチングになる。最大フローの値は最大マッチングの大きさに等しい。さらに、このネットワークの最小カットは二部グラフの最小頂点被覆に対応し、最大フロー最小カット定理からケーニッヒの定理（第 10 章）が導かれる。</p>
+</section>
+<section id="id10">
+<h3>辺素な道とメンガーの定理<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>すべての辺の容量を 1 とすると、最大フローの値は、<span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(t\)</span> への辺を共有しない道の最大本数に等しい（整数性定理により、流量 1 の辺をたどると道に分解できる）。一方、最小カットの容量は、<span class="math notranslate nohighlight">\(s\)</span> と <span class="math notranslate nohighlight">\(t\)</span> を分断するために取り除く辺の最小数である。したがって最大フロー最小カット定理から、第 4 章のメンガーの定理（辺版）が得られる。頂点版も、各頂点を「入口」と「出口」の 2 頂点に分けて容量 1 の辺で結ぶ変換によって同様に示せる。</p>
+</section>
+<section id="id11">
+<h3>その他の応用<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>複数のソースとシンク</strong>：仮想的なソースから各ソースへ、各シンクから仮想的なシンクへ容量無限大の辺を張れば、通常の最大フロー問題になる。</p></li>
+<li><p><strong>画像の領域分割</strong>：画素を頂点とし、前景らしさ・背景らしさと隣接画素の類似度を容量とするネットワークの最小カットで、画像を前景と背景に分ける手法（グラフカット）がある。</p></li>
+<li><p><strong>プロジェクト選択</strong>：利益を生むプロジェクトと、それに必要な費用のかかる準備作業の依存関係を、最小カットで最適に選ぶことができる。</p></li>
+</ul>
+<p>さらに、各辺に単位流量あたりの費用がある場合に、指定した量を最小の費用で流す<strong>最小費用流問題</strong>がある。輸送問題や割り当て問題（第 10 章）は最小費用流問題の特別な場合である。</p>
+</section>
+</section>
+<section id="id12">
+<h2>まとめ<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>フローは容量制約と流量保存則を満たす流量の割り当てであり、最大フロー問題はその値を最大化する問題である。</p></li>
+<li><p>フローの値はどの s-t カットの容量も超えず、最大フローの値と最小カットの容量は一致する（最大フロー最小カット定理）。</p></li>
+<li><p>残余グラフに増加路がなくなるまで流量を増やすのがフォード・ファルカーソン法であり、最短の増加路を選ぶエドモンズ・カープ法の計算量は <span class="math notranslate nohighlight">\(O(nm^2)\)</span> である。</p></li>
+<li><p>容量が整数なら整数の最大フローが存在し、この性質によって二部マッチングや辺素な道の問題を最大フローに帰着できる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch12_shortest_path.html" class="btn btn-neutral float-left" title="第 12 章 最短経路問題" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch14_algebraic.html" class="btn btn-neutral float-right" title="第 14 章 代数的グラフ理論" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

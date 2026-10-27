@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 4 章 数え上げ &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 5 章 グラフ理論入門" href="ch05_graphs.html" />
+    <link rel="prev" title="第 3 章 写像と関係" href="ch03_functions_relations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 4 章 数え上げ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">和の法則と積の法則</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">順列と組合せ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">順列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">組合せ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">重複順列と重複組合せ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">二項定理とパスカルの三角形</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">二項定理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">パスカルの三角形</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">包除原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">鳩の巣原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">漸化式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">母関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 4 章 数え上げ</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 4 章 数え上げ<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>すべての結果が同じ程度に起こりやすい試行では、事象の確率は「その事象に含まれる結果の個数 ÷ 起こりうる結果の総数」で求められる（第 6 章）。したがって、離散確率の計算の多くは「数える」ことに帰着する。本章では、ものの個数を効率よく、漏れや重複なく数えるための基本的な技法を学ぶ。</p>
+<section id="id2">
+<h2>和の法則と積の法則<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>数え上げの最も基本的な道具は、次の 2 つの法則である。</p>
+<ul class="simple">
+<li><p><strong>和の法則</strong>：同時には起こらない 2 つの事柄があり、一方の起こり方が <span class="math notranslate nohighlight">\(m\)</span> 通り、他方の起こり方が <span class="math notranslate nohighlight">\(n\)</span> 通りあるとき、どちらかが起こる場合の数は <span class="math notranslate nohighlight">\(m + n\)</span> 通りである。集合の言葉では、互いに素な有限集合 <span class="math notranslate nohighlight">\(A, B\)</span> について <span class="math notranslate nohighlight">\(|A \cup B| = |A| + |B|\)</span> が成り立つ。</p></li>
+<li><p><strong>積の法則</strong>：事柄 1 の起こり方が <span class="math notranslate nohighlight">\(m\)</span> 通りあり、そのそれぞれについて事柄 2 の起こり方が <span class="math notranslate nohighlight">\(n\)</span> 通りあるとき、両方が続けて起こる場合の数は <span class="math notranslate nohighlight">\(mn\)</span> 通りである。集合の言葉では <span class="math notranslate nohighlight">\(|A \times B| = |A| \cdot |B|\)</span> である。</p></li>
+</ul>
+<p><strong>例</strong>：英大文字 1 文字に続けて数字 2 桁を並べた識別子（<code class="docutils literal notranslate"><span class="pre">A07</span></code> など）は、積の法則により <span class="math notranslate nohighlight">\(26 \times 10 \times 10 = 2600\)</span> 通りある。</p>
+</section>
+<section id="id3">
+<h2>順列と組合せ<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>順列<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>異なる <span class="math notranslate nohighlight">\(n\)</span> 個のものから <span class="math notranslate nohighlight">\(r\)</span> 個を選んで 1 列に並べたものを<a class="reference internal" href="glossary.html#term-13"><span class="xref std std-term">順列</span></a>といい、その総数を <span class="math notranslate nohighlight">\(P(n, r)\)</span> と書く。1 番目は <span class="math notranslate nohighlight">\(n\)</span> 通り、2 番目は残りの <span class="math notranslate nohighlight">\(n - 1\)</span> 通り、……、<span class="math notranslate nohighlight">\(r\)</span> 番目は <span class="math notranslate nohighlight">\(n - r + 1\)</span> 通りなので、積の法則により</p>
+<div class="math notranslate nohighlight">
+\[P(n, r) = n (n - 1) \cdots (n - r + 1) = \frac{n!}{(n - r)!}\]</div>
+<p>である。ここで <span class="math notranslate nohighlight">\(n! = n (n - 1) \cdots 2 \cdot 1\)</span> は <span class="math notranslate nohighlight">\(n\)</span> の<strong>階乗</strong>であり、<span class="math notranslate nohighlight">\(0! = 1\)</span> と定める。特に、<span class="math notranslate nohighlight">\(n\)</span> 個すべてを並べる順列の総数は <span class="math notranslate nohighlight">\(n!\)</span> である。</p>
+</section>
+<section id="id5">
+<h3>組合せ<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>異なる <span class="math notranslate nohighlight">\(n\)</span> 個のものから、順序を考えずに <span class="math notranslate nohighlight">\(r\)</span> 個を選んだものを<a class="reference internal" href="glossary.html#term-7"><span class="xref std std-term">組合せ</span></a>といい、その総数を <span class="math notranslate nohighlight">\(\binom{n}{r}\)</span> または <span class="math notranslate nohighlight">\(C(n, r)\)</span> と書く。1 つの組合せを並べ替えると <span class="math notranslate nohighlight">\(r!\)</span> 通りの順列ができるので、<span class="math notranslate nohighlight">\(P(n, r) = \binom{n}{r} r!\)</span> が成り立つ。したがって</p>
+<div class="math notranslate nohighlight">
+\[\binom{n}{r} = \frac{P(n, r)}{r!} = \frac{n!}{r! \, (n - r)!}\]</div>
+<p>である。選ぶ <span class="math notranslate nohighlight">\(r\)</span> 個を決めることは、選ばない <span class="math notranslate nohighlight">\(n - r\)</span> 個を決めることと 1 対 1 に対応するので、<span class="math notranslate nohighlight">\(\binom{n}{r} = \binom{n}{n - r}\)</span> が成り立つ。<span class="math notranslate nohighlight">\(\binom{n}{r}\)</span> は次節の二項定理に現れることから<a class="reference internal" href="glossary.html#term-24"><span class="xref std std-term">二項係数</span></a>とも呼ばれる。</p>
+</section>
+<section id="id6">
+<h3>重複順列と重複組合せ<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>同じものを何度選んでもよい場合を考える。</p>
+<ul class="simple">
+<li><p><strong>重複順列</strong>：<span class="math notranslate nohighlight">\(n\)</span> 種類のものから重複を許して <span class="math notranslate nohighlight">\(r\)</span> 個を選び 1 列に並べる方法は、各位置で <span class="math notranslate nohighlight">\(n\)</span> 通りずつ選べるので <span class="math notranslate nohighlight">\(n^r\)</span> 通りある。長さ <span class="math notranslate nohighlight">\(r\)</span> の <span class="math notranslate nohighlight">\(n\)</span> 進数の列の個数と同じである。</p></li>
+<li><p><strong>重複組合せ</strong>：<span class="math notranslate nohighlight">\(n\)</span> 種類のものから重複を許して順序を考えずに <span class="math notranslate nohighlight">\(r\)</span> 個を選ぶ方法の総数を <span class="math notranslate nohighlight">\(H(n, r)\)</span> と書く。</p></li>
+</ul>
+<p>重複組合せは、全単射を使うと組合せに帰着できる。<span class="math notranslate nohighlight">\(r\)</span> 個の「○」と、種類の区切りを表す <span class="math notranslate nohighlight">\(n - 1\)</span> 本の「|」を 1 列に並べることを考える。たとえば <span class="math notranslate nohighlight">\(n = 3\)</span>、<span class="math notranslate nohighlight">\(r = 4\)</span> のとき、「○○|○|○」は種類 1 を 2 個、種類 2 を 1 個、種類 3 を 1 個選ぶことに対応し、「||○○○○」は種類 3 を 4 個選ぶことに対応する。この対応は全単射であり、並べ方は <span class="math notranslate nohighlight">\(n + r - 1\)</span> 個の位置から「○」の位置 <span class="math notranslate nohighlight">\(r\)</span> 個を選ぶ方法の数に等しいので、</p>
+<div class="math notranslate nohighlight">
+\[H(n, r) = \binom{n + r - 1}{r}\]</div>
+<p>である。たとえば、3 種類の果物から重複を許して 4 個を選ぶ方法は <span class="math notranslate nohighlight">\(\binom{6}{4} = 15\)</span> 通りある。</p>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-number">表 7 </span><span class="caption-text">選び方と並べ方の個数のまとめ</span><a class="headerlink" href="#id17" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>順序を区別する</p></th>
+<th class="head"><p>順序を区別しない</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>重複を許さない</p></td>
+<td><p><span class="math notranslate nohighlight">\(P(n, r) = \dfrac{n!}{(n - r)!}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\dbinom{n}{r} = \dfrac{n!}{r! \, (n - r)!}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>重複を許す</p></td>
+<td><p><span class="math notranslate nohighlight">\(n^r\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(H(n, r) = \dbinom{n + r - 1}{r}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id7">
+<h2>二項定理とパスカルの三角形<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>二項定理<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\((x + y)^n\)</span> を展開すると、各項は <span class="math notranslate nohighlight">\(n\)</span> 個の因数 <span class="math notranslate nohighlight">\((x + y)\)</span> のそれぞれから <span class="math notranslate nohighlight">\(x\)</span> か <span class="math notranslate nohighlight">\(y\)</span> を 1 つずつ選んで掛けたものになる。<span class="math notranslate nohighlight">\(x^k y^{n - k}\)</span> が現れるのは、<span class="math notranslate nohighlight">\(n\)</span> 個の因数のうち <span class="math notranslate nohighlight">\(x\)</span> を選ぶ <span class="math notranslate nohighlight">\(k\)</span> 個を決める方法の数、すなわち <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> 回である。よって次の<strong>二項定理</strong>が成り立つ。</p>
+<div class="math notranslate nohighlight">
+\[(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^k y^{n - k}\]</div>
+<p><span class="math notranslate nohighlight">\(x = y = 1\)</span> とおくと <span class="math notranslate nohighlight">\(\sum_{k=0}^{n} \binom{n}{k} = 2^n\)</span> が得られる。左辺は <span class="math notranslate nohighlight">\(n\)</span> 要素の集合の部分集合を要素数ごとに数えた総数であり、第 2 章で見たべき集合の要素数 <span class="math notranslate nohighlight">\(2^n\)</span> と一致する。二項定理は、第 8 章で二項分布の確率の総和が 1 になることを示す際にも使う。</p>
+</section>
+<section id="id9">
+<h3>パスカルの三角形<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>二項係数について、次の漸化式が成り立つ。</p>
+<div class="math notranslate nohighlight">
+\[\binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k} \qquad (1 \le k \le n - 1)\]</div>
+<p>これは、次のように数え方を分けると示せる。<span class="math notranslate nohighlight">\(n\)</span> 個のうち特定の 1 個を「<span class="math notranslate nohighlight">\(a\)</span>」と呼ぶ。<span class="math notranslate nohighlight">\(k\)</span> 個の選び方は、<span class="math notranslate nohighlight">\(a\)</span> を含むもの（残り <span class="math notranslate nohighlight">\(n - 1\)</span> 個から <span class="math notranslate nohighlight">\(k - 1\)</span> 個を選ぶ）と、<span class="math notranslate nohighlight">\(a\)</span> を含まないもの（残り <span class="math notranslate nohighlight">\(n - 1\)</span> 個から <span class="math notranslate nohighlight">\(k\)</span> 個を選ぶ）に分けられ、和の法則により上の式が得られる。このように、同じものを 2 通りの方法で数えて等式を示す方法を<strong>組合せ論的証明</strong>という。</p>
+<p>この漸化式に従って、各段の両端を 1 とし、内側の数を上の段の隣り合う 2 数の和として並べたものを<strong>パスカルの三角形</strong>という。<span class="math notranslate nohighlight">\(n\)</span> 段目（最上段を 0 段目とする）には <span class="math notranslate nohighlight">\(\binom{n}{0}, \binom{n}{1}, \ldots, \binom{n}{n}\)</span> が並ぶ。</p>
+</section>
+</section>
+<section id="id10">
+<h2>包除原理<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>互いに素でない集合の和集合の要素数を数えるには、重複して数えた分を補正する必要がある。2 つの集合では</p>
+<div class="math notranslate nohighlight">
+\[|A \cup B| = |A| + |B| - |A \cap B|\]</div>
+<p>であり、3 つの集合では</p>
+<div class="math notranslate nohighlight">
+\[|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |B \cap C| - |C \cap A| + |A \cap B \cap C|\]</div>
+<p>となる。一般に、有限集合 <span class="math notranslate nohighlight">\(A_1, \ldots, A_n\)</span> について次の<a class="reference internal" href="glossary.html#term-30"><span class="xref std std-term">包除原理</span></a>が成り立つ。</p>
+<div class="math notranslate nohighlight">
+\[\left| \bigcup_{i=1}^{n} A_i \right| = \sum_{k=1}^{n} (-1)^{k+1} \sum_{1 \le i_1 &lt; \cdots &lt; i_k \le n} |A_{i_1} \cap \cdots \cap A_{i_k}|\]</div>
+<p><strong>例（攪乱順列）</strong>：<span class="math notranslate nohighlight">\(1, 2, \ldots, n\)</span> を並べ替えた順列のうち、どの <span class="math notranslate nohighlight">\(i\)</span> も <span class="math notranslate nohighlight">\(i\)</span> 番目の位置に来ないものを<strong>攪乱順列</strong>といい、その個数を <span class="math notranslate nohighlight">\(D(n)\)</span> と書く。たとえば <span class="math notranslate nohighlight">\(n\)</span> 人がプレゼントを持ち寄って交換し、誰も自分のプレゼントを受け取らない場合の数である。</p>
+<p><span class="math notranslate nohighlight">\(A_i\)</span> を「<span class="math notranslate nohighlight">\(i\)</span> が <span class="math notranslate nohighlight">\(i\)</span> 番目の位置に来る順列」の集合とする。指定した <span class="math notranslate nohighlight">\(k\)</span> 個の数がそれぞれ自分の位置に来る順列は、残り <span class="math notranslate nohighlight">\(n - k\)</span> 個を自由に並べるので <span class="math notranslate nohighlight">\((n - k)!\)</span> 個あり、<span class="math notranslate nohighlight">\(k\)</span> 個の選び方は <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> 通りある。包除原理により</p>
+<div class="math notranslate nohighlight">
+\[D(n) = n! - \left| \bigcup_{i=1}^{n} A_i \right| = \sum_{k=0}^{n} (-1)^k \binom{n}{k} (n - k)! = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}\]</div>
+<p>となる。<span class="math notranslate nohighlight">\(e^{x} = \sum_{k=0}^{\infty} x^k / k!\)</span> に <span class="math notranslate nohighlight">\(x = -1\)</span> を代入した値と比べると、<span class="math notranslate nohighlight">\(n \to \infty\)</span> のとき <span class="math notranslate nohighlight">\(D(n) / n! \to 1/e \approx 0.3679\)</span> であることが分かる。<span class="math notranslate nohighlight">\(D(n)/n!\)</span> は「ランダムに並べ替えたとき誰も自分の位置に来ない確率」であり、<span class="math notranslate nohighlight">\(n\)</span> によらずほぼ <span class="math notranslate nohighlight">\(1/e\)</span> になる。この結果は第 7 章でも別の角度から扱う。</p>
+</section>
+<section id="id11">
+<h2>鳩の巣原理<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(n + 1\)</span> 羽の鳩が <span class="math notranslate nohighlight">\(n\)</span> 個の巣に入るとき、2 羽以上が入る巣が少なくとも 1 つある。これを<a class="reference internal" href="glossary.html#term-26"><span class="xref std std-term">鳩の巣原理</span></a>という。第 3 章の言葉では、「<span class="math notranslate nohighlight">\(|A| &gt; |B|\)</span> ならば単射 <span class="math notranslate nohighlight">\(f\colon A \to B\)</span> は存在しない」ということである。より一般に、<span class="math notranslate nohighlight">\(N\)</span> 羽の鳩が <span class="math notranslate nohighlight">\(n\)</span> 個の巣に入るとき、<span class="math notranslate nohighlight">\(\lceil N/n \rceil\)</span> 羽以上が入る巣が少なくとも 1 つある。ここで <span class="math notranslate nohighlight">\(\lceil x \rceil\)</span> は <span class="math notranslate nohighlight">\(x\)</span> 以上の最小の整数である。</p>
+<p><strong>例</strong>：</p>
+<ul class="simple">
+<li><p>367 人いれば、誕生日（2 月 29 日を含めて 366 通り）が同じ人が必ずいる。</p></li>
+<li><p>値域が <span class="math notranslate nohighlight">\(2^{32}\)</span> 通りのハッシュ関数に <span class="math notranslate nohighlight">\(2^{32} + 1\)</span> 個の異なるキーを入力すれば、必ず衝突が起こる。</p></li>
+</ul>
+<p>鳩の巣原理は「必ず起こる」ことを保証するが、実際にはそれよりずっと少ない個数で衝突が起こりやすくなる。どの程度の個数で衝突が起こりやすくなるかは、第 6 章の誕生日問題と第 12 章のハッシュ衝突で扱う。</p>
+</section>
+<section id="id12">
+<h2>漸化式<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<p>数えたい量 <span class="math notranslate nohighlight">\(a_n\)</span> を、より小さい <span class="math notranslate nohighlight">\(n\)</span> に対する値で表した式を<strong>漸化式</strong>という。再帰的な構造を持つものを数える際に有効である。</p>
+<p><strong>例 1（ハノイの塔）</strong>：3 本の柱があり、1 本目の柱に大きさの異なる <span class="math notranslate nohighlight">\(n\)</span> 枚の円盤が大きい順に下から積まれている。円盤を 1 回に 1 枚ずつ、小さい円盤の上に大きい円盤を置かないように移動して、すべてを 3 本目の柱に移す。<span class="math notranslate nohighlight">\(n\)</span> 枚を移す最小の手数を <span class="math notranslate nohighlight">\(a_n\)</span> とする。最も大きい円盤を動かすには、その上の <span class="math notranslate nohighlight">\(n - 1\)</span> 枚をいったん 2 本目の柱に移す必要があり、最も大きい円盤を移した後に、再び <span class="math notranslate nohighlight">\(n - 1\)</span> 枚をその上に移す。よって</p>
+<div class="math notranslate nohighlight">
+\[a_1 = 1, \qquad a_n = 2 a_{n-1} + 1 \quad (n \ge 2)\]</div>
+<p>である。両辺に 1 を加えると <span class="math notranslate nohighlight">\(a_n + 1 = 2 (a_{n-1} + 1)\)</span> となるので、<span class="math notranslate nohighlight">\(a_n + 1 = 2^n\)</span>、すなわち <span class="math notranslate nohighlight">\(a_n = 2^n - 1\)</span> である。</p>
+<p><strong>例 2（1 が連続しない 0/1 列）</strong>：長さ <span class="math notranslate nohighlight">\(n\)</span> の 0/1 列で、1 が 2 つ以上連続しないものの個数を <span class="math notranslate nohighlight">\(a_n\)</span> とする。このような列は、最後の文字が 0 なら直前までの長さ <span class="math notranslate nohighlight">\(n - 1\)</span> の部分が条件を満たす任意の列であり、最後の文字が 1 なら直前は 0 でなければならないので、長さ <span class="math notranslate nohighlight">\(n - 2\)</span> の部分が条件を満たす任意の列に「01」を付けたものである。和の法則により</p>
+<div class="math notranslate nohighlight">
+\[a_1 = 2, \quad a_2 = 3, \qquad a_n = a_{n-1} + a_{n-2} \quad (n \ge 3)\]</div>
+<p>となる。これはフィボナッチ数列 <span class="math notranslate nohighlight">\(F_1 = F_2 = 1\)</span>、<span class="math notranslate nohighlight">\(F_n = F_{n-1} + F_{n-2}\)</span> と同じ漸化式であり、<span class="math notranslate nohighlight">\(a_n = F_{n+2}\)</span> である。</p>
+</section>
+<section id="id13">
+<h2>母関数<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<p>数列 <span class="math notranslate nohighlight">\(a_0, a_1, a_2, \ldots\)</span> に対して、形式的なべき級数</p>
+<div class="math notranslate nohighlight">
+\[A(x) = \sum_{k=0}^{\infty} a_k x^k = a_0 + a_1 x + a_2 x^2 + \cdots\]</div>
+<p>を数列 <span class="math notranslate nohighlight">\(\{a_k\}\)</span> の<strong>母関数</strong>という。ここで <span class="math notranslate nohighlight">\(x\)</span> は数値を代入するための変数ではなく、<span class="math notranslate nohighlight">\(x^k\)</span> の係数として <span class="math notranslate nohighlight">\(a_k\)</span> を保持するための「目印」と考える。</p>
+<p>母関数の利点は、数え上げの組合せを多項式の積として表せることにある。たとえば、サイコロ 1 個の目の出方は <span class="math notranslate nohighlight">\(D(x) = x + x^2 + x^3 + x^4 + x^5 + x^6\)</span> で表せる（<span class="math notranslate nohighlight">\(x^k\)</span> の係数が目 <span class="math notranslate nohighlight">\(k\)</span> の出方の数）。2 個のサイコロの目の和が <span class="math notranslate nohighlight">\(s\)</span> になる出方の数は、<span class="math notranslate nohighlight">\(D(x)^2\)</span> を展開したときの <span class="math notranslate nohighlight">\(x^s\)</span> の係数に等しい。展開すると</p>
+<div class="math notranslate nohighlight">
+\[D(x)^2 = x^2 + 2x^3 + 3x^4 + 4x^5 + 5x^6 + 6x^7 + 5x^8 + 4x^9 + 3x^{10} + 2x^{11} + x^{12}\]</div>
+<p>であり、和が 7 になる出方は 6 通りあることが分かる。母関数の係数の積を集める計算は<strong>畳み込み</strong>と呼ばれ、第 9 章で確率変数の和の分布を求める際に再び現れる。二項定理も、<span class="math notranslate nohighlight">\((1 + x)^n\)</span> が数列 <span class="math notranslate nohighlight">\(\binom{n}{0}, \binom{n}{1}, \ldots, \binom{n}{n}\)</span> の母関数であることを述べたものと見なせる。</p>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/599598dc4299e8b52fa5d54f87a44651/ch04_counting.py"><code class="xref download docutils literal notranslate"><span class="pre">ch04_counting.py</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">itertools</span></code> モジュールには、順列・組合せ・重複順列・重複組合せを列挙する関数がそろっている。</p>
+<table class="docutils align-default" id="id18">
+<caption><span class="caption-number">表 8 </span><span class="caption-text">itertools の列挙関数と対応する数</span><a class="headerlink" href="#id18" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>関数</p></th>
+<th class="head"><p>列挙するもの</p></th>
+<th class="head"><p>個数</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">permutations(items,</span> <span class="pre">r)</span></code></p></td>
+<td><p>順列</p></td>
+<td><p><span class="math notranslate nohighlight">\(P(n, r)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">combinations(items,</span> <span class="pre">r)</span></code></p></td>
+<td><p>組合せ</p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{n}{r}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">product(items,</span> <span class="pre">repeat=r)</span></code></p></td>
+<td><p>重複順列</p></td>
+<td><p><span class="math notranslate nohighlight">\(n^r\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">combinations_with_replacement(items,</span> <span class="pre">r)</span></code></p></td>
+<td><p>重複組合せ</p></td>
+<td><p><span class="math notranslate nohighlight">\(H(n, r)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">math</span></code> モジュールの <code class="docutils literal notranslate"><span class="pre">perm</span></code> と <code class="docutils literal notranslate"><span class="pre">comb</span></code> は、それぞれ <span class="math notranslate nohighlight">\(P(n, r)\)</span> と <span class="math notranslate nohighlight">\(\binom{n}{r}\)</span> を計算する。次の関数は、全列挙した個数と公式による値を比較する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">check_basic_formulas</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;順列・組合せ・重複順列・重複組合せの個数を全列挙と公式で比較する。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">items</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos"> 5</span>        <span class="p">(</span><span class="s2">&quot;順列 P(n, r)&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">permutations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">))),</span> <span class="n">math</span><span class="o">.</span><span class="n">perm</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)),</span>
+<span class="linenos"> 6</span>        <span class="p">(</span><span class="s2">&quot;組合せ C(n, r)&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">))),</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)),</span>
+<span class="linenos"> 7</span>        <span class="p">(</span><span class="s2">&quot;重複順列 n^r&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">r</span><span class="p">))),</span> <span class="n">n</span> <span class="o">**</span> <span class="n">r</span><span class="p">),</span>
+<span class="linenos"> 8</span>        <span class="p">(</span><span class="s2">&quot;重複組合せ H(n, r)&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">r</span><span class="p">))),</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)),</span>
+<span class="linenos"> 9</span>    <span class="p">]</span>
+<span class="linenos">10</span>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">enumerated</span><span class="p">,</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> 全列挙=</span><span class="si">{</span><span class="n">enumerated</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">  公式=</span><span class="si">{</span><span class="n">formula</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>攪乱順列については、全列挙による個数と包除原理による公式を比較する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">derangements_brute_force</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;どの i も位置 i に来ない順列（攪乱順列）を全列挙で数える。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="k">def</span><span class="w"> </span><span class="nf">derangements_formula</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;包除原理による攪乱順列の個数 D(n) = Σ (-1)^k C(n, k) (n-k)!。&quot;&quot;&quot;</span>
+<span class="linenos">8</span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="n">k</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>漸化式は再帰関数として素直に書ける。ただし、そのまま再帰すると同じ値を何度も計算して計算量が指数的に増えるので、<code class="docutils literal notranslate"><span class="pre">functools.cache</span></code> で計算結果を記録する（メモ化）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nd">@cache</span>
+<span class="linenos">2</span><span class="k">def</span><span class="w"> </span><span class="nf">count_no_consecutive_ones</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">3</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;漸化式 a(n) = a(n-1) + a(n-2), a(1) = 2, a(2) = 3 で数える。&quot;&quot;&quot;</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">5</span>        <span class="k">return</span> <span class="mi">2</span>
+<span class="linenos">6</span>    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">7</span>        <span class="k">return</span> <span class="mi">3</span>
+<span class="linenos">8</span>    <span class="k">return</span> <span class="n">count_no_consecutive_ones</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">count_no_consecutive_ones</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- 基本公式 (n=5, r=3) ---
+順列 P(n, r)           全列挙=  60  公式=  60
+組合せ C(n, r)          全列挙=  10  公式=  10
+重複順列 n^r             全列挙= 125  公式= 125
+重複組合せ H(n, r)        全列挙=  35  公式=  35
+--- パスカルの三角形 ---
+ 1
+ 1  1
+ 1  2  1
+ 1  3  3  1
+ 1  4  6  4  1
+ 1  5 10 10  5  1
+ 1  6 15 20 15  6  1
+--- 攪乱順列 ---
+n=1: 全列挙=    0  包除原理=    0  D(n)/n!=0.000000
+n=2: 全列挙=    1  包除原理=    1  D(n)/n!=0.500000
+n=3: 全列挙=    2  包除原理=    2  D(n)/n!=0.333333
+n=4: 全列挙=    9  包除原理=    9  D(n)/n!=0.375000
+n=5: 全列挙=   44  包除原理=   44  D(n)/n!=0.366667
+n=6: 全列挙=  265  包除原理=  265  D(n)/n!=0.368056
+n=7: 全列挙= 1854  包除原理= 1854  D(n)/n!=0.367857
+n=8: 全列挙=14833  包除原理=14833  D(n)/n!=0.367882
+1/e = 0.367879
+--- 1 が連続しない 0/1 列 ---
+n= 1: 全列挙=  2  漸化式=  2
+n= 2: 全列挙=  3  漸化式=  3
+n= 3: 全列挙=  5  漸化式=  5
+n= 4: 全列挙=  8  漸化式=  8
+n= 5: 全列挙= 13  漸化式= 13
+n= 6: 全列挙= 21  漸化式= 21
+n= 7: 全列挙= 34  漸化式= 34
+n= 8: 全列挙= 55  漸化式= 55
+n= 9: 全列挙= 89  漸化式= 89
+n=10: 全列挙=144  漸化式=144
+--- ハノイの塔 ---
+n=1: 手数=  1  2^n - 1=  1
+n=2: 手数=  3  2^n - 1=  3
+n=3: 手数=  7  2^n - 1=  7
+n=4: 手数= 15  2^n - 1= 15
+n=5: 手数= 31  2^n - 1= 31
+n=6: 手数= 63  2^n - 1= 63
+n=7: 手数=127  2^n - 1=127
+</pre></div>
+</div>
+<p>いずれも全列挙と公式が一致している。<span class="math notranslate nohighlight">\(D(n)/n!\)</span> は <span class="math notranslate nohighlight">\(n\)</span> が 6 程度でもう <span class="math notranslate nohighlight">\(1/e\)</span> とほぼ等しい。全列挙は確実だが、<span class="math notranslate nohighlight">\(n\)</span> が大きくなると個数が急激に増えて計算できなくなる。公式や漸化式は、全列挙できない規模の問題を解くための道具である。</p>
+</section>
+<section id="id14">
+<h2>まとめ<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>数え上げの基本は和の法則と積の法則である。</p></li>
+<li><p>順列 <span class="math notranslate nohighlight">\(P(n, r)\)</span>、組合せ <span class="math notranslate nohighlight">\(\binom{n}{r}\)</span>、重複順列 <span class="math notranslate nohighlight">\(n^r\)</span>、重複組合せ <span class="math notranslate nohighlight">\(H(n, r) = \binom{n + r - 1}{r}\)</span> は、順序の区別と重複の有無で使い分ける。</p></li>
+<li><p>二項係数はパスカルの三角形の漸化式を満たし、二項定理の係数として現れる。</p></li>
+<li><p>包除原理により、重なりのある集合の和集合の要素数を数えられる。</p></li>
+<li><p>鳩の巣原理は、要素数の比較から「必ず重複が起こる」ことを保証する。</p></li>
+<li><p>再帰的な構造は漸化式で、数え上げの組合せは母関数の積で表せる。</p></li>
+</ul>
+<p>数え上げの技法については <a class="reference internal" href="references.html#rosen2019" id="id15"><span>[Rosen2019]</span></a> が、二項係数・漸化式・母関数については <a class="reference internal" href="references.html#graham1994" id="id16"><span>[Graham1994]</span></a> が詳しい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch03_functions_relations.html" class="btn btn-neutral float-left" title="第 3 章 写像と関係" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch05_graphs.html" class="btn btn-neutral float-right" title="第 5 章 グラフ理論入門" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

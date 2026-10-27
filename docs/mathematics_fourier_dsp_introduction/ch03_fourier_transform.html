@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 3 章 フーリエ変換 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 4 章 標本化と量子化" href="ch04_sampling.html" />
+    <link rel="prev" title="第 2 章 フーリエ級数" href="ch02_fourier_series.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 3 章 フーリエ変換</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">フーリエ級数からフーリエ変換へ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">代表的なフーリエ変換の対</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">フーリエ変換の性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">畳み込みと畳み込み定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">デルタ関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">時間幅と帯域幅の関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 3 章 フーリエ変換</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 3 章 フーリエ変換<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>フーリエ級数は周期信号だけを対象としていた。しかし、1 回だけ鳴る音、パルス、過渡的な応答など、現実の多くの信号は周期をもたない。この章では、周期を無限に長くする考え方でフーリエ級数を拡張し、周期をもたない信号のスペクトルを求める<a class="reference internal" href="appendix_a_glossary.html#term-59"><span class="xref std std-term">フーリエ変換</span></a>を導く。</p>
+<section id="id2">
+<h2>フーリエ級数からフーリエ変換へ<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>幅 1 s の矩形パルスを、周期 <span class="math notranslate nohighlight">\(T\)</span> で繰り返した信号を考える。第 2 章の式 <a class="reference internal" href="ch02_fourier_series.html#equation-eq-fourier-series-complex">(8)</a> で係数を計算すると、</p>
+<div class="math notranslate nohighlight">
+\[c_k = \frac{1}{T}\int_{-1/2}^{1/2} e^{-j2\pi k t/T}\, dt = \frac{1}{T} \cdot \frac{\sin(\pi k/T)}{\pi k/T} = \frac{1}{T}\,\mathrm{sinc}\!\left(\frac{k}{T}\right)\]</div>
+<p>となる。<span class="math notranslate nohighlight">\(T c_k\)</span> を、それぞれの周波数 <span class="math notranslate nohighlight">\(f_k = k/T\)</span> の位置に描いたものが <a class="reference internal" href="#fig-ch03-series-to-transform"><span class="std std-numref">図 8</span></a> である。周期 <span class="math notranslate nohighlight">\(T\)</span> を長くしていくと、線の間隔 <span class="math notranslate nohighlight">\(1/T\)</span> は狭くなるが、線の高さは常に <span class="math notranslate nohighlight">\(\mathrm{sinc}(f)\)</span> という同じ曲線の上に乗っている。<span class="math notranslate nohighlight">\(T \to \infty\)</span> の極限では、信号は 1 個のパルスになり、線スペクトルは連続な曲線 <span class="math notranslate nohighlight">\(\mathrm{sinc}(f)\)</span> になる。</p>
+<figure class="align-default" id="id9">
+<span id="fig-ch03-series-to-transform"></span><img alt="周期 2、4、16 秒で繰り返す矩形パルスと、周期を長くするほど線スペクトルの間隔が狭くなり、包絡線の sinc 関数を密に埋めていく様子" src="_images/fig_ch03_series_to_transform.svg" />
+<figcaption>
+<p><span class="caption-number">図 8 </span><span class="caption-text">周期的な矩形パルス（左）と、周期 <span class="math notranslate nohighlight">\(T\)</span> を掛けたフーリエ係数（右）</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>一般の信号でも同じである。<span class="math notranslate nohighlight">\(T c_k = \int_{-T/2}^{T/2} x(t) e^{-j2\pi f_k t}\, dt\)</span> の積分範囲を <span class="math notranslate nohighlight">\(T \to \infty\)</span> で全区間に広げ、離散的な周波数 <span class="math notranslate nohighlight">\(f_k\)</span> を連続な <span class="math notranslate nohighlight">\(f\)</span> に置き換えたものを、<span class="math notranslate nohighlight">\(x(t)\)</span> のフーリエ変換という。</p>
+<div class="math notranslate nohighlight" id="equation-eq-fourier-transform">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-fourier-transform" title="Link to this equation"></a></span>\[X(f) = \int_{-\infty}^{\infty} x(t)\, e^{-j2\pi f t}\, dt\]</div>
+<p>逆に、フーリエ級数の和 <span class="math notranslate nohighlight">\(x(t) = \sum_k (T c_k) e^{j2\pi f_k t} \cdot \frac{1}{T}\)</span> で、<span class="math notranslate nohighlight">\(1/T\)</span> を周波数の刻み <span class="math notranslate nohighlight">\(df\)</span> とみなすと、和は積分になり、</p>
+<div class="math notranslate nohighlight" id="equation-eq-inverse-fourier-transform">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-inverse-fourier-transform" title="Link to this equation"></a></span>\[x(t) = \int_{-\infty}^{\infty} X(f)\, e^{j2\pi f t}\, df\]</div>
+<p>が得られる。これを<a class="reference internal" href="appendix_a_glossary.html#term-15"><span class="xref std std-term">逆フーリエ変換</span></a>という。式 <a class="reference internal" href="#equation-eq-fourier-transform">(10)</a> と式 <a class="reference internal" href="#equation-eq-inverse-fourier-transform">(11)</a> は、指数の符号が違うだけで、ほぼ対称な形をしている。本書では、<span class="math notranslate nohighlight">\(x(t)\)</span> と <span class="math notranslate nohighlight">\(X(f)\)</span> がフーリエ変換の対であることを <span class="math notranslate nohighlight">\(x(t) \leftrightarrow X(f)\)</span> と書く。</p>
+<p><span class="math notranslate nohighlight">\(X(f)\)</span> は一般に複素数であり、<span class="math notranslate nohighlight">\(|X(f)|\)</span> を振幅スペクトル、<span class="math notranslate nohighlight">\(\arg X(f)\)</span> を位相スペクトルという。フーリエ級数の <span class="math notranslate nohighlight">\(c_k\)</span> と比べると、<span class="math notranslate nohighlight">\(X(f)\)</span> は「周波数あたりの量」（スペクトルの密度）を表す。<span class="math notranslate nohighlight">\(x(t)\)</span> の単位が V なら、<span class="math notranslate nohighlight">\(X(f)\)</span> の単位は V/Hz（= V·s）になる。</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>フーリエ変換の定義には流儀がある。本書の式 <a class="reference internal" href="#equation-eq-fourier-transform">(10)</a> は周波数 <span class="math notranslate nohighlight">\(f\)</span> [Hz] を使う形で、逆変換に係数が付かない。角周波数 <span class="math notranslate nohighlight">\(\omega = 2\pi f\)</span> を使う流儀では</p>
+<div class="math notranslate nohighlight">
+\[X(\omega) = \int_{-\infty}^{\infty} x(t) e^{-j\omega t}\, dt, \qquad x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} X(\omega) e^{j\omega t}\, d\omega\]</div>
+<p>と書き、逆変換に <span class="math notranslate nohighlight">\(1/(2\pi)\)</span> が付く。数学の分野では、<span class="math notranslate nohighlight">\(e^{-j}\)</span> と <span class="math notranslate nohighlight">\(e^{+j}\)</span> の符号を逆にする流儀もある。教科書や論文を読むときは、どの定義を使っているかを最初に確かめるとよい。</p>
+</div>
+<p>フーリエ変換が存在するための十分条件として、<span class="math notranslate nohighlight">\(x(t)\)</span> が絶対可積分（<span class="math notranslate nohighlight">\(\int |x(t)|\, dt &lt; \infty\)</span>）であることが知られている。正弦波や定数のように絶対可積分でない信号も、後で説明するデルタ関数を使えば、フーリエ変換を考えられる。</p>
+</section>
+<section id="id3">
+<h2>代表的なフーリエ変換の対<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>よく使うフーリエ変換の対を <a class="reference internal" href="#table-ch03-pairs"><span class="std std-numref">表 1</span></a> にまとめる。<span class="math notranslate nohighlight">\(u(t)\)</span> は単位ステップ関数（<span class="math notranslate nohighlight">\(t \ge 0\)</span> で 1、<span class="math notranslate nohighlight">\(t &lt; 0\)</span> で 0）、<span class="math notranslate nohighlight">\(\mathrm{rect}(t)\)</span> は幅 1 の矩形パルス（<span class="math notranslate nohighlight">\(|t| &lt; 1/2\)</span> で 1、それ以外で 0）、<span class="math notranslate nohighlight">\(\delta(t)\)</span> は後で説明するデルタ関数である。</p>
+<span id="table-ch03-pairs"></span><table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 1 </span><span class="caption-text">代表的なフーリエ変換の対</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 40.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(x(t)\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(X(f)\)</span></p></th>
+<th class="head"><p>備考</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathrm{rect}(t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{sinc}(f) = \dfrac{\sin(\pi f)}{\pi f}\)</span></p></td>
+<td><p>矩形パルス</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(e^{-\pi t^2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{-\pi f^2}\)</span></p></td>
+<td><p>ガウス関数</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(e^{-at} u(t)\)</span>（<span class="math notranslate nohighlight">\(a &gt; 0\)</span>）</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{1}{a + j2\pi f}\)</span></p></td>
+<td><p>片側指数関数</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\delta(t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td><p>インパルス</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta(f)\)</span></p></td>
+<td><p>直流</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(e^{j2\pi f_0 t}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta(f - f_0)\)</span></p></td>
+<td><p>複素正弦波</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\cos(2\pi f_0 t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}\delta(f - f_0) + \frac{1}{2}\delta(f + f_0)\)</span></p></td>
+<td><p>正弦波</p></td>
+</tr>
+</tbody>
+</table>
+<p>矩形パルスのフーリエ変換は、前の節で極限として得た <span class="math notranslate nohighlight">\(\mathrm{sinc}(f)\)</span> である。直接計算しても、<span class="math notranslate nohighlight">\(\int_{-1/2}^{1/2} e^{-j2\pi f t}\, dt = \sin(\pi f)/(\pi f)\)</span> となる。この <span class="math notranslate nohighlight">\(\mathrm{sinc}\)</span> 関数（ <a class="reference internal" href="appendix_a_glossary.html#term-sinc"><span class="xref std std-term">sinc 関数</span></a>）は、信号処理で何度も登場する。</p>
+<p>ガウス関数 <span class="math notranslate nohighlight">\(e^{-\pi t^2}\)</span> は、フーリエ変換しても同じ形になるという特別な性質をもつ。片側指数関数は、RC 回路のインパルス応答などに現れる。</p>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">fourier_transform_pairs.py</span></code> は、式 <a class="reference internal" href="#equation-eq-fourier-transform">(10)</a> の積分を細かい刻みの長方形の和で近似し、上の表の最初の 3 つの対を確かめる。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch03-ft">
+<div class="code-block-caption"><span class="caption-number">リスト 4 </span><span class="caption-text">fourier_transform_pairs.py の fourier_transform()</span><a class="headerlink" href="#list-ch03-ft" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">69</span><span class="k">def</span><span class="w"> </span><span class="nf">fourier_transform</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Signal</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">t_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">20.0</span><span class="p">,</span>
+<span class="linenos">70</span>                      <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">]:</span>
+<span class="linenos">71</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;x(t) のフーリエ変換を、-t_max から t_max までの長方形の和で近似する.&quot;&quot;&quot;</span>
+<span class="linenos">72</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">t_max</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># 各区間の中点</span>
+<span class="linenos">73</span>    <span class="n">xt</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">74</span>    <span class="n">result</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">xt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fk</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span> <span class="o">*</span> <span class="n">dt</span> <span class="k">for</span> <span class="n">fk</span> <span class="ow">in</span> <span class="n">f</span><span class="p">])</span>
+<span class="linenos">75</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 5 </span><span class="caption-text">fourier_transform_pairs.py の実行結果</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>|数値積分 - 理論値| の最大値（-5 Hz &lt;= f &lt;= 5 Hz）
+  2.36e-06  矩形パルス
+  1.22e-12  ガウス関数
+  1.31e-06  片側指数関数
+</pre></div>
+</div>
+</div>
+<p>いずれも数値積分と理論式がよく一致している。矩形パルスと片側指数関数の誤差がガウス関数より大きいのは、不連続点をもつ関数を長方形の和で近似した誤差である。<a class="reference internal" href="#fig-ch03-ft-pairs"><span class="std std-numref">図 9</span></a> に、3 つの信号の波形とスペクトルを示す。</p>
+<figure class="align-default" id="id12">
+<span id="fig-ch03-ft-pairs"></span><img alt="矩形パルス、ガウス関数、片側指数関数の波形と、それぞれのフーリエ変換のグラフ" src="_images/fourier_transform_pairs.svg" />
+<figcaption>
+<p><span class="caption-number">図 9 </span><span class="caption-text">代表的な信号（左）とそのフーリエ変換（右）</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>矩形パルスと片側指数関数のように、時間領域で急な変化（不連続点）をもつ信号は、周波数領域でゆっくり減衰する（<span class="math notranslate nohighlight">\(1/|f|\)</span> に比例する）。滑らかなガウス関数のスペクトルは非常に速く減衰する。第 2 章で述べた「滑らかさと減衰の速さ」の関係は、フーリエ変換でも成り立つ。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/8d2988dc4768b7efcfc79a21dbff1083/fourier_transform_pairs.py"><code class="xref download docutils literal notranslate"><span class="pre">fourier_transform_pairs.py</span></code></a></p>
+</section>
+<section id="id4">
+<h2>フーリエ変換の性質<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>フーリエ変換には、計算を楽にする多くの性質がある。<span class="math notranslate nohighlight">\(x(t) \leftrightarrow X(f)\)</span>、<span class="math notranslate nohighlight">\(y(t) \leftrightarrow Y(f)\)</span> とし、<span class="math notranslate nohighlight">\(a, b\)</span> を定数とする。</p>
+<span id="table-ch03-properties"></span><table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 2 </span><span class="caption-text">フーリエ変換の主な性質</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>性質</p></th>
+<th class="head"><p>時間領域</p></th>
+<th class="head"><p>周波数領域</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>線形性</p></td>
+<td><p><span class="math notranslate nohighlight">\(a x(t) + b y(t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(a X(f) + b Y(f)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>時間シフト</p></td>
+<td><p><span class="math notranslate nohighlight">\(x(t - t_0)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{-j2\pi f t_0} X(f)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>周波数シフト（変調）</p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{j2\pi f_0 t} x(t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(X(f - f_0)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>スケーリング</p></td>
+<td><p><span class="math notranslate nohighlight">\(x(at)\)</span>（<span class="math notranslate nohighlight">\(a \ne 0\)</span>）</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{1}{|a|} X\!\left(\dfrac{f}{a}\right)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>共役対称性</p></td>
+<td><p><span class="math notranslate nohighlight">\(x(t)\)</span> が実数</p></td>
+<td><p><span class="math notranslate nohighlight">\(X(-f) = X^*(f)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>微分</p></td>
+<td><p><span class="math notranslate nohighlight">\(\dfrac{dx}{dt}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(j2\pi f\, X(f)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>畳み込み</p></td>
+<td><p><span class="math notranslate nohighlight">\((x * y)(t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(X(f)\,Y(f)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>積</p></td>
+<td><p><span class="math notranslate nohighlight">\(x(t)\,y(t)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((X * Y)(f)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>パーセバルの定理</p></td>
+<td><p><span class="math notranslate nohighlight">\(\displaystyle\int |x(t)|^2 dt\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\displaystyle\int |X(f)|^2 df\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>いくつかの性質について、意味を説明する。</p>
+<p><strong>時間シフト</strong>：信号を <span class="math notranslate nohighlight">\(t_0\)</span> だけ遅らせても、振幅スペクトル <span class="math notranslate nohighlight">\(|X(f)|\)</span> は変わらず、位相だけが周波数に比例して <span class="math notranslate nohighlight">\(-2\pi f t_0\)</span> 変化する。逆にいうと、位相が周波数に比例して変化することは、時間の遅れを意味する。この関係は、第 9 章の線形位相フィルタで重要になる。</p>
+<p><strong>周波数シフト（変調）</strong>：信号に複素正弦波 <span class="math notranslate nohighlight">\(e^{j2\pi f_0 t}\)</span> を掛けると、スペクトルが <span class="math notranslate nohighlight">\(f_0\)</span> だけ移動する。実数の余弦波を掛けた場合は、式 <a class="reference internal" href="ch01_signals.html#equation-eq-cos-sin">(2)</a> から</p>
+<div class="math notranslate nohighlight">
+\[x(t)\cos(2\pi f_0 t) \leftrightarrow \frac{1}{2}X(f - f_0) + \frac{1}{2}X(f + f_0)\]</div>
+<p>となり、スペクトルが <span class="math notranslate nohighlight">\(\pm f_0\)</span> の 2 か所に半分ずつ移る（<a class="reference internal" href="#fig-ch03-modulation"><span class="std std-numref">図 10</span></a>）。これは、AM ラジオなどの<a class="reference internal" href="appendix_a_glossary.html#term-63"><span class="xref std std-term">変調</span></a>の原理である。低い周波数の音声信号を、電波で送れる高い周波数の帯域に移している。</p>
+<figure class="align-default" id="id14">
+<span id="fig-ch03-modulation"></span><img alt="ガウス関数に余弦波を掛けた信号の波形と、スペクトルがプラスマイナス 5 Hz の位置に移動する様子" src="_images/fig_ch03_modulation.svg" />
+<figcaption>
+<p><span class="caption-number">図 10 </span><span class="caption-text">変調：ガウス関数に 5 Hz の余弦波を掛けた信号（左）と、そのスペクトル（右）</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>共役対称性</strong>：実数の信号では <span class="math notranslate nohighlight">\(X(-f) = X^*(f)\)</span> なので、<span class="math notranslate nohighlight">\(|X(f)|\)</span> は偶関数、<span class="math notranslate nohighlight">\(\arg X(f)\)</span> は奇関数になる。負の周波数の成分は正の周波数の成分から決まるので、実数の信号のスペクトルは <span class="math notranslate nohighlight">\(f \ge 0\)</span> の範囲だけを見れば十分である。</p>
+<p><strong>微分</strong>：微分は周波数領域では <span class="math notranslate nohighlight">\(j2\pi f\)</span> を掛けることになる。微分方程式がフーリエ変換で代数方程式に変わるのは、この性質による。また、高い周波数ほど強く強調されるので、微分は雑音を増幅しやすい。</p>
+<p><strong>パーセバルの定理</strong>：信号のエネルギーは、時間領域で計算しても周波数領域で計算しても同じである。<span class="math notranslate nohighlight">\(|X(f)|^2\)</span> は、エネルギーが周波数ごとにどう分布しているかを表し、エネルギースペクトル密度と呼ばれる。</p>
+</section>
+<section id="id5">
+<h2>畳み込みと畳み込み定理<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>2 つの信号 <span class="math notranslate nohighlight">\(x(t)\)</span> と <span class="math notranslate nohighlight">\(h(t)\)</span> の<a class="reference internal" href="appendix_a_glossary.html#term-40"><span class="xref std std-term">畳み込み</span></a>を、次の式で定義する。</p>
+<div class="math notranslate nohighlight" id="equation-eq-convolution">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-convolution" title="Link to this equation"></a></span>\[(x * h)(t) = \int_{-\infty}^{\infty} x(\tau)\, h(t - \tau)\, d\tau\]</div>
+<p><span class="math notranslate nohighlight">\(h\)</span> を時間反転して <span class="math notranslate nohighlight">\(t\)</span> だけずらし、<span class="math notranslate nohighlight">\(x\)</span> と掛けて積分した値である。第 5 章で示すように、線形時不変システムの出力は、入力とインパルス応答の畳み込みで表される。畳み込みは信号処理で最も重要な演算の 1 つである。</p>
+<p>畳み込みをフーリエ変換すると、次の<a class="reference internal" href="appendix_a_glossary.html#term-41"><span class="xref std std-term">畳み込み定理</span></a>が得られる。</p>
+<div class="math notranslate nohighlight" id="equation-eq-convolution-theorem">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-convolution-theorem" title="Link to this equation"></a></span>\[(x * h)(t) \leftrightarrow X(f)\, H(f)\]</div>
+<p>式 <a class="reference internal" href="#equation-eq-convolution">(12)</a> を式 <a class="reference internal" href="#equation-eq-fourier-transform">(10)</a> に代入し、積分の順序を入れ替えて <span class="math notranslate nohighlight">\(s = t - \tau\)</span> と置くと、</p>
+<div class="math notranslate nohighlight">
+\[\int\!\!\int x(\tau) h(t - \tau) e^{-j2\pi f t}\, d\tau\, dt
+= \int x(\tau) e^{-j2\pi f \tau} d\tau \int h(s) e^{-j2\pi f s} ds = X(f) H(f)\]</div>
+<p>となることから導ける。時間領域の畳み込みは、周波数領域では単なる掛け算になる。逆に、時間領域の積は、周波数領域の畳み込みになる（<a class="reference internal" href="#table-ch03-properties"><span class="std std-numref">表 2</span></a> の「積」の行）。</p>
+<p>畳み込み定理は、次の 2 つの意味で重要である。</p>
+<ul class="simple">
+<li><p>システムの働きを、周波数ごとの「倍率」 <span class="math notranslate nohighlight">\(H(f)\)</span> として理解できる。<span class="math notranslate nohighlight">\(H(f)\)</span> が 0 に近い周波数の成分は、システムを通ると消える。これがフィルタの原理である。</p></li>
+<li><p>畳み込みの計算を、フーリエ変換、掛け算、逆フーリエ変換で行える。第 7 章の FFT と組み合わせると、長い畳み込みを高速に計算できる（第 10 章）。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>デルタ関数<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="appendix_a_glossary.html#term-46"><span class="xref std std-term">デルタ関数</span></a> <span class="math notranslate nohighlight">\(\delta(t)\)</span> は、<span class="math notranslate nohighlight">\(t = 0\)</span> の一点にだけ集中した、面積 1 の「無限に細く高いパルス」を表す。厳密には通常の関数ではなく、次の性質で定義される（超関数と呼ばれる）。</p>
+<div class="math notranslate nohighlight" id="equation-eq-sifting">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-sifting" title="Link to this equation"></a></span>\[\int_{-\infty}^{\infty} x(t)\, \delta(t - t_0)\, dt = x(t_0)\]</div>
+<p>任意の連続な関数 <span class="math notranslate nohighlight">\(x(t)\)</span> と掛けて積分すると、<span class="math notranslate nohighlight">\(t = t_0\)</span> の値を取り出す。この性質を、ふるい分け性という。直観的には、幅 <span class="math notranslate nohighlight">\(\varepsilon\)</span>、高さ <span class="math notranslate nohighlight">\(1/\varepsilon\)</span> の矩形パルスやガウス関数で、<span class="math notranslate nohighlight">\(\varepsilon \to 0\)</span> とした極限と考えてよい。</p>
+<p>式 <a class="reference internal" href="#equation-eq-sifting">(14)</a> から、<span class="math notranslate nohighlight">\(\delta(t)\)</span> のフーリエ変換は <span class="math notranslate nohighlight">\(\int \delta(t) e^{-j2\pi f t} dt = 1\)</span> であり、すべての周波数を同じ大きさで含む。逆に、定数 1 のフーリエ変換は <span class="math notranslate nohighlight">\(\delta(f)\)</span> である（周波数 0 の成分だけをもつ）。さらに周波数シフトの性質から、複素正弦波 <span class="math notranslate nohighlight">\(e^{j2\pi f_0 t}\)</span> のフーリエ変換は <span class="math notranslate nohighlight">\(\delta(f - f_0)\)</span> となり、正弦波のスペクトルは <span class="math notranslate nohighlight">\(\pm f_0\)</span> の 2 本の線になる。デルタ関数を使うと、フーリエ級数の線スペクトルも、フーリエ変換の特別な場合として扱える。</p>
+<p>デルタ関数を間隔 <span class="math notranslate nohighlight">\(T_s\)</span> で無限に並べた関数</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{comb}_{T_s}(t) = \sum_{n=-\infty}^{\infty} \delta(t - nT_s)\]</div>
+<p>をくし形関数という。くし形関数のフーリエ変換は、間隔 <span class="math notranslate nohighlight">\(1/T_s\)</span> で並んだくし形関数になる。</p>
+<div class="math notranslate nohighlight" id="equation-eq-comb">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-comb" title="Link to this equation"></a></span>\[\sum_{n=-\infty}^{\infty} \delta(t - nT_s) \leftrightarrow \frac{1}{T_s}\sum_{m=-\infty}^{\infty} \delta\!\left(f - \frac{m}{T_s}\right)\]</div>
+<p>くし形関数は周期 <span class="math notranslate nohighlight">\(T_s\)</span> の周期関数なので、フーリエ級数で展開すると、すべての係数が <span class="math notranslate nohighlight">\(c_k = 1/T_s\)</span> になる（1 周期にデルタ関数が 1 個だけあるので、式 <a class="reference internal" href="ch02_fourier_series.html#equation-eq-fourier-series-complex">(8)</a> の積分は <span class="math notranslate nohighlight">\(1/T_s\)</span> になる）。各項 <span class="math notranslate nohighlight">\(\frac{1}{T_s}e^{j2\pi k t/T_s}\)</span> のフーリエ変換は <span class="math notranslate nohighlight">\(\frac{1}{T_s}\delta(f - k/T_s)\)</span> なので、式 <a class="reference internal" href="#equation-eq-comb">(15)</a> が得られる。この関係は、第 4 章で標本化を解析するときに使う。</p>
+</section>
+<section id="id7">
+<h2>時間幅と帯域幅の関係<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>スケーリングの性質 <span class="math notranslate nohighlight">\(x(at) \leftrightarrow \frac{1}{|a|}X(f/a)\)</span> は、「信号を時間方向に縮めると、スペクトルは周波数方向に広がる」ことを表す。<a class="reference internal" href="#fig-ch03-uncertainty"><span class="std std-numref">図 11</span></a> は、ガウス関数 <span class="math notranslate nohighlight">\(e^{-\pi (t/a)^2}\)</span> の幅 <span class="math notranslate nohighlight">\(a\)</span> を変えたときの様子である。時間領域で幅が狭いパルスほど、周波数領域では広い範囲に広がる。</p>
+<figure class="align-default" id="id15">
+<span id="fig-ch03-uncertainty"></span><img alt="幅の異なる 3 つのガウス関数と、幅が狭いほどスペクトルが広がる様子" src="_images/fig_ch03_uncertainty.svg" />
+<figcaption>
+<p><span class="caption-number">図 11 </span><span class="caption-text">ガウス関数の時間幅（左）とスペクトルの幅（右）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>信号の時間的な広がりを <span class="math notranslate nohighlight">\(\Delta t\)</span>、周波数の広がり（<a class="reference internal" href="appendix_a_glossary.html#term-38"><span class="xref std std-term">帯域幅</span></a>）を <span class="math notranslate nohighlight">\(\Delta f\)</span> とすると、両者の積には下限がある。広がりを標準偏差で測る場合、</p>
+<div class="math notranslate nohighlight">
+\[\Delta t \cdot \Delta f \ge \frac{1}{4\pi}\]</div>
+<p>が成り立ち、等号はガウス関数のときに成り立つ。これを不確定性関係（不確定性原理）という。「時間的に短く、かつ周波数の範囲も狭い信号」は作れないということである。この関係は、第 8 章で、短時間フーリエ変換の時間分解能と周波数分解能のトレードオフとして再び現れる。</p>
+</section>
+<section id="id8">
+<h2>まとめ<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>フーリエ変換 <span class="math notranslate nohighlight">\(X(f) = \int x(t) e^{-j2\pi f t} dt\)</span> は、周期をもたない信号のスペクトルを表す。フーリエ級数で周期を無限に長くした極限として得られる。</p></li>
+<li><p>矩形パルスのフーリエ変換は sinc 関数、ガウス関数のフーリエ変換はガウス関数、正弦波のフーリエ変換はデルタ関数の対である。</p></li>
+<li><p>時間シフトは位相の変化に、変調はスペクトルの移動に、微分は <span class="math notranslate nohighlight">\(j2\pi f\)</span> の掛け算に対応する。</p></li>
+<li><p>時間領域の畳み込みは、周波数領域の掛け算になる（畳み込み定理）。</p></li>
+<li><p>時間幅と帯域幅は反比例の関係にあり、両方を同時に小さくすることはできない。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch02_fourier_series.html" class="btn btn-neutral float-left" title="第 2 章 フーリエ級数" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch04_sampling.html" class="btn btn-neutral float-right" title="第 4 章 標本化と量子化" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

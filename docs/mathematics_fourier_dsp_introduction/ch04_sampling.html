@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 4 章 標本化と量子化 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 5 章 離散時間信号と LTI システム" href="ch05_lti_systems.html" />
+    <link rel="prev" title="第 3 章 フーリエ変換" href="ch03_fourier_transform.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 4 章 標本化と量子化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">標本化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">エイリアシング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">標本化した信号のスペクトル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">標本化定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">信号の再構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">アンチエイリアシングフィルタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">量子化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 4 章 標本化と量子化</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 4 章 標本化と量子化<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>計算機で信号を扱うには、連続時間のアナログ信号を、とびとびの時刻の数値の列に変換する必要がある。この章では、時間を離散化する標本化と、値を離散化する量子化を説明する。特に、どのような条件なら標本化で情報が失われないかを示す標本化定理が、この章の中心である。</p>
+<section id="id2">
+<h2>標本化<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>連続時間信号 <span class="math notranslate nohighlight">\(x(t)\)</span> から、一定の時間間隔 <span class="math notranslate nohighlight">\(T_s\)</span> ごとに値を取り出して、数値の列</p>
+<div class="math notranslate nohighlight">
+\[x[n] = x(nT_s) \qquad (n = \ldots, -1, 0, 1, 2, \ldots)\]</div>
+<p>を作ることを<a class="reference internal" href="appendix_a_glossary.html#term-53"><span class="xref std std-term">標本化</span></a>（サンプリング）という。<span class="math notranslate nohighlight">\(x[n]\)</span> を標本値（サンプル）、<span class="math notranslate nohighlight">\(T_s\)</span> を標本化周期、その逆数 <span class="math notranslate nohighlight">\(f_s = 1/T_s\)</span> を<a class="reference internal" href="appendix_a_glossary.html#term-54"><span class="xref std std-term">標本化周波数</span></a>という。<span class="math notranslate nohighlight">\(f_s\)</span> は 1 秒あたりに取り出す標本の数であり、単位は Hz である。例えば、音楽 CD の標本化周波数は 44.1 kHz で、1 秒間に 44100 個の標本を取り出す。</p>
+<figure class="align-default" id="id10">
+<span id="fig-ch04-sampling"></span><img alt="連続時間信号の曲線と、一定の間隔 Ts で取り出した標本値を棒で示した図" src="_images/fig_ch04_sampling.svg" />
+<figcaption>
+<p><span class="caption-number">図 12 </span><span class="caption-text">連続時間信号と、標本化周波数 20 Hz で取り出した標本値</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch04-sampling"><span class="std std-numref">図 12</span></a> では、標本値をつなぐと元の波形がおおよそ分かる。しかし、標本と標本の間で信号がどう変化しているかの情報は、標本値だけからは分からないように見える。それでも、ある条件を満たせば、標本値だけから元の信号を完全に復元できる。その条件を、以下で順に導く。</p>
+</section>
+<section id="id3">
+<h2>エイリアシング<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>まず、標本化で何が起こりうるかを例で見る。標本化周波数 <span class="math notranslate nohighlight">\(f_s = 10\)</span> Hz で、3 Hz と 7 Hz の余弦波を標本化する。</p>
+<div class="math notranslate nohighlight">
+\[\cos\!\left(2\pi \cdot 7 \cdot \frac{n}{10}\right) = \cos\!\left(2\pi n - 2\pi \cdot 3 \cdot \frac{n}{10}\right) = \cos\!\left(2\pi \cdot 3 \cdot \frac{n}{10}\right)\]</div>
+<p><span class="math notranslate nohighlight">\(n\)</span> が整数なので <span class="math notranslate nohighlight">\(2\pi n\)</span> の項は消え、<span class="math notranslate nohighlight">\(\cos\)</span> が偶関数であることから、2 つの標本値はすべての <span class="math notranslate nohighlight">\(n\)</span> で一致する。<a class="reference internal" href="#fig-ch04-aliasing"><span class="std std-numref">図 13</span></a> に示すように、7 Hz の余弦波の標本値は、3 Hz の余弦波の上にもぴったり乗る。標本値だけを見ると、元の信号が 3 Hz だったのか 7 Hz だったのかを区別できない。</p>
+<figure class="align-default" id="id11">
+<span id="fig-ch04-aliasing"></span><img alt="7 Hz の余弦波を 10 Hz で標本化した点が、3 Hz の余弦波の上にも乗ることを示す図" src="_images/aliasing.svg" />
+<figcaption>
+<p><span class="caption-number">図 13 </span><span class="caption-text">7 Hz の余弦波の標本値（黒丸）は、3 Hz の余弦波とも一致する</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>一般に、周波数 <span class="math notranslate nohighlight">\(f\)</span> の正弦波と、周波数 <span class="math notranslate nohighlight">\(f + m f_s\)</span>（<span class="math notranslate nohighlight">\(m\)</span> は整数）の正弦波は、標本化すると区別できない。<span class="math notranslate nohighlight">\(e^{j2\pi (f + m f_s) n T_s} = e^{j2\pi f n T_s} e^{j2\pi m n} = e^{j2\pi f n T_s}\)</span> だからである。さらに実数の正弦波では <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(-f\)</span> の成分が組になるので、周波数 <span class="math notranslate nohighlight">\(f\)</span> の正弦波は、<span class="math notranslate nohighlight">\(f\)</span> を <span class="math notranslate nohighlight">\(f_s\)</span> の整数倍だけずらし、負なら符号を反転して得られる 0 から <span class="math notranslate nohighlight">\(f_s/2\)</span> の範囲の周波数の正弦波と区別できない。このように、高い周波数の成分が低い周波数の成分になりすますことを<a class="reference internal" href="appendix_a_glossary.html#term-8"><span class="xref std std-term">エイリアシング</span></a>（折り返し）といい、なりすました成分をエイリアスという。</p>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">aliasing.py</span></code> は、見かけの周波数を求める関数を実装し、いくつかの周波数で確かめる。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch04-aliasing">
+<div class="code-block-caption"><span class="caption-number">リスト 6 </span><span class="caption-text">aliasing.py の apparent_frequency()</span><a class="headerlink" href="#list-ch04-aliasing" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="k">def</span><span class="w"> </span><span class="nf">apparent_frequency</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fs</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;周波数 f の正弦波を fs で標本化したとき、見かけの周波数（0 から fs / 2）を返す.</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="sd">    f を fs の整数倍だけずらし、さらに負の周波数を正に折り返す。</span>
+<span class="linenos">23</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">24</span>    <span class="n">shifted</span> <span class="o">=</span> <span class="n">f</span> <span class="o">-</span> <span class="n">fs</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">f</span> <span class="o">/</span> <span class="n">fs</span><span class="p">)</span>  <span class="c1"># -fs/2 から fs/2 の範囲に移す</span>
+<span class="linenos">25</span>    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">shifted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 7 </span><span class="caption-text">aliasing.py の実行結果</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>標本化周波数 fs = 10.0 Hz、ナイキスト周波数 = 5.0 Hz
+周波数 [Hz]   見かけの周波数 [Hz]
+       1.0          1.0
+       3.0          3.0
+       4.0          4.0
+       6.0          4.0
+       7.0          3.0
+       9.0          1.0
+      10.0          0.0
+      13.0          3.0
+      27.0          3.0
+
+3 Hz と 7 Hz の標本値が一致する: True
+3 Hz と 13 Hz の標本値が一致する: True
+</pre></div>
+</div>
+</div>
+<p>0 から 5 Hz の範囲の周波数はそのまま見えるが、5 Hz を超えると、5 Hz を境に折り返したように見かけの周波数が下がっていく（6 Hz は 4 Hz に、9 Hz は 1 Hz に見える）。10 Hz の正弦波は、毎回同じ位相で標本化されるので、直流（0 Hz）に見える。この折り返しの境目 <span class="math notranslate nohighlight">\(f_s/2\)</span> を<a class="reference internal" href="appendix_a_glossary.html#term-48"><span class="xref std std-term">ナイキスト周波数</span></a>という。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/fd4eefff294aa7d7584e4be64c3dccd4/aliasing.py"><code class="xref download docutils literal notranslate"><span class="pre">aliasing.py</span></code></a></p>
+<p>エイリアシングは、日常でも見られる。映画やビデオで、回転する車輪が止まって見えたり、逆回転して見えたりするのは、毎秒 24 枚や 30 枚の撮影（標本化）による時間方向のエイリアシングである。</p>
+</section>
+<section id="id4">
+<h2>標本化した信号のスペクトル<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>エイリアシングを、周波数領域で見直す。標本化を数式で扱うために、<span class="math notranslate nohighlight">\(x(t)\)</span> に第 3 章のくし形関数を掛けた信号</p>
+<div class="math notranslate nohighlight">
+\[x_s(t) = x(t) \sum_{n=-\infty}^{\infty} \delta(t - nT_s) = \sum_{n=-\infty}^{\infty} x(nT_s)\, \delta(t - nT_s)\]</div>
+<p>を考える。<span class="math notranslate nohighlight">\(x_s(t)\)</span> は、標本値 <span class="math notranslate nohighlight">\(x[n]\)</span> を重みとするデルタ関数の列であり、標本値の情報だけをもつ。</p>
+<p>時間領域の積は周波数領域の畳み込みになる。くし形関数のフーリエ変換は、第 3 章の式 <a class="reference internal" href="ch03_fourier_transform.html#equation-eq-comb">(15)</a> から間隔 <span class="math notranslate nohighlight">\(f_s\)</span> のくし形関数 <span class="math notranslate nohighlight">\(f_s \sum_m \delta(f - m f_s)\)</span> である。デルタ関数との畳み込みは、関数をその位置に移動させるだけなので、</p>
+<div class="math notranslate nohighlight" id="equation-eq-sampled-spectrum">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-sampled-spectrum" title="Link to this equation"></a></span>\[X_s(f) = f_s \sum_{m=-\infty}^{\infty} X(f - m f_s)\]</div>
+<p>が得られる。標本化した信号のスペクトルは、元のスペクトル <span class="math notranslate nohighlight">\(X(f)\)</span> を <span class="math notranslate nohighlight">\(f_s\)</span> ごとにずらして無限に並べたもの（を <span class="math notranslate nohighlight">\(f_s\)</span> 倍したもの）になる。</p>
+<p><a class="reference internal" href="#fig-ch04-spectrum-replica"><span class="std std-numref">図 14</span></a> は、<span class="math notranslate nohighlight">\(|f| &lt; B\)</span> の範囲にだけ成分をもつ信号（帯域幅 <span class="math notranslate nohighlight">\(B\)</span> の信号）について、この様子を描いたものである。<span class="math notranslate nohighlight">\(f_s &gt; 2B\)</span> のとき（上）は、ずらしたスペクトルの複製どうしが重ならない。<span class="math notranslate nohighlight">\(f_s &lt; 2B\)</span> のとき（下）は、複製どうしが重なり、<span class="math notranslate nohighlight">\(-f_s/2\)</span> から <span class="math notranslate nohighlight">\(f_s/2\)</span> の範囲（灰色の範囲）に、隣の複製の裾が入り込む。これが周波数領域から見たエイリアシングである。いったん重なって足し合わされた成分は、後から分離できない。</p>
+<figure class="align-default" id="id13">
+<span id="fig-ch04-spectrum-replica"></span><img alt="帯域幅 B の信号を標本化したときのスペクトルの複製が、fs が 2B より大きいときは重ならず、小さいときは重なる様子" src="_images/fig_ch04_spectrum_replica.svg" />
+<figcaption>
+<p><span class="caption-number">図 14 </span><span class="caption-text">標本化した信号のスペクトル（青が元のスペクトル、橙が複製、黒の線がその和）</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id5">
+<h2>標本化定理<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>前の節の結果から、次の<a class="reference internal" href="appendix_a_glossary.html#term-55"><span class="xref std std-term">標本化定理</span></a>が得られる。</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>信号が <span class="math notranslate nohighlight">\(|f| &lt; B\)</span> の範囲の周波数成分だけを含む（帯域制限されている）とき、標本化周波数を</p>
+<div class="math notranslate nohighlight">
+\[f_s &gt; 2B\]</div>
+<p>に選べば、標本値 <span class="math notranslate nohighlight">\(x[n]\)</span> から元の信号 <span class="math notranslate nohighlight">\(x(t)\)</span> を完全に復元できる。</p>
+</div>
+<p>この定理は、シャノン（C. E. Shannon）やナイキスト（H. Nyquist）、日本の染谷勲らの仕事にちなみ、シャノンの標本化定理、ナイキストの定理などとも呼ばれる。<span class="math notranslate nohighlight">\(2B\)</span> をナイキストレートという。言い換えると、ナイキスト周波数 <span class="math notranslate nohighlight">\(f_s/2\)</span> より高い周波数の成分を含まなければ、エイリアシングは起こらない。</p>
+<p><span class="math notranslate nohighlight">\(f_s = 2B\)</span> ちょうどでは不十分な場合がある。例えば、周波数 <span class="math notranslate nohighlight">\(f_s/2\)</span> の正弦波 <span class="math notranslate nohighlight">\(\sin(\pi f_s t)\)</span> を標本化すると、<span class="math notranslate nohighlight">\(\sin(\pi n) = 0\)</span> なので、すべての標本値が 0 になってしまう。そのため、条件は等号を含まない不等式で書く。</p>
+<p>標本化周波数の選び方の例を <a class="reference internal" href="#table-ch04-fs"><span class="std std-numref">表 3</span></a> に示す。</p>
+<span id="table-ch04-fs"></span><table class="docutils align-default" id="id14">
+<caption><span class="caption-number">表 3 </span><span class="caption-text">標本化周波数の例</span><a class="headerlink" href="#id14" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 25.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>用途</p></th>
+<th class="head"><p>標本化周波数</p></th>
+<th class="head"><p>考え方</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>固定電話の音声</p></td>
+<td><p>8 kHz</p></td>
+<td><p>音声の主要な帯域 300 Hz から 3.4 kHz を伝える</p></td>
+</tr>
+<tr class="row-odd"><td><p>音楽 CD</p></td>
+<td><p>44.1 kHz</p></td>
+<td><p>人の可聴域の上限（約 20 kHz）の 2 倍に、フィルタのための余裕を加える</p></td>
+</tr>
+<tr class="row-even"><td><p>業務用の音声・動画</p></td>
+<td><p>48 kHz</p></td>
+<td><p>同上（放送や映像の分野の標準）</p></td>
+</tr>
+<tr class="row-odd"><td><p>高い分解能の音声</p></td>
+<td><p>96 kHz、192 kHz</p></td>
+<td><p>可聴域を超える帯域も記録する、フィルタの設計を楽にする</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h2>信号の再構成<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>標本化定理の条件を満たしていれば、元の信号を次の手順で復元できる。<a class="reference internal" href="#fig-ch04-spectrum-replica"><span class="std std-numref">図 14</span></a> の上の図で、<span class="math notranslate nohighlight">\(-f_s/2\)</span> から <span class="math notranslate nohighlight">\(f_s/2\)</span> の範囲だけを通し、それ以外を遮断する理想的なローパスフィルタを <span class="math notranslate nohighlight">\(X_s(f)\)</span> に掛ければ、元のスペクトル <span class="math notranslate nohighlight">\(X(f)\)</span>（の <span class="math notranslate nohighlight">\(f_s\)</span> 倍）だけが残る。</p>
+<p>このフィルタの周波数特性は、高さ <span class="math notranslate nohighlight">\(1/f_s\)</span>、幅 <span class="math notranslate nohighlight">\(f_s\)</span> の矩形 <span class="math notranslate nohighlight">\(\frac{1}{f_s}\mathrm{rect}(f/f_s)\)</span> であり、その逆フーリエ変換は <span class="math notranslate nohighlight">\(\mathrm{sinc}(f_s t) = \mathrm{sinc}(t/T_s)\)</span> である（第 3 章のスケーリングの性質）。周波数領域での掛け算は時間領域では畳み込みなので、<span class="math notranslate nohighlight">\(x_s(t)\)</span> と <span class="math notranslate nohighlight">\(\mathrm{sinc}(t/T_s)\)</span> を畳み込むと、</p>
+<div class="math notranslate nohighlight" id="equation-eq-sinc-interpolation">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-sinc-interpolation" title="Link to this equation"></a></span>\[x(t) = \sum_{n=-\infty}^{\infty} x[n]\, \mathrm{sinc}\!\left(\frac{t - nT_s}{T_s}\right)\]</div>
+<p>が得られる。各標本値の位置に、その値を高さとする sinc 関数を置いて足し合わせると、元の信号に戻るということである（<a class="reference internal" href="#fig-ch04-reconstruction"><span class="std std-numref">図 15</span></a>）。<span class="math notranslate nohighlight">\(\mathrm{sinc}\)</span> 関数は、中心で 1、ほかの標本の位置（<span class="math notranslate nohighlight">\(T_s\)</span> の整数倍だけ離れた位置）では 0 になるので、標本の位置では標本値そのものが得られ、標本の間は滑らかに補間される。この式を sinc 補間という。</p>
+<figure class="align-default" id="id15">
+<span id="fig-ch04-reconstruction"></span><img alt="各標本値に sinc 関数を置き、それらを足し合わせると元の信号に一致する様子" src="_images/fig_ch04_reconstruction.svg" />
+<figcaption>
+<p><span class="caption-number">図 15 </span><span class="caption-text">sinc 補間による信号の再構成（細い青の線が個々の sinc 関数）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>式 <a class="reference internal" href="#equation-eq-sinc-interpolation">(17)</a> は無限個の標本を必要とし、sinc 関数は過去と未来の両方に無限に広がるので、そのままでは実現できない。実際の D/A 変換器は、標本値を次の標本まで保持する階段状の波形（0 次ホールド）を出力し、その後のアナログのローパスフィルタ（再構成フィルタ）で、階段の角に含まれる高い周波数の成分を取り除く。</p>
+</section>
+<section id="id7">
+<h2>アンチエイリアシングフィルタ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>現実の信号は、厳密には帯域制限されていない。雑音は高い周波数まで広がっているし、急な変化を含む信号は高い周波数の成分を多く含む（第 2 章）。ナイキスト周波数を超える成分は、標本化するとエイリアスとして低い周波数に現れ、後から取り除くことができない。</p>
+<p>そのため、A/D 変換の前に、ナイキスト周波数より高い周波数の成分を十分に減衰させるアナログのローパスフィルタを置く（第 1 章の <a class="reference internal" href="ch01_signals.html#fig-ch01-dsp-chain"><span class="std std-numref">図 2</span></a>）。これを<a class="reference internal" href="appendix_a_glossary.html#term-1"><span class="xref std std-term">アンチエイリアシングフィルタ</span></a>という。理想的なフィルタは作れないので、必要な帯域 <span class="math notranslate nohighlight">\(B\)</span> と <span class="math notranslate nohighlight">\(f_s/2\)</span> の間に、フィルタの減衰が十分に大きくなるための余裕をもたせる。音楽 CD の 44.1 kHz は、20 kHz までの可聴域に対して、20 kHz から 22.05 kHz までの範囲をこの余裕に使っている。</p>
+<p>最近の A/D 変換器の多くは、必要な周波数よりはるかに高い標本化周波数でいったん標本化し（オーバーサンプリング）、デジタルのフィルタで帯域を制限してから標本化周波数を下げる。こうすると、アナログのフィルタに求められる性能を緩められる。標本化周波数を下げる処理（ダウンサンプリング）は、第 10 章で扱う。</p>
+</section>
+<section id="id8">
+<h2>量子化<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>標本値は、そのままでは実数（無限の精度をもつ値）である。計算機で扱うには、有限のビット数の数値で表す必要がある。値を一定の刻み <span class="math notranslate nohighlight">\(\Delta\)</span> の整数倍などの有限個の値に丸めることを、量子化という。<a class="reference internal" href="#fig-ch04-quantization"><span class="std std-numref">図 16</span></a> は、<span class="math notranslate nohighlight">\(-1\)</span> から <span class="math notranslate nohighlight">\(1\)</span> の範囲を 3 ビット（<span class="math notranslate nohighlight">\(2^3 = 8\)</span> 段階）で量子化した例である。</p>
+<figure class="align-default" id="id16">
+<span id="fig-ch04-quantization"></span><img alt="正弦波を 3 ビットで量子化した階段状の波形と、量子化誤差がプラスマイナス Δ/2 の範囲に収まる様子" src="_images/fig_ch04_quantization.svg" />
+<figcaption>
+<p><span class="caption-number">図 16 </span><span class="caption-text">3 ビットの量子化（左）と量子化誤差（右）</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>量子化した値と元の値の差を量子化誤差という。値を最も近い段に丸める場合、量子化誤差は <span class="math notranslate nohighlight">\(-\Delta/2\)</span> から <span class="math notranslate nohighlight">\(\Delta/2\)</span> の範囲に収まる。信号が十分に複雑に変化していれば、量子化誤差はこの範囲に一様に分布する雑音とみなせる。これを<a class="reference internal" href="appendix_a_glossary.html#term-68"><span class="xref std std-term">量子化雑音</span></a>という。その電力（2 乗の平均）は、一様分布の分散として</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2} e^2\, de = \frac{\Delta^2}{12}\]</div>
+<p>となる。</p>
+<p>信号の電力と雑音の電力の比を <a class="reference internal" href="appendix_a_glossary.html#term-SNR"><span class="xref std std-term">SNR</span></a>（signal-to-noise ratio、信号対雑音比）といい、ふつうは<a class="reference internal" href="appendix_a_glossary.html#term-43"><span class="xref std std-term">デシベル</span></a>（dB）で表す。電力の比 <span class="math notranslate nohighlight">\(P_1/P_2\)</span> のデシベル値は <span class="math notranslate nohighlight">\(10\log_{10}(P_1/P_2)\)</span> であり、振幅の比 <span class="math notranslate nohighlight">\(A_1/A_2\)</span> で表すと <span class="math notranslate nohighlight">\(20\log_{10}(A_1/A_2)\)</span> になる。</p>
+<p><span class="math notranslate nohighlight">\(B\)</span> ビットの量子化器で、量子化できる範囲いっぱいの振幅の正弦波を量子化した場合の SNR を求める。範囲を <span class="math notranslate nohighlight">\(-A\)</span> から <span class="math notranslate nohighlight">\(A\)</span> とすると、刻みは <span class="math notranslate nohighlight">\(\Delta = 2A/2^B\)</span> であり、正弦波の電力は <span class="math notranslate nohighlight">\(A^2/2\)</span> なので、</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{SNR} = 10\log_{10}\frac{A^2/2}{\Delta^2/12} = 10\log_{10}\left(\frac{3}{2}\cdot 2^{2B}\right) \approx 6.02B + 1.76 \text{ [dB]}\]</div>
+<p>となる。ビット数を 1 増やすごとに、SNR は約 6 dB 改善する。音楽 CD の 16 ビットでは約 98 dB、24 ビットでは約 146 dB である。ただし、実際の信号の振幅は範囲いっぱいではないことが多く、その分だけ SNR は下がる。</p>
+<p>量子化には、もう 1 つ注意点がある。範囲を超える値は、最大値または最小値に張り付いてしまう（クリッピング）。クリッピングは波形を大きくひずませ、多くの高調波を生む。入力の振幅は、範囲に収まるように調整する必要がある。</p>
+<p>本書の以降の章では、計算機の浮動小数点数で計算する。倍精度の浮動小数点数（Python の <code class="docutils literal notranslate"><span class="pre">float</span></code>、NumPy の <code class="docutils literal notranslate"><span class="pre">float64</span></code>）は有効数字が約 16 桁あり、量子化雑音は通常は無視できる。ただし、組み込み機器などで固定小数点数を使う場合は、フィルタの計算の途中でも量子化誤差が生じるので、設計の段階から考慮する必要がある。</p>
+</section>
+<section id="id9">
+<h2>まとめ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>標本化は、連続時間信号から間隔 <span class="math notranslate nohighlight">\(T_s\)</span> で値を取り出すことである。標本化周波数は <span class="math notranslate nohighlight">\(f_s = 1/T_s\)</span> である。</p></li>
+<li><p>周波数 <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(f + m f_s\)</span> の正弦波は、標本化すると区別できない。ナイキスト周波数 <span class="math notranslate nohighlight">\(f_s/2\)</span> を超える成分は、低い周波数に折り返す（エイリアシング）。</p></li>
+<li><p>標本化した信号のスペクトルは、元のスペクトルを <span class="math notranslate nohighlight">\(f_s\)</span> ごとに繰り返したものになる。</p></li>
+<li><p>帯域幅 <span class="math notranslate nohighlight">\(B\)</span> の信号は、<span class="math notranslate nohighlight">\(f_s &gt; 2B\)</span> で標本化すれば、sinc 補間で完全に復元できる（標本化定理）。</p></li>
+<li><p>A/D 変換の前には、アンチエイリアシングフィルタで帯域を制限する。</p></li>
+<li><p><span class="math notranslate nohighlight">\(B\)</span> ビットの量子化の SNR は、範囲いっぱいの正弦波で約 <span class="math notranslate nohighlight">\(6.02B + 1.76\)</span> dB である。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch03_fourier_transform.html" class="btn btn-neutral float-left" title="第 3 章 フーリエ変換" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch05_lti_systems.html" class="btn btn-neutral float-right" title="第 5 章 離散時間信号と LTI システム" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

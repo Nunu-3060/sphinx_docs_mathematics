@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 9 章 デジタルフィルタ &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 10 章 応用" href="ch10_applications.html" />
+    <link rel="prev" title="第 8 章 スペクトル解析" href="ch08_spectrum_analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 9 章 デジタルフィルタ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">フィルタの種類と仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fir">FIR フィルタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">窓関数法による FIR フィルタの設計</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iir">IIR フィルタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">フィルタを適用するときの注意</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fir-iir">FIR フィルタと IIR フィルタの比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 9 章 デジタルフィルタ</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 9 章 デジタルフィルタ<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>特定の周波数の成分を通し、ほかの成分を弱める処理をフィルタという。雑音の除去、帯域の制限、信号の分離など、フィルタはデジタル信号処理で最もよく使われる処理である。この章では、第 5 章の LTI システムの知識を使って、FIR フィルタと IIR フィルタの設計方法と、適用するときの注意点を説明する。</p>
+<section id="id2">
+<h2>フィルタの種類と仕様<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="appendix_a_glossary.html#term-45"><span class="xref std std-term">デジタルフィルタ</span></a>は、通過させる周波数の範囲によって、<a class="reference internal" href="#table-ch09-filter-types"><span class="std std-numref">表 7</span></a> のように分類される。</p>
+<span id="table-ch09-filter-types"></span><table class="docutils align-default" id="id6">
+<caption><span class="caption-number">表 7 </span><span class="caption-text">フィルタの種類</span><a class="headerlink" href="#id6" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>種類</p></th>
+<th class="head"><p>働き</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ローパスフィルタ（LPF）</p></td>
+<td><p>ある周波数より低い成分を通し、高い成分を弱める</p></td>
+</tr>
+<tr class="row-odd"><td><p>ハイパスフィルタ（HPF）</p></td>
+<td><p>ある周波数より高い成分を通し、低い成分を弱める</p></td>
+</tr>
+<tr class="row-even"><td><p>バンドパスフィルタ（BPF）</p></td>
+<td><p>ある範囲の周波数の成分だけを通す</p></td>
+</tr>
+<tr class="row-odd"><td><p>バンドストップフィルタ（BSF）</p></td>
+<td><p>ある範囲の周波数の成分だけを弱める。範囲が狭いものはノッチフィルタという</p></td>
+</tr>
+</tbody>
+</table>
+<p>理想的なフィルタは、通す周波数の利得が正確に 1、弱める周波数の利得が正確に 0 で、その境目で利得が急に切り替わる。しかし、そのようなフィルタは実現できない（後で示すように、インパルス応答が無限に長く、因果的でもないからである）。そこで、実際の設計では、<a class="reference internal" href="#fig-ch09-filter-spec"><span class="std std-numref">図 32</span></a> のように許容範囲を決める。</p>
+<figure class="align-default" id="id7">
+<span id="fig-ch09-filter-spec"></span><img alt="ローパスフィルタの通過域、遷移域、阻止域と、通過域の許容偏差と阻止域の減衰量を示す許容範囲の図と、それを満たすフィルタの振幅特性" src="_images/fig_ch09_filter_spec.svg" />
+<figcaption>
+<p><span class="caption-number">図 32 </span><span class="caption-text">ローパスフィルタの仕様の例（赤の範囲に振幅特性が入ってはいけない）</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>通過域</strong>：信号を通す周波数の範囲。0 から通過域端（この例では 80 Hz）まで。利得の許容偏差（リプル）を決める。</p></li>
+<li><p><strong>阻止域</strong>：信号を弱める周波数の範囲。阻止域端（この例では 150 Hz）より上。必要な減衰量を決める。</p></li>
+<li><p><strong>遷移域</strong>：通過域と阻止域の間。利得が 1 から 0 に向かって変化する範囲で、利得の値は問わない。</p></li>
+</ul>
+<p>遷移域が狭く、阻止域の減衰量が大きいほど、フィルタの次数（係数の数）が増え、計算量と遅延が大きくなる。必要以上に厳しい仕様にしないことが大切である。</p>
+<p>カットオフ周波数は、通過域と阻止域の境目の目安となる周波数である。後で説明するバタワースフィルタのように、利得が <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span>（約 <span class="math notranslate nohighlight">\(-3\)</span> dB）になる周波数で定義することが多い。</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>SciPy のフィルタ設計関数で周波数を指定する方法は 2 通りある。引数 <code class="docutils literal notranslate"><span class="pre">fs</span></code> に標本化周波数を与えると、周波数を Hz で指定できる。<code class="docutils literal notranslate"><span class="pre">fs</span></code> を省略すると、ナイキスト周波数を 1 とした正規化周波数（<span class="math notranslate nohighlight">\(f/(f_s/2)\)</span>、第 5 章の <span class="math notranslate nohighlight">\(\hat{\omega}/\pi\)</span>）で指定する。本書では、間違いを防ぐために、常に <code class="docutils literal notranslate"><span class="pre">fs</span></code> を指定する。</p>
+</div>
+</section>
+<section id="fir">
+<h2>FIR フィルタ<a class="headerlink" href="#fir" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="appendix_a_glossary.html#term-FIR"><span class="xref std std-term">FIR フィルタ</span></a>は、現在と過去の有限個の入力の重み付きの和で出力を計算するフィルタである。</p>
+<div class="math notranslate nohighlight">
+\[y[n] = \sum_{k=0}^{M} b_k\, x[n - k]\]</div>
+<p>係数 <span class="math notranslate nohighlight">\(b_k\)</span> がそのままインパルス応答 <span class="math notranslate nohighlight">\(h[k]\)</span> になる。係数の個数 <span class="math notranslate nohighlight">\(M + 1\)</span> をタップ数、<span class="math notranslate nohighlight">\(M\)</span> を次数という。<a class="reference internal" href="#fig-ch09-fir"><span class="std std-numref">図 33</span></a> は、FIR フィルタのブロック図（直接形）である。入力を 1 標本ずつ遅らせながら、係数を掛けて足し合わせる。</p>
+<figure class="align-default" id="id8">
+<span id="fig-ch09-fir"></span><div class="graphviz"><object data="_images/graphviz-88d8c1caceee4f4fa5fd9a710644c91ea071f4b3.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">入力が 3 段の遅延素子を順に通り、各段の値に係数 b0 から b3 を掛けて足し合わせて出力を得るブロック図</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 33 </span><span class="caption-text">3 次の FIR フィルタのブロック図（直接形）</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>FIR フィルタには、次の長所がある。</p>
+<ul class="simple">
+<li><p>インパルス応答の長さが有限なので、常に安定である（第 5 章）。</p></li>
+<li><p>係数を対称（<span class="math notranslate nohighlight">\(b_k = b_{M-k}\)</span>）にすると、<a class="reference internal" href="appendix_a_glossary.html#term-35"><span class="xref std std-term">線形位相</span></a>のフィルタになる。</p></li>
+</ul>
+<p>線形位相とは、位相特性が周波数に比例すること（<span class="math notranslate nohighlight">\(\arg H(e^{j\hat{\omega}}) = -\hat{\omega}M/2\)</span>）である。係数が対称なら、周波数応答は</p>
+<div class="math notranslate nohighlight">
+\[H(e^{j\hat{\omega}}) = e^{-j\hat{\omega} M/2} A(\hat{\omega})\]</div>
+<p>（<span class="math notranslate nohighlight">\(A(\hat{\omega})\)</span> は実数の関数）の形に書ける。第 3 章の時間シフトの性質から、これは「すべての周波数の成分が同じ <span class="math notranslate nohighlight">\(M/2\)</span> 標本だけ遅れる」ことを意味する。位相の傾きから求めた遅れ <span class="math notranslate nohighlight">\(\tau(\hat{\omega}) = -\frac{d}{d\hat{\omega}}\arg H(e^{j\hat{\omega}})\)</span> を<a class="reference internal" href="appendix_a_glossary.html#term-17"><span class="xref std std-term">群遅延</span></a>という。線形位相のフィルタは群遅延が一定なので、波形の形を崩さずに、全体を遅らせるだけで済む。パルスの形や波形のタイミングが重要な用途（例えば、心電図や通信の信号）では、この性質が重要である。</p>
+<p>最も簡単な FIR フィルタは、第 5 章で見た移動平均（<span class="math notranslate nohighlight">\(b_k = 1/(M+1)\)</span>）である。<a class="reference internal" href="#fig-ch09-moving-average"><span class="std std-numref">図 34</span></a> は、平均する点数 <span class="math notranslate nohighlight">\(M + 1\)</span> を変えたときの振幅特性である。点数を増やすと通過域は狭くなるが、阻止域の利得（サイドローブ）は 0.2 から 0.3 程度（約 <span class="math notranslate nohighlight">\(-13\)</span> dB から <span class="math notranslate nohighlight">\(-10\)</span> dB）までしか下がらない。移動平均の周波数応答は、矩形の窓のスペクトル（第 6 章のディリクレ核）そのものだからである。移動平均は計算が簡単で、時間領域の雑音を減らす効果はあるが、周波数を選び分けるフィルタとしての性能は低い。</p>
+<figure class="align-default" id="id9">
+<span id="fig-ch09-moving-average"></span><img alt="3 点、5 点、11 点の移動平均の振幅特性。点数が多いほど通過域が狭くなるが、阻止域の利得は大きく下がらない" src="_images/fig_ch09_moving_average.svg" />
+<figcaption>
+<p><span class="caption-number">図 34 </span><span class="caption-text">移動平均フィルタの振幅特性</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id3">
+<h2>窓関数法による FIR フィルタの設計<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>理想的なローパスフィルタ（カットオフの正規化角周波数 <span class="math notranslate nohighlight">\(\hat{\omega}_c\)</span> 以下で利得 1、それより上で 0）のインパルス応答は、逆 DTFT で求められる。</p>
+<div class="math notranslate nohighlight">
+\[h_d[n] = \frac{1}{2\pi}\int_{-\hat{\omega}_c}^{\hat{\omega}_c} e^{j\hat{\omega} n}\, d\hat{\omega} = \frac{\sin(\hat{\omega}_c n)}{\pi n} = 2 f_c\, \mathrm{sinc}(2 f_c n)\]</div>
+<p>ここで <span class="math notranslate nohighlight">\(f_c = \hat{\omega}_c/(2\pi)\)</span> は、カットオフ周波数を標本化周波数で割った値である。<span class="math notranslate nohighlight">\(h_d[n]\)</span> は sinc 関数であり、<span class="math notranslate nohighlight">\(n\)</span> の正と負の両方に無限に続く。これが、理想的なフィルタが実現できない理由である。</p>
+<p>そこで、<span class="math notranslate nohighlight">\(h_d[n]\)</span> を <span class="math notranslate nohighlight">\(M/2\)</span> 標本だけ右にずらして因果的に近づけ、長さ <span class="math notranslate nohighlight">\(M + 1\)</span> で打ち切る。ただし、そのまま打ち切る（矩形の窓を掛ける）と、周波数領域では理想的な特性と矩形の窓のスペクトルの畳み込みになり、遷移域の付近に大きな波打ちが生じる。これは、第 2 章のギブス現象そのものである。そこで、第 8 章の窓関数を掛けて、滑らかに打ち切る。この設計方法を<a class="reference internal" href="appendix_a_glossary.html#term-65"><span class="xref std std-term">窓関数法</span></a>という。手順をまとめると次のようになる。</p>
+<ol class="arabic simple">
+<li><p>理想的なインパルス応答 <span class="math notranslate nohighlight">\(h_d[n - M/2] = 2 f_c\, \mathrm{sinc}(2 f_c (n - M/2))\)</span> を、<span class="math notranslate nohighlight">\(n = 0, \ldots, M\)</span> について計算する。</p></li>
+<li><p>対称な窓関数 <span class="math notranslate nohighlight">\(w[n]\)</span> を掛ける。</p></li>
+<li><p>直流の利得（係数の和）が 1 になるように正規化する。</p></li>
+</ol>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">fir_filter_design.py</span></code> は、この手順を実装し、SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.signal.firwin()</span></code> の結果と比べる。標本化周波数は 1000 Hz、カットオフ周波数は 100 Hz、タップ数は 51 である。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch09-fir">
+<div class="code-block-caption"><span class="caption-number">リスト 22 </span><span class="caption-text">fir_filter_design.py の design_lowpass()</span><a class="headerlink" href="#list-ch09-fir" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">24</span><span class="k">def</span><span class="w"> </span><span class="nf">design_lowpass</span><span class="p">(</span><span class="n">num_taps</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">fs</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">25</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;窓関数法で FIR ローパスフィルタの係数を求める.</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="sd">    1. 理想ローパスフィルタのインパルス応答 h[n] = 2 fc sinc(2 fc (n - M)) を求める</span>
+<span class="linenos">28</span><span class="sd">       （fc = cutoff / fs は正規化したカットオフ周波数、M = (num_taps - 1) / 2）。</span>
+<span class="linenos">29</span><span class="sd">    2. 窓関数を掛けて、長さ num_taps に打ち切る。</span>
+<span class="linenos">30</span><span class="sd">    3. 直流での利得（係数の和）が 1 になるように正規化する。</span>
+<span class="linenos">31</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">32</span>    <span class="n">fc</span> <span class="o">=</span> <span class="n">cutoff</span> <span class="o">/</span> <span class="n">fs</span>
+<span class="linenos">33</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_taps</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">num_taps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="linenos">34</span>    <span class="n">ideal</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">h</span> <span class="o">=</span> <span class="n">ideal</span> <span class="o">*</span> <span class="n">signal</span><span class="o">.</span><span class="n">get_window</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">num_taps</span><span class="p">,</span> <span class="n">fftbins</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">result</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="linenos">37</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">リスト 23 </span><span class="caption-text">fir_filter_design.py の実行結果</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>矩形窓: firwin と一致する: True
+ハミング窓: firwin と一致する: True
+ブラックマン窓: firwin と一致する: True
+
+通過域（0 - 50 Hz）の最大偏差、150 Hz 以上と 200 Hz 以上での最大利得
+   0.690 dB   -31.8 dB   -36.9 dB  矩形窓
+   0.041 dB   -61.6 dB   -61.7 dB  ハミング窓
+   0.007 dB   -60.1 dB   -79.5 dB  ブラックマン窓
+
+群遅延 = 25 標本 = 25 ms（すべての周波数で一定）
+</pre></div>
+</div>
+</div>
+<figure class="align-default" id="id11">
+<span id="fig-ch09-fir-design"></span><img alt="ハミング窓で設計した 51 タップの FIR フィルタのインパルス応答と、矩形窓、ハミング窓、ブラックマン窓で設計したフィルタの振幅特性" src="_images/fir_filter_design.svg" />
+<figcaption>
+<p><span class="caption-number">図 35 </span><span class="caption-text">窓関数法で設計した FIR フィルタのインパルス応答（左）と振幅特性（右）</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>自作の関数は、3 つの窓関数のいずれでも <code class="docutils literal notranslate"><span class="pre">firwin()</span></code> と一致している（<code class="docutils literal notranslate"><span class="pre">firwin()</span></code> も同じ窓関数法で設計しているからである）。実行結果と <a class="reference internal" href="#fig-ch09-fir-design"><span class="std std-numref">図 35</span></a> から、窓関数による違いが読み取れる。</p>
+<ul class="simple">
+<li><p>矩形窓は、通過域の偏差が 0.69 dB と大きく、阻止域の利得も 150 Hz 以上で約 <span class="math notranslate nohighlight">\(-32\)</span> dB、200 Hz 以上でも約 <span class="math notranslate nohighlight">\(-37\)</span> dB までしか下がらない。</p></li>
+<li><p>ハミング窓は、通過域の偏差が 0.04 dB で、150 Hz 以上の阻止域で約 <span class="math notranslate nohighlight">\(-62\)</span> dB の減衰が得られる。</p></li>
+<li><p>ブラックマン窓は、最終的な減衰は最も大きい（200 Hz 以上で約 <span class="math notranslate nohighlight">\(-80\)</span> dB）が、遷移域が広いため、150 Hz ではまだ十分に減衰していない。</p></li>
+</ul>
+<p>第 8 章の窓関数のトレードオフ（メインローブの幅とサイドローブの高さ）が、ここではフィルタの遷移域の幅と阻止域の減衰量のトレードオフとして現れている。同じ窓関数では、タップ数を増やすと遷移域が狭くなるが、阻止域の減衰量はほぼ変わらない。</p>
+<p>このフィルタは係数が対称なので線形位相であり、群遅延は <span class="math notranslate nohighlight">\(M/2 = 25\)</span> 標本（25 ms）で一定である。</p>
+<p>窓関数法のほかに、通過域と阻止域の誤差の最大値を最小にする Parks-McClellan 法（<code class="docutils literal notranslate"><span class="pre">scipy.signal.remez()</span></code>）や、誤差の 2 乗和を最小にする最小 2 乗法（<code class="docutils literal notranslate"><span class="pre">scipy.signal.firls()</span></code>）などの設計方法がある。必要なタップ数の見積もりには、<code class="docutils literal notranslate"><span class="pre">scipy.signal.kaiserord()</span></code> が使える。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/c9e0f3e201628c01f67053a3227e2901/fir_filter_design.py"><code class="xref download docutils literal notranslate"><span class="pre">fir_filter_design.py</span></code></a></p>
+</section>
+<section id="iir">
+<h2>IIR フィルタ<a class="headerlink" href="#iir" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="appendix_a_glossary.html#term-IIR"><span class="xref std std-term">IIR フィルタ</span></a>は、第 5 章の差分方程式 <a class="reference internal" href="ch05_lti_systems.html#equation-eq-difference-equation">(19)</a> のように、過去の出力も使って出力を計算するフィルタである。インパルス応答は無限に続く。FIR フィルタと比べて、少ない次数で急峻な特性が得られることが最大の長所である。一方で、線形位相にはできず、係数によっては不安定になる。</p>
+<p>IIR フィルタは、長い歴史をもつアナログフィルタの設計手法を利用して設計することが多い。代表的なアナログフィルタを <a class="reference internal" href="#table-ch09-iir-types"><span class="std std-numref">表 8</span></a> に示す。</p>
+<span id="table-ch09-iir-types"></span><table class="docutils align-default" id="id12">
+<caption><span class="caption-number">表 8 </span><span class="caption-text">代表的なアナログフィルタの特徴</span><a class="headerlink" href="#id12" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>種類</p></th>
+<th class="head"><p>特徴</p></th>
+<th class="head"><p>SciPy の関数</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>バタワース</p></td>
+<td><p>通過域が最も平坦（リプルがない）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">butter()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>チェビシェフ I 型</p></td>
+<td><p>通過域にリプルを許し、遷移域を急峻にする</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cheby1()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>チェビシェフ II 型</p></td>
+<td><p>阻止域にリプルを許し、遷移域を急峻にする</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cheby2()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>楕円（カウエル）</p></td>
+<td><p>両方にリプルを許し、同じ次数で最も急峻</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ellip()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ベッセル</p></td>
+<td><p>群遅延が平坦に近く、波形のひずみが小さい</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bessel()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>ここでは、最も基本的な<a class="reference internal" href="appendix_a_glossary.html#term-51"><span class="xref std std-term">バタワースフィルタ</span></a>を説明する。<span class="math notranslate nohighlight">\(N\)</span> 次のアナログのバタワース LPF の振幅特性は、カットオフ角周波数を <span class="math notranslate nohighlight">\(\Omega_c\)</span> として</p>
+<div class="math notranslate nohighlight">
+\[|H_a(j\Omega)| = \frac{1}{\sqrt{1 + (\Omega/\Omega_c)^{2N}}}\]</div>
+<p>である（アナログの角周波数を <span class="math notranslate nohighlight">\(\Omega\)</span> で表す）。<span class="math notranslate nohighlight">\(\Omega = 0\)</span> での傾きが 0 で、通過域が最も平坦になる。カットオフ周波数での利得は次数によらず <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span>（<span class="math notranslate nohighlight">\(-3.01\)</span> dB）であり、阻止域では周波数が 10 倍になるごとに <span class="math notranslate nohighlight">\(20N\)</span> dB ずつ下がる。</p>
+<p>アナログフィルタの伝達関数 <span class="math notranslate nohighlight">\(H_a(s)\)</span> を、デジタルフィルタの伝達関数 <span class="math notranslate nohighlight">\(H(z)\)</span> に変換するには、<a class="reference internal" href="appendix_a_glossary.html#term-37"><span class="xref std std-term">双一次変換</span></a>を使う。</p>
+<div class="math notranslate nohighlight">
+\[s = 2 f_s \frac{1 - z^{-1}}{1 + z^{-1}}\]</div>
+<p>この変換は、アナログの周波数軸（<span class="math notranslate nohighlight">\(s = j\Omega\)</span>）全体を、デジタルの単位円（<span class="math notranslate nohighlight">\(z = e^{j\hat{\omega}}\)</span>）の 1 周にちょうど対応させる。そのため、エイリアシングが起こらず、安定なアナログフィルタは安定なデジタルフィルタに変換される。ただし、周波数の対応は直線的でなく、</p>
+<div class="math notranslate nohighlight">
+\[\Omega = 2 f_s \tan\frac{\hat{\omega}}{2}\]</div>
+<p>のようにゆがむ（<span class="math notranslate nohighlight">\(\hat{\omega} \to \pi\)</span> で <span class="math notranslate nohighlight">\(\Omega \to \infty\)</span>）。そこで、デジタルのカットオフ周波数 <span class="math notranslate nohighlight">\(f_c\)</span> を正確に合わせるために、アナログのカットオフ角周波数をあらかじめ <span class="math notranslate nohighlight">\(\Omega_c = 2 f_s \tan(\pi f_c/f_s)\)</span> に設定しておく。これを<a class="reference internal" href="appendix_a_glossary.html#term-62"><span class="xref std std-term">プリワーピング</span></a>という。</p>
+<p>1 次のバタワース LPF <span class="math notranslate nohighlight">\(H_a(s) = \Omega_c/(s + \Omega_c)\)</span> で、双一次変換を手計算してみる。<span class="math notranslate nohighlight">\(s\)</span> を代入して整理すると、</p>
+<div class="math notranslate nohighlight">
+\[H(z) = \frac{\Omega_c (1 + z^{-1})}{(2 f_s + \Omega_c) + (\Omega_c - 2 f_s) z^{-1}}\]</div>
+<p>となる。サンプルの <code class="docutils literal notranslate"><span class="pre">iir_filter_design.py</span></code> は、この式で係数を求めて <code class="docutils literal notranslate"><span class="pre">scipy.signal.butter()</span></code> と比べ、さらに次数 2、4、8 のフィルタの利得を確かめる。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch09-iir">
+<div class="code-block-caption"><span class="caption-number">リスト 24 </span><span class="caption-text">iir_filter_design.py の first_order_lowpass()</span><a class="headerlink" href="#list-ch09-iir" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">28</span><span class="k">def</span><span class="w"> </span><span class="nf">first_order_lowpass</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+<span class="linenos">29</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;1 次のアナログ LPF H(s) = wc / (s + wc) を双一次変換し、(b, a) を返す.</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="sd">    s = 2 fs (1 - z^-1) / (1 + z^-1) を代入して整理すると</span>
+<span class="linenos">32</span><span class="sd">    H(z) = wc (1 + z^-1) / ((2 fs + wc) + (wc - 2 fs) z^-1) になる。</span>
+<span class="linenos">33</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">34</span>    <span class="n">wc</span> <span class="o">=</span> <span class="n">prewarp</span><span class="p">(</span><span class="n">CUTOFF</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">wc</span><span class="p">,</span> <span class="n">wc</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">FS</span> <span class="o">+</span> <span class="n">wc</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="n">wc</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">FS</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">FS</span> <span class="o">+</span> <span class="n">wc</span><span class="p">)])</span>
+<span class="linenos">37</span>    <span class="k">return</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 25 </span><span class="caption-text">iir_filter_design.py の実行結果</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>手計算の b = [0.245237 0.245237]  a = [ 1.       -0.509525]
+butter の b = [0.245237 0.245237]  a = [ 1.       -0.509525]
+一致する: True
+
+次数   100 Hz の利得   200 Hz の利得   200 Hz の理論値
+   2        -3.01 dB       -14.15 dB       -14.15 dB
+   4        -3.01 dB       -27.97 dB       -27.97 dB
+   8        -3.01 dB       -55.92 dB       -55.92 dB
+</pre></div>
+</div>
+</div>
+<figure class="align-default" id="id14">
+<span id="fig-ch09-iir-design"></span><img alt="次数 2、4、8 のバタワースフィルタの振幅特性と位相特性。次数が高いほど急峻に減衰し、位相の変化も大きい" src="_images/iir_filter_design.svg" />
+<figcaption>
+<p><span class="caption-number">図 36 </span><span class="caption-text">バタワース LPF の振幅特性（左）と位相特性（右）</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>手計算の係数は <code class="docutils literal notranslate"><span class="pre">butter()</span></code> と一致している。どの次数でも 100 Hz の利得は <span class="math notranslate nohighlight">\(-3.01\)</span> dB であり、200 Hz の利得は、プリワーピングした周波数で計算した理論値と一致している。次数が 2 倍になると、200 Hz の減衰量（dB）もほぼ 2 倍になる。8 次のバタワースフィルタは、9 個ずつの分子と分母の係数（合計 18 個）で、51 タップの FIR フィルタより急峻な特性を実現している。</p>
+<p>一方、<a class="reference internal" href="#fig-ch09-iir-design"><span class="std std-numref">図 36</span></a> の右の図のように、位相特性は直線ではなく、カットオフ周波数の付近で急に変化する。周波数によって遅れが異なるので、波形の形が崩れる。</p>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/f589f56309361cf0abcfd699c12579ca/iir_filter_design.py"><code class="xref download docutils literal notranslate"><span class="pre">iir_filter_design.py</span></code></a></p>
+</section>
+<section id="id4">
+<h2>フィルタを適用するときの注意<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>SciPy でフィルタを信号に適用する主な関数を、<a class="reference internal" href="#table-ch09-apply"><span class="std std-numref">表 9</span></a> にまとめる。</p>
+<span id="table-ch09-apply"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 9 </span><span class="caption-text">フィルタを適用する関数</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>関数</p></th>
+<th class="head"><p>機能</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lfilter(b,</span> <span class="pre">a,</span> <span class="pre">x)</span></code></p></td>
+<td><p>差分方程式 <a class="reference internal" href="ch05_lti_systems.html#equation-eq-difference-equation">(19)</a> をそのまま計算する。FIR フィルタでは <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">[1.0]</span></code> とする</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sosfilt(sos,</span> <span class="pre">x)</span></code></p></td>
+<td><p>2 次セクション（second-order sections）の縦続接続の形で IIR フィルタを計算する</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">filtfilt(b,</span> <span class="pre">a,</span> <span class="pre">x)</span></code>、<code class="docutils literal notranslate"><span class="pre">sosfiltfilt(sos,</span> <span class="pre">x)</span></code></p></td>
+<td><p>フィルタを順方向と逆方向に 1 回ずつ掛け、位相のずれをなくす</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>2 次セクションの形を使う</strong>：高い次数の IIR フィルタを、分子と分母の多項式の係数（<code class="docutils literal notranslate"><span class="pre">b</span></code>、<code class="docutils literal notranslate"><span class="pre">a</span></code>）で表すと、係数の丸め誤差に非常に敏感になり、不安定になることがある。設計関数で <code class="docutils literal notranslate"><span class="pre">output=&quot;sos&quot;</span></code> を指定して、2 次のフィルタを直列につないだ形（<span class="math notranslate nohighlight">\(H(z) = \prod_i H_i(z)\)</span>）で表し、<code class="docutils literal notranslate"><span class="pre">sosfilt()</span></code> で適用するのが安全である。</p>
+<p><strong>フィルタの遅れ</strong>：因果的なフィルタは、必ず出力が遅れる。線形位相の FIR フィルタでは、遅れは <span class="math notranslate nohighlight">\(M/2\)</span> 標本で一定である。IIR フィルタでは、遅れが周波数によって異なり、波形がひずむ。</p>
+<p><strong>ゼロ位相フィルタリング</strong>：記録済みのデータを処理する場合は、フィルタを順方向に掛けた後、結果を時間反転して同じフィルタを再び掛け、最後に時間反転して元に戻す方法が使える。順方向の位相のずれと、逆方向の位相のずれが打ち消し合い、位相特性が 0 になる。これを<a class="reference internal" href="appendix_a_glossary.html#term-33"><span class="xref std std-term">ゼロ位相フィルタリング</span></a>といい、SciPy の <code class="docutils literal notranslate"><span class="pre">filtfilt()</span></code> と <code class="docutils literal notranslate"><span class="pre">sosfiltfilt()</span></code> で行える。振幅特性は元のフィルタの 2 乗になる（dB で 2 倍）。未来の標本を使う、因果的でない処理なので、リアルタイムの処理には使えない。</p>
+<p><a class="reference internal" href="#fig-ch09-phase-delay"><span class="std std-numref">図 37</span></a> は、雑音を加えたパルス状の信号に、4 次のバタワース LPF（カットオフ周波数 50 Hz）と、51 タップの FIR LPF を掛けた結果である。IIR フィルタを <code class="docutils literal notranslate"><span class="pre">sosfilt()</span></code> で掛けた出力（青）は、遅れているうえに、パルスの後に振動が付き、形が少し崩れている。FIR フィルタの出力（橙）は、25 標本（25 ms）遅れているが、形は保たれている。<code class="docutils literal notranslate"><span class="pre">sosfiltfilt()</span></code> の出力（赤の破線）は、遅れがなく、元の信号に重なっている。</p>
+<figure class="align-default" id="id16">
+<span id="fig-ch09-phase-delay"></span><img alt="雑音を含むパルス状の信号に IIR フィルタ、FIR フィルタ、ゼロ位相フィルタリングを適用した結果の比較" src="_images/fig_ch09_phase_delay.svg" />
+<figcaption>
+<p><span class="caption-number">図 37 </span><span class="caption-text">フィルタによる遅れと波形の変化</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>初期値の過渡応答</strong>：フィルタは、信号の始まりの前の入力を 0 とみなして計算するので、信号の先頭で過渡的な応答が生じる。信号の先頭の付近の出力は信頼できないことに注意する。<code class="docutils literal notranslate"><span class="pre">filtfilt()</span></code> は、両端の信号を折り返して延長することで、この影響を減らしている。</p>
+</section>
+<section id="fir-iir">
+<h2>FIR フィルタと IIR フィルタの比較<a class="headerlink" href="#fir-iir" title="Link to this heading"></a></h2>
+<p>最後に、FIR フィルタと IIR フィルタの特徴を <a class="reference internal" href="#table-ch09-fir-iir"><span class="std std-numref">表 10</span></a> にまとめる。</p>
+<span id="table-ch09-fir-iir"></span><table class="docutils align-default" id="id17">
+<caption><span class="caption-number">表 10 </span><span class="caption-text">FIR フィルタと IIR フィルタの比較</span><a class="headerlink" href="#id17" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>項目</p></th>
+<th class="head"><p>FIR フィルタ</p></th>
+<th class="head"><p>IIR フィルタ</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>安定性</p></td>
+<td><p>常に安定</p></td>
+<td><p>極の配置によっては不安定</p></td>
+</tr>
+<tr class="row-odd"><td><p>位相特性</p></td>
+<td><p>線形位相にできる</p></td>
+<td><p>線形位相にはできない</p></td>
+</tr>
+<tr class="row-even"><td><p>同じ急峻さに必要な次数</p></td>
+<td><p>多い（数十から数百）</p></td>
+<td><p>少ない（数次から十数次）</p></td>
+</tr>
+<tr class="row-odd"><td><p>遅れ</p></td>
+<td><p>線形位相なら次数の半分で一定（大きい）</p></td>
+<td><p>小さいが、周波数によって異なる</p></td>
+</tr>
+<tr class="row-even"><td><p>設計方法</p></td>
+<td><p>窓関数法、Parks-McClellan 法など</p></td>
+<td><p>アナログフィルタの双一次変換など</p></td>
+</tr>
+<tr class="row-odd"><td><p>主な用途</p></td>
+<td><p>波形の形を保ちたい処理、オフラインの処理</p></td>
+<td><p>計算量や遅れを小さくしたいリアルタイムの処理</p></td>
+</tr>
+</tbody>
+</table>
+<p>どちらを選ぶかは、用途によって決まる。波形の形を保つことが重要なら FIR フィルタ、計算資源が限られていて遅れも小さくしたいなら IIR フィルタが向いている。記録済みのデータを処理するなら、IIR フィルタを <code class="docutils literal notranslate"><span class="pre">sosfiltfilt()</span></code> で適用する方法も手軽でよい。</p>
+</section>
+<section id="id5">
+<h2>まとめ<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>フィルタの仕様は、通過域、遷移域、阻止域と、許容偏差、減衰量で表す。</p></li>
+<li><p>FIR フィルタは常に安定で、係数を対称にすると線形位相（群遅延が一定）になる。窓関数法では、sinc 関数を窓関数で打ち切って設計する。</p></li>
+<li><p>IIR フィルタは、少ない次数で急峻な特性が得られる。アナログのバタワースフィルタなどを、プリワーピングと双一次変換でデジタルに変換して設計する。</p></li>
+<li><p>高い次数の IIR フィルタは 2 次セクションの形で扱う。記録済みのデータなら、<code class="docutils literal notranslate"><span class="pre">sosfiltfilt()</span></code> でゼロ位相フィルタリングができる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch08_spectrum_analysis.html" class="btn btn-neutral float-left" title="第 8 章 スペクトル解析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch10_applications.html" class="btn btn-neutral float-right" title="第 10 章 応用" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

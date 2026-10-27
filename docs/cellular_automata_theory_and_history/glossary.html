@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>用語集 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="参考文献" href="references.html" />
+    <link rel="prev" title="9. Python による実装" href="implementation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">用語集</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>用語集<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書で使う主な用語を、読みの五十音順（英字で始まる用語は先頭）に並べる。</p>
+<dl class="simple glossary">
+<dt id="term-B-S">B/S 表記<a class="headerlink" href="#term-B-S" title="Link to this term"></a></dt><dd><p>Life-like CA の規則を、誕生（Birth）に必要な周囲の生きたセルの数と、生存（Survival）に必要な数を並べて表す記法。ライフゲームは B3/S23 と書く。</p>
+</dd>
+<dt id="term-0">宇宙船<a class="headerlink" href="#term-0" title="Link to this term"></a></dt><dd><p>ライフゲームなどで、一定の周期で位置をずらしながら元の形に戻るパターン。グライダーが代表例。</p>
+</dd>
+<dt id="term-4">ウルフラムの 4 クラス<a class="headerlink" href="#term-4" title="Link to this term"></a></dt><dd><p>ウルフラムによる CA の振る舞いの経験的な分類。一様（クラス 1）、周期的（クラス 2）、カオス的（クラス 3）、複雑（クラス 4）の 4 つからなる。</p>
+</dd>
+<dt id="term-1">エデンの園配置<a class="headerlink" href="#term-1" title="Link to this term"></a></dt><dd><p>どの配置からも大域写像によって到達できない配置。初期配置としてしか現れえない。大域写像が全射でないことと、エデンの園配置が存在することは同値である。</p>
+</dd>
+<dt id="term-CA">外部総和型 CA<a class="headerlink" href="#term-CA" title="Link to this term"></a></dt><dd><p>次の状態が、中心のセルの状態と、それ以外の近傍のセルの状態の和だけで決まる CA。outer totalistic CA の訳。ライフゲームはこの一種である。</p>
+</dd>
+<dt id="term-2">カオスの縁<a class="headerlink" href="#term-2" title="Link to this term"></a></dt><dd><p>秩序的な振る舞いとカオス的な振る舞いの境目付近で複雑な計算が可能になるという仮説。ラングトンやパッカードが提唱した。</p>
+</dd>
+<dt id="term-3">可逆 CA<a class="headerlink" href="#term-3" title="Link to this term"></a></dt><dd><p>大域写像が全単射で、その逆写像も CA の大域写像であるような CA。大域写像が単射であることと同値である。</p>
+</dd>
+<dt id="term-5">確率的 CA<a class="headerlink" href="#term-5" title="Link to this term"></a></dt><dd><p>局所規則が次の状態を確率的に決める CA。</p>
+</dd>
+<dt id="term-6">加法的 CA<a class="headerlink" href="#term-6" title="Link to this term"></a></dt><dd><p>2 つの配置の和（2 状態の場合は排他的論理和）の像が、それぞれの像の和に等しい CA。線形 CA とも呼ぶ。ルール 90 やルール 150 が代表例。</p>
+</dd>
+<dt id="term-7">基本図<a class="headerlink" href="#term-7" title="Link to this term"></a></dt><dd><p>交通流における、車の密度と流量の関係を表したグラフ。</p>
+</dd>
+<dt id="term-8">基本セル・オートマトン<a class="headerlink" href="#term-8" title="Link to this term"></a></dt><dd><p>2 状態で近傍の半径が 1 の 1 次元 CA。256 通りの規則があり、ルール番号で区別する。ECA（Elementary Cellular Automaton）と略す。</p>
+</dd>
+<dt id="term-9">境界条件<a class="headerlink" href="#term-9" title="Link to this term"></a></dt><dd><p>有限の格子で CA を計算するときに、格子の端のセルの近傍をどう扱うかの取り決め。周期境界条件、固定境界条件、反射境界条件などがある。</p>
+</dd>
+<dt id="term-10">局所規則<a class="headerlink" href="#term-10" title="Link to this term"></a></dt><dd><p>近傍のセルの状態の組から、次の時刻のセルの状態を決める関数。局所遷移規則とも呼ぶ。</p>
+</dd>
+<dt id="term-11">近傍<a class="headerlink" href="#term-11" title="Link to this term"></a></dt><dd><p>セルの次の状態を決めるときに参照するセルの範囲。フォン・ノイマン近傍、ムーア近傍などがある。</p>
+</dd>
+<dt id="term-12">グライダー<a class="headerlink" href="#term-12" title="Link to this term"></a></dt><dd><p>ライフゲームで最も小さな宇宙船。5 個のセルからなり、4 世代で斜めに 1 セル移動する。ルール 110 などの 1 次元 CA で移動する局所構造を指すこともある。</p>
+</dd>
+<dt id="term-13">計算の既約性<a class="headerlink" href="#term-13" title="Link to this term"></a></dt><dd><p>ある系の振る舞いを知るには、その時間発展を実際に 1 ステップずつ計算するしかなく、近道が存在しないという性質。ウルフラムが提唱した概念。</p>
+</dd>
+<dt id="term-14">計算万能<a class="headerlink" href="#term-14" title="Link to this term"></a></dt><dd><p>任意のチューリング機械の動作を模倣できること。チューリング完全とも呼ぶ。ライフゲームやルール 110 は計算万能である。</p>
+</dd>
+<dt id="term-15">決定不能<a class="headerlink" href="#term-15" title="Link to this term"></a></dt><dd><p>ある問題について、すべての入力に対して有限時間で正しく答えを出すアルゴリズムが存在しないこと。</p>
+</dd>
+<dt id="term-16">格子ガス・オートマトン<a class="headerlink" href="#term-16" title="Link to this term"></a></dt><dd><p>格子上を移動して衝突する粒子で流体を模倣する CA。HPP モデルや FHP モデルがある。</p>
+</dd>
+<dt id="term-17">格子ボルツマン法<a class="headerlink" href="#term-17" title="Link to this term"></a></dt><dd><p>格子ガス・オートマトンの粒子の有無を、存在確率の実数値に置き換えた流体シミュレーションの手法。</p>
+</dd>
+<dt id="term-18">時空図<a class="headerlink" href="#term-18" title="Link to this term"></a></dt><dd><p>1 次元 CA の各時刻の配置を、時刻の順に上から下へ並べた図。</p>
+</dd>
+<dt id="term-19">振動子<a class="headerlink" href="#term-19" title="Link to this term"></a></dt><dd><p>ライフゲームなどで、同じ位置で一定の周期ごとに元の形に戻るパターン。</p>
+</dd>
+<dt id="term-20">数保存 CA<a class="headerlink" href="#term-20" title="Link to this term"></a></dt><dd><p>セルの状態を数とみなしたときの全セルの総和が、時間発展で変わらない CA。2 状態の場合は 1 の個数が保存される。ルール 184 が代表例。</p>
+</dd>
+<dt id="term-21">静止状態<a class="headerlink" href="#term-21" title="Link to this term"></a></dt><dd><p>近傍のセルがすべてその状態であれば、次の時刻もその状態のままであるような状態。通常は 0 で表す。</p>
+</dd>
+<dt id="term-22">静物<a class="headerlink" href="#term-22" title="Link to this term"></a></dt><dd><p>ライフゲームなどで、時間が経っても変化しないパターン。</p>
+</dd>
+<dt id="term-23">セル<a class="headerlink" href="#term-23" title="Link to this term"></a></dt><dd><p>CA を構成する個々のマス目。各時刻に、状態集合の要素を 1 つとる。</p>
+</dd>
+<dt id="term-24">セル・オートマトン<a class="headerlink" href="#term-24" title="Link to this term"></a></dt><dd><p>格子状に並んだセルが、近傍のセルの状態に基づく共通の規則に従って、離散的な時刻ごとに一斉に状態を更新する計算モデル。CA（Cellular Automaton）と略す。</p>
+</dd>
+<dt id="term-25">前単射<a class="headerlink" href="#term-25" title="Link to this term"></a></dt><dd><p>大域写像の性質の 1 つ。有限個のセルだけが異なる 2 つの異なる配置が、必ず異なる配置に移ること。エデンの園定理により、全射であることと同値である。</p>
+</dd>
+<dt id="term-26">総和型 CA<a class="headerlink" href="#term-26" title="Link to this term"></a></dt><dd><p>次の状態が、近傍のセルの状態の和だけで決まる CA。totalistic CA の訳。</p>
+</dd>
+<dt id="term-27">ターマイト<a class="headerlink" href="#term-27" title="Link to this term"></a></dt><dd><p>格子上を動き回る主体（ヘッド）を持ち、ヘッドの位置のセルの状態とヘッドの内部状態に応じて動くモデル。ラングトンのアリが代表例。</p>
+</dd>
+<dt id="term-28">大域写像<a class="headerlink" href="#term-28" title="Link to this term"></a></dt><dd><p>局所規則をすべてのセルに同時に適用することで得られる、配置全体から配置全体への写像。大域遷移写像とも呼ぶ。</p>
+</dd>
+<dt id="term-29">ナーゲル・シュレッケンベルク・モデル<a class="headerlink" href="#term-29" title="Link to this term"></a></dt><dd><p>高速道路の交通流を表す 1 次元の確率的 CA。加速・減速・ランダムな減速・移動の 4 つの規則からなり、渋滞の自然発生を再現する。</p>
+</dd>
+<dt id="term-30">ニューラル・セル・オートマトン<a class="headerlink" href="#term-30" title="Link to this term"></a></dt><dd><p>局所規則をニューラルネットワークで表し、望ましい振る舞いが得られるように機械学習で求めた CA。</p>
+</dd>
+<dt id="term-31">配置<a class="headerlink" href="#term-31" title="Link to this term"></a></dt><dd><p>格子上のすべてのセルに状態を 1 つずつ割り当てたもの。CA のある時刻における全体の状態を表す。</p>
+</dd>
+<dt id="term-32">非同期更新<a class="headerlink" href="#term-32" title="Link to this term"></a></dt><dd><p>全セルを同時に更新する代わりに、セルを 1 つずつ、またはランダムに選んで更新する方式。</p>
+</dd>
+<dt id="term-33">フォン・ノイマン近傍<a class="headerlink" href="#term-33" title="Link to this term"></a></dt><dd><p>2 次元の正方格子で、中心のセルからマンハッタン距離が r 以下のセルからなる近傍。r = 1 のときは中心と上下左右の 5 セル。</p>
+</dd>
+<dt id="term-34">双子<a class="headerlink" href="#term-34" title="Link to this term"></a></dt><dd><p>有限個のセルだけが異なるのに、大域写像によって同じ配置に移る 2 つの配置の組。双子が存在しないことが前単射である。</p>
+</dd>
+<dt id="term-35">マーゴラス近傍<a class="headerlink" href="#term-35" title="Link to this term"></a></dt><dd><p>格子を 2 × 2 のブロックに区切り、区切り方を時刻ごとにずらしながらブロック単位で更新する方式。可逆 CA を作るために使われる。</p>
+</dd>
+<dt id="term-36">ムーア近傍<a class="headerlink" href="#term-36" title="Link to this term"></a></dt><dd><p>2 次元の正方格子で、中心のセルからチェビシェフ距離が r 以下のセルからなる近傍。r = 1 のときは中心と周囲 8 セルの 9 セル。</p>
+</dd>
+<dt id="term-37">メトセラ<a class="headerlink" href="#term-37" title="Link to this term"></a></dt><dd><p>ライフゲームで、小さなパターンから始まり、安定するまでに長い世代を要するパターン。R ペントミノが代表例。</p>
+</dd>
+<dt id="term-38">有限配置<a class="headerlink" href="#term-38" title="Link to this term"></a></dt><dd><p>有限個のセルを除いて、すべてのセルが静止状態である配置。</p>
+</dd>
+<dt id="term-39">ライフゲーム<a class="headerlink" href="#term-39" title="Link to this term"></a></dt><dd><p>コンウェイが 1970 年に考案した 2 次元 CA。2 状態・ムーア近傍の外部総和型 CA で、規則は B3/S23 である。</p>
+</dd>
+<dt id="term-40">λ パラメータ<a class="headerlink" href="#term-40" title="Link to this term"></a></dt><dd><p>局所規則の表のうち、静止状態以外を出力する行の割合。ラングトンが CA の振る舞いを特徴付けるために導入した。</p>
+</dd>
+<dt id="term-41">ラングトンのアリ<a class="headerlink" href="#term-41" title="Link to this term"></a></dt><dd><p>正方格子上を動くアリが、白いセルでは右に、黒いセルでは左に曲がり、セルの色を反転させながら進むモデル。すべて白の盤面から始めると、約 1 万ステップ後にハイウェイと呼ばれる周期的な構造を作り始める。</p>
+</dd>
+<dt id="term-42">量子ドット・セル・オートマトン<a class="headerlink" href="#term-42" title="Link to this term"></a></dt><dd><p>量子ドットに閉じ込めた電子の配置で 0 と 1 を表し、電子間のクーロン力で信号を伝える電子回路の方式。QCA（Quantum-dot Cellular Automata）と略す。</p>
+</dd>
+<dt id="term-43">ルール番号<a class="headerlink" href="#term-43" title="Link to this term"></a></dt><dd><p>基本セル・オートマトンの規則を 0〜255 の整数で表したもの。8 通りの近傍に対する出力を 2 進数として並べて得る。ウルフラム・コードとも呼ぶ。</p>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="implementation.html" class="btn btn-neutral float-left" title="9. Python による実装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-right" title="参考文献" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

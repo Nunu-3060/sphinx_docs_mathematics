@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. 粒子シミュレーション &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="4. 粒子間の相互作用" href="interactions.html" />
+    <link rel="prev" title="2. 数値シミュレーションの基礎" href="numerical_basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. 粒子シミュレーション</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">3.1. 空気抵抗を受けるボール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.2. 床での跳ね返り</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3.3. パーティクルシステム</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3.1. 配列による状態の管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.3.2. ベクトル化した更新処理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#for">3.3.3. for 文との速度比較</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">3.4. まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>粒子シミュレーション</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">3. </span>粒子シミュレーション<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>この章では、大きさを持たない点(質点)として扱える物体の運動を計算する。まず 1 個のボールの運動を空気抵抗や床での跳ね返りを含めて計算し、厳密解と比較する。次に、大量の粒子を NumPy の配列でまとめて扱うパーティクルシステムを作り、Python の for 文と NumPy の配列演算の速度の違いを確かめる。</p>
+<section id="id2">
+<h2><span class="section-number">3.1. </span>空気抵抗を受けるボール<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>重力加速度を <span class="math notranslate nohighlight">\(\mathbf{g} = (0, -9.81)\ \mathrm{m/s^2}\)</span> とし、ボールが速度に比例する空気抵抗 <span class="math notranslate nohighlight">\(-m b \mathbf{v}\)</span> を受けるとする(<span class="math notranslate nohighlight">\(b\)</span> は抵抗の強さを表す係数)。運動方程式は次のようになる。</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\mathbf{v}}{dt} = \mathbf{g} - b\,\mathbf{v}, \qquad \frac{d\mathbf{x}}{dt} = \mathbf{v}\]</div>
+<p>位置と速度を 2 次元のベクトル(要素数 2 の NumPy 配列)で表すと、第 2 章の半陰的オイラー法をそのまま使える。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="k">def</span><span class="w"> </span><span class="nf">acceleration</span><span class="p">(</span><span class="n">vel</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">drag</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">20</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;重力と線形の空気抵抗による加速度 g - b v を返す(b = drag)。&quot;&quot;&quot;</span>
+<span class="linenos">21</span>    <span class="k">return</span> <span class="n">GRAVITY</span> <span class="o">-</span> <span class="n">drag</span> <span class="o">*</span> <span class="n">vel</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">24</span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_flight</span><span class="p">(</span><span class="n">pos0</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">vel0</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">drag</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t_end</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">25</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;半陰的オイラー法で t_end まで計算し、位置の履歴(形状 (n + 1, 2))を返す。&quot;&quot;&quot;</span>
+<span class="linenos">26</span>    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_end</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">27</span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">pos0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">28</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">vel0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">29</span>    <span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="linenos">30</span>    <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
+<span class="linenos">31</span>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<span class="linenos">32</span>        <span class="n">vel</span> <span class="o">=</span> <span class="n">vel</span> <span class="o">+</span> <span class="n">acceleration</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">drag</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">33</span>        <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">34</span>        <span class="n">history</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
+<span class="linenos">35</span>    <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+<p>空気抵抗が速度に比例する場合、この方程式には厳密解がある。<span class="math notranslate nohighlight">\(\mathbf{v}_\infty = \mathbf{g}/b\)</span> を終端速度(十分時間がたったときの速度)とすると、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{v}(t) &amp;= \mathbf{v}_\infty + (\mathbf{v}_0 - \mathbf{v}_\infty) e^{-bt} \\
+\mathbf{x}(t) &amp;= \mathbf{x}_0 + \mathbf{v}_\infty t + (\mathbf{v}_0 - \mathbf{v}_\infty)\frac{1 - e^{-bt}}{b}\end{split}\]</div>
+<p>となる。実装は次のとおりである。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">38</span><span class="k">def</span><span class="w"> </span><span class="nf">analytic_flight</span><span class="p">(</span><span class="n">pos0</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">vel0</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">drag</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">39</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;線形の空気抵抗がある場合の厳密解(drag &gt; 0)を、時刻 t の各点で返す。&quot;&quot;&quot;</span>
+<span class="linenos">40</span>    <span class="n">v_term</span> <span class="o">=</span> <span class="n">GRAVITY</span> <span class="o">/</span> <span class="n">drag</span>  <span class="c1"># 終端速度</span>
+<span class="linenos">41</span>    <span class="n">decay</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">drag</span> <span class="o">*</span> <span class="n">t</span><span class="p">))[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">/</span> <span class="n">drag</span>
+<span class="linenos">42</span>    <span class="k">return</span> <span class="n">pos0</span> <span class="o">+</span> <span class="n">v_term</span> <span class="o">*</span> <span class="n">t</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">vel0</span> <span class="o">-</span> <span class="n">v_term</span><span class="p">)</span> <span class="o">*</span> <span class="n">decay</span>
+</pre></div>
+</div>
+<p>初速度 <span class="math notranslate nohighlight">\((10, 10)\ \mathrm{m/s}\)</span>、時間刻み幅 <span class="math notranslate nohighlight">\(\Delta t = 0.01\ \mathrm{s}\)</span> で計算した結果を<a class="reference internal" href="#fig-projectile"><span class="std std-numref">図 3.1</span></a> の左に示す。空気抵抗が強いほど飛距離が短くなり、軌道は放物線からずれ、落下側が急になる。数値解(実線)と厳密解(破線)は図ではほとんど重なっており、2 秒後までの位置の差の最大値は <span class="math notranslate nohighlight">\(b = 0.5\)</span> で約 0.13 m だった。半陰的オイラー法は 1 次精度なので、<span class="math notranslate nohighlight">\(\Delta t\)</span> を半分にすればこの差もほぼ半分になる。</p>
+<figure class="align-center" id="id8">
+<span id="fig-projectile"></span><img alt="_images/projectile.png" src="_images/projectile.png" />
+<figcaption>
+<p><span class="caption-number">図 3.1 </span><span class="caption-text">空気抵抗の有無による軌道の違い(左)と、床で跳ね返るボールの高さ(右)</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.2. </span>床での跳ね返り<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>床(<span class="math notranslate nohighlight">\(y = 0\)</span>)で跳ね返るボールは、次のように扱える。1 ステップ進めた結果ボールが床より下にめり込んでいたら、</p>
+<ol class="arabic simple">
+<li><p>めり込んだ分だけ床の上へ押し戻す(<span class="math notranslate nohighlight">\(y \leftarrow -y\)</span>)。</p></li>
+<li><p>鉛直方向の速度を反転させ、<strong>反発係数</strong> <span class="math notranslate nohighlight">\(e\)</span> を掛ける(<span class="math notranslate nohighlight">\(v_y \leftarrow -e\, v_y\)</span>)。</p></li>
+</ol>
+<p>反発係数は、衝突後と衝突前の速さの比で、<span class="math notranslate nohighlight">\(e = 1\)</span> なら完全に弾み、<span class="math notranslate nohighlight">\(e = 0\)</span> なら全く弾まない。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">45</span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_bounce</span><span class="p">(</span><span class="n">height</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">restitution</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t_end</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="linenos">46</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;床(y = 0)で跳ね返るボールの高さの履歴を返す。空気抵抗は無視する。&quot;&quot;&quot;</span>
+<span class="linenos">47</span>    <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_end</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">48</span>    <span class="n">y</span><span class="p">,</span> <span class="n">vy</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="mf">0.0</span>
+<span class="linenos">49</span>    <span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">50</span>    <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="linenos">51</span>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+<span class="linenos">52</span>        <span class="n">vy</span> <span class="o">+=</span> <span class="n">GRAVITY</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">53</span>        <span class="n">y</span> <span class="o">+=</span> <span class="n">vy</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">54</span>        <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+<span class="linenos">55</span>            <span class="c1"># 床にめり込んだら床の上へ押し戻し、速度を反転させて反発係数を掛ける</span>
+<span class="linenos">56</span>            <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">y</span>
+<span class="linenos">57</span>            <span class="n">vy</span> <span class="o">=</span> <span class="o">-</span><span class="n">restitution</span> <span class="o">*</span> <span class="n">vy</span>
+<span class="linenos">58</span>        <span class="n">history</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="linenos">59</span>    <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-projectile"><span class="std std-numref">図 3.1</span></a> の右は、高さ 2 m から <span class="math notranslate nohighlight">\(e = 0.8\)</span> で落とした結果である。跳ね返るたびに最高点が <span class="math notranslate nohighlight">\(e^2 = 0.64\)</span> 倍に下がっていく。</p>
+<p>この方法は、衝突が瞬間的に起こるとみなし、衝突の前後で速度を直接書き換えている。単純で扱いやすいが、多数の物体が同時に接触し続ける状況(積み重なった粒子など)にはそのまま使えない。その場合の扱い方は第 4 章で説明する。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.3. </span>パーティクルシステム<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>煙、火花、水しぶきのように、多数の小さな粒子で表現される現象を、コンピューターグラフィックスでは<strong>パーティクルシステム</strong>と呼ばれる仕組みで描くことが多い。各粒子は次のような一生を送る。</p>
+<ol class="arabic simple">
+<li><p><strong>発生</strong>: 発生源から、少しずつ異なる初速度で生まれる。</p></li>
+<li><p><strong>移動</strong>: 重力などの力を受けて動く。床や壁にぶつかれば跳ね返る。</p></li>
+<li><p><strong>消滅</strong>: 寿命が来たら消える。</p></li>
+</ol>
+<p>ここでは、原点から粒子を噴き上げる噴水を作る。粒子どうしは互いに影響しないものとする。</p>
+<section id="id5">
+<h3><span class="section-number">3.3.1. </span>配列による状態の管理<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>粒子 1 個ごとにオブジェクトを作るのではなく、全粒子の位置・速度・経過時間・生存しているかどうかを、それぞれ 1 つの NumPy 配列にまとめて持つ。<span class="math notranslate nohighlight">\(i\)</span> 番目の要素が <span class="math notranslate nohighlight">\(i\)</span> 番目の粒子に対応する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">28</span><span class="nd">@dataclass</span>
+<span class="linenos">29</span><span class="k">class</span><span class="w"> </span><span class="nc">Particles</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;全粒子の状態。i 番目の要素が i 番目の粒子に対応する。&quot;&quot;&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>    <span class="n">pos</span><span class="p">:</span> <span class="n">FloatArray</span>  <span class="c1"># 位置(形状 (N, 2))</span>
+<span class="linenos">33</span>    <span class="n">vel</span><span class="p">:</span> <span class="n">FloatArray</span>  <span class="c1"># 速度(形状 (N, 2))</span>
+<span class="linenos">34</span>    <span class="n">age</span><span class="p">:</span> <span class="n">FloatArray</span>  <span class="c1"># 発生してからの経過時間(形状 (N,))</span>
+<span class="linenos">35</span>    <span class="n">alive</span><span class="p">:</span> <span class="n">BoolArray</span>  <span class="c1"># 生存しているかどうか(形状 (N,))</span>
+</pre></div>
+</div>
+<p>配列の大きさ(粒子数の上限)は最初に決めておき、消滅した粒子の要素を新しい粒子に再利用する。<code class="docutils literal notranslate"><span class="pre">emit</span></code> 関数は、生存していない要素を探して新しい粒子を割り当てる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">48</span><span class="k">def</span><span class="w"> </span><span class="nf">emit</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">49</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;消滅している粒子を最大 count 個選び、原点から上向きに発射する。&quot;&quot;&quot;</span>
+<span class="linenos">50</span>    <span class="n">free</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="o">~</span><span class="n">p</span><span class="o">.</span><span class="n">alive</span><span class="p">)[:</span><span class="n">count</span><span class="p">]</span>
+<span class="linenos">51</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">free</span><span class="o">.</span><span class="n">size</span>
+<span class="linenos">52</span>    <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="mf">90.0</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>  <span class="c1"># 真上から少しばらつかせる</span>
+<span class="linenos">53</span>    <span class="n">speed</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="linenos">54</span>    <span class="n">p</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">free</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">55</span>    <span class="n">p</span><span class="o">.</span><span class="n">vel</span><span class="p">[</span><span class="n">free</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">speed</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="linenos">56</span>    <span class="n">p</span><span class="o">.</span><span class="n">vel</span><span class="p">[</span><span class="n">free</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">speed</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="linenos">57</span>    <span class="n">p</span><span class="o">.</span><span class="n">age</span><span class="p">[</span><span class="n">free</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">58</span>    <span class="n">p</span><span class="o">.</span><span class="n">alive</span><span class="p">[</span><span class="n">free</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">3.3.2. </span>ベクトル化した更新処理<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>全粒子の更新は、for 文を使わずに配列全体への演算として書ける。このような書き方を<strong>ベクトル化</strong>と呼ぶ。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">61</span><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Particles</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">62</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;全粒子を 1 ステップ進める(半陰的オイラー法)。&quot;&quot;&quot;</span>
+<span class="linenos">63</span>    <span class="n">p</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="n">GRAVITY</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">64</span>    <span class="n">p</span><span class="o">.</span><span class="n">pos</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">vel</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">65</span>    <span class="c1"># 床(y = 0)より下に出た粒子を床の上へ戻し、鉛直方向の速度を反転させる</span>
+<span class="linenos">66</span>    <span class="n">hit</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">pos</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span>
+<span class="linenos">67</span>    <span class="n">p</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">hit</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="linenos">68</span>    <span class="n">p</span><span class="o">.</span><span class="n">vel</span><span class="p">[</span><span class="n">hit</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="n">RESTITUTION</span>
+<span class="linenos">69</span>    <span class="n">p</span><span class="o">.</span><span class="n">age</span> <span class="o">+=</span> <span class="n">dt</span>
+<span class="linenos">70</span>    <span class="n">p</span><span class="o">.</span><span class="n">alive</span> <span class="o">&amp;=</span> <span class="n">p</span><span class="o">.</span><span class="n">age</span> <span class="o">&lt;</span> <span class="n">LIFETIME</span>
+</pre></div>
+</div>
+<p>床での跳ね返りは、条件を満たす粒子を選ぶ真偽値の配列であるマスク <code class="docutils literal notranslate"><span class="pre">hit</span></code> を作り、その粒子の要素だけを書き換えることで実現している。寿命の判定も同様である。</p>
+<p>実行結果のスナップショットを<a class="reference internal" href="#fig-fountain"><span class="std std-numref">図 3.2</span></a> に示す。サンプルコード <a class="reference download internal" download="" href="_downloads/5c491b00327a0bd04428b94cb465a6fe/particle_system.py"><code class="xref download docutils literal notranslate"><span class="pre">particle_system.py</span></code></a> を実行すると、噴水がアニメーションで表示される。</p>
+<figure class="align-center" id="id9">
+<span id="fig-fountain"></span><img alt="_images/fountain.png" src="_images/fountain.png" />
+<figcaption>
+<p><span class="caption-number">図 3.2 </span><span class="caption-text">パーティクルシステムによる噴水(色は粒子が発生してからの時間)</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="for">
+<h3><span class="section-number">3.3.3. </span>for 文との速度比較<a class="headerlink" href="#for" title="Link to this heading"></a></h3>
+<p>同じ更新処理を、Python のリストと for 文で 1 粒子ずつ書くと次のようになる(比較のため、寿命の処理は省いている)。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">73</span><span class="k">def</span><span class="w"> </span><span class="nf">update_with_loop</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">vel</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">74</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;update() と同じ計算(寿命の処理は除く)を、for 文で 1 粒子ずつ行う。&quot;&quot;&quot;</span>
+<span class="linenos">75</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)):</span>
+<span class="linenos">76</span>        <span class="n">vel</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">GRAVITY</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">77</span>        <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vel</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">78</span>        <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vel</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">dt</span>
+<span class="linenos">79</span>        <span class="k">if</span> <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+<span class="linenos">80</span>            <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="linenos">81</span>            <span class="n">vel</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="n">RESTITUTION</span>
+</pre></div>
+</div>
+<p>1 ステップの更新にかかった時間を比べた結果を<a class="reference internal" href="#table-vectorize"><span class="std std-numref">表 3.1</span></a> に示す。計算時間は実行する計算機によって変わるが、NumPy 版は for 文版より約 20〜40 倍速い。</p>
+<span id="table-vectorize"></span><table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 3.1 </span><span class="caption-text">1 ステップの更新にかかった時間(筆者の環境での測定値)</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>粒子数</p></th>
+<th class="head"><p>for 文 [ms]</p></th>
+<th class="head"><p>NumPy [ms]</p></th>
+<th class="head"><p>速度比</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1,000</p></td>
+<td><p>0.66</p></td>
+<td><p>0.035</p></td>
+<td><p>約 19 倍</p></td>
+</tr>
+<tr class="row-odd"><td><p>10,000</p></td>
+<td><p>7.2</p></td>
+<td><p>0.20</p></td>
+<td><p>約 36 倍</p></td>
+</tr>
+<tr class="row-even"><td><p>100,000</p></td>
+<td><p>77</p></td>
+<td><p>2.7</p></td>
+<td><p>約 29 倍</p></td>
+</tr>
+</tbody>
+</table>
+<p>Python の for 文では、1 回の繰り返しごとにインタープリターが型を調べ、オブジェクトを生成する処理が発生する。NumPy の配列演算では、同じ型の数値が並んだメモリーに対して、コンパイル済みのループが一度に処理を行う。ただし、要素数が少ないうちは NumPy の関数を呼び出すこと自体にかかる時間が目立つため、差は 1 万個程度以上で 30 倍前後になる。</p>
+<p>本書のサンプルコードは、この考え方に従い、粒子や格子点についての繰り返しをできるだけ配列演算で書く。一方、時間のステップについての繰り返しは、前のステップの結果がないと次のステップを計算できないので、for 文のまま残る。</p>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">3.4. </span>まとめ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>位置と速度を NumPy の配列で表せば、2 次元・3 次元の運動も第 2 章の時間積分法でそのまま計算できる。</p></li>
+<li><p>厳密解のある問題(線形の空気抵抗)で数値解を比較すると、実装と精度を確かめられる。</p></li>
+<li><p>床での跳ね返りは、めり込みの補正と速度の反転で簡単に表現できる。</p></li>
+<li><p>多数の粒子は、属性ごとの配列にまとめ、マスクを使ったベクトル化した処理で更新すると高速に計算できる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="numerical_basics.html" class="btn btn-neutral float-left" title="2. 数値シミュレーションの基礎" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interactions.html" class="btn btn-neutral float-right" title="4. 粒子間の相互作用" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

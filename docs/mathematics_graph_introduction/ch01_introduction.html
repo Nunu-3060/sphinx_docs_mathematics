@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 1 章 グラフ理論とは &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 2 章 グラフの定義と基本用語" href="ch02_basics.html" />
+    <link rel="prev" title="グラフ理論入門" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 1 章 グラフ理論とは</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">ケーニヒスベルクの橋の問題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">グラフで表せるもの</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">本書の進め方と記法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python の環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 1 章 グラフ理論とは</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 1 章 グラフ理論とは<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>鉄道の路線図、インターネットの接続、SNS の友人関係、ソフトウェアのモジュール間の依存関係は、見た目も分野もまったく異なる。しかし、いずれも「もの」と「もの同士のつながり」という共通の構造を持つ。この構造を抽象化した数学的対象が<strong>グラフ</strong>であり、グラフの性質を調べる数学の分野を<strong>グラフ理論</strong>という。本章では、グラフ理論の始まりとされる問題を紹介し、グラフが工学のどのような場面で使われるかを概観する。</p>
+<p>なお、本書でいう「グラフ」は関数のグラフや棒グラフのような図表ではなく、頂点と辺からなる構造のことである。</p>
+<section id="id2">
+<h2>ケーニヒスベルクの橋の問題<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>18 世紀のプロイセンの都市ケーニヒスベルク（現在のロシアのカリーニングラード）には、プレーゲル川が流れ、川の中洲と両岸を結ぶ 7 本の橋が架かっていた。町の人々の間では「7 本の橋をすべてちょうど 1 回ずつ渡って散歩することはできるか」という問題が話題になっていた。</p>
+<p>1736 年、数学者オイラー（Leonhard Euler）はこの問題が不可能であることを示した。オイラーの着眼点は、陸地の形や橋の長さは問題に関係なく、「どの陸地とどの陸地が何本の橋で結ばれているか」だけが重要だという点にある。陸地を点、橋を線で表すと、<a class="reference internal" href="#fig-ch01-konigsberg"><span class="std std-numref">図 1</span></a> のような図になる。</p>
+<figure class="align-center" id="id7">
+<span id="fig-ch01-konigsberg"></span><div class="graphviz"><object data="_images/graphviz-f98a6b219f286eeadf154fe3bd017c680758b7d3.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph konigsberg {
+    layout=neato;
+    node [shape=circle, width=0.45, fixedsize=true, fontsize=14, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    edge [penwidth=1.5];
+    A [pos=&quot;0,2!&quot;];
+    C [pos=&quot;0,0!&quot;];
+    B [pos=&quot;0,-2!&quot;];
+    D [pos=&quot;2.6,0!&quot;];
+    A -- C [label=&quot; 1&quot;]; A -- C [label=&quot; 2&quot;];
+    B -- C [label=&quot; 3&quot;]; B -- C [label=&quot; 4&quot;];
+    A -- D [label=&quot; 5&quot;]; B -- D [label=&quot; 6&quot;]; C -- D [label=&quot; 7&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 1 </span><span class="caption-text">ケーニヒスベルクの橋をグラフで表したもの。A は北岸、B は南岸、C は中洲、D は東の陸地を表す。</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>散歩の途中で、ある陸地を通過するときは「入る橋」と「出る橋」を 1 本ずつ使う。したがって、出発点と到着点を除くすべての陸地では、そこにつながる橋の本数が偶数でなければならない。ところが <a class="reference internal" href="#fig-ch01-konigsberg"><span class="std std-numref">図 1</span></a> では、A に 3 本、B に 3 本、C に 5 本、D に 3 本と、4 つの陸地すべてに奇数本の橋がつながっている。出発点と到着点の 2 か所を除いても奇数の陸地が残るので、そのような散歩は存在しない。</p>
+<p>この議論は、橋の配置を点と線の「つながり方」だけで捉えた点で画期的であった。これがグラフ理論の始まりとされる。この問題は第 7 章で一般化し、どのようなグラフで「すべての線をちょうど 1 回ずつ通る道」が存在するかを完全に特徴付ける。</p>
+</section>
+<section id="id3">
+<h2>グラフで表せるもの<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>グラフは、対象とその間の関係を扱う多くの問題の共通言語になる。<a class="reference internal" href="#table-ch01-applications"><span class="std std-numref">表 1</span></a> に、工学で現れる例を示す。</p>
+<span id="table-ch01-applications"></span><table class="docutils align-default" id="id8">
+<caption><span class="caption-number">表 1 </span><span class="caption-text">グラフで表せる対象の例</span><a class="headerlink" href="#id8" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 26.0%" />
+<col style="width: 26.0%" />
+<col style="width: 26.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>分野</p></th>
+<th class="head"><p>頂点</p></th>
+<th class="head"><p>辺</p></th>
+<th class="head"><p>典型的な問題</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>交通</p></td>
+<td><p>駅・交差点</p></td>
+<td><p>線路・道路</p></td>
+<td><p>最短経路、渋滞の解析</p></td>
+</tr>
+<tr class="row-odd"><td><p>通信ネットワーク</p></td>
+<td><p>ルーター・ホスト</p></td>
+<td><p>通信回線</p></td>
+<td><p>経路制御、障害に強い構成</p></td>
+</tr>
+<tr class="row-even"><td><p>ソフトウェア</p></td>
+<td><p>モジュール・タスク</p></td>
+<td><p>依存関係</p></td>
+<td><p>ビルド順序の決定、循環依存の検出</p></td>
+</tr>
+<tr class="row-odd"><td><p>電気回路</p></td>
+<td><p>節点</p></td>
+<td><p>素子</p></td>
+<td><p>回路方程式の立式</p></td>
+</tr>
+<tr class="row-even"><td><p>SNS</p></td>
+<td><p>ユーザー</p></td>
+<td><p>フォロー・友人関係</p></td>
+<td><p>影響力の大きい人物の発見、コミュニティ検出</p></td>
+</tr>
+<tr class="row-odd"><td><p>Web</p></td>
+<td><p>ページ</p></td>
+<td><p>リンク</p></td>
+<td><p>ページの重要度の評価（PageRank）</p></td>
+</tr>
+<tr class="row-even"><td><p>スケジューリング</p></td>
+<td><p>授業・作業</p></td>
+<td><p>同時に実施できない関係</p></td>
+<td><p>必要な時間枠の数の最小化（彩色）</p></td>
+</tr>
+<tr class="row-odd"><td><p>割り当て</p></td>
+<td><p>作業者・仕事</p></td>
+<td><p>担当できる関係</p></td>
+<td><p>最大数の割り当て（マッチング）</p></td>
+</tr>
+</tbody>
+</table>
+<p>これらの問題は、グラフとして定式化すると、分野によらず同じ理論とアルゴリズムで扱える。たとえばカーナビの経路探索とネットワークのパケット経路制御は、どちらも第 12 章の最短経路問題に帰着する。</p>
+</section>
+<section id="id4">
+<h2>本書の構成<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>本書は次の 4 部からなる。</p>
+<ul class="simple">
+<li><p><strong>第 I 部 基礎</strong>（第 2 章～第 5 章）：グラフの定義と用語、コンピュータ上での表現方法、道と連結性、代表的なグラフの種類を学ぶ。以降のすべての章の土台になる。</p></li>
+<li><p><strong>第 II 部 構造</strong>（第 6 章～第 10 章）：木、オイラー路とハミルトン路、平面グラフ、彩色、マッチングという、グラフ理論の古典的な主題を扱う。</p></li>
+<li><p><strong>第 III 部 アルゴリズム</strong>（第 11 章～第 13 章）：探索、最短経路、ネットワークフローという、実用上特に重要なアルゴリズムを扱う。</p></li>
+<li><p><strong>第 IV 部 発展</strong>（第 14 章～第 16 章）：隣接行列などの行列の固有値を使ってグラフを調べる代数的グラフ理論と、現実の大規模ネットワークの性質を調べるネットワーク科学を紹介する。</p></li>
+</ul>
+<p>第 I 部を読んだ後は、関心のある章から読んでもよい。ただし、第 II 部と第 III 部には互いに参照する箇所がある。たとえば第 6 章のプリム法は第 12 章のダイクストラ法と、第 10 章のマッチングは第 13 章のネットワークフローと関係が深い。</p>
+</section>
+<section id="id5">
+<h2>本書の進め方と記法<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>各章では、まず定義と定理を述べ、図で直観的な意味を説明する。証明は、短く理解の助けになるものは本文に載せ、長いものは主張と意味の説明にとどめる。主要なアルゴリズムは Python で実装し、実行結果を確認する。</p>
+<p>本書で用いる主な記法を <a class="reference internal" href="#table-ch01-notation"><span class="std std-numref">表 2</span></a> に示す。一覧は付録 A にもまとめてある。</p>
+<span id="table-ch01-notation"></span><table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 2 </span><span class="caption-text">本書の主な記法</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>記法</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(G = (V, E)\)</span></p></td>
+<td><p>頂点集合 <span class="math notranslate nohighlight">\(V\)</span>、辺集合 <span class="math notranslate nohighlight">\(E\)</span> のグラフ</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(n = |V|\)</span>, <span class="math notranslate nohighlight">\(m = |E|\)</span></p></td>
+<td><p>頂点数、辺数</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(uv\)</span> または <span class="math notranslate nohighlight">\(\{u, v\}\)</span></p></td>
+<td><p>頂点 <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を結ぶ無向辺</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((u, v)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への有向辺</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\deg(v)\)</span></p></td>
+<td><p>頂点 <span class="math notranslate nohighlight">\(v\)</span> の次数</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(N(v)\)</span></p></td>
+<td><p>頂点 <span class="math notranslate nohighlight">\(v\)</span> に隣接する頂点の集合</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(d(u, v)\)</span></p></td>
+<td><p>頂点 <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> の距離</p></td>
+</tr>
+</tbody>
+</table>
+<p>アルゴリズムの計算量は <span class="math notranslate nohighlight">\(O\)</span> 記法で表す。<span class="math notranslate nohighlight">\(O(f(n))\)</span> は、入力の大きさ <span class="math notranslate nohighlight">\(n\)</span> が十分大きいとき、実行時間が定数倍を除いて <span class="math notranslate nohighlight">\(f(n)\)</span> 以下で抑えられることを意味する。グラフのアルゴリズムでは、頂点数 <span class="math notranslate nohighlight">\(n\)</span> と辺数 <span class="math notranslate nohighlight">\(m\)</span> の両方を使って <span class="math notranslate nohighlight">\(O(n + m)\)</span> のように表すことが多い。</p>
+</section>
+<section id="python">
+<h2>Python の環境<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>本書のサンプルコードは Python 3.10 以降を想定しており、Python 3.14 と NetworkX 3.6 で動作を確認している。標準ライブラリに加えて、次のパッケージを使う。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 3 </span><span class="caption-text">使用するパッケージ</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>パッケージ</p></th>
+<th class="head"><p>用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NetworkX</p></td>
+<td><p>グラフの作成・解析のライブラリ。本書では自作した実装の結果を照合するために使う。</p></td>
+</tr>
+<tr class="row-odd"><td><p>NumPy</p></td>
+<td><p>行列の計算。隣接行列や固有値の計算に使う。</p></td>
+</tr>
+<tr class="row-even"><td><p>SciPy</p></td>
+<td><p>NetworkX の一部の関数（PageRank、全域木の数え上げなど）が内部で使う。</p></td>
+</tr>
+</tbody>
+</table>
+<p>これらは次のコマンドでインストールできる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>pip install networkx numpy scipy
+</pre></div>
+</div>
+<p>NetworkX を使えば、本書で扱うアルゴリズムの多くは 1 行で呼び出せる。それでも本書では、原理を理解するためにアルゴリズムを標準ライブラリだけで実装し、NetworkX は答え合わせに使う。サンプルコードの一覧とダウンロードリンクは付録 D にある。</p>
+<p>NetworkX でグラフを作り、頂点と辺の数を調べる最小限の例を次に示す。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>  <span class="c1"># 無向グラフ</span>
+<span class="linenos">4</span><span class="n">g</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">)])</span>
+<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">())</span>  <span class="c1"># 4 4</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)))</span>  <span class="c1"># [&#39;B&#39;, &#39;A&#39;, &#39;D&#39;]</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">degree</span><span class="p">()))</span>  <span class="c1"># {&#39;A&#39;: 2, &#39;B&#39;: 2, &#39;C&#39;: 3, &#39;D&#39;: 1}</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>まとめ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>グラフは「もの」と「つながり」を抽象化した構造であり、交通、通信、ソフトウェア、SNS など多くの分野に現れる。</p></li>
+<li><p>グラフ理論は、オイラーによるケーニヒスベルクの橋の問題の解決に始まる。</p></li>
+<li><p>本書では、定義と定理を図で説明し、アルゴリズムを Python で実装して確かめる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="グラフ理論入門" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch02_basics.html" class="btn btn-neutral float-right" title="第 2 章 グラフの定義と基本用語" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

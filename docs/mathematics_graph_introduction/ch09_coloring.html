@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 9 章 グラフ彩色 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 10 章 マッチング" href="ch10_matching.html" />
+    <link rel="prev" title="第 8 章 平面グラフ" href="ch08_planar.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 9 章 グラフ彩色</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">頂点彩色と彩色数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">彩色数の下界と上界</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">貪欲彩色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">彩色数の計算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">平面的グラフの彩色と四色定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">辺彩色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">彩色多項式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">彩色の応用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 9 章 グラフ彩色</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 9 章 グラフ彩色<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>大学の期末試験の日程を組むとき、同じ学生が受ける 2 つの科目は同じ時間帯に置けない。科目を頂点とし、共通の受験者がいる科目同士を辺で結ぶと、「隣接する頂点に異なる時間帯を割り当てる」問題になる。時間帯を色とみなせば、これはグラフの頂点を色分けする問題である。本章では、このグラフ彩色の理論とアルゴリズムを学ぶ。</p>
+<section id="id2">
+<h2>頂点彩色と彩色数<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 9.1（彩色・彩色数）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> の各頂点に色を 1 つずつ割り当て、隣接する頂点が異なる色になるようにしたものを <span class="math notranslate nohighlight">\(G\)</span> の<strong>彩色</strong>（正確には頂点彩色）という。<span class="math notranslate nohighlight">\(k\)</span> 色以下で彩色できるとき <span class="math notranslate nohighlight">\(G\)</span> は <strong>k-彩色可能</strong>であるという。<span class="math notranslate nohighlight">\(G\)</span> を彩色するのに必要な色の最小数を <span class="math notranslate nohighlight">\(G\)</span> の<strong>彩色数</strong>といい、<span class="math notranslate nohighlight">\(\chi(G)\)</span> と書く。</p>
+</div>
+<p>色は 1, 2, …… や 0, 1, …… の番号で表すことが多い。同じ色の頂点の集合は、どの 2 頂点も隣接しないので独立集合（第 5 章）である。つまり <span class="math notranslate nohighlight">\(k\)</span>-彩色とは、頂点集合を <span class="math notranslate nohighlight">\(k\)</span> 個の独立集合に分割することである。</p>
+<p>いくつかのグラフの彩色数はすぐに分かる。</p>
+<ul class="simple">
+<li><p>完全グラフ：<span class="math notranslate nohighlight">\(\chi(K_n) = n\)</span>。すべての頂点が互いに隣接しているからである。</p></li>
+<li><p>二部グラフ：辺を 1 本以上持てば <span class="math notranslate nohighlight">\(\chi(G) = 2\)</span>。定義から 2 色で塗れる。逆に 2 色で塗れれば二部グラフである。</p></li>
+<li><p>閉路グラフ：<span class="math notranslate nohighlight">\(n\)</span> が偶数なら <span class="math notranslate nohighlight">\(\chi(C_n) = 2\)</span>、奇数なら <span class="math notranslate nohighlight">\(\chi(C_n) = 3\)</span>。奇数長の閉路は二部グラフでない（定理 5.1）。</p></li>
+<li><p>木：頂点が 2 個以上あれば <span class="math notranslate nohighlight">\(\chi = 2\)</span>。木は二部グラフである。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>彩色数の下界と上界<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>彩色数を正確に求めるのは一般に難しいが、上下から評価することはできる。</p>
+<p><strong>下界</strong>：<span class="math notranslate nohighlight">\(G\)</span> の最大のクリーク（完全部分グラフ）の頂点数を<strong>クリーク数</strong> <span class="math notranslate nohighlight">\(\omega(G)\)</span>、最大の独立集合の大きさを<strong>独立数</strong> <span class="math notranslate nohighlight">\(\alpha(G)\)</span> という。クリークの頂点はすべて異なる色が必要なので <span class="math notranslate nohighlight">\(\chi(G) \ge \omega(G)\)</span> である。また、各色の頂点は独立集合で高々 <span class="math notranslate nohighlight">\(\alpha(G)\)</span> 個なので、<span class="math notranslate nohighlight">\(\chi(G) \ge n / \alpha(G)\)</span> である。</p>
+<p>ただし、<span class="math notranslate nohighlight">\(\chi(G)\)</span> は <span class="math notranslate nohighlight">\(\omega(G)\)</span> よりずっと大きくなりうる。三角形を含まない（<span class="math notranslate nohighlight">\(\omega = 2\)</span>）のに彩色数がいくらでも大きいグラフが存在することが知られている。ピーターセングラフは三角形を含まないが、5-閉路を含むので 2 色では塗れない。</p>
+<p><strong>上界</strong>：次の貪欲彩色の議論から、<span class="math notranslate nohighlight">\(\chi(G) \le \Delta(G) + 1\)</span> が成り立つ。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 9.1</p>
+<p>任意のグラフ <span class="math notranslate nohighlight">\(G\)</span> について、<span class="math notranslate nohighlight">\(\chi(G) \le \Delta(G) + 1\)</span> である。</p>
+</div>
+<p><strong>証明</strong>：頂点を任意の順に 1 つずつ塗る。各頂点を塗るとき、すでに塗られた隣接頂点は高々 <span class="math notranslate nohighlight">\(\Delta(G)\)</span> 個なので、それらが使っていない色が <span class="math notranslate nohighlight">\(\Delta(G) + 1\)</span> 色の中に必ず残っている。□</p>
+<p>連結グラフでこの上界が等号になるのは、完全グラフと奇数長の閉路の場合だけであることが知られている。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 9.2（ブルックスの定理）</p>
+<p>連結グラフ <span class="math notranslate nohighlight">\(G\)</span> が完全グラフでも奇数長の閉路でもなければ、<span class="math notranslate nohighlight">\(\chi(G) \le \Delta(G)\)</span> である。</p>
+</div>
+<p>たとえばピーターセングラフは <span class="math notranslate nohighlight">\(\Delta = 3\)</span> で完全グラフでも閉路でもないので、ブルックスの定理から <span class="math notranslate nohighlight">\(\chi \le 3\)</span> が分かる。5-閉路を含むことと合わせて <span class="math notranslate nohighlight">\(\chi = 3\)</span> が確定する。</p>
+</section>
+<section id="id4">
+<h2>貪欲彩色<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>定理 9.1 の証明で使った方法を<strong>貪欲彩色</strong>という。頂点を決まった順に調べ、隣接頂点が使っていない最小番号の色を割り当てる（サンプルコード <code class="docutils literal notranslate"><span class="pre">coloring.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 14 </span><span class="caption-text">貪欲彩色</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">greedy_coloring</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;与えられた順に、隣接頂点が使っていない最小の色 (0, 1, 2, ...) を割り当てる。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">color</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 4</span>    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">used</span> <span class="o">=</span> <span class="p">{</span><span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">color</span><span class="p">}</span>
+<span class="linenos"> 6</span>        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 7</span>        <span class="k">while</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">used</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos"> 9</span>        <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">color</span>
+</pre></div>
+</div>
+</div>
+<p>貪欲彩色は <span class="math notranslate nohighlight">\(O(n + m)\)</span> 時間で動作するが、使う色の数は頂点の順序に大きく依存する。<a class="reference internal" href="#fig-ch09-crown"><span class="std std-numref">図 18</span></a> の<strong>王冠グラフ</strong>は、上段の頂点 <span class="math notranslate nohighlight">\(a_i\)</span> と下段の頂点 <span class="math notranslate nohighlight">\(b_j\)</span> を <span class="math notranslate nohighlight">\(i \ne j\)</span> のときに結んだ二部グラフであり、2 色で塗れる。ところが <span class="math notranslate nohighlight">\(a_1, b_1, a_2, b_2, \ldots\)</span> の順に貪欲彩色を行うと、<span class="math notranslate nohighlight">\(a_i\)</span> と <span class="math notranslate nohighlight">\(b_i\)</span> はどちらも色 <span class="math notranslate nohighlight">\(i\)</span> で塗られ、全部で <span class="math notranslate nohighlight">\(n\)</span> 色を使ってしまう。</p>
+<figure class="align-center" id="id12">
+<span id="fig-ch09-crown"></span><div class="graphviz"><object data="_images/graphviz-116b36f89b48c10f6c190d886d4e1abd75583034.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=12, style=filled];
+    a1 [pos=&quot;0,1.3!&quot;, fillcolor=&quot;#9ecae1&quot;]; a2 [pos=&quot;1.3,1.3!&quot;, fillcolor=&quot;#fdae6b&quot;]; a3 [pos=&quot;2.6,1.3!&quot;, fillcolor=&quot;#a1d99b&quot;]; a4 [pos=&quot;3.9,1.3!&quot;, fillcolor=&quot;#bcbddc&quot;];
+    b1 [pos=&quot;0,0!&quot;, fillcolor=&quot;#9ecae1&quot;]; b2 [pos=&quot;1.3,0!&quot;, fillcolor=&quot;#fdae6b&quot;]; b3 [pos=&quot;2.6,0!&quot;, fillcolor=&quot;#a1d99b&quot;]; b4 [pos=&quot;3.9,0!&quot;, fillcolor=&quot;#bcbddc&quot;];
+    a1 -- b2; a1 -- b3; a1 -- b4; a2 -- b1; a2 -- b3; a2 -- b4;
+    a3 -- b1; a3 -- b2; a3 -- b4; a4 -- b1; a4 -- b2; a4 -- b3;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 18 </span><span class="caption-text">王冠グラフ（n = 4）。a1, b1, a2, b2, …… の順に貪欲彩色すると 4 色を使う。</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>王冠グラフ (悪い順序): 4 色
+<span class="linenos">2</span>王冠グラフ (良い順序): 2 色
+</pre></div>
+</div>
+<p>一方、上段をすべて塗ってから下段を塗れば 2 色で済む。実は、どんなグラフにも「その順序で貪欲彩色すると <span class="math notranslate nohighlight">\(\chi(G)\)</span> 色で塗れる」順序が存在する（最適な彩色で色 1 の頂点、色 2 の頂点、…… の順に並べればよい）。しかし、その順序を見つけることは彩色数を求めることと同じくらい難しい。</p>
+<p>実用上は、次数の大きい頂点ほど制約が厳しいので先に塗る<strong>ウェルシュ・パウエル法</strong>（largest first）などの経験的な順序がよく使われる。NetworkX の <code class="docutils literal notranslate"><span class="pre">nx.greedy_color</span></code> では、<code class="docutils literal notranslate"><span class="pre">strategy</span></code> 引数で順序の決め方を選べる。</p>
+</section>
+<section id="id5">
+<h2>彩色数の計算<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>グラフが 3 色で彩色可能かを判定する問題は NP 完全であることが知られている。したがって、彩色数を求める効率的なアルゴリズムは期待できない。小さなグラフなら、<span class="math notranslate nohighlight">\(k = 1, 2, \ldots\)</span> について <span class="math notranslate nohighlight">\(k\)</span> 色で塗れるかをバックトラックで調べればよい。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 15 </span><span class="caption-text">バックトラックによる k-彩色可能性の判定</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">is_colorable</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;k 色で彩色できるかをバックトラックで判定する。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]))</span>  <span class="c1"># 次数の大きい頂点から決める</span>
+<span class="linenos"> 4</span>    <span class="n">color</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="k">def</span><span class="w"> </span><span class="nf">assign</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos"> 9</span>        <span class="n">v</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">10</span>        <span class="n">used</span> <span class="o">=</span> <span class="p">{</span><span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">color</span><span class="p">}</span>
+<span class="linenos">11</span>        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<span class="linenos">12</span>            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">used</span><span class="p">:</span>
+<span class="linenos">13</span>                <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+<span class="linenos">14</span>                <span class="k">if</span> <span class="n">assign</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">15</span>                    <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">16</span>                <span class="k">del</span> <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+<span class="linenos">17</span>        <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="k">return</span> <span class="n">assign</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>ピーターセングラフに適用すると、彩色数が 3 であることが確かめられる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>ピーターセングラフの彩色数: 3
+<span class="linenos">2</span>NetworkX の貪欲彩色 (largest_first): 3 色
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>平面的グラフの彩色と四色定理<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>地図の国々を、国境を接する国が異なる色になるように塗り分ける問題を考える。国を頂点とし、国境を接する国同士を辺で結ぶと、平面的グラフの彩色問題になる（このグラフは第 8 章の双対グラフにあたる）。「どんな地図も 4 色で塗り分けられるか」という問いは 1852 年に提起され、長く未解決であった。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 9.3（四色定理）</p>
+<p>任意の平面的グラフは 4-彩色可能である。</p>
+</div>
+<p>四色定理は 1976 年にアッペルとハーケンによって証明された。証明は、約 2000 個の「避けられない配置」の一つ一つについて、それを含む最小の反例が存在しないことをコンピュータで検証するものであり、コンピュータを本質的に用いた初めての大定理の証明として議論を呼んだ。現在では、より整理された証明が知られており、定理証明支援系 Coq による形式的な検証も行われている。</p>
+<p>4 色の証明は難しいが、6 色なら簡単に示せる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 9.4（六色定理）</p>
+<p>任意の平面的グラフは 6-彩色可能である。</p>
+</div>
+<p><strong>証明</strong>：頂点数に関する帰納法で示す。頂点数が 6 以下なら明らかである。平面的グラフ <span class="math notranslate nohighlight">\(G\)</span> には次数 5 以下の頂点 <span class="math notranslate nohighlight">\(v\)</span> が存在する（第 8 章）。<span class="math notranslate nohighlight">\(G - v\)</span> も平面的なので、帰納法の仮定により 6 色で塗れる。<span class="math notranslate nohighlight">\(v\)</span> の隣接頂点は高々 5 個なので、それらが使っていない色が 6 色の中に残っており、それで <span class="math notranslate nohighlight">\(v\)</span> を塗ればよい。□</p>
+<p>この議論をもう少し工夫すると五色定理が証明できるが、ここでは省略する。</p>
+</section>
+<section id="id7">
+<h2>辺彩色<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>辺に色を割り当て、端点を共有する 2 辺が異なる色になるようにしたものを<strong>辺彩色</strong>という。必要な色の最小数を<strong>辺彩色数</strong>といい、<span class="math notranslate nohighlight">\(\chi'(G)\)</span> と書く。辺彩色は、線グラフ <span class="math notranslate nohighlight">\(L(G)\)</span> の頂点彩色と同じである（第 5 章）。</p>
+<p>1 つの頂点に接続する辺はすべて異なる色が必要なので、<span class="math notranslate nohighlight">\(\chi'(G) \ge \Delta(G)\)</span> である。頂点彩色とは異なり、辺彩色数はほぼ <span class="math notranslate nohighlight">\(\Delta(G)\)</span> で決まる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 9.5（ヴィジングの定理）</p>
+<p>任意の単純グラフ <span class="math notranslate nohighlight">\(G\)</span> について、<span class="math notranslate nohighlight">\(\Delta(G) \le \chi'(G) \le \Delta(G) + 1\)</span> である。</p>
+</div>
+<p>さらに、二部グラフでは <span class="math notranslate nohighlight">\(\chi'(G) = \Delta(G)\)</span> が成り立つ（ケーニッヒの辺彩色定理）。それでも、一般のグラフで <span class="math notranslate nohighlight">\(\chi'(G)\)</span> が <span class="math notranslate nohighlight">\(\Delta(G)\)</span> と <span class="math notranslate nohighlight">\(\Delta(G) + 1\)</span> のどちらであるかを判定する問題は NP 完全である。</p>
+<p>辺彩色の典型的な応用は、総当たり戦の日程作成である。<span class="math notranslate nohighlight">\(n\)</span> チームの総当たり戦は完全グラフ <span class="math notranslate nohighlight">\(K_n\)</span> の辺（試合）で表され、同じ色の辺は 1 チームが 1 日に 1 試合しかしない「同じ日に行える試合」になる。<span class="math notranslate nohighlight">\(n\)</span> が偶数なら <span class="math notranslate nohighlight">\(\chi'(K_n) = n - 1\)</span> なので、<span class="math notranslate nohighlight">\(n - 1\)</span> 日で全試合を終えられる。</p>
+</section>
+<section id="id8">
+<h2>彩色多項式<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> を <span class="math notranslate nohighlight">\(k\)</span> 色以下で彩色する方法の数を <span class="math notranslate nohighlight">\(P(G, k)\)</span> と書く。たとえば完全グラフでは、1 つ目の頂点に <span class="math notranslate nohighlight">\(k\)</span> 通り、2 つ目に <span class="math notranslate nohighlight">\(k - 1\)</span> 通り、…… と塗れるので、次のようになる。</p>
+<div class="math notranslate nohighlight">
+\[P(K_n, k) = k(k-1)(k-2) \cdots (k-n+1)\]</div>
+<p><span class="math notranslate nohighlight">\(n\)</span> 頂点の木では、根を <span class="math notranslate nohighlight">\(k\)</span> 通りに塗った後、各頂点を親と異なる <span class="math notranslate nohighlight">\(k - 1\)</span> 通りに塗れるので、<span class="math notranslate nohighlight">\(P(T, k) = k(k-1)^{n-1}\)</span> である。</p>
+<p>一般のグラフでは、次の<strong>削除縮約公式</strong>が成り立つ。辺 <span class="math notranslate nohighlight">\(e = uv\)</span> について、<span class="math notranslate nohighlight">\(G - e\)</span> は <span class="math notranslate nohighlight">\(e\)</span> を削除したグラフ、<span class="math notranslate nohighlight">\(G / e\)</span> は <span class="math notranslate nohighlight">\(e\)</span> を縮約した（<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を 1 つの頂点にまとめた）グラフである。</p>
+<div class="math notranslate nohighlight">
+\[P(G, k) = P(G - e, k) - P(G / e, k)\]</div>
+<p><span class="math notranslate nohighlight">\(G - e\)</span> の彩色は、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> が異なる色の彩色（これが <span class="math notranslate nohighlight">\(G\)</span> の彩色）と、同じ色の彩色（これは <span class="math notranslate nohighlight">\(G / e\)</span> の彩色と 1 対 1 に対応する）に分けられることから分かる。この公式を辺がなくなるまで繰り返し適用すると、<span class="math notranslate nohighlight">\(P(G, k)\)</span> は <span class="math notranslate nohighlight">\(k\)</span> の多項式であることが分かる。これを<strong>彩色多項式</strong>という。彩色数は <span class="math notranslate nohighlight">\(P(G, k) &gt; 0\)</span> となる最小の正整数 <span class="math notranslate nohighlight">\(k\)</span> である。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 16 </span><span class="caption-text">削除縮約公式による彩色多項式の計算</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">chromatic_polynomial</span><span class="p">(</span><span class="n">edges</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;削除縮約公式 P(G) = P(G - e) - P(G / e) で彩色多項式の係数を求める。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    戻り値の i 番目の要素が k^i の係数である。辺を持たない n 頂点のグラフは k^n。</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 8</span>    <span class="n">e</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
+<span class="linenos"> 9</span>    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="n">deleted</span> <span class="o">=</span> <span class="n">edges</span> <span class="o">-</span> <span class="p">{</span><span class="n">e</span><span class="p">}</span>
+<span class="linenos">11</span>    <span class="c1"># 縮約: v を u に併合する。生じる自己ループは e 自身なので除かれ、多重辺は集合なので 1 本になる</span>
+<span class="linenos">12</span>    <span class="n">contracted</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">u</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">v</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">deleted</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="n">p1</span> <span class="o">=</span> <span class="n">chromatic_polynomial</span><span class="p">(</span><span class="n">deleted</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="n">p2</span> <span class="o">=</span> <span class="n">chromatic_polynomial</span><span class="p">(</span><span class="n">contracted</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>C4 の彩色多項式: k^4 - 4k^3 + 6k^2 - 3k
+<span class="linenos">2</span>K4 の彩色多項式: k^4 - 6k^3 + 11k^2 - 6k
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(C_4\)</span> の結果は <span class="math notranslate nohighlight">\((k-1)^4 + (k-1)\)</span> に等しく、<span class="math notranslate nohighlight">\(K_4\)</span> の結果は <span class="math notranslate nohighlight">\(k(k-1)(k-2)(k-3)\)</span> に等しい。<span class="math notranslate nohighlight">\(k = 2\)</span> を代入すると、<span class="math notranslate nohighlight">\(C_4\)</span> は 2 通り、<span class="math notranslate nohighlight">\(K_4\)</span> は 0 通りとなり、彩色数がそれぞれ 2 と 4 であることと合っている。削除縮約公式は辺の数に関して指数時間かかるので、大きなグラフには使えない。</p>
+</section>
+<section id="id9">
+<h2>彩色の応用<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>グラフ彩色は、「衝突するものを別のグループに分ける」問題に広く使われる。</p>
+<table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 9 </span><span class="caption-text">グラフ彩色の応用例</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 26.0%" />
+<col style="width: 26.0%" />
+<col style="width: 26.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>応用</p></th>
+<th class="head"><p>頂点</p></th>
+<th class="head"><p>辺</p></th>
+<th class="head"><p>色</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>試験の日程</p></td>
+<td><p>科目</p></td>
+<td><p>共通の受験者がいる</p></td>
+<td><p>時間帯</p></td>
+</tr>
+<tr class="row-odd"><td><p>レジスタ割り当て</p></td>
+<td><p>変数</p></td>
+<td><p>同時に生存している</p></td>
+<td><p>CPU のレジスタ</p></td>
+</tr>
+<tr class="row-even"><td><p>周波数の割り当て</p></td>
+<td><p>無線局</p></td>
+<td><p>電波が干渉する</p></td>
+<td><p>周波数</p></td>
+</tr>
+<tr class="row-odd"><td><p>数独</p></td>
+<td><p>マス</p></td>
+<td><p>同じ行・列・ブロック</p></td>
+<td><p>数字 1～9</p></td>
+</tr>
+</tbody>
+</table>
+<p>コンパイラのレジスタ割り当てでは、同時に値を保持する必要がある変数同士を結んだ<strong>干渉グラフ</strong>を作り、レジスタの数を色の数として彩色する。彩色できない場合は、一部の変数をメモリに退避させる。</p>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>頂点彩色は頂点集合を独立集合に分割することであり、必要な色の最小数を彩色数 <span class="math notranslate nohighlight">\(\chi(G)\)</span> という。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega(G) \le \chi(G) \le \Delta(G) + 1\)</span> が成り立ち、ブルックスの定理により完全グラフと奇数長の閉路を除けば <span class="math notranslate nohighlight">\(\chi(G) \le \Delta(G)\)</span> である。</p></li>
+<li><p>貪欲彩色は高速だが、結果は頂点の順序に依存する。彩色数を正確に求める問題は NP 困難である。</p></li>
+<li><p>平面的グラフは 4 色で彩色できる（四色定理）。6 色で十分であることは簡単に証明できる。</p></li>
+<li><p>辺彩色数は <span class="math notranslate nohighlight">\(\Delta(G)\)</span> または <span class="math notranslate nohighlight">\(\Delta(G) + 1\)</span> である（ヴィジングの定理）。</p></li>
+<li><p>彩色の方法の数は彩色多項式で表され、削除縮約公式で計算できる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch08_planar.html" class="btn btn-neutral float-left" title="第 8 章 平面グラフ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch10_matching.html" class="btn btn-neutral float-right" title="第 10 章 マッチング" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

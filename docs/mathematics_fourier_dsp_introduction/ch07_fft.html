@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 7 章 高速フーリエ変換 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 8 章 スペクトル解析" href="ch08_spectrum_analysis.html" />
+    <link rel="prev" title="第 6 章 離散時間フーリエ変換と離散フーリエ変換" href="ch06_dtft_dft.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 7 章 高速フーリエ変換</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dft">DFT の計算量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cooley-tukey">Cooley-Tukey 法の原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fft">FFT の実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numpy-fft">NumPy の FFT 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 7 章 高速フーリエ変換</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 7 章 高速フーリエ変換<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>DFT を定義どおりに計算すると、データの長さ <span class="math notranslate nohighlight">\(N\)</span> の 2 乗に比例する計算量が必要になる。 <a class="reference internal" href="appendix_a_glossary.html#term-FFT"><span class="xref std std-term">FFT</span></a>（fast Fourier transform、高速フーリエ変換）は、DFT と同じ結果を、<span class="math notranslate nohighlight">\(N \log_2 N\)</span> に比例する計算量で求めるアルゴリズムである。FFT の発見により、DFT は実用的な道具になった。この章では、最も基本的な FFT である基数 2 の Cooley-Tukey 法を説明し、NumPy の FFT 関数の使い方をまとめる。</p>
+<section id="dft">
+<h2>DFT の計算量<a class="headerlink" href="#dft" title="Link to this heading"></a></h2>
+<p>DFT の式 <a class="reference internal" href="ch06_dtft_dft.html#equation-eq-dft">(24)</a> では、1 つの <span class="math notranslate nohighlight">\(X[k]\)</span> を求めるのに <span class="math notranslate nohighlight">\(N\)</span> 回の複素数の掛け算が必要であり、<span class="math notranslate nohighlight">\(N\)</span> 個の <span class="math notranslate nohighlight">\(X[k]\)</span> をすべて求めるには <span class="math notranslate nohighlight">\(N^2\)</span> 回の掛け算が必要である。<span class="math notranslate nohighlight">\(N = 2^{20} \approx 10^6\)</span>（標本化周波数 44.1 kHz の音声で約 24 秒）なら、約 <span class="math notranslate nohighlight">\(10^{12}\)</span> 回になる。1 秒間に <span class="math notranslate nohighlight">\(10^9\)</span> 回の掛け算ができる計算機でも、約 17 分かかる。</p>
+<p>FFT を使うと、この計算が約 <span class="math notranslate nohighlight">\(10^7\)</span> 回の掛け算で済み、1 秒もかからない。FFT のアイデアはガウスにまでさかのぼるが、1965 年にクーリー（J. W. Cooley）とテューキー（J. W. Tukey）が計算機向けのアルゴリズムとして発表し、広く使われるようになった。</p>
+</section>
+<section id="cooley-tukey">
+<h2>Cooley-Tukey 法の原理<a class="headerlink" href="#cooley-tukey" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(N\)</span> を 2 のべき乗とする。DFT の和を、<span class="math notranslate nohighlight">\(n\)</span> が偶数の項と奇数の項に分ける。<span class="math notranslate nohighlight">\(W_N = e^{-j2\pi/N}\)</span> と書くと、</p>
+<div class="math notranslate nohighlight">
+\[X[k] = \sum_{m=0}^{N/2-1} x[2m]\, W_N^{2mk} + \sum_{m=0}^{N/2-1} x[2m+1]\, W_N^{(2m+1)k}\]</div>
+<p>である。<span class="math notranslate nohighlight">\(W_N^2 = e^{-j2\pi/(N/2)} = W_{N/2}\)</span> なので、</p>
+<div class="math notranslate nohighlight">
+\[X[k] = \underbrace{\sum_{m=0}^{N/2-1} x[2m]\, W_{N/2}^{mk}}_{E[k]} + W_N^k \underbrace{\sum_{m=0}^{N/2-1} x[2m+1]\, W_{N/2}^{mk}}_{O[k]}\]</div>
+<p>と書ける。<span class="math notranslate nohighlight">\(E[k]\)</span> は偶数番目の標本 <span class="math notranslate nohighlight">\(x[0], x[2], \ldots\)</span> の長さ <span class="math notranslate nohighlight">\(N/2\)</span> の DFT、<span class="math notranslate nohighlight">\(O[k]\)</span> は奇数番目の標本 <span class="math notranslate nohighlight">\(x[1], x[3], \ldots\)</span> の長さ <span class="math notranslate nohighlight">\(N/2\)</span> の DFT である。つまり、長さ <span class="math notranslate nohighlight">\(N\)</span> の DFT は、長さ <span class="math notranslate nohighlight">\(N/2\)</span> の 2 つの DFT から組み立てられる。</p>
+<p>さらに、<span class="math notranslate nohighlight">\(E[k]\)</span> と <span class="math notranslate nohighlight">\(O[k]\)</span> は <span class="math notranslate nohighlight">\(k\)</span> について周期 <span class="math notranslate nohighlight">\(N/2\)</span> であり、<span class="math notranslate nohighlight">\(W_N^{k + N/2} = W_N^k e^{-j\pi} = -W_N^k\)</span> なので、<span class="math notranslate nohighlight">\(k = 0, 1, \ldots, N/2 - 1\)</span> について</p>
+<div class="math notranslate nohighlight" id="equation-eq-butterfly">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eq-butterfly" title="Link to this equation"></a></span>\[X[k] = E[k] + W_N^k\, O[k], \qquad X[k + N/2] = E[k] - W_N^k\, O[k]\]</div>
+<p>が成り立つ。1 回の掛け算 <span class="math notranslate nohighlight">\(W_N^k O[k]\)</span> の結果を、足し算と引き算の 2 か所で使い回せる。この計算を<a class="reference internal" href="appendix_a_glossary.html#term-50"><span class="xref std std-term">バタフライ演算</span></a>といい、<span class="math notranslate nohighlight">\(W_N^k\)</span> を<a class="reference internal" href="appendix_a_glossary.html#term-11"><span class="xref std std-term">回転因子</span></a>という。<a class="reference internal" href="#fig-ch07-butterfly"><span class="std std-numref">図 24</span></a> は、バタフライ演算を図で表したものである。交差する線の形が蝶に似ていることから、この名前がある。</p>
+<figure class="align-default" id="id3">
+<span id="fig-ch07-butterfly"></span><div class="graphviz"><object data="_images/graphviz-a4c225fc19f7e16ddff19fac6b5c4f7b86f10e81.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">E[k] と O[k] を入力とし、O[k] に回転因子を掛けたものを E[k] に足した結果と引いた結果を出力する図</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 24 </span><span class="caption-text">バタフライ演算</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>この分割を、長さ <span class="math notranslate nohighlight">\(N/2\)</span> の DFT にも同じように適用し、長さが 1 になるまで繰り返す（長さ 1 の DFT は、その値自身である）。分割の段数は <span class="math notranslate nohighlight">\(\log_2 N\)</span> であり、各段で <span class="math notranslate nohighlight">\(N/2\)</span> 回のバタフライ演算（掛け算 <span class="math notranslate nohighlight">\(N/2\)</span> 回）を行うので、全体の掛け算の回数は</p>
+<div class="math notranslate nohighlight">
+\[\frac{N}{2}\log_2 N\]</div>
+<p>になる。<a class="reference internal" href="#fig-ch07-butterfly8"><span class="std std-numref">図 25</span></a> は、<span class="math notranslate nohighlight">\(N = 8\)</span> の場合の計算の流れ（信号流れ図）である。入力をあらかじめ偶数番目と奇数番目に分け続けた順（ビット反転の順：<span class="math notranslate nohighlight">\(x[0], x[4], x[2], x[6], x[1], x[5], x[3], x[7]\)</span>）に並べると、長さ 2、4、8 の DFT を順に組み立てる 3 段のバタフライ演算で、出力が <span class="math notranslate nohighlight">\(X[0]\)</span> から <span class="math notranslate nohighlight">\(X[7]\)</span> の順に得られる。入力の番号を 3 ビットの 2 進数で表すと、例えば <span class="math notranslate nohighlight">\(x[1]\)</span>（001）は、ビットの並びを逆にした 100、つまり 4 番目の位置に来る。</p>
+<figure class="align-default" id="id4">
+<span id="fig-ch07-butterfly8"></span><img alt="N = 8 の FFT の信号流れ図。ビット反転した順の入力から、3 段のバタフライ演算を経て、X[0] から X[7] が順に得られる" src="_images/fig_ch07_butterfly8.svg" />
+<figcaption>
+<p><span class="caption-number">図 25 </span><span class="caption-text"><span class="math notranslate nohighlight">\(N = 8\)</span> の基数 2・時間間引き FFT の信号流れ図（各バタフライの下側の入力に回転因子を掛け、下側の出力では引き算をする）</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>このように、入力の時間方向の標本を偶数と奇数に分けていく方法を、時間間引き（decimation in time）という。出力の周波数方向で分ける周波数間引き（decimation in frequency）という方法もあり、計算量は同じである。</p>
+</section>
+<section id="fft">
+<h2>FFT の実装<a class="headerlink" href="#fft" title="Link to this heading"></a></h2>
+<p>式 <a class="reference internal" href="#equation-eq-butterfly">(26)</a> をそのまま再帰で書くと、FFT は数行で実装できる。</p>
+<div class="literal-block-wrapper docutils container" id="list-ch07-fft">
+<div class="code-block-caption"><span class="caption-number">リスト 14 </span><span class="caption-text">fft_radix2.py の fft_radix2()</span><a class="headerlink" href="#list-ch07-fft" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">29</span><span class="k">def</span><span class="w"> </span><span class="nf">fft_radix2</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">]:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;基数 2 の FFT を再帰で計算する. x の長さは 2 のべき乗でなければならない.&quot;&quot;&quot;</span>
+<span class="linenos">31</span>    <span class="n">n_points</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="k">if</span> <span class="n">n_points</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">33</span>        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">34</span>    <span class="k">if</span> <span class="n">n_points</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">35</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;長さは 2 のべき乗にする&quot;</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">even</span> <span class="o">=</span> <span class="n">fft_radix2</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># 偶数番目の標本の DFT</span>
+<span class="linenos">37</span>    <span class="n">odd</span> <span class="o">=</span> <span class="n">fft_radix2</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># 奇数番目の標本の DFT</span>
+<span class="linenos">38</span>    <span class="n">twiddle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_points</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_points</span><span class="p">)</span>  <span class="c1"># 回転因子 W^k</span>
+<span class="linenos">39</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">twiddle</span> <span class="o">*</span> <span class="n">odd</span>
+<span class="linenos">40</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">even</span> <span class="o">+</span> <span class="n">t</span><span class="p">,</span> <span class="n">even</span> <span class="o">-</span> <span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>偶数番目と奇数番目の標本の取り出しには、NumPy のスライス <code class="docutils literal notranslate"><span class="pre">x[0::2]</span></code> と <code class="docutils literal notranslate"><span class="pre">x[1::2]</span></code> を使っている。回転因子 <code class="docutils literal notranslate"><span class="pre">twiddle</span></code> は、<span class="math notranslate nohighlight">\(k = 0, \ldots, N/2 - 1\)</span> の <span class="math notranslate nohighlight">\(W_N^k\)</span> をまとめて計算した配列である。最後の <code class="docutils literal notranslate"><span class="pre">np.concatenate</span></code> で、式 <a class="reference internal" href="#equation-eq-butterfly">(26)</a> の前半 <span class="math notranslate nohighlight">\(X[k]\)</span> と後半 <span class="math notranslate nohighlight">\(X[k + N/2]\)</span> をつなげている。</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">リスト 15 </span><span class="caption-text">fft_radix2.py の実行結果</span><a class="headerlink" href="#id5" title="Link to this code"></a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>N =    8: np.fft.fft と一致する: True
+N =   64: np.fft.fft と一致する: True
+N = 1024: np.fft.fft と一致する: True
+
+     N    DFT の乗算回数 N^2   FFT の乗算回数 (N/2) log2 N      比
+      8                 64                       12         5.3
+     64              4,096                      192        21.3
+   1024          1,048,576                    5,120       204.8
+  65536      4,294,967,296                  524,288      8192.0
+1048576   1,099,511,627,776               10,485,760    104857.6
+</pre></div>
+</div>
+</div>
+<p>自作の FFT は <code class="docutils literal notranslate"><span class="pre">np.fft.fft()</span></code> と一致している。掛け算の回数の比 <span class="math notranslate nohighlight">\(N^2 / ((N/2)\log_2 N) = 2N/\log_2 N\)</span> は <span class="math notranslate nohighlight">\(N\)</span> とともに急速に大きくなり、<span class="math notranslate nohighlight">\(N = 2^{20}\)</span> では 10 万倍を超える。</p>
+<p><a class="reference internal" href="#fig-ch07-timing"><span class="std std-numref">図 26</span></a> は、DFT（行列の積）、自作の FFT、<code class="docutils literal notranslate"><span class="pre">np.fft.fft()</span></code> の計算時間を比べたものである（計算時間は、実行する計算機によって変わる）。DFT の計算時間は <span class="math notranslate nohighlight">\(N\)</span> が 2 倍になるごとに約 4 倍に増えるが、FFT は約 2 倍の増加にとどまる。<span class="math notranslate nohighlight">\(N\)</span> が小さいうちは、Python の再帰呼び出しの手間が大きく、自作の FFT が行列の積より遅いこともあるが、<span class="math notranslate nohighlight">\(N\)</span> が大きくなると逆転する。C 言語などで最適化された <code class="docutils literal notranslate"><span class="pre">np.fft.fft()</span></code> は、自作の FFT よりさらに数百倍速い。実用では、自分で FFT を実装せず、ライブラリの関数を使うべきである。</p>
+<figure class="align-default" id="id6">
+<span id="fig-ch07-timing"></span><img alt="データの長さに対する DFT、自作の FFT、NumPy の FFT の計算時間を両対数で示したグラフ" src="_images/fft_radix2.svg" />
+<figcaption>
+<p><span class="caption-number">図 26 </span><span class="caption-text">DFT と FFT の計算時間の比較</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>サンプルの全体：<a class="reference download internal" download="" href="_downloads/4ae78f507268bfa8dbdc83eeb97ad1d7/fft_radix2.py"><code class="xref download docutils literal notranslate"><span class="pre">fft_radix2.py</span></code></a></p>
+</section>
+<section id="numpy-fft">
+<h2>NumPy の FFT 関数<a class="headerlink" href="#numpy-fft" title="Link to this heading"></a></h2>
+<p>NumPy の <code class="docutils literal notranslate"><span class="pre">numpy.fft</span></code> モジュールの主な関数を、<a class="reference internal" href="#table-ch07-numpy-fft"><span class="std std-numref">表 5</span></a> にまとめる。SciPy にも同じ名前の関数をもつ <code class="docutils literal notranslate"><span class="pre">scipy.fft</span></code> モジュールがあり、並列計算などの追加の機能をもつ。</p>
+<span id="table-ch07-numpy-fft"></span><table class="docutils align-default" id="id7">
+<caption><span class="caption-number">表 5 </span><span class="caption-text">numpy.fft の主な関数</span><a class="headerlink" href="#id7" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 35.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>関数</p></th>
+<th class="head"><p>機能</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fft(x,</span> <span class="pre">n=None)</span></code></p></td>
+<td><p>DFT を計算する。<code class="docutils literal notranslate"><span class="pre">n</span></code> を指定すると、<code class="docutils literal notranslate"><span class="pre">x</span></code> の末尾を切り捨てるかゼロ詰めして長さ <code class="docutils literal notranslate"><span class="pre">n</span></code> にする</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ifft(X,</span> <span class="pre">n=None)</span></code></p></td>
+<td><p>逆 DFT を計算する（<span class="math notranslate nohighlight">\(1/N\)</span> を掛ける）</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rfft(x,</span> <span class="pre">n=None)</span></code></p></td>
+<td><p>実数の信号の DFT のうち、<span class="math notranslate nohighlight">\(k = 0\)</span> から <span class="math notranslate nohighlight">\(\lfloor N/2 \rfloor\)</span> までの部分だけを計算する</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irfft(X,</span> <span class="pre">n=None)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rfft()</span></code> の逆変換。元の長さ <code class="docutils literal notranslate"><span class="pre">n</span></code> を指定するのが安全である</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fftfreq(n,</span> <span class="pre">d)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fft()</span></code> の各ビンの周波数を返す。<code class="docutils literal notranslate"><span class="pre">d</span></code> は標本化周期 <span class="math notranslate nohighlight">\(T_s = 1/f_s\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rfftfreq(n,</span> <span class="pre">d)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rfft()</span></code> の各ビンの周波数を返す</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fftshift(X)</span></code></p></td>
+<td><p>周波数 0 のビンが中央に来るように、配列の前半と後半を入れ替える</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fft2(x)</span></code>、<code class="docutils literal notranslate"><span class="pre">ifft2(X)</span></code></p></td>
+<td><p>2 次元の DFT と逆 DFT（第 10 章）</p></td>
+</tr>
+</tbody>
+</table>
+<p>次の例は、直流 0.2、振幅 1.5 の 50 Hz の正弦波、振幅 0.5 の 120 Hz の余弦波を足した信号の振幅スペクトルを求めるものである。</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">リスト 16 </span><span class="caption-text">rfft による振幅スペクトルの計算</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">fs</span> <span class="o">=</span> <span class="mf">1000.0</span>                                  <span class="c1"># 標本化周波数 [Hz]</span>
+<span class="linenos"> 4</span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">/</span> <span class="n">fs</span>                     <span class="c1"># 1 秒分の時刻</span>
+<span class="linenos"> 5</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">120</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                           <span class="c1"># 長さ N/2 + 1 = 501</span>
+<span class="linenos"> 8</span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">d</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="n">fs</span><span class="p">)</span>        <span class="c1"># 0, 1, 2, ..., 500 Hz</span>
+<span class="linenos"> 9</span><span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>                 <span class="c1"># 片側の振幅に換算する</span>
+<span class="linenos">10</span><span class="n">amp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span>                                  <span class="c1"># 直流成分は 2 倍しない</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">peaks</span> <span class="o">=</span> <span class="n">amp</span> <span class="o">&gt;</span> <span class="mf">0.1</span>
+<span class="linenos">13</span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">peaks</span><span class="p">])</span>                              <span class="c1"># [  0.  50. 120.]</span>
+<span class="linenos">14</span><span class="nb">print</span><span class="p">(</span><span class="n">amp</span><span class="p">[</span><span class="n">peaks</span><span class="p">])</span>                            <span class="c1"># [0.2 1.5 0.5]</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">peaks</span><span class="p">])))</span>        <span class="c1"># 位相: 約 [0, -90, 0] 度</span>
+</pre></div>
+</div>
+</div>
+<p>4 行目から 5 行目で、1 秒分（1000 点）の信号を作る。周波数分解能は <span class="math notranslate nohighlight">\(f_s/N = 1\)</span> Hz であり、50 Hz と 120 Hz はちょうどビンに一致する。7 行目の <code class="docutils literal notranslate"><span class="pre">rfft()</span></code> は、実数の信号の DFT の前半（<span class="math notranslate nohighlight">\(k = 0\)</span> から 500 まで）だけを返す。共役対称性から後半は不要なので、計算量とメモリが約半分で済む。9 行目と 10 行目では、第 6 章で述べたように、正と負の周波数に分かれた成分をまとめるために 2 倍し、<span class="math notranslate nohighlight">\(N\)</span> で割って振幅に換算している。直流成分（と、<span class="math notranslate nohighlight">\(N\)</span> が偶数のときのナイキスト周波数の成分）は負の周波数の相手をもたないので、2 倍しない。位相は、余弦波を基準にした角度であり、<span class="math notranslate nohighlight">\(\sin\)</span> は <span class="math notranslate nohighlight">\(\cos\)</span> から <span class="math notranslate nohighlight">\(-90\)</span> 度ずれていることが分かる。</p>
+<p><code class="docutils literal notranslate"><span class="pre">fft()</span></code> の出力の並びは、<span class="math notranslate nohighlight">\(k = 0, 1, \ldots, N/2 - 1\)</span> の正の周波数の後に、<span class="math notranslate nohighlight">\(k = N/2, \ldots, N - 1\)</span> の負の周波数が続く（第 6 章）。例えば <span class="math notranslate nohighlight">\(N = 8\)</span>、<span class="math notranslate nohighlight">\(f_s = 8\)</span> Hz のとき、<code class="docutils literal notranslate"><span class="pre">np.fft.fftfreq(8,</span> <span class="pre">d=1/8)</span></code> は <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">-4,</span> <span class="pre">-3,</span> <span class="pre">-2,</span> <span class="pre">-1]</span></code> を返す。スペクトルを周波数の順に並べて描くには、<code class="docutils literal notranslate"><span class="pre">np.fft.fftshift()</span></code> で <code class="docutils literal notranslate"><span class="pre">[-4,</span> <span class="pre">-3,</span> <span class="pre">-2,</span> <span class="pre">-1,</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> の順に並べ替える。</p>
+<p>FFT を使うときの注意点を挙げる。</p>
+<ul class="simple">
+<li><p><strong>データの長さ</strong>：NumPy の FFT は、2 のべき乗に限らず任意の長さを扱える。ただし、長さが大きな素数を因数にもつと、計算が遅くなることがある。<code class="docutils literal notranslate"><span class="pre">scipy.fft.next_fast_len(n)</span></code> は、<code class="docutils literal notranslate"><span class="pre">n</span></code> 以上で FFT を高速に計算できる長さを返す。</p></li>
+<li><p><strong>正規化</strong>：NumPy の既定では、<code class="docutils literal notranslate"><span class="pre">fft()</span></code> は係数を掛けず、<code class="docutils literal notranslate"><span class="pre">ifft()</span></code> が <span class="math notranslate nohighlight">\(1/N\)</span> を掛ける（本書の式 <a class="reference internal" href="ch06_dtft_dft.html#equation-eq-dft">(24)</a> と式 <a class="reference internal" href="ch06_dtft_dft.html#equation-eq-idft">(25)</a> と同じ）。引数 <code class="docutils literal notranslate"><span class="pre">norm=&quot;ortho&quot;</span></code> を指定すると、両方に <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span> を掛ける。ライブラリによって既定の正規化が異なるので、結果の大きさを比べるときは注意する。</p></li>
+<li><p><strong>周波数軸</strong>：FFT の関数は標本化周波数を知らず、ビンの番号 <span class="math notranslate nohighlight">\(k\)</span> ごとの値を返すだけである。ビンと実際の周波数を対応付けるには、<code class="docutils literal notranslate"><span class="pre">fftfreq()</span></code> に正しい <code class="docutils literal notranslate"><span class="pre">d</span></code>（<span class="math notranslate nohighlight">\(1/f_s\)</span>）を与える必要がある。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>まとめ<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>DFT を定義どおりに計算すると <span class="math notranslate nohighlight">\(N^2\)</span> 回の掛け算が必要だが、FFT は <span class="math notranslate nohighlight">\((N/2)\log_2 N\)</span> 回で済む。</p></li>
+<li><p>基数 2 の Cooley-Tukey 法は、DFT を偶数番目と奇数番目の標本の DFT に分け、バタフライ演算 <span class="math notranslate nohighlight">\(X[k] = E[k] \pm W_N^k O[k]\)</span> で組み立てることを再帰的に繰り返す。</p></li>
+<li><p>NumPy の <code class="docutils literal notranslate"><span class="pre">np.fft.fft()</span></code>、<code class="docutils literal notranslate"><span class="pre">rfft()</span></code>、<code class="docutils literal notranslate"><span class="pre">fftfreq()</span></code>、<code class="docutils literal notranslate"><span class="pre">fftshift()</span></code> を使えば、スペクトルを簡単に計算できる。片側の振幅に換算するには、<span class="math notranslate nohighlight">\(N\)</span> で割って 2 倍する（直流成分は 2 倍しない）。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch06_dtft_dft.html" class="btn btn-neutral float-left" title="第 6 章 離散時間フーリエ変換と離散フーリエ変換" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch08_spectrum_analysis.html" class="btn btn-neutral float-right" title="第 8 章 スペクトル解析" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

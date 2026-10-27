@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. Python による実装 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="用語集" href="glossary.html" />
+    <link rel="prev" title="8. 発展的な話題" href="advanced.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Python による実装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">9.1. 基本方針</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ca">9.2. 1 次元 CA の実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">9.3. 2 次元 CA の実装：近傍の数え方</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#np-roll">9.3.1. <code class="docutils literal notranslate"><span class="pre">np.roll</span></code> による方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.3.2. 畳み込みによる方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.3.3. 2 つの方法の比較</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">9.4. 境界条件の実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">9.5. 可視化とアニメーション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">9.6. 実装上の注意</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">9.6.1. データ型とオーバーフロー</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">9.6.2. 乱数の扱い</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">9.6.3. さらなる高速化</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>Python による実装</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python">
+<h1><span class="section-number">9. </span>Python による実装<a class="headerlink" href="#python" title="Link to this heading"></a></h1>
+<p>本章では、CA を Python で実装するときの基本的な方法と注意点をまとめる。本書のサンプルコードはすべてこの章の方針で書かれている。各サンプルの一覧と実行方法は、付録の「<a class="reference internal" href="examples.html"><span class="doc">サンプルコード一覧</span></a>」を参照してほしい。</p>
+<section id="id1">
+<h2><span class="section-number">9.1. </span>基本方針<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>CA の実装で最も重要なのは、次の 2 点である。</p>
+<ul class="simple">
+<li><p><strong>同期更新を正しく実装する</strong>：次の時刻の配置は、必ず現在の配置だけから計算する。現在の配置を表す配列を書き換えながら計算してはいけない（第 2 章「<a class="reference internal" href="basics.html"><span class="doc">基本概念と定義</span></a>」を参照）。</p></li>
+<li><p><strong>セルごとのループを避ける</strong>：Python の <code class="docutils literal notranslate"><span class="pre">for</span></code> 文でセルを 1 つずつ処理すると非常に遅い。NumPy の配列演算を使って、全セルの計算を一度に行う。</p></li>
+</ul>
+<p>NumPy の配列演算は新しい配列を返すので、2 つ目の点に従えば 1 つ目の点も自然に満たされる。</p>
+</section>
+<section id="ca">
+<h2><span class="section-number">9.2. </span>1 次元 CA の実装<a class="headerlink" href="#ca" title="Link to this heading"></a></h2>
+<p>ECA の 1 ステップの実装は第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」で示した。時空図全体は、各時刻の配置を 2 次元配列の行に順に格納していけば得られる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">evolve</span><span class="p">(</span><span class="n">rule</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">initial</span><span class="p">:</span> <span class="n">Cells</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cells</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;初期配置から steps ステップ分を計算し, 時空図を 2 次元配列で返す.</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    戻り値の形は (steps + 1, セル数) で, 0 行目が初期配置である.</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="n">table</span> <span class="o">=</span> <span class="n">rule_table</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">initial</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial</span>
+<span class="linenos"> 9</span>    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="n">history</span><span class="p">[</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">table</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">history</span>
+</pre></div>
+</div>
+<p>時空図の配列は <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> の <code class="docutils literal notranslate"><span class="pre">imshow</span></code> でそのまま画像として表示できる。<code class="docutils literal notranslate"><span class="pre">interpolation=&quot;nearest&quot;</span></code> を指定しないと、セルの境界がぼやけて表示されることがある。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="kn">from</span><span class="w"> </span><span class="nn">elementary_ca</span><span class="w"> </span><span class="kn">import</span> <span class="n">evolve</span><span class="p">,</span> <span class="n">single_seed</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="n">history</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">single_seed</span><span class="p">(</span><span class="mi">201</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">6</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="linenos">7</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">9.3. </span>2 次元 CA の実装：近傍の数え方<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>ライフゲームのような外部総和型 CA では、各セルの周囲にある生きたセルの数を数えることが計算の中心になる。代表的な方法が 2 つある。</p>
+<section id="np-roll">
+<h3><span class="section-number">9.3.1. </span><code class="docutils literal notranslate"><span class="pre">np.roll</span></code> による方法<a class="headerlink" href="#np-roll" title="Link to this heading"></a></h3>
+<p>第 5 章「<a class="reference internal" href="two_dimensional.html"><span class="doc">2 次元セル・オートマトン</span></a>」で示した <code class="docutils literal notranslate"><span class="pre">count_neighbors</span></code> は、盤面全体を 8 方向に 1 セルずつ巡回的にずらした配列を足し合わせる。<code class="docutils literal notranslate"><span class="pre">np.roll</span></code> は端からはみ出した要素を反対側の端に回り込ませるので、周期境界条件が自動的に実現される。</p>
+</section>
+<section id="id3">
+<h3><span class="section-number">9.3.2. </span>畳み込みによる方法<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>周囲のセルの数を数える操作は、中心が 0 で周囲が 1 の 3 × 3 のカーネルによる畳み込みである。SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.signal.convolve2d</span></code> を使うと、次のように書ける（SciPy は本書のサンプルコードには不要なので、試す場合は <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">scipy</span></code> で別途インストールする）。<code class="docutils literal notranslate"><span class="pre">boundary=&quot;wrap&quot;</span></code> が周期境界条件を表す。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">convolve2d</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="n">KERNEL</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="linenos"> 5</span>                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="linenos"> 6</span>                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="k">def</span><span class="w"> </span><span class="nf">step_life</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="linenos">10</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ライフゲーム (B3/S23) を 1 世代進める.&quot;&quot;&quot;</span>
+<span class="linenos">11</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">KERNEL</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s2">&quot;wrap&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="p">((</span><span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">grid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>畳み込みによる方法は、カーネルを取り替えるだけで近傍の形や重みを自由に変えられる。たとえば、第 8 章「<a class="reference internal" href="advanced.html"><span class="doc">発展的な話題</span></a>」で扱った Lenia のように広い範囲の重み付き平均を使う規則では、高速フーリエ変換（FFT）による畳み込みを使うと効率がよい。</p>
+</section>
+<section id="id4">
+<h3><span class="section-number">9.3.3. </span>2 つの方法の比較<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>本書の執筆環境で、512 × 512 の盤面のライフゲームを 1 世代進める時間を測ったところ、<code class="docutils literal notranslate"><span class="pre">np.roll</span></code> による方法と畳み込みによる方法はどちらも約 10 ms で、ほぼ同等であった。一方、同じ処理を Python の 4 重の <code class="docutils literal notranslate"><span class="pre">for</span></code> 文で書くと 1 世代に約 0.7 秒かかり、NumPy を使う方法の約 70 倍遅かった。具体的な時間は環境によって異なるが、セルごとのループを避けることの効果は大きい。</p>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">9.4. </span>境界条件の実装<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">np.roll</span></code> や <code class="docutils literal notranslate"><span class="pre">boundary=&quot;wrap&quot;</span></code> が実現するのは周期境界条件である。固定境界条件や反射境界条件を使うには、<code class="docutils literal notranslate"><span class="pre">np.pad</span></code> で配列の外側に仮想的なセル（ゴースト・セル）を付け足してから近傍を計算し、最後に内側の部分だけを取り出す。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span><span class="w"> </span><span class="nf">count_neighbors_padded</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;固定境界 (mode=&quot;constant&quot;) または反射境界 (mode=&quot;symmetric&quot;) で周囲 8 セルの和を求める.&quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="n">padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>  <span class="c1"># 外側に 1 セルずつ付け足す</span>
+<span class="linenos"> 7</span>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos"> 8</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="k">for</span> <span class="n">dy</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">for</span> <span class="n">dx</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="linenos">11</span>            <span class="k">if</span> <span class="n">dy</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">12</span>                <span class="k">continue</span>
+<span class="linenos">13</span>            <span class="n">total</span> <span class="o">+=</span> <span class="n">padded</span><span class="p">[</span><span class="n">dy</span><span class="p">:</span><span class="n">dy</span> <span class="o">+</span> <span class="n">rows</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span><span class="n">dx</span> <span class="o">+</span> <span class="n">cols</span><span class="p">]</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mode=&quot;constant&quot;</span></code> は外側を 0 で埋めるので、外側を静止状態に固定した固定境界条件になる。<code class="docutils literal notranslate"><span class="pre">mode=&quot;symmetric&quot;</span></code> は端のセル自身を鏡に映した値で埋めるので、<a class="reference internal" href="basics.html#fig-boundaries"><span class="std std-numref">図 2.2</span></a> の反射境界条件になる。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">9.5. </span>可視化とアニメーション<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>2 次元 CA の時間変化は、<code class="docutils literal notranslate"><span class="pre">matplotlib.animation.FuncAnimation</span></code> でアニメーションとして表示できる（サンプルコード <code class="docutils literal notranslate"><span class="pre">game_of_life.py</span></code> の <code class="docutils literal notranslate"><span class="pre">main</span></code> 関数を参照）。アニメーションを GIF ファイルとして保存するには、次のように <code class="docutils literal notranslate"><span class="pre">PillowWriter</span></code> を使う。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span><span class="p">,</span> <span class="n">PillowWriter</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">animation</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">animation</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;life.gif&quot;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="n">PillowWriter</span><span class="p">(</span><span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FuncAnimation</span></code> が返すオブジェクトは、表示が終わるまで変数に保持しておく必要がある。変数に代入しないと、オブジェクトがガベージコレクションで回収され、アニメーションが止まってしまう。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">9.6. </span>実装上の注意<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3><span class="section-number">9.6.1. </span>データ型とオーバーフロー<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>2 状態の CA では、メモリを節約するために配列のデータ型を <code class="docutils literal notranslate"><span class="pre">np.uint8</span></code> にすることが多い。ただし、近傍の和を <code class="docutils literal notranslate"><span class="pre">np.uint8</span></code> のまま計算すると、和が 255 を超えたときに桁あふれ（オーバーフロー）が起きて誤った値になる。ライフゲームの周囲 8 セルの和は最大 8 なので問題ないが、近傍が広い規則や状態数が多い規則では、和を計算する配列を <code class="docutils literal notranslate"><span class="pre">np.int32</span></code> などにする必要がある。</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">9.6.2. </span>乱数の扱い<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>確率的 CA では、<code class="docutils literal notranslate"><span class="pre">np.random.default_rng(seed)</span></code> で乱数生成器を作り、シードを指定できるようにしておくとよい。同じシードを使えば同じ結果が再現されるので、デバッグや結果の比較がしやすくなる。本書の図は、すべてシードを固定して生成している。</p>
+</section>
+<section id="id10">
+<h3><span class="section-number">9.6.3. </span>さらなる高速化<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>さらに大規模な計算が必要な場合は、次のような方法がある。</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 9.1 </span><span class="caption-text">高速化の方法</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>方法</p></th>
+<th class="head"><p>概要</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ビット演算</p></td>
+<td><p>1 セルを 1 ビットで表し、64 セルを 1 つの 64 ビット整数に詰め込んで、ビット演算でまとめて計算する。メモリ使用量も 1/8 になる。</p></td>
+</tr>
+<tr class="row-odd"><td><p>JIT コンパイル</p></td>
+<td><p>Numba などを使って Python の関数を機械語にコンパイルし、ループのまま高速に実行する。</p></td>
+</tr>
+<tr class="row-even"><td><p>GPU</p></td>
+<td><p>CuPy や PyTorch などを使い、配列演算を GPU で並列に実行する。CA は全セルが同じ計算をするので、GPU と相性がよい。</p></td>
+</tr>
+<tr class="row-odd"><td><p>HashLife</p></td>
+<td><p>盤面を四分木で表し、同じ部分パターンの未来の計算結果を記憶して再利用する <a class="reference internal" href="references.html#gosper1984" id="id11"><span>[Gosper1984]</span></a>。規則的な構造が多いパターンでは、何兆世代もの計算を短時間で行える。</p></td>
+</tr>
+</tbody>
+</table>
+<p>ライフゲームなどの CA を手軽に試すには、HashLife を実装したソフトウェア Golly <a class="reference internal" href="references.html#golly" id="id12"><span>[Golly]</span></a> を使うのもよい。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="advanced.html" class="btn btn-neutral float-left" title="8. 発展的な話題" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="glossary.html" class="btn btn-neutral float-right" title="用語集" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

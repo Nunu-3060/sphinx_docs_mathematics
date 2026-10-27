@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 2 章 集合と論理 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 3 章 写像と関係" href="ch03_functions_relations.html" />
+    <link rel="prev" title="第 1 章 はじめに" href="ch01_introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 2 章 集合と論理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">集合</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">集合の定義と表記</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">集合演算</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">直積とべき集合</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">命題論理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">命題と論理演算</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">論理的同値</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">述語と量化子</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">証明の技法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">直接証明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">対偶による証明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">背理法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">数学的帰納法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 2 章 集合と論理</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 2 章 集合と論理<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>確率論では「事象」を集合として扱い、「事象 <span class="math notranslate nohighlight">\(A\)</span> または事象 <span class="math notranslate nohighlight">\(B\)</span> が起こる」を和集合 <span class="math notranslate nohighlight">\(A \cup B\)</span> で表す。また、数学の主張を正確に述べ、それを証明するには論理の言葉が欠かせない。本章では、以降のすべての章の土台となる集合と論理の基本を学ぶ。</p>
+<section id="id2">
+<h2>集合<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>集合の定義と表記<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>範囲がはっきりと定まったものの集まりを<strong>集合</strong>という。集合を構成する個々のものを<strong>要素</strong>または<strong>元</strong>といい、<span class="math notranslate nohighlight">\(a\)</span> が集合 <span class="math notranslate nohighlight">\(A\)</span> の要素であることを <span class="math notranslate nohighlight">\(a \in A\)</span>、要素でないことを <span class="math notranslate nohighlight">\(a \notin A\)</span> と書く。</p>
+<p>集合の表し方には、要素を並べる<strong>外延的記法</strong>と、要素の満たす条件を書く<strong>内包的記法</strong>がある。</p>
+<div class="math notranslate nohighlight">
+\[A = \{2, 4, 6, 8, 10\}, \qquad A = \{x \in \mathbb{N} \mid x \le 10 \text{ かつ } x \text{ は偶数}\}\]</div>
+<p>要素を 1 つも持たない集合を<strong>空集合</strong>といい、<span class="math notranslate nohighlight">\(\emptyset\)</span> で表す。有限集合 <span class="math notranslate nohighlight">\(A\)</span> の要素の個数を <span class="math notranslate nohighlight">\(|A|\)</span> と書く。</p>
+<p>集合 <span class="math notranslate nohighlight">\(A\)</span> のすべての要素が集合 <span class="math notranslate nohighlight">\(B\)</span> の要素でもあるとき、<span class="math notranslate nohighlight">\(A\)</span> は <span class="math notranslate nohighlight">\(B\)</span> の<strong>部分集合</strong>であるといい、<span class="math notranslate nohighlight">\(A \subseteq B\)</span> と書く。<span class="math notranslate nohighlight">\(A \subseteq B\)</span> かつ <span class="math notranslate nohighlight">\(B \subseteq A\)</span> のとき <span class="math notranslate nohighlight">\(A = B\)</span> である。2 つの集合が等しいことを示すには、この 2 つの包含関係を示せばよい。</p>
+</section>
+<section id="id4">
+<h3>集合演算<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>議論の対象となるすべての要素を含む集合を<strong>全体集合</strong>といい、<span class="math notranslate nohighlight">\(U\)</span> で表す。全体集合の部分集合 <span class="math notranslate nohighlight">\(A, B\)</span> に対して、次の演算を定める。</p>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-number">表 2 </span><span class="caption-text">基本的な集合演算</span><a class="headerlink" href="#id17" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>記号</p></th>
+<th class="head"><p>定義</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>和集合</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \cup B\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\{x \mid x \in A \text{ または } x \in B\}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>共通部分</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \cap B\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\{x \mid x \in A \text{ かつ } x \in B\}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>差集合</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \setminus B\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\{x \mid x \in A \text{ かつ } x \notin B\}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>補集合</p></td>
+<td><p><span class="math notranslate nohighlight">\(\overline{A}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\{x \in U \mid x \notin A\}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>対称差</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \mathbin{\triangle} B\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((A \setminus B) \cup (B \setminus A)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>これらの演算を図示したものを<strong>ベン図</strong>という（<a class="reference internal" href="#fig-ch02-venn"><span class="std std-numref">図 2</span></a>）。</p>
+<figure class="align-center" id="id18">
+<span id="fig-ch02-venn"></span><a class="reference internal image-reference" href="_images/ch02_venn.png"><img alt="_images/ch02_venn.png" src="_images/ch02_venn.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 2 </span><span class="caption-text">ベン図による集合演算の表現（色を付けた部分が演算結果）</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="math notranslate nohighlight">\(A \cap B = \emptyset\)</span> のとき、<span class="math notranslate nohighlight">\(A\)</span> と <span class="math notranslate nohighlight">\(B\)</span> は<strong>互いに素</strong>であるという。互いに素な集合の和集合の要素数は、それぞれの要素数の和 <span class="math notranslate nohighlight">\(|A \cup B| = |A| + |B|\)</span> になる。この事実は第 4 章の「和の法則」の基礎になる。</p>
+<p>集合演算については、次の法則が成り立つ。</p>
+<table class="docutils align-default" id="id19">
+<caption><span class="caption-number">表 3 </span><span class="caption-text">集合演算の主な法則</span><a class="headerlink" href="#id19" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>法則</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>交換法則</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \cup B = B \cup A\)</span>、<span class="math notranslate nohighlight">\(A \cap B = B \cap A\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>結合法則</p></td>
+<td><p><span class="math notranslate nohighlight">\((A \cup B) \cup C = A \cup (B \cup C)\)</span>、<span class="math notranslate nohighlight">\((A \cap B) \cap C = A \cap (B \cap C)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>分配法則</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)</span>、<span class="math notranslate nohighlight">\(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>ド・モルガンの法則</p></td>
+<td><p><span class="math notranslate nohighlight">\(\overline{A \cup B} = \overline{A} \cap \overline{B}\)</span>、<span class="math notranslate nohighlight">\(\overline{A \cap B} = \overline{A} \cup \overline{B}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>ド・モルガンの法則は、確率の計算で「少なくとも 1 つ起こる」事象の補集合が「どれも起こらない」事象になることを使う際に重要である（第 6 章の誕生日問題を参照）。</p>
+</section>
+<section id="id5">
+<h3>直積とべき集合<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>集合 <span class="math notranslate nohighlight">\(A, B\)</span> の要素の順序対全体の集合を<strong>直積</strong>といい、<span class="math notranslate nohighlight">\(A \times B = \{(a, b) \mid a \in A, b \in B\}\)</span> と書く。<span class="math notranslate nohighlight">\(|A \times B| = |A| \cdot |B|\)</span> である。たとえば、2 個のサイコロの目の組全体は <span class="math notranslate nohighlight">\(\{1, \ldots, 6\} \times \{1, \ldots, 6\}\)</span> であり、要素数は 36 である。同じ集合の <span class="math notranslate nohighlight">\(n\)</span> 個の直積を <span class="math notranslate nohighlight">\(A^n\)</span> と書く。</p>
+<p>集合 <span class="math notranslate nohighlight">\(A\)</span> の部分集合全体の集合を<strong>べき集合</strong>といい、<span class="math notranslate nohighlight">\(2^A\)</span> または <span class="math notranslate nohighlight">\(\mathcal{P}(A)\)</span> で表す。<span class="math notranslate nohighlight">\(|A| = n\)</span> のとき、各要素について「含める」「含めない」の 2 通りを選ぶので <span class="math notranslate nohighlight">\(|2^A| = 2^n\)</span> である。</p>
+</section>
+</section>
+<section id="id6">
+<h2>命題論理<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3>命題と論理演算<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>真か偽かが明確に定まる文を<a class="reference internal" href="glossary.html#term-32"><span class="xref std std-term">命題</span></a>という。「6 は偶数である」は真の命題、「7 は偶数である」は偽の命題である。一方、「6 は大きい数である」は真偽が定まらないので命題ではない。</p>
+<p>命題 <span class="math notranslate nohighlight">\(p, q\)</span> から、次の論理演算で新しい命題を作れる。</p>
+<table class="docutils align-default" id="id20">
+<caption><span class="caption-number">表 4 </span><span class="caption-text">主な論理演算</span><a class="headerlink" href="#id20" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>記号</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>否定</p></td>
+<td><p><span class="math notranslate nohighlight">\(\neg p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span> でない</p></td>
+</tr>
+<tr class="row-odd"><td><p>論理積</p></td>
+<td><p><span class="math notranslate nohighlight">\(p \land q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span> かつ <span class="math notranslate nohighlight">\(q\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>論理和</p></td>
+<td><p><span class="math notranslate nohighlight">\(p \lor q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span> または <span class="math notranslate nohighlight">\(q\)</span> （両方が真の場合も含む）</p></td>
+</tr>
+<tr class="row-odd"><td><p>含意</p></td>
+<td><p><span class="math notranslate nohighlight">\(p \to q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span> ならば <span class="math notranslate nohighlight">\(q\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>論理演算の結果は、構成要素の真理値のすべての組合せについて結果を並べた<strong>真理値表</strong>で定義される。含意 <span class="math notranslate nohighlight">\(p \to q\)</span> の真理値表は次のとおりである。</p>
+<table class="docutils align-default" id="id21">
+<caption><span class="caption-number">表 5 </span><span class="caption-text">含意 <span class="math notranslate nohighlight">\(p \to q\)</span> の真理値表</span><a class="headerlink" href="#id21" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.0%" />
+<col style="width: 33.0%" />
+<col style="width: 34.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(p\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(q\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(p \to q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>真</p></td>
+<td><p>真</p></td>
+<td><p>真</p></td>
+</tr>
+<tr class="row-odd"><td><p>真</p></td>
+<td><p>偽</p></td>
+<td><p>偽</p></td>
+</tr>
+<tr class="row-even"><td><p>偽</p></td>
+<td><p>真</p></td>
+<td><p>真</p></td>
+</tr>
+<tr class="row-odd"><td><p>偽</p></td>
+<td><p>偽</p></td>
+<td><p>真</p></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math notranslate nohighlight">\(p\)</span> が偽のときに <span class="math notranslate nohighlight">\(p \to q\)</span> が真になる点は直感に反するかもしれない。「<span class="math notranslate nohighlight">\(p \to q\)</span>」は「<span class="math notranslate nohighlight">\(p\)</span> が真なのに <span class="math notranslate nohighlight">\(q\)</span> が偽、ということは起こらない」という主張だと考えると理解しやすい。実際、<span class="math notranslate nohighlight">\(p \to q\)</span> は <span class="math notranslate nohighlight">\(\neg p \lor q\)</span> と同じ真理値表を持つ。</p>
+</section>
+<section id="id8">
+<h3>論理的同値<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>2 つの論理式が、構成要素のどの真理値の組に対しても同じ真理値をとるとき、両者は<strong>論理的に同値</strong>であるといい、<span class="math notranslate nohighlight">\(\equiv\)</span> で表す。集合のド・モルガンの法則に対応して、論理にもド・モルガンの法則 <span class="math notranslate nohighlight">\(\neg (p \lor q) \equiv \neg p \land \neg q\)</span>、<span class="math notranslate nohighlight">\(\neg (p \land q) \equiv \neg p \lor \neg q\)</span> が成り立つ。</p>
+<p>命題 <span class="math notranslate nohighlight">\(p \to q\)</span> に対して、<span class="math notranslate nohighlight">\(q \to p\)</span> を<strong>逆</strong>、<span class="math notranslate nohighlight">\(\neg p \to \neg q\)</span> を<strong>裏</strong>、<span class="math notranslate nohighlight">\(\neg q \to \neg p\)</span> を<strong>対偶</strong>という。元の命題と対偶は論理的に同値であるが、逆とは同値でない。たとえば「<span class="math notranslate nohighlight">\(n\)</span> が 4 の倍数ならば <span class="math notranslate nohighlight">\(n\)</span> は偶数である」は真であるが、その逆「<span class="math notranslate nohighlight">\(n\)</span> が偶数ならば <span class="math notranslate nohighlight">\(n\)</span> は 4 の倍数である」は偽である（<span class="math notranslate nohighlight">\(n = 2\)</span> が反例）。</p>
+</section>
+<section id="id9">
+<h3>述語と量化子<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>「<span class="math notranslate nohighlight">\(x\)</span> は偶数である」のように、変数を含み、変数の値を決めると命題になる文を<strong>述語</strong>という。述語 <span class="math notranslate nohighlight">\(P(x)\)</span> に対して、次の 2 つの<strong>量化子</strong>を用いて命題を作る。</p>
+<ul class="simple">
+<li><p><strong>全称量化子</strong> <span class="math notranslate nohighlight">\(\forall x \, P(x)\)</span>：すべての <span class="math notranslate nohighlight">\(x\)</span> について <span class="math notranslate nohighlight">\(P(x)\)</span> が成り立つ</p></li>
+<li><p><strong>存在量化子</strong> <span class="math notranslate nohighlight">\(\exists x \, P(x)\)</span>：<span class="math notranslate nohighlight">\(P(x)\)</span> が成り立つ <span class="math notranslate nohighlight">\(x\)</span> が少なくとも 1 つ存在する</p></li>
+</ul>
+<p>量化子を含む命題の否定は、<span class="math notranslate nohighlight">\(\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)\)</span>、<span class="math notranslate nohighlight">\(\neg \exists x \, P(x) \equiv \forall x \, \neg P(x)\)</span> となる。「すべての <span class="math notranslate nohighlight">\(x\)</span> で成り立つ」ことを否定するには、成り立たない例（反例）を 1 つ示せばよい。</p>
+</section>
+</section>
+<section id="id10">
+<h2>証明の技法<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>本書で使う主な証明の技法を、例とともに紹介する。</p>
+<section id="id11">
+<h3>直接証明<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p>仮定から出発して、定義や既知の事実を順に適用して結論を導く方法である。</p>
+<p><strong>例</strong>：「<span class="math notranslate nohighlight">\(n\)</span> が奇数ならば <span class="math notranslate nohighlight">\(n^2\)</span> は奇数である」。<span class="math notranslate nohighlight">\(n\)</span> が奇数なので、ある整数 <span class="math notranslate nohighlight">\(k\)</span> を用いて <span class="math notranslate nohighlight">\(n = 2k + 1\)</span> と書ける。このとき <span class="math notranslate nohighlight">\(n^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1\)</span> であり、<span class="math notranslate nohighlight">\(n^2\)</span> は奇数である。</p>
+</section>
+<section id="id12">
+<h3>対偶による証明<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(p \to q\)</span> を示す代わりに、同値な対偶 <span class="math notranslate nohighlight">\(\neg q \to \neg p\)</span> を示す方法である。</p>
+<p><strong>例</strong>：「<span class="math notranslate nohighlight">\(n^2\)</span> が偶数ならば <span class="math notranslate nohighlight">\(n\)</span> は偶数である」。対偶「<span class="math notranslate nohighlight">\(n\)</span> が奇数ならば <span class="math notranslate nohighlight">\(n^2\)</span> は奇数である」は直接証明の例で示したとおり真であるから、元の命題も真である。</p>
+</section>
+<section id="id13">
+<h3>背理法<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p>結論が成り立たないと仮定して矛盾を導き、結論が正しいと結論する方法である。</p>
+<p><strong>例</strong>：「素数は無限に存在する」。素数が有限個 <span class="math notranslate nohighlight">\(p_1, \ldots, p_k\)</span> しかないと仮定する。<span class="math notranslate nohighlight">\(N = p_1 p_2 \cdots p_k + 1\)</span> は 2 以上の整数なので、少なくとも 1 つの素因数 <span class="math notranslate nohighlight">\(p\)</span> を持つ。<span class="math notranslate nohighlight">\(p\)</span> は <span class="math notranslate nohighlight">\(p_1, \ldots, p_k\)</span> のいずれかであるが、<span class="math notranslate nohighlight">\(N\)</span> をどの <span class="math notranslate nohighlight">\(p_i\)</span> で割っても余りは 1 なので、<span class="math notranslate nohighlight">\(p\)</span> は <span class="math notranslate nohighlight">\(N\)</span> を割り切れない。これは矛盾であるから、素数は無限に存在する。</p>
+</section>
+<section id="id14">
+<h3>数学的帰納法<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p>自然数 <span class="math notranslate nohighlight">\(n\)</span> に関する命題 <span class="math notranslate nohighlight">\(P(n)\)</span> がすべての <span class="math notranslate nohighlight">\(n \ge 1\)</span> で成り立つことを示すには、次の 2 つを示せばよい。</p>
+<ol class="arabic simple">
+<li><p><strong>基底段階</strong>：<span class="math notranslate nohighlight">\(P(1)\)</span> が成り立つ。</p></li>
+<li><p><strong>帰納段階</strong>：任意の <span class="math notranslate nohighlight">\(k \ge 1\)</span> について、<span class="math notranslate nohighlight">\(P(k)\)</span> が成り立つならば <span class="math notranslate nohighlight">\(P(k + 1)\)</span> も成り立つ。</p></li>
+</ol>
+<p><strong>例</strong>：「<span class="math notranslate nohighlight">\(1 + 2 + \cdots + n = \dfrac{n(n + 1)}{2}\)</span>」。<span class="math notranslate nohighlight">\(n = 1\)</span> のとき両辺は 1 で等しい。<span class="math notranslate nohighlight">\(n = k\)</span> で成り立つと仮定すると、</p>
+<div class="math notranslate nohighlight">
+\[1 + 2 + \cdots + k + (k + 1) = \frac{k(k + 1)}{2} + (k + 1) = \frac{(k + 1)(k + 2)}{2}\]</div>
+<p>となり、<span class="math notranslate nohighlight">\(n = k + 1\)</span> でも成り立つ。よって、すべての <span class="math notranslate nohighlight">\(n \ge 1\)</span> で成り立つ。</p>
+<p>数学的帰納法は、第 4 章で扱う漸化式や、再帰的なアルゴリズムの正しさを示す際によく使われる。</p>
+</section>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/25a9b7957a1a04b06edd4098007fbf98/ch02_sets_logic.py"><code class="xref download docutils literal notranslate"><span class="pre">ch02_sets_logic.py</span></code></a></p>
+<p>Python の <code class="docutils literal notranslate"><span class="pre">set</span></code> 型は数学の集合に対応しており、<code class="docutils literal notranslate"><span class="pre">|</span></code>、<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>、<code class="docutils literal notranslate"><span class="pre">-</span></code>、<code class="docutils literal notranslate"><span class="pre">^</span></code> 演算子がそれぞれ和集合・共通部分・差集合・対称差に対応する。補集合は全体集合 <code class="docutils literal notranslate"><span class="pre">universe</span></code> との差集合で表す。次の関数は、ド・モルガンの法則が成り立つかどうかを調べる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">check_de_morgan</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">b</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">universe</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ド・モルガンの法則が成り立つかどうかを返す。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">law1</span> <span class="o">=</span> <span class="n">universe</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">universe</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">universe</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="n">law2</span> <span class="o">=</span> <span class="n">universe</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">universe</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">universe</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="k">return</span> <span class="n">law1</span> <span class="ow">and</span> <span class="n">law2</span>
+</pre></div>
+</div>
+<p>べき集合は、<span class="math notranslate nohighlight">\(n\)</span> ビットの整数と部分集合の 1 対 1 対応を利用すると簡単に列挙できる。整数 <code class="docutils literal notranslate"><span class="pre">mask</span></code> の <span class="math notranslate nohighlight">\(i\)</span> ビット目が 1 であることを、<span class="math notranslate nohighlight">\(i\)</span> 番目の要素を部分集合に含めることに対応させる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">power_set</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;べき集合を返す。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    要素数 n の集合の部分集合は、n ビットの整数 mask と 1 対 1 に対応する。</span>
+<span class="linenos"> 5</span><span class="sd">    mask の i ビット目が 1 のとき、i 番目の要素を部分集合に含める。</span>
+<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 7</span>    <span class="n">elements</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">subsets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 9</span>    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="nb">len</span><span class="p">(</span><span class="n">elements</span><span class="p">)):</span>
+<span class="linenos">10</span>        <span class="n">subsets</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">e</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">mask</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">})</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">subsets</span>
+</pre></div>
+</div>
+<p>論理式は「真理値を受け取り真理値を返す関数」として表せる。すべての真理値の組について 2 つの関数の値が一致すれば、論理的に同値である。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">is_equivalent</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Formula</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">Formula</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;2 つの論理式が論理的に同値か（すべての真理値の組で一致するか）を返す。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">==</span> <span class="n">g</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>全体集合を <span class="math notranslate nohighlight">\(U = \{1, \ldots, 10\}\)</span>、<span class="math notranslate nohighlight">\(A\)</span> を偶数の集合、<span class="math notranslate nohighlight">\(B\)</span> を 3 の倍数の集合として実行した結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- 集合演算 ---
+A       = [2, 4, 6, 8, 10]
+B       = [3, 6, 9]
+A | B   = [2, 3, 4, 6, 8, 9, 10]
+A &amp; B   = [6]
+A - B   = [2, 4, 8, 10]
+U - A   = [1, 3, 5, 7, 9]
+A ^ B   = [2, 3, 4, 8, 9, 10]
+ド・モルガンの法則: True
+--- べき集合 ---
+[[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+要素数: 8
+--- 含意の真理値表 ---
+p     q     p -&gt; q
+True  True  True
+True  False False
+False True  True
+False False True
+--- 同値性の判定 ---
+p -&gt; q と 対偶 (not q) -&gt; (not p): True
+p -&gt; q と 逆 q -&gt; p: False
+</pre></div>
+</div>
+<p>べき集合の要素数が <span class="math notranslate nohighlight">\(2^3 = 8\)</span> であること、含意とその対偶は同値だが逆とは同値でないことが確かめられる。</p>
+</section>
+<section id="id15">
+<h2>まとめ<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>集合は要素の集まりであり、和集合・共通部分・差集合・補集合などの演算を持つ。</p></li>
+<li><p>ド・モルガンの法則により、和集合の補集合は補集合の共通部分になる。</p></li>
+<li><p>直積 <span class="math notranslate nohighlight">\(A \times B\)</span> の要素数は <span class="math notranslate nohighlight">\(|A| \cdot |B|\)</span>、べき集合 <span class="math notranslate nohighlight">\(2^A\)</span> の要素数は <span class="math notranslate nohighlight">\(2^{|A|}\)</span> である。</p></li>
+<li><p>含意 <span class="math notranslate nohighlight">\(p \to q\)</span> はその対偶 <span class="math notranslate nohighlight">\(\neg q \to \neg p\)</span> と同値であるが、逆 <span class="math notranslate nohighlight">\(q \to p\)</span> とは同値でない。</p></li>
+<li><p>証明の技法として、直接証明・対偶による証明・背理法・数学的帰納法がある。</p></li>
+</ul>
+<p>集合と論理、証明の技法については <a class="reference internal" href="references.html#rosen2019" id="id16"><span>[Rosen2019]</span></a> に詳しい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch01_introduction.html" class="btn btn-neutral float-left" title="第 1 章 はじめに" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch03_functions_relations.html" class="btn btn-neutral float-right" title="第 3 章 写像と関係" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

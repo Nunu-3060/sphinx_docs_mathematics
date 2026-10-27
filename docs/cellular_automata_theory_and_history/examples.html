@@ -1,0 +1,823 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>サンプルコード一覧 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="prev" title="参考文献" href="references.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">サンプルコード一覧</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">動作環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">一覧</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#elementary-ca-py">elementary_ca.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#game-of-life-py">game_of_life.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#langtons-ant-py">langtons_ant.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#traffic-nasch-py">traffic_nasch.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lattice-gas-hpp-py">lattice_gas_hpp.py</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">サンプルコード一覧</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>サンプルコード一覧<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書のサンプルコードの一覧である。各ファイルは、ファイル名のリンクからダウンロードできる。</p>
+<section id="id2">
+<h2>動作環境<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python 3.10 以降</p></li>
+<li><p>NumPy、matplotlib</p></li>
+</ul>
+<p>必要なライブラリは次のコマンドでインストールできる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">pip install numpy matplotlib</span>
+</pre></div>
+</div>
+<p>各サンプルは、<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">ファイル名</span> <span class="pre">--help</span></code> で使い方（指定できる引数の一覧）を表示できる。</p>
+<p>すべてのサンプルは、PEP 8 に従い、型ヒントを付けて書かれている。flake8 と mypy（strict モード）による検査に通ることを確認している。検査に使った設定ファイルは次のとおりである（<a class="reference download internal" download="" href="_downloads/9a7d4e6baa469aeaeb4d02338f479f5a/setup.cfg"><code class="xref download docutils literal notranslate"><span class="pre">setup.cfg</span></code></a>）。</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[flake8]</span>
+<span class="linenos">2</span><span class="na">max-line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">120</span>
+<span class="linenos">3</span><span class="na">exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">__pycache__</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="k">[mypy]</span>
+<span class="linenos">6</span><span class="na">strict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">True</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>一覧<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-number">表 1 </span><span class="caption-text">サンプルコードの一覧</span><a class="headerlink" href="#id4" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 50.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ファイル</p></th>
+<th class="head"><p>内容</p></th>
+<th class="head"><p>関連する章</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/5afede55cb7d5b64bc997f364ce9355a/elementary_ca.py"><code class="xref download docutils literal notranslate"><span class="pre">elementary_ca.py</span></code></a></p></td>
+<td><p>基本セル・オートマトンの時空図を描く</p></td>
+<td><p><a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/5e74aaf79da4f2ba763b885632268588/game_of_life.py"><code class="xref download docutils literal notranslate"><span class="pre">game_of_life.py</span></code></a></p></td>
+<td><p>ライフゲーム（B/S 表記の Life-like CA）をアニメーション表示する</p></td>
+<td><p><a class="reference internal" href="two_dimensional.html"><span class="doc">2 次元セル・オートマトン</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/fee7bb0fcc8616e287ee50833cd4b07c/langtons_ant.py"><code class="xref download docutils literal notranslate"><span class="pre">langtons_ant.py</span></code></a></p></td>
+<td><p>ラングトンのアリを動かす</p></td>
+<td><p><a class="reference internal" href="two_dimensional.html"><span class="doc">2 次元セル・オートマトン</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference download internal" download="" href="_downloads/1a953359d59c30e4dec07f0e33705c4d/traffic_nasch.py"><code class="xref download docutils literal notranslate"><span class="pre">traffic_nasch.py</span></code></a></p></td>
+<td><p>ナーゲル・シュレッケンベルク・モデルで交通流をシミュレーションする</p></td>
+<td><p><a class="reference internal" href="applications.html"><span class="doc">応用</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference download internal" download="" href="_downloads/64f28c2661ea446033d75cb954813194/lattice_gas_hpp.py"><code class="xref download docutils literal notranslate"><span class="pre">lattice_gas_hpp.py</span></code></a></p></td>
+<td><p>HPP モデル（格子ガス・オートマトン）で密度の波が広がる様子を表示する</p></td>
+<td><p><a class="reference internal" href="applications.html"><span class="doc">応用</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="elementary-ca-py">
+<h2>elementary_ca.py<a class="headerlink" href="#elementary-ca-py" title="Link to this heading"></a></h2>
+<p>ルール番号を指定して、基本セル・オートマトンの時空図を表示する。既定では中央の 1 セルだけが 1 の初期配置を使い、<code class="docutils literal notranslate"><span class="pre">--random</span></code> を指定するとランダムな初期配置を使う。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python elementary_ca.py 30</span>
+<span class="linenos">2</span><span class="go">python elementary_ca.py 110 --width 301 --steps 150 --random</span>
+<span class="linenos">3</span><span class="go">python elementary_ca.py 90 --output rule90.png</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;基本セル・オートマトン (ECA) の時空図を描くサンプル.</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="sd">ルール番号 (0〜255) を指定すると, その規則で時間発展させた結果を</span>
+<span class="linenos"> 4</span><span class="sd">時空図 (横軸がセルの位置, 縦軸が時刻で, 下に行くほど新しい) として表示する.</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="sd">使い方の例::</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="sd">    python elementary_ca.py 30</span>
+<span class="linenos"> 9</span><span class="sd">    python elementary_ca.py 110 --width 301 --steps 150 --random</span>
+<span class="linenos">10</span><span class="sd">    python elementary_ca.py 90 --output rule90.png</span>
+<span class="linenos">11</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos">18</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">Cells</span> <span class="o">=</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="k">def</span><span class="w"> </span><span class="nf">rule_table</span><span class="p">(</span><span class="n">rule</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cells</span><span class="p">:</span>
+<span class="linenos">24</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ルール番号から局所規則の表を作る.</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="sd">    戻り値の k 番目の要素は, 近傍 (左, 中央, 右) を 2 進数 4 * 左 + 2 * 中央 + 右 と</span>
+<span class="linenos">27</span><span class="sd">    みなしたときの値が k である場合の次の状態を表す.</span>
+<span class="linenos">28</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">29</span>    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">rule</span> <span class="o">&lt;=</span> <span class="mi">255</span><span class="p">:</span>
+<span class="linenos">30</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ルール番号は 0〜255 で指定する: </span><span class="si">{</span><span class="n">rule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">rule</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">cells</span><span class="p">:</span> <span class="n">Cells</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Cells</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cells</span><span class="p">:</span>
+<span class="linenos">35</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;周期境界条件のもとで 1 ステップだけ時間発展させる.&quot;&quot;&quot;</span>
+<span class="linenos">36</span>    <span class="n">left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># 各セルの左隣の状態</span>
+<span class="linenos">37</span>    <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 各セルの右隣の状態</span>
+<span class="linenos">38</span>    <span class="n">index</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cells</span> <span class="o">+</span> <span class="n">right</span>
+<span class="linenos">39</span>    <span class="n">result</span><span class="p">:</span> <span class="n">Cells</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="linenos">40</span>    <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="k">def</span><span class="w"> </span><span class="nf">evolve</span><span class="p">(</span><span class="n">rule</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">initial</span><span class="p">:</span> <span class="n">Cells</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cells</span><span class="p">:</span>
+<span class="linenos">44</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;初期配置から steps ステップ分を計算し, 時空図を 2 次元配列で返す.</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="sd">    戻り値の形は (steps + 1, セル数) で, 0 行目が初期配置である.</span>
+<span class="linenos">47</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">48</span>    <span class="n">table</span> <span class="o">=</span> <span class="n">rule_table</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+<span class="linenos">49</span>    <span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">initial</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">50</span>    <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial</span>
+<span class="linenos">51</span>    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+<span class="linenos">52</span>        <span class="n">history</span><span class="p">[</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">history</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">table</span><span class="p">)</span>
+<span class="linenos">53</span>    <span class="k">return</span> <span class="n">history</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span><span class="k">def</span><span class="w"> </span><span class="nf">single_seed</span><span class="p">(</span><span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cells</span><span class="p">:</span>
+<span class="linenos">57</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;中央の 1 セルだけが 1 で, 残りが 0 の初期配置を作る.&quot;&quot;&quot;</span>
+<span class="linenos">58</span>    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">59</span>    <span class="n">cells</span><span class="p">[</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">60</span>    <span class="k">return</span> <span class="n">cells</span>
+<span class="linenos">61</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="k">def</span><span class="w"> </span><span class="nf">random_cells</span><span class="p">(</span><span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cells</span><span class="p">:</span>
+<span class="linenos">64</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;各セルが確率 density で 1 になるランダムな初期配置を作る.&quot;&quot;&quot;</span>
+<span class="linenos">65</span>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos">66</span>    <span class="k">return</span> <span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">density</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">70</span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;基本セル・オートマトンの時空図を描く&quot;</span><span class="p">)</span>
+<span class="linenos">71</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;rule&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;ルール番号 (0〜255)&quot;</span><span class="p">)</span>
+<span class="linenos">72</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--width&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">201</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;セルの数&quot;</span><span class="p">)</span>
+<span class="linenos">73</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--steps&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;計算するステップ数&quot;</span><span class="p">)</span>
+<span class="linenos">74</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--random&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;ランダムな初期配置を使う&quot;</span><span class="p">)</span>
+<span class="linenos">75</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--seed&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;乱数のシード&quot;</span><span class="p">)</span>
+<span class="linenos">76</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;画像の保存先 (省略時は画面に表示)&quot;</span><span class="p">)</span>
+<span class="linenos">77</span>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="linenos">78</span>
+<span class="linenos">79</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">random</span><span class="p">:</span>
+<span class="linenos">80</span>        <span class="n">initial</span> <span class="o">=</span> <span class="n">random_cells</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos">81</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">82</span>        <span class="n">initial</span> <span class="o">=</span> <span class="n">single_seed</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+<span class="linenos">83</span>    <span class="n">history</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">rule</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
+<span class="linenos">84</span>
+<span class="linenos">85</span>    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">86</span>
+<span class="linenos">87</span>    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">history</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">history</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="linenos">88</span>    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="linenos">89</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">rule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">90</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">)</span>
+<span class="linenos">91</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="linenos">92</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+<span class="linenos">93</span>        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="linenos">94</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">95</span>        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">96</span>
+<span class="linenos">97</span>
+<span class="linenos">98</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">99</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="game-of-life-py">
+<h2>game_of_life.py<a class="headerlink" href="#game-of-life-py" title="Link to this heading"></a></h2>
+<p>ライフゲームをアニメーション表示する。<code class="docutils literal notranslate"><span class="pre">--pattern</span></code> で初期パターン（block、beehive、blinker、toad、glider、lwss、r_pentomino、gosper_gun）を、<code class="docutils literal notranslate"><span class="pre">--rule</span></code> で B/S 表記の規則を指定できる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python game_of_life.py --pattern glider</span>
+<span class="linenos">2</span><span class="go">python game_of_life.py --pattern gosper_gun --size 60 80</span>
+<span class="linenos">3</span><span class="go">python game_of_life.py --random 0.3 --rule B36/S23</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;ライフゲーム (および Life-like セル・オートマトン) のサンプル.</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="sd">B/S 表記で規則を指定できる. 既定値の B3/S23 がコンウェイのライフゲームである.</span>
+<span class="linenos">  4</span><span class="sd">境界条件は周期境界 (上端と下端, 左端と右端がつながっている) とする.</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="sd">使い方の例::</span>
+<span class="linenos">  7</span>
+<span class="linenos">  8</span><span class="sd">    python game_of_life.py --pattern glider</span>
+<span class="linenos">  9</span><span class="sd">    python game_of_life.py --pattern gosper_gun --size 60 80</span>
+<span class="linenos"> 10</span><span class="sd">    python game_of_life.py --random 0.3 --rule B36/S23</span>
+<span class="linenos"> 11</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 12</span>
+<span class="linenos"> 13</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 18</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="linenos"> 19</span>
+<span class="linenos"> 20</span><span class="n">Grid</span> <span class="o">=</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+<span class="linenos"> 21</span>
+<span class="linenos"> 22</span><span class="c1"># パターンは文字列で表す. &quot;O&quot; が生きているセル, &quot;.&quot; が死んでいるセルである.</span>
+<span class="linenos"> 23</span><span class="n">PATTERNS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 24</span>    <span class="s2">&quot;block&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 25</span>        <span class="s2">&quot;OO&quot;</span><span class="p">,</span>
+<span class="linenos"> 26</span>        <span class="s2">&quot;OO&quot;</span><span class="p">,</span>
+<span class="linenos"> 27</span>    <span class="p">],</span>
+<span class="linenos"> 28</span>    <span class="s2">&quot;beehive&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 29</span>        <span class="s2">&quot;.OO.&quot;</span><span class="p">,</span>
+<span class="linenos"> 30</span>        <span class="s2">&quot;O..O&quot;</span><span class="p">,</span>
+<span class="linenos"> 31</span>        <span class="s2">&quot;.OO.&quot;</span><span class="p">,</span>
+<span class="linenos"> 32</span>    <span class="p">],</span>
+<span class="linenos"> 33</span>    <span class="s2">&quot;blinker&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 34</span>        <span class="s2">&quot;OOO&quot;</span><span class="p">,</span>
+<span class="linenos"> 35</span>    <span class="p">],</span>
+<span class="linenos"> 36</span>    <span class="s2">&quot;toad&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 37</span>        <span class="s2">&quot;.OOO&quot;</span><span class="p">,</span>
+<span class="linenos"> 38</span>        <span class="s2">&quot;OOO.&quot;</span><span class="p">,</span>
+<span class="linenos"> 39</span>    <span class="p">],</span>
+<span class="linenos"> 40</span>    <span class="s2">&quot;glider&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 41</span>        <span class="s2">&quot;.O.&quot;</span><span class="p">,</span>
+<span class="linenos"> 42</span>        <span class="s2">&quot;..O&quot;</span><span class="p">,</span>
+<span class="linenos"> 43</span>        <span class="s2">&quot;OOO&quot;</span><span class="p">,</span>
+<span class="linenos"> 44</span>    <span class="p">],</span>
+<span class="linenos"> 45</span>    <span class="s2">&quot;lwss&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 46</span>        <span class="s2">&quot;.O..O&quot;</span><span class="p">,</span>
+<span class="linenos"> 47</span>        <span class="s2">&quot;O....&quot;</span><span class="p">,</span>
+<span class="linenos"> 48</span>        <span class="s2">&quot;O...O&quot;</span><span class="p">,</span>
+<span class="linenos"> 49</span>        <span class="s2">&quot;OOOO.&quot;</span><span class="p">,</span>
+<span class="linenos"> 50</span>    <span class="p">],</span>
+<span class="linenos"> 51</span>    <span class="s2">&quot;r_pentomino&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 52</span>        <span class="s2">&quot;.OO&quot;</span><span class="p">,</span>
+<span class="linenos"> 53</span>        <span class="s2">&quot;OO.&quot;</span><span class="p">,</span>
+<span class="linenos"> 54</span>        <span class="s2">&quot;.O.&quot;</span><span class="p">,</span>
+<span class="linenos"> 55</span>    <span class="p">],</span>
+<span class="linenos"> 56</span>    <span class="s2">&quot;gosper_gun&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos"> 57</span>        <span class="s2">&quot;........................O...........&quot;</span><span class="p">,</span>
+<span class="linenos"> 58</span>        <span class="s2">&quot;......................O.O...........&quot;</span><span class="p">,</span>
+<span class="linenos"> 59</span>        <span class="s2">&quot;............OO......OO............OO&quot;</span><span class="p">,</span>
+<span class="linenos"> 60</span>        <span class="s2">&quot;...........O...O....OO............OO&quot;</span><span class="p">,</span>
+<span class="linenos"> 61</span>        <span class="s2">&quot;OO........O.....O...OO..............&quot;</span><span class="p">,</span>
+<span class="linenos"> 62</span>        <span class="s2">&quot;OO........O...O.OO....O.O...........&quot;</span><span class="p">,</span>
+<span class="linenos"> 63</span>        <span class="s2">&quot;..........O.....O.......O...........&quot;</span><span class="p">,</span>
+<span class="linenos"> 64</span>        <span class="s2">&quot;...........O...O....................&quot;</span><span class="p">,</span>
+<span class="linenos"> 65</span>        <span class="s2">&quot;............OO......................&quot;</span><span class="p">,</span>
+<span class="linenos"> 66</span>    <span class="p">],</span>
+<span class="linenos"> 67</span><span class="p">}</span>
+<span class="linenos"> 68</span>
+<span class="linenos"> 69</span>
+<span class="linenos"> 70</span><span class="k">def</span><span class="w"> </span><span class="nf">parse_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="linenos"> 71</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;B3/S23&quot; のような B/S 表記を (誕生の条件, 生存の条件) に変換する.&quot;&quot;&quot;</span>
+<span class="linenos"> 72</span>    <span class="n">birth_part</span><span class="p">,</span> <span class="n">survive_part</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos"> 73</span>    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">birth_part</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">survive_part</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">)):</span>
+<span class="linenos"> 74</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B/S 表記ではない: </span><span class="si">{</span><span class="n">rule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 75</span>    <span class="n">birth</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">birth_part</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="linenos"> 76</span>    <span class="n">survive</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">survive_part</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="linenos"> 77</span>    <span class="k">return</span> <span class="n">birth</span><span class="p">,</span> <span class="n">survive</span>
+<span class="linenos"> 78</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span><span class="k">def</span><span class="w"> </span><span class="nf">pattern_to_array</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="linenos"> 81</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;文字列で表したパターンを 0/1 の配列に変換する.&quot;&quot;&quot;</span>
+<span class="linenos"> 82</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span><span class="k">def</span><span class="w"> </span><span class="nf">place</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">top</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="linenos"> 86</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;指定した大きさの盤面にパターンを置く. 位置を省略すると中央に置く.&quot;&quot;&quot;</span>
+<span class="linenos"> 87</span>    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos"> 88</span>    <span class="n">cells</span> <span class="o">=</span> <span class="n">pattern_to_array</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="linenos"> 89</span>    <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">cells</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos"> 90</span>    <span class="k">if</span> <span class="n">top</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 91</span>        <span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 92</span>    <span class="k">if</span> <span class="n">left</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 93</span>        <span class="n">left</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos"> 94</span>    <span class="n">grid</span><span class="p">[</span><span class="n">top</span><span class="p">:</span><span class="n">top</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span><span class="n">left</span> <span class="o">+</span> <span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">cells</span>
+<span class="linenos"> 95</span>    <span class="k">return</span> <span class="n">grid</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span><span class="k">def</span><span class="w"> </span><span class="nf">count_neighbors</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">Grid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="linenos"> 99</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;各セルの周囲 8 セル (ムーア近傍から中心を除いたもの) にある生きたセルの数を数える.&quot;&quot;&quot;</span>
+<span class="linenos">100</span>    <span class="n">total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="linenos">101</span>    <span class="k">for</span> <span class="n">dy</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">102</span>        <span class="k">for</span> <span class="n">dx</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos">103</span>            <span class="k">if</span> <span class="n">dy</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">dx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">104</span>                <span class="k">continue</span>
+<span class="linenos">105</span>            <span class="n">total</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">106</span>    <span class="k">return</span> <span class="n">total</span>
+<span class="linenos">107</span>
+<span class="linenos">108</span>
+<span class="linenos">109</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">Grid</span><span class="p">,</span>
+<span class="linenos">110</span>         <span class="n">birth</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">3</span><span class="p">}),</span>
+<span class="linenos">111</span>         <span class="n">survive</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}))</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="linenos">112</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;1 世代だけ時間発展させる.&quot;&quot;&quot;</span>
+<span class="linenos">113</span>    <span class="n">n</span> <span class="o">=</span> <span class="n">count_neighbors</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="linenos">114</span>    <span class="n">born</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">birth</span><span class="p">))</span>
+<span class="linenos">115</span>    <span class="n">stays</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">survive</span><span class="p">))</span>
+<span class="linenos">116</span>    <span class="n">result</span><span class="p">:</span> <span class="n">Grid</span> <span class="o">=</span> <span class="p">(</span><span class="n">born</span> <span class="o">|</span> <span class="n">stays</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">117</span>    <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">118</span>
+<span class="linenos">119</span>
+<span class="linenos">120</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">121</span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;ライフゲームをアニメーション表示する&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--rule&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;B3/S23&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;B/S 表記の規則 (既定値は B3/S23)&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--pattern&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PATTERNS</span><span class="p">),</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;glider&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;初期パターン&quot;</span><span class="p">)</span>
+<span class="linenos">124</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--random&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;DENSITY&quot;</span><span class="p">,</span>
+<span class="linenos">125</span>                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;指定すると, この密度のランダムな初期配置を使う&quot;</span><span class="p">)</span>
+<span class="linenos">126</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">metavar</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;ROWS&quot;</span><span class="p">,</span> <span class="s2">&quot;COLS&quot;</span><span class="p">),</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;盤面の大きさ&quot;</span><span class="p">)</span>
+<span class="linenos">127</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--steps&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;表示する世代数&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--interval&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;1 世代あたりの表示時間 [ms]&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="linenos">130</span>
+<span class="linenos">131</span>    <span class="n">birth</span><span class="p">,</span> <span class="n">survive</span> <span class="o">=</span> <span class="n">parse_rule</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">rule</span><span class="p">)</span>
+<span class="linenos">132</span>    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">133</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">random</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">134</span>        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="linenos">135</span>        <span class="n">grid</span> <span class="o">=</span> <span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">args</span><span class="o">.</span><span class="n">random</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">136</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">137</span>        <span class="n">grid</span> <span class="o">=</span> <span class="n">place</span><span class="p">(</span><span class="n">PATTERNS</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">pattern</span><span class="p">],</span> <span class="n">shape</span><span class="p">)</span>
+<span class="linenos">138</span>
+<span class="linenos">139</span>    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">140</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="linenos">141</span>    <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.artist</span><span class="w"> </span><span class="kn">import</span> <span class="n">Artist</span>
+<span class="linenos">142</span>
+<span class="linenos">143</span>    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="linenos">144</span>    <span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="linenos">145</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="linenos">146</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="linenos">147</span>
+<span class="linenos">148</span>    <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;grid&quot;</span><span class="p">:</span> <span class="n">grid</span><span class="p">}</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Artist</span><span class="p">]:</span>
+<span class="linenos">151</span>        <span class="n">state</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">],</span> <span class="n">birth</span><span class="p">,</span> <span class="n">survive</span><span class="p">)</span>
+<span class="linenos">152</span>        <span class="n">image</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">])</span>
+<span class="linenos">153</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">rule</span><span class="si">}</span><span class="s2">  generation </span><span class="si">{</span><span class="n">frame</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">154</span>        <span class="k">return</span> <span class="p">[</span><span class="n">image</span><span class="p">]</span>
+<span class="linenos">155</span>
+<span class="linenos">156</span>    <span class="c1"># アニメーションのオブジェクトは表示が終わるまで変数に保持しておく必要がある.</span>
+<span class="linenos">157</span>    <span class="n">animation</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">interval</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">158</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">159</span>    <span class="k">del</span> <span class="n">animation</span>
+<span class="linenos">160</span>
+<span class="linenos">161</span>
+<span class="linenos">162</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">163</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="langtons-ant-py">
+<h2>langtons_ant.py<a class="headerlink" href="#langtons-ant-py" title="Link to this heading"></a></h2>
+<p>ラングトンのアリを指定したステップ数だけ動かし、結果を表示する。既定の 11000 ステップでは、ハイウェイが伸び始めた様子が見られる。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python langtons_ant.py</span>
+<span class="linenos">2</span><span class="go">python langtons_ant.py --steps 500 --size 40</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;ラングトンのアリのサンプル.</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="sd">白いセルの上ではアリが右に 90 度向きを変え, 黒いセルの上では左に 90 度向きを変える.</span>
+<span class="linenos"> 4</span><span class="sd">その後, いま居るセルの色を反転させてから, 向いている方向へ 1 セル進む.</span>
+<span class="linenos"> 5</span><span class="sd">何もない盤面から始めると, 約 1 万ステップの不規則な動きの後に「ハイウェイ」と</span>
+<span class="linenos"> 6</span><span class="sd">呼ばれる周期的な構造を作りながら一方向へ進み続ける.</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="sd">使い方の例::</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="sd">    python langtons_ant.py</span>
+<span class="linenos">11</span><span class="sd">    python langtons_ant.py --steps 500 --size 40</span>
+<span class="linenos">12</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="linenos">17</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos">20</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">Grid</span> <span class="o">=</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="c1"># 向きは 0: 上, 1: 右, 2: 下, 3: 左 とする. 配列の行番号は下に行くほど大きい.</span>
+<span class="linenos">25</span><span class="n">DIRECTIONS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="nd">@dataclass</span>
+<span class="linenos">29</span><span class="k">class</span><span class="w"> </span><span class="nc">Ant</span><span class="p">:</span>
+<span class="linenos">30</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;アリの位置 (行, 列) と向き.&quot;&quot;&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span>    <span class="n">row</span><span class="p">:</span> <span class="nb">int</span>
+<span class="linenos">33</span>    <span class="n">col</span><span class="p">:</span> <span class="nb">int</span>
+<span class="linenos">34</span>    <span class="n">direction</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">ant</span><span class="p">:</span> <span class="n">Ant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">38</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;アリを 1 ステップ動かす. grid と ant をその場で書き換える.&quot;&quot;&quot;</span>
+<span class="linenos">39</span>    <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">ant</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">ant</span><span class="o">.</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>   <span class="c1"># 白いセル: 右に曲がる</span>
+<span class="linenos">40</span>        <span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+<span class="linenos">41</span>    <span class="k">else</span><span class="p">:</span>                             <span class="c1"># 黒いセル: 左に曲がる</span>
+<span class="linenos">42</span>        <span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">direction</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+<span class="linenos">43</span>    <span class="n">grid</span><span class="p">[</span><span class="n">ant</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">ant</span><span class="o">.</span><span class="n">col</span><span class="p">]</span> <span class="o">^=</span> <span class="mi">1</span>       <span class="c1"># セルの色を反転する</span>
+<span class="linenos">44</span>    <span class="n">d_row</span><span class="p">,</span> <span class="n">d_col</span> <span class="o">=</span> <span class="n">DIRECTIONS</span><span class="p">[</span><span class="n">ant</span><span class="o">.</span><span class="n">direction</span><span class="p">]</span>
+<span class="linenos">45</span>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos">46</span>    <span class="n">ant</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">row</span> <span class="o">+</span> <span class="n">d_row</span><span class="p">)</span> <span class="o">%</span> <span class="n">rows</span>  <span class="c1"># 周期境界条件</span>
+<span class="linenos">47</span>    <span class="n">ant</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">col</span> <span class="o">+</span> <span class="n">d_col</span><span class="p">)</span> <span class="o">%</span> <span class="n">cols</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Grid</span><span class="p">,</span> <span class="n">Ant</span><span class="p">]:</span>
+<span class="linenos">51</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;size × size の白い盤面の中央からアリを steps ステップ動かす.&quot;&quot;&quot;</span>
+<span class="linenos">52</span>    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="linenos">53</span>    <span class="n">ant</span> <span class="o">=</span> <span class="n">Ant</span><span class="p">(</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">54</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+<span class="linenos">55</span>        <span class="n">step</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">ant</span><span class="p">)</span>
+<span class="linenos">56</span>    <span class="k">return</span> <span class="n">grid</span><span class="p">,</span> <span class="n">ant</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">60</span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;ラングトンのアリを動かして結果を表示する&quot;</span><span class="p">)</span>
+<span class="linenos">61</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;盤面の一辺のセル数&quot;</span><span class="p">)</span>
+<span class="linenos">62</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--steps&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">11000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;ステップ数&quot;</span><span class="p">)</span>
+<span class="linenos">63</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;画像の保存先 (省略時は画面に表示)&quot;</span><span class="p">)</span>
+<span class="linenos">64</span>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span>    <span class="n">grid</span><span class="p">,</span> <span class="n">ant</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span>    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span>    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="linenos">71</span>    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="linenos">72</span>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ant</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">ant</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="s2">&quot;r.&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="linenos">73</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Langton&#39;s ant after </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+<span class="linenos">74</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="linenos">75</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="linenos">76</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+<span class="linenos">77</span>        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="linenos">78</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">79</span>        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">80</span>
+<span class="linenos">81</span>
+<span class="linenos">82</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">83</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="traffic-nasch-py">
+<h2>traffic_nasch.py<a class="headerlink" href="#traffic-nasch-py" title="Link to this heading"></a></h2>
+<p>ナーゲル・シュレッケンベルク・モデルの時空図を表示する。<code class="docutils literal notranslate"><span class="pre">--diagram</span></code> を指定すると、密度を変えながら流量を求めて基本図を描く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python traffic_nasch.py</span>
+<span class="linenos">2</span><span class="go">python traffic_nasch.py --density 0.1 --p 0.3</span>
+<span class="linenos">3</span><span class="go">python traffic_nasch.py --diagram</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="sd">&quot;&quot;&quot;ナーゲル・シュレッケンベルク・モデルによる交通流シミュレーション.</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="sd">周回道路 (周期境界条件) を L 個のセルに区切り, 各セルに車が高々 1 台入る.</span>
+<span class="linenos">  4</span><span class="sd">各車の速度は 0〜v_max の整数で, 毎ステップ次の 4 つの規則を全車に同時に適用する.</span>
+<span class="linenos">  5</span>
+<span class="linenos">  6</span><span class="sd">1. 加速: v ← min(v + 1, v_max)</span>
+<span class="linenos">  7</span><span class="sd">2. 減速: v ← min(v, 前の車までの空きセル数)</span>
+<span class="linenos">  8</span><span class="sd">3. ランダムな減速: 確率 p で v ← max(v - 1, 0)</span>
+<span class="linenos">  9</span><span class="sd">4. 移動: 位置 ← 位置 + v</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="sd">使い方の例::</span>
+<span class="linenos"> 12</span>
+<span class="linenos"> 13</span><span class="sd">    python traffic_nasch.py                       # 時空図を表示する</span>
+<span class="linenos"> 14</span><span class="sd">    python traffic_nasch.py --density 0.1 --p 0.3</span>
+<span class="linenos"> 15</span><span class="sd">    python traffic_nasch.py --diagram             # 基本図 (密度と流量の関係) を表示する</span>
+<span class="linenos"> 16</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 17</span>
+<span class="linenos"> 18</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos"> 19</span>
+<span class="linenos"> 20</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="linenos"> 21</span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 24</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="linenos"> 25</span>
+<span class="linenos"> 26</span><span class="n">IntArray</span> <span class="o">=</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">]</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="n">EMPTY</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># 時空図で車が居ないセルを表す値</span>
+<span class="linenos"> 29</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span><span class="nd">@dataclass</span>
+<span class="linenos"> 32</span><span class="k">class</span><span class="w"> </span><span class="nc">Road</span><span class="p">:</span>
+<span class="linenos"> 33</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;周回道路の状態. positions と velocities の i 番目が i 台目の車を表す.&quot;&quot;&quot;</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span>    <span class="n">length</span><span class="p">:</span> <span class="nb">int</span>
+<span class="linenos"> 36</span>    <span class="n">positions</span><span class="p">:</span> <span class="n">IntArray</span>
+<span class="linenos"> 37</span>    <span class="n">velocities</span><span class="p">:</span> <span class="n">IntArray</span>
+<span class="linenos"> 38</span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span><span class="k">def</span><span class="w"> </span><span class="nf">make_road</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_cars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Road</span><span class="p">:</span>
+<span class="linenos"> 41</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;車をランダムな位置に速度 0 で配置した道路を作る.&quot;&quot;&quot;</span>
+<span class="linenos"> 42</span>    <span class="n">positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_cars</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos"> 43</span>    <span class="n">velocities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_cars</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos"> 44</span>    <span class="k">return</span> <span class="n">Road</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">velocities</span><span class="p">)</span>
+<span class="linenos"> 45</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">road</span><span class="p">:</span> <span class="n">Road</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 48</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;全車に 4 つの規則を同時に適用する. road をその場で書き換える.</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span><span class="sd">    車は追い越しをしないので, 配列上の並び順は周回方向の並び順のまま保たれる.</span>
+<span class="linenos"> 51</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 52</span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">positions</span>
+<span class="linenos"> 53</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">velocities</span>
+<span class="linenos"> 54</span>    <span class="c1"># 前の車 (配列上で次の要素, 最後の車にとっては先頭の車) までの空きセル数</span>
+<span class="linenos"> 55</span>    <span class="n">gaps</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">road</span><span class="o">.</span><span class="n">length</span>
+<span class="linenos"> 56</span>    <span class="k">if</span> <span class="n">pos</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos"> 57</span>        <span class="n">gaps</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos"> 58</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">vel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">v_max</span><span class="p">)</span>              <span class="c1"># 1. 加速</span>
+<span class="linenos"> 59</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>                   <span class="c1"># 2. 減速</span>
+<span class="linenos"> 60</span>    <span class="n">slow</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">vel</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">p</span>
+<span class="linenos"> 61</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">slow</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">vel</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">vel</span><span class="p">)</span>  <span class="c1"># 3. ランダムな減速</span>
+<span class="linenos"> 62</span>    <span class="n">road</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vel</span><span class="p">)</span> <span class="o">%</span> <span class="n">road</span><span class="o">.</span><span class="n">length</span>    <span class="c1"># 4. 移動</span>
+<span class="linenos"> 63</span>    <span class="n">road</span><span class="o">.</span><span class="n">velocities</span> <span class="o">=</span> <span class="n">vel</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span>
+<span class="linenos"> 66</span><span class="k">def</span><span class="w"> </span><span class="nf">snapshot</span><span class="p">(</span><span class="n">road</span><span class="p">:</span> <span class="n">Road</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntArray</span><span class="p">:</span>
+<span class="linenos"> 67</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;道路の各セルについて, 車が居れば速度を, 居なければ EMPTY を入れた配列を返す.&quot;&quot;&quot;</span>
+<span class="linenos"> 68</span>    <span class="n">cells</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">EMPTY</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos"> 69</span>    <span class="n">cells</span><span class="p">[</span><span class="n">road</span><span class="o">.</span><span class="n">positions</span><span class="p">]</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">velocities</span>
+<span class="linenos"> 70</span>    <span class="k">return</span> <span class="n">cells</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span>
+<span class="linenos"> 73</span><span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">density</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntArray</span><span class="p">:</span>
+<span class="linenos"> 74</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;時空図 (形は (steps + 1, length)) を計算する.&quot;&quot;&quot;</span>
+<span class="linenos"> 75</span>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos"> 76</span>    <span class="n">road</span> <span class="o">=</span> <span class="n">make_road</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">density</span> <span class="o">*</span> <span class="n">length</span><span class="p">)),</span> <span class="n">rng</span><span class="p">)</span>
+<span class="linenos"> 77</span>    <span class="n">history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos"> 78</span>    <span class="n">history</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">snapshot</span><span class="p">(</span><span class="n">road</span><span class="p">)</span>
+<span class="linenos"> 79</span>    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+<span class="linenos"> 80</span>        <span class="n">step</span><span class="p">(</span><span class="n">road</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+<span class="linenos"> 81</span>        <span class="n">history</span><span class="p">[</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">snapshot</span><span class="p">(</span><span class="n">road</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="k">return</span> <span class="n">history</span>
+<span class="linenos"> 83</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span><span class="k">def</span><span class="w"> </span><span class="nf">mean_flow</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">density</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="linenos"> 86</span>              <span class="n">transient</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">measure</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos"> 87</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;十分に時間が経った後の流量 (1 ステップに 1 セルあたりを通過する車の台数) を求める.</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span><span class="sd">    流量は 密度 × 平均速度 = (全車の速度の和) / 道路のセル数 で計算できる.</span>
+<span class="linenos"> 90</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 91</span>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos"> 92</span>    <span class="n">n_cars</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">density</span> <span class="o">*</span> <span class="n">length</span><span class="p">)</span>
+<span class="linenos"> 93</span>    <span class="k">if</span> <span class="n">n_cars</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 94</span>        <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos"> 95</span>    <span class="n">road</span> <span class="o">=</span> <span class="n">make_road</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_cars</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+<span class="linenos"> 96</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">transient</span><span class="p">):</span>
+<span class="linenos"> 97</span>        <span class="n">step</span><span class="p">(</span><span class="n">road</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+<span class="linenos"> 98</span>    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos"> 99</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measure</span><span class="p">):</span>
+<span class="linenos">100</span>        <span class="n">step</span><span class="p">(</span><span class="n">road</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+<span class="linenos">101</span>        <span class="n">total</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">road</span><span class="o">.</span><span class="n">velocities</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">/</span> <span class="n">length</span>
+<span class="linenos">102</span>    <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">measure</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span>
+<span class="linenos">105</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">106</span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;ナーゲル・シュレッケンベルク・モデルの交通流シミュレーション&quot;</span><span class="p">)</span>
+<span class="linenos">107</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--length&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;道路のセル数&quot;</span><span class="p">)</span>
+<span class="linenos">108</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--density&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;車の密度 (0〜1)&quot;</span><span class="p">)</span>
+<span class="linenos">109</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--vmax&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;最高速度&quot;</span><span class="p">)</span>
+<span class="linenos">110</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--p&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;ランダムな減速の確率&quot;</span><span class="p">)</span>
+<span class="linenos">111</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--steps&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;ステップ数&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--diagram&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;基本図 (密度と流量の関係) を描く&quot;</span><span class="p">)</span>
+<span class="linenos">113</span>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="linenos">114</span>
+<span class="linenos">115</span>    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span>    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="linenos">118</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">diagram</span><span class="p">:</span>
+<span class="linenos">119</span>        <span class="n">densities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="linenos">120</span>        <span class="n">flows</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean_flow</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">rho</span><span class="p">),</span> <span class="n">args</span><span class="o">.</span><span class="n">vmax</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">rho</span> <span class="ow">in</span> <span class="n">densities</span><span class="p">]</span>
+<span class="linenos">121</span>        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">densities</span><span class="p">,</span> <span class="n">flows</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;density&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;flow&quot;</span><span class="p">)</span>
+<span class="linenos">124</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fundamental diagram (v_max=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">vmax</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="linenos">125</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">126</span>        <span class="n">history</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">density</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">vmax</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
+<span class="linenos">127</span>        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">history</span> <span class="o">!=</span> <span class="n">EMPTY</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;position&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;density=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">density</span><span class="si">}</span><span class="s2">, v_max=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">vmax</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">131</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">132</span>
+<span class="linenos">133</span>
+<span class="linenos">134</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">135</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="lattice-gas-hpp-py">
+<h2>lattice_gas_hpp.py<a class="headerlink" href="#lattice-gas-hpp-py" title="Link to this heading"></a></h2>
+<p>HPP モデル（格子ガス・オートマトン）で、中央の密度の高い領域から波が広がる様子を表示する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">python lattice_gas_hpp.py</span>
+<span class="linenos">2</span><span class="go">python lattice_gas_hpp.py --size 256 --steps 60</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;HPP モデル (格子ガス・オートマトン) の簡易実装.</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="sd">正方格子の各ノードには, 東・北・西・南の 4 方向へ動く粒子が方向ごとに高々 1 個ずつ存在できる.</span>
+<span class="linenos"> 4</span><span class="sd">1 ステップは次の 2 段階からなる.</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="sd">1. 衝突: 正面衝突する 2 粒子 (東と西のみ, または北と南のみ) を 90 度回転させる.</span>
+<span class="linenos"> 7</span><span class="sd">2. 移動: 各粒子を向いている方向の隣のノードへ移す.</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="sd">衝突の前後で粒子数と運動量が保存される. 境界条件は周期境界とする.</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="sd">使い方の例::</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="sd">    python lattice_gas_hpp.py</span>
+<span class="linenos">14</span><span class="sd">    python lattice_gas_hpp.py --size 256 --steps 60</span>
+<span class="linenos">15</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos">22</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">npt</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="n">BoolGrid</span> <span class="o">=</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">]</span>
+<span class="linenos">25</span><span class="n">FloatGrid</span> <span class="o">=</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="c1"># 4 方向の粒子の有無を形 (4, 行数, 列数) の真偽値配列で表す. 配列の行番号は下に行くほど大きい.</span>
+<span class="linenos">28</span><span class="n">EAST</span><span class="p">,</span> <span class="n">NORTH</span><span class="p">,</span> <span class="n">WEST</span><span class="p">,</span> <span class="n">SOUTH</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="k">def</span><span class="w"> </span><span class="nf">collide</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">BoolGrid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoolGrid</span><span class="p">:</span>
+<span class="linenos">32</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;正面衝突する粒子の組を 90 度回転させた状態を返す.&quot;&quot;&quot;</span>
+<span class="linenos">33</span>    <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">state</span>
+<span class="linenos">34</span>    <span class="n">horizontal</span> <span class="o">=</span> <span class="n">e</span> <span class="o">&amp;</span> <span class="n">w</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">n</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">s</span>  <span class="c1"># 東西からの正面衝突</span>
+<span class="linenos">35</span>    <span class="n">vertical</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="n">s</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">e</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">w</span>    <span class="c1"># 南北からの正面衝突</span>
+<span class="linenos">36</span>    <span class="n">flip</span> <span class="o">=</span> <span class="n">horizontal</span> <span class="o">|</span> <span class="n">vertical</span>  <span class="c1"># 該当するノードでは 4 方向すべての有無を反転すればよい</span>
+<span class="linenos">37</span>    <span class="n">result</span><span class="p">:</span> <span class="n">BoolGrid</span> <span class="o">=</span> <span class="n">state</span> <span class="o">^</span> <span class="n">flip</span>
+<span class="linenos">38</span>    <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="k">def</span><span class="w"> </span><span class="nf">propagate</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">BoolGrid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoolGrid</span><span class="p">:</span>
+<span class="linenos">42</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;各粒子を隣のノードへ移動させた状態を返す.&quot;&quot;&quot;</span>
+<span class="linenos">43</span>    <span class="n">moved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">44</span>    <span class="n">moved</span><span class="p">[</span><span class="n">EAST</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">EAST</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">45</span>    <span class="n">moved</span><span class="p">[</span><span class="n">WEST</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">WEST</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">46</span>    <span class="n">moved</span><span class="p">[</span><span class="n">NORTH</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">NORTH</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">47</span>    <span class="n">moved</span><span class="p">[</span><span class="n">SOUTH</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">SOUTH</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">48</span>    <span class="k">return</span> <span class="n">moved</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">BoolGrid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoolGrid</span><span class="p">:</span>
+<span class="linenos">52</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;衝突と移動をこの順に行う.&quot;&quot;&quot;</span>
+<span class="linenos">53</span>    <span class="k">return</span> <span class="n">propagate</span><span class="p">(</span><span class="n">collide</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span><span class="k">def</span><span class="w"> </span><span class="nf">initial_state</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">background</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bump</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoolGrid</span><span class="p">:</span>
+<span class="linenos">57</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;一様な背景の中央に, 粒子の密度が高い円形の領域を置いた初期状態を作る.&quot;&quot;&quot;</span>
+<span class="linenos">58</span>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos">59</span>    <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">size</span><span class="p">]</span>
+<span class="linenos">60</span>    <span class="n">inside</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="linenos">61</span>    <span class="n">probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">inside</span><span class="p">,</span> <span class="n">bump</span><span class="p">,</span> <span class="n">background</span><span class="p">)</span>
+<span class="linenos">62</span>    <span class="n">state</span><span class="p">:</span> <span class="n">BoolGrid</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">probability</span>
+<span class="linenos">63</span>    <span class="k">return</span> <span class="n">state</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span><span class="k">def</span><span class="w"> </span><span class="nf">coarse_density</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">BoolGrid</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatGrid</span><span class="p">:</span>
+<span class="linenos">67</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;block × block のノードごとに平均した粒子密度を返す. 微視的なゆらぎをならして見るために使う.&quot;&quot;&quot;</span>
+<span class="linenos">68</span>    <span class="n">counts</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="linenos">69</span>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">shape</span>
+<span class="linenos">70</span>    <span class="n">reshaped</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[:</span><span class="n">rows</span> <span class="o">-</span> <span class="n">rows</span> <span class="o">%</span> <span class="n">block</span><span class="p">,</span> <span class="p">:</span><span class="n">cols</span> <span class="o">-</span> <span class="n">cols</span> <span class="o">%</span> <span class="n">block</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">rows</span> <span class="o">//</span> <span class="n">block</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="n">cols</span> <span class="o">//</span> <span class="n">block</span><span class="p">,</span> <span class="n">block</span><span class="p">)</span>
+<span class="linenos">71</span>    <span class="n">result</span><span class="p">:</span> <span class="n">FloatGrid</span> <span class="o">=</span> <span class="n">reshaped</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="linenos">72</span>    <span class="k">return</span> <span class="n">result</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span>
+<span class="linenos">75</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">76</span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;HPP モデルで密度の波が広がる様子を表示する&quot;</span><span class="p">)</span>
+<span class="linenos">77</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--size&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;格子の一辺のノード数&quot;</span><span class="p">)</span>
+<span class="linenos">78</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--steps&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;ステップ数&quot;</span><span class="p">)</span>
+<span class="linenos">79</span>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--block&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;密度を平均するブロックの一辺&quot;</span><span class="p">)</span>
+<span class="linenos">80</span>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="linenos">81</span>
+<span class="linenos">82</span>    <span class="n">state</span> <span class="o">=</span> <span class="n">initial_state</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bump</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">16</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">83</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">):</span>
+<span class="linenos">84</span>        <span class="n">state</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="linenos">85</span>
+<span class="linenos">86</span>    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">87</span>
+<span class="linenos">88</span>    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="linenos">89</span>    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">coarse_density</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">block</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="linenos">90</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HPP lattice gas, step </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">91</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="linenos">92</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="linenos">93</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">94</span>
+<span class="linenos">95</span>
+<span class="linenos">96</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">97</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="references.html" class="btn btn-neutral float-left" title="参考文献" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

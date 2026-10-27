@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 述語と量化子 &mdash; 論理・集合入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=27372ee5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="6. 集合の基礎" href="set.html" />
+    <link rel="prev" title="4. 推論と証明" href="inference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            論理・集合入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proposition.html">2. 命題と論理演算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equivalence.html">3. 論理式の同値変形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">4. 推論と証明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 述語と量化子</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">5.1. 述語</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">5.2. 量化子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">5.3. 量化子の否定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">5.4. 多重の量化子と順序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">5.5. 自由変数と束縛変数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">5.6. 議論領域の制限と空の議論領域</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">5.7. サンプルコード</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">6. 集合の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relation.html">7. 関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapping.html">8. 写像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality.html">9. 集合の大きさ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paradox.html">10. 素朴集合論の限界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">付録 C 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">論理・集合入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>述語と量化子</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">5. </span>述語と量化子<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>「<span class="math notranslate nohighlight">\(x &gt; 3\)</span>」のように変数を含む主張は、変数の値が決まるまで真偽が定まらない。本章では、このような主張を扱う述語と、「すべての」「ある」を表す量化子を導入する。</p>
+<section id="id2">
+<h2><span class="section-number">5.1. </span>述語<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（述語）</p>
+<p>変数を含み、変数に値を代入すると命題になる主張を述語という。</p>
+</div>
+<p>たとえば <span class="math notranslate nohighlight">\(P(x)\)</span> を「<span class="math notranslate nohighlight">\(x &gt; 3\)</span>」とすると、<span class="math notranslate nohighlight">\(P(5)\)</span> は真の命題、<span class="math notranslate nohighlight">\(P(1)\)</span> は偽の命題である。変数が動く範囲をあらかじめ定めておき、これを議論領域という。議論領域は、自然数全体や整数全体、あるプログラムが扱うユーザー全体などである。議論領域は値の集まりであり、第 6 章で扱う集合の言葉で表される。</p>
+<p>述語は複数の変数を含んでもよい。たとえば <span class="math notranslate nohighlight">\(Q(x, y)\)</span> を「<span class="math notranslate nohighlight">\(x + y = 4\)</span>」とすると、<span class="math notranslate nohighlight">\(Q(1, 3)\)</span> は真、<span class="math notranslate nohighlight">\(Q(2, 3)\)</span> は偽である。</p>
+<p>述語は「議論領域の値を受け取って真理値を返すもの」なので、Python では <code class="docutils literal notranslate"><span class="pre">bool</span></code> 型の値を返す関数として表せる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.2. </span>量化子<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>述語に値を代入する以外にも、述語から命題を作る方法がある。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（全称量化子・存在量化子）</p>
+<p><span class="math notranslate nohighlight">\(\forall x \, P(x)\)</span> は「議論領域のすべての <span class="math notranslate nohighlight">\(x\)</span> について <span class="math notranslate nohighlight">\(P(x)\)</span> が成り立つ」という命題を表す。<span class="math notranslate nohighlight">\(\exists x \, P(x)\)</span> は「議論領域のある <span class="math notranslate nohighlight">\(x\)</span> について <span class="math notranslate nohighlight">\(P(x)\)</span> が成り立つ」、すなわち「<span class="math notranslate nohighlight">\(P(x)\)</span> を満たす <span class="math notranslate nohighlight">\(x\)</span> が少なくとも 1 つ存在する」という命題を表す。記号 <span class="math notranslate nohighlight">\(\forall\)</span> を全称量化子、<span class="math notranslate nohighlight">\(\exists\)</span> を存在量化子という。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(\forall x \, P(x)\)</span> の形の命題を全称命題、<span class="math notranslate nohighlight">\(\exists x \, P(x)\)</span> の形の命題を存在命題という。議論領域を明示したいときは、議論領域を <span class="math notranslate nohighlight">\(D\)</span> として <span class="math notranslate nohighlight">\(\forall x \in D \, P(x)\)</span>、<span class="math notranslate nohighlight">\(\exists x \in D \, P(x)\)</span> と書く。</p>
+<p>議論領域を自然数全体とすると、<span class="math notranslate nohighlight">\(\forall x \, (x \geq 0)\)</span> は真、<span class="math notranslate nohighlight">\(\forall x \, (x &gt; 3)\)</span> は偽、<span class="math notranslate nohighlight">\(\exists x \, (x &gt; 3)\)</span> は真である。</p>
+<p>議論領域が有限集合 <span class="math notranslate nohighlight">\(\{a_1, a_2, \ldots, a_n\}\)</span> のときは、全称命題は論理積、存在命題は論理和で書き直せる。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\forall x \, P(x) &amp;\equiv P(a_1) \land P(a_2) \land \cdots \land P(a_n) \\
+\exists x \, P(x) &amp;\equiv P(a_1) \lor P(a_2) \lor \cdots \lor P(a_n)\end{split}\]</div>
+<p>これは Python の組み込み関数 <code class="docutils literal notranslate"><span class="pre">all</span></code> と <code class="docutils literal notranslate"><span class="pre">any</span></code> にそのまま対応する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">domain</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="linenos">2</span><span class="nb">print</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">domain</span><span class="p">))</span>  <span class="c1"># ∀x (x ≥ 0) → True</span>
+<span class="linenos">3</span><span class="nb">print</span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">domain</span><span class="p">))</span>   <span class="c1"># ∃x (x &gt; 3) → True</span>
+</pre></div>
+</div>
+<p>ただし、プログラムで確かめられるのは議論領域が有限の場合だけである。議論領域が自然数全体のように無限の場合、全称命題をすべての値について確かめることはできない。そのため、無限の議論領域についての全称命題は、第 4 章で扱った証明によって示す必要がある。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">5.3. </span>量化子の否定<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>「すべてのテストが成功した」の否定は「成功しなかったテストが存在する」である。「すべてのテストが失敗した」ではない点に注意する。一般に、次の法則が成り立つ。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">量化子の否定</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\neg \forall x \, P(x) &amp;\equiv \exists x \, \neg P(x) \\
+\neg \exists x \, P(x) &amp;\equiv \forall x \, \neg P(x)\end{split}\]</div>
+</div>
+<p>議論領域が有限の場合、全称命題は論理積、存在命題は論理和なので、これはド・モルガンの法則そのものである。この法則は、反例を 1 つ挙げれば全称命題を否定できるという、第 4 章で述べた事実の根拠でもある。</p>
+<p>Python では <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">all(p(x)</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">domain)</span></code> と <code class="docutils literal notranslate"><span class="pre">any(not</span> <span class="pre">p(x)</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">domain)</span></code> が常に同じ値になる。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">5.4. </span>多重の量化子と順序<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>量化子は重ねて使える。議論領域を自然数全体とすると、</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\forall x \, \exists y \, (y &gt; x)\)</span> は「どの <span class="math notranslate nohighlight">\(x\)</span> に対しても、<span class="math notranslate nohighlight">\(x\)</span> より大きい <span class="math notranslate nohighlight">\(y\)</span> がある」という意味であり、真である（<span class="math notranslate nohighlight">\(y = x + 1\)</span> とすればよい）。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\exists y \, \forall x \, (y &gt; x)\)</span> は「どの <span class="math notranslate nohighlight">\(x\)</span> よりも大きい <span class="math notranslate nohighlight">\(y\)</span> がある」という意味であり、偽である（そのような <span class="math notranslate nohighlight">\(y\)</span> は <span class="math notranslate nohighlight">\(y &gt; y\)</span> を満たさなければならない）。</p></li>
+</ul>
+<p>このように、異なる種類の量化子の順序を入れ替えると意味が変わる。<span class="math notranslate nohighlight">\(\forall x \, \exists y\)</span> では <span class="math notranslate nohighlight">\(y\)</span> を <span class="math notranslate nohighlight">\(x\)</span> ごとに選んでよいが、<span class="math notranslate nohighlight">\(\exists y \, \forall x\)</span> では 1 つの <span class="math notranslate nohighlight">\(y\)</span> がすべての <span class="math notranslate nohighlight">\(x\)</span> に対して通用しなければならない。</p>
+<p>一方、同じ種類の量化子どうしは入れ替えてもよい。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\forall x \, \forall y \, P(x, y) &amp;\equiv \forall y \, \forall x \, P(x, y) \\
+\exists x \, \exists y \, P(x, y) &amp;\equiv \exists y \, \exists x \, P(x, y)\end{split}\]</div>
+<p>また、<span class="math notranslate nohighlight">\(\exists y \, \forall x \, P(x, y)\)</span> が真ならば <span class="math notranslate nohighlight">\(\forall x \, \exists y \, P(x, y)\)</span> も真である。逆は上の例のとおり成り立つとは限らない。</p>
+<p>多重の量化子を含む命題の否定は、量化子の否定を外側から順に適用して求める。たとえば、数列 <span class="math notranslate nohighlight">\(a_0, a_1, a_2, \ldots\)</span> が上に有界であるとは</p>
+<div class="math notranslate nohighlight">
+\[\exists M \, \forall n \, (a_n \leq M)\]</div>
+<p>が成り立つことをいう。その否定は</p>
+<div class="math notranslate nohighlight">
+\[\neg \exists M \, \forall n \, (a_n \leq M)
+\equiv \forall M \, \neg \forall n \, (a_n \leq M)
+\equiv \forall M \, \exists n \, (a_n &gt; M)\]</div>
+<p>であり、「どのような <span class="math notranslate nohighlight">\(M\)</span> に対しても、<span class="math notranslate nohighlight">\(M\)</span> を超える項がある」という意味になる。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">5.5. </span>自由変数と束縛変数<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(\forall x \, P(x, y)\)</span> において、変数 <span class="math notranslate nohighlight">\(x\)</span> は量化子 <span class="math notranslate nohighlight">\(\forall x\)</span> によって束縛されているといい、束縛変数と呼ぶ。束縛されていない変数 <span class="math notranslate nohighlight">\(y\)</span> を自由変数と呼ぶ。自由変数を含む式は、その変数の値が決まるまで真偽が定まらない述語である。</p>
+<p>束縛変数の名前は自由に付け替えられる。<span class="math notranslate nohighlight">\(\forall x \, P(x)\)</span> と <span class="math notranslate nohighlight">\(\forall z \, P(z)\)</span> は同じ命題である。ただし、付け替えた名前が既に自由変数として使われている場合は意味が変わってしまうので、そのような名前は使えない。</p>
+<p>この区別は、Python のジェネレータ式の変数と外側の変数の区別によく似ている。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="linenos">2</span><span class="n">result</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>ここで <code class="docutils literal notranslate"><span class="pre">x</span></code> はジェネレータ式の中だけで意味を持つ束縛変数にあたり、<code class="docutils literal notranslate"><span class="pre">z</span></code> に名前を変えても結果は変わらない。一方 <code class="docutils literal notranslate"><span class="pre">y</span></code> は式の外で値が決まる自由変数にあたる。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">5.6. </span>議論領域の制限と空の議論領域<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>議論領域全体ではなく、条件 <span class="math notranslate nohighlight">\(D(x)\)</span> を満たす <span class="math notranslate nohighlight">\(x\)</span> だけについて述べたいことがある。<span class="math notranslate nohighlight">\(D(x)\)</span> を満たす <span class="math notranslate nohighlight">\(x\)</span> の全体を <span class="math notranslate nohighlight">\(D\)</span> と書くと、次のように書き換えられる。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\forall x \in D \, P(x) &amp;\equiv \forall x \, (D(x) \to P(x)) \\
+\exists x \in D \, P(x) &amp;\equiv \exists x \, (D(x) \land P(x))\end{split}\]</div>
+<p>全称量化子では含意 <span class="math notranslate nohighlight">\(\to\)</span>、存在量化子では論理積 <span class="math notranslate nohighlight">\(\land\)</span> になることに注意する。存在量化子のほうを <span class="math notranslate nohighlight">\(\exists x \, (D(x) \to P(x))\)</span> と書くと、<span class="math notranslate nohighlight">\(D(x)\)</span> を満たさない <span class="math notranslate nohighlight">\(x\)</span> が 1 つでもあれば真になってしまい、意図と異なる命題になる。</p>
+<p>この書き換えから、<span class="math notranslate nohighlight">\(D(x)\)</span> を満たす <span class="math notranslate nohighlight">\(x\)</span> が 1 つも無い場合、すなわち議論領域が空の場合の真理値が分かる。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\forall x \in D \, P(x)\)</span> は、含意の前件 <span class="math notranslate nohighlight">\(D(x)\)</span> が常に偽なので、<span class="math notranslate nohighlight">\(P(x)\)</span> の内容にかかわらず真である。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\exists x \in D \, P(x)\)</span> は、論理積の一方 <span class="math notranslate nohighlight">\(D(x)\)</span> が常に偽なので偽である。</p></li>
+</ul>
+<p>空の議論領域についての全称命題が真になることを、空虚な真という。Python でも <code class="docutils literal notranslate"><span class="pre">all([])</span></code> は <code class="docutils literal notranslate"><span class="pre">True</span></code>、<code class="docutils literal notranslate"><span class="pre">any([])</span></code> は <code class="docutils literal notranslate"><span class="pre">False</span></code> である。「チェック対象が 0 件のとき、すべてのチェックに合格した」とみなされる、という形でプログラムにも現れるので注意する。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">5.7. </span>サンプルコード<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>有限の議論領域上で全称命題・存在命題を評価し、量化子の順序による違いと空の議論領域の扱いを確かめるサンプルコードを示す。</p>
+<p><a class="reference download internal" download="" href="_downloads/6997c0b93911698844bd56c8616b79af/quantifier.py"><code class="xref download docutils literal notranslate"><span class="pre">quantifier.py</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;有限の議論領域上で全称命題・存在命題を評価するサンプル。&quot;&quot;&quot;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span><span class="w"> </span><span class="nf">for_all</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;∀x ∈ domain. predicate(x) の真理値を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 8</span>    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">domain</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">12</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;∃x ∈ domain. predicate(x) の真理値を返す。&quot;&quot;&quot;</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">domain</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">17</span>    <span class="n">domain</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 議論領域 D = {0, 1, 2, 3, 4}</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>    <span class="k">def</span><span class="w"> </span><span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">20</span>        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="c1"># ∀x ∃y P(x, y): どの x にも x + y = 4 となる y がある（y = 4 - x）。</span>
+<span class="linenos">23</span>    <span class="n">forall_exists</span> <span class="o">=</span> <span class="n">for_all</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">exists</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
+<span class="linenos">24</span>    <span class="c1"># ∃y ∀x P(x, y): どの x についても x + y = 4 となる共通の y がある。</span>
+<span class="linenos">25</span>    <span class="n">exists_forall</span> <span class="o">=</span> <span class="n">exists</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">for_all</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
+<span class="linenos">26</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;∀x ∃y (x + y = 4):&quot;</span><span class="p">,</span> <span class="n">forall_exists</span><span class="p">)</span>
+<span class="linenos">27</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;∃y ∀x (x + y = 4):&quot;</span><span class="p">,</span> <span class="n">exists_forall</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>    <span class="c1"># 量化子の否定: ¬∀x P(x) と ∃x ¬P(x) は常に一致する。</span>
+<span class="linenos">30</span>    <span class="k">def</span><span class="w"> </span><span class="nf">is_even</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">31</span>        <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;¬∀x (x は偶数):&quot;</span><span class="p">,</span> <span class="ow">not</span> <span class="n">for_all</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">is_even</span><span class="p">))</span>
+<span class="linenos">34</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;∃x ¬(x は偶数):&quot;</span><span class="p">,</span> <span class="n">exists</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">is_even</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>    <span class="c1"># 空の議論領域: 全称命題は真、存在命題は偽になる。</span>
+<span class="linenos">37</span>    <span class="n">empty</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">38</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;∀x ∈ ∅ (x は偶数):&quot;</span><span class="p">,</span> <span class="n">for_all</span><span class="p">(</span><span class="n">empty</span><span class="p">,</span> <span class="n">is_even</span><span class="p">))</span>
+<span class="linenos">39</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;∃x ∈ ∅ (x は偶数):&quot;</span><span class="p">,</span> <span class="n">exists</span><span class="p">(</span><span class="n">empty</span><span class="p">,</span> <span class="n">is_even</span><span class="p">))</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">43</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>∀x ∃y (x + y = 4): True
+∃y ∀x (x + y = 4): False
+¬∀x (x は偶数): True
+∃x ¬(x は偶数): True
+∀x ∈ ∅ (x は偶数): True
+∃x ∈ ∅ (x は偶数): False
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="inference.html" class="btn btn-neutral float-left" title="4. 推論と証明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="set.html" class="btn btn-neutral float-right" title="6. 集合の基礎" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

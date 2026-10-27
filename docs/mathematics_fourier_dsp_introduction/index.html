@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フーリエ解析・デジタル信号処理入門 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="はじめに" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">フーリエ解析・デジタル信号処理入門</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>フーリエ解析・デジタル信号処理入門<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>音声、振動、電波、心電図、画像など、工学で扱う多くのデータは「信号」である。フーリエ解析は、信号を周波数の異なる正弦波の重ね合わせとして捉える数学であり、デジタル信号処理は、その考え方を計算機の上で実現する技術である。本書は、エンジニアと工学系の大学生を対象とした、フーリエ解析とデジタル信号処理の入門書である。</p>
+<p>本書では、数式の厳密な証明よりも、式の意味と導出の流れを重視する。各章では「数式 → 図 → コード」の順に説明し、Python と NumPy、SciPy のサンプルコードで結果を確かめる。サンプルコードは本文から閲覧し、ダウンロードできる。</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#id2">本書の目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#id3">対象読者と前提知識</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#id4">本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#id5">実行環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#id6">表記の約束</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch01_signals.html#id2">信号とは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_signals.html#id3">正弦波</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_signals.html#id4">複素数とオイラーの公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_signals.html#id5">複素正弦波</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_signals.html#id6">内積と直交性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_signals.html#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id2">周期信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id3">三角関数の直交性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id4">フーリエ係数の求め方</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id5">例：矩形波</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id6">ギブス現象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id7">複素フーリエ級数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id8">スペクトル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id9">パーセバルの等式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_fourier_series.html#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id2">フーリエ級数からフーリエ変換へ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id3">代表的なフーリエ変換の対</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id4">フーリエ変換の性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id5">畳み込みと畳み込み定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id6">デルタ関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id7">時間幅と帯域幅の関係</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_fourier_transform.html#id8">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id2">標本化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id3">エイリアシング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id4">標本化した信号のスペクトル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id5">標本化定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id6">信号の再構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id7">アンチエイリアシングフィルタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id8">量子化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_sampling.html#id9">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id1">基本的な離散時間信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id2">システムと LTI システム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id3">インパルス応答と畳み込み和</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id4">因果性と安定性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id5">差分方程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id6">周波数応答</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#z">z 変換と伝達関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_lti_systems.html#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#id2">離散時間フーリエ変換</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#id3">離散フーリエ変換</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#id4">行列による表現</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#dft">DFT の性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#id5">循環畳み込みと線形畳み込み</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#id6">周波数分解能とゼロ詰め</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_dtft_dft.html#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch07_fft.html#dft">DFT の計算量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_fft.html#cooley-tukey">Cooley-Tukey 法の原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_fft.html#fft">FFT の実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_fft.html#numpy-fft">NumPy の FFT 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_fft.html#id2">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch08_spectrum_analysis.html#id2">スペクトル漏れ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_spectrum_analysis.html#id3">窓関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_spectrum_analysis.html#id4">パワースペクトル密度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_spectrum_analysis.html#id5">短時間フーリエ変換とスペクトログラム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_spectrum_analysis.html#id6">時間分解能と周波数分解能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_spectrum_analysis.html#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#id2">フィルタの種類と仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#fir">FIR フィルタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#id3">窓関数法による FIR フィルタの設計</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#iir">IIR フィルタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#id4">フィルタを適用するときの注意</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#fir-iir">FIR フィルタと IIR フィルタの比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_digital_filters.html#id5">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch10_applications.html#id2">雑音の除去</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_applications.html#fft">FFT による高速な畳み込み</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_applications.html#id3">リサンプリング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_applications.html#dft">画像の 2 次元 DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_applications.html#dtmf">DTMF 信号の検出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_applications.html#id4">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch11_further_study.html#id2">本書の振り返り</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch11_further_study.html#id3">次に学ぶ話題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch11_further_study.html#id4">学び方の提案</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-right" title="はじめに" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

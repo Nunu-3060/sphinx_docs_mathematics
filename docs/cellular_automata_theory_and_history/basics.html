@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 基本概念と定義 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="3. 歴史" href="history.html" />
+    <link rel="prev" title="1. はじめに" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 基本概念と定義</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.1. 構成要素</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.2. 配置と大域写像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.3. 近傍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.4. 静止状態と有限配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.5. 境界条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.6. 更新の方式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.7. 計算例と時空図</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>基本概念と定義</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">2. </span>基本概念と定義<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本章では、本書全体で使う CA の基本的な用語と記号を定義する。</p>
+<section id="id2">
+<h2><span class="section-number">2.1. </span>構成要素<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>CA は次の 4 つの要素で決まる。</p>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 2.1 </span><span class="caption-text">CA の構成要素</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>要素</p></th>
+<th class="head"><p>記号</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>格子（セル空間）</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span></p></td>
+<td><p>セルが並ぶ空間。<span class="math notranslate nohighlight">\(d\)</span> 次元の整数格子で、各格子点が 1 つのセルに対応する。</p></td>
+</tr>
+<tr class="row-odd"><td><p>状態集合</p></td>
+<td><p><span class="math notranslate nohighlight">\(S\)</span></p></td>
+<td><p>各セルがとりうる状態の有限集合。2 状態の場合は <span class="math notranslate nohighlight">\(S = \{0, 1\}\)</span> とする。</p></td>
+</tr>
+<tr class="row-even"><td><p>近傍</p></td>
+<td><p><span class="math notranslate nohighlight">\(N = (v_1, \ldots, v_m)\)</span></p></td>
+<td><p>次の状態を決めるときに参照するセルの相対位置の列。<span class="math notranslate nohighlight">\(v_i \in \mathbb{Z}^d\)</span> である。</p></td>
+</tr>
+<tr class="row-odd"><td><p>局所規則</p></td>
+<td><p><span class="math notranslate nohighlight">\(f : S^m \to S\)</span></p></td>
+<td><p>近傍のセルの状態の組から、次の時刻の状態を決める関数。局所遷移規則とも呼ぶ。</p></td>
+</tr>
+</tbody>
+</table>
+<p>ここで重要なのは、格子・近傍・局所規則がすべてのセルで共通であること（一様性）、次の状態が近傍という有限の範囲だけで決まること（局所性）、そして全セルが同時に更新されること（同期性）である。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.2. </span>配置と大域写像<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>格子上の各セルに状態を 1 つずつ割り当てたもの、すなわち写像 <span class="math notranslate nohighlight">\(c : \mathbb{Z}^d \to S\)</span> を<a class="reference internal" href="glossary.html#term-31"><span class="xref std std-term">配置</span></a>（configuration）と呼ぶ。配置全体の集合を <span class="math notranslate nohighlight">\(S^{\mathbb{Z}^d}\)</span> と書く。配置 <span class="math notranslate nohighlight">\(c\)</span> における位置 <span class="math notranslate nohighlight">\(x\)</span> のセルの状態は <span class="math notranslate nohighlight">\(c(x)\)</span> である。</p>
+<p>局所規則 <span class="math notranslate nohighlight">\(f\)</span> をすべてのセルに同時に適用すると、配置 <span class="math notranslate nohighlight">\(c\)</span> から新しい配置 <span class="math notranslate nohighlight">\(F(c)\)</span> が得られる。</p>
+<div class="math notranslate nohighlight">
+\[F(c)(x) = f\bigl(c(x + v_1),\, c(x + v_2),\, \ldots,\, c(x + v_m)\bigr) \qquad (x \in \mathbb{Z}^d)\]</div>
+<p>この写像 <span class="math notranslate nohighlight">\(F : S^{\mathbb{Z}^d} \to S^{\mathbb{Z}^d}\)</span> を<a class="reference internal" href="glossary.html#term-28"><span class="xref std std-term">大域写像</span></a>（大域遷移写像）と呼ぶ。初期配置 <span class="math notranslate nohighlight">\(c^0\)</span> から始めて <span class="math notranslate nohighlight">\(c^{t+1} = F(c^t)\)</span> を繰り返し計算することが、CA の時間発展である。</p>
+<p>局所規則は有限集合 <span class="math notranslate nohighlight">\(S^m\)</span> から <span class="math notranslate nohighlight">\(S\)</span> への関数なので、その個数は有限であり、<span class="math notranslate nohighlight">\(|S|^{|S|^m}\)</span> 通りある。たとえば 2 状態で 3 セルの近傍を持つ 1 次元 CA の局所規則は <span class="math notranslate nohighlight">\(2^{2^3} = 256\)</span> 通りである（第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」で扱う）。一方、2 状態で、次節で定義するムーア近傍（9 セル）を持つ 2 次元 CA の局所規則は <span class="math notranslate nohighlight">\(2^{512}\)</span> 通りもあり、すべてを調べ尽くすことはできない。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.3. </span>近傍<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>よく使われる近傍を <a class="reference internal" href="#fig-neighborhoods"><span class="std std-numref">図 2.1</span></a> に示す。</p>
+<ul class="simple">
+<li><p><strong>1 次元の半径 r の近傍</strong>：位置 <span class="math notranslate nohighlight">\(x\)</span> の左右 <span class="math notranslate nohighlight">\(r\)</span> セルずつと自分自身の <span class="math notranslate nohighlight">\(2r + 1\)</span> セル、すなわち <span class="math notranslate nohighlight">\(N = (-r, \ldots, -1, 0, 1, \ldots, r)\)</span> である。</p></li>
+<li><p><strong>フォン・ノイマン近傍</strong>：2 次元で、マンハッタン距離が <span class="math notranslate nohighlight">\(r\)</span> 以下のセル <span class="math notranslate nohighlight">\(\{ (i, j) : |i| + |j| \le r \}\)</span> である。<span class="math notranslate nohighlight">\(r = 1\)</span> のときは自分自身と上下左右の 5 セルになる。</p></li>
+<li><p><strong>ムーア近傍</strong>：2 次元で、チェビシェフ距離が <span class="math notranslate nohighlight">\(r\)</span> 以下のセル <span class="math notranslate nohighlight">\(\{ (i, j) : \max(|i|, |j|) \le r \}\)</span> である。<span class="math notranslate nohighlight">\(r = 1\)</span> のときは自分自身と周囲 8 セルの 9 セルになる。</p></li>
+</ul>
+<figure class="align-center" id="id10">
+<span id="fig-neighborhoods"></span><a class="reference internal image-reference" href="_images/neighborhoods.png"><img alt="_images/neighborhoods.png" src="_images/neighborhoods.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 2.1 </span><span class="caption-text">フォン・ノイマン近傍とムーア近傍（赤が中心のセル、青が近傍に含まれるセル）</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>単に「近傍」と言うとき、中心のセル自身を含める場合と含めない場合がある。本書では、局所規則の引数としての近傍 <span class="math notranslate nohighlight">\(N\)</span> は中心のセルを含むものとし、ライフゲームの説明などで「周囲 8 セル」と言う場合は中心のセルを含まないものとする。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.4. </span>静止状態と有限配置<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>状態 <span class="math notranslate nohighlight">\(q \in S\)</span> が <span class="math notranslate nohighlight">\(f(q, q, \ldots, q) = q\)</span> を満たすとき、<span class="math notranslate nohighlight">\(q\)</span> を<a class="reference internal" href="glossary.html#term-21"><span class="xref std std-term">静止状態</span></a>と呼ぶ。周囲がすべて静止状態ならそのセルも静止状態のままなので、静止状態は「何もない背景」を表す。本書では、静止状態は 0 であるとする。</p>
+<p>有限個のセルを除いてすべて静止状態であるような配置を<a class="reference internal" href="glossary.html#term-38"><span class="xref std std-term">有限配置</span></a>と呼ぶ。コンピュータ上でパターンを扱うときや、計算能力の議論をするときには、有限配置を考えることが多い。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.5. </span>境界条件<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>理論上の格子 <span class="math notranslate nohighlight">\(\mathbb{Z}^d\)</span> は無限に広いが、コンピュータ上では有限個のセルしか扱えない。そのため、端のセルの近傍が格子の外にはみ出す部分をどう扱うかを決める必要がある。これを<a class="reference internal" href="glossary.html#term-9"><span class="xref std std-term">境界条件</span></a>と呼ぶ（<a class="reference internal" href="#fig-boundaries"><span class="std std-numref">図 2.2</span></a>）。</p>
+<table class="docutils align-default" id="id11">
+<caption><span class="caption-number">表 2.2 </span><span class="caption-text">主な境界条件</span><a class="headerlink" href="#id11" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>境界条件</p></th>
+<th class="head"><p>扱い方</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>周期境界条件</p></td>
+<td><p>右端の右隣を左端のセルとみなす（2 次元では上端と下端もつなぐ）。格子は 1 次元では円周、2 次元ではトーラス（ドーナツの表面）になる。端が特別扱いされないので、最もよく使われる。</p></td>
+</tr>
+<tr class="row-odd"><td><p>固定境界条件</p></td>
+<td><p>格子の外側のセルを、常に一定の状態（多くは静止状態）とみなす。</p></td>
+</tr>
+<tr class="row-even"><td><p>反射境界条件</p></td>
+<td><p>格子の外側のセルが、境界をはさんで鏡に映した位置のセルと同じ状態であるとみなす。</p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-center" id="id12">
+<span id="fig-boundaries"></span><a class="reference internal image-reference" href="_images/boundaries.png"><img alt="_images/boundaries.png" src="_images/boundaries.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 2.2 </span><span class="caption-text">1 次元の場合の境界条件（左右の破線のセルが、格子の外側に置いた仮想的なセル）</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>有限の格子で周期境界条件を使う場合、配置の総数は有限なので、時間発展は必ずいつか以前と同じ配置に戻り、その後は周期的になる。ただし、その周期や周期に入るまでの時間は格子の大きさに対して指数的に長くなりうるので、実際のシミュレーションで周期に達することはまれである。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">2.6. </span>更新の方式<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>標準的な CA では、すべてのセルを同時に更新する（同期更新）。実装上は、現在の配置を読みながら新しい配置を別の配列に書き込めばよい。現在の配置を書き換えながら順に更新すると、あるセルの更新結果がまだ更新していない隣のセルの計算に混ざり、意図と異なる規則を計算することになるので注意が必要である。</p>
+<p>これに対し、セルを 1 つずつ（またはランダムな順序で）更新する方式を非同期更新と呼ぶ。非同期更新の CA については、第 8 章「<a class="reference internal" href="advanced.html"><span class="doc">発展的な話題</span></a>」で触れる。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">2.7. </span>計算例と時空図<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>具体例として、2 状態・半径 1 の 1 次元 CA で、局所規則を</p>
+<div class="math notranslate nohighlight">
+\[f(a, b, c) = a \oplus c\]</div>
+<p>とするものを考える。ここで <span class="math notranslate nohighlight">\(\oplus\)</span> は排他的論理和（XOR）であり、左右の隣のセルの状態が異なれば 1、同じなら 0 となる。これは第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」で扱うルール 90 である。セル数 8、周期境界条件で、位置 3 のセルだけが 1 の配置から始めると、時間発展は次のようになる。</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 2.3 </span><span class="caption-text">ルール 90 の時間発展の計算例</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>時刻</p></th>
+<th class="head"><p>配置（位置 0〜7）</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>たとえば時刻 2 の位置 0 のセルは、時刻 1 の位置 7 と位置 1 のセルがどちらも 0 なので 0 になる（位置 0 の左隣は、周期境界条件により位置 7 である）。時刻 3 の位置 0 のセルは、時刻 2 の位置 7 が 0、位置 1 が 1 なので 1 になる。</p>
+<p>このように各時刻の配置を上から順に並べた図を<a class="reference internal" href="glossary.html#term-18"><span class="xref std std-term">時空図</span></a>と呼ぶ。1 次元 CA の振る舞いは、時空図を見ると一目で把握できる。本書の 1 次元 CA の図は、すべてこの形式で描いている。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="1. はじめに" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="history.html" class="btn btn-neutral float-right" title="3. 歴史" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

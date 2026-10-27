@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 12 章 アルゴリズムと確率 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="付録 A 記号一覧" href="appendix_symbols.html" />
+    <link rel="prev" title="第 11 章 マルコフ連鎖入門" href="ch11_markov_chains.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 12 章 アルゴリズムと確率</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">ハッシュ衝突</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">衝突の確率</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">ハッシュ値の長さ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">クーポンコレクター問題</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">期待値</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">裾の確率</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">乱択クイックソート</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">アルゴリズム</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">比較回数の期待値</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">ブルームフィルタ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">仕組み</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">偽陽性率</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">モンテカルロ法による数値計算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 12 章 アルゴリズムと確率</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 12 章 アルゴリズムと確率<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本章では、これまでに学んだ数え上げ・期待値・不等式を使って、乱数を利用するアルゴリズムやデータ構造の性能を解析する。乱数を使うアルゴリズムを<strong>乱択アルゴリズム</strong>という。乱択アルゴリズムは、大きく次の 2 種類に分けられる。</p>
+<ul class="simple">
+<li><p><strong>ラスベガス法</strong>：結果は常に正しいが、実行時間が乱数によって変わる。例：乱択クイックソート。</p></li>
+<li><p><strong>モンテカルロ法</strong>：実行時間はおおむね一定だが、結果が一定の確率で誤っている（または誤差を含む）。例：ブルームフィルタ、モンテカルロ積分。</p></li>
+</ul>
+<p>どちらの場合も、性能や正しさは確率的にしか保証されない。その保証を与えるのが確率論である。</p>
+<section id="id2">
+<h2>ハッシュ衝突<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>ハッシュ表やデータの重複検出では、キーをハッシュ関数で <span class="math notranslate nohighlight">\(m\)</span> 通りの値（バケット）のいずれかに対応させる。異なるキーが同じ値に対応することを<strong>衝突</strong>という。ここでは、各キーのハッシュ値が独立に <span class="math notranslate nohighlight">\(m\)</span> 通りの値を等しい確率でとると仮定する（<strong>一様ハッシュの仮定</strong>）。</p>
+<section id="id3">
+<h3>衝突の確率<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(n\)</span> 個のキーで衝突が起こらない確率は、第 6 章の誕生日問題と同じく</p>
+<div class="math notranslate nohighlight">
+\[P(\text{衝突なし}) = \prod_{i=0}^{n-1} \left(1 - \frac{i}{m}\right)\]</div>
+<p>である。<span class="math notranslate nohighlight">\(1 - x \le e^{-x}\)</span> を使うと</p>
+<div class="math notranslate nohighlight">
+\[P(\text{衝突なし}) \le \prod_{i=0}^{n-1} e^{-i/m} = \exp\left(-\frac{n(n - 1)}{2m}\right)\]</div>
+<p>となり、<span class="math notranslate nohighlight">\(n\)</span> が <span class="math notranslate nohighlight">\(m\)</span> より十分小さければ右辺はよい近似にもなる。この近似式から、衝突の確率が 1/2 になるキーの個数はおよそ</p>
+<div class="math notranslate nohighlight">
+\[n \approx \sqrt{2m \log 2} \approx 1.18 \sqrt{m}\]</div>
+<p>である。<span class="math notranslate nohighlight">\(m = 365\)</span> のとき <span class="math notranslate nohighlight">\(n \approx 22.5\)</span> となり、誕生日問題の答え 23 とほぼ一致する。</p>
+<p>指示確率変数を使うと、衝突するキーの組の個数の期待値も簡単に求められる。<span class="math notranslate nohighlight">\(\binom{n}{2}\)</span> 個のキーの組のそれぞれが衝突する確率は <span class="math notranslate nohighlight">\(1/m\)</span> なので、期待値の線形性により</p>
+<div class="math notranslate nohighlight">
+\[E[\text{衝突する組の個数}] = \binom{n}{2} \frac{1}{m}\]</div>
+<p>である。</p>
+</section>
+<section id="id4">
+<h3>ハッシュ値の長さ<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>32 ビットのハッシュ値（<span class="math notranslate nohighlight">\(m = 2^{32} \approx 4.3 \times 10^9\)</span>）では、<span class="math notranslate nohighlight">\(n \approx 1.18 \times 2^{16} \approx 77000\)</span> 個のキーで衝突の確率が 1/2 に達する。値域の大きさに比べてごくわずかな個数である。一般に <span class="math notranslate nohighlight">\(b\)</span> ビットのハッシュ値は、<span class="math notranslate nohighlight">\(2^{b/2}\)</span> 個程度のキーで衝突しやすくなる。暗号学的ハッシュ関数で、衝突を見つける攻撃（<strong>誕生日攻撃</strong>）への耐性として <span class="math notranslate nohighlight">\(2^{b/2}\)</span> 程度の計算量しか期待できないのはこのためである。重複検出などで衝突を事実上無視したい場合は、扱うデータの個数の 2 乗よりも十分大きな値域を持つハッシュ値を使う必要がある。</p>
+</section>
+</section>
+<section id="id5">
+<h2>クーポンコレクター問題<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(n\)</span> 種類のクーポンがあり、1 回引くごとに各種類が等しい確率 <span class="math notranslate nohighlight">\(1/n\)</span> で（独立に）手に入るとする。全種類をそろえるまでに引く回数 <span class="math notranslate nohighlight">\(T\)</span> の期待値を求める。この問題は<strong>クーポンコレクター問題</strong>と呼ばれ、「すべてのサーバーに少なくとも 1 回リクエストが届くまでの回数」「ランダムなテスト入力ですべての分岐を網羅するまでの回数」などのモデルになる。</p>
+<section id="id6">
+<h3>期待値<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(i - 1\)</span> 種類を持っている状態から <span class="math notranslate nohighlight">\(i\)</span> 種類目を手に入れるまでに引く回数を <span class="math notranslate nohighlight">\(T_i\)</span> とする。このとき、1 回引いて新しい種類が出る確率は <span class="math notranslate nohighlight">\(p_i = (n - i + 1)/n\)</span> なので、<span class="math notranslate nohighlight">\(T_i \sim \mathrm{Geo}(p_i)\)</span> であり、<span class="math notranslate nohighlight">\(E[T_i] = n/(n - i + 1)\)</span> である。<span class="math notranslate nohighlight">\(T = T_1 + \cdots + T_n\)</span> なので、期待値の線形性により</p>
+<div class="math notranslate nohighlight">
+\[E[T] = \sum_{i=1}^{n} \frac{n}{n - i + 1} = n \left(1 + \frac{1}{2} + \cdots + \frac{1}{n}\right) = n H_n\]</div>
+<p>となる。ここで <span class="math notranslate nohighlight">\(H_n = \sum_{k=1}^{n} 1/k\)</span> は<strong>調和数</strong>であり、<span class="math notranslate nohighlight">\(H_n \approx \log n + 0.5772\)</span> （0.5772... はオイラーの定数）と近似できる。したがって <span class="math notranslate nohighlight">\(E[T] \approx n \log n\)</span> である。<span class="math notranslate nohighlight">\(n = 50\)</span> のとき <span class="math notranslate nohighlight">\(E[T] = 50 H_{50} \approx 225\)</span> であり、種類数の 4 倍以上の回数が必要である。最後の数種類をそろえるのに多くの回数がかかる（最後の 1 種類だけで平均 <span class="math notranslate nohighlight">\(n\)</span> 回）ことが原因である。</p>
+</section>
+<section id="id7">
+<h3>裾の確率<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(t\)</span> 回引いた後に特定の種類 <span class="math notranslate nohighlight">\(j\)</span> をまだ持っていない確率は <span class="math notranslate nohighlight">\((1 - 1/n)^t \le e^{-t/n}\)</span> である。ユニオンバウンドにより、いずれかの種類が欠けている確率は <span class="math notranslate nohighlight">\(n e^{-t/n}\)</span> 以下である。<span class="math notranslate nohighlight">\(t = n \log n + cn\)</span> とおくと</p>
+<div class="math notranslate nohighlight">
+\[P(T &gt; n \log n + cn) \le n e^{-(\log n + c)} = e^{-c}\]</div>
+<p>となる。たとえば <span class="math notranslate nohighlight">\(c = 5\)</span> とすれば、<span class="math notranslate nohighlight">\(n \log n + 5n\)</span> 回以内にそろわない確率は <span class="math notranslate nohighlight">\(e^{-5} \approx 0.007\)</span> 以下である。</p>
+</section>
+</section>
+<section id="id8">
+<h2>乱択クイックソート<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3>アルゴリズム<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p><strong>クイックソート</strong>は、配列から 1 つの要素（<strong>ピボット</strong>）を選び、ピボットより小さい要素と大きい要素に分けて、それぞれを再帰的に整列するアルゴリズムである。ピボットを常に先頭の要素とすると、すでに整列済みの配列に対して比較回数が <span class="math notranslate nohighlight">\(n(n - 1)/2\)</span> となり、最悪の性能になる。ピボットを一様ランダムに選ぶ<strong>乱択クイックソート</strong>では、入力がどのような配列であっても、比較回数の期待値が <span class="math notranslate nohighlight">\(O(n \log n)\)</span> になる。</p>
+</section>
+<section id="id10">
+<h3>比較回数の期待値<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>要素は相異なるとし、整列後の順に <span class="math notranslate nohighlight">\(z_1 &lt; z_2 &lt; \cdots &lt; z_n\)</span> と名前を付ける。要素同士の比較は、一方がピボットのときにしか行われないので、各組 <span class="math notranslate nohighlight">\(z_i, z_j\)</span> （<span class="math notranslate nohighlight">\(i &lt; j\)</span>）は高々 1 回しか比較されない。<span class="math notranslate nohighlight">\(X_{ij}\)</span> を「<span class="math notranslate nohighlight">\(z_i\)</span> と <span class="math notranslate nohighlight">\(z_j\)</span> が比較される」事象の指示確率変数とすると、比較回数は <span class="math notranslate nohighlight">\(X = \sum_{i &lt; j} X_{ij}\)</span> である。</p>
+<p><span class="math notranslate nohighlight">\(z_i\)</span> と <span class="math notranslate nohighlight">\(z_j\)</span> が比較されるのはいつかを考える。集合 <span class="math notranslate nohighlight">\(Z_{ij} = \{z_i, z_{i+1}, \ldots, z_j\}\)</span> の要素がピボットに選ばれるまで、<span class="math notranslate nohighlight">\(Z_{ij}\)</span> の要素はすべて同じ部分配列に属している。<span class="math notranslate nohighlight">\(Z_{ij}\)</span> から最初に選ばれるピボットが <span class="math notranslate nohighlight">\(z_i\)</span> または <span class="math notranslate nohighlight">\(z_j\)</span> ならば両者は比較され、間にある要素ならば <span class="math notranslate nohighlight">\(z_i\)</span> と <span class="math notranslate nohighlight">\(z_j\)</span> は別の部分配列に分かれて、以後比較されない。<span class="math notranslate nohighlight">\(Z_{ij}\)</span> の <span class="math notranslate nohighlight">\(j - i + 1\)</span> 個の要素はどれも等しい確率で最初のピボットになるので</p>
+<div class="math notranslate nohighlight">
+\[P(X_{ij} = 1) = \frac{2}{j - i + 1}\]</div>
+<p>である。期待値の線形性により、<span class="math notranslate nohighlight">\(d = j - i\)</span> として</p>
+<div class="math notranslate nohighlight">
+\[E[X] = \sum_{i &lt; j} \frac{2}{j - i + 1} = \sum_{d=1}^{n-1} (n - d) \frac{2}{d + 1} = 2(n + 1) H_n - 4n\]</div>
+<p>となる（最後の等式は <span class="math notranslate nohighlight">\(n - d = (n + 1) - (d + 1)\)</span> と分けて計算すれば得られる）。<span class="math notranslate nohighlight">\(H_n \approx \log n\)</span> より、<span class="math notranslate nohighlight">\(n\)</span> が大きいとき <span class="math notranslate nohighlight">\(E[X] \approx 2n \log n \approx 1.39 \, n \log_2 n\)</span> である。比較による整列アルゴリズムは最悪の場合に少なくとも <span class="math notranslate nohighlight">\(\log_2 n! \approx n \log_2 n\)</span> 回の比較を必要とすることが知られており、乱択クイックソートの平均的な比較回数はその約 1.39 倍にとどまる。</p>
+</section>
+</section>
+<section id="id11">
+<h2>ブルームフィルタ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<h3>仕組み<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p><strong>ブルームフィルタ</strong>は、「ある要素が集合に含まれるか」を少ないメモリで判定するデータ構造である <a class="reference internal" href="references.html#bloom1970" id="id13"><span>[Bloom1970]</span></a>。<span class="math notranslate nohighlight">\(m\)</span> ビットの配列（初期値はすべて 0）と、<span class="math notranslate nohighlight">\(k\)</span> 個のハッシュ関数 <span class="math notranslate nohighlight">\(h_1, \ldots, h_k\)</span> （値は <span class="math notranslate nohighlight">\(0, \ldots, m - 1\)</span>）を使う。</p>
+<ul class="simple">
+<li><p><strong>登録</strong>：要素 <span class="math notranslate nohighlight">\(x\)</span> について、<span class="math notranslate nohighlight">\(h_1(x), \ldots, h_k(x)\)</span> 番目のビットをすべて 1 にする。</p></li>
+<li><p><strong>判定</strong>：要素 <span class="math notranslate nohighlight">\(y\)</span> について、<span class="math notranslate nohighlight">\(h_1(y), \ldots, h_k(y)\)</span> 番目のビットがすべて 1 なら「含まれる（かもしれない）」、1 つでも 0 なら「含まれない」と答える。</p></li>
+</ul>
+<p>登録した要素に対しては必ず「含まれる」と答えるので、<strong>偽陰性</strong>（含まれるのに含まれないと答えること）は起こらない。一方、登録していない要素でも、たまたま <span class="math notranslate nohighlight">\(k\)</span> 個のビットがすべて他の要素によって 1 になっていれば「含まれる」と答えてしまう。これを<strong>偽陽性</strong>という。ブルームフィルタは、ディスクやネットワークへの高価な問い合わせの前に、確実に存在しないものを安価に除外する用途で使われる。</p>
+</section>
+<section id="id14">
+<h3>偽陽性率<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(n\)</span> 個の要素を登録した後、特定のビットが 0 のままである確率は、<span class="math notranslate nohighlight">\(kn\)</span> 回のハッシュ値がどれもそのビットに当たらない確率なので</p>
+<div class="math notranslate nohighlight">
+\[\left(1 - \frac{1}{m}\right)^{kn} \approx e^{-kn/m}\]</div>
+<p>である。登録していない要素の <span class="math notranslate nohighlight">\(k\)</span> 個のビットがすべて 1 である確率、すなわち偽陽性率は、各ビットが独立であると近似すると</p>
+<div class="math notranslate nohighlight">
+\[f(k) = \left(1 - e^{-kn/m}\right)^k\]</div>
+<p>となる（実際にはビット同士はわずかに依存しているので、これは近似である）。</p>
+<p><span class="math notranslate nohighlight">\(k\)</span> を大きくすると、確認するビットが増えるので偽陽性は起こりにくくなるが、配列の 1 の割合も増える。この 2 つの効果のつり合いで、最適な <span class="math notranslate nohighlight">\(k\)</span> が決まる。<span class="math notranslate nohighlight">\(f(k)\)</span> を最小にする <span class="math notranslate nohighlight">\(k\)</span> は <span class="math notranslate nohighlight">\(k = (m/n) \log 2\)</span> であり、このとき <span class="math notranslate nohighlight">\(f \approx (1/2)^k \approx 0.6185^{m/n}\)</span> となる。たとえば 1 要素あたり 10 ビット（<span class="math notranslate nohighlight">\(m/n = 10\)</span>）を使うと、<span class="math notranslate nohighlight">\(k = 7\)</span> で偽陽性率は約 0.82% になる（<a class="reference internal" href="#fig-ch12-bloom"><span class="std std-numref">図 19</span></a>）。</p>
+<figure class="align-center" id="id19">
+<span id="fig-ch12-bloom"></span><a class="reference internal image-reference" href="_images/ch12_bloom.png"><img alt="_images/ch12_bloom.png" src="_images/ch12_bloom.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 19 </span><span class="caption-text">ハッシュ関数の個数 <span class="math notranslate nohighlight">\(k\)</span> とブルームフィルタの偽陽性率（点線は最適な <span class="math notranslate nohighlight">\(k\)</span>）</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id15">
+<h2>モンテカルロ法による数値計算<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p>面積や積分の値を、乱数を使って近似的に求める方法も<strong>モンテカルロ法</strong>と呼ばれる。たとえば、単位正方形 <span class="math notranslate nohighlight">\([0, 1]^2\)</span> に一様乱数で <span class="math notranslate nohighlight">\(N\)</span> 個の点を打つと、各点が四分円 <span class="math notranslate nohighlight">\(x^2 + y^2 \le 1\)</span> に入る確率は面積比 <span class="math notranslate nohighlight">\(\pi/4\)</span> に等しい。四分円に入った点の割合を <span class="math notranslate nohighlight">\(\hat{p}\)</span> とすると、<span class="math notranslate nohighlight">\(4\hat{p}\)</span> は円周率 <span class="math notranslate nohighlight">\(\pi\)</span> の推定値になる（<a class="reference internal" href="#fig-ch12-pi"><span class="std std-numref">図 20</span></a>）。</p>
+<p><span class="math notranslate nohighlight">\(\hat{p}\)</span> は <span class="math notranslate nohighlight">\(N\)</span> 個の独立な <span class="math notranslate nohighlight">\(\mathrm{Ber}(\pi/4)\)</span> の標本平均なので、大数の法則により <span class="math notranslate nohighlight">\(4\hat{p} \to \pi\)</span> である。推定値の標準偏差は</p>
+<div class="math notranslate nohighlight">
+\[4 \sqrt{\frac{(\pi/4)(1 - \pi/4)}{N}} \approx \frac{1.64}{\sqrt{N}}\]</div>
+<p>であり、誤差は <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span> に比例して小さくなる。精度を 1 桁上げるには点の個数を 100 倍にする必要があるので、低次元の積分ではモンテカルロ法は効率がよくない。しかし、誤差の大きさが次元に直接は依存しないので、高次元の積分や、複雑なシステムのシミュレーションでは有力な方法となる。</p>
+<figure class="align-center" id="id20">
+<span id="fig-ch12-pi"></span><a class="reference internal image-reference" href="_images/ch12_pi.png"><img alt="_images/ch12_pi.png" src="_images/ch12_pi.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 20 </span><span class="caption-text">モンテカルロ法による円周率の推定（左：乱数点、右：点の個数と誤差）</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/e632f8ec8dd476c37b359790bc2f5d87/ch12_randomized_algorithms.py"><code class="xref download docutils literal notranslate"><span class="pre">ch12_randomized_algorithms.py</span></code></a></p>
+<p>ハッシュ衝突の確率の厳密値は、多数の 1 に近い数の積になる。そのまま掛け合わせる代わりに対数の和を計算し、<code class="docutils literal notranslate"><span class="pre">math.log1p(x)</span></code> （<span class="math notranslate nohighlight">\(\log(1 + x)\)</span> を <span class="math notranslate nohighlight">\(x\)</span> が小さいときにも精度よく計算する関数）を使う。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">collision_probability</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;n 個のキーを m 個のバケットへ一様にハッシュしたとき、衝突が起きる確率の厳密値を返す。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">log_no_collision</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="o">-</span><span class="n">i</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">4</span>    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_no_collision</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>乱択クイックソートは、比較回数を数えるように実装する。各段階で、ピボット以外の要素はピボットとちょうど 1 回ずつ比較される。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">quicksort_comparisons</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">rng</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ピボットを一様ランダムに選ぶクイックソートで、要素同士の比較回数を返す（要素は相異なるとする）。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">4</span>        <span class="k">return</span> <span class="mi">0</span>
+<span class="linenos">5</span>    <span class="n">pivot</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="n">smaller</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">]</span>
+<span class="linenos">7</span>    <span class="n">larger</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">]</span>
+<span class="linenos">8</span>    <span class="c1"># ピボット以外の各要素をピボットと 1 回ずつ比較する</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">quicksort_comparisons</span><span class="p">(</span><span class="n">smaller</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="o">+</span> <span class="n">quicksort_comparisons</span><span class="p">(</span><span class="n">larger</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ブルームフィルタでは、<span class="math notranslate nohighlight">\(k\)</span> 個の独立なハッシュ関数を用意する代わりに、1 つのハッシュ値（SHA-256）から 2 つの値 <span class="math notranslate nohighlight">\(h_1, h_2\)</span> を取り出し、<span class="math notranslate nohighlight">\(h_1 + i h_2 \bmod m\)</span> （<span class="math notranslate nohighlight">\(i = 0, \ldots, k - 1\)</span>）で <span class="math notranslate nohighlight">\(k\)</span> 個の位置を作る。この<strong>ダブルハッシュ法</strong>は、偽陽性率をほとんど悪化させずに計算を省けることが知られている <a class="reference internal" href="references.html#kirsch2006" id="id16"><span>[Kirsch2006]</span></a>。<span class="math notranslate nohighlight">\(h_2\)</span> を奇数にしているのは、<span class="math notranslate nohighlight">\(h_2\)</span> が 0 になって <span class="math notranslate nohighlight">\(k\)</span> 個の位置がすべて同じになるのを避けるためである。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span><span class="w"> </span><span class="nc">BloomFilter</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;m ビットの配列と k 個のハッシュ関数からなるブルームフィルタ。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">bits</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span><span class="w"> </span><span class="nf">_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="linenos">10</span>        <span class="c1"># SHA-256 の値から 2 つのハッシュ値 h1, h2 を取り出し、h1 + i * h2 (mod m) で k 個の位置を作る</span>
+<span class="linenos">11</span>        <span class="n">digest</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="linenos">12</span>        <span class="n">h1</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="s2">&quot;little&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>        <span class="n">h2</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="s2">&quot;little&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="mi">1</span>
+<span class="linenos">14</span>        <span class="k">return</span> <span class="p">[(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">h2</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)]</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">17</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;要素を登録する。&quot;&quot;&quot;</span>
+<span class="linenos">18</span>        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_indexes</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+<span class="linenos">19</span>            <span class="bp">self</span><span class="o">.</span><span class="n">bits</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">def</span><span class="w"> </span><span class="nf">might_contain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">22</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;登録済みの可能性があれば True、確実に未登録なら False を返す。&quot;&quot;&quot;</span>
+<span class="linenos">23</span>        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bits</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_indexes</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- ハッシュ衝突 ---
+n= 10000, m=2^32: 厳密値=0.0116  近似=0.0116
+n= 50000, m=2^32: 厳密値=0.2525  近似=0.2525
+n= 77163, m=2^32: 厳密値=0.5000  近似=0.5000
+n=100000, m=2^32: 厳密値=0.6878  近似=0.6878
+--- クーポンコレクター問題 (n=50) ---
+理論値 n H_n = 224.96, シミュレーション平均 = 223.86
+--- 乱択クイックソートの比較回数 ---
+n=  10: 理論値=    24.44  シミュレーション平均=    24.77
+n= 100: 理論値=   647.85  シミュレーション平均=   649.59
+n=1000: 理論値= 10985.91  シミュレーション平均= 11053.98
+--- ブルームフィルタ (m=10000, n=1000) ---
+k= 1: 理論値=0.0952  実測=0.0974
+k= 3: 理論値=0.0174  実測=0.0183
+k= 5: 理論値=0.0094  実測=0.0098
+k= 7: 理論値=0.0082  実測=0.0087
+k=10: 理論値=0.0102  実測=0.0107
+--- モンテカルロ法による円周率の推定 ---
+N=    100: 推定値=3.48000  誤差=0.33841
+N=  10000: 推定値=3.13760  誤差=0.00399
+N=1000000: 推定値=3.14112  誤差=0.00047
+</pre></div>
+</div>
+<p>いずれも理論値と実験値がよく一致している。ブルームフィルタの実測値が理論値をわずかに上回っているのは、主に偽陽性率の近似式がビット同士の依存を無視していること、ダブルハッシュ法が完全に独立なハッシュ関数ではないことによる。また、偽陽性率は <span class="math notranslate nohighlight">\(k = 7\)</span> 付近で最小になっており、最適値 <span class="math notranslate nohighlight">\((m/n) \log 2 \approx 6.9\)</span> と一致する。</p>
+</section>
+<section id="id17">
+<h2>まとめ<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> 通りのハッシュ値は、<span class="math notranslate nohighlight">\(\sqrt{m}\)</span> 程度の個数のキーで衝突しやすくなる（誕生日問題）。</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> 種類のクーポンをそろえる回数の期待値は <span class="math notranslate nohighlight">\(n H_n \approx n \log n\)</span> であり、幾何分布の和として求められる。</p></li>
+<li><p>乱択クイックソートの比較回数の期待値は <span class="math notranslate nohighlight">\(2(n + 1) H_n - 4n \approx 2n \log n\)</span> であり、指示確率変数と期待値の線形性で導ける。</p></li>
+<li><p>ブルームフィルタの偽陽性率は <span class="math notranslate nohighlight">\((1 - e^{-kn/m})^k\)</span> で近似でき、<span class="math notranslate nohighlight">\(k = (m/n) \log 2\)</span> で最小になる。</p></li>
+<li><p>モンテカルロ法による推定の誤差は <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span> に比例する。</p></li>
+</ul>
+<p>本章の話題を含む乱択アルゴリズムの解析については <a class="reference internal" href="references.html#mitzenmacher2017" id="id18"><span>[Mitzenmacher2017]</span></a> に詳しい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch11_markov_chains.html" class="btn btn-neutral float-left" title="第 11 章 マルコフ連鎖入門" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix_symbols.html" class="btn btn-neutral float-right" title="付録 A 記号一覧" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

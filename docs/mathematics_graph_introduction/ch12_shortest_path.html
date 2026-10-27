@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 12 章 最短経路問題 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 13 章 ネットワークフロー" href="ch13_flow.html" />
+    <link rel="prev" title="第 11 章 グラフの探索" href="ch11_search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 12 章 最短経路問題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">問題の定義</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">負の重みと負閉路</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">最短経路の基本的な性質</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">ダイクストラ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">ベルマン・フォード法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">ワーシャル・フロイド法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a">A* 探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">アルゴリズムの比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 12 章 最短経路問題</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 12 章 最短経路問題<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>カーナビや乗換案内は、道路や路線のネットワーク上で最も短い（速い、安い）経路を求めている。インターネットのルーターも、パケットを届ける経路をグラフの最短経路として計算している。本章では、重み付きグラフの最短経路を求める代表的なアルゴリズムを学ぶ。</p>
+<section id="id2">
+<h2>問題の定義<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>重み付き有向グラフで、道 <span class="math notranslate nohighlight">\(P = (v_0, v_1, \ldots, v_k)\)</span> の<strong>長さ</strong>（重み）を、通る辺の重みの和 <span class="math notranslate nohighlight">\(w(P) = \sum_{i=1}^{k} w(v_{i-1}, v_i)\)</span> と定める。<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への道の長さの最小値を <span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への<strong>最短距離</strong>といい、それを実現する道を<strong>最短経路</strong>という。無向グラフは、各辺を両方向の有向辺に置き換えれば有向グラフとして扱える。</p>
+<p>最短経路問題には、求めるものによって次の種類がある。</p>
+<ul class="simple">
+<li><p><strong>単一始点最短経路問題</strong>：1 つの始点から他のすべての頂点への最短経路を求める。</p></li>
+<li><p><strong>2 点間最短経路問題</strong>：特定の始点から特定の終点への最短経路を求める。</p></li>
+<li><p><strong>全点対最短経路問題</strong>：すべての頂点の組について最短経路を求める。</p></li>
+</ul>
+<p>2 点間の問題を解く一般的な方法で、単一始点の問題より漸近的に速いものは知られていない。そのため、まず単一始点の問題を考える。辺の重みがすべて 1 なら、第 11 章の幅優先探索で <span class="math notranslate nohighlight">\(O(n + m)\)</span> 時間で解ける。</p>
+<section id="id3">
+<h3>負の重みと負閉路<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>辺の重みは負でもよい。たとえば重みを「コスト」とし、ある区間を通ると報酬がもらえるなら、その辺の重みは負になる。ただし、長さが負の有向閉路（<strong>負閉路</strong>）に到達できる場合は、閉路を何周もすることで長さをいくらでも小さくできるので、最短距離は定義できない。本章のアルゴリズムは、負閉路がないことを前提とするか、負閉路を検出して報告する。</p>
+</section>
+<section id="id4">
+<h3>最短経路の基本的な性質<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>すべてのアルゴリズムの基礎になるのは、次の 2 つの性質である。</p>
+<ul class="simple">
+<li><p><strong>部分構造の最適性</strong>：最短経路の一部分もまた最短経路である。<span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への最短経路が <span class="math notranslate nohighlight">\(u\)</span> を通るなら、その <span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(u\)</span> までの部分は <span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(u\)</span> への最短経路である（そうでなければ、その部分を短い経路に置き換えて全体を短くできる）。</p></li>
+<li><p><strong>三角不等式</strong>：<span class="math notranslate nohighlight">\(s\)</span> からの最短距離を <span class="math notranslate nohighlight">\(d(\cdot)\)</span> とすると、任意の辺 <span class="math notranslate nohighlight">\((u, v)\)</span> について <span class="math notranslate nohighlight">\(d(v) \le d(u) + w(u, v)\)</span> が成り立つ。</p></li>
+</ul>
+<p>アルゴリズムは、各頂点について距離の暫定値 <span class="math notranslate nohighlight">\(\mathrm{dist}[v]\)</span>（初期値は始点で 0、それ以外で <span class="math notranslate nohighlight">\(\infty\)</span>）を持ち、次の<strong>緩和</strong>と呼ばれる操作を繰り返して真の距離に近づける。</p>
+<div class="math notranslate nohighlight">
+\[\text{if } \mathrm{dist}[u] + w(u, v) &lt; \mathrm{dist}[v] \text{ then } \mathrm{dist}[v] \leftarrow \mathrm{dist}[u] + w(u, v)\]</div>
+<p>緩和で値を更新するとき、<span class="math notranslate nohighlight">\(v\)</span> の直前の頂点（親）として <span class="math notranslate nohighlight">\(u\)</span> を記録しておけば、終了後に親をたどって最短経路を復元できる。親を結んだ辺は始点を根とする木になり、これを<strong>最短経路木</strong>という。各アルゴリズムの違いは、緩和をどの順序で行うかにある。</p>
+<p>本章では <a class="reference internal" href="#fig-ch12-graph"><span class="std std-numref">図 24</span></a> の重み付き有向グラフを例とする。</p>
+<figure class="align-center" id="id10">
+<span id="fig-ch12-graph"></span><div class="graphviz"><object data="_images/graphviz-8f38ae0e34751feced2f4ef6074ec987c90c0221.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    edge [fontsize=12, color=&quot;#999999&quot;];
+    s [pos=&quot;0,1!&quot;]; a [pos=&quot;1.8,2!&quot;]; b [pos=&quot;1.8,0!&quot;]; c [pos=&quot;3.6,1!&quot;]; t [pos=&quot;5.4,1!&quot;];
+    s -&gt; a [label=&quot;4&quot;];
+    s -&gt; b [label=&quot;1&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    b -&gt; a [label=&quot;2&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    b -&gt; c [label=&quot;5&quot;];
+    a -&gt; c [label=&quot;1&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+    c -&gt; t [label=&quot;3&quot;, penwidth=3, color=&quot;#e07b28&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 24 </span><span class="caption-text">最短経路の例に用いる重み付き有向グラフ。太線は s からの最短経路木である。</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id5">
+<h2>ダイクストラ法<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>辺の重みがすべて非負のとき、単一始点最短経路問題は<strong>ダイクストラ法</strong>（Dijkstra's algorithm）で効率よく解ける。</p>
+<ol class="arabic simple">
+<li><p>始点の暫定距離を 0、それ以外を <span class="math notranslate nohighlight">\(\infty\)</span> とする。すべての頂点を「未確定」とする。</p></li>
+<li><p>未確定の頂点のうち暫定距離が最小の頂点 <span class="math notranslate nohighlight">\(u\)</span> を選び、「確定」とする。</p></li>
+<li><p><span class="math notranslate nohighlight">\(u\)</span> から出るすべての辺 <span class="math notranslate nohighlight">\((u, v)\)</span> について緩和を行う。</p></li>
+<li><p>すべての頂点が確定するまで 2, 3 を繰り返す。</p></li>
+</ol>
+<p>手順 2 で選んだ頂点の暫定距離が真の距離に等しいことが、正しさの要点である。始点からの真の距離を <span class="math notranslate nohighlight">\(d(\cdot)\)</span> とし、<span class="math notranslate nohighlight">\(u\)</span> への最短経路上で最初に現れる未確定の頂点を <span class="math notranslate nohighlight">\(x\)</span> とする。<span class="math notranslate nohighlight">\(x\)</span> の直前の頂点は確定済みで、確定したときに緩和を行っているので、<span class="math notranslate nohighlight">\(\mathrm{dist}[x] = d(x)\)</span> である。重みが非負なので <span class="math notranslate nohighlight">\(d(x) \le d(u)\)</span> であり、<span class="math notranslate nohighlight">\(u\)</span> の選び方から <span class="math notranslate nohighlight">\(\mathrm{dist}[u] \le \mathrm{dist}[x]\)</span> である。以上より <span class="math notranslate nohighlight">\(\mathrm{dist}[u] \le d(x) \le d(u)\)</span> となり、暫定距離は真の距離以上なので <span class="math notranslate nohighlight">\(\mathrm{dist}[u] = d(u)\)</span> が成り立つ。</p>
+<p><a class="reference internal" href="#fig-ch12-graph"><span class="std std-numref">図 24</span></a> では、s（距離 0）、b（距離 1）、a（距離 3）、c（距離 4）、t（距離 7）の順に確定する。a の暫定距離は最初 s からの直通の 4 であるが、b を確定したときに s → b → a の 3 に更新される。</p>
+<p>暫定距離が最小の頂点を選ぶために、優先度付きキュー（Python の <code class="docutils literal notranslate"><span class="pre">heapq</span></code>）を使う（サンプルコード <code class="docutils literal notranslate"><span class="pre">shortest_path.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 23 </span><span class="caption-text">ダイクストラ法</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">dijkstra</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">WeightedAdj</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ダイクストラ法（優先度付きキュー版）。重みはすべて非負とする。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    戻り値は (距離, 最短経路木における親)。</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">}</span>
+<span class="linenos"> 7</span>    <span class="n">parent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 8</span>    <span class="n">dist</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos"> 9</span>    <span class="n">heap</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
+<span class="linenos">10</span>    <span class="k">while</span> <span class="n">heap</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">d</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>  <span class="c1"># 古いエントリは読み飛ばす</span>
+<span class="linenos">13</span>            <span class="k">continue</span>
+<span class="linenos">14</span>        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">15</span>            <span class="k">if</span> <span class="n">d</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+<span class="linenos">16</span>                <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span> <span class="o">+</span> <span class="n">w</span>
+<span class="linenos">17</span>                <span class="n">parent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+<span class="linenos">18</span>                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">v</span><span class="p">))</span>
+<span class="linenos">19</span>    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">parent</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">heapq</span></code> には要素の優先度を下げる操作がないので、距離を更新するたびに新しい組 <code class="docutils literal notranslate"><span class="pre">(距離,</span> <span class="pre">頂点)</span></code> を追加し、取り出したときに古いものを読み飛ばしている。ヒープの要素数は <span class="math notranslate nohighlight">\(O(m)\)</span> で、各操作は <span class="math notranslate nohighlight">\(O(\log m) = O(\log n)\)</span> 時間なので、全体の計算量は <span class="math notranslate nohighlight">\(O((n + m) \log n)\)</span> である。密グラフでは、ヒープを使わずに毎回 <span class="math notranslate nohighlight">\(O(n)\)</span> 時間で最小の頂点を探す <span class="math notranslate nohighlight">\(O(n^2)\)</span> の実装の方が速い場合もある。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>ダイクストラ法: {&#39;s&#39;: 0.0, &#39;a&#39;: 3.0, &#39;b&#39;: 1.0, &#39;c&#39;: 4.0, &#39;t&#39;: 7.0} 経路: [&#39;s&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;, &#39;t&#39;]
+</pre></div>
+</div>
+<p>負の重みがあるとダイクストラ法は正しく動作しない。たとえば辺 s → a（重み 2）、s → b（重み 3）、b → a（重み <span class="math notranslate nohighlight">\(-2\)</span>）のグラフでは、a が先に距離 2 で確定してしまうが、実際の最短距離は s → b → a の 1 である。上の正しさの議論で使った <span class="math notranslate nohighlight">\(d(x) \le d(u)\)</span> が、負の重みがあると成り立たないからである。</p>
+</section>
+<section id="id6">
+<h2>ベルマン・フォード法<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>負の重みを含む場合は<strong>ベルマン・フォード法</strong>（Bellman–Ford algorithm）を使う。考え方は単純で、すべての辺の緩和を <span class="math notranslate nohighlight">\(n - 1\)</span> 回繰り返す。</p>
+<p>負閉路がなければ、最短経路は道（頂点の重複がない）として取れるので、辺は高々 <span class="math notranslate nohighlight">\(n - 1\)</span> 本である。すべての辺の緩和を 1 回行うごとに、最短経路の先頭から 1 本ずつ辺が「確定」していくので、<span class="math notranslate nohighlight">\(n - 1\)</span> 回で全頂点の距離が求まる。<span class="math notranslate nohighlight">\(n - 1\)</span> 回の後でもまだ緩和で値が変わる辺があれば、始点から到達できる負閉路が存在する。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 24 </span><span class="caption-text">ベルマン・フォード法</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">bellman_ford</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">WeightedAdj</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ベルマン・フォード法。source から到達できる負閉路があれば None を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">}</span>
+<span class="linenos"> 4</span>    <span class="n">dist</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos"> 5</span>    <span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">adj</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]]</span>
+<span class="linenos"> 6</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="n">updated</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 8</span>        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+<span class="linenos"> 9</span>            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+<span class="linenos">10</span>                <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+<span class="linenos">11</span>                <span class="n">updated</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">12</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">updated</span><span class="p">:</span>
+<span class="linenos">13</span>            <span class="k">break</span>
+<span class="linenos">14</span>    <span class="c1"># n - 1 回の反復後もまだ短くできる辺があれば負閉路が存在する</span>
+<span class="linenos">15</span>    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">dist</span>
+</pre></div>
+</div>
+</div>
+<p>計算量は <span class="math notranslate nohighlight">\(O(nm)\)</span> であり、ダイクストラ法より遅い。途中で 1 回も更新がなければ、その時点で打ち切ってよい。次の実行例の 2 行目は、頂点 a と b の間に長さ <span class="math notranslate nohighlight">\(-2 + 1 = -1\)</span> の負閉路があるグラフに適用した結果である。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>ベルマン・フォード法: {&#39;s&#39;: 0.0, &#39;a&#39;: 3.0, &#39;b&#39;: 1.0, &#39;c&#39;: 4.0, &#39;t&#39;: 7.0}
+<span class="linenos">2</span>負閉路を含むグラフ: None
+</pre></div>
+</div>
+<p>ベルマン・フォード法は、各頂点が隣接頂点と距離の情報を交換するだけで計算を進められるので、分散環境に向いている。初期のインターネットの経路制御プロトコル RIP（距離ベクトル型）は、この考え方に基づいている。また、為替レートの対数の符号を反転したものを重みとすると、負閉路は「通貨を一周交換すると得をする」裁定機会に対応する。</p>
+</section>
+<section id="id7">
+<h2>ワーシャル・フロイド法<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>全点対最短経路問題は、各頂点を始点としてダイクストラ法を <span class="math notranslate nohighlight">\(n\)</span> 回行えば解ける。より簡潔な方法が<strong>ワーシャル・フロイド法</strong>（Floyd–Warshall algorithm）である。頂点を <span class="math notranslate nohighlight">\(v_1, \ldots, v_n\)</span> とし、「経由してよい頂点を <span class="math notranslate nohighlight">\(v_1, \ldots, v_k\)</span> に限ったときの <span class="math notranslate nohighlight">\(v_i\)</span> から <span class="math notranslate nohighlight">\(v_j\)</span> への最短距離」を <span class="math notranslate nohighlight">\(d_k(i, j)\)</span> とすると、次の漸化式が成り立つ。</p>
+<div class="math notranslate nohighlight">
+\[d_k(i, j) = \min\bigl(d_{k-1}(i, j),\ d_{k-1}(i, k) + d_{k-1}(k, j)\bigr)\]</div>
+<p><span class="math notranslate nohighlight">\(v_k\)</span> を経由しない最短経路と、<span class="math notranslate nohighlight">\(v_k\)</span> を 1 回経由する最短経路の短い方をとる、という意味である。<span class="math notranslate nohighlight">\(d_0(i, j)\)</span> は辺の重み（辺がなければ <span class="math notranslate nohighlight">\(\infty\)</span>）であり、<span class="math notranslate nohighlight">\(d_n(i, j)\)</span> が求める最短距離になる。このように、小さな部分問題の解を表に記録しながら大きな問題を解く方法を<strong>動的計画法</strong>という。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 25 </span><span class="caption-text">ワーシャル・フロイド法</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">floyd_warshall</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">WeightedAdj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ワーシャル・フロイド法で全点対の最短距離を求める。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span> <span class="k">if</span> <span class="n">u</span> <span class="o">==</span> <span class="n">v</span> <span class="k">else</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">}</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">}</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos"> 7</span>            <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">],</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="linenos"> 8</span>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>  <span class="c1"># 経由してよい頂点を 1 つずつ増やす</span>
+<span class="linenos"> 9</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+<span class="linenos">12</span>                    <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">dist</span>
+</pre></div>
+</div>
+</div>
+<p>表を上書きしながら計算してよいので、実装は 3 重ループだけで済む。計算量は <span class="math notranslate nohighlight">\(O(n^3)\)</span>、メモリは <span class="math notranslate nohighlight">\(O(n^2)\)</span> である。負の重みがあっても負閉路がなければ正しく動作し、終了後に <span class="math notranslate nohighlight">\(d(i, i) &lt; 0\)</span> となる頂点があれば負閉路が存在する。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>ワーシャル・フロイド法 (a からの距離): {&#39;s&#39;: inf, &#39;a&#39;: 0.0, &#39;b&#39;: inf, &#39;c&#39;: 1.0, &#39;t&#39;: 4.0}
+</pre></div>
+</div>
+<p>a からは s と b に到達できないので、距離は <span class="math notranslate nohighlight">\(\infty\)</span> になっている。</p>
+</section>
+<section id="a">
+<h2>A* 探索<a class="headerlink" href="#a" title="Link to this heading"></a></h2>
+<p>2 点間の最短経路だけが必要な場合、ダイクストラ法は終点と関係のない方向にも探索を広げてしまう。<strong>A* 探索</strong>（A-star）は、各頂点から終点までの距離の見積もり <span class="math notranslate nohighlight">\(h(v)\)</span>（<strong>ヒューリスティック関数</strong>）を使い、<span class="math notranslate nohighlight">\(\mathrm{dist}[v] + h(v)\)</span> が最小の頂点から確定していく。ダイクストラ法は <span class="math notranslate nohighlight">\(h(v) = 0\)</span> とした特別な場合である。</p>
+<p><span class="math notranslate nohighlight">\(h(v)\)</span> が実際の残り距離を超えない（<strong>許容的</strong>である）とき、A* 探索は最短経路を求められる。さらに、任意の辺 <span class="math notranslate nohighlight">\((u, v)\)</span> について <span class="math notranslate nohighlight">\(h(u) \le w(u, v) + h(v)\)</span> を満たす（<strong>無矛盾</strong>である）とき、ダイクストラ法と同様に、一度確定した頂点を再び調べる必要がない。地図上の経路探索では、直線距離が無矛盾なヒューリスティックになる。上下左右に移動する格子では、マンハッタン距離 <span class="math notranslate nohighlight">\(|x_1 - x_2| + |y_1 - y_2|\)</span> が使える。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 26 </span><span class="caption-text">格子上の A* 探索</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">astar_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">start</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="n">goal</span><span class="p">:</span> <span class="n">Cell</span><span class="p">,</span> <span class="n">use_heuristic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;格子上の A* 探索。&#39;#&#39; は壁。マンハッタン距離をヒューリスティックに用いる。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    use_heuristic が False ならヒューリスティックを常に 0 とし、ダイクストラ法と同じ動作になる。</span>
+<span class="linenos"> 5</span><span class="sd">    戻り値は (最短距離, 展開した頂点数)。到達できなければ None。</span>
+<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 7</span>    <span class="k">def</span><span class="w"> </span><span class="nf">h</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="n">Cell</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 8</span>        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">goal</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">goal</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">use_heuristic</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>    <span class="n">g_cost</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="linenos">11</span>    <span class="n">heap</span> <span class="o">=</span> <span class="p">[(</span><span class="n">h</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="n">start</span><span class="p">)]</span>
+<span class="linenos">12</span>    <span class="n">closed</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">Cell</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos">13</span>    <span class="k">while</span> <span class="n">heap</span><span class="p">:</span>
+<span class="linenos">14</span>        <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">closed</span><span class="p">:</span>
+<span class="linenos">16</span>            <span class="k">continue</span>
+<span class="linenos">17</span>        <span class="n">closed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="linenos">18</span>        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">goal</span><span class="p">:</span>
+<span class="linenos">19</span>            <span class="k">return</span> <span class="n">g_cost</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">closed</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="n">r</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">c</span>
+<span class="linenos">21</span>        <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="p">((</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">col</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+<span class="linenos">22</span>            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">grid</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span>
+<span class="linenos">23</span>                <span class="n">ng</span> <span class="o">=</span> <span class="n">g_cost</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">24</span>                <span class="k">if</span> <span class="n">ng</span> <span class="o">&lt;</span> <span class="n">g_cost</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+<span class="linenos">25</span>                    <span class="n">g_cost</span><span class="p">[(</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ng</span>
+<span class="linenos">26</span>                    <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">ng</span> <span class="o">+</span> <span class="n">h</span><span class="p">((</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">)),</span> <span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">)))</span>
+<span class="linenos">27</span>    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-ch12-astar"><span class="std std-numref">図 25</span></a> は、壁のある格子で、ダイクストラ法と A* 探索が確定した（展開した）セルを比較したものである。ダイクストラ法は始点から全方向に均等に探索を広げるのに対し、A* 探索は終点の方向に探索を絞り込んでいる。どちらも同じ長さの最短経路を見つけるが、A* 探索の方が展開するセルが少ない。</p>
+<figure class="align-center" id="id15">
+<span id="fig-ch12-astar"></span><img alt="ダイクストラ法と A* 探索の展開セルの比較" src="_images/ch12_astar.png" />
+<figcaption>
+<p><span class="caption-number">図 25 </span><span class="caption-text">ダイクストラ法（左）と A* 探索（右）が展開したセル（水色）と最短経路（橙色）。緑の丸が始点、赤の星が終点、黒は壁である。</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>サンプルコードの小さな格子でも、次のように展開するセルの数が減っている。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>A* 探索 (距離, 展開数): (16, 24)
+<span class="linenos">2</span>ダイクストラ法 (距離, 展開数): (16, 35)
+</pre></div>
+</div>
+<p>ヒューリスティックが実際の距離に近いほど、探索は効率的になる。実際のカーナビでは、A* 探索に加えて、道路網を前処理して高速化する手法（階層的な縮約など）が使われている。</p>
+</section>
+<section id="id8">
+<h2>アルゴリズムの比較<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id16">
+<caption><span class="caption-number">表 12 </span><span class="caption-text">最短経路アルゴリズムの比較</span><a class="headerlink" href="#id16" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 22.0%" />
+<col style="width: 18.0%" />
+<col style="width: 38.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>アルゴリズム</p></th>
+<th class="head"><p>問題</p></th>
+<th class="head"><p>計算量</p></th>
+<th class="head"><p>条件・特徴</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>幅優先探索</p></td>
+<td><p>単一始点</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n + m)\)</span></p></td>
+<td><p>重みなし（すべて 1）</p></td>
+</tr>
+<tr class="row-odd"><td><p>ダイクストラ法</p></td>
+<td><p>単一始点</p></td>
+<td><p><span class="math notranslate nohighlight">\(O((n + m) \log n)\)</span></p></td>
+<td><p>重みが非負</p></td>
+</tr>
+<tr class="row-even"><td><p>ベルマン・フォード法</p></td>
+<td><p>単一始点</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(nm)\)</span></p></td>
+<td><p>負の重みも可、負閉路を検出できる</p></td>
+</tr>
+<tr class="row-odd"><td><p>ワーシャル・フロイド法</p></td>
+<td><p>全点対</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n^3)\)</span></p></td>
+<td><p>負の重みも可、実装が簡潔</p></td>
+</tr>
+<tr class="row-even"><td><p>A* 探索</p></td>
+<td><p>2 点間</p></td>
+<td><p>最悪はダイクストラ法と同じ</p></td>
+<td><p>良いヒューリスティックがあれば高速</p></td>
+</tr>
+</tbody>
+</table>
+<p>なお、DAG では、トポロジカル順序（第 11 章）に従って各頂点から出る辺を緩和すれば、負の重みがあっても <span class="math notranslate nohighlight">\(O(n + m)\)</span> 時間で最短経路が求まる。重みの符号を反転すれば最長経路も求まり、これはプロジェクト管理でクリティカルパス（全体の所要時間を決める作業の列）を求める方法になる。</p>
+</section>
+<section id="id9">
+<h2>まとめ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>最短経路は部分構造の最適性を持ち、アルゴリズムは緩和の操作を繰り返して距離を求める。</p></li>
+<li><p>重みが非負ならダイクストラ法、負の重みがあればベルマン・フォード法を使う。負閉路があると最短距離は定義できない。</p></li>
+<li><p>全点対の最短距離はワーシャル・フロイド法で <span class="math notranslate nohighlight">\(O(n^3)\)</span> 時間で求められる。</p></li>
+<li><p>2 点間の探索では、A* 探索が終点までの距離の見積もりを利用して探索範囲を絞り込む。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch11_search.html" class="btn btn-neutral float-left" title="第 11 章 グラフの探索" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch13_flow.html" class="btn btn-neutral float-right" title="第 13 章 ネットワークフロー" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

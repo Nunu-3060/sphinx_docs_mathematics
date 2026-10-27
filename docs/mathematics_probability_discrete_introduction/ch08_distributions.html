@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 8 章 代表的な離散分布 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 9 章 同時分布と確率変数の和" href="ch09_joint_distributions.html" />
+    <link rel="prev" title="第 7 章 確率変数と期待値" href="ch07_random_variables.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 8 章 代表的な離散分布</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">離散一様分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">ベルヌーイ分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">二項分布</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">定義</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">期待値と分散</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">幾何分布</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">定義と期待値</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">無記憶性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">負の二項分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">超幾何分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">ポアソン分布</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">定義</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">二項分布のポアソン近似</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">分布のまとめ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 8 章 代表的な離散分布</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 8 章 代表的な離散分布<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>確率変数の分布は試行ごとに異なるが、実際の問題に現れる分布の多くは、いくつかの典型的な分布のどれかに当てはまる。たとえば「<span class="math notranslate nohighlight">\(n\)</span> 回の独立な試行での成功回数」は二項分布に、「初めて成功するまでの試行回数」は幾何分布に従う。本章では代表的な離散分布を紹介し、それぞれの確率質量関数・期待値・分散と、どのような場面で現れるかを学ぶ。</p>
+<p>以下では、確率変数 <span class="math notranslate nohighlight">\(X\)</span> が分布 <span class="math notranslate nohighlight">\(D\)</span> に従うことを <span class="math notranslate nohighlight">\(X \sim D\)</span> と書く。また、<span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span> とし、<span class="math notranslate nohighlight">\(q = 1 - p\)</span> とおく。</p>
+<section id="id2">
+<h2>離散一様分布<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(X\)</span> が <span class="math notranslate nohighlight">\(1, 2, \ldots, n\)</span> の値を等しい確率でとるとき、<span class="math notranslate nohighlight">\(X\)</span> は<strong>離散一様分布</strong>に従うという。</p>
+<div class="math notranslate nohighlight">
+\[P(X = k) = \frac{1}{n} \quad (k = 1, \ldots, n), \qquad E[X] = \frac{n + 1}{2}, \qquad V[X] = \frac{n^2 - 1}{12}\]</div>
+<p>サイコロ 1 個の目は <span class="math notranslate nohighlight">\(n = 6\)</span> の離散一様分布に従い、<span class="math notranslate nohighlight">\(V[X] = 35/12\)</span> は第 7 章で求めた値と一致する。</p>
+</section>
+<section id="id3">
+<h2>ベルヌーイ分布<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>成功か失敗かの 2 通りの結果しかない試行を<strong>ベルヌーイ試行</strong>という。成功の確率が <span class="math notranslate nohighlight">\(p\)</span> のベルヌーイ試行で、成功なら 1、失敗なら 0 をとる確率変数 <span class="math notranslate nohighlight">\(X\)</span> は<strong>ベルヌーイ分布</strong> <span class="math notranslate nohighlight">\(\mathrm{Ber}(p)\)</span> に従う。</p>
+<div class="math notranslate nohighlight">
+\[P(X = 1) = p, \quad P(X = 0) = q, \qquad E[X] = p, \qquad V[X] = p - p^2 = pq\]</div>
+<p>ベルヌーイ分布に従う確率変数は、成功という事象の指示確率変数にほかならない。</p>
+</section>
+<section id="id4">
+<h2>二項分布<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>定義<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>成功の確率が <span class="math notranslate nohighlight">\(p\)</span> のベルヌーイ試行を独立に <span class="math notranslate nohighlight">\(n\)</span> 回繰り返したときの成功回数 <span class="math notranslate nohighlight">\(X\)</span> は、<strong>二項分布</strong> <span class="math notranslate nohighlight">\(\mathrm{Bin}(n, p)\)</span> に従う。</p>
+<div class="math notranslate nohighlight">
+\[P(X = k) = \binom{n}{k} p^k q^{n-k} \quad (k = 0, 1, \ldots, n)\]</div>
+<p><span class="math notranslate nohighlight">\(n\)</span> 回のうちどの <span class="math notranslate nohighlight">\(k\)</span> 回で成功するかの選び方が <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> 通りあり、そのそれぞれの起こる確率が独立性により <span class="math notranslate nohighlight">\(p^k q^{n-k}\)</span> であることから、この式が得られる。二項定理により <span class="math notranslate nohighlight">\(\sum_{k=0}^{n} \binom{n}{k} p^k q^{n-k} = (p + q)^n = 1\)</span> となり、確率の総和は確かに 1 である。</p>
+</section>
+<section id="id6">
+<h3>期待値と分散<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(i\)</span> 回目の試行の成功の指示確率変数を <span class="math notranslate nohighlight">\(X_i \sim \mathrm{Ber}(p)\)</span> とすると、<span class="math notranslate nohighlight">\(X = X_1 + \cdots + X_n\)</span> である。期待値の線形性により</p>
+<div class="math notranslate nohighlight">
+\[E[X] = np\]</div>
+<p>である。また、<span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> は独立なので、第 9 章で示す「独立な確率変数の和の分散は分散の和」という性質により</p>
+<div class="math notranslate nohighlight">
+\[V[X] = npq\]</div>
+<p>である。<a class="reference internal" href="#fig-ch08-binomial"><span class="std std-numref">図 9</span></a> に <span class="math notranslate nohighlight">\(n = 20\)</span> の二項分布を示す。<span class="math notranslate nohighlight">\(p = 0.5\)</span> のとき分布は <span class="math notranslate nohighlight">\(np = 10\)</span> を中心に左右対称になり、<span class="math notranslate nohighlight">\(p\)</span> が 0.5 から離れると分布は偏る。</p>
+<figure class="align-center" id="id19">
+<span id="fig-ch08-binomial"></span><a class="reference internal image-reference" href="_images/ch08_binomial.png"><img alt="_images/ch08_binomial.png" src="_images/ch08_binomial.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 9 </span><span class="caption-text">二項分布 <span class="math notranslate nohighlight">\(\mathrm{Bin}(20, p)\)</span> の確率質量関数</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>例</strong>：不良品率 2% の製品を 100 個検査したとき、不良品が 3 個以下である確率は <span class="math notranslate nohighlight">\(\sum_{k=0}^{3} \binom{100}{k} 0.02^k \, 0.98^{100-k} \approx 0.859\)</span> である。</p>
+</section>
+</section>
+<section id="id7">
+<h2>幾何分布<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>定義と期待値<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>成功の確率が <span class="math notranslate nohighlight">\(p\)</span> のベルヌーイ試行を独立に繰り返したとき、初めて成功するまでの試行回数（成功した回を含む） <span class="math notranslate nohighlight">\(X\)</span> は、<strong>幾何分布</strong> <span class="math notranslate nohighlight">\(\mathrm{Geo}(p)\)</span> に従う。<span class="math notranslate nohighlight">\(X = k\)</span> となるのは、最初の <span class="math notranslate nohighlight">\(k - 1\)</span> 回が失敗で <span class="math notranslate nohighlight">\(k\)</span> 回目に成功する場合なので</p>
+<div class="math notranslate nohighlight">
+\[P(X = k) = q^{k-1} p \quad (k = 1, 2, \ldots)\]</div>
+<p>である。確率は公比 <span class="math notranslate nohighlight">\(q\)</span> の等比数列になっている（名前の由来である）。</p>
+<p>期待値は次のように求められる。<span class="math notranslate nohighlight">\(X &gt; k\)</span> は「最初の <span class="math notranslate nohighlight">\(k\)</span> 回がすべて失敗」と同じなので <span class="math notranslate nohighlight">\(P(X &gt; k) = q^k\)</span> である。正の整数値をとる確率変数について成り立つ公式 <span class="math notranslate nohighlight">\(E[X] = \sum_{k=0}^{\infty} P(X &gt; k)\)</span> を使うと</p>
+<div class="math notranslate nohighlight">
+\[E[X] = \sum_{k=0}^{\infty} q^k = \frac{1}{1 - q} = \frac{1}{p}\]</div>
+<p>となる。公式 <span class="math notranslate nohighlight">\(E[X] = \sum_{k \ge 0} P(X &gt; k)\)</span> は、<span class="math notranslate nohighlight">\(X = \sum_{k \ge 0} I_{\{X &gt; k\}}\)</span> （<span class="math notranslate nohighlight">\(X = m\)</span> のとき右辺は <span class="math notranslate nohighlight">\(k = 0, \ldots, m - 1\)</span> の <span class="math notranslate nohighlight">\(m\)</span> 個の項が 1 になる）に期待値の線形性を適用すれば得られる。分散は <span class="math notranslate nohighlight">\(V[X] = q/p^2\)</span> である。</p>
+<p><strong>例</strong>：サイコロを投げて 6 が出るまでの回数の期待値は <span class="math notranslate nohighlight">\(1/(1/6) = 6\)</span> 回である。成功確率 1% のガチャを当たるまで引く回数の期待値は 100 回であるが、<span class="math notranslate nohighlight">\(P(X &gt; 100) = 0.99^{100} \approx 0.366\)</span> なので、100 回引いても当たらない確率は 3 分の 1 以上ある。</p>
+</section>
+<section id="id9">
+<h3>無記憶性<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>幾何分布は、次の<strong>無記憶性</strong>を持つ。</p>
+<div class="math notranslate nohighlight">
+\[P(X &gt; m + n \mid X &gt; m) = \frac{q^{m+n}}{q^m} = q^n = P(X &gt; n)\]</div>
+<p>すでに <span class="math notranslate nohighlight">\(m\)</span> 回失敗しているという情報は、その後に必要な試行回数の分布に影響しない。「これだけ外れが続いたのだから、そろそろ当たるはずだ」という考えは、独立な試行については誤りである（<strong>ギャンブラーの誤謬</strong>と呼ばれる）。正の整数値をとる分布のうち、無記憶性を持つのは幾何分布だけであることが知られている。</p>
+<figure class="align-center" id="id20">
+<span id="fig-ch08-geometric"></span><a class="reference internal image-reference" href="_images/ch08_geometric.png"><img alt="_images/ch08_geometric.png" src="_images/ch08_geometric.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 10 </span><span class="caption-text">幾何分布 <span class="math notranslate nohighlight">\(\mathrm{Geo}(p)\)</span> の確率質量関数</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>幾何分布には、「初めて成功するまでの<strong>失敗</strong>の回数」 <span class="math notranslate nohighlight">\(Y = X - 1\)</span> （値は <span class="math notranslate nohighlight">\(0, 1, 2, \ldots\)</span>）で定義する流儀もある。このとき <span class="math notranslate nohighlight">\(E[Y] = q/p\)</span> となる。文献やライブラリを使う際は、どちらの定義かを確認する必要がある。SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.stats.geom</span></code> は本書と同じく試行回数で定義している。</p>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2>負の二項分布<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>成功の確率が <span class="math notranslate nohighlight">\(p\)</span> のベルヌーイ試行を独立に繰り返したとき、<span class="math notranslate nohighlight">\(r\)</span> 回目の成功までの試行回数 <span class="math notranslate nohighlight">\(X\)</span> は、<strong>負の二項分布</strong> <span class="math notranslate nohighlight">\(\mathrm{NB}(r, p)\)</span> に従う。<span class="math notranslate nohighlight">\(X = k\)</span> となるのは、最初の <span class="math notranslate nohighlight">\(k - 1\)</span> 回でちょうど <span class="math notranslate nohighlight">\(r - 1\)</span> 回成功し、<span class="math notranslate nohighlight">\(k\)</span> 回目に成功する場合なので</p>
+<div class="math notranslate nohighlight">
+\[P(X = k) = \binom{k - 1}{r - 1} p^r q^{k - r} \quad (k = r, r + 1, \ldots)\]</div>
+<p>である。<span class="math notranslate nohighlight">\(X\)</span> は、1 回目の成功までの回数、1 回目から 2 回目の成功までの回数、……という独立な <span class="math notranslate nohighlight">\(r\)</span> 個の <span class="math notranslate nohighlight">\(\mathrm{Geo}(p)\)</span> の和で表せるので</p>
+<div class="math notranslate nohighlight">
+\[E[X] = \frac{r}{p}, \qquad V[X] = \frac{rq}{p^2}\]</div>
+<p>である。<span class="math notranslate nohighlight">\(r = 1\)</span> のとき幾何分布に一致する。SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.stats.nbinom</span></code> は「<span class="math notranslate nohighlight">\(r\)</span> 回目の成功までの失敗の回数」 <span class="math notranslate nohighlight">\(X - r\)</span> の分布として定義されている。</p>
+</section>
+<section id="id11">
+<h2>超幾何分布<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>当たり <span class="math notranslate nohighlight">\(K\)</span> 個を含む <span class="math notranslate nohighlight">\(N\)</span> 個のくじから、<span class="math notranslate nohighlight">\(n\)</span> 個を<strong>非復元抽出</strong>（取り出したものを戻さずに次を取り出す）するとき、取り出した中の当たりの個数 <span class="math notranslate nohighlight">\(X\)</span> は<strong>超幾何分布</strong>に従う。</p>
+<div class="math notranslate nohighlight">
+\[P(X = k) = \frac{\binom{K}{k} \binom{N - K}{n - k}}{\binom{N}{n}}\]</div>
+<p><span class="math notranslate nohighlight">\(N\)</span> 個から <span class="math notranslate nohighlight">\(n\)</span> 個を選ぶ <span class="math notranslate nohighlight">\(\binom{N}{n}\)</span> 通りが同様に確からしく、そのうち当たり <span class="math notranslate nohighlight">\(K\)</span> 個から <span class="math notranslate nohighlight">\(k\)</span> 個、外れ <span class="math notranslate nohighlight">\(N - K\)</span> 個から <span class="math notranslate nohighlight">\(n - k\)</span> 個を選ぶ方法が <span class="math notranslate nohighlight">\(\binom{K}{k} \binom{N - K}{n - k}\)</span> 通りあることから得られる。</p>
+<p><span class="math notranslate nohighlight">\(p = K/N\)</span> とおくと、期待値と分散は次のとおりである。</p>
+<div class="math notranslate nohighlight">
+\[E[X] = np, \qquad V[X] = np(1 - p) \cdot \frac{N - n}{N - 1}\]</div>
+<p>期待値は、取り出したものを戻す<strong>復元抽出</strong>の場合（二項分布 <span class="math notranslate nohighlight">\(\mathrm{Bin}(n, p)\)</span>）と同じである。<span class="math notranslate nohighlight">\(i\)</span> 番目に取り出したものが当たりである確率は、非復元抽出でも <span class="math notranslate nohighlight">\(K/N\)</span> だからである。一方、分散は係数 <span class="math notranslate nohighlight">\((N - n)/(N - 1)\)</span> だけ小さくなる。<span class="math notranslate nohighlight">\(N\)</span> が <span class="math notranslate nohighlight">\(n\)</span> に比べて十分大きければ、この係数は 1 に近く、超幾何分布は二項分布で近似できる。品質検査の抜き取り検査や、トランプの手札の確率の計算に現れる。</p>
+</section>
+<section id="id12">
+<h2>ポアソン分布<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<section id="id13">
+<h3>定義<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<p><span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> に対して、次の確率質量関数を持つ分布を<strong>ポアソン分布</strong> <span class="math notranslate nohighlight">\(\mathrm{Po}(\lambda)\)</span> という。</p>
+<div class="math notranslate nohighlight">
+\[P(X = k) = e^{-\lambda} \frac{\lambda^k}{k!} \quad (k = 0, 1, 2, \ldots)\]</div>
+<p><span class="math notranslate nohighlight">\(e^{\lambda} = \sum_{k=0}^{\infty} \lambda^k / k!\)</span> より確率の総和は 1 である。期待値と分散はともに <span class="math notranslate nohighlight">\(\lambda\)</span> に等しい。</p>
+<div class="math notranslate nohighlight">
+\[E[X] = V[X] = \lambda\]</div>
+<p>ポアソン分布は、「一定時間内に Web サーバーに届くリクエストの数」「1 ページあたりの誤植の数」のように、多数の機会のそれぞれで低い確率で起こる事象の回数のモデルとして使われる（<a class="reference internal" href="#fig-ch08-poisson"><span class="std std-numref">図 11</span></a>）。</p>
+<figure class="align-center" id="id21">
+<span id="fig-ch08-poisson"></span><a class="reference internal image-reference" href="_images/ch08_poisson.png"><img alt="_images/ch08_poisson.png" src="_images/ch08_poisson.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 11 </span><span class="caption-text">ポアソン分布 <span class="math notranslate nohighlight">\(\mathrm{Po}(\lambda)\)</span> の確率質量関数</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id14">
+<h3>二項分布のポアソン近似<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<p>ポアソン分布が「稀な事象の回数」のモデルになる理由は、次の極限定理にある。<span class="math notranslate nohighlight">\(\lambda = np\)</span> を一定に保ったまま <span class="math notranslate nohighlight">\(n \to \infty\)</span> とすると、各 <span class="math notranslate nohighlight">\(k\)</span> について</p>
+<div class="math notranslate nohighlight">
+\[\binom{n}{k} p^k (1 - p)^{n-k} = \frac{n (n - 1) \cdots (n - k + 1)}{n^k} \cdot \frac{\lambda^k}{k!} \cdot \left(1 - \frac{\lambda}{n}\right)^{n} \left(1 - \frac{\lambda}{n}\right)^{-k} \to 1 \cdot \frac{\lambda^k}{k!} \cdot e^{-\lambda} \cdot 1\]</div>
+<p>となる。ここで <span class="math notranslate nohighlight">\((1 - \lambda/n)^n \to e^{-\lambda}\)</span> を用いた。つまり、試行回数 <span class="math notranslate nohighlight">\(n\)</span> が大きく成功確率 <span class="math notranslate nohighlight">\(p\)</span> が小さいとき、<span class="math notranslate nohighlight">\(\mathrm{Bin}(n, p)\)</span> は <span class="math notranslate nohighlight">\(\mathrm{Po}(np)\)</span> で近似できる（<a class="reference internal" href="#fig-ch08-poisson-approx"><span class="std std-numref">図 12</span></a>）。近似の誤差を全変動距離 <span class="math notranslate nohighlight">\(\frac{1}{2} \sum_k |P(X = k) - P(Y = k)|\)</span> で測ると、<span class="math notranslate nohighlight">\(np^2\)</span> 以下であることが知られている（ル・カムの不等式）。</p>
+<figure class="align-center" id="id22">
+<span id="fig-ch08-poisson-approx"></span><a class="reference internal image-reference" href="_images/ch08_poisson_approx.png"><img alt="_images/ch08_poisson_approx.png" src="_images/ch08_poisson_approx.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 12 </span><span class="caption-text">二項分布とポアソン分布 <span class="math notranslate nohighlight">\(\mathrm{Po}(3)\)</span> の比較（左：<span class="math notranslate nohighlight">\(n = 10\)</span>、右：<span class="math notranslate nohighlight">\(n = 100\)</span>）</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id15">
+<h2>分布のまとめ<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id23">
+<caption><span class="caption-number">表 11 </span><span class="caption-text">代表的な離散分布</span><a class="headerlink" href="#id23" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 33.0%" />
+<col style="width: 25.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>分布</p></th>
+<th class="head"><p>確率質量関数</p></th>
+<th class="head"><p>値の範囲</p></th>
+<th class="head"><p>期待値</p></th>
+<th class="head"><p>分散</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>一様分布</p></td>
+<td><p><span class="math notranslate nohighlight">\(1/n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1, \ldots, n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{n+1}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{n^2 - 1}{12}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathrm{Ber}(p)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p^k q^{1-k}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0, 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(pq\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathrm{Bin}(n, p)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{n}{k} p^k q^{n-k}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0, \ldots, n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(np\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(npq\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathrm{Geo}(p)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(q^{k-1} p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1, 2, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{p}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{q}{p^2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathrm{NB}(r, p)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{k-1}{r-1} p^r q^{k-r}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(r, r + 1, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{r}{p}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{rq}{p^2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>超幾何分布</p></td>
+<td><p><span class="math notranslate nohighlight">\(\binom{K}{k} \binom{N-K}{n-k} / \binom{N}{n}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\max(0, n - N + K), \ldots, \min(n, K)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{nK}{N}\)</span></p></td>
+<td><p>本文参照</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathrm{Po}(\lambda)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{-\lambda} \lambda^k / k!\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0, 1, 2, \ldots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/15495d80ebb1b27013b6002f49797b47/ch08_distributions.py"><code class="xref download docutils literal notranslate"><span class="pre">ch08_distributions.py</span></code></a></p>
+<p>SciPy の <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> モジュールには、主要な確率分布が実装されている。離散分布では、<code class="docutils literal notranslate"><span class="pre">pmf</span></code> （確率質量関数）、<code class="docutils literal notranslate"><span class="pre">cdf</span></code> （累積分布関数）、<code class="docutils literal notranslate"><span class="pre">sf</span></code> （<span class="math notranslate nohighlight">\(1 - F(x)\)</span>、すなわち <span class="math notranslate nohighlight">\(P(X &gt; x)\)</span>）、<code class="docutils literal notranslate"><span class="pre">mean</span></code>、<code class="docutils literal notranslate"><span class="pre">var</span></code>、<code class="docutils literal notranslate"><span class="pre">rvs</span></code> （乱数の生成）などのメソッドが使える。</p>
+<table class="docutils align-default" id="id24">
+<caption><span class="caption-number">表 12 </span><span class="caption-text">scipy.stats の離散分布と本書の記号の対応</span><a class="headerlink" href="#id24" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>scipy.stats</p></th>
+<th class="head"><p>本書の記号</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">binom.pmf(k,</span> <span class="pre">n,</span> <span class="pre">p)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{Bin}(n, p)\)</span> の <span class="math notranslate nohighlight">\(P(X = k)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">geom.pmf(k,</span> <span class="pre">p)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{Geo}(p)\)</span> の <span class="math notranslate nohighlight">\(P(X = k)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nbinom.pmf(k</span> <span class="pre">-</span> <span class="pre">r,</span> <span class="pre">r,</span> <span class="pre">p)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{NB}(r, p)\)</span> の <span class="math notranslate nohighlight">\(P(X = k)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hypergeom.pmf(k,</span> <span class="pre">N,</span> <span class="pre">K,</span> <span class="pre">n)</span></code></p></td>
+<td><p>超幾何分布の <span class="math notranslate nohighlight">\(P(X = k)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">poisson.pmf(k,</span> <span class="pre">lam)</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{Po}(\lambda)\)</span> の <span class="math notranslate nohighlight">\(P(X = k)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>サンプルコードでは、各分布の確率質量関数を定義どおりに実装し、<code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> の値と照合する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">binomial_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;二項分布 Bin(n, p) の確率質量関数。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span> <span class="o">**</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span><span class="w"> </span><span class="nf">geometric_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;幾何分布 Geo(p)（初めて成功するまでの試行回数）の確率質量関数。k = 1, 2, ...&quot;&quot;&quot;</span>
+<span class="linenos"> 8</span>    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span><span class="w"> </span><span class="nf">negative_binomial_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">12</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;負の二項分布（r 回目の成功までの試行回数）の確率質量関数。k = r, r+1, ...&quot;&quot;&quot;</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span> <span class="o">**</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="k">def</span><span class="w"> </span><span class="nf">hypergeometric_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">population</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">successes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">draws</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">17</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;超幾何分布の確率質量関数。</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="sd">    当たり successes 個を含む population 個から draws 個を非復元抽出したとき、</span>
+<span class="linenos">20</span><span class="sd">    当たりがちょうど k 個含まれる確率。</span>
+<span class="linenos">21</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">22</span>    <span class="k">return</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">successes</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">population</span> <span class="o">-</span> <span class="n">successes</span><span class="p">,</span> <span class="n">draws</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+<span class="linenos">23</span>            <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">draws</span><span class="p">))</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">def</span><span class="w"> </span><span class="nf">poisson_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lam</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">27</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ポアソン分布 Po(λ) の確率質量関数。</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="sd">    k が大きいと λ^k や k! が浮動小数点数の範囲を超えるので、対数をとって計算する。</span>
+<span class="linenos">30</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span> <span class="o">-</span> <span class="n">lam</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">lgamma</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>ポアソン分布の確率質量関数は、<span class="math notranslate nohighlight">\(k\)</span> が大きいと <span class="math notranslate nohighlight">\(\lambda^k\)</span> や <span class="math notranslate nohighlight">\(k!\)</span> が浮動小数点数で表せる範囲を超えてしまう。そこで、対数をとって <span class="math notranslate nohighlight">\(\log P(X = k) = k \log \lambda - \lambda - \log k!\)</span> を計算してから指数関数に戻している。<code class="docutils literal notranslate"><span class="pre">math.lgamma(k</span> <span class="pre">+</span> <span class="pre">1)</span></code> は <span class="math notranslate nohighlight">\(\log k!\)</span> を返す。</p>
+<p>ポアソン近似の精度は、<span class="math notranslate nohighlight">\(np = 3\)</span> を保ったまま <span class="math notranslate nohighlight">\(n\)</span> を大きくしたときの全変動距離で調べる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">poisson_approximation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;np = 3 を保ったまま n を大きくしたときの二項分布とポアソン分布の差を調べる。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">lam</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="linenos">4</span>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]:</span>
+<span class="linenos">5</span>        <span class="n">p</span> <span class="o">=</span> <span class="n">lam</span> <span class="o">/</span> <span class="n">n</span>
+<span class="linenos">6</span>        <span class="c1"># 全変動距離 (1/2) Σ |P(X=k) - P(Y=k)|</span>
+<span class="linenos">7</span>        <span class="n">distance</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">binomial_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="n">poisson_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">lam</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="linenos">8</span>        <span class="n">distance</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">poisson_pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">lam</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">60</span><span class="p">))</span>
+<span class="linenos">9</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">: 全変動距離 = </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- scipy.stats との照合 ---
+二項分布     最大誤差 = 2.50e-16
+幾何分布     最大誤差 = 0.00e+00
+負の二項分布   最大誤差 = 1.11e-16
+超幾何分布    最大誤差 = 5.55e-17
+ポアソン分布   最大誤差 = 1.67e-16
+--- 期待値と分散 ---
+Bin(20, 0.3)  E: scipy=6.0000 理論=6.0000  V: scipy=4.2000 理論=4.2000
+Geo(0.3)      E: scipy=3.3333 理論=3.3333  V: scipy=7.7778 理論=7.7778
+Po(4)         E: scipy=4.0000 理論=4.0000  V: scipy=4.0000 理論=4.0000
+NB(3, 0.3)    E: scipy=10.0000 理論=10.0000  V: scipy=23.3333 理論=23.3333
+--- 幾何分布の無記憶性 ---
+P(X &gt; 6 | X &gt; 4) = 0.490000, P(X &gt; 2) = 0.490000
+--- ポアソン近似 ---
+n=  10, p=0.3000: 全変動距離 = 0.08641
+n=  30, p=0.1000: 全変動距離 = 0.02618
+n= 100, p=0.0300: 全変動距離 = 0.00761
+n=1000, p=0.0030: 全変動距離 = 0.00075
+</pre></div>
+</div>
+<p>自作の確率質量関数と SciPy の値の差は浮動小数点数の丸め誤差の程度（<span class="math notranslate nohighlight">\(10^{-16}\)</span> 程度）であり、両者は一致している。全変動距離は <span class="math notranslate nohighlight">\(n\)</span> にほぼ反比例して小さくなり、いずれも上界 <span class="math notranslate nohighlight">\(np^2 = 9/n\)</span> を下回っている。</p>
+</section>
+<section id="id16">
+<h2>まとめ<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ベルヌーイ試行の成功回数は二項分布、初めて成功するまでの回数は幾何分布、<span class="math notranslate nohighlight">\(r\)</span> 回目の成功までの回数は負の二項分布に従う。</p></li>
+<li><p>非復元抽出での当たりの個数は超幾何分布に従い、母集団が大きければ二項分布で近似できる。</p></li>
+<li><p>稀な事象の回数はポアソン分布でモデル化される。<span class="math notranslate nohighlight">\(n\)</span> が大きく <span class="math notranslate nohighlight">\(p\)</span> が小さいとき、<span class="math notranslate nohighlight">\(\mathrm{Bin}(n, p)\)</span> は <span class="math notranslate nohighlight">\(\mathrm{Po}(np)\)</span> で近似できる。</p></li>
+<li><p>幾何分布は無記憶性を持つ。独立な試行では、過去の失敗は将来の成功しやすさに影響しない。</p></li>
+<li><p>分布の定義には流儀の違いがあるので、ライブラリを使う際はパラメータの意味を確認する。</p></li>
+</ul>
+<p>代表的な離散分布の性質については <a class="reference internal" href="references.html#ross2019" id="id17"><span>[Ross2019]</span></a> や <a class="reference internal" href="references.html#feller1968" id="id18"><span>[Feller1968]</span></a> に詳しい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch07_random_variables.html" class="btn btn-neutral float-left" title="第 7 章 確率変数と期待値" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch09_joint_distributions.html" class="btn btn-neutral float-right" title="第 9 章 同時分布と確率変数の和" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

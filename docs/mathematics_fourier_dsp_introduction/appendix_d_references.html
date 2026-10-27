@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>付録 D 参考文献 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="prev" title="付録 C サンプルコード一覧" href="appendix_c_samples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">付録 D 参考文献</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">教科書</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">論文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">規格とドキュメント</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">付録 D 参考文献</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="d">
+<h1>付録 D 参考文献<a class="headerlink" href="#d" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>教科書<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>文献</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="22">
+<li><p>Oppenheim and R. W. Schafer, <em>Discrete-Time Signal Processing</em>, 3rd ed., Pearson, 2010.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>離散時間信号処理の標準的な教科書。本書で扱った内容のほぼすべてを、証明を含めて詳しく扱っている。</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="8">
+<li><p>McClellan, R. W. Schafer, and M. A. Yoder, <em>DSP First</em>, 2nd ed., Pearson, 2016.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>正弦波と周波数応答から始める入門書。正規化角周波数 <span class="math notranslate nohighlight">\(\hat{\omega}\)</span> の表記は、この本にならった。</p></td>
+</tr>
+<tr class="row-even"><td><ol class="upperalpha simple" start="18">
+<li><ol class="upperalpha simple" start="7">
+<li><p>Lyons, <em>Understanding Digital Signal Processing</em>, 3rd ed., Prentice Hall, 2010.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>数式を抑え、図と具体例で説明する実践的な入門書。</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="upperalpha simple" start="19">
+<li><ol class="upperalpha simple" start="23">
+<li><p>Smith, <em>The Scientist and Engineer's Guide to Digital Signal Processing</em>, California Technical Publishing, 1997.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>実務家向けの入門書。全文が著者のウェブサイト <a class="reference external" href="https://www.dspguide.com/">https://www.dspguide.com/</a> で公開されている。</p></td>
+</tr>
+<tr class="row-even"><td><ol class="upperalpha simple" start="5">
+<li><ol class="upperalpha simple" start="15">
+<li><p>Brigham, <em>The Fast Fourier Transform and Its Applications</em>, Prentice Hall, 1988.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>FFT とその応用を、フーリエ変換との関係から詳しく説明している。</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="15">
+<li><p>Smith III, <em>Mathematics of the Discrete Fourier Transform (DFT), with Audio Applications</em>, 2nd ed., W3K Publishing, 2007.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>複素数から DFT までの数学を、音響の応用とともに丁寧に説明している。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<h2>論文<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>文献</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ol class="upperalpha simple" start="3">
+<li><ol class="upperalpha simple" start="5">
+<li><p>Shannon, &quot;Communication in the presence of noise,&quot; <em>Proceedings of the IRE</em>, vol. 37, no. 1, pp. 10--21, 1949.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>標本化定理を明確に示した論文（第 4 章）。</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="upperalpha simple" start="10">
+<li><ol class="upperalpha simple" start="23">
+<li><p>Cooley and J. W. Tukey, &quot;An algorithm for the machine calculation of complex Fourier series,&quot; <em>Mathematics of Computation</em>, vol. 19, no. 90, pp. 297--301, 1965.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>FFT を広く知らしめた論文（第 7 章）。</p></td>
+</tr>
+<tr class="row-even"><td><ol class="upperalpha simple" start="6">
+<li><ol class="upperalpha simple" start="10">
+<li><p>Harris, &quot;On the use of windows for harmonic analysis with the discrete Fourier transform,&quot; <em>Proceedings of the IEEE</em>, vol. 66, no. 1, pp. 51--83, 1978.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>窓関数の特性を網羅的に比較した論文。<a class="reference internal" href="ch08_spectrum_analysis.html#table-ch08-windows"><span class="std std-numref">表 6</span></a> の値の出典である（第 8 章）。</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="upperalpha simple" start="16">
+<li><ol class="upperalpha simple" start="4">
+<li><p>Welch, &quot;The use of fast Fourier transform for the estimation of power spectra: A method based on time averaging over short, modified periodograms,&quot; <em>IEEE Transactions on Audio and Electroacoustics</em>, vol. AU-15, no. 2, pp. 70--73, 1967.</p></li>
+</ol>
+</li>
+</ol>
+</td>
+<td><p>ウェルチ法の論文（第 8 章）。</p></td>
+</tr>
+<tr class="row-even"><td><ol class="upperalpha simple" start="7">
+<li><p>Goertzel, &quot;An algorithm for the evaluation of finite trigonometric series,&quot; <em>The American Mathematical Monthly</em>, vol. 65, no. 1, pp. 34--35, 1958.</p></li>
+</ol>
+</td>
+<td><p>ゲルツェル法の論文（第 10 章）。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h2>規格とドキュメント<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>文献</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ITU-T Recommendation Q.23, <em>Technical features of push-button telephone sets</em>, 1988.</p></td>
+<td><p>DTMF 信号の周波数の割り当てを定めた規格（第 10 章）。</p></td>
+</tr>
+<tr class="row-odd"><td><p>NumPy Developers, &quot;Discrete Fourier Transform (numpy.fft),&quot; <a class="reference external" href="https://numpy.org/doc/stable/reference/routines.fft.html">https://numpy.org/doc/stable/reference/routines.fft.html</a></p></td>
+<td><p>NumPy の FFT 関数のリファレンス。正規化の定義などが説明されている（第 7 章）。</p></td>
+</tr>
+<tr class="row-even"><td><p>SciPy Developers, &quot;Signal processing (scipy.signal),&quot; <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html">https://docs.scipy.org/doc/scipy/reference/signal.html</a></p></td>
+<td><p>SciPy の信号処理の関数のリファレンス（第 8 章、第 9 章、第 10 章）。</p></td>
+</tr>
+<tr class="row-odd"><td><p>SciPy Developers, &quot;Fourier Transforms (scipy.fft),&quot; <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/fft.html">https://docs.scipy.org/doc/scipy/reference/fft.html</a></p></td>
+<td><p>SciPy の FFT 関数のリファレンス（第 7 章）。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="appendix_c_samples.html" class="btn btn-neutral float-left" title="付録 C サンプルコード一覧" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

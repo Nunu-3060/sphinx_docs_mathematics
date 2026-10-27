@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 5 章 さまざまなグラフ &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 6 章 木と全域木" href="ch06_trees.html" />
+    <link rel="prev" title="第 4 章 道と連結性" href="ch04_connectivity.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 5 章 さまざまなグラフ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">基本的なグラフの族</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">正則グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">二部グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">補グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">線グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">有向非巡回グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 5 章 さまざまなグラフ</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 5 章 さまざまなグラフ<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>グラフ理論には、名前の付いた特別なグラフが数多く登場する。それらは定理の例や反例として、またアルゴリズムの入力の典型例として繰り返し現れる。本章では、代表的なグラフの族と、グラフから新しいグラフを作る操作を紹介する。</p>
+<section id="id2">
+<h2>基本的なグラフの族<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#table-ch05-families"><span class="std std-numref">表 7</span></a> に、よく使われるグラフの族と記号をまとめる。</p>
+<span id="table-ch05-families"></span><table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 7 </span><span class="caption-text">基本的なグラフの族</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 14.0%" />
+<col style="width: 40.0%" />
+<col style="width: 24.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>記号</p></th>
+<th class="head"><p>定義</p></th>
+<th class="head"><p>辺数</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>完全グラフ</p></td>
+<td><p><span class="math notranslate nohighlight">\(K_n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span> 頂点で、すべての 2 頂点が隣接している</p></td>
+<td><p><span class="math notranslate nohighlight">\(n(n-1)/2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>空グラフ</p></td>
+<td><p><span class="math notranslate nohighlight">\(\overline{K_n}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span> 頂点で、辺を 1 本も持たない</p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>道グラフ</p></td>
+<td><p><span class="math notranslate nohighlight">\(P_n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span> 頂点を 1 列に並べて隣同士を結ぶ</p></td>
+<td><p><span class="math notranslate nohighlight">\(n - 1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>閉路グラフ</p></td>
+<td><p><span class="math notranslate nohighlight">\(C_n\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span> 頂点（<span class="math notranslate nohighlight">\(n \ge 3\)</span>）を環状に並べて隣同士を結ぶ</p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>星グラフ</p></td>
+<td><p><span class="math notranslate nohighlight">\(K_{1,n}\)</span></p></td>
+<td><p>1 つの中心と <span class="math notranslate nohighlight">\(n\)</span> 個の葉を結ぶ</p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>完全二部グラフ</p></td>
+<td><p><span class="math notranslate nohighlight">\(K_{p,q}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p\)</span> 頂点と <span class="math notranslate nohighlight">\(q\)</span> 頂点の 2 グループで、異なるグループの頂点がすべて隣接している</p></td>
+<td><p><span class="math notranslate nohighlight">\(pq\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>文献によっては <span class="math notranslate nohighlight">\(P_n\)</span> を「長さ <span class="math notranslate nohighlight">\(n\)</span> の道」（頂点数 <span class="math notranslate nohighlight">\(n + 1\)</span>）の意味で使うこともある。本書では頂点数を添字とする。</p>
+<figure class="align-center" id="id10">
+<span id="fig-ch05-families"></span><div class="graphviz"><object data="_images/graphviz-61e67c55d6a19e4ce96cd26cf22b1b8a90cb0305.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.3, fixedsize=true, label=&quot;&quot;, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    a1 [pos=&quot;0,1!&quot;]; a2 [pos=&quot;0.95,0.31!&quot;]; a3 [pos=&quot;0.59,-0.81!&quot;]; a4 [pos=&quot;-0.59,-0.81!&quot;]; a5 [pos=&quot;-0.95,0.31!&quot;];
+    a1 -- a2; a1 -- a3; a1 -- a4; a1 -- a5; a2 -- a3; a2 -- a4; a2 -- a5; a3 -- a4; a3 -- a5; a4 -- a5;
+    b1 [pos=&quot;2.5,0.8!&quot;]; b2 [pos=&quot;3.5,0.8!&quot;]; b3 [pos=&quot;4.5,0.8!&quot;];
+    c1 [pos=&quot;2.5,-0.7!&quot;, fillcolor=&quot;#fde5cf&quot;]; c2 [pos=&quot;3.5,-0.7!&quot;, fillcolor=&quot;#fde5cf&quot;]; c3 [pos=&quot;4.5,-0.7!&quot;, fillcolor=&quot;#fde5cf&quot;];
+    b1 -- c1; b1 -- c2; b1 -- c3; b2 -- c1; b2 -- c2; b2 -- c3; b3 -- c1; b3 -- c2; b3 -- c3;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 9 </span><span class="caption-text">完全グラフ K5（左）と完全二部グラフ K3,3（右）</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="math notranslate nohighlight">\(K_5\)</span> と <span class="math notranslate nohighlight">\(K_{3,3}\)</span> は、第 8 章で平面的グラフを特徴付ける際に中心的な役割を果たす。</p>
+</section>
+<section id="id3">
+<h2>正則グラフ<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>すべての頂点の次数が等しいグラフを<strong>正則グラフ</strong>といい、次数が <span class="math notranslate nohighlight">\(k\)</span> のとき <strong>k-正則</strong>という。握手補題より、<span class="math notranslate nohighlight">\(n\)</span> 頂点の <span class="math notranslate nohighlight">\(k\)</span>-正則グラフの辺数は <span class="math notranslate nohighlight">\(kn/2\)</span> である。したがって <span class="math notranslate nohighlight">\(k\)</span> と <span class="math notranslate nohighlight">\(n\)</span> がともに奇数の <span class="math notranslate nohighlight">\(k\)</span>-正則グラフは存在しない。3-正則グラフは<strong>立方グラフ</strong>とも呼ばれる。</p>
+<p>完全グラフ <span class="math notranslate nohighlight">\(K_n\)</span> は <span class="math notranslate nohighlight">\((n-1)\)</span>-正則、閉路グラフ <span class="math notranslate nohighlight">\(C_n\)</span> は 2-正則である。ほかに、次の 2 つがよく登場する。</p>
+<ul class="simple">
+<li><p><strong>ピーターセングラフ</strong>：10 頂点、15 辺の 3-正則グラフ（<a class="reference internal" href="#fig-ch05-petersen"><span class="std std-numref">図 10</span></a> 左）。多くの予想に対する反例として知られ、本書でもハミルトン閉路を持たない例（第 7 章）や非平面グラフの例（第 8 章）として登場する。</p></li>
+<li><p><strong>超立方体グラフ</strong> <span class="math notranslate nohighlight">\(Q_d\)</span>：長さ <span class="math notranslate nohighlight">\(d\)</span> の 0/1 の列を頂点とし、ちょうど 1 桁だけ異なる列同士を結んだグラフ（<a class="reference internal" href="#fig-ch05-petersen"><span class="std std-numref">図 10</span></a> 右は <span class="math notranslate nohighlight">\(Q_3\)</span> を交差なく描いたもの）。<span class="math notranslate nohighlight">\(2^d\)</span> 頂点の <span class="math notranslate nohighlight">\(d\)</span>-正則グラフであり、2 頂点間の距離は列の異なる桁の数（ハミング距離）に等しい。並列計算機の結合網として使われた。</p></li>
+</ul>
+<figure class="align-center" id="id11">
+<span id="fig-ch05-petersen"></span><div class="graphviz"><object data="_images/graphviz-d31d162e0d7175551f4d7701a980dedc93d8e8da.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.3, fixedsize=true, label=&quot;&quot;, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    o0 [pos=&quot;0,1.2!&quot;]; o1 [pos=&quot;1.14,0.37!&quot;]; o2 [pos=&quot;0.71,-0.97!&quot;]; o3 [pos=&quot;-0.71,-0.97!&quot;]; o4 [pos=&quot;-1.14,0.37!&quot;];
+    i0 [pos=&quot;0,0.55!&quot;]; i1 [pos=&quot;0.52,0.17!&quot;]; i2 [pos=&quot;0.32,-0.44!&quot;]; i3 [pos=&quot;-0.32,-0.44!&quot;]; i4 [pos=&quot;-0.52,0.17!&quot;];
+    o0 -- o1; o1 -- o2; o2 -- o3; o3 -- o4; o4 -- o0;
+    o0 -- i0; o1 -- i1; o2 -- i2; o3 -- i3; o4 -- i4;
+    i0 -- i2; i2 -- i4; i4 -- i1; i1 -- i3; i3 -- i0;
+    node [shape=box, width=0.42, height=0.28, fontsize=10, fillcolor=&quot;#fde5cf&quot;];
+    q000 [label=&quot;000&quot;, pos=&quot;2.4,-1.0!&quot;]; q100 [label=&quot;100&quot;, pos=&quot;4.8,-1.0!&quot;];
+    q010 [label=&quot;010&quot;, pos=&quot;2.4,1.2!&quot;]; q110 [label=&quot;110&quot;, pos=&quot;4.8,1.2!&quot;];
+    q001 [label=&quot;001&quot;, pos=&quot;3.1,-0.35!&quot;]; q101 [label=&quot;101&quot;, pos=&quot;4.1,-0.35!&quot;];
+    q011 [label=&quot;011&quot;, pos=&quot;3.1,0.55!&quot;]; q111 [label=&quot;111&quot;, pos=&quot;4.1,0.55!&quot;];
+    q000 -- q100; q000 -- q010; q000 -- q001; q100 -- q110; q100 -- q101; q010 -- q110;
+    q010 -- q011; q001 -- q101; q001 -- q011; q110 -- q111; q101 -- q111; q011 -- q111;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 10 </span><span class="caption-text">ピーターセングラフ（左）と 3 次元の超立方体グラフ Q3（右）</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h2>二部グラフ<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 5.1（二部グラフ）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> の頂点集合を 2 つの集合 <span class="math notranslate nohighlight">\(X, Y\)</span>（<span class="math notranslate nohighlight">\(X \cup Y = V\)</span>, <span class="math notranslate nohighlight">\(X \cap Y = \emptyset\)</span>）に分けて、すべての辺が <span class="math notranslate nohighlight">\(X\)</span> の頂点と <span class="math notranslate nohighlight">\(Y\)</span> の頂点を結ぶようにできるとき、<span class="math notranslate nohighlight">\(G\)</span> を<strong>二部グラフ</strong>という。<span class="math notranslate nohighlight">\((X, Y)\)</span> を<strong>二部分割</strong>という。</p>
+</div>
+<p>二部グラフは、「作業者と仕事」「学生と授業」「ユーザーと商品」のように、2 種類の対象の間の関係を表すのに自然に現れる。第 10 章のマッチングは主に二部グラフ上で考える。</p>
+<p>頂点を 2 色で塗り、隣接する頂点が異なる色になるようにできることと、二部グラフであることは同じである。二部グラフかどうかは、奇数長の閉路の有無で完全に判定できる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 5.1</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> が二部グラフであるための必要十分条件は、<span class="math notranslate nohighlight">\(G\)</span> が奇数長の閉路を含まないことである。</p>
+</div>
+<p><strong>証明</strong>：（必要性）二部グラフの閉路は、<span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> を交互に通るので、出発点に戻るまでに偶数本の辺を通る。よって奇数長の閉路はない。</p>
+<p>（十分性）<span class="math notranslate nohighlight">\(G\)</span> が奇数長の閉路を含まないとする。連結成分ごとに考えればよいので、<span class="math notranslate nohighlight">\(G\)</span> は連結としてよい。頂点 <span class="math notranslate nohighlight">\(r\)</span> を 1 つ選び、<span class="math notranslate nohighlight">\(d(r, v)\)</span> が偶数の頂点を <span class="math notranslate nohighlight">\(X\)</span>、奇数の頂点を <span class="math notranslate nohighlight">\(Y\)</span> とする。もし同じ集合に属する 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> が隣接していたとすると、<span class="math notranslate nohighlight">\(r\)</span> から <span class="math notranslate nohighlight">\(u\)</span> への最短経路、辺 <span class="math notranslate nohighlight">\(uv\)</span>、<span class="math notranslate nohighlight">\(v\)</span> から <span class="math notranslate nohighlight">\(r\)</span> への最短経路をつなげた閉歩道の長さは <span class="math notranslate nohighlight">\(d(r, u) + 1 + d(r, v)\)</span> であり、<span class="math notranslate nohighlight">\(d(r, u)\)</span> と <span class="math notranslate nohighlight">\(d(r, v)\)</span> の偶奇が等しいので奇数になる。ところが、奇数長の閉歩道は必ず奇数長の閉路を含む。実際、閉歩道の途中で同じ頂点が 2 回現れれば、そこで 2 つの短い閉歩道に分けられ、長さの和が奇数なのでどちらか一方は奇数長である。これを繰り返すと、頂点の重複のない奇数長の閉歩道、つまり奇数長の閉路が得られる。これは仮定に反する。□</p>
+<p>この証明はそのまま判定アルゴリズムになる。幅優先探索で始点からの距離の偶奇によって頂点を 2 色に塗り、同じ色の頂点同士が隣接していれば二部グラフではない。計算量は <span class="math notranslate nohighlight">\(O(n + m)\)</span> である（サンプルコード <code class="docutils literal notranslate"><span class="pre">connectivity.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 5 </span><span class="caption-text">二部グラフの判定</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">bipartition</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;二部グラフなら 2 つの頂点集合を、そうでなければ None を返す。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    各連結成分を幅優先探索し、隣り合う頂点に異なる色 (0 / 1) を塗る。</span>
+<span class="linenos"> 5</span><span class="sd">    同じ色の頂点同士が隣接していたら、奇数長の閉路があるので二部グラフではない。</span>
+<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 7</span>    <span class="n">color</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 8</span>    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">:</span>
+<span class="linenos"> 9</span>        <span class="k">if</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">color</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">continue</span>
+<span class="linenos">11</span>        <span class="n">color</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">12</span>        <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+<span class="linenos">13</span>        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+<span class="linenos">14</span>            <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos">15</span>            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">16</span>                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">color</span><span class="p">:</span>
+<span class="linenos">17</span>                    <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+<span class="linenos">18</span>                    <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">19</span>                <span class="k">elif</span> <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">20</span>                    <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">21</span>    <span class="n">left</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">color</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="linenos">22</span>    <span class="k">return</span> <span class="n">left</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span> <span class="o">-</span> <span class="n">left</span>
+</pre></div>
+</div>
+</div>
+<p>偶数長の閉路 <span class="math notranslate nohighlight">\(C_6\)</span> と奇数長の閉路 <span class="math notranslate nohighlight">\(C_5\)</span> に適用すると、次の結果になる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>C6 の二部分割: ({0, 2, 4}, {1, 3, 5})
+<span class="linenos">2</span>C5 の二部分割: None
+</pre></div>
+</div>
+<p>木（第 6 章）は閉路を持たないので、定理 5.1 より二部グラフである。超立方体グラフ <span class="math notranslate nohighlight">\(Q_d\)</span> も、1 の個数の偶奇で頂点を分ければ二部グラフになる。</p>
+</section>
+<section id="id5">
+<h2>補グラフ<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 5.2（補グラフ）</p>
+<p>単純グラフ <span class="math notranslate nohighlight">\(G = (V, E)\)</span> に対し、頂点集合が <span class="math notranslate nohighlight">\(V\)</span> で、<span class="math notranslate nohighlight">\(G\)</span> で隣接していない 2 頂点の間に辺を持つグラフを <span class="math notranslate nohighlight">\(G\)</span> の<strong>補グラフ</strong>といい、<span class="math notranslate nohighlight">\(\overline{G}\)</span> と書く。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(G\)</span> と <span class="math notranslate nohighlight">\(\overline{G}\)</span> の辺を合わせると <span class="math notranslate nohighlight">\(K_n\)</span> になるので、<span class="math notranslate nohighlight">\(|E(G)| + |E(\overline{G})| = n(n-1)/2\)</span> である。補グラフは「関係がない」ことに注目したいときに使う。たとえば「互いに知り合いである人の集まり」は <span class="math notranslate nohighlight">\(G\)</span> の完全部分グラフ（<strong>クリーク</strong>）であり、「互いに知り合いでない人の集まり」は <span class="math notranslate nohighlight">\(G\)</span> の<strong>独立集合</strong>（どの 2 頂点も隣接しない頂点集合）である。<span class="math notranslate nohighlight">\(G\)</span> の独立集合は <span class="math notranslate nohighlight">\(\overline{G}\)</span> のクリークに対応する。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 5.2</p>
+<p>任意の単純グラフ <span class="math notranslate nohighlight">\(G\)</span> について、<span class="math notranslate nohighlight">\(G\)</span> と <span class="math notranslate nohighlight">\(\overline{G}\)</span> の少なくとも一方は連結である。</p>
+</div>
+<p><strong>証明</strong>：<span class="math notranslate nohighlight">\(G\)</span> が連結でないとして、<span class="math notranslate nohighlight">\(\overline{G}\)</span> が連結であることを示す。任意の 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> を考える。<span class="math notranslate nohighlight">\(u, v\)</span> が <span class="math notranslate nohighlight">\(G\)</span> の異なる連結成分に属するなら、<span class="math notranslate nohighlight">\(G\)</span> で隣接していないので <span class="math notranslate nohighlight">\(\overline{G}\)</span> で隣接している。同じ連結成分に属するなら、別の連結成分の頂点 <span class="math notranslate nohighlight">\(w\)</span> を選ぶと、<span class="math notranslate nohighlight">\(uw\)</span> と <span class="math notranslate nohighlight">\(wv\)</span> はどちらも <span class="math notranslate nohighlight">\(\overline{G}\)</span> の辺なので、<span class="math notranslate nohighlight">\(u, w, v\)</span> は <span class="math notranslate nohighlight">\(\overline{G}\)</span> の道である。□</p>
+<p><span class="math notranslate nohighlight">\(G \cong \overline{G}\)</span> となるグラフを<strong>自己補グラフ</strong>という。<span class="math notranslate nohighlight">\(P_4\)</span> や <span class="math notranslate nohighlight">\(C_5\)</span> がその例である。</p>
+</section>
+<section id="id6">
+<h2>線グラフ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 5.3（線グラフ）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> の辺を頂点とし、<span class="math notranslate nohighlight">\(G\)</span> で端点を共有する 2 辺を隣接させたグラフを <span class="math notranslate nohighlight">\(G\)</span> の<strong>線グラフ</strong>といい、<span class="math notranslate nohighlight">\(L(G)\)</span> と書く。</p>
+</div>
+<p>線グラフを使うと、辺に関する問題を頂点に関する問題に言い換えられる。たとえば第 9 章の辺彩色（端点を共有する辺に異なる色を塗る問題）は、線グラフの頂点彩色と同じである。<span class="math notranslate nohighlight">\(G\)</span> の頂点 <span class="math notranslate nohighlight">\(v\)</span> に接続する <span class="math notranslate nohighlight">\(\deg(v)\)</span> 本の辺は <span class="math notranslate nohighlight">\(L(G)\)</span> でクリークになるので、<span class="math notranslate nohighlight">\(L(G)\)</span> の辺数は <span class="math notranslate nohighlight">\(\sum_v \binom{\deg(v)}{2}\)</span> である。</p>
+<figure class="align-center" id="id13">
+<span id="fig-ch05-line"></span><div class="graphviz"><object data="_images/graphviz-a21c0fd5fb6c97bd778d8033371f9e800909a26b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.35, fixedsize=true, fontsize=12, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    edge [fontsize=11, fontcolor=&quot;#c0392b&quot;];
+    1 [pos=&quot;0,0!&quot;]; 2 [pos=&quot;-1,0.8!&quot;]; 3 [pos=&quot;1,0.8!&quot;]; 4 [pos=&quot;0,-1!&quot;];
+    1 -- 2 [label=&quot;a&quot;]; 1 -- 3 [label=&quot;b&quot;]; 1 -- 4 [label=&quot;c&quot;]; 2 -- 3 [label=&quot;d&quot;];
+    node [fillcolor=&quot;#fde5cf&quot;, fontcolor=&quot;#c0392b&quot;];
+    la [label=&quot;a&quot;, pos=&quot;2.6,0.8!&quot;]; lb [label=&quot;b&quot;, pos=&quot;3.8,0.8!&quot;]; lc [label=&quot;c&quot;, pos=&quot;3.2,-0.6!&quot;]; ld [label=&quot;d&quot;, pos=&quot;3.2,1.6!&quot;];
+    la -- lb; la -- lc; lb -- lc; la -- ld; lb -- ld;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 11 </span><span class="caption-text">星グラフ K1,3 に辺を 1 本加えたグラフ G（左）とその線グラフ L(G)（右）</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id7">
+<h2>有向非巡回グラフ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>有向閉路（辺の向きに沿って一周する閉路）を持たない有向グラフを<strong>有向非巡回グラフ</strong>（directed acyclic graph、<strong>DAG</strong>）という。DAG は「前後関係」や「依存関係」を表す。たとえば、ビルドシステムにおけるファイルの依存関係、表計算ソフトのセル間の参照関係、授業の履修順序（先修条件）などは DAG で表される。依存関係に有向閉路があると、処理の順序を決められない（循環依存）。</p>
+<p>DAG の頂点は、すべての辺が前から後ろへ向かうように 1 列に並べられる。この並べ方を<strong>トポロジカル順序</strong>という。逆に、トポロジカル順序が存在する有向グラフは DAG である。トポロジカル順序を求めるアルゴリズムは第 11 章で扱う。</p>
+</section>
+<section id="id8">
+<h2>まとめ<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>完全グラフ、道グラフ、閉路グラフ、完全二部グラフなどは、定理の例や反例として繰り返し登場する。</p></li>
+<li><p>正則グラフはすべての頂点の次数が等しいグラフであり、ピーターセングラフや超立方体グラフがその例である。</p></li>
+<li><p>二部グラフであることは、奇数長の閉路を含まないことと同値であり、幅優先探索で判定できる。</p></li>
+<li><p>補グラフはクリークと独立集合を入れ替え、線グラフは辺の問題を頂点の問題に言い換える。</p></li>
+<li><p>有向閉路を持たない有向グラフ（DAG）は依存関係を表し、トポロジカル順序を持つ。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch04_connectivity.html" class="btn btn-neutral float-left" title="第 4 章 道と連結性" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch06_trees.html" class="btn btn-neutral float-right" title="第 6 章 木と全域木" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

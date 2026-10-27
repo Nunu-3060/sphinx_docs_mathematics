@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 4 章 道と連結性 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 5 章 さまざまなグラフ" href="ch05_graph_classes.html" />
+    <link rel="prev" title="第 3 章 グラフの表現" href="ch03_representation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 4 章 道と連結性</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">歩道・小道・道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">連結性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">距離</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">有向グラフの連結性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">切断点と橋</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">点連結度と辺連結度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 4 章 道と連結性</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 4 章 道と連結性<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>グラフに関する多くの問いは「ある頂点から別の頂点へたどり着けるか」「どれだけ離れているか」「どこが壊れると分断されるか」という形をとる。本章では、頂点をたどる経路に関する用語を定義し、グラフのつながり具合を表す連結性の概念を学ぶ。</p>
+<section id="id2">
+<h2>歩道・小道・道<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>グラフの頂点を辺に沿ってたどる経路には、頂点や辺の重複を許すかどうかによっていくつかの種類がある。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 4.1（歩道・小道・道）</p>
+<p>頂点の列 <span class="math notranslate nohighlight">\(v_0, v_1, \ldots, v_k\)</span> で、連続する 2 頂点 <span class="math notranslate nohighlight">\(v_{i-1}, v_i\)</span> が隣接しているもの（<span class="math notranslate nohighlight">\(v_{i-1} v_i \in E\)</span>、<span class="math notranslate nohighlight">\(1 \le i \le k\)</span>）を、<span class="math notranslate nohighlight">\(v_0\)</span> から <span class="math notranslate nohighlight">\(v_k\)</span> への<strong>歩道</strong>という。<span class="math notranslate nohighlight">\(k\)</span> を歩道の<strong>長さ</strong>という。</p>
+<ul class="simple">
+<li><p>同じ辺を 2 回以上通らない歩道を<strong>小道</strong>という。</p></li>
+<li><p>同じ頂点を 2 回以上通らない歩道を<strong>道</strong>（または<strong>パス</strong>）という。</p></li>
+</ul>
+</div>
+<p>始点と終点が一致する歩道（<span class="math notranslate nohighlight">\(v_0 = v_k\)</span>）を<strong>閉歩道</strong>という。閉歩道のうち同じ辺を 2 回以上通らないものを<strong>閉小道</strong>、さらに始点と終点以外の頂点に重複がなく、長さが 3 以上のものを<strong>閉路</strong>（または<strong>サイクル</strong>）という。長さ <span class="math notranslate nohighlight">\(k\)</span> の閉路を <span class="math notranslate nohighlight">\(k\)</span>-閉路ともいう。3-閉路は三角形である。</p>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-number">表 6 </span><span class="caption-text">歩道の種類と許される重複</span><a class="headerlink" href="#id9" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 35.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>名称</p></th>
+<th class="head"><p>頂点の重複</p></th>
+<th class="head"><p>辺の重複</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>歩道</p></td>
+<td><p>許す</p></td>
+<td><p>許す</p></td>
+</tr>
+<tr class="row-odd"><td><p>小道</p></td>
+<td><p>許す</p></td>
+<td><p>許さない</p></td>
+</tr>
+<tr class="row-even"><td><p>道</p></td>
+<td><p>許さない</p></td>
+<td><p>許さない</p></td>
+</tr>
+<tr class="row-odd"><td><p>閉路</p></td>
+<td><p>始点と終点の一致のみ</p></td>
+<td><p>許さない</p></td>
+</tr>
+</tbody>
+</table>
+<p>頂点が重複しなければ辺も重複しないので、道は小道であり、小道は歩道である。逆向きには、次の性質が成り立つ。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">補題 4.1</p>
+<p><span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への歩道が存在すれば、<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への道が存在する。</p>
+</div>
+<p><strong>証明</strong>：<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への歩道のうち、長さが最小のものを <span class="math notranslate nohighlight">\(W = (v_0, \ldots, v_k)\)</span> とする。もし <span class="math notranslate nohighlight">\(W\)</span> に同じ頂点が 2 回現れる（<span class="math notranslate nohighlight">\(v_i = v_j\)</span>, <span class="math notranslate nohighlight">\(i &lt; j\)</span>）なら、<span class="math notranslate nohighlight">\(v_{i+1}, \ldots, v_j\)</span> を取り除いた列も <span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への歩道であり、<span class="math notranslate nohighlight">\(W\)</span> より短い。これは <span class="math notranslate nohighlight">\(W\)</span> の最小性に反する。よって <span class="math notranslate nohighlight">\(W\)</span> は道である。□</p>
+<p>この補題により、「たどり着けるか」を考えるときは歩道と道を区別しなくてよい。</p>
+</section>
+<section id="id3">
+<h2>連結性<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 4.2（連結）</p>
+<p>グラフ <span class="math notranslate nohighlight">\(G\)</span> の任意の 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> の間に道が存在するとき、<span class="math notranslate nohighlight">\(G\)</span> は<strong>連結</strong>であるという。</p>
+</div>
+<p>連結でないグラフは、互いに行き来できない複数の部分に分かれる。「<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への道が存在する」という関係は同値関係（反射律・対称律・推移律を満たす関係）であり、頂点集合をいくつかの同値類に分ける。各同値類による誘導部分グラフを<strong>連結成分</strong>という。連結成分は、<span class="math notranslate nohighlight">\(G\)</span> の連結な部分グラフのうち極大なもの（それより大きい連結な部分グラフに含まれないもの）でもある。連結グラフの連結成分は自分自身の 1 つだけである。</p>
+<figure class="align-center" id="id10">
+<span id="fig-ch04-components"></span><div class="graphviz"><object data="_images/graphviz-9da51a07f6bafa25be83ca2e908ed5878af210f1.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.4, fixedsize=true, fontsize=13, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    0 [pos=&quot;0,1!&quot;]; 1 [pos=&quot;0,-0.2!&quot;]; 2 [pos=&quot;1,0.4!&quot;];
+    3 [pos=&quot;2.2,0.4!&quot;]; 4 [pos=&quot;3.2,1!&quot;]; 5 [pos=&quot;3.2,-0.2!&quot;]; 6 [pos=&quot;4.3,-0.2!&quot;];
+    7 [pos=&quot;5.4,1!&quot;]; 8 [pos=&quot;5.4,-0.2!&quot;];
+    2 [fillcolor=&quot;#fde5cf&quot;]; 3 [fillcolor=&quot;#fde5cf&quot;]; 5 [fillcolor=&quot;#fde5cf&quot;];
+    0 -- 1; 1 -- 2; 2 -- 0; 3 -- 4; 4 -- 5; 5 -- 3;
+    2 -- 3 [penwidth=3]; 5 -- 6 [penwidth=3]; 7 -- 8 [penwidth=3];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 8 </span><span class="caption-text">2 つの連結成分を持つグラフ。頂点 2, 3, 5 は切断点、太線の辺は橋である。</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch04-components"><span class="std std-numref">図 8</span></a> のグラフは、頂点集合 <span class="math notranslate nohighlight">\(\{0, 1, \ldots, 6\}\)</span> と <span class="math notranslate nohighlight">\(\{7, 8\}\)</span> の 2 つの連結成分を持つ。</p>
+<p>辺が少なすぎるとグラフは連結になりえない。この直観は次の定理で正確に表される。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 4.2</p>
+<p>頂点数 <span class="math notranslate nohighlight">\(n\)</span>、辺数 <span class="math notranslate nohighlight">\(m\)</span> のグラフの連結成分の個数を <span class="math notranslate nohighlight">\(c\)</span> とすると、<span class="math notranslate nohighlight">\(c \ge n - m\)</span> が成り立つ。特に、連結グラフでは <span class="math notranslate nohighlight">\(m \ge n - 1\)</span> である。</p>
+</div>
+<p><strong>証明</strong>：辺のない <span class="math notranslate nohighlight">\(n\)</span> 頂点のグラフから始めて、辺を 1 本ずつ加えていく。最初は連結成分が <span class="math notranslate nohighlight">\(n\)</span> 個ある。辺を 1 本加えると、その両端が別々の連結成分に属していれば 2 つの成分が 1 つになり、同じ成分に属していれば成分の数は変わらない。いずれにしても、成分の数は 1 本あたり高々 1 しか減らない。よって <span class="math notranslate nohighlight">\(m\)</span> 本加えた後の成分の数は <span class="math notranslate nohighlight">\(n - m\)</span> 以上である。□</p>
+<p><span class="math notranslate nohighlight">\(m = n - 1\)</span> で連結なグラフは、第 6 章で扱う木になる。</p>
+</section>
+<section id="id4">
+<h2>距離<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 4.3（距離）</p>
+<p>グラフの 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> を結ぶ道のうち、長さが最小のものを<strong>最短経路</strong>といい、その長さを <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> の<strong>距離</strong>といい、<span class="math notranslate nohighlight">\(d(u, v)\)</span> と書く。<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への道がない場合は <span class="math notranslate nohighlight">\(d(u, v) = \infty\)</span> とする。</p>
+</div>
+<p>距離 <span class="math notranslate nohighlight">\(d\)</span> は、<span class="math notranslate nohighlight">\(d(u, v) \ge 0\)</span>（等号は <span class="math notranslate nohighlight">\(u = v\)</span> のときに限る）、<span class="math notranslate nohighlight">\(d(u, v) = d(v, u)\)</span>、三角不等式 <span class="math notranslate nohighlight">\(d(u, w) \le d(u, v) + d(v, w)\)</span> を満たす。つまり、連結グラフの頂点集合は <span class="math notranslate nohighlight">\(d\)</span> によって距離空間になる。</p>
+<p>距離に関連して、次の量がよく使われる。</p>
+<ul class="simple">
+<li><p>頂点 <span class="math notranslate nohighlight">\(v\)</span> の<strong>離心数</strong>：<span class="math notranslate nohighlight">\(e(v) = \max_{u \in V} d(u, v)\)</span>。<span class="math notranslate nohighlight">\(v\)</span> から最も遠い頂点までの距離である。</p></li>
+<li><p>グラフの<strong>直径</strong>：離心数の最大値 <span class="math notranslate nohighlight">\(\max_{v} e(v)\)</span>。最も離れた 2 頂点間の距離である。</p></li>
+<li><p>グラフの<strong>半径</strong>：離心数の最小値 <span class="math notranslate nohighlight">\(\min_{v} e(v)\)</span>。離心数が半径に等しい頂点を<strong>中心</strong>という。</p></li>
+</ul>
+<p>ネットワークの直径は、情報が全体に行き渡るのに必要な最大の段数を表す。中心は、全頂点への最大距離が最小になる位置なので、たとえば消防署や配送拠点を 1 つ置く場所の候補になる。</p>
+<p>辺に重みがないグラフでは、ある頂点からすべての頂点への距離を、第 11 章で扱う<strong>幅優先探索</strong>により <span class="math notranslate nohighlight">\(O(n + m)\)</span> 時間で求められる。幅優先探索は、始点から距離 1 の頂点、距離 2 の頂点、…… と、近い順に頂点を訪問する方法である。実装を次に示す（サンプルコード <code class="docutils literal notranslate"><span class="pre">connectivity.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 2 </span><span class="caption-text">幅優先探索による距離の計算</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">bfs_distances</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;source から到達できる各頂点までの距離（辺の本数）を幅優先探索で求める。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="linenos"> 4</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">source</span><span class="p">])</span>
+<span class="linenos"> 5</span>    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="linenos"> 7</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos"> 8</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dist</span><span class="p">:</span>
+<span class="linenos"> 9</span>                <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">10</span>                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">dist</span>
+</pre></div>
+</div>
+</div>
+<p>連結成分は、まだどの成分にも属さない頂点から幅優先探索を行い、到達できた頂点を 1 つの成分とする処理を繰り返せば求められる。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 3 </span><span class="caption-text">連結成分の計算</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">connected_components</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;連結成分を頂点集合のリストとして返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos"> 4</span>    <span class="n">components</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 5</span>    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">:</span>
+<span class="linenos"> 6</span>        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+<span class="linenos"> 7</span>            <span class="n">component</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">bfs_distances</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+<span class="linenos"> 8</span>            <span class="n">seen</span> <span class="o">|=</span> <span class="n">component</span>
+<span class="linenos"> 9</span>            <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">component</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">components</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-ch04-components"><span class="std std-numref">図 8</span></a> のグラフに適用した結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>連結成分: [{0, 1, 2, 3, 4, 5, 6}, {8, 7}]
+<span class="linenos">2</span>頂点 0 からの距離: {0: 0, 1: 1, 2: 1, 3: 2, 4: 3, 5: 3, 6: 4}
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>有向グラフの連結性<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>有向グラフでは、辺の向きに従ってたどる<strong>有向道</strong>を考える。<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への有向道があるとき、<span class="math notranslate nohighlight">\(v\)</span> は <span class="math notranslate nohighlight">\(u\)</span> から<strong>到達可能</strong>であるという。有向グラフの連結性には 2 種類ある。</p>
+<ul class="simple">
+<li><p>任意の 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> について、<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> へも <span class="math notranslate nohighlight">\(v\)</span> から <span class="math notranslate nohighlight">\(u\)</span> へも到達可能であるとき、<strong>強連結</strong>であるという。</p></li>
+<li><p>辺の向きを無視した無向グラフが連結であるとき、<strong>弱連結</strong>であるという。</p></li>
+</ul>
+<p>強連結な部分グラフのうち極大なものを<strong>強連結成分</strong>という。一方通行の道路網が強連結でなければ、ある地点から出発して戻ってこられない地点が存在することになる。強連結成分を求めるアルゴリズムは第 11 章で扱う。</p>
+</section>
+<section id="id6">
+<h2>切断点と橋<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>ネットワークの信頼性を考えるとき、「1 か所が故障しただけで全体が分断されるか」は重要な問題である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 4.4（切断点・橋）</p>
+<p>連結グラフ <span class="math notranslate nohighlight">\(G\)</span> の頂点 <span class="math notranslate nohighlight">\(v\)</span> について、<span class="math notranslate nohighlight">\(G - v\)</span> が連結でないとき、<span class="math notranslate nohighlight">\(v\)</span> を<strong>切断点</strong>（または関節点）という。辺 <span class="math notranslate nohighlight">\(e\)</span> について <span class="math notranslate nohighlight">\(G - e\)</span> が連結でないとき、<span class="math notranslate nohighlight">\(e\)</span> を<strong>橋</strong>という。</p>
+</div>
+<p>連結でないグラフでは、連結成分の個数を増やす頂点や辺を切断点や橋という。<a class="reference internal" href="#fig-ch04-components"><span class="std std-numref">図 8</span></a> では、頂点 2, 3, 5 が切断点、辺 23, 56, 78 が橋である。橋は次のように特徴付けられる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 4.3</p>
+<p>辺 <span class="math notranslate nohighlight">\(e\)</span> が橋であるための必要十分条件は、<span class="math notranslate nohighlight">\(e\)</span> がどの閉路にも含まれないことである。</p>
+</div>
+<p><strong>証明</strong>：<span class="math notranslate nohighlight">\(e = uv\)</span> とする。<span class="math notranslate nohighlight">\(e\)</span> がある閉路に含まれるとすると、その閉路から <span class="math notranslate nohighlight">\(e\)</span> を除いた部分は <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を結ぶ道になる。<span class="math notranslate nohighlight">\(e\)</span> を使っていた歩道はすべてこの道で迂回できるので、<span class="math notranslate nohighlight">\(G - e\)</span> でも連結成分は変わらず、<span class="math notranslate nohighlight">\(e\)</span> は橋ではない。逆に <span class="math notranslate nohighlight">\(e\)</span> が橋でないとすると、<span class="math notranslate nohighlight">\(G - e\)</span> でも <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> は同じ連結成分に属するので、<span class="math notranslate nohighlight">\(G - e\)</span> に <span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> への道 <span class="math notranslate nohighlight">\(P\)</span> がある。<span class="math notranslate nohighlight">\(P\)</span> に <span class="math notranslate nohighlight">\(e\)</span> を加えると <span class="math notranslate nohighlight">\(e\)</span> を含む閉路になる。□</p>
+<p>切断点と橋は、第 11 章で扱う深さ優先探索を 1 回行うだけで、<span class="math notranslate nohighlight">\(O(n + m)\)</span> 時間ですべて求められる。深さ優先探索で各頂点に訪問順の番号 <code class="docutils literal notranslate"><span class="pre">order</span></code> を付け、さらに「その頂点から深さ優先探索木を下り、最後に深さ優先探索木に含まれない辺（後退辺）を高々 1 本使って戻れる頂点の番号の最小値」<code class="docutils literal notranslate"><span class="pre">low</span></code> を計算する。深さ優先探索木で <span class="math notranslate nohighlight">\(u\)</span> の子 <span class="math notranslate nohighlight">\(v\)</span> について <code class="docutils literal notranslate"><span class="pre">low[v]</span> <span class="pre">&gt;=</span> <span class="pre">order[u]</span></code> なら、<span class="math notranslate nohighlight">\(v\)</span> 以下の部分は <span class="math notranslate nohighlight">\(u\)</span> を通らずに <span class="math notranslate nohighlight">\(u\)</span> より上へ戻れないので、<span class="math notranslate nohighlight">\(u\)</span> は切断点である（探索の根だけは、子が 2 つ以上あることが条件になる）。同様に <code class="docutils literal notranslate"><span class="pre">low[v]</span> <span class="pre">&gt;</span> <span class="pre">order[u]</span></code> なら、辺 <span class="math notranslate nohighlight">\(uv\)</span> は橋である。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">リスト 4 </span><span class="caption-text">切断点と橋の計算</span><a class="headerlink" href="#id13" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">articulation_points_and_bridges</span><span class="p">(</span><span class="n">adj</span><span class="p">:</span> <span class="n">AdjList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;深さ優先探索の訪問順 order と lowlink 値 low から切断点と橋を求める。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    low[v] は、v から深さ優先探索木の辺を 0 本以上下り、最後に後退辺を高々 1 本たどって</span>
+<span class="linenos"> 5</span><span class="sd">    到達できる頂点の order の最小値である。</span>
+<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 7</span>    <span class="n">order</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 8</span>    <span class="n">low</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos"> 9</span>    <span class="n">points</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos">10</span>    <span class="n">bridges</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="k">def</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">13</span>        <span class="n">order</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="n">children</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">15</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">16</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+<span class="linenos">17</span>                <span class="n">children</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">18</span>                <span class="n">dfs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+<span class="linenos">19</span>                <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="linenos">20</span>                <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">order</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">21</span>                    <span class="n">points</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">22</span>                <span class="k">if</span> <span class="n">low</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">order</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">23</span>                    <span class="n">bridges</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="nb">min</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)))</span>
+<span class="linenos">24</span>            <span class="k">elif</span> <span class="n">v</span> <span class="o">!=</span> <span class="n">parent</span><span class="p">:</span>
+<span class="linenos">25</span>                <span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">low</span><span class="p">[</span><span class="n">u</span><span class="p">],</span> <span class="n">order</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="linenos">26</span>        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">children</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">27</span>            <span class="n">points</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adj</span><span class="p">:</span>
+<span class="linenos">30</span>        <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+<span class="linenos">31</span>            <span class="n">dfs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="k">return</span> <span class="n">points</span><span class="p">,</span> <span class="n">bridges</span>
+</pre></div>
+</div>
+</div>
+<p>このコードは再帰呼び出しを使っているため、頂点数が数千を超える長い道を含むグラフでは Python の再帰の深さの上限に達することがある。その場合は <code class="docutils literal notranslate"><span class="pre">sys.setrecursionlimit</span></code> で上限を引き上げるか、スタックを使った非再帰の実装に書き換える。</p>
+</section>
+<section id="id7">
+<h2>点連結度と辺連結度<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>切断点や橋がないグラフでも、2 頂点や 2 辺を除けば分断されるかもしれない。グラフがどれだけ分断されにくいかを数値で表したものが連結度である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 4.5（連結度）</p>
+<p>連結グラフ <span class="math notranslate nohighlight">\(G\)</span> から取り除くと連結でなくなる（または頂点が 1 個だけになる）頂点集合の大きさの最小値を<strong>点連結度</strong>といい、<span class="math notranslate nohighlight">\(\kappa(G)\)</span> と書く。同様に、取り除くと連結でなくなる辺集合の大きさの最小値を<strong>辺連結度</strong>といい、<span class="math notranslate nohighlight">\(\kappa'(G)\)</span> と書く。<span class="math notranslate nohighlight">\(\kappa(G) \ge k\)</span> のとき <span class="math notranslate nohighlight">\(G\)</span> は <strong>k-連結</strong>、<span class="math notranslate nohighlight">\(\kappa'(G) \ge k\)</span> のとき <strong>k-辺連結</strong>であるという。</p>
+</div>
+<p>切断点を持つ連結グラフは <span class="math notranslate nohighlight">\(\kappa(G) = 1\)</span>、橋を持つ連結グラフは <span class="math notranslate nohighlight">\(\kappa'(G) = 1\)</span> である。次数が最小の頂点に接続する辺をすべて除けばその頂点は孤立するので、<span class="math notranslate nohighlight">\(\kappa'(G) \le \delta(G)\)</span> が成り立つ。さらに一般に、次の不等式が知られている（ホイットニーの不等式）。</p>
+<div class="math notranslate nohighlight">
+\[\kappa(G) \le \kappa'(G) \le \delta(G)\]</div>
+<p>連結度と「2 頂点を結ぶ互いに独立な道の数」を結びつけるのが、次のメンガーの定理である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 4.4（メンガーの定理）</p>
+<p>隣接していない 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> を分断するために取り除く必要のある頂点の最小数は、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を結び、端点以外に共通の頂点を持たない道の最大本数に等しい。辺についても同様に、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を分断するために取り除く必要のある辺の最小数は、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を結び、共通の辺を持たない道の最大本数に等しい。</p>
+</div>
+<p>たとえば通信ネットワークで 2 拠点間に辺を共有しない経路が 3 本あれば、どの 2 本の回線が切れても通信が続く。メンガーの定理は、そのような冗長性が「分断に必要な故障の数」と一致することを保証する。この定理は、第 13 章の最大フロー最小カット定理の特別な場合として証明できる。</p>
+<p>NetworkX では、<code class="docutils literal notranslate"><span class="pre">nx.node_connectivity</span></code> と <code class="docutils literal notranslate"><span class="pre">nx.edge_connectivity</span></code> で連結度を計算できる。</p>
+</section>
+<section id="id8">
+<h2>まとめ<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>歩道・小道・道・閉路は、頂点と辺の重複を許すかどうかで区別される。歩道があれば道もある。</p></li>
+<li><p>連結成分は「道で結ばれる」という同値関係の同値類である。<span class="math notranslate nohighlight">\(n\)</span> 頂点の連結グラフには少なくとも <span class="math notranslate nohighlight">\(n - 1\)</span> 本の辺がある。</p></li>
+<li><p>重みのないグラフの距離は幅優先探索で求められる。直径・半径・中心は距離から定まる。</p></li>
+<li><p>有向グラフには強連結と弱連結の 2 つの連結性がある。</p></li>
+<li><p>切断点と橋はネットワークの弱点を表し、深さ優先探索で効率よく求められる。橋はどの閉路にも含まれない辺である。</p></li>
+<li><p>連結度は分断に必要な頂点数・辺数の最小値であり、メンガーの定理によって独立な道の本数と一致する。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch03_representation.html" class="btn btn-neutral float-left" title="第 3 章 グラフの表現" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch05_graph_classes.html" class="btn btn-neutral float-right" title="第 5 章 さまざまなグラフ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

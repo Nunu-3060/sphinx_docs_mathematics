@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>用語集 &mdash; Python による流体・粒子シミュレーション入門 1.0 ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4bf93ade" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="参考文献" href="references.html" />
+    <link rel="prev" title="11. 手法の比較と実践上の注意" href="practice.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python による流体・粒子シミュレーション入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numerical_basics.html">2. 数値シミュレーションの基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particles.html">3. 粒子シミュレーション</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interactions.html">4. 粒子間の相互作用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fluid_basics.html">5. 流体力学の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advection_diffusion.html">6. 格子法の第一歩: 移流と拡散</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stable_fluids.html">7. 格子法による 2 次元流体: Stable Fluids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cavity_flow.html">8. 格子法の検証: キャビティ流れ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sph.html">9. 粒子法による流体: SPH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lbm.html">10. 格子ボルツマン法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practice.html">11. 手法の比較と実践上の注意</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python による流体・粒子シミュレーション入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">用語集</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>用語集<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書で使う主な用語を、アルファベット順、五十音順にまとめる。</p>
+<dl class="simple glossary">
+<dt id="term-CFL">CFL 条件<a class="headerlink" href="#term-CFL" title="Link to this term"></a></dt><dd><p>陽解法の差分法が安定であるための、時間刻み幅の条件。1 ステップの間に情報が格子間隔より遠くへ伝わってはならないことを表す。移流方程式では <span class="math notranslate nohighlight">\(c\Delta t/\Delta x \le 1\)</span> となる。</p>
+</dd>
+<dt id="term-SPH">SPH<a class="headerlink" href="#term-SPH" title="Link to this term"></a></dt><dd><p>Smoothed Particle Hydrodynamics(平滑化粒子流体力学)の略。流体を粒子で表し、カーネル関数による重み付き平均で物理量を計算する粒子法。</p>
+</dd>
+<dt id="term-0">圧力投影<a class="headerlink" href="#term-0" title="Link to this term"></a></dt><dd><p>ポアソン方程式を解いて求めた量の勾配を速度場から引き、非圧縮条件を満たす速度場にする操作。</p>
+</dd>
+<dt id="term-1">移流<a class="headerlink" href="#term-1" title="Link to this term"></a></dt><dd><p>流れによって物理量が運ばれること。ナビエ-ストークス方程式の移流項 <span class="math notranslate nohighlight">\(-(\mathbf{u}\cdot\nabla)\mathbf{u}\)</span> は、流れが速度そのものを運ぶ効果を表す。</p>
+</dd>
+<dt id="term-2">陰解法<a class="headerlink" href="#term-2" title="Link to this term"></a></dt><dd><p>未知の新しい時刻の値を含む式を、連立方程式として解く時間積分法。時間刻み幅の安定性の制約が緩い(または無い)代わりに、連立方程式を解く手間がかかる。</p>
+</dd>
+<dt id="term-3">オイラー的視点<a class="headerlink" href="#term-3" title="Link to this term"></a></dt><dd><p>空間に固定した点で流体の物理量を観測する記述の方法。格子法はこの視点にもとづく。</p>
+</dd>
+<dt id="term-4">カーネル関数<a class="headerlink" href="#term-4" title="Link to this term"></a></dt><dd><p>SPH で、周囲の粒子の値を重み付きで平均するための重み関数。距離が影響半径を超えると 0 になる。</p>
+</dd>
+<dt id="term-5">拡散数<a class="headerlink" href="#term-5" title="Link to this term"></a></dt><dd><p>拡散方程式の陽解法で使う無次元数 <span class="math notranslate nohighlight">\(r = \nu\Delta t/\Delta x^2\)</span>。1 次元では <span class="math notranslate nohighlight">\(r \le 1/2\)</span> が安定の条件である。</p>
+</dd>
+<dt id="term-6">緩和時間<a class="headerlink" href="#term-6" title="Link to this term"></a></dt><dd><p>格子ボルツマン法の BGK 衝突則で、分布関数が平衡分布関数に近づく遅さを表す定数 <span class="math notranslate nohighlight">\(\tau\)</span>。動粘性係数と <span class="math notranslate nohighlight">\(\nu = (\tau - 1/2)/3\)</span> の関係にある。</p>
+</dd>
+<dt id="term-7">近傍探索<a class="headerlink" href="#term-7" title="Link to this term"></a></dt><dd><p>ある粒子から一定の距離以内にある粒子(近傍)をすべて見つける処理。</p>
+</dd>
+<dt id="term-8">クーラン数<a class="headerlink" href="#term-8" title="Link to this term"></a></dt><dd><p>1 ステップの間に流れが何格子分進むかを表す無次元数 <span class="math notranslate nohighlight">\(C = c\Delta t/\Delta x\)</span>。</p>
+</dd>
+<dt id="term-9">格子収束<a class="headerlink" href="#term-9" title="Link to this term"></a></dt><dd><p>格子を細かくするにつれて、計算結果が一定の値に近づいていくこと。格子法の結果を信頼するための基本的な確認事項である。</p>
+</dd>
+<dt id="term-10">格子ボルツマン法<a class="headerlink" href="#term-10" title="Link to this term"></a></dt><dd><p>格子の上を飛び移りながら衝突する仮想的な粒子の分布関数を計算し、その平均として流体の運動を再現する方法。LBM とも呼ぶ。</p>
+</dd>
+<dt id="term-11">ゴーストセル<a class="headerlink" href="#term-11" title="Link to this term"></a></dt><dd><p>境界条件を扱いやすくするために、計算領域の外側に加える仮想的なセル。壁の内側の値から、境界条件に合うように値を決める。</p>
+</dd>
+<dt id="term-12">個別要素法<a class="headerlink" href="#term-12" title="Link to this term"></a></dt><dd><p>粒子 1 個 1 個の運動と、粒子どうしの接触力を計算して粒子の集まりの振る舞いを調べる方法。DEM(Discrete Element Method)とも呼ぶ。</p>
+</dd>
+<dt id="term-13">時間刻み幅<a class="headerlink" href="#term-13" title="Link to this term"></a></dt><dd><p>時間積分で 1 ステップに進める時間の幅 <span class="math notranslate nohighlight">\(\Delta t\)</span>。</p>
+</dd>
+<dt id="term-14">弱圧縮性 SPH<a class="headerlink" href="#term-14" title="Link to this term"></a></dt><dd><p>流体をわずかに圧縮できるものとみなし、状態方程式で密度から圧力を直接計算する SPH。WCSPH とも呼ぶ。</p>
+</dd>
+<dt id="term-15">射影法<a class="headerlink" href="#term-15" title="Link to this term"></a></dt><dd><p>圧力以外の項で仮の速度を求め、圧力のポアソン方程式を解いて速度を修正する、非圧縮性流体の計算法。フラクショナルステップ法とも呼ぶ。圧力投影と同じ考え方にもとづく。</p>
+</dd>
+<dt id="term-16">人工粘性<a class="headerlink" href="#term-16" title="Link to this term"></a></dt><dd><p>SPH で、近づき合う粒子の組にだけ働く減衰の力を加えて、計算を安定にするための項。</p>
+</dd>
+<dt id="term-17">シンプレクティック積分法<a class="headerlink" href="#term-17" title="Link to this term"></a></dt><dd><p>エネルギーに近い量を長時間にわたって保存する性質を持つ時間積分法。半陰的オイラー法や速度ベルレ法がこれにあたる。</p>
+</dd>
+<dt id="term-18">数値拡散<a class="headerlink" href="#term-18" title="Link to this term"></a></dt><dd><p>差分法などの離散化の誤差によって、元の方程式にはない拡散の効果が生じ、波形がなまる現象。</p>
+</dd>
+<dt id="term-19">数値分散<a class="headerlink" href="#term-19" title="Link to this term"></a></dt><dd><p>離散化の誤差によって、波長ごとに波の進む速さがずれ、不連続の近くなどに振動が生じる現象。</p>
+</dd>
+<dt id="term-20">ストローハル数<a class="headerlink" href="#term-20" title="Link to this term"></a></dt><dd><p>物体の後ろから渦が放出される周波数 <span class="math notranslate nohighlight">\(f\)</span> を表す無次元数 <span class="math notranslate nohighlight">\(\mathrm{St} = fD/U\)</span>。</p>
+</dd>
+<dt id="term-21">滑りなし条件<a class="headerlink" href="#term-21" title="Link to this term"></a></dt><dd><p>壁の上で、流体の速度が壁の速度に等しいという境界条件。</p>
+</dd>
+<dt id="term-22">セミラグランジュ法<a class="headerlink" href="#term-22" title="Link to this term"></a></dt><dd><p>格子点から流れを逆にたどった出発点の値を補間して、移流を計算する方法。無条件に安定だが、数値拡散が大きい。</p>
+</dd>
+<dt id="term-23">セル分割法<a class="headerlink" href="#term-23" title="Link to this term"></a></dt><dd><p>空間を探索半径と同じ大きさのセルに分割し、周囲のセルの中だけを調べることで近傍探索を高速化する方法。セルリスト法とも呼ぶ。</p>
+</dd>
+<dt id="term-24">動粘性係数<a class="headerlink" href="#term-24" title="Link to this term"></a></dt><dd><p>粘性係数 <span class="math notranslate nohighlight">\(\mu\)</span> を密度 <span class="math notranslate nohighlight">\(\rho\)</span> で割った量 <span class="math notranslate nohighlight">\(\nu = \mu/\rho\)</span>。単位は <span class="math notranslate nohighlight">\(\mathrm{m^2/s}\)</span>。</p>
+</dd>
+<dt id="term-25">ナビエ-ストークス方程式<a class="headerlink" href="#term-25" title="Link to this term"></a></dt><dd><p>粘性を持つ流体の運動を表す方程式。流体粒子の加速度が、圧力・粘性・外力によって決まることを表す。</p>
+</dd>
+<dt id="term-26">跳ね返り境界<a class="headerlink" href="#term-26" title="Link to this term"></a></dt><dd><p>格子ボルツマン法で、壁に入ってきた粒子を来た向きに跳ね返すことで、滑りなし条件を実現する方法。</p>
+</dd>
+<dt id="term-27">半陰的オイラー法<a class="headerlink" href="#term-27" title="Link to this term"></a></dt><dd><p>先に速度を更新し、新しい速度で位置を更新する時間積分法。シンプレクティック・オイラー法とも呼ぶ。</p>
+</dd>
+<dt id="term-28">反発係数<a class="headerlink" href="#term-28" title="Link to this term"></a></dt><dd><p>衝突の前後での相対速度の大きさの比。1 なら完全に弾み、0 なら全く弾まない。</p>
+</dd>
+<dt id="term-29">非圧縮条件<a class="headerlink" href="#term-29" title="Link to this term"></a></dt><dd><p>速度場の発散が 0(<span class="math notranslate nohighlight">\(\nabla\cdot\mathbf{u} = 0\)</span>)であるという条件。密度が一定の流体が満たす。</p>
+</dd>
+<dt id="term-30">分離解法<a class="headerlink" href="#term-30" title="Link to this term"></a></dt><dd><p>方程式の項ごとに計算を分け、順番に計算して 1 ステップを進める方法。Stable Fluids 法や射影法がこれにあたる。</p>
+</dd>
+<dt id="term-31">平衡分布関数<a class="headerlink" href="#term-31" title="Link to this term"></a></dt><dd><p>格子ボルツマン法で、衝突を十分繰り返して落ち着いた状態の分布関数。密度と速度から計算できる。</p>
+</dd>
+<dt id="term-32">ベンチマーク問題<a class="headerlink" href="#term-32" title="Link to this term"></a></dt><dd><p>信頼できる結果が公表されており、計算法の検証に使われる標準的な問題。</p>
+</dd>
+<dt id="term-33">ポアソン方程式<a class="headerlink" href="#term-33" title="Link to this term"></a></dt><dd><p><span class="math notranslate nohighlight">\(\nabla^2 p = b\)</span> の形の偏微分方程式。非圧縮性流体の計算では、圧力を求めるために解く。</p>
+</dd>
+<dt id="term-34">陽解法<a class="headerlink" href="#term-34" title="Link to this term"></a></dt><dd><p>既知の現在の時刻の値だけを使って、新しい時刻の値を直接計算する時間積分法。計算は簡単だが、時間刻み幅に安定性の制約がある。</p>
+</dd>
+<dt id="term-35">ラグランジュ的視点<a class="headerlink" href="#term-35" title="Link to this term"></a></dt><dd><p>流体とともに動く流体粒子を追跡して物理量を記述する方法。粒子法はこの視点にもとづく。</p>
+</dd>
+<dt id="term-36">レイノルズ数<a class="headerlink" href="#term-36" title="Link to this term"></a></dt><dd><p>慣性の効果と粘性の効果の比を表す無次元数 <span class="math notranslate nohighlight">\(\mathrm{Re} = UL/\nu\)</span>。流れが層流になるか乱流になるかなど、流れの性質を決める。</p>
+</dd>
+<dt id="term-37">連続の式<a class="headerlink" href="#term-37" title="Link to this term"></a></dt><dd><p>流体の質量保存則を表す方程式。非圧縮性流体では非圧縮条件になる。</p>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="practice.html" class="btn btn-neutral float-left" title="11. 手法の比較と実践上の注意" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-right" title="参考文献" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

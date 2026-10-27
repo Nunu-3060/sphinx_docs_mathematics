@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. 写像 &mdash; 論理・集合入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=27372ee5" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="9. 集合の大きさ" href="cardinality.html" />
+    <link rel="prev" title="7. 関係" href="relation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            論理・集合入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proposition.html">2. 命題と論理演算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equivalence.html">3. 論理式の同値変形</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inference.html">4. 推論と証明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicate.html">5. 述語と量化子</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">6. 集合の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relation.html">7. 関係</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. 写像</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">8.1. 写像の定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">8.2. Python の関数との違い</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">8.3. 像と逆像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">8.4. 単射・全射・全単射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">8.5. 合成写像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">8.6. 逆写像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">8.7. サンプルコード</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cardinality.html">9. 集合の大きさ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="paradox.html">10. 素朴集合論の限界</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">付録 C 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">論理・集合入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8. </span>写像</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">8. </span>写像<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>写像は、集合の要素に別の集合の要素を対応させる規則である。プログラミングの関数とよく似ているが、異なる点もある。本章では、写像を関係の特別な場合として定義し、その基本的な性質を学ぶ。</p>
+<section id="id2">
+<h2><span class="section-number">8.1. </span>写像の定義<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（写像）</p>
+<p>集合 <span class="math notranslate nohighlight">\(A\)</span> から集合 <span class="math notranslate nohighlight">\(B\)</span> への関係 <span class="math notranslate nohighlight">\(f \subseteq A \times B\)</span> が</p>
+<div class="math notranslate nohighlight">
+\[\forall a \in A \, \exists! \, b \in B \, ((a, b) \in f)\]</div>
+<p>を満たすとき、<span class="math notranslate nohighlight">\(f\)</span> を <span class="math notranslate nohighlight">\(A\)</span> から <span class="math notranslate nohighlight">\(B\)</span> への写像といい、<span class="math notranslate nohighlight">\(f \colon A \to B\)</span> と書く。<span class="math notranslate nohighlight">\((a, b) \in f\)</span> であることを <span class="math notranslate nohighlight">\(f(a) = b\)</span> と書き、<span class="math notranslate nohighlight">\(b\)</span> を <span class="math notranslate nohighlight">\(f\)</span> による <span class="math notranslate nohighlight">\(a\)</span> の像という。<span class="math notranslate nohighlight">\(A\)</span> を <span class="math notranslate nohighlight">\(f\)</span> の定義域、<span class="math notranslate nohighlight">\(B\)</span> を <span class="math notranslate nohighlight">\(f\)</span> の終域という。</p>
+</div>
+<p>ここで <span class="math notranslate nohighlight">\(\exists! \, b\)</span> は「条件を満たす <span class="math notranslate nohighlight">\(b\)</span> がただ 1 つ存在する」ことを表す。つまり写像の条件は、次の 2 つからなる。</p>
+<ul class="simple">
+<li><p>定義域のどの要素にも、対応する終域の要素がある。</p></li>
+<li><p>対応する終域の要素は 1 つに限られる。</p></li>
+</ul>
+<p>たとえば、<span class="math notranslate nohighlight">\(f(x) = x^2\)</span> で定まる <span class="math notranslate nohighlight">\(f \colon \mathbb{R} \to \mathbb{R}\)</span> は写像である。一方、<span class="math notranslate nohighlight">\(\{(x, y) \in \mathbb{R} \times \mathbb{R} \mid x = y^2\}\)</span> は <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> から <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> への写像ではない。<span class="math notranslate nohighlight">\(x = 1\)</span> には <span class="math notranslate nohighlight">\(y = 1\)</span> と <span class="math notranslate nohighlight">\(y = -1\)</span> の 2 つが対応し、<span class="math notranslate nohighlight">\(x = -1\)</span> には対応する <span class="math notranslate nohighlight">\(y\)</span> が無いからである。</p>
+<p>写像 <span class="math notranslate nohighlight">\(f\)</span> が要素 <span class="math notranslate nohighlight">\(a\)</span> を <span class="math notranslate nohighlight">\(f(a)\)</span> に対応させることを <span class="math notranslate nohighlight">\(a \mapsto f(a)\)</span> とも書く。また、2 つの写像 <span class="math notranslate nohighlight">\(f, g \colon A \to B\)</span> が等しいとは、すべての <span class="math notranslate nohighlight">\(a \in A\)</span> について <span class="math notranslate nohighlight">\(f(a) = g(a)\)</span> であることをいう。写像は対応の結果だけで決まり、計算の手順は問わない。</p>
+</section>
+<section id="python">
+<h2><span class="section-number">8.2. </span>Python の関数との違い<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>写像と Python の関数はよく似ているが、次の点で異なる。</p>
+<ul class="simple">
+<li><p>Python の関数は、例外を送出したり、終了しなかったりすることがある。そのような引数では値が定まらないので、写像の条件の 1 つ目を満たさない。</p></li>
+<li><p>Python の関数は、乱数や現在時刻、外部の状態によって、同じ引数に対して異なる値を返すことがある。これは写像の条件の 2 つ目を満たさない。</p></li>
+<li><p>Python の関数は、画面への出力やファイルの書き込みのような副作用を持つことがある。写像には対応以外の働きは無い。</p></li>
+</ul>
+<p>したがって、写像に近いのは、どの引数に対しても必ず終了して値を返し、同じ引数に同じ値を返し、副作用を持たない関数である。このような関数は純粋関数とも呼ばれる。</p>
+<p>有限集合の間の写像は、定義域の要素をキーとする辞書（<code class="docutils literal notranslate"><span class="pre">dict</span></code> 型）で表すのが分かりやすい。辞書のキーは重複しないので、キーの集合が定義域に一致していれば写像の条件を満たす。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">8.3. </span>像と逆像<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（像・逆像）</p>
+<p>写像 <span class="math notranslate nohighlight">\(f \colon A \to B\)</span> について、<span class="math notranslate nohighlight">\(X \subseteq A\)</span> と <span class="math notranslate nohighlight">\(Y \subseteq B\)</span> に対し</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(X) &amp;= \{f(x) \mid x \in X\} \\
+f^{-1}(Y) &amp;= \{a \in A \mid f(a) \in Y\}\end{split}\]</div>
+<p>と定め、<span class="math notranslate nohighlight">\(f(X)\)</span> を <span class="math notranslate nohighlight">\(X\)</span> の像、<span class="math notranslate nohighlight">\(f^{-1}(Y)\)</span> を <span class="math notranslate nohighlight">\(Y\)</span> の逆像という。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(f(A)\)</span> を <span class="math notranslate nohighlight">\(f\)</span> の像という。<span class="math notranslate nohighlight">\(f(A)\)</span> を値域と呼ぶ文献もあるが、値域という語は終域の意味で使われることもあるため、本書では使わない。</p>
+<p>たとえば <span class="math notranslate nohighlight">\(f \colon \mathbb{Z} \to \mathbb{Z}\)</span>、<span class="math notranslate nohighlight">\(f(x) = x^2\)</span> について、</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(\{-1, 0, 1\}) = \{0, 1\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f^{-1}(\{4\}) = \{-2, 2\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f^{-1}(\{3\}) = \emptyset\)</span></p></li>
+</ul>
+<p>である。逆像は、後述の逆写像が存在しない写像に対しても定義される。たとえばデータベースの検索は「属性の値がある範囲に入るレコード全体」を求める操作なので、逆像を求める操作とみなせる。</p>
+<p>像と逆像は、集合演算と次の関係にある。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(X_1 \cup X_2) &amp;= f(X_1) \cup f(X_2) \\
+f(X_1 \cap X_2) &amp;\subseteq f(X_1) \cap f(X_2) \\
+f^{-1}(Y_1 \cup Y_2) &amp;= f^{-1}(Y_1) \cup f^{-1}(Y_2) \\
+f^{-1}(Y_1 \cap Y_2) &amp;= f^{-1}(Y_1) \cap f^{-1}(Y_2)\end{split}\]</div>
+<p>2 行目だけは等号が成り立つとは限らない。上の <span class="math notranslate nohighlight">\(f(x) = x^2\)</span> で <span class="math notranslate nohighlight">\(X_1 = \{-1\}\)</span>、<span class="math notranslate nohighlight">\(X_2 = \{1\}\)</span> とすると、<span class="math notranslate nohighlight">\(f(X_1 \cap X_2) = f(\emptyset) = \emptyset\)</span> だが、<span class="math notranslate nohighlight">\(f(X_1) \cap f(X_2) = \{1\}\)</span> である。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">8.4. </span>単射・全射・全単射<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（単射・全射・全単射）</p>
+<p>写像 <span class="math notranslate nohighlight">\(f \colon A \to B\)</span> について、</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\forall a \in A \, \forall a' \in A \, (f(a) = f(a') \to a = a')\)</span> が成り立つとき、<span class="math notranslate nohighlight">\(f\)</span> を単射という。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\forall b \in B \, \exists a \in A \, (f(a) = b)\)</span> が成り立つとき、<span class="math notranslate nohighlight">\(f\)</span> を全射という。</p></li>
+<li><p>単射かつ全射であるとき、<span class="math notranslate nohighlight">\(f\)</span> を全単射という。</p></li>
+</ul>
+</div>
+<p>単射の条件は、対偶をとると「<span class="math notranslate nohighlight">\(a \neq a'\)</span> ならば <span class="math notranslate nohighlight">\(f(a) \neq f(a')\)</span>」となる。つまり単射とは、異なる要素が異なる要素に移る写像である。全射の条件は <span class="math notranslate nohighlight">\(f(A) = B\)</span>、すなわち終域のどの要素も何かの像になっていることである。全単射は、定義域と終域の要素を過不足なく一対一に対応させる写像である。</p>
+<p>次の図は、有限集合の間の写像の例である。各写像について、上の段が定義域、下の段が終域の要素を表す。</p>
+<figure class="align-default" id="id8">
+<div class="graphviz"><object data="_images/graphviz-174c531fe95e7c39c5b67f26743ffae66de2c34e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">単射でも全射でもない写像、単射だが全射でない写像、全射だが単射でない写像、全単射の矢印図</p></object></div>
+<figcaption>
+<p><span class="caption-text">f1 は単射でも全射でもない写像、f2 は単射だが全射でない写像、f3 は全射だが単射でない写像、f4 は全単射</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>数の集合の間の写像の例を挙げる。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 64.0%" />
+<col style="width: 12.0%" />
+<col style="width: 12.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>写像</p></th>
+<th class="head"><p>単射</p></th>
+<th class="head"><p>全射</p></th>
+<th class="head"><p>全単射</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f \colon \mathbb{Z} \to \mathbb{Z}\)</span>、<span class="math notranslate nohighlight">\(f(x) = 2x\)</span></p></td>
+<td><p>○</p></td>
+<td><p>×</p></td>
+<td><p>×</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f \colon \mathbb{Z} \to \mathbb{Z}\)</span>、<span class="math notranslate nohighlight">\(f(x) = x^2\)</span></p></td>
+<td><p>×</p></td>
+<td><p>×</p></td>
+<td><p>×</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f \colon \mathbb{Z} \to \{0, 1, 2\}\)</span>、<span class="math notranslate nohighlight">\(f(x) = (x \text{ を 3 で割った余り})\)</span></p></td>
+<td><p>×</p></td>
+<td><p>○</p></td>
+<td><p>×</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f \colon \mathbb{R} \to \mathbb{R}\)</span>、<span class="math notranslate nohighlight">\(f(x) = 2x + 1\)</span></p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+</tr>
+</tbody>
+</table>
+<p>同じ式で定まる写像でも、定義域と終域によって性質が変わる。たとえば <span class="math notranslate nohighlight">\(f(x) = x^2\)</span> は、<span class="math notranslate nohighlight">\(f \colon \mathbb{Z} \to \mathbb{Z}\)</span> としては単射でも全射でもないが、<span class="math notranslate nohighlight">\(f \colon \mathbb{N} \to \mathbb{N}\)</span> としては単射になる。写像を考えるときは、常に定義域と終域を明示する必要がある。</p>
+<p>これらの概念はプログラミングにも現れる。データの符号化（エンコード）は、元のデータを復元（デコード）できるように単射でなければならない。一方、ハッシュ関数は、入力となりうる値の数が出力の値の数より多いので、単射にはなりえない。これは第 9 章の鳩の巣原理から分かる。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">8.5. </span>合成写像<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（合成写像）</p>
+<p>写像 <span class="math notranslate nohighlight">\(f \colon A \to B\)</span> と <span class="math notranslate nohighlight">\(g \colon B \to C\)</span> に対し、<span class="math notranslate nohighlight">\(a \mapsto g(f(a))\)</span> で定まる写像 <span class="math notranslate nohighlight">\(A \to C\)</span> を <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(g\)</span> の合成写像といい、<span class="math notranslate nohighlight">\(g \circ f\)</span> と書く。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(g \circ f\)</span> は「<span class="math notranslate nohighlight">\(f\)</span> を先に、<span class="math notranslate nohighlight">\(g\)</span> を後に適用する」写像である。記号の並び順と適用の順が逆になるのは、<span class="math notranslate nohighlight">\((g \circ f)(a) = g(f(a))\)</span> と書いたときに <span class="math notranslate nohighlight">\(g\)</span> と <span class="math notranslate nohighlight">\(f\)</span> の並び順がそろうようにするためである。</p>
+<p>写像の合成は結合法則 <span class="math notranslate nohighlight">\(h \circ (g \circ f) = (h \circ g) \circ f\)</span> を満たす。一方、交換法則は一般に成り立たない。<span class="math notranslate nohighlight">\(f(x) = x + 1\)</span> と <span class="math notranslate nohighlight">\(g(x) = 2x\)</span> について、<span class="math notranslate nohighlight">\((g \circ f)(x) = 2x + 2\)</span> だが <span class="math notranslate nohighlight">\((f \circ g)(x) = 2x + 1\)</span> である。</p>
+<p>また、単射どうしの合成は単射、全射どうしの合成は全射、したがって全単射どうしの合成は全単射である。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">8.6. </span>逆写像<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>集合 <span class="math notranslate nohighlight">\(A\)</span> の各要素をそれ自身に対応させる写像を <span class="math notranslate nohighlight">\(A\)</span> 上の恒等写像といい、<span class="math notranslate nohighlight">\(\mathrm{id}_A\)</span> と書く。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義（逆写像）</p>
+<p>写像 <span class="math notranslate nohighlight">\(f \colon A \to B\)</span> に対し、写像 <span class="math notranslate nohighlight">\(g \colon B \to A\)</span> が <span class="math notranslate nohighlight">\(g \circ f = \mathrm{id}_A\)</span> と <span class="math notranslate nohighlight">\(f \circ g = \mathrm{id}_B\)</span> を満たすとき、<span class="math notranslate nohighlight">\(g\)</span> を <span class="math notranslate nohighlight">\(f\)</span> の逆写像といい、<span class="math notranslate nohighlight">\(f^{-1}\)</span> と書く。</p>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">定理</p>
+<p>写像 <span class="math notranslate nohighlight">\(f \colon A \to B\)</span> が逆写像を持つための必要十分条件は、<span class="math notranslate nohighlight">\(f\)</span> が全単射であることである。</p>
+</div>
+<p><strong>証明</strong> <span class="math notranslate nohighlight">\(f\)</span> が逆写像 <span class="math notranslate nohighlight">\(g\)</span> を持つとする。<span class="math notranslate nohighlight">\(f(a) = f(a')\)</span> ならば <span class="math notranslate nohighlight">\(a = g(f(a)) = g(f(a')) = a'\)</span> なので <span class="math notranslate nohighlight">\(f\)</span> は単射である。また、任意の <span class="math notranslate nohighlight">\(b \in B\)</span> について <span class="math notranslate nohighlight">\(f(g(b)) = b\)</span> なので <span class="math notranslate nohighlight">\(f\)</span> は全射である。</p>
+<p>逆に <span class="math notranslate nohighlight">\(f\)</span> が全単射であるとする。全射なので、任意の <span class="math notranslate nohighlight">\(b \in B\)</span> に対して <span class="math notranslate nohighlight">\(f(a) = b\)</span> となる <span class="math notranslate nohighlight">\(a \in A\)</span> があり、単射なのでそのような <span class="math notranslate nohighlight">\(a\)</span> はただ 1 つである。この <span class="math notranslate nohighlight">\(a\)</span> を <span class="math notranslate nohighlight">\(g(b)\)</span> と定めると、<span class="math notranslate nohighlight">\(g \colon B \to A\)</span> は写像であり、作り方から <span class="math notranslate nohighlight">\(g \circ f = \mathrm{id}_A\)</span> と <span class="math notranslate nohighlight">\(f \circ g = \mathrm{id}_B\)</span> を満たす。□</p>
+<p>たとえば <span class="math notranslate nohighlight">\(f \colon \mathbb{R} \to \mathbb{R}\)</span>、<span class="math notranslate nohighlight">\(f(x) = 2x + 1\)</span> の逆写像は <span class="math notranslate nohighlight">\(f^{-1}(y) = (y - 1) / 2\)</span> である。</p>
+<p>逆像の記号 <span class="math notranslate nohighlight">\(f^{-1}(Y)\)</span> と逆写像の記号 <span class="math notranslate nohighlight">\(f^{-1}\)</span> は同じ記号を使うが、別のものである。逆像はどの写像についても定義されるが、逆写像は全単射の場合だけ存在する。<span class="math notranslate nohighlight">\(f\)</span> が全単射のときは、<span class="math notranslate nohighlight">\(\{b\}\)</span> の逆像は逆写像による <span class="math notranslate nohighlight">\(b\)</span> の像を唯一の要素とする集合 <span class="math notranslate nohighlight">\(\{f^{-1}(b)\}\)</span> になるので、混乱は生じない。</p>
+</section>
+<section id="id7">
+<h2><span class="section-number">8.7. </span>サンプルコード<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>有限集合の間の写像を辞書で表し、像・逆像・単射・全射・逆写像・合成写像を扱うサンプルコードを示す。</p>
+<p><a class="reference download internal" download="" href="_downloads/547551980de0ea9368a174847eec58f9/mapping.py"><code class="xref download docutils literal notranslate"><span class="pre">mapping.py</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;有限集合間の写像を辞書で表し、単射・全射を判定するサンプル。&quot;&quot;&quot;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="n">A</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">B</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">C</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">class</span><span class="w"> </span><span class="nc">Mapping</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]):</span>
+<span class="linenos">11</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;定義域・終域・対応表の組で表した写像。&quot;&quot;&quot;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">codomain</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">B</span><span class="p">],</span> <span class="n">table</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">14</span>        <span class="c1"># 写像の条件: 定義域のすべての要素に、終域の要素がちょうど 1 つ対応する。</span>
+<span class="linenos">15</span>        <span class="c1"># dict のキーは重複しないため、キーの集合が定義域と一致すれば十分である。</span>
+<span class="linenos">16</span>        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">!=</span> <span class="n">domain</span><span class="p">:</span>
+<span class="linenos">17</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;対応表のキーが定義域と一致しない&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">codomain</span><span class="p">:</span>
+<span class="linenos">19</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;終域に含まれない値がある&quot;</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+<span class="linenos">21</span>        <span class="bp">self</span><span class="o">.</span><span class="n">codomain</span> <span class="o">=</span> <span class="n">codomain</span>
+<span class="linenos">22</span>        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">B</span><span class="p">:</span>
+<span class="linenos">25</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="k">def</span><span class="w"> </span><span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xs</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">A</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="n">B</span><span class="p">]:</span>
+<span class="linenos">28</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;部分集合 xs の像 f(xs) を返す。&quot;&quot;&quot;</span>
+<span class="linenos">29</span>        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">}</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>    <span class="k">def</span><span class="w"> </span><span class="nf">preimage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ys</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+<span class="linenos">32</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;部分集合 ys の逆像 f⁻¹(ys) を返す。&quot;&quot;&quot;</span>
+<span class="linenos">33</span>        <span class="k">return</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">in</span> <span class="n">ys</span><span class="p">}</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>    <span class="k">def</span><span class="w"> </span><span class="nf">is_injective</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">36</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;単射であるか: 異なる要素の像が常に異なる。&quot;&quot;&quot;</span>
+<span class="linenos">37</span>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>    <span class="k">def</span><span class="w"> </span><span class="nf">is_surjective</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">40</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;全射であるか: 像が終域全体に一致する。&quot;&quot;&quot;</span>
+<span class="linenos">41</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">codomain</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span>    <span class="k">def</span><span class="w"> </span><span class="nf">is_bijective</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">44</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;全単射であるか。&quot;&quot;&quot;</span>
+<span class="linenos">45</span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_injective</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_surjective</span><span class="p">()</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span>    <span class="k">def</span><span class="w"> </span><span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Mapping[B, A]&quot;</span><span class="p">:</span>
+<span class="linenos">48</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;逆写像を返す。全単射でなければ ValueError を送出する。&quot;&quot;&quot;</span>
+<span class="linenos">49</span>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_bijective</span><span class="p">():</span>
+<span class="linenos">50</span>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;全単射でないので逆写像は存在しない&quot;</span><span class="p">)</span>
+<span class="linenos">51</span>        <span class="k">return</span> <span class="n">Mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">codomain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="k">def</span><span class="w"> </span><span class="nf">compose</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">]:</span>
+<span class="linenos">55</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;合成写像 g ∘ f を返す。f の終域と g の定義域が一致していなければならない。&quot;&quot;&quot;</span>
+<span class="linenos">56</span>    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">codomain</span> <span class="o">!=</span> <span class="n">g</span><span class="o">.</span><span class="n">domain</span><span class="p">:</span>
+<span class="linenos">57</span>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;f の終域と g の定義域が一致しない&quot;</span><span class="p">)</span>
+<span class="linenos">58</span>    <span class="k">return</span> <span class="n">Mapping</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">codomain</span><span class="p">,</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">domain</span><span class="p">})</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span><span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">62</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: 単射=</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">is_injective</span><span class="p">()</span><span class="si">}</span><span class="s2">, 全射=</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">is_surjective</span><span class="p">()</span><span class="si">}</span><span class="s2">, 全単射=</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">is_bijective</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">66</span>    <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+<span class="linenos">67</span>    <span class="n">square</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">})</span>
+<span class="linenos">68</span>    <span class="n">describe</span><span class="p">(</span><span class="s2">&quot;f(x) = x²（{-2, ..., 2} → {0, 1, 4}）&quot;</span><span class="p">,</span> <span class="n">square</span><span class="p">)</span>
+<span class="linenos">69</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  f({-1, 0, 1}) =&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">square</span><span class="o">.</span><span class="n">image</span><span class="p">({</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">})))</span>
+<span class="linenos">70</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  f⁻¹(</span><span class="si">{4}</span><span class="s2">) =&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">square</span><span class="o">.</span><span class="n">preimage</span><span class="p">({</span><span class="mi">4</span><span class="p">})))</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span>    <span class="n">shift</span> <span class="o">=</span> <span class="n">Mapping</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">})</span>
+<span class="linenos">73</span>    <span class="n">describe</span><span class="p">(</span><span class="s2">&quot;g(x) = x + 1（{-2, ..., 2} → {-1, ..., 3}）&quot;</span><span class="p">,</span> <span class="n">shift</span><span class="p">)</span>
+<span class="linenos">74</span>    <span class="n">g_inv</span> <span class="o">=</span> <span class="n">shift</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
+<span class="linenos">75</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  g⁻¹(3) =&quot;</span><span class="p">,</span> <span class="n">g_inv</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="linenos">76</span>
+<span class="linenos">77</span>    <span class="n">h</span> <span class="o">=</span> <span class="n">compose</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">}))</span>
+<span class="linenos">78</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(f ∘ (x ↦ -x))(2) =&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="linenos">79</span>
+<span class="linenos">80</span>
+<span class="linenos">81</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="linenos">82</span>    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>f(x) = x²（{-2, ..., 2} → {0, 1, 4}）: 単射=False, 全射=True, 全単射=False
+  f({-1, 0, 1}) = [0, 1]
+  f⁻¹({4}) = [-2, 2]
+g(x) = x + 1（{-2, ..., 2} → {-1, ..., 3}）: 単射=True, 全射=True, 全単射=True
+  g⁻¹(3) = 2
+(f ∘ (x ↦ -x))(2) = 4
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="relation.html" class="btn btn-neutral float-left" title="7. 関係" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cardinality.html" class="btn btn-neutral float-right" title="9. 集合の大きさ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

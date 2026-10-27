@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 15 章 ネットワーク科学への入口 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 16 章 おわりに" href="ch16_conclusion.html" />
+    <link rel="prev" title="第 14 章 代数的グラフ理論" href="ch14_algebraic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 15 章 ネットワーク科学への入口</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">ネットワークの基本的な指標</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">次数分布</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">クラスタ係数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">平均距離</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">中心性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">ネットワークモデル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#er">ER モデル（ランダムグラフ）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ws">WS モデル（スモールワールド）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ba">BA モデル（スケールフリー）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">モデルの比較</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">頑健性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">その他の話題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 15 章 ネットワーク科学への入口</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 15 章 ネットワーク科学への入口<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>インターネット、SNS、論文の引用関係、タンパク質の相互作用、送電網など、現実のネットワークは数百万から数十億の頂点を持つ。このような巨大なグラフでは、個々の頂点や辺よりも、次数の分布や頂点間の平均的な距離といった統計的な性質が重要になる。現実のネットワークに共通する性質を調べ、それを生み出す仕組みをモデル化する分野を<strong>ネットワーク科学</strong>という。本章では、ネットワークを特徴付ける基本的な指標と、代表的なネットワークモデルを紹介する。</p>
+<section id="id2">
+<h2>ネットワークの基本的な指標<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>次数分布<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>次数が <span class="math notranslate nohighlight">\(k\)</span> の頂点の割合を <span class="math notranslate nohighlight">\(P(k)\)</span> と書き、<span class="math notranslate nohighlight">\(k\)</span> の関数として見たものを<strong>次数分布</strong>という。次数分布は、ネットワークの「つながりの偏り」を表す。</p>
+<p>多くの現実のネットワークでは、大多数の頂点の次数は小さいが、ごく一部に非常に次数の大きい頂点（<strong>ハブ</strong>）が存在する。このようなネットワークの次数分布は、次数の大きい側に長く裾を引き、しばしば次のべき乗則で近似される。</p>
+<div class="math notranslate nohighlight">
+\[P(k) \propto k^{-\gamma}\]</div>
+<p>指数 <span class="math notranslate nohighlight">\(\gamma\)</span> は多くの場合 2 から 3 の間にある。べき乗則に従う次数分布を持つネットワークを<strong>スケールフリーネットワーク</strong>という。べき乗則は、両辺の対数をとると <span class="math notranslate nohighlight">\(\log P(k) = -\gamma \log k + \text{定数}\)</span> となるので、両対数グラフで直線に見える。ただし、現実のデータが厳密にべき乗則に従うかどうかについては議論がある。</p>
+</section>
+<section id="id4">
+<h3>クラスタ係数<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>「友人の友人は友人である」ことが多いという性質を測るのがクラスタ係数である。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 15.1（クラスタ係数）</p>
+<p>次数 <span class="math notranslate nohighlight">\(k_v \ge 2\)</span> の頂点 <span class="math notranslate nohighlight">\(v\)</span> について、<span class="math notranslate nohighlight">\(v\)</span> の隣接頂点の組 <span class="math notranslate nohighlight">\(\binom{k_v}{2}\)</span> 個のうち、互いに隣接している組の割合を、<span class="math notranslate nohighlight">\(v\)</span> の<strong>局所クラスタ係数</strong> <span class="math notranslate nohighlight">\(C_v\)</span> という。</p>
+<div class="math notranslate nohighlight">
+\[C_v = \frac{(v \text{ の隣接頂点の間の辺の本数})}{k_v (k_v - 1) / 2}\]</div>
+<p>全頂点の <span class="math notranslate nohighlight">\(C_v\)</span> の平均を<strong>平均クラスタ係数</strong>という（次数 1 以下の頂点では <span class="math notranslate nohighlight">\(C_v = 0\)</span> とする）。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(C_v\)</span> は、<span class="math notranslate nohighlight">\(v\)</span> を含む三角形の数を、<span class="math notranslate nohighlight">\(v\)</span> を含みうる三角形の最大数で割ったものでもある。完全グラフではすべての頂点で <span class="math notranslate nohighlight">\(C_v = 1\)</span>、木ではすべての頂点で <span class="math notranslate nohighlight">\(C_v = 0\)</span> である（サンプルコード <code class="docutils literal notranslate"><span class="pre">network_analysis.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 32 </span><span class="caption-text">局所クラスタ係数</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">clustering_coefficient</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="s2">&quot;nx.Graph[int]&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;頂点 v の局所クラスタ係数: 隣接頂点の組のうち、互いに隣接している組の割合。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="linenos">4</span>    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="k">return</span> <span class="mf">0.0</span>
+<span class="linenos">7</span>    <span class="n">links</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">neighbors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">neighbors</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+<span class="linenos">8</span>    <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">links</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>平均距離<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>全頂点対の距離の平均を<strong>平均距離</strong>（平均経路長）という。1960 年代に社会心理学者ミルグラムが行った実験では、米国内の見知らぬ人に知人を介して手紙を届けると、平均して 6 人程度で届くことが報告された。これは「六次の隔たり」として知られる。現実のネットワークの多くは、頂点数が非常に大きくても平均距離が小さい。この性質を<strong>スモールワールド性</strong>という。</p>
+</section>
+</section>
+<section id="id6">
+<h2>中心性<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>ネットワークの中で「重要な」頂点を見つけるための指標を<strong>中心性</strong>という。何をもって重要とするかによって、さまざまな中心性が定義されている。<a class="reference internal" href="#table-ch15-centrality"><span class="std std-numref">表 13</span></a> に代表的なものをまとめる。</p>
+<span id="table-ch15-centrality"></span><table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 13 </span><span class="caption-text">代表的な中心性</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 40.0%" />
+<col style="width: 38.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>中心性</p></th>
+<th class="head"><p>定義</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>次数中心性</p></td>
+<td><p><span class="math notranslate nohighlight">\(\deg(v) / (n - 1)\)</span></p></td>
+<td><p>直接のつながりが多い</p></td>
+</tr>
+<tr class="row-odd"><td><p>近接中心性</p></td>
+<td><p><span class="math notranslate nohighlight">\((n - 1) / \sum_{u \ne v} d(u, v)\)</span></p></td>
+<td><p>他の頂点に平均的に近い</p></td>
+</tr>
+<tr class="row-even"><td><p>媒介中心性</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{s \ne v \ne t} \sigma_{st}(v) / \sigma_{st}\)</span></p></td>
+<td><p>他の頂点間の最短経路の多くが通る</p></td>
+</tr>
+<tr class="row-odd"><td><p>固有ベクトル中心性</p></td>
+<td><p>隣接行列の最大固有値の固有ベクトルの成分</p></td>
+<td><p>重要な頂点とつながっている</p></td>
+</tr>
+</tbody>
+</table>
+<p>媒介中心性の <span class="math notranslate nohighlight">\(\sigma_{st}\)</span> は <span class="math notranslate nohighlight">\(s\)</span> から <span class="math notranslate nohighlight">\(t\)</span> への最短経路の本数、<span class="math notranslate nohighlight">\(\sigma_{st}(v)\)</span> はそのうち <span class="math notranslate nohighlight">\(v\)</span> を通るものの本数である。NetworkX の既定では、媒介中心性を <span class="math notranslate nohighlight">\((n-1)(n-2)/2\)</span> で割って 0 から 1 の値に正規化する。固有ベクトル中心性も、ベクトルの長さが 1 になるよう正規化される。NetworkX の既定では、媒介中心性を <span class="math notranslate nohighlight">\((n-1)(n-2)/2\)</span> で割って 0 から 1 の値に正規化する。固有ベクトル中心性も、ベクトルの長さが 1 になるよう正規化される。媒介中心性の高い頂点は、情報や物の流れの「関所」にあたり、取り除くとネットワークが分断されやすい。ブランデスのアルゴリズムを使うと、全頂点の媒介中心性を <span class="math notranslate nohighlight">\(O(nm)\)</span> 時間で計算できる。固有ベクトル中心性は第 14 章で扱った隣接行列の固有ベクトルに基づく指標であり、PageRank はこれを有向グラフ向けに改良したものと見ることができる。</p>
+<p>第 14 章で用いた空手クラブのネットワーク（34 頂点、78 辺）について、各中心性の上位 3 頂点を計算すると次のようになる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>空手クラブ: 頂点数 = 34 辺数 = 78
+<span class="linenos">2</span>頂点 0 のクラスタ係数: 0.15 NetworkX: 0.15
+<span class="linenos">3</span>次数中心性 上位: [(33, 0.515), (0, 0.485), (32, 0.364)]
+<span class="linenos">4</span>近接中心性 上位: [(0, 0.569), (2, 0.559), (33, 0.55)]
+<span class="linenos">5</span>媒介中心性 上位: [(0, 0.438), (33, 0.304), (32, 0.145)]
+<span class="linenos">6</span>固有ベクトル中心性 上位: [(33, 0.373), (0, 0.355), (2, 0.317)]
+</pre></div>
+</div>
+<p>どの指標でも、対立した 2 人である頂点 0（指導者）と頂点 33（管理者）が上位に入っている。一方、近接中心性では 2 つのグループの境界にいる頂点 2 が 2 位に入るなど、指標によって順位は異なる。目的に合った指標を選ぶことが大切である。</p>
+<p>頂点 0 は次数 16 でクラスタ係数は 0.15 である。頂点 0 の友人同士は、120 組のうち 18 組しか互いに友人でない。頂点 0 は、互いにあまりつながっていない多くの人をまとめる立場にあることが分かる。</p>
+</section>
+<section id="id7">
+<h2>ネットワークモデル<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>現実のネットワークの性質がどのような仕組みで生まれるかを理解するため、ランダムにグラフを生成するモデルが研究されてきた。ここでは代表的な 3 つのモデルを紹介する。<a class="reference internal" href="#fig-ch15-models"><span class="std std-numref">図 30</span></a> は、それぞれのモデルで生成した 40 頂点のグラフである（頂点の大きさは次数を表す）。</p>
+<figure class="align-center" id="id14">
+<span id="fig-ch15-models"></span><img alt="3 つのネットワークモデルで生成したグラフ" src="_images/ch15_models.png" />
+<figcaption>
+<p><span class="caption-number">図 30 </span><span class="caption-text">ER モデル（左）、WS モデル（中央）、BA モデル（右）で生成したグラフ</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="er">
+<h3>ER モデル（ランダムグラフ）<a class="headerlink" href="#er" title="Link to this heading"></a></h3>
+<p><strong>ER モデル</strong>（エルデシュ・レーニィモデル）<span class="math notranslate nohighlight">\(G(n, p)\)</span> は、<span class="math notranslate nohighlight">\(n\)</span> 頂点のすべての頂点対について、独立に確率 <span class="math notranslate nohighlight">\(p\)</span> で辺を張るモデルである。最も単純なランダムグラフであり、ランダムグラフ理論の出発点になった。</p>
+<ul class="simple">
+<li><p>各頂点の次数は二項分布 <span class="math notranslate nohighlight">\(B(n - 1, p)\)</span> に従う。<span class="math notranslate nohighlight">\(n\)</span> が大きく平均次数 <span class="math notranslate nohighlight">\(\bar{k} = p(n - 1)\)</span> が一定なら、ポアソン分布で近似できる。次数は平均の周りに集中し、ハブは現れない。</p></li>
+<li><p>平均距離は <span class="math notranslate nohighlight">\(\log n / \log \bar{k}\)</span> 程度であり、小さい。</p></li>
+<li><p>ある頂点の 2 つの隣接頂点同士が隣接している確率も <span class="math notranslate nohighlight">\(p\)</span> なので、クラスタ係数は <span class="math notranslate nohighlight">\(p\)</span> 程度であり、<span class="math notranslate nohighlight">\(n\)</span> が大きいと非常に小さい。</p></li>
+</ul>
+<p>ER モデルには、<strong>相転移</strong>と呼ばれる興味深い現象がある。平均次数 <span class="math notranslate nohighlight">\(\bar{k}\)</span> が 1 より小さいと、どの連結成分も小さい（頂点数の <span class="math notranslate nohighlight">\(O(\log n)\)</span> 程度）。ところが <span class="math notranslate nohighlight">\(\bar{k}\)</span> が 1 を超えると、頂点数の一定割合を含む巨大な連結成分（<strong>巨大連結成分</strong>）が突然現れる。さらに <span class="math notranslate nohighlight">\(p\)</span> が <span class="math notranslate nohighlight">\(\log n / n\)</span> を超えると、グラフはほぼ確実に連結になる。</p>
+<p>ER モデルは平均距離が小さい点で現実のネットワークに似ているが、クラスタ係数が小さすぎることと、ハブが現れないことが現実と異なる。</p>
+</section>
+<section id="ws">
+<h3>WS モデル（スモールワールド）<a class="headerlink" href="#ws" title="Link to this heading"></a></h3>
+<p><strong>WS モデル</strong>（ワッツ・ストロガッツモデル）は、規則的な格子とランダムグラフの中間を表すモデルである。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span> 個の頂点を環状に並べ、各頂点を左右それぞれ <span class="math notranslate nohighlight">\(k/2\)</span> 個ずつ、計 <span class="math notranslate nohighlight">\(k\)</span> 個の近い頂点と結ぶ（環状格子）。</p></li>
+<li><p>各辺について、確率 <span class="math notranslate nohighlight">\(p\)</span> で一方の端点を他のランダムな頂点に付け替える。</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(p = 0\)</span> の環状格子はクラスタ係数が大きいが、平均距離も <span class="math notranslate nohighlight">\(n\)</span> に比例して大きい。<span class="math notranslate nohighlight">\(p = 1\)</span> ではほぼランダムグラフになり、平均距離もクラスタ係数も小さい。ワッツとストロガッツは、<span class="math notranslate nohighlight">\(p\)</span> が小さい範囲で、少数の「近道」の辺によって平均距離が急激に小さくなる一方、クラスタ係数はほとんど下がらないことを示した（<a class="reference internal" href="#fig-ch15-small-world"><span class="std std-numref">図 31</span></a>）。クラスタ係数が大きく平均距離が小さいネットワークを<strong>スモールワールドネットワーク</strong>という。</p>
+<figure class="align-center" id="id15">
+<span id="fig-ch15-small-world"></span><img alt="WS モデルのつなぎ替え確率と平均クラスタ係数・平均距離の関係" src="_images/ch15_small_world.png" />
+<figcaption>
+<p><span class="caption-number">図 31 </span><span class="caption-text">WS モデル（n = 500、k = 6）で、つなぎ替え確率 p を変えたときの平均クラスタ係数と平均距離（p = 0 のときの値との比）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ba">
+<h3>BA モデル（スケールフリー）<a class="headerlink" href="#ba" title="Link to this heading"></a></h3>
+<p><strong>BA モデル</strong>（バラバシ・アルバートモデル）は、ネットワークが成長していく過程をモデル化したものである。</p>
+<ol class="arabic simple">
+<li><p>少数の頂点からなるグラフから始める。</p></li>
+<li><p>新しい頂点を 1 つ追加し、既存の頂点 <span class="math notranslate nohighlight">\(m\)</span> 個と辺で結ぶ。このとき、既存の頂点 <span class="math notranslate nohighlight">\(v\)</span> を選ぶ確率を、その次数 <span class="math notranslate nohighlight">\(\deg(v)\)</span> に比例させる。</p></li>
+<li><p>2 を繰り返す。</p></li>
+</ol>
+<p>手順 2 の「次数の大きい頂点ほど新しい辺を獲得しやすい」という仕組みを<strong>優先的選択</strong>という。人気のある Web ページほど新たにリンクされやすい、多く引用される論文ほどさらに引用されやすい、といった「富める者はますます富む」現象を表している。BA モデルの次数分布は、<span class="math notranslate nohighlight">\(n\)</span> が大きいとき指数 <span class="math notranslate nohighlight">\(\gamma = 3\)</span> のべき乗則に従う。</p>
+<p><a class="reference internal" href="#fig-ch15-degree"><span class="std std-numref">図 32</span></a> は、頂点数 10000、平均次数約 6 の ER モデルと BA モデルの次数分布を比較したものである。ER モデルの次数は平均の周りに集中しているのに対し、BA モデルの次数分布は長く裾を引き、両対数グラフでほぼ直線になる。</p>
+<figure class="align-center" id="id16">
+<span id="fig-ch15-degree"></span><img alt="ER モデルと BA モデルの次数分布" src="_images/ch15_degree.png" />
+<figcaption>
+<p><span class="caption-number">図 32 </span><span class="caption-text">ER モデルと BA モデルの次数分布（左は線形目盛り、右は両対数目盛り）</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id8">
+<h3>モデルの比較<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>頂点数 1000、平均次数約 6 にそろえて 3 つのモデルのグラフを生成し、指標を比較した結果を次に示す。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>ER  (p = 0.006): 平均次数 = 6.05, 最大次数 = 19, 平均クラスタ係数 = 0.006, 平均距離 = 4.04
+<span class="linenos">2</span>WS  (k = 6, p = 0.1): 平均次数 = 6.00, 最大次数 = 9, 平均クラスタ係数 = 0.449, 平均距離 = 6.08
+<span class="linenos">3</span>BA  (m = 3): 平均次数 = 5.98, 最大次数 = 91, 平均クラスタ係数 = 0.030, 平均距離 = 3.54
+</pre></div>
+</div>
+<p>WS モデルはクラスタ係数が際立って大きい。平均距離は ER モデルより大きいが、同じ頂点数の環状格子（約 84）と比べれば非常に小さい。BA モデルは最大次数が 91 と極端に大きなハブを持ち、平均距離が最も小さい。ハブが多くの頂点を短い距離で結びつけているからである。</p>
+<table class="docutils align-default" id="id17">
+<caption><span class="caption-number">表 14 </span><span class="caption-text">3 つのモデルの特徴</span><a class="headerlink" href="#id17" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 26.0%" />
+<col style="width: 26.0%" />
+<col style="width: 26.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>性質</p></th>
+<th class="head"><p>ER モデル</p></th>
+<th class="head"><p>WS モデル</p></th>
+<th class="head"><p>BA モデル</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>次数分布</p></td>
+<td><p>ポアソン分布（ハブなし）</p></td>
+<td><p>平均の周りに集中</p></td>
+<td><p>べき乗則（ハブあり）</p></td>
+</tr>
+<tr class="row-odd"><td><p>クラスタ係数</p></td>
+<td><p>小さい</p></td>
+<td><p>大きい</p></td>
+<td><p>小さい</p></td>
+</tr>
+<tr class="row-even"><td><p>平均距離</p></td>
+<td><p>小さい</p></td>
+<td><p>小さい</p></td>
+<td><p>とても小さい</p></td>
+</tr>
+</tbody>
+</table>
+<p>どのモデルも現実のネットワークのすべての性質を再現するわけではない。それぞれ、ある性質がどのような仕組みから生まれうるかを説明するための単純化されたモデルである。</p>
+</section>
+<section id="id9">
+<h3>頑健性<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>スケールフリーネットワークは、ランダムな頂点の故障には強い。大多数の頂点は次数が小さく、それらを取り除いても全体の連結性はほとんど損なわれないからである。一方で、ハブを狙って取り除く攻撃には弱く、少数のハブを失うだけで急速に分断される。この性質は、インターネットの障害対策や感染症の対策（多くの人と接触する人を優先してワクチンを接種する）を考える上で重要である。</p>
+</section>
+</section>
+<section id="id10">
+<h2>その他の話題<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>ネットワーク科学では、ほかにも次のような問題が研究されている。</p>
+<ul class="simple">
+<li><p><strong>コミュニティ検出</strong>：内部の辺が密で、外部との辺が疎な頂点の集まり（コミュニティ）を見つける。モジュラリティと呼ばれる指標を最大化するルーヴァン法などがあり、NetworkX では <code class="docutils literal notranslate"><span class="pre">nx.community</span></code> モジュールで利用できる。第 14 章のスペクトル分割もその一手法である。</p></li>
+<li><p><strong>ネットワーク上の拡散</strong>：感染症、うわさ、停電の連鎖などがネットワーク上でどのように広がるかを、確率モデルで解析する。</p></li>
+<li><p><strong>リンク予測</strong>：現在のネットワーク構造から、将来つながる可能性の高い頂点の組を予測する。推薦システムなどに応用される。</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>まとめ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>次数分布、クラスタ係数、平均距離は、大規模ネットワークの基本的な指標である。</p></li>
+<li><p>中心性は頂点の重要度を表す指標であり、次数・近接・媒介・固有ベクトルなどの種類がある。</p></li>
+<li><p>ER モデルは単純なランダムグラフであり、平均次数 1 を境に巨大連結成分が現れる相転移を示す。</p></li>
+<li><p>WS モデルは、少数の近道によってクラスタ係数が大きく平均距離が小さいスモールワールドネットワークを生み出す。</p></li>
+<li><p>BA モデルは、優先的選択によってべき乗則の次数分布を持つスケールフリーネットワークを生み出す。スケールフリーネットワークはランダムな故障に強く、ハブへの攻撃に弱い。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch14_algebraic.html" class="btn btn-neutral float-left" title="第 14 章 代数的グラフ理論" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch16_conclusion.html" class="btn btn-neutral float-right" title="第 16 章 おわりに" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

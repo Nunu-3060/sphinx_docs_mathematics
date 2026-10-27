@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>索引 &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="#" />
+    <link rel="search" title="検索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_further_study.html">第 11 章 さらに学ぶために</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">索引</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">索引</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#D"><strong>D</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ | <a href="#ア"><strong>ア</strong></a>
+ | <a href="#イ"><strong>イ</strong></a>
+ | <a href="#ウ"><strong>ウ</strong></a>
+ | <a href="#エ"><strong>エ</strong></a>
+ | <a href="#オ"><strong>オ</strong></a>
+ | <a href="#キ"><strong>キ</strong></a>
+ | <a href="#ケ"><strong>ケ</strong></a>
+ | <a href="#ス"><strong>ス</strong></a>
+ | <a href="#セ"><strong>セ</strong></a>
+ | <a href="#タ"><strong>タ</strong></a>
+ | <a href="#テ"><strong>テ</strong></a>
+ | <a href="#ナ"><strong>ナ</strong></a>
+ | <a href="#ハ"><strong>ハ</strong></a>
+ | <a href="#ヒ"><strong>ヒ</strong></a>
+ | <a href="#フ"><strong>フ</strong></a>
+ | <a href="#伝"><strong>伝</strong></a>
+ | <a href="#位"><strong>位</strong></a>
+ | <a href="#信"><strong>信</strong></a>
+ | <a href="#双"><strong>双</strong></a>
+ | <a href="#周"><strong>周</strong></a>
+ | <a href="#回"><strong>回</strong></a>
+ | <a href="#因"><strong>因</strong></a>
+ | <a href="#基"><strong>基</strong></a>
+ | <a href="#変"><strong>変</strong></a>
+ | <a href="#安"><strong>安</strong></a>
+ | <a href="#差"><strong>差</strong></a>
+ | <a href="#帯"><strong>帯</strong></a>
+ | <a href="#循"><strong>循</strong></a>
+ | <a href="#振"><strong>振</strong></a>
+ | <a href="#極"><strong>極</strong></a>
+ | <a href="#標"><strong>標</strong></a>
+ | <a href="#正"><strong>正</strong></a>
+ | <a href="#畳"><strong>畳</strong></a>
+ | <a href="#直"><strong>直</strong></a>
+ | <a href="#窓"><strong>窓</strong></a>
+ | <a href="#線"><strong>線</strong></a>
+ | <a href="#群"><strong>群</strong></a>
+ | <a href="#複"><strong>複</strong></a>
+ | <a href="#角"><strong>角</strong></a>
+ | <a href="#逆"><strong>逆</strong></a>
+ | <a href="#連"><strong>連</strong></a>
+ | <a href="#量"><strong>量</strong></a>
+ | <a href="#離"><strong>離</strong></a>
+ | <a href="#零"><strong>零</strong></a>
+ | <a href="#高"><strong>高</strong></a>
+ 
+</div>
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-DFT"><strong>DFT</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-DTFT"><strong>DTFT</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-DTMF"><strong>DTMF</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-FFT"><strong>FFT</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-FIR"><strong>FIR フィルタ</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-IIR"><strong>IIR フィルタ</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-LTI"><strong>LTI システム</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-sinc"><strong>sinc 関数</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-SNR"><strong>SNR</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-STFT"><strong>STFT</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-z"><strong>z 変換</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ア">ア</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-0"><strong>アップサンプリング</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-1"><strong>アンチエイリアシングフィルタ</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="イ">イ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-6"><strong>インパルス応答</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ウ">ウ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-7"><strong>ウェルチ法</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="エ">エ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-8"><strong>エイリアシング</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="オ">オ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-9"><strong>オイラーの公式</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-10"><strong>オーバーラップ加算法</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="キ">キ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-13"><strong>ギブス現象</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ケ">ケ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-18"><strong>ゲルツェル法</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ス">ス</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-28"><strong>スペクトル</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-29"><strong>スペクトル漏れ</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-30"><strong>スペクトログラム</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="セ">セ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-33"><strong>ゼロ位相フィルタリング</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-34"><strong>ゼロ詰め</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="タ">タ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-39"><strong>ダウンサンプリング</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="テ">テ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-45"><strong>デジタルフィルタ</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-44"><strong>デジタル信号</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-43"><strong>デシベル</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-46"><strong>デルタ関数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ナ">ナ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-48"><strong>ナイキスト周波数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ハ">ハ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-50"><strong>バタフライ演算</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-51"><strong>バタワースフィルタ</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-52"><strong>パワースペクトル密度</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-49"><strong>パーセバルの等式</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="ヒ">ヒ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-56"><strong>ピリオドグラム</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="フ">フ</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-62"><strong>プリワーピング</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-58"><strong>フーリエ係数</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-59"><strong>フーリエ変換</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-57"><strong>フーリエ級数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="伝">伝</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-47"><strong>伝達関数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="位">位</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-3"><strong>位相</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-4"><strong>位相特性</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="信">信</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-25"><strong>信号</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="双">双</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-37"><strong>双一次変換</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="周">周</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-21"><strong>周波数</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-23"><strong>周波数分解能</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-22"><strong>周波数応答</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="回">回</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-11"><strong>回転因子</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="因">因</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-5"><strong>因果性</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="基">基</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-14"><strong>基本周波数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="変">変</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-63"><strong>変調</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="安">安</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-2"><strong>安定性</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="差">差</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-20"><strong>差分方程式</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="帯">帯</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-38"><strong>帯域幅</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="循">循</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-24"><strong>循環畳み込み</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="振">振</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-26"><strong>振幅</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-27"><strong>振幅特性</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="極">極</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-16"><strong>極</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="標">標</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-53"><strong>標本化</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-54"><strong>標本化周波数</strong></a>
+</li>
+      <li><a href="appendix_a_glossary.html#term-55"><strong>標本化定理</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="正">正</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-32"><strong>正弦波</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-31"><strong>正規化角周波数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="畳">畳</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-40"><strong>畳み込み</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-41"><strong>畳み込み定理</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="直">直</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-42"><strong>直交</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="窓">窓</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-64"><strong>窓関数</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-65"><strong>窓関数法</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="線">線</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-36"><strong>線スペクトル</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-35"><strong>線形位相</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="群">群</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-17"><strong>群遅延</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="複">複</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-61"><strong>複素フーリエ級数</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-60"><strong>複素正弦波</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="角">角</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-12"><strong>角周波数</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="逆">逆</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-15"><strong>逆フーリエ変換</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="連">連</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-70"><strong>連続時間信号</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="量">量</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-67"><strong>量子化</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-68"><strong>量子化雑音</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="離">離</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-66"><strong>離散時間信号</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="零">零</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-69"><strong>零点</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="高">高</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="appendix_a_glossary.html#term-19"><strong>高調波</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

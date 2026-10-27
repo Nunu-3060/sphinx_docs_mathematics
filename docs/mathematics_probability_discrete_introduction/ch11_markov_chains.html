@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 11 章 マルコフ連鎖入門 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 12 章 アルゴリズムと確率" href="ch12_randomized_algorithms.html" />
+    <link rel="prev" title="第 10 章 確率の不等式と極限定理" href="ch10_limit_theorems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_random_variables.html">第 7 章 確率変数と期待値</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 11 章 マルコフ連鎖入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">マルコフ連鎖の定義</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">マルコフ性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">遷移行列と状態遷移図</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#n">n ステップ後の分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">定常分布</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">定常分布の定義</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">定常分布への収束</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">グラフ上のランダムウォーク</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">ギャンブラーの破産問題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 11 章 マルコフ連鎖入門</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 11 章 マルコフ連鎖入門<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>これまでの章では、主に独立な試行を扱ってきた。しかし、明日の天気は今日の天気に影響され、Web ページの閲覧者が次に見るページは今見ているページのリンクに左右される。このように、次の状態が現在の状態に依存して確率的に決まる過程の最も基本的なモデルが<a class="reference internal" href="glossary.html#term-31"><span class="xref std std-term">マルコフ連鎖</span></a>である。本章では、第 5 章のグラフと第 7 章以降の確率の道具を組み合わせて、マルコフ連鎖の基礎を学ぶ。</p>
+<section id="id2">
+<h2>マルコフ連鎖の定義<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>マルコフ性<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>有限集合 <span class="math notranslate nohighlight">\(S = \{1, 2, \ldots, k\}\)</span> を<strong>状態空間</strong>とし、<span class="math notranslate nohighlight">\(S\)</span> の値をとる確率変数の列 <span class="math notranslate nohighlight">\(X_0, X_1, X_2, \ldots\)</span> を考える。<span class="math notranslate nohighlight">\(X_n\)</span> は時刻 <span class="math notranslate nohighlight">\(n\)</span> における状態を表す。すべての時刻 <span class="math notranslate nohighlight">\(n\)</span> と状態 <span class="math notranslate nohighlight">\(i_0, \ldots, i_{n-1}, i, j\)</span> について</p>
+<div class="math notranslate nohighlight">
+\[P(X_{n+1} = j \mid X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) = P(X_{n+1} = j \mid X_n = i)\]</div>
+<p>が成り立つとき（条件付き確率が定義される場合に限る）、この列を<strong>マルコフ連鎖</strong>という。この性質を<strong>マルコフ性</strong>という。次の状態の分布は現在の状態だけで決まり、そこに至るまでの経緯には依存しない。</p>
+<p>さらに、右辺が時刻 <span class="math notranslate nohighlight">\(n\)</span> によらない場合を<strong>時間的に一様</strong>なマルコフ連鎖という。本書では時間的に一様なマルコフ連鎖のみを扱い、</p>
+<div class="math notranslate nohighlight">
+\[p_{ij} = P(X_{n+1} = j \mid X_n = i)\]</div>
+<p>を状態 <span class="math notranslate nohighlight">\(i\)</span> から状態 <span class="math notranslate nohighlight">\(j\)</span> への<strong>遷移確率</strong>という。</p>
+</section>
+<section id="id4">
+<h3>遷移行列と状態遷移図<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>遷移確率を並べた <span class="math notranslate nohighlight">\(k \times k\)</span> 行列 <span class="math notranslate nohighlight">\(P = (p_{ij})\)</span> を<a class="reference internal" href="glossary.html#term-15"><span class="xref std std-term">遷移行列</span></a>という。遷移行列の成分は非負で、各行の和は 1 である（状態 <span class="math notranslate nohighlight">\(i\)</span> から、いずれかの状態に必ず遷移するため）。</p>
+<p><strong>例（天気のモデル）</strong>：天気を「晴れ」「曇り」「雨」の 3 状態で表し、翌日の天気が今日の天気だけで次のように決まるとする。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P = \begin{pmatrix} 0.7 &amp; 0.2 &amp; 0.1 \\ 0.3 &amp; 0.4 &amp; 0.3 \\ 0.2 &amp; 0.4 &amp; 0.4 \end{pmatrix}\end{split}\]</div>
+<p>1 行目は、今日が晴れのとき、明日が晴れ・曇り・雨である確率がそれぞれ 0.7、0.2、0.1 であることを表す。マルコフ連鎖は、状態を頂点、遷移確率を辺の重みとする重み付き有向グラフで表せる。これを<strong>状態遷移図</strong>という（<a class="reference internal" href="#fig-ch11-weather"><span class="std std-numref">図 16</span></a>）。</p>
+<figure class="align-center" id="id13">
+<span id="fig-ch11-weather"></span><div class="graphviz"><object data="_images/graphviz-87b4b4874ca81e01cff325a295c7727bf78ce2c9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph weather {
+    rankdir=LR;
+    node [shape=circle, width=0.8, fixedsize=true, fontsize=12];
+    edge [fontsize=10, arrowsize=0.7];
+    S [label=&quot;晴れ&quot;]; C [label=&quot;曇り&quot;]; R [label=&quot;雨&quot;];
+    S -&gt; S [label=&quot;0.7&quot;]; S -&gt; C [label=&quot;0.2&quot;]; S -&gt; R [label=&quot;0.1&quot;];
+    C -&gt; S [label=&quot;0.3&quot;]; C -&gt; C [label=&quot;0.4&quot;]; C -&gt; R [label=&quot;0.3&quot;];
+    R -&gt; S [label=&quot;0.2&quot;]; R -&gt; C [label=&quot;0.4&quot;]; R -&gt; R [label=&quot;0.4&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 16 </span><span class="caption-text">天気のマルコフ連鎖の状態遷移図</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="n">
+<h2>n ステップ後の分布<a class="headerlink" href="#n" title="Link to this heading"></a></h2>
+<p>時刻 <span class="math notranslate nohighlight">\(n\)</span> の状態の分布を行ベクトル <span class="math notranslate nohighlight">\(\pi^{(n)} = (P(X_n = 1), \ldots, P(X_n = k))\)</span> で表す。全確率の公式により</p>
+<div class="math notranslate nohighlight">
+\[P(X_{n+1} = j) = \sum_{i} P(X_n = i) \, P(X_{n+1} = j \mid X_n = i) = \sum_{i} \pi^{(n)}_i p_{ij}\]</div>
+<p>なので、行列の積を使って <span class="math notranslate nohighlight">\(\pi^{(n+1)} = \pi^{(n)} P\)</span> と書ける。これを繰り返すと</p>
+<div class="math notranslate nohighlight">
+\[\pi^{(n)} = \pi^{(0)} P^n\]</div>
+<p>である。特に、遷移行列のべき乗 <span class="math notranslate nohighlight">\(P^n\)</span> の <span class="math notranslate nohighlight">\((i, j)\)</span> 成分は、状態 <span class="math notranslate nohighlight">\(i\)</span> から出発して <span class="math notranslate nohighlight">\(n\)</span> ステップ後に状態 <span class="math notranslate nohighlight">\(j\)</span> にいる確率 <span class="math notranslate nohighlight">\(P(X_n = j \mid X_0 = i)\)</span> に等しい。これは、第 5 章で述べた「隣接行列のべき乗の成分は歩道の個数」という性質の確率版である。<span class="math notranslate nohighlight">\(P^n\)</span> の成分は、長さ <span class="math notranslate nohighlight">\(n\)</span> の歩道すべてについて、通る辺の遷移確率の積を足し合わせたものになっている。</p>
+<p><strong>例</strong>：今日が晴れのとき、明後日の分布は <span class="math notranslate nohighlight">\((1, 0, 0) P^2\)</span> で求められる。<span class="math notranslate nohighlight">\(P^2\)</span> の 1 行目を計算すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\text{晴れ} &amp;: \; 0.7 \times 0.7 + 0.2 \times 0.3 + 0.1 \times 0.2 = 0.57 \\
+\text{曇り} &amp;: \; 0.7 \times 0.2 + 0.2 \times 0.4 + 0.1 \times 0.4 = 0.26 \\
+\text{雨} &amp;: \; 0.7 \times 0.1 + 0.2 \times 0.3 + 0.1 \times 0.4 = 0.17
+\end{aligned}\end{split}\]</div>
+<p>となり、明後日の分布は <span class="math notranslate nohighlight">\((0.57, 0.26, 0.17)\)</span> である。</p>
+</section>
+<section id="id5">
+<h2>定常分布<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3>定常分布の定義<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>状態の分布 <span class="math notranslate nohighlight">\(\pi\)</span> が</p>
+<div class="math notranslate nohighlight">
+\[\pi P = \pi, \qquad \sum_{i} \pi_i = 1, \qquad \pi_i \ge 0\]</div>
+<p>を満たすとき、<span class="math notranslate nohighlight">\(\pi\)</span> を<a class="reference internal" href="glossary.html#term-21"><span class="xref std std-term">定常分布</span></a>という。ある時刻で分布が <span class="math notranslate nohighlight">\(\pi\)</span> であれば、その後もずっと分布は <span class="math notranslate nohighlight">\(\pi\)</span> のまま変わらない。</p>
+<p>天気の例で <span class="math notranslate nohighlight">\(\pi = (x, y, z)\)</span> とおいて <span class="math notranslate nohighlight">\(\pi P = \pi\)</span> と <span class="math notranslate nohighlight">\(x + y + z = 1\)</span> を解くと、<span class="math notranslate nohighlight">\(\pi = (6/13, 4/13, 3/13) \approx (0.462, 0.308, 0.231)\)</span> が得られる。<a class="reference internal" href="#fig-ch11-convergence"><span class="std std-numref">図 17</span></a> は、晴れから始めた場合と雨から始めた場合の分布の推移である。どちらから始めても、10 日ほどで分布は定常分布にほぼ一致する。</p>
+<figure class="align-center" id="id14">
+<span id="fig-ch11-convergence"></span><a class="reference internal image-reference" href="_images/ch11_convergence.png"><img alt="_images/ch11_convergence.png" src="_images/ch11_convergence.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 17 </span><span class="caption-text">天気のマルコフ連鎖の分布の推移</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id7">
+<h3>定常分布への収束<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>どのような初期分布から始めても定常分布に収束するとは限らない。収束を保証するには、次の 2 つの条件が必要である。</p>
+<ul class="simple">
+<li><p><strong>既約性</strong>：どの状態からどの状態へも、何ステップかで正の確率で到達できる。状態遷移図でいえば、任意の 2 頂点の間に有向の道がある（強連結である）。</p></li>
+<li><p><strong>非周期性</strong>：状態 <span class="math notranslate nohighlight">\(i\)</span> から <span class="math notranslate nohighlight">\(i\)</span> に戻ってこられるステップ数の最大公約数が、すべての状態について 1 である。</p></li>
+</ul>
+<p><strong>定理</strong>：有限状態の既約なマルコフ連鎖は、ただ 1 つの定常分布 <span class="math notranslate nohighlight">\(\pi\)</span> を持ち、すべての <span class="math notranslate nohighlight">\(i\)</span> について <span class="math notranslate nohighlight">\(\pi_i &gt; 0\)</span> である。さらに非周期的であれば、任意の初期分布 <span class="math notranslate nohighlight">\(\pi^{(0)}\)</span> について <span class="math notranslate nohighlight">\(\pi^{(0)} P^n \to \pi\)</span> （<span class="math notranslate nohighlight">\(n \to \infty\)</span>）が成り立つ。</p>
+<p>また、既約であれば（非周期的でなくても）、長い期間のうち状態 <span class="math notranslate nohighlight">\(i\)</span> に滞在する時間の割合は <span class="math notranslate nohighlight">\(\pi_i\)</span> に近づく。これは大数の法則のマルコフ連鎖版である。</p>
+<p>周期的な例として、2 つの状態を必ず交互に行き来する連鎖 <span class="math notranslate nohighlight">\(P = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span> を考える。定常分布は <span class="math notranslate nohighlight">\((1/2, 1/2)\)</span> であるが、状態 1 から始めると分布は <span class="math notranslate nohighlight">\((1, 0), (0, 1), (1, 0), \ldots\)</span> と振動し続け、収束しない。天気の例では、どの状態も 1 ステップで自分自身に戻れる（自己ループがある）ので周期は 1 である。</p>
+</section>
+</section>
+<section id="id8">
+<h2>グラフ上のランダムウォーク<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>連結な無向グラフ <span class="math notranslate nohighlight">\(G = (V, E)\)</span> の上で、現在の頂点 <span class="math notranslate nohighlight">\(v\)</span> から、隣接する頂点の 1 つを等しい確率 <span class="math notranslate nohighlight">\(1/\deg(v)\)</span> で選んで移動することを繰り返す過程を、グラフ上の<strong>ランダムウォーク</strong>という。これは頂点を状態とするマルコフ連鎖である。</p>
+<p>このランダムウォークの定常分布は</p>
+<div class="math notranslate nohighlight">
+\[\pi_v = \frac{\deg(v)}{2|E|}\]</div>
+<p>である。実際、<span class="math notranslate nohighlight">\(\sum_{u} \pi_u p_{uv} = \sum_{u \text{ は } v \text{ に隣接}} \frac{\deg(u)}{2|E|} \cdot \frac{1}{\deg(u)} = \frac{\deg(v)}{2|E|}\)</span> が成り立ち、第 5 章の握手補題により <span class="math notranslate nohighlight">\(\sum_v \pi_v = 1\)</span> となる。次数の大きい頂点ほど、長い目で見て頻繁に訪問される。なお、グラフが二部グラフの場合はランダムウォークが周期 2 になり、分布は定常分布に収束しない。</p>
+<p>Web ページを頂点、リンクを有向辺とするグラフ上のランダムウォーク（に、一定の確率でランダムなページへ移動する操作を加えたもの）の定常分布で、ページの重要度を測る手法が、検索エンジンで用いられた PageRank である。</p>
+</section>
+<section id="id9">
+<h2>ギャンブラーの破産問題<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>所持金 <span class="math notranslate nohighlight">\(i\)</span> 円のギャンブラーが、1 回ごとに確率 <span class="math notranslate nohighlight">\(p\)</span> で 1 円勝ち、確率 <span class="math notranslate nohighlight">\(q = 1 - p\)</span> で 1 円負ける賭けを繰り返す。所持金が 0 円になる（破産する）か、目標の <span class="math notranslate nohighlight">\(N\)</span> 円に達したら終了する。目標に達する確率 <span class="math notranslate nohighlight">\(h_i\)</span> を求める。</p>
+<p>所持金の推移は、状態 <span class="math notranslate nohighlight">\(0, 1, \ldots, N\)</span> のマルコフ連鎖である（<a class="reference internal" href="#fig-ch11-ruin"><span class="std std-numref">図 18</span></a>）。状態 0 と <span class="math notranslate nohighlight">\(N\)</span> は、一度入ると出られない<strong>吸収状態</strong>である。</p>
+<figure class="align-center" id="id15">
+<span id="fig-ch11-ruin"></span><div class="graphviz"><object data="_images/graphviz-9ee07c5ca497873f483e54c155b5d02b4204d42d.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph ruin {
+    rankdir=LR;
+    node [shape=circle, width=0.5, fixedsize=true, fontsize=12];
+    edge [fontsize=10, arrowsize=0.7];
+    s0 [label=&quot;0&quot;, shape=doublecircle]; s1 [label=&quot;1&quot;]; s2 [label=&quot;2&quot;]; s3 [label=&quot;3&quot;]; s4 [label=&quot;4&quot;, shape=doublecircle];
+    s1 -&gt; s2 [label=&quot;p&quot;]; s2 -&gt; s3 [label=&quot;p&quot;]; s3 -&gt; s4 [label=&quot;p&quot;];
+    s1 -&gt; s0 [label=&quot;q&quot;]; s2 -&gt; s1 [label=&quot;q&quot;]; s3 -&gt; s2 [label=&quot;q&quot;];
+    s0 -&gt; s0 [label=&quot;1&quot;]; s4 -&gt; s4 [label=&quot;1&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 18 </span><span class="caption-text">ギャンブラーの破産問題の状態遷移図（<span class="math notranslate nohighlight">\(N = 4\)</span> の場合）</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>最初の 1 回の勝ち負けで場合分けする（<strong>第一ステップ解析</strong>という）と、全確率の公式とマルコフ性から</p>
+<div class="math notranslate nohighlight">
+\[h_i = p \, h_{i+1} + q \, h_{i-1} \quad (1 \le i \le N - 1), \qquad h_0 = 0, \quad h_N = 1\]</div>
+<p>が成り立つ。これは第 4 章で扱った漸化式の一種である。<span class="math notranslate nohighlight">\(h_i = (p + q) h_i\)</span> を使って変形すると <span class="math notranslate nohighlight">\(h_{i+1} - h_i = (q/p)(h_i - h_{i-1})\)</span> となるので、<span class="math notranslate nohighlight">\(r = q/p\)</span> とおくと <span class="math notranslate nohighlight">\(h_{i+1} - h_i = r^i h_1\)</span> である。<span class="math notranslate nohighlight">\(i = 0, \ldots, N - 1\)</span> について足し合わせると <span class="math notranslate nohighlight">\(h_N = 1\)</span> から <span class="math notranslate nohighlight">\(h_1\)</span> が決まり、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}h_i = \begin{cases} \dfrac{i}{N} &amp; (p = 1/2) \\[2ex] \dfrac{1 - r^i}{1 - r^N} &amp; (p \ne 1/2) \end{cases}\end{split}\]</div>
+<p>が得られる。</p>
+<p>公平な賭け（<span class="math notranslate nohighlight">\(p = 1/2\)</span>）では、目標に達する確率は所持金の目標に対する割合に等しい。一方、わずかでも不利な賭けでは状況が大きく変わる。<span class="math notranslate nohighlight">\(i = 10\)</span>、<span class="math notranslate nohighlight">\(N = 20\)</span> のとき、<span class="math notranslate nohighlight">\(p = 0.49\)</span> で <span class="math notranslate nohighlight">\(h_{10} \approx 0.401\)</span>、<span class="math notranslate nohighlight">\(p = 0.45\)</span> で <span class="math notranslate nohighlight">\(h_{10} \approx 0.119\)</span> となる。1 回あたりの不利はわずかでも、多数回繰り返すと破産する確率は大きくなる。</p>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/81bf677a23187be8bc689192be587c93/ch11_markov_chains.py"><code class="xref download docutils literal notranslate"><span class="pre">ch11_markov_chains.py</span></code></a></p>
+<p><span class="math notranslate nohighlight">\(n\)</span> ステップ後の分布は、<code class="docutils literal notranslate"><span class="pre">numpy.linalg.matrix_power</span></code> で遷移行列のべき乗を計算して求める。NumPy の <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> 演算子は行列の積を表す。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">distribution_after</span><span class="p">(</span><span class="n">p0</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;初期分布 p0 から n ステップ後の分布 p0 P^n を返す。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">result</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">p0</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>定常分布の条件 <span class="math notranslate nohighlight">\(\pi P = \pi\)</span> は、転置をとると <span class="math notranslate nohighlight">\((P^\top - I) \pi^\top = 0\)</span> という連立一次方程式になる。この <span class="math notranslate nohighlight">\(k\)</span> 本の式は 1 次従属（すべて足すと <span class="math notranslate nohighlight">\(0 = 0\)</span> になる）なので、1 本を <span class="math notranslate nohighlight">\(\sum_i \pi_i = 1\)</span> に置き換えて解く。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">stationary_distribution</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;π P = π, Σ π_i = 1 を連立一次方程式として解き、定常分布 π を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">k</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 4</span>    <span class="c1"># (P^T - I) π^T = 0 の 1 本を Σ π_i = 1 で置き換える</span>
+<span class="linenos"> 5</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos"> 7</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos"> 9</span>    <span class="n">result</span><span class="p">:</span> <span class="n">npt</span><span class="o">.</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>ギャンブラーの破産問題のシミュレーションは次のとおりである。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">ruin_simulation</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">trials</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ギャンブラーの破産問題をシミュレーションし、target に到達した割合を返す。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">wins</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">4</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+<span class="linenos">5</span>        <span class="n">money</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos">6</span>        <span class="k">while</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">money</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+<span class="linenos">7</span>            <span class="n">money</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<span class="linenos">8</span>        <span class="n">wins</span> <span class="o">+=</span> <span class="n">money</span> <span class="o">==</span> <span class="n">target</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="n">wins</span> <span class="o">/</span> <span class="n">trials</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- 晴れから始めたときの n 日後の分布 ---
+n= 1: [0.7 0.2 0.1]
+n= 2: [0.57 0.26 0.17]
+n= 5: [0.4718 0.3032 0.225 ]
+n=10: [0.4617 0.3076 0.2307]
+n=20: [0.4615 0.3077 0.2308]
+--- 雨から始めたときの n 日後の分布 ---
+n= 1: [0.2 0.4 0.4]
+n= 2: [0.34 0.36 0.3 ]
+n= 5: [0.45   0.3128 0.2373]
+n=10: [0.4613 0.3078 0.2309]
+n=20: [0.4615 0.3077 0.2308]
+--- 定常分布 ---
+π = [0.4615 0.3077 0.2308], π P = [0.4615 0.3077 0.2308]
+100000 日のシミュレーションでの滞在割合: [0.4669 0.3038 0.2294]
+--- ギャンブラーの破産問題 (所持金 10, 目標 20) ---
+p=0.50: 目標到達確率 理論値=0.5000  シミュレーション=0.5106
+p=0.49: 目標到達確率 理論値=0.4013  シミュレーション=0.3902
+p=0.45: 目標到達確率 理論値=0.1185  シミュレーション=0.1180
+</pre></div>
+</div>
+<p>どちらの初期状態から始めても、20 日後の分布は定常分布 <span class="math notranslate nohighlight">\((6/13, 4/13, 3/13)\)</span> とほぼ一致している。また、長期間のシミュレーションでの各状態の滞在割合も定常分布に近い。ギャンブラーの破産問題のシミュレーション（5000 回）の結果は、第 10 章で見た誤差の目安 <span class="math notranslate nohighlight">\(1.96 \sqrt{0.25/5000} \approx 0.014\)</span> の範囲で理論値と一致している。</p>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>マルコフ連鎖は、次の状態の分布が現在の状態だけで決まる確率過程であり、遷移行列または状態遷移図で表される。</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> ステップ後の分布は <span class="math notranslate nohighlight">\(\pi^{(0)} P^n\)</span> で求められる。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pi P = \pi\)</span> を満たす分布を定常分布という。有限状態で既約かつ非周期的なマルコフ連鎖は、初期分布によらず定常分布に収束する。</p></li>
+<li><p>連結な無向グラフ上のランダムウォークの定常分布は、次数に比例する。</p></li>
+<li><p>吸収状態に達する確率は、第一ステップ解析により漸化式を立てて求められる。</p></li>
+</ul>
+<p>マルコフ連鎖については <a class="reference internal" href="references.html#levin2017" id="id11"><span>[Levin2017]</span></a> に、ランダムウォークとギャンブラーの破産問題については <a class="reference internal" href="references.html#feller1968" id="id12"><span>[Feller1968]</span></a> に詳しい。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch10_limit_theorems.html" class="btn btn-neutral float-left" title="第 10 章 確率の不等式と極限定理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch12_randomized_algorithms.html" class="btn btn-neutral float-right" title="第 12 章 アルゴリズムと確率" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

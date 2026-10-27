@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 11 章 さらに学ぶために &mdash; フーリエ解析・デジタル信号処理入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=93060902" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=58315b28"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="付録 A 用語集" href="appendix_a_glossary.html" />
+    <link rel="prev" title="第 10 章 応用" href="ch10_applications.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フーリエ解析・デジタル信号処理入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 連続時間のフーリエ解析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_signals.html">第 1 章 信号と数学的準備</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_fourier_series.html">第 2 章 フーリエ級数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_fourier_transform.html">第 3 章 フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散時間の信号とシステム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_sampling.html">第 4 章 標本化と量子化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_lti_systems.html">第 5 章 離散時間信号と LTI システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_dtft_dft.html">第 6 章 離散時間フーリエ変換と離散フーリエ変換</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fft.html">第 7 章 高速フーリエ変換</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 実践</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch08_spectrum_analysis.html">第 8 章 スペクトル解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_digital_filters.html">第 9 章 デジタルフィルタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_applications.html">第 10 章 応用</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 11 章 さらに学ぶために</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">本書の振り返り</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">次に学ぶ話題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">学び方の提案</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_glossary.html">付録 A 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_symbols.html">付録 B 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_samples.html">付録 C サンプルコード一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_references.html">付録 D 参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フーリエ解析・デジタル信号処理入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 11 章 さらに学ぶために</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 11 章 さらに学ぶために<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書では、フーリエ級数からフーリエ変換、DFT と FFT を経て、スペクトル解析とデジタルフィルタまでを説明した。この章では、本書の内容を振り返り、その先にある話題を紹介する。</p>
+<section id="id2">
+<h2>本書の振り返り<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>本書の内容は、次の 1 つの流れにまとめられる。</p>
+<ol class="arabic simple">
+<li><p>信号は、正弦波（複素正弦波）という直交基底の重ね合わせで表せる（第 1 章から第 3 章）。周期信号はフーリエ級数で、周期をもたない信号はフーリエ変換で表す。</p></li>
+<li><p>標本化すると、スペクトルは標本化周波数ごとに繰り返される。ナイキスト周波数より低い成分だけなら、情報は失われない（第 4 章）。</p></li>
+<li><p>LTI システムは、正弦波の周波数を変えず、振幅と位相だけを変える。その変え方が周波数応答である（第 5 章）。</p></li>
+<li><p>有限の長さの離散時間信号のスペクトルは DFT で計算でき、FFT で高速に求められる（第 6 章と第 7 章）。</p></li>
+<li><p>有限の長さの観測によるスペクトル漏れは窓関数で減らし、時間とともに変化する信号は STFT で解析する（第 8 章）。</p></li>
+<li><p>周波数応答を設計することで、目的の成分だけを取り出すフィルタが作れる（第 9 章）。</p></li>
+</ol>
+<p>この流れの中で何度も現れた次の 3 つの考え方は、どの分野の信号処理でも役に立つ。</p>
+<ul class="simple">
+<li><p><strong>畳み込みと積の対応</strong>：一方の領域の畳み込みは、他方の領域の積になる。</p></li>
+<li><p><strong>時間と周波数の双対性</strong>：時間領域で短いものは周波数領域で広く、離散的なものは周期的になる。</p></li>
+<li><p><strong>有限であることの影響</strong>：計算機で扱えるのは有限の長さと有限の精度のデータだけであり、その影響（スペクトル漏れ、循環畳み込み、量子化雑音など）を理解して扱う必要がある。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>次に学ぶ話題<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>本書の先にある主な話題を <a class="reference internal" href="#table-ch11-topics"><span class="std std-numref">表 12</span></a> に示す。</p>
+<span id="table-ch11-topics"></span><table class="docutils align-default" id="id5">
+<caption><span class="caption-number">表 12 </span><span class="caption-text">さらに学ぶための話題</span><a class="headerlink" href="#id5" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>話題</p></th>
+<th class="head"><p>概要</p></th>
+<th class="head"><p>関連する道具</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ラプラス変換</p></td>
+<td><p>フーリエ変換の <span class="math notranslate nohighlight">\(j\omega\)</span> を複素数 <span class="math notranslate nohighlight">\(s = \sigma + j\omega\)</span> に拡張したもの。アナログ回路や制御系の解析の基本となる。z 変換とは <span class="math notranslate nohighlight">\(z = e^{sT_s}\)</span> の関係で結び付く</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.signal.lti</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>離散コサイン変換（DCT）</p></td>
+<td><p>実数の余弦波だけを基底とする変換。信号の両端を対称に折り返して延長するので、境目の不連続が生じにくく、エネルギーが少数の係数に集中しやすい。JPEG や MP3 などの圧縮に使われる</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.fft.dct</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ヒルベルト変換と解析信号</p></td>
+<td><p>実数の信号から負の周波数の成分を取り除いた複素数の信号（解析信号）を作る。振幅の包絡線や瞬時周波数を求めるのに使う</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.signal.hilbert</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ウェーブレット変換</p></td>
+<td><p>高い周波数では短い区間、低い周波数では長い区間で解析する。STFT の時間分解能と周波数分解能のトレードオフを、周波数ごとに変えられる</p></td>
+<td><p>PyWavelets（<code class="docutils literal notranslate"><span class="pre">pywt</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td><p>マルチレート信号処理</p></td>
+<td><p>標本化周波数の変換を効率よく行う方法や、信号を複数の帯域に分けるフィルタバンク。音声符号化や通信で使われる</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.signal.resample_poly</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>適応フィルタ</p></td>
+<td><p>入力の性質に合わせて係数を逐次更新するフィルタ。LMS アルゴリズムが代表的で、エコーキャンセラや雑音キャンセラに使われる</p></td>
+<td><p>NumPy で実装できる</p></td>
+</tr>
+<tr class="row-even"><td><p>統計的信号処理</p></td>
+<td><p>雑音を確率的に扱い、最適なフィルタを求める。ウィーナーフィルタやカルマンフィルタがある</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.signal.wiener</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>パラメトリックなスペクトル推定</p></td>
+<td><p>信号を AR モデルなどで表し、短いデータからでも分解能の高いスペクトルを推定する。音声の線形予測分析にも使われる</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.linalg.solve_toeplitz</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2>学び方の提案<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>信号処理の理論は、実際の信号で試すと理解が深まる。次のような題材で、本書のサンプルコードを改造してみるとよい。</p>
+<ul class="simple">
+<li><p>スマートフォンやパソコンで録音した自分の声のスペクトログラムを描き、母音ごとの違いを観察する。WAV ファイルは <code class="docutils literal notranslate"><span class="pre">scipy.io.wavfile.read()</span></code> で読み込める。</p></li>
+<li><p>加速度センサーのデータ（スマートフォンのアプリで記録できる）から、歩行のリズムの周波数を求める。</p></li>
+<li><p>商用電源の 50 Hz または 60 Hz のハムノイズを含む信号を作り、ノッチフィルタ（<code class="docutils literal notranslate"><span class="pre">scipy.signal.iirnotch()</span></code>）で取り除く。</p></li>
+<li><p>楽器の音の高調波の構造を調べ、音色の違いを比べる。</p></li>
+</ul>
+<p>より体系的に学ぶには、<a class="reference internal" href="appendix_d_references.html"><span class="doc">付録 D 参考文献</span></a>に挙げた文献を参照してほしい。Oppenheim と Schafer の教科書は、離散時間信号処理の標準的な教科書であり、本書で省略した証明や、より高度な話題を詳しく扱っている。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch10_applications.html" class="btn btn-neutral float-left" title="第 10 章 応用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix_a_glossary.html" class="btn btn-neutral float-right" title="付録 A 用語集" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

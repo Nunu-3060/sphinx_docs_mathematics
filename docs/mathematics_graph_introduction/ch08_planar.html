@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 8 章 平面グラフ &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 9 章 グラフ彩色" href="ch09_coloring.html" />
+    <link rel="prev" title="第 7 章 オイラー路とハミルトン路" href="ch07_euler_hamilton.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 8 章 平面グラフ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">平面グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">オイラーの公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">辺数の上界</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">クラトフスキーの定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">双対グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">平面性の判定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 8 章 平面グラフ</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 8 章 平面グラフ<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>電子回路の基板では、配線同士が交差すると短絡してしまう。地下鉄の路線図や回路図を見やすく描くときも、線の交差は少ない方がよい。このように「辺を交差させずに平面上に描けるか」という問題は、グラフ理論の古典的な主題の一つである。本章では、平面に描けるグラフの性質と、平面に描けないグラフの特徴付けを学ぶ。</p>
+<section id="id2">
+<h2>平面グラフ<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 8.1（平面的グラフ・平面グラフ）</p>
+<p>辺を端点以外で交差させずに平面上に描けるグラフを<strong>平面的グラフ</strong>という。平面的グラフを実際に交差なく描いた図を<strong>平面描画</strong>（または平面埋め込み）といい、平面描画が与えられたグラフを<strong>平面グラフ</strong>という。</p>
+</div>
+<p>文献によっては、平面的グラフのことも平面グラフと呼ぶ。グラフの図に交差があっても、平面的グラフでないとは限らない。<a class="reference internal" href="#fig-ch08-k4"><span class="std std-numref">図 16</span></a> の左の図は <span class="math notranslate nohighlight">\(K_4\)</span> を交差ありで描いたものだが、右のように描き直せば交差はなくなる。したがって <span class="math notranslate nohighlight">\(K_4\)</span> は平面的グラフである。</p>
+<figure class="align-center" id="id9">
+<span id="fig-ch08-k4"></span><div class="graphviz"><object data="_images/graphviz-20dad94073b55e32ab8c08eb18de18fecfce2c76.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.3, fixedsize=true, fontsize=11, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    a [pos=&quot;0,1.4!&quot;]; b [pos=&quot;1.4,1.4!&quot;]; c [pos=&quot;1.4,0!&quot;]; d [pos=&quot;0,0!&quot;];
+    a -- b; b -- c; c -- d; d -- a; a -- c; b -- d;
+    p [label=&quot;a&quot;, pos=&quot;3.6,1.6!&quot;]; q [label=&quot;b&quot;, pos=&quot;2.6,0!&quot;]; r [label=&quot;c&quot;, pos=&quot;4.6,0!&quot;]; s [label=&quot;d&quot;, pos=&quot;3.6,0.55!&quot;];
+    p -- q; q -- r; r -- p; s -- p; s -- q; s -- r;
+    node [shape=plaintext, style=&quot;&quot;, fontsize=11, fontcolor=&quot;#c0392b&quot;, width=0.2];
+    f1 [label=&quot;f1&quot;, pos=&quot;3.3,0.7!&quot;]; f2 [label=&quot;f2&quot;, pos=&quot;3.9,0.7!&quot;]; f3 [label=&quot;f3&quot;, pos=&quot;3.6,0.2!&quot;]; f4 [label=&quot;f4&quot;, pos=&quot;4.6,1.2!&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 16 </span><span class="caption-text">交差のある K4 の描画（左）と平面描画（右）。右の図の f1～f4 は面を表す。</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>平面グラフは、平面をいくつかの領域に分ける。この領域を<strong>面</strong>という。面のうち 1 つは、グラフの外側に広がる有界でない領域であり、これを<strong>外面</strong>という。<a class="reference internal" href="#fig-ch08-k4"><span class="std std-numref">図 16</span></a> の右の図には、内側の 3 つの三角形 f1, f2, f3 と外面 f4 の 4 つの面がある。</p>
+<p>凸多面体の頂点と辺は、平面グラフとして描ける。多面体の 1 つの面を手前に大きく広げ、残りをその中に押し込むように描けばよい。このとき広げた面が外面になる。<a class="reference internal" href="ch05_graph_classes.html#fig-ch05-petersen"><span class="std std-numref">図 10</span></a> の右の図は、立方体をこのように描いたものである。</p>
+</section>
+<section id="id3">
+<h2>オイラーの公式<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>平面グラフの頂点数・辺数・面数の間には、次の美しい関係がある。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 8.1（オイラーの公式）</p>
+<p>連結な平面グラフの頂点数を <span class="math notranslate nohighlight">\(n\)</span>、辺数を <span class="math notranslate nohighlight">\(m\)</span>、面数を <span class="math notranslate nohighlight">\(f\)</span> とすると、次式が成り立つ。</p>
+<div class="math notranslate nohighlight">
+\[n - m + f = 2\]</div>
+</div>
+<p><strong>証明</strong>：辺数 <span class="math notranslate nohighlight">\(m\)</span> に関する帰納法で示す。<span class="math notranslate nohighlight">\(G\)</span> が木の場合、<span class="math notranslate nohighlight">\(m = n - 1\)</span> であり、閉路がないので平面は分割されず <span class="math notranslate nohighlight">\(f = 1\)</span> である。よって <span class="math notranslate nohighlight">\(n - m + f = n - (n - 1) + 1 = 2\)</span> が成り立つ。<span class="math notranslate nohighlight">\(G\)</span> が木でない場合は閉路を持つ。閉路上の辺 <span class="math notranslate nohighlight">\(e\)</span> を 1 本除くと、<span class="math notranslate nohighlight">\(G - e\)</span> は連結な平面グラフのままであり（定理 4.3）、<span class="math notranslate nohighlight">\(e\)</span> の両側にあった 2 つの面が 1 つにつながる。辺と面が 1 つずつ減るので <span class="math notranslate nohighlight">\(n - m + f\)</span> の値は変わらず、帰納法の仮定から 2 に等しい。□</p>
+<p>凸多面体に当てはめると、頂点数 <span class="math notranslate nohighlight">\(V\)</span>、辺数 <span class="math notranslate nohighlight">\(E\)</span>、面数 <span class="math notranslate nohighlight">\(F\)</span> について <span class="math notranslate nohighlight">\(V - E + F = 2\)</span> となる。立方体なら <span class="math notranslate nohighlight">\(8 - 12 + 6 = 2\)</span>、正十二面体なら <span class="math notranslate nohighlight">\(20 - 30 + 12 = 2\)</span> である。これが元々のオイラーの多面体定理である。連結成分が <span class="math notranslate nohighlight">\(c\)</span> 個の平面グラフでは、同様の議論で <span class="math notranslate nohighlight">\(n - m + f = 1 + c\)</span> が成り立つ。</p>
+<p>正多面体が 5 種類しかないことも、オイラーの公式から導ける。すべての面が <span class="math notranslate nohighlight">\(p\)</span> 角形で、すべての頂点に <span class="math notranslate nohighlight">\(q\)</span> 本の辺が集まる多面体を考える（<span class="math notranslate nohighlight">\(p, q \ge 3\)</span>）。各辺はちょうど 2 つの面に接し、ちょうど 2 つの頂点に接続するので、<span class="math notranslate nohighlight">\(pf = 2m\)</span>、<span class="math notranslate nohighlight">\(qn = 2m\)</span> である。これをオイラーの公式に代入すると次式を得る。</p>
+<div class="math notranslate nohighlight">
+\[\frac{2m}{q} - m + \frac{2m}{p} = 2 \quad \Longrightarrow \quad \frac{1}{p} + \frac{1}{q} = \frac{1}{2} + \frac{1}{m} &gt; \frac{1}{2}\]</div>
+<p><span class="math notranslate nohighlight">\(p, q \ge 3\)</span> でこれを満たす組は <span class="math notranslate nohighlight">\((p, q) = (3, 3), (3, 4), (4, 3), (3, 5), (5, 3)\)</span> の 5 つだけであり、それぞれ正四面体、正八面体、立方体、正二十面体、正十二面体に対応する。</p>
+</section>
+<section id="id4">
+<h2>辺数の上界<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>オイラーの公式から、平面的グラフの辺はあまり多くできないことが分かる。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 8.2</p>
+<p>頂点数 <span class="math notranslate nohighlight">\(n \ge 3\)</span> の単純な平面的グラフについて、<span class="math notranslate nohighlight">\(m \le 3n - 6\)</span> が成り立つ。さらに、三角形（長さ 3 の閉路）を含まなければ <span class="math notranslate nohighlight">\(m \le 2n - 4\)</span> が成り立つ。</p>
+</div>
+<p><strong>証明</strong>：連結な場合を示せば十分である（連結でなければ辺を加えて連結にできる）。平面描画で、各面の境界をなす辺の本数を数える（両側が同じ面に接する辺は 2 回数える）。単純グラフで <span class="math notranslate nohighlight">\(n \ge 3\)</span> なら、各面の境界は 3 本以上の辺からなる。一方、各辺はちょうど 2 回数えられる。よって <span class="math notranslate nohighlight">\(3f \le 2m\)</span> である。これをオイラーの公式 <span class="math notranslate nohighlight">\(f = 2 - n + m\)</span> に代入すると <span class="math notranslate nohighlight">\(3(2 - n + m) \le 2m\)</span>、すなわち <span class="math notranslate nohighlight">\(m \le 3n - 6\)</span> を得る。三角形を含まなければ各面の境界は 4 本以上なので <span class="math notranslate nohighlight">\(4f \le 2m\)</span> となり、同様に <span class="math notranslate nohighlight">\(m \le 2n - 4\)</span> を得る。□</p>
+<p>この定理から、2 つの重要な非平面的グラフが得られる。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K_5\)</span> は <span class="math notranslate nohighlight">\(n = 5\)</span>, <span class="math notranslate nohighlight">\(m = 10\)</span> であり、<span class="math notranslate nohighlight">\(3n - 6 = 9 &lt; 10\)</span> なので平面的でない。</p></li>
+<li><p><span class="math notranslate nohighlight">\(K_{3,3}\)</span> は <span class="math notranslate nohighlight">\(n = 6\)</span>, <span class="math notranslate nohighlight">\(m = 9\)</span> であり、<span class="math notranslate nohighlight">\(3n - 6 = 12\)</span> は満たすが、二部グラフなので三角形を含まず（定理 5.1）、<span class="math notranslate nohighlight">\(2n - 4 = 8 &lt; 9\)</span> なので平面的でない。</p></li>
+</ul>
+<p>ピーターセングラフ（<span class="math notranslate nohighlight">\(n = 10\)</span>, <span class="math notranslate nohighlight">\(m = 15\)</span>）は <span class="math notranslate nohighlight">\(3n - 6 = 24\)</span> も <span class="math notranslate nohighlight">\(2n - 4 = 16\)</span> も満たすが、最短の閉路の長さが 5 なので、同じ議論で <span class="math notranslate nohighlight">\(5f \le 2m\)</span> から <span class="math notranslate nohighlight">\(m \le 5(n - 2)/3 \approx 13.3\)</span> が得られ、平面的でないと分かる。</p>
+<p>定理 8.2 のもう一つの帰結として、平面的グラフには次数 5 以下の頂点が必ず存在する。もしすべての頂点の次数が 6 以上なら、握手補題より <span class="math notranslate nohighlight">\(2m \ge 6n\)</span>、すなわち <span class="math notranslate nohighlight">\(m \ge 3n\)</span> となり、<span class="math notranslate nohighlight">\(m \le 3n - 6\)</span> に反するからである。この事実は第 9 章で平面的グラフの彩色を考えるときに使う。</p>
+</section>
+<section id="id5">
+<h2>クラトフスキーの定理<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(K_5\)</span> と <span class="math notranslate nohighlight">\(K_{3,3}\)</span> は平面的でない。実は、これら 2 つが「平面的でないグラフの本質」であることが知られている。それを述べるために、細分という操作を定義する。</p>
+<p>グラフの辺 <span class="math notranslate nohighlight">\(uv\)</span> を、新しい頂点 <span class="math notranslate nohighlight">\(w\)</span> を挟んだ 2 本の辺 <span class="math notranslate nohighlight">\(uw\)</span>, <span class="math notranslate nohighlight">\(wv\)</span> に置き換える操作を辺の<strong>細分</strong>という。辺の細分を何回か繰り返して得られるグラフを、元のグラフの<strong>細分</strong>という。細分は辺の途中に点を打つだけなので、平面的かどうかは変わらない。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 8.3（クラトフスキーの定理）</p>
+<p>グラフが平面的であるための必要十分条件は、<span class="math notranslate nohighlight">\(K_5\)</span> の細分も <span class="math notranslate nohighlight">\(K_{3,3}\)</span> の細分も部分グラフとして含まないことである。</p>
+</div>
+<p>必要性は、<span class="math notranslate nohighlight">\(K_5\)</span> や <span class="math notranslate nohighlight">\(K_{3,3}\)</span> の細分を含めば、その部分だけで平面に描けないことから明らかである。十分性の証明は長いので省略する。</p>
+<p>似た定理に、縮約を用いた<strong>ワグナーの定理</strong>がある。辺 <span class="math notranslate nohighlight">\(uv\)</span> の両端を 1 つの頂点にまとめる操作を辺の<strong>縮約</strong>という。部分グラフをとる操作と縮約を繰り返して得られるグラフを<strong>マイナー</strong>という。ワグナーの定理は「グラフが平面的であるための必要十分条件は、<span class="math notranslate nohighlight">\(K_5\)</span> も <span class="math notranslate nohighlight">\(K_{3,3}\)</span> もマイナーとして含まないことである」と述べる。ピーターセングラフは、外側の 5-閉路と内側の星形をつなぐ 5 本の辺を縮約すると <span class="math notranslate nohighlight">\(K_5\)</span> になるので、<span class="math notranslate nohighlight">\(K_5\)</span> をマイナーとして含む。</p>
+</section>
+<section id="id6">
+<h2>双対グラフ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>平面グラフ <span class="math notranslate nohighlight">\(G\)</span> の各面に頂点を 1 つずつ置き、<span class="math notranslate nohighlight">\(G\)</span> の辺 <span class="math notranslate nohighlight">\(e\)</span> を挟んで隣り合う 2 つの面の頂点を、<span class="math notranslate nohighlight">\(e\)</span> と交差する辺で結ぶ。こうして得られるグラフを <span class="math notranslate nohighlight">\(G\)</span> の<strong>双対グラフ</strong>といい、<span class="math notranslate nohighlight">\(G^*\)</span> と書く（一般に多重グラフになる）。</p>
+<figure class="align-center" id="id10">
+<span id="fig-ch08-dual"></span><div class="graphviz"><object data="_images/graphviz-43f543410dd894ecee8323ca0cd078c9a60abee9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.3, fixedsize=true, fontsize=11, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    1 [pos=&quot;0,0!&quot;]; 2 [pos=&quot;2,0!&quot;]; 3 [pos=&quot;2,2!&quot;]; 4 [pos=&quot;0,2!&quot;];
+    1 -- 2 [penwidth=2, color=&quot;#2a6fb0&quot;]; 2 -- 3 [penwidth=2, color=&quot;#2a6fb0&quot;];
+    3 -- 4 [penwidth=2, color=&quot;#2a6fb0&quot;]; 4 -- 1 [penwidth=2, color=&quot;#2a6fb0&quot;];
+    1 -- 3 [penwidth=2, color=&quot;#2a6fb0&quot;];
+    node [shape=circle, width=0.28, fillcolor=&quot;#fde5cf&quot;, fontcolor=&quot;#7a3e00&quot;];
+    edge [style=dashed, color=&quot;#e07b28&quot;];
+    x [pos=&quot;1.4,0.6!&quot;]; y [pos=&quot;0.6,1.4!&quot;]; o [pos=&quot;3.2,2.9!&quot;];
+    node [shape=point, width=0.01, style=invis];
+    b1 [pos=&quot;1,-0.5!&quot;]; b2 [pos=&quot;3.6,-0.5!&quot;]; b3 [pos=&quot;-0.5,1!&quot;]; b4 [pos=&quot;-0.5,3.3!&quot;];
+    x -- y; x -- o; y -- o;
+    x -- b1; b1 -- b2; b2 -- o;
+    y -- b3; b3 -- b4; b4 -- o;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 17 </span><span class="caption-text">平面グラフ（青）とその双対グラフ（橙、破線）。双対グラフの頂点 o は外面に対応する。</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch08-dual"><span class="std std-numref">図 17</span></a> では、元のグラフ（頂点 4、辺 5、面 3）の双対グラフは、頂点 3、辺 5 になっている。元のグラフの面が双対グラフの頂点に、辺が辺に、頂点が面に対応するので、<span class="math notranslate nohighlight">\(G^*\)</span> の頂点数・辺数・面数はそれぞれ <span class="math notranslate nohighlight">\(f, m, n\)</span> である。立方体の双対グラフは正八面体、正十二面体の双対グラフは正二十面体であり、正四面体は自分自身と双対である。</p>
+<p>双対グラフでは、<span class="math notranslate nohighlight">\(G\)</span> の閉路が <span class="math notranslate nohighlight">\(G^*\)</span> の極小なカット（第 6 章の意味のカットのうち、真部分集合がカットにならないもの）に対応する。この対応は、平面グラフ上の最大フローや最短経路の問題を、双対グラフ上の別の問題に言い換えるのに使われる。</p>
+</section>
+<section id="id7">
+<h2>平面性の判定<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>グラフが平面的かどうかは、ホップクロフトとタージャンによるアルゴリズムなどで <span class="math notranslate nohighlight">\(O(n)\)</span> 時間で判定できる。定理 8.2 より平面的グラフでは <span class="math notranslate nohighlight">\(m = O(n)\)</span> なので、辺数が <span class="math notranslate nohighlight">\(3n - 6\)</span> を超えていればその時点で平面的でないと判断できる。</p>
+<p>NetworkX では <code class="docutils literal notranslate"><span class="pre">nx.check_planarity</span></code> で平面性を判定でき、平面的な場合は平面描画（各頂点の周りの辺の並び順）も得られる。サンプルコード <code class="docutils literal notranslate"><span class="pre">planarity.py</span></code> では、平面描画の面を数えてオイラーの公式を確かめている。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 13 </span><span class="caption-text">平面描画の面の数え上げ</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">count_faces</span><span class="p">(</span><span class="n">embedding</span><span class="p">:</span> <span class="s2">&quot;nx.PlanarEmbedding[int]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;平面埋め込みの面の数を数える。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    各辺は 2 つの向き (u, v), (v, u) を持ち、それぞれちょうど 1 つの面の境界になる。</span>
+<span class="linenos"> 5</span><span class="sd">    向き付きの辺を順にたどって面を 1 つずつ数える。</span>
+<span class="linenos"> 6</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 7</span>    <span class="n">visited</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="linenos"> 8</span>    <span class="n">faces</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos"> 9</span>    <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">embedding</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="n">embedding</span><span class="o">.</span><span class="n">traverse_face</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mark_half_edges</span><span class="o">=</span><span class="n">visited</span><span class="p">)</span>
+<span class="linenos">12</span>            <span class="n">faces</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">faces</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>K4: 平面的, n = 4, m = 6, f = 4, n - m + f = 2
+<span class="linenos">2</span>K5: 非平面的, n = 5, m = 10, 3n - 6 = 9
+<span class="linenos">3</span>K3,3: 非平面的, n = 6, m = 9, 3n - 6 = 12
+<span class="linenos">4</span>立方体 Q3: 平面的, n = 8, m = 12, f = 6, n - m + f = 2
+<span class="linenos">5</span>正十二面体: 平面的, n = 20, m = 30, f = 12, n - m + f = 2
+<span class="linenos">6</span>ピーターセン: 非平面的, n = 10, m = 15, 3n - 6 = 24
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(K_{3,3}\)</span> とピーターセングラフは <span class="math notranslate nohighlight">\(m \le 3n - 6\)</span> を満たすが、平面的でないことに注意する。辺数の上界は平面的であるための必要条件にすぎない。</p>
+<p>平面的でないグラフについては、描画したときの辺の交差の最小数（<strong>交差数</strong>）が問題になる。回路設計では、配線の交差を減らすために基板を多層にしたり、ジャンパー線を使ったりする。</p>
+</section>
+<section id="id8">
+<h2>まとめ<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>平面に辺を交差させずに描けるグラフを平面的グラフという。平面描画は平面をいくつかの面に分ける。</p></li>
+<li><p>連結な平面グラフでは、オイラーの公式 <span class="math notranslate nohighlight">\(n - m + f = 2\)</span> が成り立つ。この公式から正多面体が 5 種類しかないことが導ける。</p></li>
+<li><p>単純な平面的グラフは <span class="math notranslate nohighlight">\(m \le 3n - 6\)</span> を満たし、次数 5 以下の頂点を持つ。<span class="math notranslate nohighlight">\(K_5\)</span> と <span class="math notranslate nohighlight">\(K_{3,3}\)</span> は平面的でない。</p></li>
+<li><p>クラトフスキーの定理により、平面的でないグラフは <span class="math notranslate nohighlight">\(K_5\)</span> か <span class="math notranslate nohighlight">\(K_{3,3}\)</span> の細分を必ず含む。</p></li>
+<li><p>平面グラフの面を頂点とする双対グラフでは、元のグラフの閉路がカットに対応する。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch07_euler_hamilton.html" class="btn btn-neutral float-left" title="第 7 章 オイラー路とハミルトン路" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch09_coloring.html" class="btn btn-neutral float-right" title="第 9 章 グラフ彩色" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

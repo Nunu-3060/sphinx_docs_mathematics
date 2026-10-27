@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>グラフ理論入門 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 1 章 グラフ理論とは" href="ch01_introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">グラフ理論入門</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>グラフ理論入門<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本書は、Python などのプログラミングの知識を持つエンジニアや工学系の大学生を対象とした、グラフ理論の入門書である。グラフの基本的な概念から、木・彩色・マッチングといった構造の理論、探索・最短経路・ネットワークフローなどのアルゴリズム、さらに行列を用いた解析やネットワーク科学までを扱う。定義と定理を図で直観的に説明し、主要なアルゴリズムは Python で実装して動作を確かめる。</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch01_introduction.html#id2">ケーニヒスベルクの橋の問題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_introduction.html#id3">グラフで表せるもの</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_introduction.html#id4">本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_introduction.html#id5">本書の進め方と記法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_introduction.html#python">Python の環境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch01_introduction.html#id6">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id2">グラフの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id3">多重辺・自己ループと単純グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id4">有向グラフと重み付きグラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id5">次数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id6">握手補題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id8">部分グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id9">グラフの同型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch02_basics.html#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#id2">隣接行列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#id3">接続行列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#id4">隣接リスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#id5">辺リスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#id6">表現の比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#python">Python による実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch03_representation.html#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id2">歩道・小道・道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id3">連結性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id4">距離</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id5">有向グラフの連結性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id6">切断点と橋</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id7">点連結度と辺連結度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch04_connectivity.html#id8">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id2">基本的なグラフの族</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id3">正則グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id4">二部グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id5">補グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id6">線グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id7">有向非巡回グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch05_graph_classes.html#id8">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch06_trees.html#id2">木の定義と性質</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_trees.html#id3">根付き木</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_trees.html#id4">全域木</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_trees.html#id5">ケイリーの公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_trees.html#id6">最小全域木</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch06_trees.html#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch07_euler_hamilton.html">第 7 章 オイラー路とハミルトン路</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch07_euler_hamilton.html#id2">オイラー路</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_euler_hamilton.html#id6">ハミルトン路</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_euler_hamilton.html#id10">巡回セールスマン問題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch07_euler_hamilton.html#id11">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id2">平面グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id3">オイラーの公式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id4">辺数の上界</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id5">クラトフスキーの定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id6">双対グラフ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id7">平面性の判定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch08_planar.html#id8">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id2">頂点彩色と彩色数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id3">彩色数の下界と上界</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id4">貪欲彩色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id5">彩色数の計算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id6">平面的グラフの彩色と四色定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id7">辺彩色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id8">彩色多項式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id9">彩色の応用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch09_coloring.html#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch10_matching.html#id2">マッチングの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_matching.html#id3">増加路とベルジュの定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_matching.html#id4">二部グラフのマッチング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_matching.html#id9">安定マッチング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch10_matching.html#id11">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch11_search.html#id2">幅優先探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch11_search.html#id3">深さ優先探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch11_search.html#id5">トポロジカルソート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch11_search.html#id6">強連結成分分解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch11_search.html#id7">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#id2">問題の定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#id5">ダイクストラ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#id6">ベルマン・フォード法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#id7">ワーシャル・フロイド法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#a">A* 探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#id8">アルゴリズムの比較</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch12_shortest_path.html#id9">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch13_flow.html#id2">フローネットワーク</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch13_flow.html#id3">カット</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch13_flow.html#id4">最大フロー最小カット定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch13_flow.html#id6">フォード・ファルカーソン法とエドモンズ・カープ法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch13_flow.html#id8">最大フローの応用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch13_flow.html#id12">まとめ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#id2">隣接行列のべき乗と歩道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#id3">隣接行列の固有値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#id4">ラプラシアン行列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#id6">行列木定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#id7">スペクトルによるグラフ分割</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#pagerank">PageRank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch14_algebraic.html#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch15_network_science.html#id2">ネットワークの基本的な指標</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch15_network_science.html#id6">中心性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch15_network_science.html#id7">ネットワークモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch15_network_science.html#id10">その他の話題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch15_network_science.html#id11">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ch16_conclusion.html#id2">本書の振り返り</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch16_conclusion.html#id3">さらに学ぶために</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ch16_conclusion.html#id8">おわりに</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch01_introduction.html" class="btn btn-neutral float-right" title="第 1 章 グラフ理論とは" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

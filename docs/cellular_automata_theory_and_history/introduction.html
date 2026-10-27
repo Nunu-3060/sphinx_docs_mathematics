@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. はじめに &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="2. 基本概念と定義" href="basics.html" />
+    <link rel="prev" title="セル・オートマトンの理論と歴史" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. はじめに</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. セル・オートマトンとは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 本書の構成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.3. 前提知識</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">1.4. サンプルコードについて</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">1.5. 表記について</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">7. 応用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>はじめに</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>はじめに<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2><span class="section-number">1.1. </span>セル・オートマトンとは<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>セル・オートマトン（以下、CA と略す）は、格子状に並んだ多数の「セル」が、それぞれ有限個の状態の 1 つをとり、離散的な時刻ごとに一斉に状態を更新していく計算モデルである。各セルの次の状態は、そのセル自身とすぐ近くのセルの現在の状態だけから、全セル共通の規則によって決まる。</p>
+<p>例として、1 列に並んだセルが白（0）か黒（1）のどちらかの状態をとり、「左右の隣のセルの状態が異なれば次の時刻に黒、同じなら白になる」という規則で更新される CA を考える。中央の 1 セルだけを黒にして時間発展させると、各時刻の配置を上から順に並べた図に、シェルピンスキー・ガスケットと呼ばれるフラクタル図形が現れる（第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」で扱うルール 90 である）。規則は 1 行で書けるほど単純なのに、全体としては規則から直ちには予想しにくい模様が生じる。この「局所的で単純な規則から大域的で複雑な振る舞いが生まれる」という性質が、CA が多くの分野で研究されてきた主な理由である。</p>
+<p>CA には、主に次の 3 つの側面がある。</p>
+<ul class="simple">
+<li><p><strong>計算モデル</strong>：チューリング機械と同等の計算能力を持つ CA が存在し、計算とは何か、自己増殖とは何かを考える道具として使われてきた。</p></li>
+<li><p><strong>物理・生物現象のモデル</strong>：流体、交通流、結晶成長、生物の模様など、多数の要素が局所的に相互作用する系を、微分方程式を使わずに直接シミュレーションする手法として使われる。</p></li>
+<li><p><strong>数学の対象</strong>：CA の時間発展を、無限個のセルの配置全体の上の写像（力学系）とみなして、その性質を調べることができる。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.2. </span>本書の構成<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>本書は次の章からなる。</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-number">表 1.1 </span><span class="caption-text">本書の構成</span><a class="headerlink" href="#id7" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 30.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>章</p></th>
+<th class="head"><p>表題</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>はじめに</p></td>
+<td><p>本書の目的と構成</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>基本概念と定義</p></td>
+<td><p>格子・状態・近傍・局所規則・大域写像・境界条件などの定義</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>歴史</p></td>
+<td><p>1940 年代から現在までの主要な出来事と人物</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1 次元セル・オートマトン</p></td>
+<td><p>基本セル・オートマトン、ルール番号、ウルフラムの 4 クラス分類</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2 次元セル・オートマトン</p></td>
+<td><p>ライフゲームとその仲間、ラングトンのアリ</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>理論</p></td>
+<td><p>計算万能性、自己増殖、エデンの園定理、可逆性、λ パラメータ</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>応用</p></td>
+<td><p>格子ガス、交通流、森林火災、結晶成長、乱数生成など</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>発展的な話題</p></td>
+<td><p>確率的・非同期・連続値の CA、ニューラル・セル・オートマトン</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Python による実装</p></td>
+<td><p>NumPy による実装の方法と注意点</p></td>
+</tr>
+</tbody>
+</table>
+<p>巻末には付録として、用語集、参考文献、サンプルコードの一覧を付けた。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.3. </span>前提知識<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>本書は次の知識を前提とする。</p>
+<ul class="simple">
+<li><p>Python の基本的な文法と、NumPy の配列操作の基礎</p></li>
+<li><p>集合・写像・2 進数などの、大学初年級の離散数学の基礎</p></li>
+</ul>
+<p>チューリング機械や位相空間の知識があれば第 6 章をより深く理解できるが、必須ではない。必要な用語は本文中で簡単に説明する。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">1.4. </span>サンプルコードについて<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>本書のサンプルコードは Python 3.10 以降で動作し、NumPy と matplotlib を使う。各サンプルは付録の「<a class="reference internal" href="examples.html"><span class="doc">サンプルコード一覧</span></a>」から閲覧・ダウンロードできる。本文中の図の多くは、これらのサンプルコードを使って本書のビルド時に生成したものである。</p>
+<p>各サンプルはコマンドラインから次のように実行する。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">pip install numpy matplotlib</span>
+<span class="linenos">2</span><span class="go">python elementary_ca.py 30</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">1.5. </span>表記について<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>本書では次のように表記を統一する。</p>
+<ul class="simple">
+<li><p>時刻は <span class="math notranslate nohighlight">\(t = 0, 1, 2, \ldots\)</span> のように 0 から数える。ライフゲームでは、慣例に従い時刻を「世代」とも呼ぶ。</p></li>
+<li><p>セルの状態は、特に断らない限り 0 と 1 の 2 状態とし、図では 0 を白、1 を黒（または濃い色）で示す。</p></li>
+<li><p>1 次元 CA の時空図は、横軸をセルの位置、縦軸を時刻とし、上から下へ時間が進むように描く。</p></li>
+<li><p>人名は原則としてカタカナで表記し、初出時に原綴りを併記する。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="セル・オートマトンの理論と歴史" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basics.html" class="btn btn-neutral float-right" title="2. 基本概念と定義" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

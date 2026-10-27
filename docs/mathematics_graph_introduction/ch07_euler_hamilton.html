@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 7 章 オイラー路とハミルトン路 &mdash; グラフ理論入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b621ff32" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 8 章 平面グラフ" href="ch08_planar.html" />
+    <link rel="prev" title="第 6 章 木と全域木" href="ch06_trees.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            グラフ理論入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 グラフ理論とは</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_basics.html">第 2 章 グラフの定義と基本用語</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_representation.html">第 3 章 グラフの表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_connectivity.html">第 4 章 道と連結性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graph_classes.html">第 5 章 さまざまなグラフ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 構造</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_trees.html">第 6 章 木と全域木</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 7 章 オイラー路とハミルトン路</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">オイラー路</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">オイラーの定理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">ヒールホルツァーのアルゴリズム</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">中国人郵便配達問題</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">ハミルトン路</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">十分条件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">必要条件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">バックトラックによる探索</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">巡回セールスマン問題</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_planar.html">第 8 章 平面グラフ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_coloring.html">第 9 章 グラフ彩色</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_matching.html">第 10 章 マッチング</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 アルゴリズム</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_search.html">第 11 章 グラフの探索</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_shortest_path.html">第 12 章 最短経路問題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch13_flow.html">第 13 章 ネットワークフロー</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 発展</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch14_algebraic.html">第 14 章 代数的グラフ理論</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch15_network_science.html">第 15 章 ネットワーク科学への入口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch16_conclusion.html">第 16 章 おわりに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_samples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">グラフ理論入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 7 章 オイラー路とハミルトン路</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 7 章 オイラー路とハミルトン路<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>第 1 章のケーニヒスベルクの橋の問題は「すべての辺をちょうど 1 回ずつ通れるか」という問題であった。これと似た「すべての頂点をちょうど 1 回ずつ通れるか」という問題もある。2 つの問題は一見よく似ているが、前者は簡単な条件で判定でき効率よく解けるのに対し、後者は効率のよい解法が知られていない難しい問題である。本章では、この対照的な 2 つの問題を学ぶ。</p>
+<section id="id2">
+<h2>オイラー路<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>本節では、多重辺を許す多重グラフを扱う。ケーニヒスベルクの橋のグラフが多重グラフだからである。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 7.1（オイラー路・オイラー閉路）</p>
+<p>グラフのすべての辺をちょうど 1 回ずつ通る小道を<strong>オイラー路</strong>という。始点と終点が一致するオイラー路を<strong>オイラー閉路</strong>という。オイラー閉路を持つグラフを<strong>オイラーグラフ</strong>という。</p>
+</div>
+<p>オイラー路を描くことは、紙からペンを離さずに、同じ線を 2 度なぞらずに図形を描く「一筆書き」にほかならない。オイラー路は小道であり、頂点の重複を許すので、第 4 章の道（頂点の重複を許さない）とは限らない。同様に、オイラー閉路も第 4 章で定義した閉路とは異なることに注意する。</p>
+<section id="id3">
+<h3>オイラーの定理<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>オイラー路が存在するかどうかは、次数の偶奇だけで完全に判定できる。以下、孤立点はオイラー路に関係しないので、孤立点を除いたグラフが連結であるとする。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 7.1（オイラーの定理）</p>
+<p>孤立点を除いて連結な多重グラフ <span class="math notranslate nohighlight">\(G\)</span> について、次が成り立つ。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(G\)</span> がオイラー閉路を持つための必要十分条件は、すべての頂点の次数が偶数であることである。</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span> が始点と終点の異なるオイラー路を持つための必要十分条件は、次数が奇数の頂点がちょうど 2 個であることである。このとき、オイラー路はその 2 頂点を始点・終点とする。</p></li>
+</ol>
+</div>
+<p><strong>証明</strong>：（必要性）オイラー閉路をたどるとき、頂点を通過するたびに「入る辺」と「出る辺」を 1 本ずつ使う。始点も、最初に出て最後に入るので同様である。各辺はちょうど 1 回使われるので、各頂点の次数は偶数になる。オイラー路の場合は、始点と終点だけが 1 本ずつ余るので、その 2 頂点の次数だけが奇数になる。</p>
+<p>（十分性）すべての次数が偶数のとき、オイラー閉路を構成する。任意の頂点 <span class="math notranslate nohighlight">\(s\)</span> から出発し、未使用の辺を使える限りたどる。<span class="math notranslate nohighlight">\(s\)</span> 以外の頂点に入ったときは、その頂点の次数が偶数なので、まだ使っていない出口が必ず残っている。よって行き詰まるのは <span class="math notranslate nohighlight">\(s\)</span> に戻ったときだけであり、閉小道 <span class="math notranslate nohighlight">\(C\)</span> が得られる。<span class="math notranslate nohighlight">\(C\)</span> がすべての辺を使っていれば終わる。そうでなければ、グラフが連結なので、<span class="math notranslate nohighlight">\(C\)</span> 上の頂点 <span class="math notranslate nohighlight">\(v\)</span> で未使用の辺に接続するものがある。未使用の辺だけからなるグラフでも各頂点の次数は偶数なので、<span class="math notranslate nohighlight">\(v\)</span> から同じ操作で閉小道 <span class="math notranslate nohighlight">\(C'\)</span> を作り、<span class="math notranslate nohighlight">\(C\)</span> の <span class="math notranslate nohighlight">\(v\)</span> の位置に <span class="math notranslate nohighlight">\(C'\)</span> を挿入する。これを繰り返せば、すべての辺を使うオイラー閉路が得られる。</p>
+<p>奇数次の頂点が 2 個（<span class="math notranslate nohighlight">\(u, v\)</span>）の場合は、<span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> を結ぶ辺 <span class="math notranslate nohighlight">\(e\)</span> を仮に加えるとすべての次数が偶数になる。そのグラフのオイラー閉路から <span class="math notranslate nohighlight">\(e\)</span> を除けば、<span class="math notranslate nohighlight">\(u\)</span> から <span class="math notranslate nohighlight">\(v\)</span> へのオイラー路になる。□</p>
+<p>系 2.2 より奇数次の頂点の個数は偶数なので、奇数次の頂点の個数は 0, 2, 4, …… のいずれかである。オイラー路が存在するのは 0 個または 2 個のときに限られる。ケーニヒスベルクの橋のグラフ（<a class="reference internal" href="ch01_introduction.html#fig-ch01-konigsberg"><span class="std std-numref">図 1</span></a>）は 4 頂点すべてが奇数次なので、オイラー路は存在しない。</p>
+<p>有向グラフでは、各頂点の入次数と出次数が等しく、辺の向きを無視して連結であれば、オイラー閉路が存在する。</p>
+</section>
+<section id="id4">
+<h3>ヒールホルツァーのアルゴリズム<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>定理 7.1 の十分性の証明は、そのままオイラー路を求めるアルゴリズムになる。これを<strong>ヒールホルツァーのアルゴリズム</strong>（Hierholzer's algorithm）という。スタックを使うと、閉小道の挿入を簡潔に実装できる。</p>
+<ol class="arabic simple">
+<li><p>始点（奇数次の頂点があればその一方、なければ任意の頂点）をスタックに積む。</p></li>
+<li><p>スタックの一番上の頂点 <span class="math notranslate nohighlight">\(u\)</span> に未使用の辺 <span class="math notranslate nohighlight">\(uv\)</span> があれば、その辺を使用済みにして <span class="math notranslate nohighlight">\(v\)</span> を積む。</p></li>
+<li><p><span class="math notranslate nohighlight">\(u\)</span> に未使用の辺がなければ、<span class="math notranslate nohighlight">\(u\)</span> をスタックから降ろして経路の末尾に追加する。</p></li>
+<li><p>スタックが空になるまで 2, 3 を繰り返し、最後に経路を逆順にする。</p></li>
+</ol>
+<p>行き詰まった頂点から順に経路が確定していき、確定する前に別の閉小道が見つかれば、それが自然に挿入される。各辺を 1 回ずつ処理するので、計算量は <span class="math notranslate nohighlight">\(O(n + m)\)</span> である（サンプルコード <code class="docutils literal notranslate"><span class="pre">euler_path.py</span></code>）。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 11 </span><span class="caption-text">ヒールホルツァーのアルゴリズム</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">euler_path</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Edge</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ヒールホルツァーのアルゴリズムでオイラー路（またはオイラー閉路）を求める。</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    多重辺を扱えるよう、辺を番号で区別する。オイラー路が存在しなければ None を返す。</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="n">odd</span> <span class="o">=</span> <span class="n">odd_vertices</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="linenos"> 8</span>        <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>    <span class="n">adj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)}</span>  <span class="c1"># 頂点 -&gt; [(隣接頂点, 辺番号)]</span>
+<span class="linenos">10</span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+<span class="linenos">11</span>        <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+<span class="linenos">12</span>        <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+<span class="linenos">13</span>    <span class="n">used</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">odd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">odd</span> <span class="k">else</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+<span class="linenos">17</span>    <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">18</span>    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+<span class="linenos">19</span>        <span class="n">u</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">20</span>        <span class="c1"># u から出る未使用の辺を 1 本たどる。行き止まりになったら path に確定させる。</span>
+<span class="linenos">21</span>        <span class="k">while</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="ow">and</span> <span class="n">used</span><span class="p">[</span><span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]:</span>
+<span class="linenos">22</span>            <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">23</span>        <span class="k">if</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+<span class="linenos">24</span>            <span class="n">v</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">25</span>            <span class="n">used</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">26</span>            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">27</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">28</span>            <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="linenos">29</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># 辺を持つ部分が連結でない</span>
+<span class="linenos">30</span>        <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="n">path</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>多重辺を区別できるよう、辺に番号を付けて使用済みかどうかを管理している。<a class="reference internal" href="#fig-ch07-house"><span class="std std-numref">図 15</span></a> の「家」の形の図形に適用すると、奇数次の頂点 0 と 1 を両端とするオイラー路が得られる。</p>
+<figure class="align-center" id="id13">
+<span id="fig-ch07-house"></span><div class="graphviz"><object data="_images/graphviz-964eaee7c9979bec9c4e56776d40b64d00bfc97e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">graph g {
+    layout=neato;
+    node [shape=circle, width=0.35, fixedsize=true, fontsize=12, style=filled, fillcolor=&quot;#dbe8f5&quot;];
+    0 [pos=&quot;0,0!&quot;, fillcolor=&quot;#fde5cf&quot;]; 1 [pos=&quot;1.6,0!&quot;, fillcolor=&quot;#fde5cf&quot;];
+    2 [pos=&quot;1.6,1.6!&quot;]; 3 [pos=&quot;0,1.6!&quot;]; 4 [pos=&quot;0.8,2.6!&quot;];
+    0 -- 1; 1 -- 2; 2 -- 3; 3 -- 0; 0 -- 2; 1 -- 3; 2 -- 4; 3 -- 4;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-number">図 15 </span><span class="caption-text">一筆書きできる「家」の形のグラフ。頂点 0 と 1 の次数が奇数である。</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>ケーニヒスベルク: 奇数次の頂点 = [0, 1, 2, 3]
+<span class="linenos">2</span>ケーニヒスベルク: オイラー路 = None
+<span class="linenos">3</span>橋を 1 本除いた場合: [1, 3, 2, 1, 2, 0, 3]
+<span class="linenos">4</span>家の形: オイラー路 = [0, 2, 4, 3, 1, 2, 3, 0, 1]
+<span class="linenos">5</span>NetworkX: オイラー路が存在するか = True
+</pre></div>
+</div>
+<p>コード中のケーニヒスベルクのグラフでは、陸地を 0（北岸）、1（南岸）、2（中洲）、3（東の陸地）としている。北岸と中洲を結ぶ橋を 1 本取り除くと、奇数次の頂点が 1 と 3 の 2 個になり、オイラー路が存在するようになる。</p>
+</section>
+<section id="id5">
+<h3>中国人郵便配達問題<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>郵便配達員が、担当区域のすべての道路を少なくとも 1 回通り、局に戻ってくる経路のうち、総距離が最短のものを求める問題を<strong>中国人郵便配達問題</strong>という（中国の数学者である管梅谷（Mei-Ko Kwan）が提起したことに由来する）。グラフがオイラーグラフならオイラー閉路が答えである。そうでなければ、いくつかの道路を 2 回通る必要がある。</p>
+<p>2 回通る道路は、奇数次の頂点同士を 2 つずつ組にして、組ごとに最短経路を重複させることで決まる。どう組にするかは、重みの合計が最小になる完全マッチング（第 10 章）として多項式時間で求められる。重複させた後のグラフはすべての次数が偶数になるので、オイラー閉路が答えになる。除雪車や道路清掃車の巡回経路の計画などに応用されている。</p>
+</section>
+</section>
+<section id="id6">
+<h2>ハミルトン路<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<div class="admonition- admonition">
+<p class="admonition-title">定義 7.2（ハミルトン路・ハミルトン閉路）</p>
+<p>グラフのすべての頂点をちょうど 1 回ずつ通る道を<strong>ハミルトン路</strong>という。すべての頂点を通る閉路を<strong>ハミルトン閉路</strong>という。ハミルトン閉路を持つグラフを<strong>ハミルトングラフ</strong>という。</p>
+</div>
+<p>名前は、19 世紀の数学者ハミルトン（William Rowan Hamilton）が考案した「正十二面体の 20 個の頂点を辺に沿ってすべて 1 回ずつ巡って戻る」というパズル（イコシアン・ゲーム）に由来する。</p>
+<p>オイラー路とは異なり、ハミルトン閉路が存在するための簡単な必要十分条件は知られていない。実際、グラフがハミルトン閉路を持つかを判定する問題は <strong>NP 完全</strong>と呼ばれる問題のクラスに属する。NP 完全問題には多項式時間のアルゴリズムが存在しないと広く信じられており、これは計算機科学の最大の未解決問題（P ≠ NP 予想）と関係している。また、NP 完全問題と少なくとも同程度に難しい問題（判定問題に限らず、最適化問題も含む）を <strong>NP 困難</strong>という。</p>
+<section id="id7">
+<h3>十分条件<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>必要十分条件はないが、「辺が十分多ければハミルトン閉路がある」という形の十分条件が知られている。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 7.2（ディラックの定理）</p>
+<p>頂点数 <span class="math notranslate nohighlight">\(n \ge 3\)</span> の単純グラフで、最小次数が <span class="math notranslate nohighlight">\(\delta(G) \ge n/2\)</span> ならば、<span class="math notranslate nohighlight">\(G\)</span> はハミルトン閉路を持つ。</p>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">定理 7.3（オーレの定理）</p>
+<p>頂点数 <span class="math notranslate nohighlight">\(n \ge 3\)</span> の単純グラフで、隣接していない任意の 2 頂点 <span class="math notranslate nohighlight">\(u, v\)</span> について <span class="math notranslate nohighlight">\(\deg(u) + \deg(v) \ge n\)</span> ならば、<span class="math notranslate nohighlight">\(G\)</span> はハミルトン閉路を持つ。</p>
+</div>
+<p><span class="math notranslate nohighlight">\(\delta(G) \ge n/2\)</span> なら任意の 2 頂点の次数の和は <span class="math notranslate nohighlight">\(n\)</span> 以上なので、オーレの定理はディラックの定理を含む。これらは十分条件にすぎない。たとえば閉路グラフ <span class="math notranslate nohighlight">\(C_n\)</span> は、最小次数が 2 しかないが、それ自身がハミルトン閉路である。</p>
+</section>
+<section id="id8">
+<h3>必要条件<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>ハミルトン閉路が存在しないことを示すには、必要条件を使う。</p>
+<ul class="simple">
+<li><p>ハミルトン閉路から <span class="math notranslate nohighlight">\(k\)</span> 個の頂点を除くと、高々 <span class="math notranslate nohighlight">\(k\)</span> 個の道に分かれる。したがって、<span class="math notranslate nohighlight">\(k\)</span> 個の頂点を除いて <span class="math notranslate nohighlight">\(k\)</span> 個より多くの連結成分に分かれるグラフは、ハミルトン閉路を持たない。特に、切断点を持つグラフはハミルトン閉路を持たない。</p></li>
+<li><p>二部グラフのハミルトン閉路は 2 つの側を交互に通るので、両側の頂点数が等しくなければハミルトン閉路を持たない。</p></li>
+</ul>
+<p>ピーターセングラフ（<a class="reference internal" href="ch05_graph_classes.html#fig-ch05-petersen"><span class="std std-numref">図 10</span></a>）は、これらの条件では除外できないが、ハミルトン閉路を持たないことが知られている（ハミルトン路は持つ）。</p>
+</section>
+<section id="id9">
+<h3>バックトラックによる探索<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>小さなグラフでは、道を 1 頂点ずつ延ばし、行き詰まったら 1 つ戻って別の頂点を試す<strong>バックトラック</strong>で、ハミルトン閉路を探せる。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 12 </span><span class="caption-text">バックトラックによるハミルトン閉路の探索</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">hamiltonian_cycle</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="s2">&quot;nx.Graph[int]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;バックトラックでハミルトン閉路を 1 つ探す。見つからなければ None を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="linenos"> 5</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 6</span>    <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+<span class="linenos"> 7</span>    <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">}</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span><span class="w"> </span><span class="nf">extend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">start</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+<span class="linenos">13</span>            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+<span class="linenos">14</span>                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">15</span>                <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">16</span>                <span class="k">if</span> <span class="n">extend</span><span class="p">():</span>
+<span class="linenos">17</span>                    <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">18</span>                <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="linenos">19</span>                <span class="n">visited</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">20</span>        <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">return</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="k">if</span> <span class="n">extend</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<p>最悪の場合は頂点の並べ方をすべて試すことになり、計算量は <span class="math notranslate nohighlight">\(O(n!)\)</span> 程度になる。正十二面体グラフとピーターセングラフに適用すると、次の結果が得られる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>正十二面体: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 0]
+<span class="linenos">2</span>ピーターセン: None
+</pre></div>
+</div>
+<p>NetworkX の <code class="docutils literal notranslate"><span class="pre">nx.dodecahedral_graph</span></code> では、頂点を番号の順にたどる閉路がハミルトン閉路になっている。ピーターセングラフについては、すべての可能性を調べ尽くした結果としてハミルトン閉路が存在しないことが分かる。</p>
+</section>
+</section>
+<section id="id10">
+<h2>巡回セールスマン問題<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>重み付き完全グラフで、重みの合計が最小のハミルトン閉路を求める問題を<strong>巡回セールスマン問題</strong>（traveling salesman problem、TSP）という。セールスマンがすべての都市を 1 回ずつ訪問して出発地に戻る最短の巡回路を求める問題であり、配送計画、基板の穴あけ順序、DNA 配列の解析などに現れる。</p>
+<p>ハミルトン閉路の存在判定が難しいことから、巡回セールスマン問題も <strong>NP 困難</strong>である。厳密に解く方法と、近似的に解く方法を簡単に紹介する。</p>
+<ul class="simple">
+<li><p><strong>全探索</strong>：<span class="math notranslate nohighlight">\(n\)</span> 都市の巡回路は <span class="math notranslate nohighlight">\((n-1)!/2\)</span> 通りある。<span class="math notranslate nohighlight">\(n = 15\)</span> でも約 <span class="math notranslate nohighlight">\(4.4 \times 10^{10}\)</span> 通りになり、すぐに計算できなくなる。</p></li>
+<li><p><strong>動的計画法</strong>（ヘルド・カープ法）：小さな部分問題の解を表に記録しながら大きな問題を解く方法を動的計画法という（第 12 章で詳しく述べる）。「訪問済みの都市の集合」と「現在の都市」を状態として最短距離を記録する。計算量は <span class="math notranslate nohighlight">\(O(n^2 2^n)\)</span> で、全探索よりはるかに速いが、依然として指数時間である。</p></li>
+<li><p><strong>近似アルゴリズム</strong>：距離が三角不等式を満たす場合、最小全域木（第 6 章）を深さ優先でたどり、既に訪れた都市を飛ばすと、最適解の 2 倍以内の巡回路が得られる。最適な巡回路から 1 辺を除くと全域木になるので、最小全域木の重みは最適値以下であり、木をたどって往復する経路の長さはその 2 倍以下だからである。マッチングを組み合わせたクリストフィデスのアルゴリズムでは、1.5 倍以内が保証される。</p></li>
+<li><p><strong>局所探索</strong>：2-opt 法（巡回路の 2 辺を選んでつなぎ替え、短くなれば採用する）などのヒューリスティックで解を改善する。保証はないが、実用上は良い解が得られることが多い。</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>まとめ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#table-ch07-compare"><span class="std std-numref">表 8</span></a> に、オイラー路とハミルトン路の違いをまとめる。</p>
+<span id="table-ch07-compare"></span><table class="docutils align-default" id="id15">
+<caption><span class="caption-number">表 8 </span><span class="caption-text">オイラー路とハミルトン路の比較</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 38.0%" />
+<col style="width: 38.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>項目</p></th>
+<th class="head"><p>オイラー路</p></th>
+<th class="head"><p>ハミルトン路</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>通る対象</p></td>
+<td><p>すべての辺をちょうど 1 回</p></td>
+<td><p>すべての頂点をちょうど 1 回</p></td>
+</tr>
+<tr class="row-odd"><td><p>存在の判定</p></td>
+<td><p>次数の偶奇で判定できる</p></td>
+<td><p>簡単な必要十分条件は知られていない（NP 完全）</p></td>
+</tr>
+<tr class="row-even"><td><p>求め方</p></td>
+<td><p>ヒールホルツァーのアルゴリズムで <span class="math notranslate nohighlight">\(O(n + m)\)</span></p></td>
+<td><p>一般には指数時間の探索が必要</p></td>
+</tr>
+<tr class="row-odd"><td><p>重み付きの最適化</p></td>
+<td><p>中国人郵便配達問題（多項式時間）</p></td>
+<td><p>巡回セールスマン問題（NP 困難）</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>オイラー閉路が存在するのは、すべての頂点の次数が偶数のときであり、オイラー路が存在するのは奇数次の頂点が 0 個または 2 個のときである。</p></li>
+<li><p>ハミルトン閉路については、ディラックの定理やオーレの定理のような十分条件と、いくつかの必要条件が知られている。</p></li>
+<li><p>巡回セールスマン問題は NP 困難であり、実用上は動的計画法、近似アルゴリズム、局所探索などを使い分ける。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch06_trees.html" class="btn btn-neutral float-left" title="第 6 章 木と全域木" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch08_planar.html" class="btn btn-neutral float-right" title="第 8 章 平面グラフ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

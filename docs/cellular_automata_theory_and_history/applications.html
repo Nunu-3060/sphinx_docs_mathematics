@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. 応用 &mdash; セル・オートマトンの理論と歴史</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c81581b9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="8. 発展的な話題" href="advanced.html" />
+    <link rel="prev" title="6. 理論" href="theory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            セル・オートマトンの理論と歴史
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">本編</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">2. 基本概念と定義</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">3. 歴史</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dimensional.html">4. 1 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two_dimensional.html">5. 2 次元セル・オートマトン</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">6. 理論</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. 応用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">7.1. 流体シミュレーション</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hpp">7.1.1. HPP モデル</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fhp">7.1.2. FHP モデルと格子ボルツマン法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">7.2. 交通流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">7.3. 森林火災と感染症</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">7.4. 結晶の成長</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">7.5. 乱数生成と暗号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">7.6. 画像処理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">7.7. 量子ドット・セル・オートマトン</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">7.8. 生物の模様</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">8. 発展的な話題</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.html">9. Python による実装</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">セル・オートマトンの理論と歴史</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>応用</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">7. </span>応用<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>CA は、多数の要素が局所的に相互作用する現象を直接シミュレーションできるため、物理・工学・生物・社会などのさまざまな分野でモデルとして使われてきた。本章では代表的な応用例を紹介する。</p>
+<section id="id2">
+<h2><span class="section-number">7.1. </span>流体シミュレーション<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="hpp">
+<h3><span class="section-number">7.1.1. </span>HPP モデル<a class="headerlink" href="#hpp" title="Link to this heading"></a></h3>
+<p>流体は膨大な数の分子からなるが、巨視的な流れの性質（ナビエ・ストークス方程式に従うこと）は、個々の分子の詳細にはあまり依存せず、「粒子の数と運動量が保存される」「粒子が局所的に衝突する」といった基本的な性質だけで決まると考えられる。そこで、分子の運動を極端に単純化した CA で流体を模倣する<a class="reference internal" href="glossary.html#term-16"><span class="xref std std-term">格子ガス・オートマトン</span></a>が考案された。</p>
+<p>最初の格子ガス・オートマトンである HPP モデル <a class="reference internal" href="references.html#hardy1973" id="id3"><span>[Hardy1973]</span></a> では、正方格子の各ノードに、東・北・西・南の 4 方向に動く粒子が、方向ごとに高々 1 個ずつ存在できる。各ノードの状態は 4 ビットで表され、1 ステップは次の 2 段階からなる。</p>
+<ol class="arabic simple">
+<li><p><strong>衝突</strong>：ちょうど 2 個の粒子が正面から衝突する場合（東と西の粒子だけ、または北と南の粒子だけがある場合）、2 個の粒子の進行方向を 90 度回転させる（<a class="reference internal" href="#fig-hpp-rules"><span class="std std-numref">図 7.1</span></a>）。それ以外の場合は何もしない。</p></li>
+<li><p><strong>移動</strong>：各粒子を、進行方向の隣のノードへ移す。</p></li>
+</ol>
+<figure class="align-center" id="id19">
+<span id="fig-hpp-rules"></span><a class="reference internal image-reference" href="_images/hpp_rules.png"><img alt="_images/hpp_rules.png" src="_images/hpp_rules.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7.1 </span><span class="caption-text">HPP モデルの衝突規則</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>衝突の前後で、ノード上の粒子数も運動量の合計（正面衝突なので 0）も変わらないので、モデル全体で粒子数と運動量が保存される。衝突は次のように実装できる（サンプルコード <code class="docutils literal notranslate"><span class="pre">lattice_gas_hpp.py</span></code> から抜粋）。正面衝突が起きるノードでは、4 方向すべての粒子の有無を反転させればよい。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">collide</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">BoolGrid</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BoolGrid</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;正面衝突する粒子の組を 90 度回転させた状態を返す.&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">state</span>
+<span class="linenos">4</span>    <span class="n">horizontal</span> <span class="o">=</span> <span class="n">e</span> <span class="o">&amp;</span> <span class="n">w</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">n</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">s</span>  <span class="c1"># 東西からの正面衝突</span>
+<span class="linenos">5</span>    <span class="n">vertical</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="n">s</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">e</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">w</span>    <span class="c1"># 南北からの正面衝突</span>
+<span class="linenos">6</span>    <span class="n">flip</span> <span class="o">=</span> <span class="n">horizontal</span> <span class="o">|</span> <span class="n">vertical</span>  <span class="c1"># 該当するノードでは 4 方向すべての有無を反転すればよい</span>
+<span class="linenos">7</span>    <span class="n">result</span><span class="p">:</span> <span class="n">BoolGrid</span> <span class="o">=</span> <span class="n">state</span> <span class="o">^</span> <span class="n">flip</span>
+<span class="linenos">8</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-hpp"><span class="std std-numref">図 7.2</span></a> は、一様な粒子の分布の中央に密度の高い円形の領域を置き、時間発展させた結果である。個々のノードの粒子数はゆらぎが大きいので、4 × 4 のノードごとに平均した密度を表示している。密度の高い領域から、音波に相当する密度の波が同心円状に広がっていく様子が分かる。</p>
+<figure class="align-center" id="id20">
+<span id="fig-hpp"></span><a class="reference internal image-reference" href="_images/hpp.png"><img alt="_images/hpp.png" src="_images/hpp.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7.2 </span><span class="caption-text">HPP モデルで密度の波が広がる様子（4 × 4 のノードごとの平均粒子数）</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="fhp">
+<h3><span class="section-number">7.1.2. </span>FHP モデルと格子ボルツマン法<a class="headerlink" href="#fhp" title="Link to this heading"></a></h3>
+<p>HPP モデルの音波は等方的に広がるが、正方格子の対称性が低いために、運動量の流れ（粘性や非線形項）に方向による違いが残り、巨視的な振る舞いがナビエ・ストークス方程式にならない。この問題は、六角格子を使い、粒子が 6 方向に動けるようにした FHP モデルで解決された <a class="reference internal" href="references.html#frisch1986" id="id4"><span>[Frisch1986]</span></a>。FHP モデルでは、巨視的な振る舞いが（流速が音速に比べて十分小さい範囲で）ナビエ・ストークス方程式に従うことが示されている。</p>
+<p>一方、格子ガス・オートマトンには、各ノードの状態が 0 か 1 なので統計的なゆらぎが大きく、滑らかな結果を得るには広い範囲の平均をとる必要があるという欠点があった。そこで、各方向の粒子の有無の代わりに、その「平均的な存在確率」を実数で持ち、衝突規則をボルツマン方程式の衝突項で置き換えた<a class="reference internal" href="glossary.html#term-17"><span class="xref std std-term">格子ボルツマン法</span></a>が提案された <a class="reference internal" href="references.html#mcnamara1988" id="id5"><span>[McNamara1988]</span></a>。格子ボルツマン法は、厳密には状態が連続値なので CA の定義からは外れるが、局所的な規則による同期更新という CA の性質を受け継いでおり、並列計算に向く。複雑な形状の境界を扱いやすいこともあり、現在も多孔質媒体中の流れや混相流などのシミュレーションに広く使われている。</p>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">7.2. </span>交通流<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="glossary.html#term-29"><span class="xref std std-term">ナーゲル・シュレッケンベルク・モデル</span></a><a class="reference internal" href="references.html#nagel1992" id="id7"><span>[Nagel1992]</span></a> は、高速道路の交通流を表す 1 次元の確率的 CA である。道路を長さ約 7.5 m のセルに区切り、各セルには車が高々 1 台入る。各車は 0 から <span class="math notranslate nohighlight">\(v_{\max}\)</span> までの整数の速度 <span class="math notranslate nohighlight">\(v\)</span> を持ち（単位はセル/ステップ）、毎ステップ、すべての車に次の 4 つの規則を順に適用する。</p>
+<ol class="arabic simple">
+<li><p><strong>加速</strong>：<span class="math notranslate nohighlight">\(v \leftarrow \min(v + 1,\ v_{\max})\)</span></p></li>
+<li><p><strong>減速</strong>：前の車までの空きセル数を <span class="math notranslate nohighlight">\(g\)</span> として、<span class="math notranslate nohighlight">\(v \leftarrow \min(v,\ g)\)</span></p></li>
+<li><p><strong>ランダムな減速</strong>：確率 <span class="math notranslate nohighlight">\(p\)</span> で <span class="math notranslate nohighlight">\(v \leftarrow \max(v - 1,\ 0)\)</span></p></li>
+<li><p><strong>移動</strong>：車を <span class="math notranslate nohighlight">\(v\)</span> セル前に進める</p></li>
+</ol>
+<p>規則 2 により、車は前の車に追突しない。規則 3 は、運転者が理由もなく減速する（ぼんやりする、過剰に反応する）ことを表しており、このモデルの本質的な部分である。1 ステップを 1 秒とし、<span class="math notranslate nohighlight">\(v_{\max} = 5\)</span> とすると、最高速度は毎秒 37.5 m（時速 135 km）に相当する。<span class="math notranslate nohighlight">\(v_{\max} = 1\)</span>、<span class="math notranslate nohighlight">\(p = 0\)</span> とすると、このモデルは第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」で扱ったルール 184 と一致する。</p>
+<p>4 つの規則は次のように実装できる（サンプルコード <code class="docutils literal notranslate"><span class="pre">traffic_nasch.py</span></code> から抜粋）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">road</span><span class="p">:</span> <span class="n">Road</span><span class="p">,</span> <span class="n">v_max</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;全車に 4 つの規則を同時に適用する. road をその場で書き換える.</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="sd">    車は追い越しをしないので, 配列上の並び順は周回方向の並び順のまま保たれる.</span>
+<span class="linenos"> 5</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 6</span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">positions</span>
+<span class="linenos"> 7</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">velocities</span>
+<span class="linenos"> 8</span>    <span class="c1"># 前の車 (配列上で次の要素, 最後の車にとっては先頭の車) までの空きセル数</span>
+<span class="linenos"> 9</span>    <span class="n">gaps</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">road</span><span class="o">.</span><span class="n">length</span>
+<span class="linenos">10</span>    <span class="k">if</span> <span class="n">pos</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">11</span>        <span class="n">gaps</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">road</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="linenos">12</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">vel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">v_max</span><span class="p">)</span>              <span class="c1"># 1. 加速</span>
+<span class="linenos">13</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">gaps</span><span class="p">)</span>                   <span class="c1"># 2. 減速</span>
+<span class="linenos">14</span>    <span class="n">slow</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">vel</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">p</span>
+<span class="linenos">15</span>    <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">slow</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">vel</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">vel</span><span class="p">)</span>  <span class="c1"># 3. ランダムな減速</span>
+<span class="linenos">16</span>    <span class="n">road</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vel</span><span class="p">)</span> <span class="o">%</span> <span class="n">road</span><span class="o">.</span><span class="n">length</span>    <span class="c1"># 4. 移動</span>
+<span class="linenos">17</span>    <span class="n">road</span><span class="o">.</span><span class="n">velocities</span> <span class="o">=</span> <span class="n">vel</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-nasch-spacetime"><span class="std std-numref">図 7.3</span></a> は、周回道路での時空図である。車の密度が低いと、すべての車がほぼ最高速度で走る（自由流）。密度が高くなると、ある車のランダムな減速をきっかけに後続の車が次々に減速し、渋滞が自然発生する。時空図の黒い帯が渋滞であり、車は右へ進むのに、渋滞の帯は左（車の進行方向と逆）へ移動していく。これは実際の高速道路で観測される「渋滞の後方への伝播」と一致する。</p>
+<figure class="align-center" id="id21">
+<span id="fig-nasch-spacetime"></span><a class="reference internal image-reference" href="_images/nasch_spacetime.png"><img alt="_images/nasch_spacetime.png" src="_images/nasch_spacetime.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7.3 </span><span class="caption-text">ナーゲル・シュレッケンベルク・モデルの時空図（<span class="math notranslate nohighlight">\(v_{\max} = 5\)</span>、<span class="math notranslate nohighlight">\(p = 0.25\)</span>、車は右へ進む）</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>道路の単位長さあたりの車の数を密度 <span class="math notranslate nohighlight">\(\rho\)</span>、単位時間あたりにある地点を通過する車の数を流量 <span class="math notranslate nohighlight">\(q\)</span> とすると、平均速度 <span class="math notranslate nohighlight">\(\bar{v}\)</span> を使って <span class="math notranslate nohighlight">\(q = \rho \bar{v}\)</span> と表せる。密度と流量の関係を表したグラフを<a class="reference internal" href="glossary.html#term-7"><span class="xref std std-term">基本図</span></a>と呼ぶ（<a class="reference internal" href="#fig-nasch-diagram"><span class="std std-numref">図 7.4</span></a>）。<span class="math notranslate nohighlight">\(p = 0\)</span> の場合、密度が <span class="math notranslate nohighlight">\(1/(v_{\max} + 1)\)</span> 以下ではすべての車が最高速度で走れるので流量は <span class="math notranslate nohighlight">\(q = \rho v_{\max}\)</span> となって密度に比例して増え、それを超えると渋滞が生じて流量が減少する。ランダムな減速の確率 <span class="math notranslate nohighlight">\(p\)</span> が大きいほど、最大の流量は小さくなる。このように、単純なモデルでありながら、実測の基本図の特徴をよく再現する。</p>
+<figure class="align-center" id="id22">
+<span id="fig-nasch-diagram"></span><a class="reference internal image-reference" href="_images/nasch_diagram.png"><img alt="_images/nasch_diagram.png" src="_images/nasch_diagram.png" style="width: 65%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7.4 </span><span class="caption-text">ナーゲル・シュレッケンベルク・モデルの基本図（道路長 400 セル）</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id8">
+<h2><span class="section-number">7.3. </span>森林火災と感染症<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>森林火災のモデルでは、各セルが「空き地」「木」「燃えている木」の 3 状態をとる。ドロッセル（B. Drossel）とシュワーブル（F. Schwabl）のモデル <a class="reference internal" href="references.html#drossel1992" id="id9"><span>[Drossel1992]</span></a> では、毎ステップ次の規則を適用する。</p>
+<ul class="simple">
+<li><p>燃えている木は空き地になる。</p></li>
+<li><p>隣に燃えている木がある木は燃え始める。</p></li>
+<li><p>隣に燃えている木がない木も、小さな確率 <span class="math notranslate nohighlight">\(p_{\mathrm{f}}\)</span> で燃え始める（落雷）。</p></li>
+<li><p>空き地には確率 <span class="math notranslate nohighlight">\(p_{\mathrm{g}}\)</span> で新しい木が生える。</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(p_{\mathrm{f}} \ll p_{\mathrm{g}}\)</span> のとき、このモデルは木が生えて森が広がり、落雷による火災で一気に失われる、という過程を繰り返す。そして、1 回の火災で焼ける面積の分布が、特定の大きさを持たないべき乗則に従う。外部からパラメータを細かく調整しなくても、系が自然に臨界状態に近づくこのような性質は<strong>自己組織化臨界現象</strong>と呼ばれる。</p>
+<p>同様に、各セルを「感受性者（未感染）」「感染者」「回復者」とし、感染者の隣の感受性者が確率的に感染する規則を考えると、感染症の空間的な広がりを表す CA になる。感受性者・感染者・回復者の人数の変化を微分方程式で表す SIR モデルとは異なり、人の空間的な分布や移動の制限の効果を直接表せる点が利点である。</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">7.4. </span>結晶の成長<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>雪の結晶が六角形の対称性を持つ複雑な形に成長する様子は、六角格子の CA でよく再現できる。最も単純なモデルは、「ちょうど 1 個の隣のセルが氷であるセルは、次の時刻に氷になる」という規則である。この規則で 1 個の氷のセルから始めると、六回対称の樹枝状のパターンが成長する。</p>
+<p>ライター（C. A. Reiter）のモデル <a class="reference internal" href="references.html#reiter2005" id="id11"><span>[Reiter2005]</span></a> では、各セルが水蒸気の量を表す実数値を持ち、水蒸気の拡散と氷への取り込みを局所規則として表す。少数のパラメータを変えるだけで、板状、樹枝状などの現実の雪の結晶によく似た多様な形が得られる。</p>
+</section>
+<section id="id12">
+<h2><span class="section-number">7.5. </span>乱数生成と暗号<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<p>第 4 章「<a class="reference internal" href="one_dimensional.html"><span class="doc">1 次元セル・オートマトン</span></a>」で述べたように、ルール 30 の中央の列は統計的に乱数に近い性質を持つ <a class="reference internal" href="references.html#wolfram1986" id="id13"><span>[Wolfram1986]</span></a>。CA は単純な論理演算の繰り返しで計算でき、ハードウェアで並列に実装しやすいので、擬似乱数生成器として利用されてきた。</p>
+<p>ウルフラムは、ルール 30 で生成した系列を鍵ストリームとする暗号も提案した。しかし、マイヤー（W. Meier）とシュタッフェルバッハ（O. Staffelbach）は、生成された系列の一部から内部状態を効率よく推定する攻撃法を示した <a class="reference internal" href="references.html#meier1991" id="id14"><span>[Meier1991]</span></a>。そのため、ルール 30 をそのまま暗号に使うことは推奨されない。シミュレーション用の擬似乱数としては使えても、暗号として安全かどうかは別の問題であることに注意が必要である。</p>
+</section>
+<section id="id15">
+<h2><span class="section-number">7.6. </span>画像処理<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p>画像の各画素をセルとみなすと、多くの画像処理を CA として表すことができる。たとえば、2 値画像で「周囲 8 画素の多数決で自分の値を決める」規則を適用すると、孤立した点状のノイズが除去される。また、「周囲に背景の画素があれば背景にする」という規則は、モルフォロジー処理の収縮（erosion）に相当する。CA による画像処理は、各画素の計算が独立しているため、GPU などで並列に実行しやすい。</p>
+</section>
+<section id="id16">
+<h2><span class="section-number">7.7. </span>量子ドット・セル・オートマトン<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="glossary.html#term-42"><span class="xref std std-term">量子ドット・セル・オートマトン</span></a>（Quantum-dot Cellular Automata、QCA）は、CA の考え方を電子回路の設計に応用したものである <a class="reference internal" href="references.html#lent1993" id="id17"><span>[Lent1993]</span></a>。1 つのセルは正方形の四隅に置いた 4 個の量子ドットと 2 個の電子からなる。電子どうしの反発により、電子は対角線上の 2 個のドットに入り、どちらの対角線に入るかで 0 と 1 を表す。隣り合うセルの電子はクーロン力で同じ配置にそろおうとするので、セルを並べると信号が伝わる。</p>
+<p>QCA では、電流を流さずに電子の配置の変化だけで情報を伝えるので、消費電力を非常に小さくできる可能性がある。3 入力の多数決ゲートを基本素子として論理回路を構成する。ただし、室温で安定に動作させることなどの課題が残っており、現在も研究段階の技術である。</p>
+</section>
+<section id="id18">
+<h2><span class="section-number">7.8. </span>生物の模様<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<p>イモガイの一種の貝殻には、ルール 30 などの ECA の時空図によく似た三角形の模様が現れる。貝殻は縁に沿って成長し、縁に並んだ色素細胞が隣の細胞からの活性化・抑制を受けて色素を出すかどうかを決めるので、貝殻の模様は 1 次元 CA の時空図と同じ仕組みで描かれていると考えられる。このように、CA は生物の形や模様ができる仕組みを考えるうえでも有用なモデルとなる。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="theory.html" class="btn btn-neutral float-left" title="6. 理論" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="advanced.html" class="btn btn-neutral float-right" title="8. 発展的な話題" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

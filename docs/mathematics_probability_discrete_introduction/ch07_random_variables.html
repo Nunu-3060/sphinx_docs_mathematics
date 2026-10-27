@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 7 章 確率変数と期待値 &mdash; 確率論・離散数学入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c0931fb0" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 8 章 代表的な離散分布" href="ch08_distributions.html" />
+    <link rel="prev" title="第 6 章 確率の基礎" href="ch06_probability.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            確率論・離散数学入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_introduction.html">第 1 章 はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 離散数学の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch02_sets_logic.html">第 2 章 集合と論理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_functions_relations.html">第 3 章 写像と関係</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch04_counting.html">第 4 章 数え上げ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_graphs.html">第 5 章 グラフ理論入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 離散確率</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch06_probability.html">第 6 章 確率の基礎</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 7 章 確率変数と期待値</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">確率変数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">確率質量関数と累積分布関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">期待値</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">定義</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">確率変数の関数の期待値</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">期待値の線形性</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">指示確率変数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">分散と標準偏差</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python で確かめる</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_distributions.html">第 8 章 代表的な離散分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_joint_distributions.html">第 9 章 同時分布と確率変数の和</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_limit_theorems.html">第 10 章 確率の不等式と極限定理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch11_markov_chains.html">第 11 章 マルコフ連鎖入門</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 応用</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch12_randomized_algorithms.html">第 12 章 アルゴリズムと確率</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_symbols.html">付録 A 記号一覧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_examples.html">付録 B サンプルコードの実行方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">確率論・離散数学入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 7 章 確率変数と期待値</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>第 7 章 確率変数と期待値<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>第 6 章では事象の確率を扱った。しかし実際に知りたいのは「サイコロの目の和」「アルゴリズムの比較回数」「待ち時間」のように、試行の結果によって決まる<strong>数値</strong>であることが多い。本章では、試行の結果に数値を対応させる確率変数を導入し、その平均的な値である期待値と、ばらつきの大きさを表す分散を学ぶ。特に、期待値の線形性と指示確率変数を組み合わせる技法は、第 12 章のアルゴリズム解析で中心的な役割を果たす。</p>
+<section id="id2">
+<h2>確率変数<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>離散確率空間 <span class="math notranslate nohighlight">\((\Omega, P)\)</span> において、各根元事象 <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> に実数 <span class="math notranslate nohighlight">\(X(\omega)\)</span> を対応させる写像 <span class="math notranslate nohighlight">\(X\colon \Omega \to \mathbb{R}\)</span> を<a class="reference internal" href="glossary.html#term-3"><span class="xref std std-term">確率変数</span></a>という。本書の標本空間は有限または可算なので、確率変数のとる値も有限個または可算個であり、このような確率変数を<strong>離散確率変数</strong>という。</p>
+<p><strong>例</strong>：2 個のサイコロを投げる試行で <span class="math notranslate nohighlight">\(\Omega = \{1, \ldots, 6\}^2\)</span> とし、根元事象 <span class="math notranslate nohighlight">\(\omega = (a, b)\)</span> に目の和 <span class="math notranslate nohighlight">\(S(\omega) = a + b\)</span> を対応させると、<span class="math notranslate nohighlight">\(S\)</span> は 2 から 12 までの値をとる確率変数である。</p>
+<p>確率変数 <span class="math notranslate nohighlight">\(X\)</span> が値 <span class="math notranslate nohighlight">\(x\)</span> をとるという事象 <span class="math notranslate nohighlight">\(\{\omega \in \Omega \mid X(\omega) = x\}\)</span> を、<span class="math notranslate nohighlight">\(\{X = x\}\)</span> と略記する。その確率は <span class="math notranslate nohighlight">\(P(X = x)\)</span> と書く。同様に、<span class="math notranslate nohighlight">\(P(X \le x)\)</span> や <span class="math notranslate nohighlight">\(P(a \le X \le b)\)</span> などの記法も用いる。</p>
+</section>
+<section id="id3">
+<h2>確率質量関数と累積分布関数<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>離散確率変数 <span class="math notranslate nohighlight">\(X\)</span> のとりうる値の集合を <span class="math notranslate nohighlight">\(\{x_1, x_2, \ldots\}\)</span> とする。各値 <span class="math notranslate nohighlight">\(x_i\)</span> に確率 <span class="math notranslate nohighlight">\(P(X = x_i)\)</span> を対応させる関数</p>
+<div class="math notranslate nohighlight">
+\[p_X(x) = P(X = x)\]</div>
+<p>を <span class="math notranslate nohighlight">\(X\)</span> の<a class="reference internal" href="glossary.html#term-2"><span class="xref std std-term">確率質量関数</span></a>という。確率質量関数は <span class="math notranslate nohighlight">\(p_X(x) \ge 0\)</span> と <span class="math notranslate nohighlight">\(\sum_i p_X(x_i) = 1\)</span> を満たす。確率変数の値と確率の対応関係を、確率変数の<strong>分布</strong>（確率分布）という。</p>
+<p>また、実数 <span class="math notranslate nohighlight">\(x\)</span> に対して</p>
+<div class="math notranslate nohighlight">
+\[F_X(x) = P(X \le x) = \sum_{x_i \le x} p_X(x_i)\]</div>
+<p>で定まる関数を <span class="math notranslate nohighlight">\(X\)</span> の<a class="reference internal" href="glossary.html#term-33"><span class="xref std std-term">累積分布関数</span></a>という。離散確率変数の累積分布関数は、各値 <span class="math notranslate nohighlight">\(x_i\)</span> で <span class="math notranslate nohighlight">\(p_X(x_i)\)</span> だけ跳ね上がる階段状の関数である。累積分布関数は単調非減少であり、<span class="math notranslate nohighlight">\(x \to -\infty\)</span> で 0、<span class="math notranslate nohighlight">\(x \to \infty\)</span> で 1 に近づく。また、<span class="math notranslate nohighlight">\(P(a &lt; X \le b) = F_X(b) - F_X(a)\)</span> が成り立つ。</p>
+<p><strong>例</strong>：2 個のサイコロの目の和 <span class="math notranslate nohighlight">\(S\)</span> の確率質量関数は次のとおりである。</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 10 </span><span class="caption-text">2 個のサイコロの目の和 <span class="math notranslate nohighlight">\(S\)</span> の分布</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 17.2%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+<col style="width: 7.5%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(s\)</span></p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>6</p></th>
+<th class="head"><p>7</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>9</p></th>
+<th class="head"><p>10</p></th>
+<th class="head"><p>11</p></th>
+<th class="head"><p>12</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(36 \, P(S = s)\)</span></p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2>期待値<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>定義<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>離散確率変数 <span class="math notranslate nohighlight">\(X\)</span> の<a class="reference internal" href="glossary.html#term-5"><span class="xref std std-term">期待値</span></a>を次で定める。</p>
+<div class="math notranslate nohighlight">
+\[E[X] = \sum_{i} x_i \, P(X = x_i)\]</div>
+<p>期待値は、とりうる値をその確率で重み付けした平均である。試行を何度も繰り返したときの <span class="math notranslate nohighlight">\(X\)</span> の値の平均は <span class="math notranslate nohighlight">\(E[X]\)</span> に近づく（第 10 章の大数の法則）。<span class="math notranslate nohighlight">\(X\)</span> が可算無限個の値をとる場合は、右辺の級数が絶対収束するとき（<span class="math notranslate nohighlight">\(\sum_i |x_i| P(X = x_i) &lt; \infty\)</span> のとき）に限って期待値が存在するという。本書で扱う確率変数の期待値はすべて存在する。</p>
+<p>根元事象ごとに足し合わせると、同じ値が次のように書ける。</p>
+<div class="math notranslate nohighlight">
+\[E[X] = \sum_{\omega \in \Omega} X(\omega) \, p(\omega)\]</div>
+<p>右辺の和を <span class="math notranslate nohighlight">\(X(\omega)\)</span> の値ごとにまとめると定義の式になるので、両者は等しい。</p>
+<p><strong>例</strong>：サイコロ 1 個の目 <span class="math notranslate nohighlight">\(X\)</span> の期待値は <span class="math notranslate nohighlight">\(E[X] = (1 + 2 + \cdots + 6)/6 = 7/2\)</span> である。期待値 <span class="math notranslate nohighlight">\(7/2\)</span> は <span class="math notranslate nohighlight">\(X\)</span> がとりうる値ではない。期待値は「最も出やすい値」ではなく、あくまで重み付き平均である。</p>
+</section>
+<section id="id6">
+<h3>確率変数の関数の期待値<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>関数 <span class="math notranslate nohighlight">\(g\)</span> に対して <span class="math notranslate nohighlight">\(g(X)\)</span> も確率変数であり、その期待値は <span class="math notranslate nohighlight">\(g(X)\)</span> の分布を求めなくても、<span class="math notranslate nohighlight">\(X\)</span> の分布から次のように計算できる。</p>
+<div class="math notranslate nohighlight">
+\[E[g(X)] = \sum_{i} g(x_i) \, P(X = x_i)\]</div>
+<p>たとえば <span class="math notranslate nohighlight">\(E[X^2] = \sum_i x_i^2 \, P(X = x_i)\)</span> である。一般に <span class="math notranslate nohighlight">\(E[g(X)] \ne g(E[X])\)</span> であることに注意する。たとえばサイコロの目 <span class="math notranslate nohighlight">\(X\)</span> では、<span class="math notranslate nohighlight">\(E[X^2] = 91/6\)</span> であるが、<span class="math notranslate nohighlight">\((E[X])^2 = 49/4\)</span> である。</p>
+</section>
+<section id="id7">
+<h3>期待値の線形性<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p><strong>定理（期待値の線形性）</strong>：確率変数 <span class="math notranslate nohighlight">\(X, Y\)</span> と定数 <span class="math notranslate nohighlight">\(a, b, c\)</span> について</p>
+<div class="math notranslate nohighlight">
+\[E[aX + bY + c] = a E[X] + b E[Y] + c\]</div>
+<p>が成り立つ。</p>
+<p><strong>証明</strong>：根元事象ごとの和の表示を使うと</p>
+<div class="math notranslate nohighlight">
+\[E[aX + bY + c] = \sum_{\omega} (a X(\omega) + b Y(\omega) + c) \, p(\omega) = a \sum_{\omega} X(\omega) p(\omega) + b \sum_{\omega} Y(\omega) p(\omega) + c \sum_{\omega} p(\omega)\]</div>
+<p>であり、<span class="math notranslate nohighlight">\(\sum_\omega p(\omega) = 1\)</span> より結論が得られる。</p>
+<p>この定理で重要なのは、<span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> が独立である必要がない点である。確率変数がどのように依存し合っていても、和の期待値は期待値の和になる。帰納法により、<span class="math notranslate nohighlight">\(n\)</span> 個の確率変数についても <span class="math notranslate nohighlight">\(E[X_1 + \cdots + X_n] = E[X_1] + \cdots + E[X_n]\)</span> が成り立つ。</p>
+<p><strong>例</strong>：2 個のサイコロの目の和 <span class="math notranslate nohighlight">\(S = X_1 + X_2\)</span> の期待値は、<span class="math notranslate nohighlight">\(S\)</span> の分布を求めなくても <span class="math notranslate nohighlight">\(E[S] = E[X_1] + E[X_2] = 7/2 + 7/2 = 7\)</span> と分かる。</p>
+</section>
+</section>
+<section id="id8">
+<h2>指示確率変数<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>事象 <span class="math notranslate nohighlight">\(A\)</span> に対して、<span class="math notranslate nohighlight">\(A\)</span> が起これば 1、起こらなければ 0 をとる確率変数</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}I_A(\omega) = \begin{cases} 1 &amp; (\omega \in A) \\ 0 &amp; (\omega \notin A) \end{cases}\end{split}\]</div>
+<p>を <span class="math notranslate nohighlight">\(A\)</span> の<a class="reference internal" href="glossary.html#term-11"><span class="xref std std-term">指示確率変数</span></a>という。指示確率変数の期待値は、事象の確率に等しい。</p>
+<div class="math notranslate nohighlight">
+\[E[I_A] = 1 \cdot P(A) + 0 \cdot P(\overline{A}) = P(A)\]</div>
+<p>「何かが起こる回数」は、指示確率変数の和として表せる。これと期待値の線形性を組み合わせると、回数の分布を求めなくても期待値を簡単に計算できる。</p>
+<p><strong>例 1</strong>：サイコロを 3 回投げて 6 が出る回数 <span class="math notranslate nohighlight">\(X\)</span> の期待値を求める。<span class="math notranslate nohighlight">\(A_i\)</span> を「<span class="math notranslate nohighlight">\(i\)</span> 回目に 6 が出る」とすると <span class="math notranslate nohighlight">\(X = I_{A_1} + I_{A_2} + I_{A_3}\)</span> なので、<span class="math notranslate nohighlight">\(E[X] = 3 \times (1/6) = 1/2\)</span> である。</p>
+<p><strong>例 2（順列の不動点）</strong>：<span class="math notranslate nohighlight">\(1, \ldots, n\)</span> をランダムに並べ替えたとき（<span class="math notranslate nohighlight">\(n!\)</span> 通りの順列が同様に確からしいとする）、自分の位置に来る数の個数 <span class="math notranslate nohighlight">\(X\)</span> の期待値を求める。<span class="math notranslate nohighlight">\(A_i\)</span> を「数 <span class="math notranslate nohighlight">\(i\)</span> が <span class="math notranslate nohighlight">\(i\)</span> 番目の位置に来る」とすると、<span class="math notranslate nohighlight">\(P(A_i) = (n - 1)!/n! = 1/n\)</span> である。<span class="math notranslate nohighlight">\(X = \sum_{i=1}^{n} I_{A_i}\)</span> なので</p>
+<div class="math notranslate nohighlight">
+\[E[X] = \sum_{i=1}^{n} P(A_i) = n \times \frac{1}{n} = 1\]</div>
+<p>となる。<span class="math notranslate nohighlight">\(n\)</span> がいくつであっても、平均してちょうど 1 個の数が自分の位置に来る。<span class="math notranslate nohighlight">\(A_i\)</span> 同士は独立でない（たとえば <span class="math notranslate nohighlight">\(n - 1\)</span> 個が自分の位置に来れば、残りの 1 個も必ず自分の位置に来る）が、期待値の線形性は独立性を必要としないので、この計算は正しい。なお、<span class="math notranslate nohighlight">\(P(X = 0)\)</span> は第 4 章の攪乱順列の割合 <span class="math notranslate nohighlight">\(D(n)/n!\)</span> であり、<span class="math notranslate nohighlight">\(1/e\)</span> に近づく。</p>
+</section>
+<section id="id9">
+<h2>分散と標準偏差<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>期待値が同じでも、値のばらつき方は確率変数によって異なる。<span class="math notranslate nohighlight">\(\mu = E[X]\)</span> とするとき、ばらつきの大きさを表す量として、<span class="math notranslate nohighlight">\(X\)</span> の<a class="reference internal" href="glossary.html#term-29"><span class="xref std std-term">分散</span></a>を次で定める。</p>
+<div class="math notranslate nohighlight">
+\[V[X] = E[(X - \mu)^2]\]</div>
+<p>分散の正の平方根 <span class="math notranslate nohighlight">\(\sigma = \sqrt{V[X]}\)</span> を<strong>標準偏差</strong>という。標準偏差は <span class="math notranslate nohighlight">\(X\)</span> と同じ単位を持つので、ばらつきの大きさを直感的に把握しやすい。</p>
+<p>期待値の線形性を使って展開すると、計算に便利な次の公式が得られる。</p>
+<div class="math notranslate nohighlight">
+\[V[X] = E[X^2 - 2\mu X + \mu^2] = E[X^2] - 2\mu E[X] + \mu^2 = E[X^2] - (E[X])^2\]</div>
+<p>また、定数 <span class="math notranslate nohighlight">\(a, b\)</span> について <span class="math notranslate nohighlight">\(V[aX + b] = a^2 V[X]\)</span> が成り立つ。定数 <span class="math notranslate nohighlight">\(b\)</span> を加えても分布が平行移動するだけでばらつきは変わらず、<span class="math notranslate nohighlight">\(a\)</span> 倍するとばらつきは <span class="math notranslate nohighlight">\(|a|\)</span> 倍（分散は <span class="math notranslate nohighlight">\(a^2\)</span> 倍）になる。</p>
+<p><strong>例</strong>：サイコロ 1 個の目 <span class="math notranslate nohighlight">\(X\)</span> について、<span class="math notranslate nohighlight">\(E[X^2] = (1 + 4 + 9 + 16 + 25 + 36)/6 = 91/6\)</span> なので</p>
+<div class="math notranslate nohighlight">
+\[V[X] = \frac{91}{6} - \left(\frac{7}{2}\right)^2 = \frac{35}{12} \approx 2.92, \qquad \sigma = \sqrt{35/12} \approx 1.71\]</div>
+<p>である。</p>
+<p>期待値と異なり、分散は一般に線形ではない。<span class="math notranslate nohighlight">\(V[X + Y] = V[X] + V[Y]\)</span> は <span class="math notranslate nohighlight">\(X\)</span> と <span class="math notranslate nohighlight">\(Y\)</span> が独立な場合などに限って成り立つ。この点は第 9 章で共分散を導入して詳しく扱う。</p>
+</section>
+<section id="python">
+<h2>Python で確かめる<a class="headerlink" href="#python" title="Link to this heading"></a></h2>
+<p>サンプルコード：<a class="reference download internal" download="" href="_downloads/c0478e4bde4a7ccc5ee33ee971ff527f/ch07_random_variables.py"><code class="xref download docutils literal notranslate"><span class="pre">ch07_random_variables.py</span></code></a></p>
+<p>サンプルコードでは、離散確率変数の分布を「値 → 確率」の辞書 <code class="docutils literal notranslate"><span class="pre">dict[int,</span> <span class="pre">Fraction]</span></code> で表す。同様に確からしい根元事象の一覧と、根元事象から値を計算する関数（確率変数）を受け取り、分布を作る。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">distribution_of</span><span class="p">(</span><span class="n">outcomes</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">variable</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Distribution</span><span class="p">:</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;同様に確からしい根元事象の一覧と確率変数から、確率変数の分布を作る。&quot;&quot;&quot;</span>
+<span class="linenos">3</span>    <span class="n">counts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">4</span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">5</span>    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">outcomes</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">variable</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="linenos">7</span>        <span class="n">counts</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="linenos">8</span>        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">9</span>    <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">())}</span>
+</pre></div>
+</div>
+<p>期待値・分散・累積分布関数は、定義どおりに実装できる。<code class="docutils literal notranslate"><span class="pre">expectation</span></code> の引数 <code class="docutils literal notranslate"><span class="pre">g</span></code> を指定すると、<span class="math notranslate nohighlight">\(E[g(X)]\)</span> を計算する。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span><span class="w"> </span><span class="nf">expectation</span><span class="p">(</span><span class="n">dist</span><span class="p">:</span> <span class="n">Distribution</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Fraction</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Fraction</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;g(X) の期待値 E[g(X)] = Σ g(x) P(X = x) を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">Fraction</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dist</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="k">def</span><span class="w"> </span><span class="nf">variance</span><span class="p">(</span><span class="n">dist</span><span class="p">:</span> <span class="n">Distribution</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Fraction</span><span class="p">:</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;分散 V[X] = E[X^2] - (E[X])^2 を返す。&quot;&quot;&quot;</span>
+<span class="linenos"> 8</span>    <span class="n">mean</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="k">return</span> <span class="n">expectation</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">mean</span> <span class="o">*</span> <span class="n">mean</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="n">dist</span><span class="p">:</span> <span class="n">Distribution</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Fraction</span><span class="p">:</span>
+<span class="linenos">13</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;累積分布関数 F(x) = P(X &lt;= x) を返す。&quot;&quot;&quot;</span>
+<span class="linenos">14</span>    <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">p</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dist</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>実行結果は次のとおりである。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--- サイコロ 1 個 ---
+E[X] = 7/2, V[X] = 35/12
+F(2) = 1/3, F(4) = 2/3
+--- サイコロ 2 個の和 ---
+{2: &#39;1/36&#39;, 3: &#39;1/18&#39;, 4: &#39;1/12&#39;, 5: &#39;1/9&#39;, 6: &#39;5/36&#39;, 7: &#39;1/6&#39;, 8: &#39;5/36&#39;, 9: &#39;1/9&#39;, 10: &#39;1/12&#39;, 11: &#39;1/18&#39;, 12: &#39;1/36&#39;}
+E[S] = 7, V[S] = 35/6
+--- 期待値の線形性: 3 回投げて 6 が出る回数 ---
+全列挙による E[X] = 1/2, 線形性による 3 x (1/6) = 1/2
+--- 指示確率変数: ランダムな順列の不動点の個数 ---
+n=1: E[X] = 1, V[X] = 0, P(X=0) = 0.0000
+n=2: E[X] = 1, V[X] = 1, P(X=0) = 0.5000
+n=3: E[X] = 1, V[X] = 1, P(X=0) = 0.3333
+n=4: E[X] = 1, V[X] = 1, P(X=0) = 0.3750
+n=5: E[X] = 1, V[X] = 1, P(X=0) = 0.3667
+n=6: E[X] = 1, V[X] = 1, P(X=0) = 0.3681
+n=7: E[X] = 1, V[X] = 1, P(X=0) = 0.3679
+1/e = 0.3679
+</pre></div>
+</div>
+<p>不動点の個数の期待値は、全列挙でもすべての <span class="math notranslate nohighlight">\(n\)</span> で 1 になっている。また、2 個のサイコロの目の和 <span class="math notranslate nohighlight">\(S\)</span> の分散 <span class="math notranslate nohighlight">\(35/6\)</span> は、1 個の分散 <span class="math notranslate nohighlight">\(35/12\)</span> のちょうど 2 倍である。これは 2 個のサイコロの目が独立であるためで、第 9 章で理由を説明する。なお、不動点の個数の分散も <span class="math notranslate nohighlight">\(n \ge 2\)</span> で 1 になっている。この事実も第 9 章の共分散を使うと導ける。</p>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>確率変数は根元事象に実数を対応させる写像であり、その分布は確率質量関数または累積分布関数で表される。</p></li>
+<li><p>期待値 <span class="math notranslate nohighlight">\(E[X] = \sum_i x_i P(X = x_i)\)</span> は値の重み付き平均である。</p></li>
+<li><p>期待値の線形性 <span class="math notranslate nohighlight">\(E[X + Y] = E[X] + E[Y]\)</span> は、確率変数が独立でなくても成り立つ。</p></li>
+<li><p>回数は指示確率変数の和で表せる。指示確率変数の期待値は事象の確率に等しいので、回数の期待値は確率の和で求められる。</p></li>
+<li><p>分散 <span class="math notranslate nohighlight">\(V[X] = E[X^2] - (E[X])^2\)</span> はばらつきの大きさを表し、<span class="math notranslate nohighlight">\(V[aX + b] = a^2 V[X]\)</span> を満たす。</p></li>
+</ul>
+<p>確率変数と期待値については <a class="reference internal" href="references.html#ross2019" id="id11"><span>[Ross2019]</span></a> に詳しい。指示確率変数を使った計算の例は <a class="reference internal" href="references.html#mitzenmacher2017" id="id12"><span>[Mitzenmacher2017]</span></a> に多く収められている。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch06_probability.html" class="btn btn-neutral float-left" title="第 6 章 確率の基礎" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch08_distributions.html" class="btn btn-neutral float-right" title="第 8 章 代表的な離散分布" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
