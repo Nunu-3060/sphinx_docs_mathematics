@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 1 章 力学系とは何か &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 2 章 1 次元写像の反復" href="ch02_one_dimensional_maps.html" />
+    <link rel="prev" title="はじめに" href="ch00_introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 1 章 力学系とは何か</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">状態と時間発展の規則</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">離散時間と連続時間</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">離散時間の力学系の例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">連続時間の力学系の例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">アトラクタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">決定論と予測可能性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">力学系と創発</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 1 章 力学系とは何か</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch01">
+<span id="id1"></span><h1>第 1 章 力学系とは何か<a class="headerlink" href="#ch01" title="Link to this heading"></a></h1>
+<p>この章では、本書全体の土台となる「力学系」の考え方を説明する。力学系という言葉は物理学の「力学」に由来するが、扱う対象は物体の運動に限らない。人口、株価、気温、画面上の点の位置など、時間とともに変化するものなら何でも力学系として扱える。</p>
+<section id="id2">
+<h2>状態と時間発展の規則<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><strong>力学系</strong>（dynamical system）は、次の 2 つの組で決まる。</p>
+<ul class="simple">
+<li><p><strong>状態</strong>（state）：ある時刻に、系がどうなっているかを表す量の組。たとえば振り子なら、角度と角速度の 2 つの数で状態が決まる。</p></li>
+<li><p><strong>時間発展の規則</strong>（time evolution rule）：現在の状態から、少し先の状態を決める規則。</p></li>
+</ul>
+<p>状態として取りうる値全体の集合を<strong>状態空間</strong>（state space）または<strong>相空間</strong>（phase space）という。振り子の状態空間は、角度と角速度を座標とする平面である。状態空間の 1 点が、系のある瞬間の様子をすべて表す。時間が進むと、その点は規則に従って状態空間の中を動き、1 本の曲線や点列を描く。これを<strong>軌道</strong>（orbit、trajectory）という。</p>
+<p>力学系の重要な性質は、規則が<strong>決定論的</strong>（deterministic）であることである。つまり、現在の状態が決まれば、未来の状態はただ 1 つに決まる。サイコロのような偶然の要素は含まない。それでも、第 II 部で見るように、決定論的な規則から、偶然のように見える振る舞い（カオス）が生まれることがある。</p>
+</section>
+<section id="id3">
+<h2>離散時間と連続時間<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>時間の扱い方によって、力学系は 2 種類に分かれる。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 4 </span><span class="caption-text">離散時間と連続時間の力学系</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 41.0%" />
+<col style="width: 41.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>離散時間の力学系</p></th>
+<th class="head"><p>連続時間の力学系</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>時間</p></td>
+<td><p><span class="math notranslate nohighlight">\(n = 0, 1, 2, \ldots\)</span> と飛び飛びに進む</p></td>
+<td><p><span class="math notranslate nohighlight">\(t\)</span> が連続的に進む</p></td>
+</tr>
+<tr class="row-odd"><td><p>規則</p></td>
+<td><p>写像 <span class="math notranslate nohighlight">\(x_{n+1} = f(x_n)\)</span></p></td>
+<td><p>微分方程式 <span class="math notranslate nohighlight">\(\dot{x} = F(x)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>軌道</p></td>
+<td><p>点列 <span class="math notranslate nohighlight">\(x_0, x_1, x_2, \ldots\)</span></p></td>
+<td><p>曲線 <span class="math notranslate nohighlight">\(x(t)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>例</p></td>
+<td><p>年ごとの人口、1 フレームごとの粒子の位置</p></td>
+<td><p>振り子の運動、惑星の運動、電気回路</p></td>
+</tr>
+</tbody>
+</table>
+<p>離散時間の力学系では、関数 <span class="math notranslate nohighlight">\(f\)</span> を繰り返し適用する。初期値 <span class="math notranslate nohighlight">\(x_0\)</span> から、</p>
+<div class="math notranslate nohighlight">
+\[x_1 = f(x_0), \quad x_2 = f(x_1) = f(f(x_0)), \quad x_3 = f(f(f(x_0))), \quad \ldots\]</div>
+<p>と計算していく。<span class="math notranslate nohighlight">\(f\)</span> を <span class="math notranslate nohighlight">\(n\)</span> 回適用したものを <span class="math notranslate nohighlight">\(f^n\)</span> と書くと、<span class="math notranslate nohighlight">\(x_n = f^n(x_0)\)</span> である。このような計算を<strong>反復</strong>（iteration）という。</p>
+<p>連続時間の力学系では、状態の変化の速さ（時間微分）が、現在の状態の関数として与えられる。微分方程式 <span class="math notranslate nohighlight">\(\dot{x} = F(x)\)</span> は、「状態 <span class="math notranslate nohighlight">\(x\)</span> にいるとき、状態は速度 <span class="math notranslate nohighlight">\(F(x)\)</span> で変化する」という意味である。<span class="math notranslate nohighlight">\(F\)</span> を状態空間の各点に矢印として描いたものを<strong>ベクトル場</strong>（vector field）という。軌道は、ベクトル場の矢印に沿って流れる曲線になる。</p>
+<p>2 つの種類は、互いに行き来できる。連続時間の力学系を一定の時間間隔 <span class="math notranslate nohighlight">\(\Delta t\)</span> ごとに観測すれば、離散時間の力学系になる。第 3 章で扱う数値解法は、まさにこの考え方で微分方程式を写像に置き換える。逆に、第 6 章のポアンカレ断面のように、連続時間の軌道から特定の瞬間だけを取り出して、写像として調べる方法もある。</p>
+</section>
+<section id="id4">
+<h2>離散時間の力学系の例<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#fig-ch01-orbits"><span class="std std-numref">図 2</span></a> に、離散時間の力学系の例を 3 つ示す。</p>
+<figure class="align-default" id="fig-ch01-orbits">
+<a class="reference internal image-reference" href="_images/ch01_first_systems_orbits.png"><img alt="_images/ch01_first_systems_orbits.png" src="_images/ch01_first_systems_orbits.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 2 </span><span class="caption-text">3 つの写像の軌道。左から、複利、個体数のモデル、余弦関数の反復。</span><a class="headerlink" href="#fig-ch01-orbits" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>複利</strong>：<span class="math notranslate nohighlight">\(x_{n+1} = 1.1\,x_n\)</span> は、毎年 10% の利息が付く預金の残高を表す。残高は指数関数的に増え続ける。</p></li>
+<li><p><strong>個体数のモデル</strong>：<span class="math notranslate nohighlight">\(x_{n+1} = r x_n (1 - x_n)\)</span> は、生物の個体数（環境の上限に対する割合）を表すモデルで、<strong>ロジスティック写像</strong>（logistic map）と呼ばれる。個体数が少ないうちは <span class="math notranslate nohighlight">\(r\)</span> 倍に増えるが、多くなると餌の不足などで増え方が鈍る。<span class="math notranslate nohighlight">\(r = 2.8\)</span> では、個体数は約 0.643 に落ち着く。</p></li>
+<li><p><strong>余弦関数の反復</strong>：電卓に適当な数を入れ、<span class="math notranslate nohighlight">\(\cos\)</span> のボタン（ラジアン単位）を押し続けると、表示は約 0.739 に落ち着く。この値は <span class="math notranslate nohighlight">\(\cos x = x\)</span> の解である。</p></li>
+</ul>
+<p>後の 2 つの例では、軌道がある値に近づいて落ち着いた。このように、<span class="math notranslate nohighlight">\(f(x^*) = x^*\)</span> を満たし、そこから動かない点 <span class="math notranslate nohighlight">\(x^*\)</span> を<strong>固定点</strong>（fixed point）という。ロジスティック写像は、パラメータ <span class="math notranslate nohighlight">\(r\)</span> を大きくすると、固定点に落ち着かず、周期的な振動や、不規則な変動を示すようになる。この様子は第 4 章で詳しく調べる。</p>
+<p>反復の計算は、Python で次のように書ける。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 1 </span><span class="caption-text">写像の反復（ch01_first_systems.py）</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">18</span><span class="k">def</span><span class="w"> </span><span class="nf">iterate</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">19</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;x0 に写像 f を n 回適用し、x0 を含む n + 1 個の値（軌道）を返す.&quot;&quot;&quot;</span>
+<span class="linenos">20</span>    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+<span class="linenos">21</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">22</span>        <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="linenos">23</span>    <span class="k">return</span> <span class="n">xs</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>連続時間の力学系の例<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>摩擦のある振り子を考える。振り子が真下から測った角度を <span class="math notranslate nohighlight">\(\theta\)</span>、角速度を <span class="math notranslate nohighlight">\(\omega = \dot{\theta}\)</span> とすると、運動方程式は次のようになる（重力加速度と振り子の長さの比を 1 とした）。</p>
+<div class="math notranslate nohighlight">
+\[\dot{\theta} = \omega, \qquad \dot{\omega} = -\sin\theta - \gamma\,\omega\]</div>
+<p>右辺の <span class="math notranslate nohighlight">\(-\sin\theta\)</span> は重力による復元力、<span class="math notranslate nohighlight">\(-\gamma\,\omega\)</span> は速度に比例する摩擦力（<span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>）を表す。状態は <span class="math notranslate nohighlight">\((\theta, \omega)\)</span> の 2 つの数なので、状態空間は平面になる。2 次元の相空間を<strong>相平面</strong>（phase plane）ともいう。</p>
+<p><a class="reference internal" href="#fig-ch01-pendulum"><span class="std std-numref">図 3</span></a> は、<span class="math notranslate nohighlight">\(\gamma = 0.3\)</span>、初期状態 <span class="math notranslate nohighlight">\((\theta, \omega) = (2.5, 0)\)</span> の軌道である。左は角度と角速度を時刻の関数として描いた<strong>時系列</strong>（time series）、右は同じ運動を相平面に描いたものである。</p>
+<figure class="align-default" id="fig-ch01-pendulum">
+<a class="reference internal image-reference" href="_images/ch01_first_systems_pendulum.png"><img alt="_images/ch01_first_systems_pendulum.png" src="_images/ch01_first_systems_pendulum.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 3 </span><span class="caption-text">減衰振り子の時系列（左）と、相平面上の軌道（右）</span><a class="headerlink" href="#fig-ch01-pendulum" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>時系列では振動がだんだん小さくなる様子が、相平面では軌道が渦を巻きながら原点に近づく様子が見える。原点 <span class="math notranslate nohighlight">\((0, 0)\)</span> は振り子が真下で静止した状態で、<span class="math notranslate nohighlight">\(\dot{\theta} = \dot{\omega} = 0\)</span> となるので、そこに置けば動かない。連続時間の力学系で、このように動かない点を<strong>平衡点</strong>（equilibrium point）という。離散時間の固定点に当たる。</p>
+</section>
+<section id="id6">
+<h2>アトラクタ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>減衰振り子では、初期状態をどこに選んでも（ちょうど真上で静止させた場合などを除いて）、軌道は最終的に真下の平衡点に近づく。このように、周りの軌道を引き寄せる集合を<strong>アトラクタ</strong>（attractor）という。アトラクタに近づくまでの途中の振る舞いを<strong>過渡状態</strong>（transient）という。</p>
+<p>アトラクタは 1 点とは限らない。</p>
+<ul class="simple">
+<li><p><strong>固定点（平衡点）</strong>：軌道が 1 点に落ち着く。減衰振り子、<span class="math notranslate nohighlight">\(r = 2.8\)</span> のロジスティック写像。</p></li>
+<li><p><strong>周期軌道</strong>：軌道が同じ経路を繰り返しなぞる。心臓の拍動や、第 3 章で扱うリミットサイクル。</p></li>
+<li><p><strong>ストレンジアトラクタ</strong>：軌道が繰り返しのない複雑な動きを続けるが、状態空間の限られた領域から出ない。この集合はフラクタルな構造を持つ。第 6 章で扱う。</p></li>
+</ul>
+<p>アトラクタは、力学系の「長期的な振る舞い」を代表するものである。本書の図の多くは、過渡状態を捨て、アトラクタ上の軌道だけを描いている。</p>
+</section>
+<section id="id7">
+<h2>決定論と予測可能性<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>1814 年、数学者のラプラスは、「宇宙のすべての粒子の現在の位置と速度を知る知性があれば、未来を完全に予測できる」と考えた。決定論的な力学系では、現在の状態が未来を一意に決めるので、原理的にはこの考え方は正しい。</p>
+<p>しかし、実際には現在の状態を無限の精度で知ることはできない。測定値にはわずかな誤差が必ず含まれる。多くの力学系では、初期値のわずかな誤差は、時間が経っても小さいままか、ゆっくりとしか大きくならない。ところが、ある種の力学系では、誤差が指数関数的に大きくなり、短い時間で予測が意味を失う。これが<strong>カオス</strong>（chaos）である。カオスは「決定論的なのに予測できない」という一見矛盾した性質を持つ。第 II 部では、この性質を具体的な例で調べ、数値で測る方法を学ぶ。</p>
+</section>
+<section id="id8">
+<h2>力学系と創発<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p><strong>創発</strong>（emergence）は、個々の要素の単純な振る舞いからは予想しにくい、全体としての性質やパターンが現れることを指す。鳥の群れの動き、シマウマの縞模様、ライフゲームのグライダーなどが例としてよく挙げられる。</p>
+<p>創発の多くは、力学系の言葉で表せる。たとえばライフゲームは、格子上の各セルの生死を、近傍のセルの状態から決める規則であり、盤面全体の状態を 1 つの点とみなせば、巨大な状態空間を持つ離散時間の力学系である。鳥の群れのシミュレーション（ボイド）も、全個体の位置と速度を状態とする力学系である。</p>
+<p>本書では主に、状態を表す数が 1〜3 個程度の、小さな力学系を扱う。小さな力学系でも、反復によって驚くほど複雑な振る舞いが生まれることが分かる。これは、要素の数が多いことだけが複雑さの源ではないことを示している。第 11 章では、空間に広がった多数の要素からなる力学系（結合写像格子、反応拡散系）を取り上げ、小さな力学系の知識が、パターンが生まれる仕組みの理解にどう役立つかを見る。</p>
+</section>
+<section id="id9">
+<h2>まとめ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>力学系は、状態と時間発展の規則の組で決まる。状態全体の集合を状態空間（相空間）、時間とともに状態がたどる経路を軌道という。</p></li>
+<li><p>離散時間の力学系は写像の反復 <span class="math notranslate nohighlight">\(x_{n+1} = f(x_n)\)</span> で、連続時間の力学系は微分方程式 <span class="math notranslate nohighlight">\(\dot{x} = F(x)\)</span> で表す。</p></li>
+<li><p>軌道を引き寄せる集合をアトラクタという。アトラクタには、固定点、周期軌道、ストレンジアトラクタなどがある。</p></li>
+<li><p>決定論的な力学系でも、初期値の誤差が急速に大きくなる場合（カオス）は、長期的な予測ができない。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch00_introduction.html" class="btn btn-neutral float-left" title="はじめに" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch02_one_dimensional_maps.html" class="btn btn-neutral float-right" title="第 2 章 1 次元写像の反復" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

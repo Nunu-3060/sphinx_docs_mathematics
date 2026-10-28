@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 3 章 微分方程式と相空間 &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 4 章 ロジスティック写像とカオスへの道" href="ch04_logistic_map.html" />
+    <link rel="prev" title="第 2 章 1 次元写像の反復" href="ch02_one_dimensional_maps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 3 章 微分方程式と相空間</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">微分方程式を数値的に解く</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">オイラー法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">ルンゲ＝クッタ法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">精度の比較</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">相平面とベクトル場</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">線形系の平衡点の分類</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">非線形系の線形化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">リミットサイクル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">2 次元ではカオスは起きない</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 3 章 微分方程式と相空間</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch03">
+<span id="id1"></span><h1>第 3 章 微分方程式と相空間<a class="headerlink" href="#ch03" title="Link to this heading"></a></h1>
+<p>この章では、連続時間の力学系 <span class="math notranslate nohighlight">\(\dot{x} = F(x)\)</span> を扱う。まず、微分方程式をコンピュータで解く方法（数値解法）を説明し、本書の以降の章で使う共通モジュールを作る。次に、2 次元の系の相平面を描き、平衡点の種類を分類する。最後に、2 次元の連続時間の系ではカオスが起きないという重要な結果を紹介する。</p>
+<section id="id2">
+<h2>微分方程式を数値的に解く<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>オイラー法<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>微分方程式 <span class="math notranslate nohighlight">\(\dot{x} = F(x)\)</span> は、「今の状態 <span class="math notranslate nohighlight">\(x\)</span> での変化の速さは <span class="math notranslate nohighlight">\(F(x)\)</span> である」と言っている。短い時間 <span class="math notranslate nohighlight">\(\Delta t\)</span> の間、この速さが変わらないと仮定すると、</p>
+<div class="math notranslate nohighlight">
+\[x(t + \Delta t) \approx x(t) + \Delta t\,F(x(t))\]</div>
+<p>となる。これを繰り返して軌道を求める方法を<strong>オイラー法</strong>（Euler method）という。オイラー法は、微分方程式を写像 <span class="math notranslate nohighlight">\(x_{k+1} = x_k + \Delta t\,F(x_k)\)</span> に置き換えたものといえる。</p>
+<p>オイラー法は分かりやすいが、精度が低い。1 ステップの誤差は <span class="math notranslate nohighlight">\(\Delta t^2\)</span> に比例し、一定の時間 <span class="math notranslate nohighlight">\(T\)</span> まで計算するには <span class="math notranslate nohighlight">\(T/\Delta t\)</span> ステップが必要なので、時刻 <span class="math notranslate nohighlight">\(T\)</span> での誤差（大域誤差）は <span class="math notranslate nohighlight">\(\Delta t\)</span> に比例する。刻み幅を半分にしても、誤差は半分にしかならない。</p>
+</section>
+<section id="id4">
+<h3>ルンゲ＝クッタ法<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p><strong>4 次のルンゲ＝クッタ法</strong>（Runge–Kutta method、RK4）は、1 ステップの中で 4 か所の傾きを計算し、重み付きの平均で進む方法である。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}k_1 &amp;= F(x_k) \\
+k_2 &amp;= F\!\left(x_k + \tfrac{\Delta t}{2} k_1\right) \\
+k_3 &amp;= F\!\left(x_k + \tfrac{\Delta t}{2} k_2\right) \\
+k_4 &amp;= F(x_k + \Delta t\,k_3) \\
+x_{k+1} &amp;= x_k + \frac{\Delta t}{6}(k_1 + 2k_2 + 2k_3 + k_4)\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(k_1\)</span> は区間の始点、<span class="math notranslate nohighlight">\(k_2\)</span> と <span class="math notranslate nohighlight">\(k_3\)</span> は中点、<span class="math notranslate nohighlight">\(k_4\)</span> は終点での傾きの推定値である。大域誤差は <span class="math notranslate nohighlight">\(\Delta t^4\)</span> に比例するので、刻み幅を半分にすると誤差は約 1/16 になる。1 ステップあたり <span class="math notranslate nohighlight">\(F\)</span> を 4 回計算する必要があるが、同じ精度を得るための計算量は、オイラー法よりはるかに少ない。</p>
+<p>本書では、オイラー法と RK4 を共通モジュール <code class="docutils literal notranslate"><span class="pre">ode.py</span></code> にまとめ、以降の章のサンプルから使う。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 3 </span><span class="caption-text">数値解法の共通モジュール（ode.py）</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">17</span><span class="n">Vector</span> <span class="o">=</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span>
+<span class="linenos">18</span><span class="n">VectorField</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Vector</span><span class="p">],</span> <span class="n">Vector</span><span class="p">]</span>
+<span class="linenos">19</span><span class="n">Stepper</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">VectorField</span><span class="p">,</span> <span class="n">Vector</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">Vector</span><span class="p">]</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">def</span><span class="w"> </span><span class="nf">euler_step</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">VectorField</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="linenos">23</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;オイラー法: 現在の傾き f(x) のまま dt だけ進む.&quot;&quot;&quot;</span>
+<span class="linenos">24</span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="k">def</span><span class="w"> </span><span class="nf">rk4_step</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">VectorField</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="linenos">28</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;4 次のルンゲ＝クッタ法: 区間内の 4 か所の傾きを重み付きで平均して進む.&quot;&quot;&quot;</span>
+<span class="linenos">29</span>    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="linenos">30</span>    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k1</span><span class="p">)</span>
+<span class="linenos">31</span>    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k2</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k3</span><span class="p">)</span>
+<span class="linenos">33</span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">/</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">k2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">k3</span> <span class="o">+</span> <span class="n">k4</span><span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">VectorField</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">Stepper</span> <span class="o">=</span> <span class="n">rk4_step</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="linenos">37</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;初期値 x0 から n ステップ進め、x0 を含む n + 1 個の状態を返す.</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="sd">    戻り値の形は (n + 1,) + x0.shape である。</span>
+<span class="linenos">40</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">41</span>    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">42</span>    <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span>
+<span class="linenos">43</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="linenos">44</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">45</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">46</span>        <span class="n">xs</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+<span class="linenos">47</span>    <span class="k">return</span> <span class="n">xs</span>
+</pre></div>
+</div>
+</div>
+<p>状態 <code class="docutils literal notranslate"><span class="pre">x</span></code> は NumPy の配列で、最後の軸が状態の成分を表す。形が (1000, 3) の配列を渡すと、1000 個の初期値の軌道を一度に計算できる。NumPy では、Python のループを書くより、配列全体に対する演算（ベクトル化）のほうがはるかに速い。第 10 章の吸引領域の計算などでは、この性質を利用して数万個の初期値を同時に計算する。</p>
+</section>
+<section id="id5">
+<h3>精度の比較<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>2 つの方法の精度を、単振動 <span class="math notranslate nohighlight">\(\ddot{x} = -x\)</span> で比べる。2 階の微分方程式は、速度 <span class="math notranslate nohighlight">\(v = \dot{x}\)</span> を新しい変数として加えると、1 階の連立方程式 <span class="math notranslate nohighlight">\(\dot{x} = v\)</span>、<span class="math notranslate nohighlight">\(\dot{v} = -x\)</span> に書き直せる。初期値 <span class="math notranslate nohighlight">\((x, v) = (1, 0)\)</span> の厳密解は <span class="math notranslate nohighlight">\(x = \cos t\)</span>、<span class="math notranslate nohighlight">\(v = -\sin t\)</span> で、相平面では単位円を描く。</p>
+<figure class="align-default" id="fig-ch03-orbits">
+<a class="reference internal image-reference" href="_images/ch03_integrators_orbits.png"><img alt="_images/ch03_integrators_orbits.png" src="_images/ch03_integrators_orbits.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 8 </span><span class="caption-text">刻み幅 0.1 で 300 ステップ計算した単振動の軌道</span><a class="headerlink" href="#fig-ch03-orbits" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ch03-errors">
+<a class="reference internal image-reference" href="_images/ch03_integrators_errors.png"><img alt="_images/ch03_integrators_errors.png" src="_images/ch03_integrators_errors.png" style="width: 55%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 9 </span><span class="caption-text">刻み幅と、時刻 10 での誤差の関係（両対数グラフ）</span><a class="headerlink" href="#fig-ch03-errors" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch03-orbits"><span class="std std-numref">図 8</span></a> では、オイラー法の軌道が外側に渦を巻いて広がっている。エネルギー <span class="math notranslate nohighlight">\(x^2 + v^2\)</span> が保存されるはずの系で、オイラー法は 1 ステップごとにエネルギーを <span class="math notranslate nohighlight">\(1 + \Delta t^2\)</span> 倍に増やしてしまうからである。RK4 の軌道は厳密解とほとんど重なる。<a class="reference internal" href="#fig-ch03-errors"><span class="std std-numref">図 9</span></a> の両対数グラフでは、誤差が直線に並び、その傾きはオイラー法で約 1、RK4 で約 4 である。次の出力は、刻み幅を半分にしたときに誤差が何分の 1 になるかを表しており、それぞれ約 2 と 16 になっている。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  dt      オイラー法   比     ルンゲ＝クッタ法  比
+ 0.1000  6.460e-01         8.333e-06
+ 0.0500  2.838e-01    2.3  5.208e-07        16.0
+ 0.0250  1.331e-01    2.1  3.255e-08        16.0
+ 0.0125  6.449e-02    2.1  2.035e-09        16.0
+</pre></div>
+</div>
+<p>刻み幅は小さいほど正確だが、計算時間が増える。本書のサンプルでは、RK4 で刻み幅 0.002〜0.05 程度を使う。第 5 章で見るように、カオス的な系では誤差がいずれ大きくなるので、どれほど精度の高い数値解法を使っても、長時間の軌道を正確に求めることはできない。</p>
+</section>
+</section>
+<section id="id6">
+<h2>相平面とベクトル場<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>2 次元の系 <span class="math notranslate nohighlight">\(\dot{x} = F(x)\)</span> では、平面上の各点にベクトル <span class="math notranslate nohighlight">\(F(x)\)</span> が決まる。このベクトル場に沿って流れる曲線をいくつも描いた図を<strong>相図</strong>（phase portrait）という。相図を見ると、個々の軌道を計算しなくても、系の振る舞いの全体像がつかめる。</p>
+<section id="id7">
+<h3>線形系の平衡点の分類<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>最も基本的なのは、行列 <span class="math notranslate nohighlight">\(A\)</span> を使って <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}} = A\boldsymbol{x}\)</span> と書ける<strong>線形系</strong>（linear system）である。原点は常に平衡点であり、その周りの振る舞いは <span class="math notranslate nohighlight">\(A\)</span> の<strong>固有値</strong>（eigenvalue）で決まる（固有値については <a class="reference internal" href="appendix_a_math.html#appendix-a"><span class="std std-ref">付録 A</span></a> を参照）。</p>
+<p>固有値 <span class="math notranslate nohighlight">\(\lambda\)</span> と固有ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span> の組（<span class="math notranslate nohighlight">\(A\boldsymbol{v} = \lambda\boldsymbol{v}\)</span>）があると、<span class="math notranslate nohighlight">\(\boldsymbol{x}(t) = e^{\lambda t}\boldsymbol{v}\)</span> は解になる。固有値が実数なら、この解は固有ベクトルの方向に沿って、<span class="math notranslate nohighlight">\(\lambda &lt; 0\)</span> なら原点に近づき、<span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span> なら遠ざかる。固有値が複素数 <span class="math notranslate nohighlight">\(\alpha \pm i\beta\)</span> なら、解は角速度 <span class="math notranslate nohighlight">\(\beta\)</span> で回転しながら、<span class="math notranslate nohighlight">\(e^{\alpha t}\)</span> に比例して大きさを変える。2 次元の系の平衡点は、固有値によって <a class="reference internal" href="#fig-ch03-linear"><span class="std std-numref">図 10</span></a> と次の表のように分類できる。</p>
+<figure class="align-default" id="fig-ch03-linear">
+<a class="reference internal image-reference" href="_images/ch03_phase_portrait_linear.png"><img alt="_images/ch03_phase_portrait_linear.png" src="_images/ch03_phase_portrait_linear.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 10 </span><span class="caption-text">線形系の 4 種類の平衡点の相図</span><a class="headerlink" href="#fig-ch03-linear" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 5 </span><span class="caption-text">2 次元の線形系の平衡点の分類</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 24.0%" />
+<col style="width: 40.0%" />
+<col style="width: 36.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>種類</p></th>
+<th class="head"><p>固有値</p></th>
+<th class="head"><p>軌道の様子</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>安定結節点</p></td>
+<td><p>2 つとも負の実数</p></td>
+<td><p>まっすぐ（または曲がりながら）原点に近づく</p></td>
+</tr>
+<tr class="row-odd"><td><p>不安定結節点</p></td>
+<td><p>2 つとも正の実数</p></td>
+<td><p>原点から遠ざかる</p></td>
+</tr>
+<tr class="row-even"><td><p>鞍点</p></td>
+<td><p>正と負の実数が 1 つずつ</p></td>
+<td><p>1 方向からは近づき、別の方向へ遠ざかる</p></td>
+</tr>
+<tr class="row-odd"><td><p>安定渦状点</p></td>
+<td><p>実部が負の複素数</p></td>
+<td><p>渦を巻きながら原点に近づく</p></td>
+</tr>
+<tr class="row-even"><td><p>不安定渦状点</p></td>
+<td><p>実部が正の複素数</p></td>
+<td><p>渦を巻きながら原点から遠ざかる</p></td>
+</tr>
+<tr class="row-odd"><td><p>中心</p></td>
+<td><p>実部が 0 の複素数（純虚数）</p></td>
+<td><p>原点の周りを閉じた曲線で回り続ける</p></td>
+</tr>
+</tbody>
+</table>
+<p>離散時間の写像では、固定点の安定性は微分係数の絶対値が 1 より小さいかどうかで決まった（第 2 章）。連続時間の系では、固有値の実部が負かどうかで決まる。この違いは、連続時間の解 <span class="math notranslate nohighlight">\(e^{\lambda t}\)</span> を時間 <span class="math notranslate nohighlight">\(\Delta t\)</span> ごとに観測すると、写像の係数 <span class="math notranslate nohighlight">\(e^{\lambda \Delta t}\)</span> になり、<span class="math notranslate nohighlight">\(|e^{\lambda \Delta t}| &lt; 1\)</span> と <span class="math notranslate nohighlight">\(\mathrm{Re}\,\lambda &lt; 0\)</span> が同じ条件になることから理解できる。</p>
+</section>
+<section id="id8">
+<h3>非線形系の線形化<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>非線形の系でも、平衡点 <span class="math notranslate nohighlight">\(\boldsymbol{x}^*\)</span> のごく近くでは、<span class="math notranslate nohighlight">\(F\)</span> を 1 次式で近似できる。このとき行列 <span class="math notranslate nohighlight">\(A\)</span> の役割をするのが、<span class="math notranslate nohighlight">\(F\)</span> の各成分を各変数で偏微分した値を並べた<strong>ヤコビ行列</strong>（Jacobian matrix）である。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}J = \begin{pmatrix} \dfrac{\partial F_1}{\partial x_1} &amp; \dfrac{\partial F_1}{\partial x_2} \\[2mm] \dfrac{\partial F_2}{\partial x_1} &amp; \dfrac{\partial F_2}{\partial x_2} \end{pmatrix}\end{split}\]</div>
+<p>摩擦のない振り子 <span class="math notranslate nohighlight">\(\dot{\theta} = \omega\)</span>、<span class="math notranslate nohighlight">\(\dot{\omega} = -\sin\theta\)</span> で確かめる。ヤコビ行列は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}J(\theta, \omega) = \begin{pmatrix} 0 &amp; 1 \\ -\cos\theta &amp; 0 \end{pmatrix}\end{split}\]</div>
+<p>である。真下に静止した平衡点 <span class="math notranslate nohighlight">\((0, 0)\)</span> では固有値が <span class="math notranslate nohighlight">\(\pm i\)</span> となり、線形化した系は中心になる。真上に静止した平衡点 <span class="math notranslate nohighlight">\((\pi, 0)\)</span> では固有値が <span class="math notranslate nohighlight">\(\pm 1\)</span> となり、鞍点になる。<a class="reference internal" href="#fig-ch03-pendulum"><span class="std std-numref">図 11</span></a> は振り子の相図である。</p>
+<figure class="align-default" id="fig-ch03-pendulum">
+<a class="reference internal image-reference" href="_images/ch03_phase_portrait_pendulum.png"><img alt="_images/ch03_phase_portrait_pendulum.png" src="_images/ch03_phase_portrait_pendulum.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 11 </span><span class="caption-text">摩擦のない振り子の相図。赤い曲線（セパラトリクス）が、往復する揺れと、回り続ける回転を分ける。</span><a class="headerlink" href="#fig-ch03-pendulum" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>振り子のエネルギー <span class="math notranslate nohighlight">\(E = \omega^2/2 - \cos\theta\)</span> は時間がたっても変わらないので、軌道は <span class="math notranslate nohighlight">\(E\)</span> が一定の曲線に沿う。<span class="math notranslate nohighlight">\(E &lt; 1\)</span> の軌道は中心の周りの閉じた曲線（往復する揺れ）、<span class="math notranslate nohighlight">\(E &gt; 1\)</span> の軌道は上下の波打つ曲線（回り続ける回転）になる。その境目の <span class="math notranslate nohighlight">\(E = 1\)</span> の曲線は鞍点どうしを結び、<strong>セパラトリクス</strong>（separatrix）と呼ばれる。振り子を真上に向かってちょうどぎりぎりで止まる勢いで押し出すと、軌道はセパラトリクスに乗り、無限の時間をかけて真上に近づく。</p>
+<p>なお、線形化で中心と判定された場合は注意が必要である。線形化では無視した高次の項によって、実際の系では渦状点になることがある。摩擦のない振り子では、エネルギーが保存されるので、本当に中心になる。</p>
+</section>
+</section>
+<section id="id9">
+<h2>リミットサイクル<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>減衰振り子の振動は、摩擦によって必ず止まる。しかし、心臓の拍動、時計の振り子、楽器の弦の自励振動のように、外部からエネルギーを受け取りながら、一定の振幅で振動を続ける系もある。このような振動は、相平面では孤立した閉軌道として現れ、<strong>リミットサイクル</strong>（limit cycle）と呼ばれる。</p>
+<p>真空管の発振回路のモデルとして考案された<strong>ファン・デル・ポール振動子</strong>（van der Pol oscillator）</p>
+<div class="math notranslate nohighlight">
+\[\ddot{x} - \mu (1 - x^2)\,\dot{x} + x = 0\]</div>
+<p>は、リミットサイクルを持つ代表的な系である。<span class="math notranslate nohighlight">\(\dot{x}\)</span> の係数 <span class="math notranslate nohighlight">\(-\mu(1 - x^2)\)</span> は、<span class="math notranslate nohighlight">\(|x| &lt; 1\)</span> では負（振動を増幅する「負の摩擦」）、<span class="math notranslate nohighlight">\(|x| &gt; 1\)</span> では正（ふつうの摩擦）になる。そのため、振幅が小さい振動は大きくなり、大きい振動は小さくなって、ちょうど釣り合う振幅に落ち着く。</p>
+<figure class="align-default" id="fig-ch03-vdp">
+<a class="reference internal image-reference" href="_images/ch03_van_der_pol_limit_cycle.png"><img alt="_images/ch03_van_der_pol_limit_cycle.png" src="_images/ch03_van_der_pol_limit_cycle.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 12 </span><span class="caption-text">ファン・デル・ポール振動子（<span class="math notranslate nohighlight">\(\mu = 1\)</span>）。内側と外側から出発した軌道が、同じリミットサイクルに近づく。</span><a class="headerlink" href="#fig-ch03-vdp" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch03-vdp"><span class="std std-numref">図 12</span></a> で、内側から出発した軌道も外側から出発した軌道も、同じ閉曲線に近づいている。リミットサイクルは、周期軌道のアトラクタである。中心の周りの閉軌道（振り子の揺れ）とは違い、初期値によらず同じ振幅と周期の振動が実現する。</p>
+</section>
+<section id="id10">
+<h2>2 次元ではカオスは起きない<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>ここまで見た 2 次元の連続時間の系では、軌道は最終的に平衡点か閉軌道に近づいた（振り子のセパラトリクスのように、鞍点どうしを結ぶ軌道の輪に近づく場合もある）。実は、これは一般に成り立つ。</p>
+<p><strong>ポアンカレ＝ベンディクソンの定理</strong>（Poincaré–Bendixson theorem）：平面上の（右辺が時間によらない）連続時間の系で、軌道が、平衡点を含まない有界な閉領域にとどまり続けるなら、その軌道は閉軌道であるか、閉軌道に近づく。</p>
+<p>直観的な理由は、平面上の軌道は互いに交差できないことにある。微分方程式の解は初期値から一意に決まるので、2 本の軌道が交われば、交点から先の未来が 2 通りになってしまう。平面上で交差せずに有界な領域を動き続けるには、同じ経路をぐるぐる回るか、どこかに落ち着くしかない。</p>
+<p>この定理から、連続時間の系でカオスが起きるには、少なくとも 3 次元の状態空間が必要であることが分かる。3 次元では、軌道は交差せずに立体的に巻き付き、複雑な構造を作れる。第 6 章のローレンツ方程式は、その最初の例である。</p>
+<p>一方、離散時間の写像では事情が違う。写像の軌道は点列であり、「線が交差しない」という制約がない。第 4 章で見るように、1 次元の写像でもカオスが起きる。ただし、ロジスティック写像のように異なる 2 つの値が同じ 1 つの値に移る（逆写像が一意に決まらない）写像の場合であり、逆にたどれる写像でカオスが起きるには 2 次元以上が必要である。第 6 章のエノン写像は、そのような 2 次元の写像の例である。</p>
+</section>
+<section id="id11">
+<h2>まとめ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>オイラー法の大域誤差は刻み幅に比例し、4 次のルンゲ＝クッタ法の大域誤差は刻み幅の 4 乗に比例する。</p></li>
+<li><p>線形系の平衡点は、行列の固有値によって、結節点、鞍点、渦状点、中心などに分類できる。非線形系の平衡点は、ヤコビ行列で線形化して調べる。</p></li>
+<li><p>リミットサイクルは孤立した閉軌道のアトラクタで、初期値によらない一定の振動を表す。</p></li>
+<li><p>ポアンカレ＝ベンディクソンの定理により、2 次元の連続時間の系ではカオスは起きない。連続時間の系のカオスには 3 次元以上が必要である。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch02_one_dimensional_maps.html" class="btn btn-neutral float-left" title="第 2 章 1 次元写像の反復" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch04_logistic_map.html" class="btn btn-neutral float-right" title="第 4 章 ロジスティック写像とカオスへの道" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

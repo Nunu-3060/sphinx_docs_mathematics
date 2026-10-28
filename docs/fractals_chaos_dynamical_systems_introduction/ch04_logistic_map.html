@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 4 章 ロジスティック写像とカオスへの道 &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 5 章 カオスの特徴付け" href="ch05_characterizing_chaos.html" />
+    <link rel="prev" title="第 3 章 微分方程式と相空間" href="ch03_odes_phase_space.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 4 章 ロジスティック写像とカオスへの道</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">パラメータによる振る舞いの変化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">分岐図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">ファイゲンバウム定数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">カオスの領域と窓</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">間欠性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">引き伸ばしと折り畳み</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">テント写像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">パイこね変換</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 4 章 ロジスティック写像とカオスへの道</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch04">
+<span id="id1"></span><h1>第 4 章 ロジスティック写像とカオスへの道<a class="headerlink" href="#ch04" title="Link to this heading"></a></h1>
+<p>ロジスティック写像 <span class="math notranslate nohighlight">\(f(x) = r x (1 - x)\)</span> は、1976 年に生態学者のロバート・メイが論文「非常に複雑な振る舞いを示す単純な数学モデル」で紹介して以来、カオスの研究で最もよく使われる例になった。この章では、パラメータ <span class="math notranslate nohighlight">\(r\)</span> を少しずつ大きくしながら、固定点、周期軌道、カオスへと振る舞いが移り変わる様子を追う。</p>
+<section id="id2">
+<h2>パラメータによる振る舞いの変化<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="#fig-ch04-timeseries"><span class="std std-numref">図 13</span></a> は、4 つの <span class="math notranslate nohighlight">\(r\)</span> の値について、初期値 <span class="math notranslate nohighlight">\(x_0 = 0.1\)</span> からの時系列を描いたものである。</p>
+<figure class="align-default" id="fig-ch04-timeseries">
+<a class="reference internal image-reference" href="_images/ch04_logistic_timeseries.png"><img alt="_images/ch04_logistic_timeseries.png" src="_images/ch04_logistic_timeseries.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 13 </span><span class="caption-text">ロジスティック写像の時系列</span><a class="headerlink" href="#fig-ch04-timeseries" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r = 2.8\)</span>：固定点 <span class="math notranslate nohighlight">\(1 - 1/r \approx 0.643\)</span> に落ち着く。</p></li>
+<li><p><span class="math notranslate nohighlight">\(r = 3.2\)</span>：2 つの値を交互にとる周期 2 の振動になる。</p></li>
+<li><p><span class="math notranslate nohighlight">\(r = 3.5\)</span>：4 つの値を順にとる周期 4 の振動になる。</p></li>
+<li><p><span class="math notranslate nohighlight">\(r = 3.9\)</span>：決まった周期を持たない、不規則な変動になる。</p></li>
+</ul>
+<p>式の形はまったく同じで、係数 <span class="math notranslate nohighlight">\(r\)</span> が違うだけである。それでも、長期的な振る舞いは質的に異なる。パラメータを変えたときに、このように振る舞いが質的に変わることを<strong>分岐</strong>（bifurcation）という。</p>
+</section>
+<section id="id3">
+<h2>分岐図<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(r\)</span> を連続的に変えたときの振る舞いを 1 枚の図にまとめたものが<strong>分岐図</strong>（bifurcation diagram）である。横軸に <span class="math notranslate nohighlight">\(r\)</span> をとり、各 <span class="math notranslate nohighlight">\(r\)</span> について、過渡状態を捨てた後の軌道の値 <span class="math notranslate nohighlight">\(x_n\)</span> を縦に点で打つ。固定点に落ち着く <span class="math notranslate nohighlight">\(r\)</span> では点が 1 つに重なり、周期 <span class="math notranslate nohighlight">\(k\)</span> の軌道では <span class="math notranslate nohighlight">\(k\)</span> 個の点が、カオスでは区間を埋める多数の点が打たれる。</p>
+<p>次のコードは、1500 個の <span class="math notranslate nohighlight">\(r\)</span> の値について、軌道を NumPy の配列でまとめて計算する。各 <span class="math notranslate nohighlight">\(r\)</span> について、最初の 500 回の反復を捨て、続く 200 回の値を記録する。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 4 </span><span class="caption-text">分岐図の点を計算する関数（ch04_logistic.py）</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">27</span><span class="k">def</span><span class="w"> </span><span class="nf">bifurcation_points</span><span class="p">(</span><span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1500</span><span class="p">,</span> <span class="n">transient</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
+<span class="linenos">28</span>                       <span class="n">keep</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+<span class="linenos">29</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;分岐図の点 (r, x) を返す.</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="sd">    n_r 個の r の値について、軌道をまとめて（ベクトル化して）計算する。最初の transient 回の</span>
+<span class="linenos">32</span><span class="sd">    反復は、アトラクタに近づくまでの過渡状態として捨て、続く keep 回の値を記録する。</span>
+<span class="linenos">33</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">34</span>    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n_r</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">transient</span><span class="p">):</span>
+<span class="linenos">37</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="linenos">38</span>    <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">keep</span><span class="p">,</span> <span class="n">n_r</span><span class="p">))</span>
+<span class="linenos">39</span>    <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">keep</span><span class="p">,</span> <span class="n">n_r</span><span class="p">))</span>
+<span class="linenos">40</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">keep</span><span class="p">):</span>
+<span class="linenos">41</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="linenos">42</span>        <span class="n">rs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+<span class="linenos">43</span>        <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+<span class="linenos">44</span>    <span class="k">return</span> <span class="n">rs</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">xs</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<figure class="align-default" id="fig-ch04-bifurcation">
+<a class="reference internal image-reference" href="_images/ch04_logistic_bifurcation.png"><img alt="_images/ch04_logistic_bifurcation.png" src="_images/ch04_logistic_bifurcation.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 14 </span><span class="caption-text">ロジスティック写像の分岐図。赤い破線は <span class="math notranslate nohighlight">\(r = 3\)</span> と <span class="math notranslate nohighlight">\(r = 1 + \sqrt{6} \approx 3.449\)</span>。</span><a class="headerlink" href="#fig-ch04-bifurcation" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch04-bifurcation"><span class="std std-numref">図 14</span></a> で、<span class="math notranslate nohighlight">\(r &lt; 3\)</span> では 1 本だった線が、<span class="math notranslate nohighlight">\(r = 3\)</span> で 2 本に分かれる。第 2 章で調べたとおり、ここで固定点が不安定になり、安定な周期 2 の軌道が生まれる。<span class="math notranslate nohighlight">\(r = 1 + \sqrt{6}\)</span> では、周期 2 の軌道が不安定になり、2 本の線がそれぞれ 2 本に分かれて周期 4 になる。このように、周期が 2 倍になる分岐を<strong>周期倍分岐</strong>（period-doubling bifurcation）という。</p>
+<p>周期倍分岐は、<span class="math notranslate nohighlight">\(r\)</span> が大きくなるにつれて、周期 8、16、32、……と、間隔をどんどん縮めながら繰り返される。そして <span class="math notranslate nohighlight">\(r_\infty \approx 3.5699\)</span> で周期が無限大になり、その先の多くの <span class="math notranslate nohighlight">\(r\)</span> では軌道がカオス的になる。周期倍分岐を繰り返してカオスに至る道筋を<strong>周期倍分岐カスケード</strong>（period-doubling cascade）という。</p>
+</section>
+<section id="id4">
+<h2>ファイゲンバウム定数<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>周期倍分岐が起きる <span class="math notranslate nohighlight">\(r\)</span> の間隔は、ほぼ一定の比で縮んでいく。1975 年、ミッチェル・ファイゲンバウムは、この比が</p>
+<div class="math notranslate nohighlight">
+\[\delta = \lim_{n \to \infty} \frac{r_n - r_{n-1}}{r_{n+1} - r_n} = 4.6692016\ldots\]</div>
+<p>に収束することを発見した（論文の発表は 1978 年）。この <span class="math notranslate nohighlight">\(\delta\)</span> を<strong>ファイゲンバウム定数</strong>（Feigenbaum constant）という。</p>
+<p>分岐点そのものを数値的に求めるのは難しいので、代わりに<strong>超安定なパラメータ</strong> <span class="math notranslate nohighlight">\(R_n\)</span> を使う。<span class="math notranslate nohighlight">\(R_n\)</span> は、周期 <span class="math notranslate nohighlight">\(2^n\)</span> の軌道が、微分が 0 になる点 <span class="math notranslate nohighlight">\(x = 1/2\)</span> を通る <span class="math notranslate nohighlight">\(r\)</span> の値である。軌道上の微分係数の積が 0 になるので、その軌道は超安定である（第 2 章）。<span class="math notranslate nohighlight">\(R_n\)</span> は分岐点の間に 1 つずつあり、その間隔も同じ比 <span class="math notranslate nohighlight">\(\delta\)</span> で縮む。<span class="math notranslate nohighlight">\(R_n\)</span> は、<span class="math notranslate nohighlight">\(f^{2^n}(1/2) = 1/2\)</span> を満たす <span class="math notranslate nohighlight">\(r\)</span> として、方程式の数値解法で求められる。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 5 </span><span class="caption-text">超安定なパラメータを求める関数（ch04_logistic.py）</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">58</span><span class="k">def</span><span class="w"> </span><span class="nf">superstable_parameters</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="linenos">59</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;周期 2^n の超安定な軌道を持つパラメータ R_0, R_1, ... を count 個求める.</span>
+<span class="linenos">60</span>
+<span class="linenos">61</span><span class="sd">    超安定な軌道は、f の微分が 0 になる点 x = 1/2 を通る。そこで</span>
+<span class="linenos">62</span><span class="sd">    f_r を 2^n 回適用した値が 1/2 に戻る r を、割線法で解く。初期値は、</span>
+<span class="linenos">63</span><span class="sd">    それまでに求めた R から、間隔がほぼ一定の比で縮むことを使って予想する。</span>
+<span class="linenos">64</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">65</span>    <span class="k">def</span><span class="w"> </span><span class="nf">g</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="n">x</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">67</span>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">68</span>            <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="linenos">69</span>        <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span>
+<span class="linenos">70</span>
+<span class="linenos">71</span>    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)]</span>
+<span class="linenos">72</span>    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
+<span class="linenos">73</span>        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="linenos">74</span>        <span class="n">guess</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">4.7</span>
+<span class="linenos">75</span>        <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">guess</span><span class="p">,</span> <span class="n">guess</span> <span class="o">+</span> <span class="mf">1e-6</span> <span class="o">*</span> <span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos">76</span>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+<span class="linenos">77</span>            <span class="n">g0</span><span class="p">,</span> <span class="n">g1</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">r0</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="linenos">78</span>            <span class="k">if</span> <span class="n">g1</span> <span class="o">==</span> <span class="n">g0</span><span class="p">:</span>
+<span class="linenos">79</span>                <span class="k">break</span>
+<span class="linenos">80</span>            <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r1</span> <span class="o">-</span> <span class="n">g1</span> <span class="o">*</span> <span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">g1</span> <span class="o">-</span> <span class="n">g0</span><span class="p">)</span>
+<span class="linenos">81</span>            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span><span class="p">:</span>
+<span class="linenos">82</span>                <span class="k">break</span>
+<span class="linenos">83</span>        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">r1</span><span class="p">))</span>
+<span class="linenos">84</span>    <span class="k">return</span> <span class="n">params</span><span class="p">[:</span><span class="n">count</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>計算結果を次に示す。間隔の比 <span class="math notranslate nohighlight">\(\delta_n = (R_{n-1} - R_{n-2})/(R_n - R_{n-1})\)</span> が、4.669 に近づいていく様子が分かる。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> n  周期   R_n                 δ_n
+ 0     1   2.000000000000
+ 1     2   3.236067977500
+ 2     4   3.498561699328  4.708943
+ 3     8   3.554640862769  4.680771
+ 4    16   3.566667379856  4.662960
+ 5    32   3.569243531637  4.668404
+ 6    64   3.569795293750  4.668954
+ 7   128   3.569913465422  4.669157
+ 8   256   3.569938774233  4.669191
+</pre></div>
+</div>
+<p>ファイゲンバウム定数の重要な点は、その<strong>普遍性</strong>（universality）にある。<span class="math notranslate nohighlight">\(f(x) = r \sin(\pi x)\)</span> のように、区間を区間に移し、なめらかな山を 1 つ持つ（頂上の近くが 2 次関数で近似できる）写像なら、式が違っても、周期倍分岐の間隔の比は同じ <span class="math notranslate nohighlight">\(\delta\)</span> になる。さらに、流体の対流や電気回路の実験でも、周期倍分岐を経てカオスに至る現象が観測され、分岐の間隔の比がファイゲンバウム定数に近い値になることが確かめられた。個々のモデルの細部によらず、同じ定数が現れることは、カオスへの道筋に普遍的な法則があることを示している。</p>
+</section>
+<section id="id5">
+<h2>カオスの領域と窓<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(r_\infty\)</span> より先の分岐図は、点が帯状に広がったカオスの領域が大半を占める。しかし、ところどころに、点がまばらな縦の白い帯がある。この帯を<strong>窓</strong>（window）という。窓の中では、軌道は再び周期的になる。最も大きな窓は、<span class="math notranslate nohighlight">\(r = 1 + \sqrt{8} \approx 3.8284\)</span> から始まる周期 3 の窓である。</p>
+<figure class="align-default" id="fig-ch04-window">
+<a class="reference internal image-reference" href="_images/ch04_logistic_window.png"><img alt="_images/ch04_logistic_window.png" src="_images/ch04_logistic_window.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 15 </span><span class="caption-text">周期 3 の窓（左）と、その一部の拡大（右）</span><a class="headerlink" href="#fig-ch04-window" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch04-window"><span class="std std-numref">図 15</span></a> の左図で、周期 3 の窓の中の 3 本の線は、それぞれ周期倍分岐を起こし、周期 6、12、24、……を経て再びカオスになる。右図は、左図の赤枠を拡大したものである。この図は、<a class="reference internal" href="#fig-ch04-bifurcation"><span class="std std-numref">図 14</span></a> の分岐図全体を縮小したものとよく似ている。分岐図は、全体と似た形を細部に何度も含んでいる。このように、全体と部分が似ている性質を<strong>自己相似性</strong>（self-similarity）といい、第 III 部で扱うフラクタルの最も基本的な特徴である。カオスを扱う章ですでにフラクタルが顔を出していることは、両者の深い結び付きを示している。</p>
+<p>周期 3 の軌道には特別な意味がある。1975 年、リーとヨークは論文「周期 3 はカオスを意味する」で、区間からそれ自身への連続な写像が周期 3 の点を持てば、あらゆる周期の周期点を持ち、さらに周期的でない複雑な軌道も無数に持つことを示した。この論文は、「カオス」という言葉を数学の用語として使った最初の論文として知られる。</p>
+</section>
+<section id="id6">
+<h2>間欠性<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>窓の始まりの直前では、<strong>間欠性</strong>（intermittency）と呼ばれる振る舞いが見られる。<a class="reference internal" href="#fig-ch04-intermittency"><span class="std std-numref">図 16</span></a> は、周期 3 の窓が始まる <span class="math notranslate nohighlight">\(r = 1 + \sqrt{8}\)</span> よりわずかに小さい <span class="math notranslate nohighlight">\(r = 3.8282\)</span> の時系列である。</p>
+<figure class="align-default" id="fig-ch04-intermittency">
+<a class="reference internal image-reference" href="_images/ch04_logistic_intermittency.png"><img alt="_images/ch04_logistic_intermittency.png" src="_images/ch04_logistic_intermittency.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 16 </span><span class="caption-text">周期 3 の窓の直前での間欠性</span><a class="headerlink" href="#fig-ch04-intermittency" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>周期 3 に近い規則的な振動（層流相）がしばらく続いた後、突然不規則な変動（バースト）が起き、また規則的な振動に戻る。<span class="math notranslate nohighlight">\(r = 1 + \sqrt{8}\)</span> では、<span class="math notranslate nohighlight">\(f^3\)</span> のグラフが対角線にちょうど接し、周期 3 の軌道が生まれる。その直前では、グラフと対角線の間にわずかな隙間があり、軌道はこの狭い隙間をゆっくりと通り抜ける。この通り抜けに時間がかかる間が、層流相として現れる。<span class="math notranslate nohighlight">\(r\)</span> が窓に近づくほど、隙間が狭くなり、層流相は長くなる。間欠性は、流体の乱流の始まりなど、実際の物理系でも観測される。</p>
+</section>
+<section id="id7">
+<h2>引き伸ばしと折り畳み<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>なぜ、こんなに単純な写像からカオスが生まれるのだろうか。鍵は、<strong>引き伸ばし</strong>（stretching）と<strong>折り畳み</strong>（folding）の組み合わせにある。</p>
+<ul class="simple">
+<li><p><strong>引き伸ばし</strong>：微分係数の絶対値が 1 より大きい部分では、近くの 2 点の距離が広がる。これを繰り返すと、わずかな違いが拡大される。</p></li>
+<li><p><strong>折り畳み</strong>：ロジスティック写像のグラフは山型なので、区間 <span class="math notranslate nohighlight">\([0, 1]\)</span> を引き伸ばしながら、真ん中で折り返して区間に戻す。そのため、軌道は区間の外へ逃げ出さない。</p></li>
+</ul>
+<p>引き伸ばしだけなら、軌道は無限に遠くへ発散するだけである。縮める操作と折り畳みだけなら、軌道は固定点や周期軌道に落ち着く。両方を繰り返すことで、軌道は有界な領域にとどまりながら、近くの点どうしが離れ続ける。</p>
+<section id="id8">
+<h3>テント写像<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>この仕組みを最も簡単な形で示すのが<strong>テント写像</strong>（tent map）</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}T(x) = \begin{cases} 2x &amp; (0 \le x &lt; 1/2) \\ 2 - 2x &amp; (1/2 \le x \le 1) \end{cases}\end{split}\]</div>
+<p>である。グラフはテントの形をしていて、傾きの絶対値はどこでも 2 である。<a class="reference internal" href="#fig-ch04-tent"><span class="std std-numref">図 17</span></a> の右図は、幅 0.001 の区間に集めた 300 個の点を反復した結果である。区間の幅は 1 回ごとに 2 倍になり、約 10 回で区間全体に広がる。その後は、最初に近くにいた点どうしが、区間のあちこちにばらばらに散らばる。</p>
+<figure class="align-default" id="fig-ch04-tent">
+<a class="reference internal image-reference" href="_images/ch04_stretch_fold_tent.png"><img alt="_images/ch04_stretch_fold_tent.png" src="_images/ch04_stretch_fold_tent.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 17 </span><span class="caption-text">テント写像のグラフ（左）と、狭い区間に集めた点が広がる様子（右）</span><a class="headerlink" href="#fig-ch04-tent" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id9">
+<h3>パイこね変換<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>2 次元では、パン生地をこねる操作に似た<strong>パイこね変換</strong>（baker's map）</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}B(x, y) = \begin{cases} (2x,\; y/2) &amp; (0 \le x &lt; 1/2) \\ (2x - 1,\; (y + 1)/2) &amp; (1/2 \le x &lt; 1) \end{cases}\end{split}\]</div>
+<p>がよく知られている。正方形を横に 2 倍に引き伸ばし、縦に半分に押しつぶしてから、右半分を切り取って左半分の上に重ねる。<a class="reference internal" href="#fig-ch04-baker"><span class="std std-numref">図 18</span></a> は、円を描いた画像にパイこね変換を繰り返し施したものである。円は細長く引き伸ばされ、何層にも重ねられて、正方形全体に薄く広がる。</p>
+<figure class="align-default" id="fig-ch04-baker">
+<a class="reference internal image-reference" href="_images/ch04_stretch_fold_baker.png"><img alt="_images/ch04_stretch_fold_baker.png" src="_images/ch04_stretch_fold_baker.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 18 </span><span class="caption-text">パイこね変換を繰り返し施した画像（数字は施した回数）</span><a class="headerlink" href="#fig-ch04-baker" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>パイこね変換は、面積を保ちながら、横方向には引き伸ばし、縦方向には縮める。正方形のどの小さな領域も、反復を繰り返すと全体に細かく行き渡る。このように、全体をよく混ぜる性質を<strong>混合性</strong>（mixing）という。コーヒーにミルクを入れてかき混ぜると全体が均一になるのは、流体の運動にこの性質があるからである。</p>
+<p>パイこね変換は「切って重ねる」操作だが、ロジスティック写像やエノン写像（第 6 章）は「折り曲げて重ねる」操作をする。いずれの場合も、引き伸ばしと重ね合わせを繰り返すことで、層状の細かい構造が生まれる。この構造が、第 6 章で見るストレンジアトラクタのフラクタル構造の起源である。</p>
+</section>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ロジスティック写像は、<span class="math notranslate nohighlight">\(r\)</span> を大きくすると、固定点、周期 2、周期 4、……と周期倍分岐を繰り返し、<span class="math notranslate nohighlight">\(r_\infty \approx 3.5699\)</span> を超えると、多くの <span class="math notranslate nohighlight">\(r\)</span> でカオスになる（ところどころに周期的な窓がある）。</p></li>
+<li><p>周期倍分岐の間隔の比はファイゲンバウム定数 <span class="math notranslate nohighlight">\(\delta \approx 4.669\)</span> に近づく。この定数は、山を 1 つ持つ多くの写像や実験で共通に現れる。</p></li>
+<li><p>カオスの領域の中にも、周期軌道が現れる窓がある。分岐図は自己相似な構造を持つ。</p></li>
+<li><p>カオスは、引き伸ばし（近くの点を引き離す）と折り畳み（軌道を有界な領域に戻す）の組み合わせから生まれる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch03_odes_phase_space.html" class="btn btn-neutral float-left" title="第 3 章 微分方程式と相空間" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch05_characterizing_chaos.html" class="btn btn-neutral float-right" title="第 5 章 カオスの特徴付け" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

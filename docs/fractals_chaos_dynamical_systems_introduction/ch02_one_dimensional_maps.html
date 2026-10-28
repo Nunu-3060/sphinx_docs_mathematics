@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 2 章 1 次元写像の反復 &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 3 章 微分方程式と相空間" href="ch03_odes_phase_space.html" />
+    <link rel="prev" title="第 1 章 力学系とは何か" href="ch01_dynamical_systems.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 2 章 1 次元写像の反復</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">クモの巣図</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">固定点の安定性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">線形写像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">一般の写像と線形化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">ロジスティック写像の固定点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">周期軌道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">ニュートン法を力学系として見る</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 2 章 1 次元写像の反復</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch02">
+<span id="id1"></span><h1>第 2 章 1 次元写像の反復<a class="headerlink" href="#ch02" title="Link to this heading"></a></h1>
+<p>状態が 1 つの実数で表される、最も簡単な離散時間の力学系 <span class="math notranslate nohighlight">\(x_{n+1} = f(x_n)\)</span> を調べる。1 次元写像は簡単だが、固定点の安定性、周期軌道、そして第 4 章以降で扱うカオスまで、力学系の重要な概念がほぼすべて現れる。また、グラフを使って反復の様子を目で追えるので、直観を養うのに適している。</p>
+<section id="id2">
+<h2>クモの巣図<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>写像の反復を図で追う方法に、<strong>クモの巣図</strong>（cobweb plot）がある。横軸を <span class="math notranslate nohighlight">\(x_n\)</span>、縦軸を <span class="math notranslate nohighlight">\(x_{n+1}\)</span> とする平面に、関数 <span class="math notranslate nohighlight">\(y = f(x)\)</span> のグラフと対角線 <span class="math notranslate nohighlight">\(y = x\)</span> を描き、次の手順で線を引く。</p>
+<ol class="arabic simple">
+<li><p>横軸上の初期値 <span class="math notranslate nohighlight">\(x_0\)</span> から縦に進み、グラフ上の点 <span class="math notranslate nohighlight">\((x_0, f(x_0)) = (x_0, x_1)\)</span> に至る。</p></li>
+<li><p>そこから横に進み、対角線上の点 <span class="math notranslate nohighlight">\((x_1, x_1)\)</span> に至る。対角線の上では縦と横の座標が等しいので、これで <span class="math notranslate nohighlight">\(x_1\)</span> を横軸の値に移したことになる。</p></li>
+<li><p>そこから縦に進み、グラフ上の点 <span class="math notranslate nohighlight">\((x_1, x_2)\)</span> に至る。以下、2 と 3 を繰り返す。</p></li>
+</ol>
+<p>この手順を実装したのが次の関数である。点 <span class="math notranslate nohighlight">\((x, x)\)</span> から <span class="math notranslate nohighlight">\((x, f(x))\)</span>、<span class="math notranslate nohighlight">\((f(x), f(x))\)</span> へと順に進む折れ線の頂点を、リスト <code class="docutils literal notranslate"><span class="pre">px</span></code> と <code class="docutils literal notranslate"><span class="pre">py</span></code> に追加していく。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-number">リスト 2 </span><span class="caption-text">クモの巣図を描く関数（ch02_cobweb.py）</span><a class="headerlink" href="#id10" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">26</span><span class="k">def</span><span class="w"> </span><span class="nf">cobweb</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Map</span><span class="p">,</span> <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lo</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">hi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">27</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;写像 f のグラフ、対角線 y = x、x0 から n 回反復したクモの巣図を ax に描く.</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="sd">    点 (x, x) から縦に動いてグラフ上の点 (x, f(x)) へ、そこから横に動いて</span>
+<span class="linenos">30</span><span class="sd">    対角線上の点 (f(x), f(x)) へ進む。これを繰り返すと、軌道 x0, x1, x2, ... が描ける。</span>
+<span class="linenos">31</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">32</span>    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="linenos">33</span>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="linenos">34</span>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">],</span> <span class="p">[</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">],</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+<span class="linenos">37</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="linenos">38</span>        <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="linenos">39</span>        <span class="n">px</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">]</span>
+<span class="linenos">40</span>        <span class="n">py</span> <span class="o">+=</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+<span class="linenos">41</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos">42</span>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="linenos">43</span>    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">44</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+<span class="linenos">45</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+<span class="linenos">46</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="linenos">47</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x_n$&quot;</span><span class="p">)</span>
+<span class="linenos">48</span>    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$x_{n+1}$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>グラフと対角線が交わる点では <span class="math notranslate nohighlight">\(f(x) = x\)</span> が成り立つ。つまり、交点は固定点である。クモの巣図を描くと、軌道が固定点に吸い込まれるのか、固定点から離れていくのかが一目で分かる。</p>
+</section>
+<section id="id3">
+<h2>固定点の安定性<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>線形写像<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>まず、最も簡単な線形写像 <span class="math notranslate nohighlight">\(f(x) = a x\)</span> を考える。固定点は <span class="math notranslate nohighlight">\(x^* = 0\)</span> で、軌道は <span class="math notranslate nohighlight">\(x_n = a^n x_0\)</span> となる。したがって、</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> なら、<span class="math notranslate nohighlight">\(x_n\)</span> は 0 に近づく。</p></li>
+<li><p><span class="math notranslate nohighlight">\(|a| &gt; 1\)</span> なら、<span class="math notranslate nohighlight">\(|x_n|\)</span> は限りなく大きくなる。</p></li>
+<li><p><span class="math notranslate nohighlight">\(a &lt; 0\)</span> なら、<span class="math notranslate nohighlight">\(x_n\)</span> の符号が毎回反転し、0 の両側を交互に行き来する。</p></li>
+</ul>
+<p><a class="reference internal" href="#fig-ch02-linear"><span class="std std-numref">図 4</span></a> は、<span class="math notranslate nohighlight">\(a = 0.5\)</span>、<span class="math notranslate nohighlight">\(-0.5\)</span>、1.5、<span class="math notranslate nohighlight">\(-1.5\)</span> の 4 つの場合のクモの巣図である。<span class="math notranslate nohighlight">\(a &gt; 0\)</span> では軌道は階段状に、<span class="math notranslate nohighlight">\(a &lt; 0\)</span> では渦巻き状になる。</p>
+<figure class="align-default" id="fig-ch02-linear">
+<a class="reference internal image-reference" href="_images/ch02_cobweb_linear.png"><img alt="_images/ch02_cobweb_linear.png" src="_images/ch02_cobweb_linear.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 4 </span><span class="caption-text">線形写像 <span class="math notranslate nohighlight">\(f(x) = a x\)</span> のクモの巣図。<span class="math notranslate nohighlight">\(|a| &lt; 1\)</span> では固定点 0 に近づき、<span class="math notranslate nohighlight">\(|a| &gt; 1\)</span> では離れていく。</span><a class="headerlink" href="#fig-ch02-linear" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id5">
+<h3>一般の写像と線形化<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>一般の写像 <span class="math notranslate nohighlight">\(f\)</span> についても、固定点 <span class="math notranslate nohighlight">\(x^*\)</span> のごく近くでは、<span class="math notranslate nohighlight">\(f\)</span> を 1 次式で近似できる（<a class="reference internal" href="appendix_a_math.html#appendix-a"><span class="std std-ref">付録 A</span></a> のテイラー展開を参照）。</p>
+<div class="math notranslate nohighlight">
+\[f(x) \approx f(x^*) + f'(x^*)(x - x^*) = x^* + f'(x^*)(x - x^*)\]</div>
+<p>固定点からのずれを <span class="math notranslate nohighlight">\(\varepsilon_n = x_n - x^*\)</span> とおくと、<span class="math notranslate nohighlight">\(\varepsilon_{n+1} \approx f'(x^*)\,\varepsilon_n\)</span> となる。これは係数が <span class="math notranslate nohighlight">\(a = f'(x^*)\)</span> の線形写像である。このように、固定点の近くの振る舞いを 1 次式で近似することを<strong>線形化</strong>（linearization）という。線形写像の結果から、次の判定法が得られる。</p>
+<div class="math notranslate nohighlight" id="equation-eq-ch02-stability">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-ch02-stability" title="Link to this equation"></a></span>\[|f'(x^*)| &lt; 1 \;\Rightarrow\; \text{安定}, \qquad |f'(x^*)| &gt; 1 \;\Rightarrow\; \text{不安定}\]</div>
+<p>近くの軌道を引き寄せる固定点を<strong>安定</strong>（stable）な固定点、または<strong>吸引的</strong>（attracting）な固定点という。近くの軌道を遠ざける固定点を<strong>不安定</strong>（unstable）な固定点、または<strong>反発的</strong>（repelling）な固定点という。<span class="math notranslate nohighlight">\(|f'(x^*)| = 1\)</span> のときは、1 次の近似だけでは安定性を判定できない。このような場合は、次の節で見るように、パラメータを変えたときに振る舞いが質的に変わる境目になることが多い。</p>
+</section>
+</section>
+<section id="id6">
+<h2>ロジスティック写像の固定点<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>第 1 章で紹介したロジスティック写像</p>
+<div class="math notranslate nohighlight">
+\[f(x) = r x (1 - x), \qquad 0 \le x \le 1,\quad 0 &lt; r \le 4\]</div>
+<p>の固定点を調べる。<span class="math notranslate nohighlight">\(r x (1 - x) = x\)</span> を解くと、固定点は <span class="math notranslate nohighlight">\(x^* = 0\)</span> と <span class="math notranslate nohighlight">\(x^* = 1 - 1/r\)</span> の 2 つである（後者は <span class="math notranslate nohighlight">\(r &gt; 1\)</span> のときに区間 <span class="math notranslate nohighlight">\([0, 1]\)</span> に入る）。微分は <span class="math notranslate nohighlight">\(f'(x) = r(1 - 2x)\)</span> なので、</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x^* = 0\)</span> では <span class="math notranslate nohighlight">\(f'(0) = r\)</span>。<span class="math notranslate nohighlight">\(r &lt; 1\)</span> で安定、<span class="math notranslate nohighlight">\(r &gt; 1\)</span> で不安定。</p></li>
+<li><p><span class="math notranslate nohighlight">\(x^* = 1 - 1/r\)</span> では <span class="math notranslate nohighlight">\(f'(x^*) = 2 - r\)</span>。<span class="math notranslate nohighlight">\(1 &lt; r &lt; 3\)</span> で安定、<span class="math notranslate nohighlight">\(r &gt; 3\)</span> で不安定。</p></li>
+</ul>
+<p><a class="reference internal" href="#fig-ch02-logistic"><span class="std std-numref">図 5</span></a> は、<span class="math notranslate nohighlight">\(r = 2.8\)</span>、3.2、3.9 のクモの巣図である。</p>
+<figure class="align-default" id="fig-ch02-logistic">
+<a class="reference internal image-reference" href="_images/ch02_cobweb_logistic.png"><img alt="_images/ch02_cobweb_logistic.png" src="_images/ch02_cobweb_logistic.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 5 </span><span class="caption-text">ロジスティック写像のクモの巣図（初期値 <span class="math notranslate nohighlight">\(x_0 = 0.1\)</span>）</span><a class="headerlink" href="#fig-ch02-logistic" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="math notranslate nohighlight">\(r = 2.8\)</span> では、軌道は渦を巻きながら固定点に近づく。<span class="math notranslate nohighlight">\(f'(x^*) = -0.8\)</span> が負なので、固定点の両側を交互に行き来しながら近づく。<span class="math notranslate nohighlight">\(r = 3.2\)</span> では <span class="math notranslate nohighlight">\(f'(x^*) = -1.2\)</span> となり、固定点は不安定になる。軌道は固定点から離れていくが、無限に遠くへ行くわけではなく、四角形の経路を繰り返しなぞるようになる。これは 2 つの値を交互にとる周期軌道である。<span class="math notranslate nohighlight">\(r = 3.9\)</span> では、軌道は一定の経路に落ち着かず、区間のあちこちを不規則に動き回る。</p>
+<p>サンプルの <code class="docutils literal notranslate"><span class="pre">report()</span></code> 関数で、固定点と微分係数を計算した結果を次に示す。最後の行は、次の節で説明する周期 2 の点である。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>r = 2.8: 固定点 x* = 0.642857, f&#39;(x*) = -0.800000
+r = 3.2: 固定点 x* = 0.687500, f&#39;(x*) = -1.200000
+r = 3.2: 周期 2 の点 p = 0.513045, q = 0.799455, f&#39;(p) f&#39;(q) = +0.160000
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2>周期軌道<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p><span class="math notranslate nohighlight">\(f(p) = q\)</span>、<span class="math notranslate nohighlight">\(f(q) = p\)</span>（<span class="math notranslate nohighlight">\(p \ne q\)</span>）を満たす 2 点 <span class="math notranslate nohighlight">\(p, q\)</span> は、軌道 <span class="math notranslate nohighlight">\(p, q, p, q, \ldots\)</span> を作る。このような軌道を<strong>周期 2 の軌道</strong>といい、<span class="math notranslate nohighlight">\(p\)</span> と <span class="math notranslate nohighlight">\(q\)</span> を<strong>周期点</strong>（periodic point）という。一般に、<span class="math notranslate nohighlight">\(f^k(p) = p\)</span> を満たす最小の正の整数 <span class="math notranslate nohighlight">\(k\)</span> を、周期点 <span class="math notranslate nohighlight">\(p\)</span> の周期という。</p>
+<p>周期 2 の点は、2 回反復した写像 <span class="math notranslate nohighlight">\(f^2 = f \circ f\)</span> の固定点である。したがって、周期軌道の問題は、<span class="math notranslate nohighlight">\(f^2\)</span> の固定点の問題に帰着できる。<a class="reference internal" href="#fig-ch02-second"><span class="std std-numref">図 6</span></a> は、<span class="math notranslate nohighlight">\(r = 3.2\)</span> のロジスティック写像 <span class="math notranslate nohighlight">\(f\)</span> と <span class="math notranslate nohighlight">\(f^2\)</span> のグラフである。<span class="math notranslate nohighlight">\(f^2\)</span> のグラフは対角線と 4 点で交わる。そのうち 2 点は <span class="math notranslate nohighlight">\(f\)</span> の固定点（0 と <span class="math notranslate nohighlight">\(1 - 1/r\)</span>）で、残りの 2 点が周期 2 の点 <span class="math notranslate nohighlight">\(p, q\)</span> である。</p>
+<figure class="align-default" id="fig-ch02-second">
+<a class="reference internal image-reference" href="_images/ch02_cobweb_second.png"><img alt="_images/ch02_cobweb_second.png" src="_images/ch02_cobweb_second.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 6 </span><span class="caption-text"><span class="math notranslate nohighlight">\(r = 3.2\)</span> のロジスティック写像 <span class="math notranslate nohighlight">\(f\)</span> と、2 回反復した写像 <span class="math notranslate nohighlight">\(f^2\)</span></span><a class="headerlink" href="#fig-ch02-second" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>周期軌道の安定性も、<span class="math notranslate nohighlight">\(f^2\)</span> の固定点としての安定性で判定できる。合成関数の微分の公式（連鎖律）から、</p>
+<div class="math notranslate nohighlight">
+\[(f^2)'(p) = f'(f(p))\,f'(p) = f'(q)\,f'(p)\]</div>
+<p>である。この値は <span class="math notranslate nohighlight">\(p\)</span> と <span class="math notranslate nohighlight">\(q\)</span> のどちらで計算しても同じになり、軌道全体の安定性を表す。ロジスティック写像では、<span class="math notranslate nohighlight">\(p, q\)</span> は <span class="math notranslate nohighlight">\(r^2 x^2 - r(r + 1)x + (r + 1) = 0\)</span> の 2 つの解で、計算すると <span class="math notranslate nohighlight">\(f'(p)\,f'(q) = -r^2 + 2r + 4\)</span> となる。<span class="math notranslate nohighlight">\(r = 3.2\)</span> では 0.16 となり、周期 2 の軌道は安定である。この値の絶対値が 1 未満になるのは <span class="math notranslate nohighlight">\(3 &lt; r &lt; 1 + \sqrt{6} \approx 3.449\)</span> のときである。<span class="math notranslate nohighlight">\(r\)</span> が <span class="math notranslate nohighlight">\(1 + \sqrt{6}\)</span> を超えると周期 2 の軌道も不安定になり、次は周期 4 の軌道が現れる。この現象は第 4 章で詳しく扱う。</p>
+</section>
+<section id="id8">
+<h2>ニュートン法を力学系として見る<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>方程式 <span class="math notranslate nohighlight">\(g(x) = 0\)</span> を数値的に解く<strong>ニュートン法</strong>（Newton's method）は、写像</p>
+<div class="math notranslate nohighlight">
+\[N(x) = x - \frac{g(x)}{g'(x)}\]</div>
+<p>の反復である。<span class="math notranslate nohighlight">\(g(x^*) = 0\)</span> なら <span class="math notranslate nohighlight">\(N(x^*) = x^*\)</span> なので、方程式の解は <span class="math notranslate nohighlight">\(N\)</span> の固定点である。<span class="math notranslate nohighlight">\(N\)</span> を微分すると <span class="math notranslate nohighlight">\(N'(x) = g(x)\,g''(x) / g'(x)^2\)</span> となり、解では <span class="math notranslate nohighlight">\(N'(x^*) = 0\)</span>（<span class="math notranslate nohighlight">\(g'(x^*) \ne 0\)</span> の場合）である。微分係数が 0 の固定点を<strong>超安定</strong>（superstable）な固定点という。超安定な固定点の近くでは、<span class="math notranslate nohighlight">\(\varepsilon_{n+1} \approx C\,\varepsilon_n^2\)</span>（<span class="math notranslate nohighlight">\(C\)</span> は定数）となり、誤差が 1 回ごとに 2 乗で小さくなる。</p>
+<p><span class="math notranslate nohighlight">\(g(x) = x^2 - 2\)</span> とすると <span class="math notranslate nohighlight">\(N(x) = (x + 2/x)/2\)</span> となり、反復は <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> に収束する。<a class="reference internal" href="#fig-ch02-newton"><span class="std std-numref">図 7</span></a> はそのクモの巣図、次の出力は、初期値 1 から 50 桁の精度で反復した結果である（図と出力では初期値が違うが、どちらも同じように収束する）。誤差の指数がほぼ 2 倍ずつ増え、正しい桁数が 1 回ごとにほぼ倍になる様子が分かる。</p>
+<figure class="align-default" id="fig-ch02-newton">
+<a class="reference internal image-reference" href="_images/ch02_newton_cobweb.png"><img alt="_images/ch02_newton_cobweb.png" src="_images/ch02_newton_cobweb.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 7 </span><span class="caption-text"><span class="math notranslate nohighlight">\(\sqrt{2}\)</span> を求めるニュートン法のクモの巣図（初期値 3.2）</span><a class="headerlink" href="#fig-ch02-newton" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> n  x_n                                                    誤差
+ 0  1.00000000000000000000000000000000000000000000000000  4.1e-01
+ 1  1.50000000000000000000000000000000000000000000000000  8.6e-02
+ 2  1.41666666666666666666666666666666666666666666666667  2.5e-03
+ 3  1.41421568627450980392156862745098039215686274509804  2.1e-06
+ 4  1.41421356237468991062629557889013491011655962211574  1.6e-12
+ 5  1.41421356237309504880168962350253024361498192577620  9.0e-25
+ 6  1.41421356237309504880168872420969807856967187537723  2.9e-49
+</pre></div>
+</div>
+<p>ニュートン法は、解の近くから始めれば非常に速く収束する。しかし、解が複数ある方程式を複素数の範囲で解くと、どの解に収束するかが初期値によって複雑に入り組み、フラクタルな境界が現れる。これは第 9 章で扱う。</p>
+</section>
+<section id="id9">
+<h2>まとめ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>クモの巣図を使うと、1 次元写像の反復をグラフ上で追える。グラフと対角線の交点が固定点である。</p></li>
+<li><p>固定点 <span class="math notranslate nohighlight">\(x^*\)</span> は、<span class="math notranslate nohighlight">\(|f'(x^*)| &lt; 1\)</span> なら安定、<span class="math notranslate nohighlight">\(|f'(x^*)| &gt; 1\)</span> なら不安定である。</p></li>
+<li><p>周期 <span class="math notranslate nohighlight">\(k\)</span> の点は <span class="math notranslate nohighlight">\(f^k\)</span> の固定点であり、その安定性は軌道上の微分係数の積で判定できる。</p></li>
+<li><p>ロジスティック写像は、<span class="math notranslate nohighlight">\(r\)</span> が 3 を超えると固定点が不安定になり、周期 2 の軌道が現れる。</p></li>
+<li><p>ニュートン法は、解を超安定な固定点とする写像の反復であり、誤差が 2 乗で小さくなる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch01_dynamical_systems.html" class="btn btn-neutral float-left" title="第 1 章 力学系とは何か" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch03_odes_phase_space.html" class="btn btn-neutral float-right" title="第 3 章 微分方程式と相空間" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 10 章 カオスとフラクタルの接点 &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 11 章 自然・工学の中のカオスとフラクタル" href="ch11_applications.html" />
+    <link rel="prev" title="第 9 章 複素力学系：ジュリア集合とマンデルブロ集合" href="ch09_complex_dynamics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 10 章 カオスとフラクタルの接点</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">ストレンジアトラクタはなぜフラクタルになるか</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">相関次元</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">時系列からのアトラクタの再構成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">吸引領域の境界</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">カオスとフラクタルの関係のまとめ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 10 章 カオスとフラクタルの接点</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch10">
+<span id="id1"></span><h1>第 10 章 カオスとフラクタルの接点<a class="headerlink" href="#ch10" title="Link to this heading"></a></h1>
+<p>ここまで、カオスとフラクタルを別々の部で扱ってきたが、両者は何度も同じ場所に現れた。ロジスティック写像の分岐図は自己相似な構造を持ち、エノン・アトラクタは拡大するたびに層が現れ、ジュリア集合の上では軌道がカオス的に振る舞った。この章では、両者がなぜ結び付くのかを整理し、ストレンジアトラクタのフラクタル次元を測る方法と、吸引領域の境界に現れるフラクタルを扱う。</p>
+<section id="id2">
+<h2>ストレンジアトラクタはなぜフラクタルになるか<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>第 4 章で見たように、カオスは引き伸ばしと折り畳みの繰り返しから生まれる。散逸系では、これに「体積の縮小」が加わる。エノン写像を例にとると、1 回の反復で、領域は</p>
+<ol class="arabic simple">
+<li><p>ある方向に引き伸ばされ（近くの点どうしが離れる）、</p></li>
+<li><p>折り曲げられて元の領域に戻され、</p></li>
+<li><p>全体として面積が 0.3 倍に縮む。</p></li>
+</ol>
+<p>引き伸ばされた方向と直交する方向には、領域は押しつぶされる。1 本の帯は、反復すると折り曲げられた 2 本の帯になり、さらに反復すると 4 本になる。これを無限に繰り返すと、引き伸ばされた方向には滑らかな曲線、押しつぶされた方向にはカントール集合のような点の並びを持つ構造ができる。これがストレンジアトラクタのフラクタル構造の正体である。</p>
+<p>この見方から、アトラクタの次元についての目安も得られる。引き伸ばしの強さ（正のリアプノフ指数）と縮みの強さ（負のリアプノフ指数）の釣り合いで、アトラクタがどれだけ空間を埋めるかが決まる。2 次元の写像で、リアプノフ指数が <span class="math notranslate nohighlight">\(\lambda_1 &gt; 0 &gt; \lambda_2\)</span> のとき、</p>
+<div class="math notranslate nohighlight">
+\[D_{\mathrm{KY}} = 1 + \frac{\lambda_1}{|\lambda_2|}\]</div>
+<p>を<strong>リアプノフ次元</strong>（カプラン＝ヨーク次元）という。多くのアトラクタで、この値はフラクタル次元と一致すると予想されており（カプラン＝ヨーク予想）、多くの例で数値的に確かめられている。エノン写像では <span class="math notranslate nohighlight">\(\lambda_1 \approx 0.42\)</span>、<span class="math notranslate nohighlight">\(\lambda_2 \approx -1.62\)</span> で、<span class="math notranslate nohighlight">\(D_{\mathrm{KY}} \approx 1.26\)</span> となる。</p>
+</section>
+<section id="id3">
+<h2>相関次元<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>第 7 章のボックスカウント次元は、ストレンジアトラクタにも使える。しかし、アトラクタ上には点が非常に濃い部分とまばらな部分があり、まばらな部分のボックスまで正しく数えるには、膨大な数の点が必要になる。また、3 次元以上ではボックスの数が多くなりすぎる。そこで、ストレンジアトラクタの次元の推定には、1983 年にグラスバーガーとプロカッチャが提案した<strong>相関次元</strong>（correlation dimension）がよく使われる。</p>
+<p>アトラクタ上の <span class="math notranslate nohighlight">\(N\)</span> 個の点 <span class="math notranslate nohighlight">\(\boldsymbol{x}_1, \ldots, \boldsymbol{x}_N\)</span> について、距離が <span class="math notranslate nohighlight">\(r\)</span> より小さい点の組の割合</p>
+<div class="math notranslate nohighlight">
+\[C(r) = \frac{2}{N(N - 1)} \#\{\, (i, j) \mid i &lt; j,\ |\boldsymbol{x}_i - \boldsymbol{x}_j| &lt; r \,\}\]</div>
+<p>を<strong>相関積分</strong>（correlation integral）という（<span class="math notranslate nohighlight">\(\#\)</span> は個数を表す）。点が <span class="math notranslate nohighlight">\(D\)</span> 次元的に分布していれば、ある点から半径 <span class="math notranslate nohighlight">\(r\)</span> 以内にある点の数は <span class="math notranslate nohighlight">\(r^D\)</span> に比例するので、<span class="math notranslate nohighlight">\(C(r) \propto r^{\nu}\)</span> となる。この指数 <span class="math notranslate nohighlight">\(\nu\)</span> を相関次元という。相関次元は、ボックスカウント次元以下の値になるが、多くのアトラクタでは両者はほぼ等しい。</p>
+<p>相関積分は、点の組の距離をすべて計算し、並べ替えてから、各 <span class="math notranslate nohighlight">\(r\)</span> より小さいものを数えれば求められる。4000 点なら組の数は約 800 万で、NumPy で一度に計算するとメモリを多く使うので、500 点ずつに分けて計算する。</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">リスト 19 </span><span class="caption-text">相関積分の計算（ch10_correlation_dimension.py）</span><a class="headerlink" href="#id8" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">24</span><span class="k">def</span><span class="w"> </span><span class="nf">correlation_integral</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">Array</span><span class="p">,</span> <span class="n">radii</span><span class="p">:</span> <span class="n">Array</span><span class="p">,</span> <span class="n">chunk</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+<span class="linenos">25</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;各半径 r について、距離が r 未満の点の組の割合 C(r) を返す.</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="sd">    すべての組の距離を一度に計算するとメモリーを多く使うので、chunk 個ずつに分けて計算する。</span>
+<span class="linenos">28</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">29</span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="linenos">30</span>    <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">radii</span><span class="p">))</span>
+<span class="linenos">31</span>    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">chunk</span><span class="p">):</span>
+<span class="linenos">32</span>        <span class="n">block</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">start</span> <span class="o">+</span> <span class="n">chunk</span><span class="p">]</span>
+<span class="linenos">33</span>        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">block</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">points</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">34</span>        <span class="c1"># 自分自身との組（距離 0）と、同じ組を 2 回数えるのを避けるため、番号が大きい相手だけを数える</span>
+<span class="linenos">35</span>        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">block</span><span class="p">))</span>
+<span class="linenos">36</span>        <span class="n">mask</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+<span class="linenos">37</span>        <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+<span class="linenos">38</span>        <span class="n">counts</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">radii</span><span class="p">)</span>
+<span class="linenos">39</span>    <span class="n">result</span><span class="p">:</span> <span class="n">Array</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">40</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-ch10-correlation"><span class="std std-numref">図 47</span></a> は、エノン・アトラクタとローレンツ・アトラクタの相関積分を両対数グラフに描いたものである。</p>
+<figure class="align-default" id="fig-ch10-correlation">
+<a class="reference internal image-reference" href="_images/ch10_correlation_dimension_correlation.png"><img alt="_images/ch10_correlation_dimension_correlation.png" src="_images/ch10_correlation_dimension_correlation.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 47 </span><span class="caption-text">相関積分の両対数グラフ。赤い直線は、当てはめに使った範囲。</span><a class="headerlink" href="#fig-ch10-correlation" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="math notranslate nohighlight">\(r\)</span> が小さい範囲では、点がほぼ一直線に並ぶ。<span class="math notranslate nohighlight">\(r\)</span> がアトラクタの大きさに近づくと、ほとんどすべての組が数えられて <span class="math notranslate nohighlight">\(C(r)\)</span> は 1 で頭打ちになる。逆に <span class="math notranslate nohighlight">\(r\)</span> が小さすぎると、組の数が少なくなって統計的なばらつきが大きくなる。直線を当てはめるのは、その間の範囲である。推定結果を次に示す。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>エノン写像: 相関次元の推定値 1.200（文献値 約 1.21）
+ローレンツ方程式: 相関次元の推定値 2.043（文献値 約 2.05）
+エノン写像: ボックスカウント次元の推定値 1.259（文献値 約 1.26）
+</pre></div>
+</div>
+<p>エノン・アトラクタの次元は約 1.2 で、曲線（1 次元）より少しだけ平面を埋める。ローレンツ・アトラクタの次元は約 2.05 で、面（2 次元）に見えるアトラクタが、実はわずかに厚みのある、層の重なりであることを示している。最後の行は、同じエノン・アトラクタのボックスカウント次元である。相関次元とボックスカウント次元はほぼ等しく、リアプノフ次元の約 1.26 とも近い。</p>
+<section id="id4">
+<h3>時系列からのアトラクタの再構成<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>実験や観測では、状態のすべての変数を測れるとは限らない。たとえば、ローレンツ方程式の <span class="math notranslate nohighlight">\(x\)</span> だけが時系列として得られる場合でも、時間をずらした値を並べたベクトル <span class="math notranslate nohighlight">\((x(t), x(t + \tau), x(t + 2\tau))\)</span> を作ると、元のアトラクタと（滑らかな変形を除いて）同じ構造を持つ図形が得られる。これを<strong>遅れ座標による埋め込み</strong>（delay embedding）といい、ターケンスの埋め込み定理（1981 年）がその正しさを保証する。再構成したアトラクタの相関次元を計算すれば、観測データの背後にある力学系の次元を推定できる。この方法は、心拍や脳波、気象データなどの解析に使われてきた。</p>
+</section>
+</section>
+<section id="id5">
+<h2>吸引領域の境界<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>アトラクタが複数ある系では、状態空間は「どのアトラクタに行き着くか」によって分割される。各アトラクタに行き着く初期値全体の集合を、そのアトラクタの<strong>吸引領域</strong>（basin of attraction）、あるいは<strong>ベイスン</strong>という。第 9 章のニュートン法フラクタルは、3 つの解（3 つの固定点のアトラクタ）の吸引領域を色分けした図だった。</p>
+<p>吸引領域の境界は、滑らかな曲線になることもあるが、フラクタルになることもある。その例として、<strong>磁気振り子</strong>を取り上げる。振り子のおもりが鉄でできていて、その下に 3 つの磁石が置かれているとする。おもりを手で持ち上げて放すと、磁石に引かれながら複雑に動き回り、摩擦によって最後はどれか 1 つの磁石の上で止まる。</p>
+<p>ここでは、おもりの水平面内の位置 <span class="math notranslate nohighlight">\(\boldsymbol{x} = (x, y)\)</span> が、次の運動方程式に従うとする。</p>
+<div class="math notranslate nohighlight">
+\[\ddot{\boldsymbol{x}} = -k\,\boldsymbol{x} - \gamma\,\dot{\boldsymbol{x}} + \sum_{i=1}^{3} \frac{\boldsymbol{m}_i - \boldsymbol{x}}{\left(|\boldsymbol{m}_i - \boldsymbol{x}|^2 + h^2\right)^{3/2}}\]</div>
+<p>右辺の第 1 項は振り子を中心に戻そうとする力、第 2 項は摩擦力、第 3 項は位置 <span class="math notranslate nohighlight">\(\boldsymbol{m}_i\)</span> にある 3 つの磁石からの引力で、<span class="math notranslate nohighlight">\(h\)</span> は磁石がおもりの動く面からどれだけ下にあるかを表す。サンプルでは <span class="math notranslate nohighlight">\(k = 0.5\)</span>、<span class="math notranslate nohighlight">\(\gamma = 0.2\)</span>、<span class="math notranslate nohighlight">\(h = 0.3\)</span> とし、磁石を原点を中心とする半径 1 の円の上に等間隔に置く。</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">リスト 20 </span><span class="caption-text">磁気振り子の運動方程式（ch10_magnetic_pendulum.py）</span><a class="headerlink" href="#id9" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">32</span><span class="k">def</span><span class="w"> </span><span class="nf">pendulum</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="linenos">33</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;状態 (x, y, vx, vy) の時間微分を返す.&quot;&quot;&quot;</span>
+<span class="linenos">34</span>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span> <span class="n">vy</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="linenos">35</span>    <span class="n">ax</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">GAMMA</span> <span class="o">*</span> <span class="n">vx</span>
+<span class="linenos">36</span>    <span class="n">ay</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">GAMMA</span> <span class="o">*</span> <span class="n">vy</span>
+<span class="linenos">37</span>    <span class="k">for</span> <span class="n">mx</span><span class="p">,</span> <span class="n">my</span> <span class="ow">in</span> <span class="n">MAGNETS</span><span class="p">:</span>
+<span class="linenos">38</span>        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">mx</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">my</span> <span class="o">-</span> <span class="n">y</span>
+<span class="linenos">39</span>        <span class="n">r2</span> <span class="o">=</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span> <span class="o">+</span> <span class="n">H</span> <span class="o">*</span> <span class="n">H</span>
+<span class="linenos">40</span>        <span class="n">inv_r3</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">r2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>  <span class="c1"># 1 / r^3（** 1.5 より速い）</span>
+<span class="linenos">41</span>        <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">inv_r3</span>
+<span class="linenos">42</span>        <span class="n">ay</span> <span class="o">=</span> <span class="n">ay</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">inv_r3</span>
+<span class="linenos">43</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">ay</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>初期位置を格子状に 4 万個並べ（初速度は 0）、どの磁石の上で止まるかを計算する。すべての初期値を NumPy の配列でまとめて RK4 で計算し、止まった点は計算の対象から外して速くする。</p>
+<figure class="align-default" id="fig-ch10-basins">
+<a class="reference internal image-reference" href="_images/ch10_magnetic_pendulum_basins.png"><img alt="_images/ch10_magnetic_pendulum_basins.png" src="_images/ch10_magnetic_pendulum_basins.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 48 </span><span class="caption-text">磁気振り子の吸引領域。色は止まった磁石（白丸）、明るさは止まるまでの時間（暗いほど長い）を表す。</span><a class="headerlink" href="#fig-ch10-basins" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch10-basins"><span class="std std-numref">図 48</span></a> で、磁石の近くから放すと、おもりはその磁石で止まる。しかし、磁石から離れた場所では、3 色の領域が細い帯となって複雑に入り組んでいる。右の拡大図でも、帯の中にさらに細い帯が現れる。境界の近くでは、初期位置をほんのわずか変えるだけで、止まる磁石が変わる。</p>
+<p>この系の運動は、最終的には必ず止まるので、アトラクタは 3 つの固定点だけである。それでも、止まるまでの過渡状態の間、おもりは磁石の間をカオス的に動き回る。このような、有限の時間だけ続くカオスを<strong>過渡カオス</strong>（transient chaos）という。過渡カオスがあると、吸引領域の境界はフラクタルになり、最終的な結果（どの磁石で止まるか）を予測するには、初期値を非常に高い精度で知る必要がある。初期値の不確かさを <span class="math notranslate nohighlight">\(\varepsilon\)</span> とすると、結果を正しく予測できない初期値の割合は <span class="math notranslate nohighlight">\(\varepsilon^{\alpha}\)</span> に比例して減り、境界がフラクタルなほど指数 <span class="math notranslate nohighlight">\(\alpha\)</span> は小さくなる。つまり、精度を上げても、予測できない初期値の割合はなかなか減らない。サイコロやコイン投げの結果が予測できないのも、同じような仕組みによると考えられている。</p>
+</section>
+<section id="id6">
+<h2>カオスとフラクタルの関係のまとめ<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>本書で扱った、力学系に現れるフラクタルを、次の表にまとめる。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-number">表 9 </span><span class="caption-text">力学系に現れるフラクタル</span><a class="headerlink" href="#id10" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 36.0%" />
+<col style="width: 36.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>フラクタル</p></th>
+<th class="head"><p>現れる場所</p></th>
+<th class="head"><p>生まれる仕組み</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ストレンジアトラクタ</p></td>
+<td><p>カオス的な散逸系の長期的な軌道（第 6 章）</p></td>
+<td><p>引き伸ばし、折り畳み、体積の縮小の繰り返し</p></td>
+</tr>
+<tr class="row-odd"><td><p>ジュリア集合</p></td>
+<td><p>複素数の写像で、発散する初期値と発散しない初期値の境界（第 9 章）</p></td>
+<td><p>境界上のカオス的な（反発的な）振る舞い</p></td>
+</tr>
+<tr class="row-even"><td><p>フラクタルな吸引領域の境界</p></td>
+<td><p>複数のアトラクタを持つ系（第 9 章、本章）</p></td>
+<td><p>境界の近くでの過渡カオス</p></td>
+</tr>
+<tr class="row-odd"><td><p>分岐図、マンデルブロ集合</p></td>
+<td><p>パラメータ空間（第 4 章、第 9 章）</p></td>
+<td><p>同じ分岐の仕組みが、小さなスケールで繰り返し現れること</p></td>
+</tr>
+<tr class="row-even"><td><p>IFS のアトラクタ</p></td>
+<td><p>縮小写像の組（第 8 章）</p></td>
+<td><p>縮小した複製の貼り合わせ</p></td>
+</tr>
+</tbody>
+</table>
+<p>いずれの場合も、フラクタルは単純な規則を無限に繰り返した結果として現れる。カオスは「時間の中で繰り返される引き伸ばしと折り畳み」、フラクタルは「空間に刻まれたその痕跡」と見ることができる。</p>
+</section>
+<section id="id7">
+<h2>まとめ<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ストレンジアトラクタは、引き伸ばされた方向には滑らかで、押しつぶされた方向にはカントール集合のような構造を持つ。リアプノフ指数からも次元を見積もれる。</p></li>
+<li><p>相関次元は、点の組の距離の分布から推定する次元で、ストレンジアトラクタの次元の推定によく使われる。</p></li>
+<li><p>時系列 1 つからでも、遅れ座標による埋め込みでアトラクタを再構成できる。</p></li>
+<li><p>過渡カオスがあると、吸引領域の境界はフラクタルになり、最終状態の予測が難しくなる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch09_complex_dynamics.html" class="btn btn-neutral float-left" title="第 9 章 複素力学系：ジュリア集合とマンデルブロ集合" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch11_applications.html" class="btn btn-neutral float-right" title="第 11 章 自然・工学の中のカオスとフラクタル" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

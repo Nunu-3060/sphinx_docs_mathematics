@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 7 章 フラクタルと次元 &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 8 章 反復関数系と L-system" href="ch08_ifs_lsystem.html" />
+    <link rel="prev" title="第 6 章 ストレンジアトラクタ" href="ch06_strange_attractors.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 7 章 フラクタルと次元</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">フラクタルとは</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">古典的なフラクタル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">カントール集合</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">コッホ曲線</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">シェルピンスキーのギャスケット</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">海岸線のパラドックス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">相似次元</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">ボックスカウント次元</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">統計的自己相似性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 7 章 フラクタルと次元</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch07">
+<span id="id1"></span><h1>第 7 章 フラクタルと次元<a class="headerlink" href="#ch07" title="Link to this heading"></a></h1>
+<p>第 II 部では、カオスの分岐図やストレンジアトラクタに、拡大しても細かい構造が現れ続ける性質があることを見た。この章では、そのような図形、すなわちフラクタルを正面から扱う。古典的なフラクタルの作り方を紹介し、「次元」という概念を整数でない値にまで広げて、フラクタルの複雑さを数値で表す方法を学ぶ。</p>
+<section id="id2">
+<h2>フラクタルとは<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><strong>フラクタル</strong>（fractal）という言葉は、1975 年に数学者のブノワ・マンデルブロが、「破片」を意味するラテン語 fractus から作った。厳密な定義はないが、次のような性質を持つ図形をフラクタルと呼ぶ。</p>
+<ul class="simple">
+<li><p><strong>自己相似性</strong>：図形の一部を拡大すると、全体と同じ（または似た）形が現れる。</p></li>
+<li><p><strong>細部の構造</strong>：どんなに拡大しても、なめらかな線や面にならず、細かい構造が現れ続ける。</p></li>
+<li><p><strong>整数でない次元</strong>：この章で定義する「次元」が、1 や 2 のような整数にならない。</p></li>
+</ul>
+<p>自然界には、フラクタルに近い形がたくさんある。海岸線、山の稜線、雲、川の流れの網目、樹木の枝分かれ、肺の気管支、血管などである。ユークリッド幾何学の直線、円、球では、これらの形をうまく表せない。マンデルブロは著書『フラクタル幾何学』で、「雲は球ではなく、山は円錐ではなく、海岸線は円ではない」と述べ、自然の形を表すための新しい幾何学としてフラクタルを提唱した。</p>
+</section>
+<section id="id3">
+<h2>古典的なフラクタル<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>フラクタルという言葉が生まれる前から、数学者は奇妙な性質を持つ図形をいくつも考案していた。いずれも、図形の一部を縮小した自分自身の複製で置き換える操作を、無限に繰り返して作る。</p>
+<section id="id4">
+<h3>カントール集合<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>区間 <span class="math notranslate nohighlight">\([0, 1]\)</span> から真ん中の 1/3 を取り除き、残った 2 つの区間からそれぞれ真ん中の 1/3 を取り除く。この操作を無限に繰り返して残る点の集合を<strong>カントール集合</strong>（Cantor set）という（<a class="reference internal" href="#fig-ch07-cantor"><span class="std std-numref">図 32</span></a>）。</p>
+<figure class="align-default" id="fig-ch07-cantor">
+<a class="reference internal image-reference" href="_images/ch07_classic_fractals_cantor.png"><img alt="_images/ch07_classic_fractals_cantor.png" src="_images/ch07_classic_fractals_cantor.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 32 </span><span class="caption-text">カントール集合を作る過程</span><a class="headerlink" href="#fig-ch07-cantor" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><span class="math notranslate nohighlight">\(n\)</span> 段階目に残る区間の長さの合計は <span class="math notranslate nohighlight">\((2/3)^n\)</span> で、<span class="math notranslate nohighlight">\(n \to \infty\)</span> で 0 になる。つまり、取り除いた区間の長さの合計は 1 であり、カントール集合の「長さ」は 0 である。それにもかかわらず、カントール集合には区間 <span class="math notranslate nohighlight">\([0, 1]\)</span> と同じだけ（数え切れないほど）多くの点が残る。カントール集合は、3 進数で表したときに 1 の桁を使わずに書ける数全体の集合と一致する。</p>
+</section>
+<section id="id5">
+<h3>コッホ曲線<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>線分を 3 等分し、真ん中の部分を、それを 1 辺とする正三角形の残りの 2 辺で置き換える。できた 4 本の線分のそれぞれに同じ操作を繰り返して得られる曲線を<strong>コッホ曲線</strong>（Koch curve）という。正三角形の 3 辺をコッホ曲線で置き換えた図形を<strong>コッホ雪片</strong>（Koch snowflake）という（<a class="reference internal" href="#fig-ch07-koch"><span class="std std-numref">図 33</span></a>）。</p>
+<figure class="align-default" id="fig-ch07-koch">
+<a class="reference internal image-reference" href="_images/ch07_classic_fractals_koch.png"><img alt="_images/ch07_classic_fractals_koch.png" src="_images/ch07_classic_fractals_koch.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 33 </span><span class="caption-text">コッホ曲線を作る過程とコッホ雪片</span><a class="headerlink" href="#fig-ch07-koch" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>1 回の操作で、線分の長さは 4/3 倍になる。したがって、<span class="math notranslate nohighlight">\(n\)</span> 段階目の曲線の長さは <span class="math notranslate nohighlight">\((4/3)^n\)</span> で、<span class="math notranslate nohighlight">\(n \to \infty\)</span> で無限大になる。一方、雪片の面積は有限の値に収束する。次の出力は、最初の正三角形の 1 辺を 1 として、周の長さと面積（最初の正三角形との比）を計算したものである。周の長さは際限なく増えるが、面積は 8/5 に収束する。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>段階  周の長さ    面積（最初の正三角形との比）
+   0       3.000  1.000000
+   1       4.000  1.333333
+   2       5.333  1.481481
+   3       7.111  1.547325
+   5      12.642  1.589595
+  10      53.273  1.599820
+  20     946.011  1.600000
+面積の極限: 8/5 = 1.6
+</pre></div>
+</div>
+<p>コッホ曲線は、どこでも折れ曲がっていて、接線を引ける点が 1 つもない。有限の領域に収まる、長さが無限大の曲線である。</p>
+</section>
+<section id="id6">
+<h3>シェルピンスキーのギャスケット<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>正三角形を、各辺の中点を結んで 4 つの小さな正三角形に分け、真ん中の 1 つを取り除く。残った 3 つの正三角形に同じ操作を繰り返して得られる図形を<strong>シェルピンスキーのギャスケット</strong>（Sierpinski gasket）という（<a class="reference internal" href="#fig-ch07-sierpinski"><span class="std std-numref">図 34</span></a>）。1 回の操作で面積は 3/4 倍になるので、極限の面積は 0 である。</p>
+<figure class="align-default" id="fig-ch07-sierpinski">
+<a class="reference internal image-reference" href="_images/ch07_classic_fractals_sierpinski.png"><img alt="_images/ch07_classic_fractals_sierpinski.png" src="_images/ch07_classic_fractals_sierpinski.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 34 </span><span class="caption-text">シェルピンスキーのギャスケットを作る過程</span><a class="headerlink" href="#fig-ch07-sierpinski" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>これらの図形の作り方は、次の関数のように再帰的に（または、各段階の図形の一覧を更新するループで）書ける。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 9 </span><span class="caption-text">コッホ曲線の頂点を求める関数（ch07_classic_fractals.py）</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">31</span><span class="k">def</span><span class="w"> </span><span class="nf">koch_curve</span><span class="p">(</span><span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Points</span><span class="p">:</span>
+<span class="linenos">32</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;コッホ曲線の level 段階目の折れ線の頂点を、複素数の配列で返す.</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="sd">    線分を 3 等分し、真ん中の部分を、正三角形の 2 辺で置き換える。</span>
+<span class="linenos">35</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">36</span>    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">])</span>
+<span class="linenos">37</span>    <span class="n">rotate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>  <span class="c1"># 60 度の回転</span>
+<span class="linenos">38</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+<span class="linenos">39</span>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="linenos">40</span>        <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mf">3.0</span>
+<span class="linenos">41</span>        <span class="n">p1</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">d</span>
+<span class="linenos">42</span>        <span class="n">peak</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="n">rotate</span>
+<span class="linenos">43</span>        <span class="n">p2</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">d</span>
+<span class="linenos">44</span>        <span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">peak</span><span class="p">,</span> <span class="n">p2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="linenos">45</span>        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">46</span>    <span class="k">return</span> <span class="n">points</span>
+</pre></div>
+</div>
+</div>
+<p>平面上の点を複素数で表すと、回転を掛け算で書けるので、コードが短くなる。<span class="math notranslate nohighlight">\(e^{i\pi/3}\)</span> を掛けると 60 度回転する（<a class="reference internal" href="appendix_a_math.html#appendix-a"><span class="std std-ref">付録 A</span></a>）。</p>
+</section>
+</section>
+<section id="id7">
+<h2>海岸線のパラドックス<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>イギリスの海岸線の長さは何 km だろうか。1 km の物差しで測った長さと、100 m の物差しで測った長さを比べると、後者のほうが長くなる。短い物差しは、長い物差しでは飛ばしてしまう小さな入り江や岬を測れるからである。物差しを短くするほど、測った長さは増え続け、一定の値に収束しない。</p>
+<p>イギリスの科学者ルイス・フライ・リチャードソンは、さまざまな国境や海岸線について、物差しの長さ <span class="math notranslate nohighlight">\(\varepsilon\)</span> と測った長さ <span class="math notranslate nohighlight">\(L(\varepsilon)\)</span> を調べ、両対数グラフでほぼ直線になること、つまり</p>
+<div class="math notranslate nohighlight">
+\[L(\varepsilon) \propto \varepsilon^{1 - D}\]</div>
+<p>の関係があることを見つけた。滑らかな曲線なら <span class="math notranslate nohighlight">\(D = 1\)</span> で、<span class="math notranslate nohighlight">\(L\)</span> は一定の値になる。イギリスの西海岸では <span class="math notranslate nohighlight">\(D \approx 1.25\)</span> だった。マンデルブロは 1967 年の論文「イギリスの海岸線の長さはどれだけか」で、この <span class="math notranslate nohighlight">\(D\)</span> を図形の「次元」と解釈した。コッホ曲線も、物差しの長さを 1/3 にするごとに測った長さが 4/3 倍になるので、同じ関係を満たす。</p>
+</section>
+<section id="id8">
+<h2>相似次元<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>整数でない次元を定義するために、まず、ふつうの図形の次元を見直す。</p>
+<ul class="simple">
+<li><p>線分を 1/2 に縮小した複製は、2 つで元の線分を覆う。</p></li>
+<li><p>正方形を 1/2 に縮小した複製は、4 つで元の正方形を覆う。</p></li>
+<li><p>立方体を 1/2 に縮小した複製は、8 つで元の立方体を覆う。</p></li>
+</ul>
+<p>縮小率を <span class="math notranslate nohighlight">\(s\)</span>、必要な複製の数を <span class="math notranslate nohighlight">\(N\)</span> とすると、<span class="math notranslate nohighlight">\(N = (1/s)^D\)</span> の関係があり、<span class="math notranslate nohighlight">\(D\)</span> がちょうど図形の次元（1、2、3）になっている。そこで、自己相似な図形の<strong>相似次元</strong>（similarity dimension）を</p>
+<div class="math notranslate nohighlight" id="equation-eq-ch07-similarity">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-ch07-similarity" title="Link to this equation"></a></span>\[D = \frac{\log N}{\log (1/s)}\]</div>
+<p>と定義する。</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-number">表 6 </span><span class="caption-text">相似次元の例</span><a class="headerlink" href="#id13" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 34.0%" />
+<col style="width: 22.0%" />
+<col style="width: 22.0%" />
+<col style="width: 22.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>図形</p></th>
+<th class="head"><p>複製の数 <span class="math notranslate nohighlight">\(N\)</span></p></th>
+<th class="head"><p>縮小率 <span class="math notranslate nohighlight">\(s\)</span></p></th>
+<th class="head"><p>相似次元 <span class="math notranslate nohighlight">\(D\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>線分</p></td>
+<td><p>2</p></td>
+<td><p>1/2</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>正方形</p></td>
+<td><p>4</p></td>
+<td><p>1/2</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>カントール集合</p></td>
+<td><p>2</p></td>
+<td><p>1/3</p></td>
+<td><p><span class="math notranslate nohighlight">\(\log 2/\log 3 \approx 0.631\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>コッホ曲線</p></td>
+<td><p>4</p></td>
+<td><p>1/3</p></td>
+<td><p><span class="math notranslate nohighlight">\(\log 4/\log 3 \approx 1.262\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>シェルピンスキーのギャスケット</p></td>
+<td><p>3</p></td>
+<td><p>1/2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\log 3/\log 2 \approx 1.585\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>カントール集合は点の集まりだが、0 次元の有限個の点よりは「多く」、1 次元の線分よりは「少ない」。コッホ曲線は曲線だが、滑らかな曲線よりは平面を多く埋め、それでも平面を埋め尽くすほどではない。整数でない次元は、このような中間的な性質を数値で表している。</p>
+</section>
+<section id="id9">
+<h2>ボックスカウント次元<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>相似次元は、正確な自己相似性を持つ図形にしか使えない。ストレンジアトラクタや海岸線のような図形の次元を求めるには、<strong>ボックスカウント次元</strong>（box-counting dimension）を使う。</p>
+<p>平面を一辺 <span class="math notranslate nohighlight">\(\varepsilon\)</span> の正方形（ボックス）の格子で区切り、図形と重なるボックスの数 <span class="math notranslate nohighlight">\(N(\varepsilon)\)</span> を数える。滑らかな曲線なら <span class="math notranslate nohighlight">\(N(\varepsilon) \propto 1/\varepsilon\)</span>、面なら <span class="math notranslate nohighlight">\(N(\varepsilon) \propto 1/\varepsilon^2\)</span> となる。一般に <span class="math notranslate nohighlight">\(N(\varepsilon) \propto \varepsilon^{-D}\)</span> となるとき、</p>
+<div class="math notranslate nohighlight">
+\[D = \lim_{\varepsilon \to 0} \frac{\log N(\varepsilon)}{\log (1/\varepsilon)}\]</div>
+<p>をボックスカウント次元という。正確に自己相似な図形では、複製どうしの重なりが無視できれば、ボックスカウント次元は相似次元と一致する。</p>
+<p>数値的には、いくつかの <span class="math notranslate nohighlight">\(\varepsilon\)</span> について <span class="math notranslate nohighlight">\(N(\varepsilon)\)</span> を数え、両対数グラフに描いた点に直線を当てはめ、その傾きを <span class="math notranslate nohighlight">\(D\)</span> の推定値とする。図形を点の集まりで近似すれば、ボックスの数は、各点の座標を <span class="math notranslate nohighlight">\(\varepsilon\)</span> で割って切り捨てた整数の組の種類の数として数えられる。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 10 </span><span class="caption-text">ボックスの数を数える関数と、次元を推定する関数（ch07_box_counting.py）</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">22</span><span class="k">def</span><span class="w"> </span><span class="nf">box_count</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">Points</span><span class="p">,</span> <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="linenos">23</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;点の集まり points（形は (n, 2)、座標は [0, 1] の範囲）と重なる、一辺 eps のボックスの数を返す.&quot;&quot;&quot;</span>
+<span class="linenos">24</span>    <span class="n">boxes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">points</span> <span class="o">/</span> <span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="linenos">25</span>    <span class="c1"># ボックスの番号の組 (i, j) を 1 つの整数にまとめてから、重複を除いて数える</span>
+<span class="linenos">26</span>    <span class="n">keys</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">eps</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="linenos">27</span>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">30</span><span class="k">def</span><span class="w"> </span><span class="nf">estimate_dimension</span><span class="p">(</span><span class="n">points</span><span class="p">:</span> <span class="n">Points</span><span class="p">,</span> <span class="n">sizes</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]]:</span>
+<span class="linenos">31</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ボックスの大きさ sizes ごとに数を数え、最小二乗法で直線を当てはめた傾きと、数の配列を返す.&quot;&quot;&quot;</span>
+<span class="linenos">32</span>    <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">box_count</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span> <span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="linenos">33</span>    <span class="n">slope</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">sizes</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">counts</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">34</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">slope</span><span class="p">),</span> <span class="n">counts</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#fig-ch07-boxes"><span class="std std-numref">図 35</span></a> はコッホ曲線に重なるボックス、<a class="reference internal" href="#fig-ch07-loglog"><span class="std std-numref">図 36</span></a> は 3 つの図形の両対数グラフである。</p>
+<figure class="align-default" id="fig-ch07-boxes">
+<a class="reference internal image-reference" href="_images/ch07_box_counting_boxes.png"><img alt="_images/ch07_box_counting_boxes.png" src="_images/ch07_box_counting_boxes.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 35 </span><span class="caption-text">コッホ曲線と重なるボックス（<span class="math notranslate nohighlight">\(\varepsilon = 1/8\)</span> と <span class="math notranslate nohighlight">\(1/32\)</span>）</span><a class="headerlink" href="#fig-ch07-boxes" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ch07-loglog">
+<a class="reference internal image-reference" href="_images/ch07_box_counting_loglog.png"><img alt="_images/ch07_box_counting_loglog.png" src="_images/ch07_box_counting_loglog.png" style="width: 65%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 36 </span><span class="caption-text">ボックスの大きさと数の関係（両対数グラフ）</span><a class="headerlink" href="#fig-ch07-loglog" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>推定値と理論値を次に示す。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>コッホ曲線: 推定値 1.2600, 理論値 1.2619
+シェルピンスキーのギャスケット: 推定値 1.5850, 理論値 1.5850
+カントール集合: 推定値 0.6421, 理論値 0.6309
+</pre></div>
+</div>
+<p>コッホ曲線とギャスケットでは、推定値は理論値とよく一致する。カントール集合ではずれが大きいが、これはボックスの大きさを <span class="math notranslate nohighlight">\(2^{-k}\)</span> としたためである。カントール集合の構造は 1/3 ずつ縮むので、2 のべき乗で区切った格子とは揃わず、ボックスの数が段階的に変わる。ボックスの大きさを構造に合わせて <span class="math notranslate nohighlight">\(3^{-k}\)</span> にとれば、理論上は <span class="math notranslate nohighlight">\(N(\varepsilon) = 2^k\)</span> となり、傾きは理論値に一致する（ただし、この例の点は区間の端点なので、格子の境界にちょうど乗る点が丸め誤差でどちらのボックスに入るかによって、数が少し変わる）。ボックスカウント法では、図形の構造と格子の関係によって推定値がずれることがあるので、<span class="math notranslate nohighlight">\(\varepsilon\)</span> の範囲や刻み方を変えて結果を確かめるとよい。また、点の数が有限なので、<span class="math notranslate nohighlight">\(\varepsilon\)</span> が点の間隔より小さくなると、<span class="math notranslate nohighlight">\(N(\varepsilon)\)</span> は点の数で頭打ちになる。直線を当てはめる範囲は、両対数グラフが直線とみなせる部分に限る必要がある。</p>
+<p>数学では、より厳密な次元として<strong>ハウスドルフ次元</strong>（Hausdorff dimension）が使われる。多くの図形でボックスカウント次元と一致するが、一致しない図形もある。本書では、計算しやすいボックスカウント次元と、第 10 章の相関次元を使う。</p>
+</section>
+<section id="id10">
+<h2>統計的自己相似性<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>コッホ曲線の一部を拡大すると、全体とまったく同じ形が現れる。しかし、海岸線の一部を拡大しても、全体と同じ形が現れるわけではない。現れるのは、全体と「同じくらい入り組んだ」形である。このように、形そのものではなく、統計的な性質（凹凸の大きさの分布など）が拡大縮小しても変わらない性質を<strong>統計的自己相似性</strong>（statistical self-similarity）という。</p>
+<p>また、自然界のフラクタルは、限られた範囲の大きさでしか自己相似でない。海岸線の入り組み方は、数 km から数 m の範囲では似ているかもしれないが、砂粒の大きさまで拡大すれば別の構造になる。それでも、その範囲でフラクタルとして扱うことは、形を理解したり、本物らしい形を生成したりするのに役立つ。第 11 章では、統計的自己相似性を持つ地形を生成する方法を扱う。</p>
+</section>
+<section id="id11">
+<h2>まとめ<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>フラクタルは、自己相似性を持ち、どれだけ拡大しても細部の構造が現れ、整数でない次元を持つ図形である。</p></li>
+<li><p>カントール集合、コッホ曲線、シェルピンスキーのギャスケットは、縮小した自分自身の複製で置き換える操作を繰り返して作る。</p></li>
+<li><p>相似次元は <span class="math notranslate nohighlight">\(D = \log N/\log(1/s)\)</span> で定義する。ボックスカウント次元は、ボックスの数と大きさの両対数グラフの傾きとして推定する。</p></li>
+<li><p>自然界のフラクタルは、統計的に、限られた範囲の大きさで自己相似である。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch06_strange_attractors.html" class="btn btn-neutral float-left" title="第 6 章 ストレンジアトラクタ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch08_ifs_lsystem.html" class="btn btn-neutral float-right" title="第 8 章 反復関数系と L-system" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 6 章 ストレンジアトラクタ &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 7 章 フラクタルと次元" href="ch07_fractals_dimension.html" />
+    <link rel="prev" title="第 5 章 カオスの特徴付け" href="ch05_characterizing_chaos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 6 章 ストレンジアトラクタ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">散逸系と保存系</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">ローレンツ方程式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">ローレンツ写像</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">レスラー方程式とポアンカレ断面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">エノン写像</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">保存系のカオス</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">二重振り子</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kam">標準写像と KAM 理論</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">ジェネラティブアートで人気のアトラクタ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">まとめ</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch11_applications.html">第 11 章 自然・工学の中のカオスとフラクタル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 6 章 ストレンジアトラクタ</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch06">
+<span id="id1"></span><h1>第 6 章 ストレンジアトラクタ<a class="headerlink" href="#ch06" title="Link to this heading"></a></h1>
+<p>第 3 章で見たとおり、2 次元の連続時間の系ではカオスは起きない。この章では、3 次元の連続時間の系と 2 次元の写像で現れるカオスを調べる。それらの軌道は、状態空間の中で<strong>ストレンジアトラクタ</strong>（strange attractor）と呼ばれる、複雑で美しい形を描く。また、エネルギーが保存される系に現れる、性質の異なるカオスも紹介する。</p>
+<section id="id2">
+<h2>散逸系と保存系<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>力学系は、状態空間の体積（2 次元なら面積）の変わり方によって、大きく 2 つに分けられる。</p>
+<ul class="simple">
+<li><p><strong>散逸系</strong>（dissipative system）：摩擦などでエネルギーが失われる系。状態空間の領域は、時間とともに体積が縮む。</p></li>
+<li><p><strong>保存系</strong>（conservative system）：摩擦のない力学系（ハミルトン系）。エネルギーが保存され、状態空間の領域は、形を変えても体積は変わらない（リウヴィルの定理）。</p></li>
+</ul>
+<p>連続時間の系 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}} = F(\boldsymbol{x})\)</span> では、ベクトル場の<strong>発散</strong>（divergence）<span class="math notranslate nohighlight">\(\nabla \cdot F = \sum_i \partial F_i / \partial x_i\)</span> が、体積が変化する割合を表す。発散が負なら体積は縮み、0 なら保たれる。写像では、ヤコビ行列の行列式の絶対値 <span class="math notranslate nohighlight">\(|\det J|\)</span> が、1 回の反復で面積（体積）が何倍になるかを表す。</p>
+<p>散逸系では、状態空間の領域は最終的に体積 0 の集合に縮む。それがアトラクタである。固定点（0 次元）やリミットサイクル（1 次元）は体積 0 の集合の例である。ところが、カオス的な系では、軌道は近くの軌道と離れ続けるので、1 点や 1 本の閉曲線には落ち着けない。体積は 0 に縮みながら、ある方向には引き伸ばされ続ける。その結果できるのが、無限に細かく折り重なった構造を持つストレンジアトラクタである。「ストレンジ（奇妙な）」という名前は、1971 年にリュエルとターケンスが付けた。</p>
+</section>
+<section id="id3">
+<h2>ローレンツ方程式<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>1963 年、ローレンツ（第 5 章）は、大気の対流を極端に単純化した、次の 3 変数の微分方程式を調べた。</p>
+<div class="math notranslate nohighlight" id="equation-eq-ch06-lorenz">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-ch06-lorenz" title="Link to this equation"></a></span>\[\dot{x} = \sigma (y - x), \qquad \dot{y} = x(\rho - z) - y, \qquad \dot{z} = xy - \beta z\]</div>
+<p><span class="math notranslate nohighlight">\(x\)</span> は対流の強さ、<span class="math notranslate nohighlight">\(y\)</span> と <span class="math notranslate nohighlight">\(z\)</span> は温度分布のずれを表す。ローレンツが使った <span class="math notranslate nohighlight">\(\sigma = 10\)</span>、<span class="math notranslate nohighlight">\(\rho = 28\)</span>、<span class="math notranslate nohighlight">\(\beta = 8/3\)</span> では、軌道は <a class="reference internal" href="#fig-ch06-lorenz"><span class="std std-numref">図 21</span></a> のような、蝶の羽のような形のアトラクタを描く。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-number">リスト 7 </span><span class="caption-text">ローレンツ方程式の右辺（ch06_lorenz.py）</span><a class="headerlink" href="#id11" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">23</span><span class="k">def</span><span class="w"> </span><span class="nf">lorenz</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="linenos">24</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;ローレンツ方程式の右辺.&quot;&quot;&quot;</span>
+<span class="linenos">25</span>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="linenos">26</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">SIGMA</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">),</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">RHO</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">BETA</span> <span class="o">*</span> <span class="n">z</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<figure class="align-default" id="fig-ch06-lorenz">
+<a class="reference internal image-reference" href="_images/ch06_lorenz_attractor.png"><img alt="_images/ch06_lorenz_attractor.png" src="_images/ch06_lorenz_attractor.png" style="width: 65%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 21 </span><span class="caption-text">ローレンツ・アトラクタ</span><a class="headerlink" href="#fig-ch06-lorenz" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>軌道は、左右 2 つの羽のどちらかで数回ぐるぐると回った後、不規則なタイミングでもう一方の羽に移る。何回回ってから移るかには周期性がなく、予測が難しい。発散は <span class="math notranslate nohighlight">\(\nabla \cdot F = -\sigma - 1 - \beta \approx -13.7\)</span> で、状態空間の体積は単位時間あたり <span class="math notranslate nohighlight">\(e^{-13.7}\)</span> 倍に縮む。体積は急速に 0 に近づくので、アトラクタは厚みを持たない「面」のように見える。しかし、拡大すると、面に見えたものは無数の薄い層が重なった構造をしている。</p>
+<p><a class="reference internal" href="#fig-ch06-lorenz-divergence"><span class="std std-numref">図 22</span></a> は、<span class="math notranslate nohighlight">\(x\)</span> の初期値が <span class="math notranslate nohighlight">\(10^{-8}\)</span> だけ違う 2 つの軌道の <span class="math notranslate nohighlight">\(x(t)\)</span> である。時刻 30 付近までは区別できないが、その後はまったく別の動きをする。</p>
+<figure class="align-default" id="fig-ch06-lorenz-divergence">
+<a class="reference internal image-reference" href="_images/ch06_lorenz_divergence.png"><img alt="_images/ch06_lorenz_divergence.png" src="_images/ch06_lorenz_divergence.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 22 </span><span class="caption-text">初期値がわずかに違う 2 つの軌道の <span class="math notranslate nohighlight">\(x(t)\)</span></span><a class="headerlink" href="#fig-ch06-lorenz-divergence" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>ローレンツがこの現象に気付いたのは、計算を途中から再開するときに、印刷された 3 桁に丸めた値を入力したことがきっかけだった。丸めによるわずかな違いが、しばらくすると計算結果をまったく違うものにしていたのである。</p>
+<section id="id4">
+<h3>ローレンツ写像<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>ローレンツは、連続的な軌道から、<span class="math notranslate nohighlight">\(z(t)\)</span> の極大値 <span class="math notranslate nohighlight">\(M_k\)</span> だけを順に取り出し、<span class="math notranslate nohighlight">\(M_k\)</span> と次の極大値 <span class="math notranslate nohighlight">\(M_{k+1}\)</span> の関係をプロットした（<a class="reference internal" href="#fig-ch06-lorenz-map"><span class="std std-numref">図 23</span></a>）。</p>
+<figure class="align-default" id="fig-ch06-lorenz-map">
+<a class="reference internal image-reference" href="_images/ch06_lorenz_lorenz_map.png"><img alt="_images/ch06_lorenz_lorenz_map.png" src="_images/ch06_lorenz_lorenz_map.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 23 </span><span class="caption-text">ローレンツ写像（<span class="math notranslate nohighlight">\(z\)</span> の極大値の連続する組）</span><a class="headerlink" href="#fig-ch06-lorenz-map" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>点はほぼ 1 本の曲線の上に並び、テント写像（第 4 章）に似た形をしている。つまり、3 次元の複雑な軌道の振る舞いの本質は、1 次元の写像 <span class="math notranslate nohighlight">\(M_{k+1} = g(M_k)\)</span> で表せる。曲線の傾きの絶対値はどこでも 1 より大きいので、この写像はカオス的である。3 次元の連続時間の系の解析が、1 次元の写像の解析に帰着できることは、カオスの研究で繰り返し使われる考え方である。</p>
+</section>
+</section>
+<section id="id5">
+<h2>レスラー方程式とポアンカレ断面<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>1976 年にオットー・レスラーが考案した方程式</p>
+<div class="math notranslate nohighlight">
+\[\dot{x} = -y - z, \qquad \dot{y} = x + a y, \qquad \dot{z} = b + z(x - c)\]</div>
+<p>は、非線形の項が <span class="math notranslate nohighlight">\(zx\)</span> の 1 つだけという、ローレンツ方程式よりさらに単純な形をしている。<span class="math notranslate nohighlight">\(a = b = 0.2\)</span>、<span class="math notranslate nohighlight">\(c = 5.7\)</span> では、<a class="reference internal" href="#fig-ch06-rossler"><span class="std std-numref">図 24</span></a> のようなアトラクタが現れる。軌道は <span class="math notranslate nohighlight">\(xy\)</span> 平面の近くで外側へ渦を巻きながら広がり、外側に来ると <span class="math notranslate nohighlight">\(z\)</span> 方向に持ち上げられ、折り返されて内側に戻る。第 4 章で説明した引き伸ばしと折り畳みが、そのまま目に見える形になっている。</p>
+<figure class="align-default" id="fig-ch06-rossler">
+<a class="reference internal image-reference" href="_images/ch06_rossler_attractor.png"><img alt="_images/ch06_rossler_attractor.png" src="_images/ch06_rossler_attractor.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 24 </span><span class="caption-text">レスラー・アトラクタ（左）と、その <span class="math notranslate nohighlight">\(xy\)</span> 平面への射影（右）。赤い線は次に説明するポアンカレ断面。</span><a class="headerlink" href="#fig-ch06-rossler" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>連続時間の系を調べる強力な方法に、<strong>ポアンカレ断面</strong>（Poincaré section）がある。状態空間に、軌道が横切る面（断面）を置き、軌道が断面を同じ向きに横切るたびに、その位置を記録する。<span class="math notranslate nohighlight">\(k\)</span> 回目の位置から <span class="math notranslate nohighlight">\(k + 1\)</span> 回目の位置を決める写像を<strong>ポアンカレ写像</strong>（Poincaré map）という。断面を 1 回横切って閉じる周期軌道は、断面上の固定点になる。こうして、連続時間の系の問題は、1 次元低い写像の問題になる。</p>
+<p>ここでは、半平面 <span class="math notranslate nohighlight">\(y = 0\)</span>、<span class="math notranslate nohighlight">\(x &lt; 0\)</span> を断面とし、軌道が <span class="math notranslate nohighlight">\(y &gt; 0\)</span> から <span class="math notranslate nohighlight">\(y &lt; 0\)</span> へ横切る位置を、前後の 2 点の線形補間で求める。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-number">リスト 8 </span><span class="caption-text">断面を横切る位置を求める関数（ch06_rossler.py）</span><a class="headerlink" href="#id12" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">30</span><span class="k">def</span><span class="w"> </span><span class="nf">section_crossings</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]:</span>
+<span class="linenos">31</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;軌道 xs が半平面 {y = 0, x &lt; 0} を y &gt; 0 から y &lt; 0 へ横切る点の x 座標を返す.</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="sd">    横切る前後の 2 点を直線で結び、y = 0 になる位置を線形補間で求める。</span>
+<span class="linenos">34</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">35</span>    <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="linenos">36</span>    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">((</span><span class="n">y0</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y1</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">xs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">37</span>    <span class="n">s</span> <span class="o">=</span> <span class="n">y0</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">y0</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">y1</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+<span class="linenos">38</span>    <span class="n">result</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">]</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="linenos">39</span>    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<p>横切る位置を <span class="math notranslate nohighlight">\(u_k = -x\)</span> として、<span class="math notranslate nohighlight">\(u_k\)</span> と <span class="math notranslate nohighlight">\(u_{k+1}\)</span> の関係を描いたのが <a class="reference internal" href="#fig-ch06-section"><span class="std std-numref">図 25</span></a> である。点は山を 1 つ持つ曲線の上に並び、ロジスティック写像のグラフによく似ている。実際、レスラー方程式は、パラメータ <span class="math notranslate nohighlight">\(c\)</span> を大きくしていくと、周期倍分岐を繰り返してカオスに至る。第 4 章で学んだ 1 次元写像の知識が、そのまま 3 次元の連続時間の系に当てはまる。</p>
+<figure class="align-default" id="fig-ch06-section">
+<a class="reference internal image-reference" href="_images/ch06_rossler_section.png"><img alt="_images/ch06_rossler_section.png" src="_images/ch06_rossler_section.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 25 </span><span class="caption-text">レスラー方程式のポアンカレ写像</span><a class="headerlink" href="#fig-ch06-section" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id6">
+<h2>エノン写像<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>1976 年、天文学者のミシェル・エノンは、ローレンツ方程式のポアンカレ写像の性質をまねた、2 次元の写像を考案した。</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = 1 - a x_n^2 + y_n, \qquad y_{n+1} = b x_n\]</div>
+<p><span class="math notranslate nohighlight">\(a = 1.4\)</span>、<span class="math notranslate nohighlight">\(b = 0.3\)</span> が標準的なパラメータである。ヤコビ行列の行列式は <span class="math notranslate nohighlight">\(-b\)</span> なので、1 回の反復で面積は <span class="math notranslate nohighlight">\(|b| = 0.3\)</span> 倍に縮む。また、逆写像を一意に求められる（逆にたどれる）写像である。</p>
+<figure class="align-default" id="fig-ch06-henon">
+<a class="reference internal image-reference" href="_images/ch06_henon_attractor.png"><img alt="_images/ch06_henon_attractor.png" src="_images/ch06_henon_attractor.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 26 </span><span class="caption-text">エノン・アトラクタ（左）と、赤枠の部分を順に拡大した図（中、右）</span><a class="headerlink" href="#fig-ch06-henon" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch06-henon"><span class="std std-numref">図 26</span></a> の左図では、アトラクタはブーメランのような形の数本の曲線に見える。赤枠の部分を拡大すると（中央の図）、1 本に見えた曲線が、近接した数本の曲線の束であることが分かる。さらに拡大すると（右の図）、その 1 本もまた細い曲線の束になっている。このような構造は、拡大を何度繰り返しても現れる。曲線を横切る方向に見ると、点の並び方は第 7 章で扱うカントール集合に似た構造をしている。</p>
+<p>エノン写像は、1 回の反復で、領域を引き伸ばし（<span class="math notranslate nohighlight">\(-a x^2\)</span> の項）、折り曲げ、縦に押しつぶして（<span class="math notranslate nohighlight">\(b x\)</span> の項）元の領域に重ねる。この操作の繰り返しが、層の中に層がある構造を作る。エノン・アトラクタのフラクタル次元は約 1.26 で、1 次元の曲線と 2 次元の面の中間の値になる（第 10 章）。</p>
+</section>
+<section id="id7">
+<h2>保存系のカオス<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>摩擦がなく、エネルギーが保存される系にもカオスは現れる。ただし、体積が縮まないので、アトラクタは存在しない。軌道は、初期値によって決まるエネルギーの面の上を、いつまでも動き続ける。</p>
+<section id="id8">
+<h3>二重振り子<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>振り子の先にもう 1 つの振り子をつないだ<strong>二重振り子</strong>（double pendulum）は、保存系のカオスの代表例である。状態は 2 本の棒の角度と角速度の 4 つの数で表される。<a class="reference internal" href="#fig-ch06-pendulum-tip"><span class="std std-numref">図 27</span></a> は 2 つ目のおもりの軌跡、<a class="reference internal" href="#fig-ch06-pendulum-divergence"><span class="std std-numref">図 28</span></a> は初期角度が <span class="math notranslate nohighlight">\(10^{-6}\)</span> ラジアンだけ違う 2 つの振り子の角度の比較である。</p>
+<figure class="align-default" id="fig-ch06-pendulum-tip">
+<a class="reference internal image-reference" href="_images/ch06_double_pendulum_tip.png"><img alt="_images/ch06_double_pendulum_tip.png" src="_images/ch06_double_pendulum_tip.png" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 27 </span><span class="caption-text">二重振り子の 2 つ目のおもりの軌跡（2 本の棒を水平より少し上まで持ち上げて離した場合）</span><a class="headerlink" href="#fig-ch06-pendulum-tip" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ch06-pendulum-divergence">
+<a class="reference internal image-reference" href="_images/ch06_double_pendulum_divergence.png"><img alt="_images/ch06_double_pendulum_divergence.png" src="_images/ch06_double_pendulum_divergence.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 28 </span><span class="caption-text">初期角度がわずかに違う 2 つの振り子の、2 本目の棒の角度</span><a class="headerlink" href="#fig-ch06-pendulum-divergence" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch06-pendulum-gif"><span class="std std-numref">図 29</span></a> は、初期角度が 0.001 ラジアンずつ違う 3 つの振り子を重ねて動かしたアニメーションである。最初は 1 つに見えるが、数秒後にはばらばらに動き出す。</p>
+<figure class="align-default" id="fig-ch06-pendulum-gif">
+<a class="reference internal image-reference" href="_images/ch06_double_pendulum.gif"><img alt="_images/ch06_double_pendulum.gif" src="_images/ch06_double_pendulum.gif" style="width: 240px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 29 </span><span class="caption-text">初期角度がわずかに違う 3 つの二重振り子</span><a class="headerlink" href="#fig-ch06-pendulum-gif" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>数値計算でエネルギーがどれだけ保たれているかを確かめた結果を次に示す。20 秒間の計算で、エネルギーの変化は初期値の約 1000 万分の 1 に収まっている。</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>エネルギーの初期値: 12.247201
+20 秒間のエネルギーの変化の最大値: 1.93e-06
+</pre></div>
+</div>
+<p>なお、二重振り子は、初期角度が小さい（揺れが小さい）ときには、ほぼ規則的な振動をする。カオス的になるのは、エネルギーが大きく、2 本目の棒が回転できるくらい大きく揺れる場合である。</p>
+</section>
+<section id="kam">
+<h3>標準写像と KAM 理論<a class="headerlink" href="#kam" title="Link to this heading"></a></h3>
+<p>保存系のカオスの性質を調べるのによく使われるのが、<strong>標準写像</strong>（standard map、チリコフ写像）である。</p>
+<div class="math notranslate nohighlight">
+\[p_{n+1} = p_n + K \sin\theta_n, \qquad \theta_{n+1} = \theta_n + p_{n+1} \qquad (\bmod\ 2\pi)\]</div>
+<p>これは、周期的に叩かれる回転子（キックローター）の、1 回のキックごとの角度 <span class="math notranslate nohighlight">\(\theta\)</span> と角運動量 <span class="math notranslate nohighlight">\(p\)</span> の変化を表す。ヤコビ行列の行列式は 1 なので、面積を保つ写像である。<a class="reference internal" href="#fig-ch06-standard"><span class="std std-numref">図 30</span></a> は、ランダムに選んだ 150 個の初期値から 800 回ずつ反復した点を、初期値ごとに色を変えて描いたものである。</p>
+<figure class="align-default" id="fig-ch06-standard">
+<a class="reference internal image-reference" href="_images/ch06_standard_map_phase.png"><img alt="_images/ch06_standard_map_phase.png" src="_images/ch06_standard_map_phase.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 30 </span><span class="caption-text">標準写像の位相図。左から <span class="math notranslate nohighlight">\(K = 0.5\)</span>、0.97、2.0。</span><a class="headerlink" href="#fig-ch06-standard" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(K = 0.5\)</span>：ほとんどの軌道は、左右に横切る曲線や、島のような閉曲線の上に並ぶ。これらの曲線は<strong>不変曲線</strong>（invariant curve。連続時間の系で見れば、不変トーラスと呼ばれる面の断面）と呼ばれ、軌道は規則的（準周期的）である。</p></li>
+<li><p><span class="math notranslate nohighlight">\(K = 0.97\)</span>：島と曲線の間に、点がばらばらに散らばった領域（カオスの海）が広がる。後で述べる臨界値 0.9716 のわずかに手前で、左右に横切る曲線はほとんど壊れている。</p></li>
+<li><p><span class="math notranslate nohighlight">\(K = 2.0\)</span>：カオスの海が大部分を占め、規則的な島がいくつか残るだけになる。</p></li>
+</ul>
+<p>規則的に解ける（可積分な）保存系に小さな摂動（乱れ）を加えたとき、規則的な軌道の多くが（形を変えながらも）生き残ることを保証するのが、<strong>KAM 理論</strong>（コルモゴロフ、アーノルド、モーザーの名に由来する）である。摂動が強くなると、規則的な軌道は少しずつ壊れてカオスの海に飲み込まれる。標準写像で、左右に横切る曲線が最後の 1 本まで壊れるのは <span class="math notranslate nohighlight">\(K \approx 0.9716\)</span> であることが、数値計算によって知られている。保存系では、規則的な運動とカオス的な運動が、状態空間の中で複雑に入り組んで共存する。</p>
+</section>
+</section>
+<section id="id9">
+<h2>ジェネラティブアートで人気のアトラクタ<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>三角関数だけでできた次の 2 つの写像は、パラメータ <span class="math notranslate nohighlight">\(a, b, c, d\)</span> を変えると多彩な形のアトラクタを描くので、ジェネラティブアートの題材として人気がある。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{クリフォード・アトラクタ：} &amp;\quad x' = \sin(a y) + c \cos(a x), \quad y' = \sin(b x) + d \cos(b y) \\
+\text{ピーター・デ・ヨング・アトラクタ：} &amp;\quad x' = \sin(a y) - \cos(b x), \quad y' = \sin(c x) - \cos(d y)\end{split}\]</div>
+<figure class="align-default" id="fig-ch06-clifford">
+<a class="reference internal image-reference" href="_images/ch06_clifford_scatter.png"><img alt="_images/ch06_clifford_scatter.png" src="_images/ch06_clifford_scatter.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 31 </span><span class="caption-text">クリフォード・アトラクタ（左）とピーター・デ・ヨング・アトラクタ（右）</span><a class="headerlink" href="#fig-ch06-clifford" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch06-clifford"><span class="std std-numref">図 31</span></a> は、40 万個の点を半透明の黒で打ったものである。点が密集する部分が濃く見え、アトラクタの上での軌道の訪れやすさ（密度）のむらが、布のひだのような模様として浮かび上がる。この密度のむらを強調して描く技法は、第 12 章で扱う。</p>
+</section>
+<section id="id10">
+<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>散逸系では状態空間の体積が縮み、軌道はアトラクタに近づく。カオス的な散逸系のアトラクタは、層が無限に折り重なったストレンジアトラクタになる。</p></li>
+<li><p>ローレンツ方程式、レスラー方程式は、3 次元の連続時間の系のカオスの代表例である。ポアンカレ断面や極大値の列を使うと、1 次元の写像に帰着して解析できる。</p></li>
+<li><p>エノン写像は、2 次元の写像のストレンジアトラクタの代表例で、拡大するたびに層の中に層が現れる。</p></li>
+<li><p>保存系にはアトラクタがないが、カオスは存在する。規則的な運動とカオス的な運動が共存し、非線形の効果が強いほどカオスの領域が広がる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch05_characterizing_chaos.html" class="btn btn-neutral float-left" title="第 5 章 カオスの特徴付け" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch07_fractals_dimension.html" class="btn btn-neutral float-right" title="第 7 章 フラクタルと次元" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

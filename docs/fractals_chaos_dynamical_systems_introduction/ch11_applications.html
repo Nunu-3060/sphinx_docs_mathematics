@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 11 章 自然・工学の中のカオスとフラクタル &mdash; フラクタル・カオス・力学系入門</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=29434bd9" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=19757887"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=4755f45a"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="第 12 章 ジェネラティブアートへの応用" href="ch12_generative_art.html" />
+    <link rel="prev" title="第 10 章 カオスとフラクタルの接点" href="ch10_chaos_and_fractals.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            フラクタル・カオス・力学系入門
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">はじめに</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch00_introduction.html">はじめに</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 I 部 力学系の基礎</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch01_dynamical_systems.html">第 1 章 力学系とは何か</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch02_one_dimensional_maps.html">第 2 章 1 次元写像の反復</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch03_odes_phase_space.html">第 3 章 微分方程式と相空間</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 II 部 カオス</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch04_logistic_map.html">第 4 章 ロジスティック写像とカオスへの道</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch05_characterizing_chaos.html">第 5 章 カオスの特徴付け</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch06_strange_attractors.html">第 6 章 ストレンジアトラクタ</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 III 部 フラクタル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ch07_fractals_dimension.html">第 7 章 フラクタルと次元</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch08_ifs_lsystem.html">第 8 章 反復関数系と L-system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch09_complex_dynamics.html">第 9 章 複素力学系：ジュリア集合とマンデルブロ集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch10_chaos_and_fractals.html">第 10 章 カオスとフラクタルの接点</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">第 IV 部 応用と表現</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第 11 章 自然・工学の中のカオスとフラクタル</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">気象と予測</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">生物と医学</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">カオスの工学的な利用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">カオス同期</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">カオスの制御</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">フラクタルの工学的な利用</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">フラクタル地形</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">その他の応用</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">空間に広がる力学系</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">結合写像格子</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">反応拡散系とチューリング・パターン</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">まとめ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ch12_generative_art.html">第 12 章 ジェネラティブアートへの応用</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">付録</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix_a_math.html">付録 A 数学の補足</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_b_glossary.html">付録 B 用語集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_c_references.html">付録 C 参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix_d_examples.html">付録 D サンプルコード一覧</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">フラクタル・カオス・力学系入門</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">第 11 章 自然・工学の中のカオスとフラクタル</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ch11">
+<span id="id1"></span><h1>第 11 章 自然・工学の中のカオスとフラクタル<a class="headerlink" href="#ch11" title="Link to this heading"></a></h1>
+<p>この章では、カオスとフラクタルが、自然現象の理解や工学の中でどのように使われているかを紹介する。前半では、気象、生物、通信などに現れるカオスと、地形の生成などに使われるフラクタルを扱う。後半では、多数の要素が空間に並んで相互作用する力学系を取り上げ、局所的な規則から大域的なパターンが生まれる、創発の仕組みを見る。</p>
+<section id="id2">
+<h2>気象と予測<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>現代のカオス研究の出発点の 1 つは気象学である（それ以前にも、19 世紀末にポアンカレが天体の運動の研究で、カオス的な振る舞いの存在に気付いていた）。ローレンツが示したように、大気の運動はカオス的であり、初期値のわずかな誤差は数日で大きく成長する。観測網をどれほど充実させても、地表のすべての地点の気温や風速を誤差なく測ることはできないので、決定論的な予報には原理的な限界がある。</p>
+<p>現在の数値予報では、この限界を前提とした<strong>アンサンブル予報</strong>（ensemble forecast）が使われている。観測値に少しずつ違う誤差を加えた多数の初期値から計算を行い、結果のばらつきを見る。計算結果がそろっていれば予報の信頼度は高く、ばらばらであれば低い。カオスによる予測の限界を、確率的な情報として利用しているのである。</p>
+</section>
+<section id="id3">
+<h2>生物と医学<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>ロジスティック写像は、もともと生物の個体数のモデルとして研究された。メイは、昆虫のように世代が重ならない生物の個体数が、環境の条件によっては、外からの乱れがなくても不規則に変動しうることを示した。実際の生態系で観測される個体数の変動のうち、どれだけが決定論的なカオスによるものかは、今も研究が続いている。</p>
+<p>医学でも、カオスとフラクタルの考え方が使われている。健康な人の心拍の間隔は、一定ではなく、さまざまな時間の尺度でゆらいでいる。このゆらぎは統計的自己相似性を持ち、病気や加齢によってその性質が変わることが報告されている。肺の気管支や血管の枝分かれ構造がフラクタルに近いことも、限られた体積の中で表面積や到達範囲を大きくする仕組みとして理解されている。</p>
+</section>
+<section id="id4">
+<h2>カオスの工学的な利用<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3>カオス同期<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>初期値鋭敏性を持つカオス的な系どうしは、同じ式でも、わずかな初期値の違いで別の振る舞いになる。ところが、1990 年にペコラとキャロルは、2 つのカオス的な系の一部の変数を共有させると、両者が完全に同じ振る舞いをするようになることを示した。これを<strong>カオス同期</strong>（chaos synchronization）という。</p>
+<p>例として、ローレンツ方程式を 2 つ用意する。1 つ目（駆動系）はふつうに計算する。2 つ目（応答系）は <span class="math notranslate nohighlight">\(y\)</span>、<span class="math notranslate nohighlight">\(z\)</span> だけを持ち、<span class="math notranslate nohighlight">\(x\)</span> の代わりに駆動系の <span class="math notranslate nohighlight">\(x\)</span> を使う。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{駆動系：} &amp;\quad \dot{x} = \sigma(y - x), \quad \dot{y} = x(\rho - z) - y, \quad \dot{z} = xy - \beta z \\
+\text{応答系：} &amp;\quad \dot{y}' = x(\rho - z') - y', \quad \dot{z}' = x y' - \beta z'\end{split}\]</div>
+<p><a class="reference internal" href="#fig-ch11-sync"><span class="std std-numref">図 49</span></a> は、応答系を駆動系と違う初期値から始めたときの、<span class="math notranslate nohighlight">\(y\)</span> と <span class="math notranslate nohighlight">\(y'\)</span> の差である。差は指数関数的に小さくなり、2 つの系は完全に同期する。比較のために、結合しない 2 つのローレンツ方程式の差も示した。こちらは小さくならない。</p>
+<figure class="align-default" id="fig-ch11-sync">
+<a class="reference internal image-reference" href="_images/ch11_synchronization_sync.png"><img alt="_images/ch11_synchronization_sync.png" src="_images/ch11_synchronization_sync.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 49 </span><span class="caption-text">応答系と駆動系の <span class="math notranslate nohighlight">\(y\)</span> の差（縦軸は対数目盛り）</span><a class="headerlink" href="#fig-ch11-sync" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>カオス同期は、秘密の通信に応用する研究が行われてきた。送信側はカオス的な信号にメッセージを小さく重ねて送り、受信側は同じ式の応答系を同期させてカオスの成分を取り除き、メッセージを取り出す。ただし、この方式は現代の暗号のような安全性の保証を持たず、解読法も多く提案されている。カオス的な写像を乱数の生成に使う場合も、第 5 章で見た浮動小数点数の問題などがあるので、暗号用の乱数には、専用に設計された方法を使うべきである。</p>
+</section>
+<section id="id6">
+<h3>カオスの制御<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>カオスの中には、不安定な周期軌道が無数に埋め込まれている（第 5 章）。1990 年にオット、グレボギ、ヨークは、軌道がこれらの周期軌道の 1 つに近づいたときに、パラメータをわずかに調整して軌道を周期軌道の上にとどめる方法（OGY 法）を提案した。小さな操作で系の振る舞いを大きく変えられることは、初期値鋭敏性の裏返しである。この考え方は、レーザーや心臓の不整脈の制御などで研究されてきた。</p>
+</section>
+</section>
+<section id="id7">
+<h2>フラクタルの工学的な利用<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>フラクタル地形<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p>コンピュータグラフィックスでは、山や海岸線のような自然な地形を生成するのに、統計的自己相似性を持つ乱数の関数が使われる。代表的な方法が<strong>中点変位法</strong>（midpoint displacement）である。1 次元の場合、線分の両端の高さを決め、中点の高さを両端の平均にランダムな量を加えた値にする。できた 2 本の線分のそれぞれで同じ操作を繰り返し、そのたびに加えるランダムな量の大きさを <span class="math notranslate nohighlight">\(2^{-H}\)</span> 倍にする。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-number">リスト 21 </span><span class="caption-text">1 次元の中点変位法（ch11_terrain.py）</span><a class="headerlink" href="#id14" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">21</span><span class="k">def</span><span class="w"> </span><span class="nf">midpoint_displacement_1d</span><span class="p">(</span><span class="n">levels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hurst</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+<span class="linenos">22</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;長さ 2^levels + 1 の稜線（高さの列）を作る.&quot;&quot;&quot;</span>
+<span class="linenos">23</span>    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">levels</span>
+<span class="linenos">24</span>    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">25</span>    <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos">26</span>    <span class="n">step</span> <span class="o">=</span> <span class="n">n</span>
+<span class="linenos">27</span>    <span class="k">while</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">28</span>        <span class="n">half</span> <span class="o">=</span> <span class="n">step</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos">29</span>        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">step</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="p">[</span><span class="n">step</span><span class="p">::</span><span class="n">step</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>  <span class="c1"># 各区間の両端の平均</span>
+<span class="linenos">30</span>        <span class="n">h</span><span class="p">[</span><span class="n">half</span><span class="p">::</span><span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">mid</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">31</span>        <span class="n">scale</span> <span class="o">*=</span> <span class="mf">2.0</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">hurst</span><span class="p">)</span>
+<span class="linenos">32</span>        <span class="n">step</span> <span class="o">=</span> <span class="n">half</span>
+<span class="linenos">33</span>    <span class="k">return</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(H\)</span> は<strong>ハースト指数</strong>（Hurst exponent）と呼ばれ、0 から 1 の値をとる。<span class="math notranslate nohighlight">\(H\)</span> が小さいほど、細かい凹凸が大きく残るギザギザの形になる。こうしてできる曲線は、<strong>非整数ブラウン運動</strong>（fractional Brownian motion）と呼ばれる確率過程の近似であり、グラフのフラクタル次元は <span class="math notranslate nohighlight">\(2 - H\)</span> になる。<a class="reference internal" href="#fig-ch11-profiles"><span class="std std-numref">図 50</span></a> は、3 つの <span class="math notranslate nohighlight">\(H\)</span> で作った稜線である。</p>
+<figure class="align-default" id="fig-ch11-profiles">
+<a class="reference internal image-reference" href="_images/ch11_terrain_profiles.png"><img alt="_images/ch11_terrain_profiles.png" src="_images/ch11_terrain_profiles.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 50 </span><span class="caption-text">中点変位法で作った稜線（同じ乱数を使い、<span class="math notranslate nohighlight">\(H\)</span> だけを変えた）</span><a class="headerlink" href="#fig-ch11-profiles" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>2 次元に拡張した方法が<strong>ダイヤモンド・スクエア法</strong>（diamond-square algorithm）である。正方形の 4 隅の平均にランダムな量を加えて中心の高さを決める段階（ダイヤモンド段階）と、周りの 4 点の平均にランダムな量を加えて辺の中点の高さを決める段階（スクエア段階）を交互に繰り返す。<a class="reference internal" href="#fig-ch11-terrain"><span class="std std-numref">図 51</span></a> は、できた高さの地図に、高さに応じた色と陰影を付けたものである。地形の表面のフラクタル次元は <span class="math notranslate nohighlight">\(3 - H\)</span> になる。</p>
+<figure class="align-default" id="fig-ch11-terrain">
+<a class="reference internal image-reference" href="_images/ch11_terrain_terrain.png"><img alt="_images/ch11_terrain_terrain.png" src="_images/ch11_terrain_terrain.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 51 </span><span class="caption-text">ダイヤモンド・スクエア法で作った地形（高さ 0.4 未満を海とした）</span><a class="headerlink" href="#fig-ch11-terrain" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>ゲームや映像の地形生成では、パーリンノイズなどの滑らかなノイズを、周波数を 2 倍、振幅を半分（など）にしながら重ね合わせる方法もよく使われる。これも、大きな起伏から小さな凹凸までを同じ規則で作るという点で、同じ考え方に基づいている。</p>
+</section>
+<section id="id9">
+<h3>その他の応用<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>フラクタル・アンテナ</strong>：コッホ曲線やシェルピンスキーのギャスケットのような形のアンテナは、小さな面積に長い導体を収められ、さまざまな大きさの構造を持つので、複数の周波数帯で動作させやすい。携帯電話の内蔵アンテナなどに使われてきた。</p></li>
+<li><p><strong>フラクタル画像圧縮</strong>：画像の各部分を、画像自身の別の部分を縮小・変形したもので近似し、その変換（IFS に似たもの）だけを記録する方法である。第 8 章のコラージュ定理に基づく。1990 年代に盛んに研究されたが、符号化に時間がかかることなどから、現在の画像形式では主流になっていない。</p></li>
+<li><p><strong>材料と物理</strong>：金属の破断面、電気の放電の跡（リヒテンベルク図形）、粒子が付着して成長する結晶（拡散律速凝集）などは、フラクタルな形になることが知られている。</p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h2>空間に広がる力学系<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>ここまで扱ってきた力学系の多くは、状態が 1〜4 個の数で表される小さな系だった。現実の創発現象の多くは、空間に並んだ多数の要素が、近くの要素と相互作用することで起きる。ここでは、そのような系の例を 2 つ取り上げる。</p>
+<section id="id11">
+<h3>結合写像格子<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p><strong>結合写像格子</strong>（coupled map lattice、CML）は、1980 年代に金子邦彦が導入したモデルで、1 次元（または 2 次元）に並べたカオス的な写像を、隣どうしで結合したものである。各格子点 <span class="math notranslate nohighlight">\(i\)</span> の値 <span class="math notranslate nohighlight">\(x(i)\)</span> を、次の規則で同時に更新する。</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1}(i) = (1 - \varepsilon)\,f(x_n(i)) + \frac{\varepsilon}{2}\bigl[f(x_n(i - 1)) + f(x_n(i + 1))\bigr]\]</div>
+<p><span class="math notranslate nohighlight">\(f(x) = 1 - a x^2\)</span> はロジスティック写像と同じ種類の写像で、<span class="math notranslate nohighlight">\(a\)</span> が大きいほどカオスが強い。<span class="math notranslate nohighlight">\(\varepsilon\)</span> は隣との結合の強さである。各格子点は、自分の写像の値と、両隣の写像の値の平均を混ぜたものに更新される。</p>
+<figure class="align-default" id="fig-ch11-cml">
+<a class="reference internal image-reference" href="_images/ch11_coupled_map_lattice_spacetime.png"><img alt="_images/ch11_coupled_map_lattice_spacetime.png" src="_images/ch11_coupled_map_lattice_spacetime.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 52 </span><span class="caption-text">結合写像格子の時空図（横軸が格子点の位置、縦軸が時刻で、下に向かって時間が進む）</span><a class="headerlink" href="#fig-ch11-cml" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-ch11-cml"><span class="std std-numref">図 52</span></a> は、128 個の格子点の値の時間変化を、横軸に位置、縦軸に時刻をとって描いた<strong>時空図</strong>である。パラメータによって、次のようにさまざまなパターンが現れる。</p>
+<ul class="simple">
+<li><p>格子が、同じように振動する領域（ドメイン）に分かれ、その境界が動かずに凍結する。</p></li>
+<li><p>規則的に振動する領域と、乱れた領域が混在し、乱れた領域が広がったり消えたりする。</p></li>
+<li><p>全体が乱れ、空間的にも時間的にも不規則な状態（時空カオス）になる。</p></li>
+</ul>
+<p>個々の格子点の規則は単純な写像であり、それが隣と弱く結合するだけで、領域の形成、欠陥の運動、乱流のような状態など、多様なパターンが現れる。結合写像格子は、乱流や生物の細胞集団などのモデルとして研究されてきた。</p>
+</section>
+<section id="id12">
+<h3>反応拡散系とチューリング・パターン<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p>1952 年、計算機科学の創始者の 1 人であるアラン・チューリングは、論文「形態形成の化学的基礎」で、2 種類の化学物質が反応しながら拡散するだけで、一様な状態から自発的に模様が生まれうることを示した。この模様を<strong>チューリング・パターン</strong>（Turing pattern）という。チューリングは、動物の体の模様などがこの仕組みで生まれる可能性を提案した。後に、熱帯魚の縞模様が、実際にチューリング・パターンのように変化することが観察されている。</p>
+<p>模様が生まれるための鍵は、2 つの物質の拡散の速さの違いにある。自分自身を増やす物質（活性化因子）と、それを抑える物質（抑制因子）があり、抑制因子のほうが速く拡散するとする。ある場所で活性化因子が少し増えると、その場所ではさらに増えるが、周りには抑制因子が先に広がって、増えるのを抑える。その結果、活性化因子の多い場所が、一定の間隔を空けて並ぶ。次のグレイ＝スコット・モデルでは、<span class="math notranslate nohighlight">\(v\)</span> が自分自身を増やす活性化因子の役割を、<span class="math notranslate nohighlight">\(v\)</span> に消費される原料 <span class="math notranslate nohighlight">\(u\)</span> が抑制の役割をする。<span class="math notranslate nohighlight">\(u\)</span> のほうが速く拡散する（サンプルでは拡散係数を <span class="math notranslate nohighlight">\(D_u = 0.16\)</span>、<span class="math notranslate nohighlight">\(D_v = 0.08\)</span> とした）。</p>
+<p>ここでは、反応拡散系の代表的なモデルである<strong>グレイ＝スコット・モデル</strong>（Gray–Scott model）を使う。物質 <span class="math notranslate nohighlight">\(u\)</span> と <span class="math notranslate nohighlight">\(v\)</span> の濃度が、次の方程式に従って変化する。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{\partial u}{\partial t} &amp;= D_u \nabla^2 u - u v^2 + F(1 - u) \\
+\frac{\partial v}{\partial t} &amp;= D_v \nabla^2 v + u v^2 - (F + k)\,v\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\nabla^2\)</span> は<strong>ラプラシアン</strong>（Laplacian）で、周りより濃度が低い場所では正、高い場所では負になり、拡散によって濃度がならされる効果を表す。<span class="math notranslate nohighlight">\(u v^2\)</span> は <span class="math notranslate nohighlight">\(u\)</span> が <span class="math notranslate nohighlight">\(v\)</span> に変わる反応、<span class="math notranslate nohighlight">\(F(1 - u)\)</span> は <span class="math notranslate nohighlight">\(u\)</span> の補給、<span class="math notranslate nohighlight">\((F + k)v\)</span> は <span class="math notranslate nohighlight">\(v\)</span> の除去を表す。</p>
+<p>数値計算では、平面を格子に分け、ラプラシアンを「上下左右の 4 点の値の和から、中心の値の 4 倍を引いたもの」で近似する。時間は刻み幅 1 のオイラー法で進める。</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-number">リスト 22 </span><span class="caption-text">グレイ＝スコット・モデルの計算（ch11_reaction_diffusion.py）</span><a class="headerlink" href="#id15" title="Link to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">30</span><span class="k">def</span><span class="w"> </span><span class="nf">gray_scott</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6000</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+<span class="linenos">31</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;一様な状態の中央に小さな乱れを置き、steps ステップ（時間刻み 1）後の v の濃度を返す.&quot;&quot;&quot;</span>
+<span class="linenos">32</span>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="linenos">33</span>    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos">34</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos">35</span>    <span class="n">center</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">8</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">u</span><span class="p">[</span><span class="n">center</span><span class="p">,</span> <span class="n">center</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">37</span>    <span class="n">v</span><span class="p">[</span><span class="n">center</span><span class="p">,</span> <span class="n">center</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="linenos">38</span>    <span class="n">u</span> <span class="o">+=</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos">39</span>    <span class="n">v</span> <span class="o">+=</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos">40</span>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+<span class="linenos">41</span>        <span class="n">uvv</span> <span class="o">=</span> <span class="n">u</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span>
+<span class="linenos">42</span>        <span class="n">u</span> <span class="o">+=</span> <span class="n">DU</span> <span class="o">*</span> <span class="n">laplacian</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">-</span> <span class="n">uvv</span> <span class="o">+</span> <span class="n">f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span>
+<span class="linenos">43</span>        <span class="n">v</span> <span class="o">+=</span> <span class="n">DV</span> <span class="o">*</span> <span class="n">laplacian</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="n">uvv</span> <span class="o">-</span> <span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span>
+<span class="linenos">44</span>    <span class="k">return</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#fig-ch11-rd"><span class="std std-numref">図 53</span></a> は、中央に小さな乱れを置いた一様な状態から、6000 ステップ計算した後の <span class="math notranslate nohighlight">\(v\)</span> の濃度である。<span class="math notranslate nohighlight">\(F\)</span> と <span class="math notranslate nohighlight">\(k\)</span> の組み合わせによって、斑点、縞、迷路など、まったく違う模様が生まれる。</p>
+<figure class="align-default" id="fig-ch11-rd">
+<a class="reference internal image-reference" href="_images/ch11_reaction_diffusion_patterns.png"><img alt="_images/ch11_reaction_diffusion_patterns.png" src="_images/ch11_reaction_diffusion_patterns.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">図 53 </span><span class="caption-text">グレイ＝スコット・モデルで生まれる模様（128 × 128 の格子）</span><a class="headerlink" href="#fig-ch11-rd" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>1993 年にピアソンは、グレイ＝スコット・モデルの <span class="math notranslate nohighlight">\(F\)</span> と <span class="math notranslate nohighlight">\(k\)</span> を系統的に変えて計算し、自己複製する斑点を含む、多様な模様を分類した。反応拡散系は、局所的な規則（その場所での反応と、隣への拡散）だけで大域的なパターンが生まれる、創発の代表例である。ジェネラティブアートでも、模様の生成や、模様を動かすアニメーションの題材としてよく使われている。</p>
+</section>
+</section>
+<section id="id13">
+<h2>まとめ<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>気象予報では、カオスによる予測の限界を前提に、多数の初期値から計算するアンサンブル予報が使われている。</p></li>
+<li><p>カオス同期は、一部の変数を共有させることで 2 つのカオス的な系を同期させる現象で、通信への応用が研究されてきた。</p></li>
+<li><p>中点変位法やダイヤモンド・スクエア法で、統計的自己相似性を持つ地形を生成できる。ハースト指数で凹凸の性質を調整できる。</p></li>
+<li><p>結合写像格子や反応拡散系では、局所的な相互作用から、領域、時空カオス、斑点、縞などの大域的なパターンが生まれる。</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ch10_chaos_and_fractals.html" class="btn btn-neutral float-left" title="第 10 章 カオスとフラクタルの接点" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ch12_generative_art.html" class="btn btn-neutral float-right" title="第 12 章 ジェネラティブアートへの応用" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Nunu_3060.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
